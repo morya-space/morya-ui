@@ -10,11 +10,6 @@ description: 操作结果 / 阻断页：成功、失败、403、404 等。
 
 核心 API：`status` + `size` + `title` / `description`，插槽 `icon` / `default` / `footer`。
 
-
-## 何时使用
-
-- 操作结果 / 阻断页：成功、失败、403、404 等。
-
 ## 引入
 
 ```ts

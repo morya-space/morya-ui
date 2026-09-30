@@ -8,11 +8,6 @@ description: SVG circular loading indicator with configurable stroke width and a
 
 SVG circular loading indicator.
 
-
-## When to use
-
-- SVG circular loading indicator with configurable stroke width and animation duration
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: Canvas repeating watermark overlay for children.
 
 Repeating canvas watermark over the default slot.
 
-
-## When to use
-
-- Canvas repeating watermark overlay for children
-
 ## Import
 
 ```ts

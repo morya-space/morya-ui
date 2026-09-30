@@ -8,11 +8,6 @@ description: Confirm / cancel dialog that reuses Dialog overlay styling.
 
 Modal dialog used when the user must explicitly confirm an action.
 
-
-## When to use
-
-- Confirm / cancel dialog that reuses Dialog overlay styling
-
 ## Import
 
 ```ts

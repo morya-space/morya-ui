@@ -10,11 +10,6 @@ Lightweight status for tables and detail headers. Prefer [Tag](/components/Tag) 
 
 Non-neutral severities show a semantic icon by default so the status reads as a marker, not plain tinted text.
 
-
-## When to use
-
-- Inline status marker with a colored dot or semantic icon plus label
-
 ## Import
 
 ```ts

@@ -18,11 +18,6 @@ Vs [Toast](/components/Toast):
 
 **Rule of thumb**: one short sentence → `message.success('Saved')`; title + detail → `toast.success({ summary, detail })`.
 
-
-## When to use
-
-- Top-center floating notice with an imperative API
-
 ## Import
 
 ```ts

@@ -10,11 +10,6 @@ Pagination. `v-model` uses a **1-based page number**. The instance property `fir
 
 `pageSize` is an alias of `rows` (`pageSize` wins when both are set). Also supports `showSizePicker` / `showSizeChanger`, `showQuickJumper`, `simple`, and `size`.
 
-
-## When to use
-
-- Pagination. v-model is the page number. The instance exposes first (zero-based index of the first record)
-
 ## Import
 
 ```ts

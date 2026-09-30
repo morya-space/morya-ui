@@ -8,11 +8,6 @@ description: Tab switcher with line/card types, closable/addable tabs, extra slo
 
 Tabs switch content panels within the same view.
 
-
-## When to use
-
-- Tab switcher with line/card types, closable/addable tabs, extra slot, and overflow scrolling
-
 ## Import
 
 ```ts

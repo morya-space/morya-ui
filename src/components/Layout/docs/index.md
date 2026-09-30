@@ -8,11 +8,6 @@ description: 页面级布局骨架，含 Header / Sider / Content / Footer。
 
 页面级布局容器。侧栏场景需在对应 `MLayout` 上设置 `has-sider`。根布局使用 `fill-viewport`（`height: 100dvh`）或显式 `height` 后，`MLayoutContent` / `MLayoutSider` 会撑满剩余空间。
 
-
-## 何时使用
-
-- 页面级布局骨架，含 Header / Sider / Content / Footer。
-
 ## 引入
 
 ```ts

@@ -8,11 +8,6 @@ description: Text input field.
 
 Single-line text input.
 
-
-## When to use
-
-- Text input field
-
 ## Import
 
 ```ts

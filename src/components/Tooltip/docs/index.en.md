@@ -8,11 +8,6 @@ description: A short hint shown on hover or focus. Supports placement, disabled,
 
 Short hint for a trigger element, suited to icon buttons or truncated text.
 
-
-## When to use
-
-- A short hint shown on hover or focus. Supports placement, disabled, and showDelay
-
 ## Import
 
 ```ts

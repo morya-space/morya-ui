@@ -8,11 +8,6 @@ description: 悬停或聚焦时显示的短提示。支持 placement、disabled 
 
 为触发元素提供短提示，适合图标按钮或截断文本说明。
 
-
-## 何时使用
-
-- 悬停或聚焦时显示的短提示。支持 placement、disabled 与 showDelay。
-
 ## 引入
 
 ```ts

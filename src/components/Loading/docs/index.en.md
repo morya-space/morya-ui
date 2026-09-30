@@ -12,11 +12,6 @@ Built-in graphics are a circular spinner, aurora ring, bouncing balls, wave bars
 
 Fullscreen masks teleport to `body` so parent `overflow` / `transform` cannot clip them. Only one fullscreen instance stays open at a time.
 
-
-## When to use
-
-- Loading indicator and mask, with multiple effects, a region overlay, the v-loading directive, and an imperative service
-
 ## Import
 
 ```ts

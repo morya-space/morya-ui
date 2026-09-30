@@ -8,11 +8,6 @@ description: 生成二维码，支持状态遮罩与刷新。
 
 Canvas 二维码。编码使用内嵌 Nayuki MIT `qrcodegen`，无额外 npm 运行时依赖。
 
-
-## 何时使用
-
-- 生成二维码，支持状态遮罩与刷新。
-
 ## 引入
 
 ```ts

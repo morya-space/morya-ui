@@ -8,11 +8,6 @@ description: Right-click context menu with show(event) / hide().
 
 Context menu that opens at the pointer position. Nested `items` are supported. `useContextMenu()` can bind `v-model` / `v-model:position`.
 
-
-## When to use
-
-- Right-click context menu with show(event) / hide()
-
 ## Import
 
 ```ts

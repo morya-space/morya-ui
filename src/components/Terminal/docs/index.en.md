@@ -8,11 +8,6 @@ description: Simple command-prompt UI.
 
 Shows a welcome message and command history; submitting emits `command`.
 
-
-## When to use
-
-- Simple command-prompt UI
-
 ## Import
 
 ```ts

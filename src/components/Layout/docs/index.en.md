@@ -8,11 +8,6 @@ description: Page layout shell with Header / Sider / Content / Footer.
 
 Page-level layout shell. Set `has-sider` on the `MLayout` that hosts a sider. Give the root layout a fixed `height` (or `min-height`) so `MLayoutContent` can fill the remaining space.
 
-
-## When to use
-
-- Page layout shell with Header / Sider / Content / Footer
-
 ## Import
 
 ```ts

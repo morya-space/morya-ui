@@ -8,11 +8,6 @@ description: SVG circular knob for selecting a numeric value.
 
 Circular dial control with drag and keyboard adjustment.
 
-
-## When to use
-
-- SVG circular knob for selecting a numeric value
-
 ## Import
 
 ```ts

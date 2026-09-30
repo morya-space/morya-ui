@@ -8,11 +8,6 @@ description: Searchable command palette dialog.
 
 Searchable command palette for running actions from `model`. Fits global shortcuts such as Cmd/Ctrl+K.
 
-
-## When to use
-
-- Searchable command palette dialog
-
 ## Import
 
 ```ts

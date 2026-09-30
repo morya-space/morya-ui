@@ -8,11 +8,6 @@ description: Star rating control with clear and readonly support.
 
 Click stars to rate. A clear button is shown by default.
 
-
-## When to use
-
-- Star rating control with clear and readonly support
-
 ## Import
 
 ```ts

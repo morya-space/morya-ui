@@ -10,11 +10,6 @@ description: 表单选择器：mode="multiple" | "tags"、labelInValue、fieldNa
 
 **与 Dropdown 的区别：** `MSelect` 是表单控件；动作菜单请使用 `MDropdown`。
 
-
-## 何时使用
-
-- 表单选择器：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender
-
 ## 引入
 
 ```ts

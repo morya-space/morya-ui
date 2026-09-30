@@ -12,11 +12,6 @@ For list no-data, filtered no-results, and first-use prompts. Do not use error c
 
 By default it shows a lightweight empty glyph and locale `emptyMessage`. Override with `illustration`, `icon`, `image`, or slots.
 
-
-## When to use
-
-- Empty states with illustration / icon, title, description, and actions
-
 ## Import
 
 ```ts

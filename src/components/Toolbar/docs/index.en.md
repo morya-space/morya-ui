@@ -8,10 +8,6 @@ description: Toolbar layout with start / center / end regions.
 
 Horizontal action bar, commonly used as a list page header.
 
-## When to use
-
-- Toolbar layout with start / center / end regions
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: Accessible form label.
 
 Simple label with `htmlFor` / `for` and a default slot.
 
-
-## When to use
-
-- Accessible form label
-
 ## Import
 
 ```ts

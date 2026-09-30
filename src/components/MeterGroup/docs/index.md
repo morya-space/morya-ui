@@ -8,11 +8,6 @@ description: 多段占比计量条。
 
 展示多段 `{ label, value, color }` 占比。
 
-
-## 何时使用
-
-- 多段占比计量条。
-
 ## 引入
 
 ```ts

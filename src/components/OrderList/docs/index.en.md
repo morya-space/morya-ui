@@ -8,11 +8,6 @@ description: Reorder a list with drag-and-drop and up/down buttons.
 
 Reorder with a drag handle (native HTML5 DnD, no external library). Up and down buttons remain as a keyboard-friendly fallback.
 
-
-## When to use
-
-- Reorder a list with drag-and-drop and up/down buttons
-
 ## Import
 
 ```ts

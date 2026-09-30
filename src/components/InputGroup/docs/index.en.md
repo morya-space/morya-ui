@@ -8,11 +8,6 @@ description: Combine an input with prefix and suffix addons into one control gro
 
 Combine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-inputgroup-addon` class manually.
 
-
-## When to use
-
-- Combine an input with prefix and suffix addons into one control group
-
 ## Import
 
 ```ts

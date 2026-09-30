@@ -8,11 +8,6 @@ description: 工具栏布局，分 start / center / end 区域。
 
 水平排列操作区，常用于列表页顶栏。
 
-
-## 何时使用
-
-- 工具栏布局，分 start / center / end 区域。
-
 ## 引入
 
 ```ts

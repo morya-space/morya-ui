@@ -8,11 +8,6 @@ description: Vertical or horizontal timeline with icon markers and custom slots.
 
 Display event nodes in chronological order.
 
-
-## When to use
-
-- Vertical or horizontal timeline with icon markers and custom slots
-
 ## Import
 
 ```ts

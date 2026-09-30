@@ -14,11 +14,6 @@ Vs [Message](/components/Message): Message is the **default** for short single-l
 
 Do **not** use `toast.add({ summary: 'Saved' })` when `message.success('Saved')` is enough.
 
-
-## When to use
-
-- Corner floating notifications with API and controlled lists
-
 ## Import
 
 ```ts

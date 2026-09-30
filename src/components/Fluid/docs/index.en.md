@@ -8,11 +8,6 @@ description: Layout wrapper that stretches children to full width.
 
 Fluid layout container that applies `width: 100%` to child controls.
 
-
-## When to use
-
-- Layout wrapper that stretches children to full width
-
 ## Import
 
 ```ts

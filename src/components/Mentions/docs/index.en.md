@@ -8,11 +8,6 @@ description: Suggest and insert mention tokens when typing a prefix.
 
 Multi-line field that opens a suggestion list after a **prefix** (default `@`). Choosing an item inserts plain text `prefix + value + split`. Good for comments and collaborative inputs.
 
-
-## When to use
-
-- Suggest and insert mention tokens when typing a prefix
-
 ## Import
 
 ```ts

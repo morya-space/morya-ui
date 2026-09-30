@@ -8,11 +8,6 @@ description: Modal dialog with preset footer actions, async close guards, and st
 
 Modal dialog. Visibility uses `v-model` (`modelValue`), corresponding to `visible`.
 
-
-## When to use
-
-- Modal dialog with preset footer actions, async close guards, and status type
-
 ## Import
 
 ```ts

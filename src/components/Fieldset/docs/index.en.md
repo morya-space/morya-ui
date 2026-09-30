@@ -8,11 +8,6 @@ description: Grouped fields with a legend, optionally collapsible.
 
 Group a form or related content with a legend.
 
-
-## When to use
-
-- Grouped fields with a legend, optionally collapsible
-
 ## Import
 
 ```ts

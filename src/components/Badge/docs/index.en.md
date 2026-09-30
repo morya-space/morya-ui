@@ -8,11 +8,6 @@ description: Status badge or dot.
 
 Status badge or dot for counts and status cues.
 
-
-## When to use
-
-- Status badge or dot
-
 ## Import
 
 ```ts

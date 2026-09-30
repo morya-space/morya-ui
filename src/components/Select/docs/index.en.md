@@ -10,11 +10,6 @@ Form select for choosing one or more values from a list of options.
 
 **Unlike Dropdown:** `MSelect` is a form control. Use `MDropdown` for action menus.
 
-
-## When to use
-
-- Form select: mode=multiple|tags, labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender
-
 ## Import
 
 ```ts

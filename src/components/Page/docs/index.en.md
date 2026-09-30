@@ -8,10 +8,6 @@ description: Composable page sections for spacing, borders, and headings with li
 
 Page composition components. Use them with `MLayout` to encode filter bars, toolbars, form surfaces, KPI cards, and other admin-page blocks **without rewriting scoped CSS on every page**.
 
-## When to use
-
-- Composable page sections for spacing, borders, and headings with little or no custom CSS
-
 ## Import
 
 ```ts

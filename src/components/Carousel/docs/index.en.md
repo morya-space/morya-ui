@@ -8,11 +8,6 @@ description: Carousel for a set of content items.
 
 Slides content in a window of `numVisible` items.
 
-
-## When to use
-
-- Carousel for a set of content items
-
 ## Import
 
 ```ts

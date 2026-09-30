@@ -8,11 +8,6 @@ description: 分段控制器，单选切换。
 
 在互斥选项间切换视图或模式。与 [SelectButton](/components/SelectButton) 不同：Segmented 为轨道 + 选中块样式，且为 **单选** `radiogroup` 语义（非 `aria-pressed` 多选）。
 
-
-## 何时使用
-
-- 分段控制器，单选切换。
-
 ## 引入
 
 ```ts

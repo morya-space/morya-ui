@@ -8,11 +8,6 @@ description: Click the display area to switch to editable content.
 
 Toggle between display and content views.
 
-
-## When to use
-
-- Click the display area to switch to editable content
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: Step-by-step guided overlay with spotlight and panel.
 
 **Product tours and onboarding**. Spotlight mask plus floating panel with prev / next / finish / close.
 
-
-## When to use
-
-- Step-by-step guided overlay with spotlight and panel
-
 ## Import
 
 ```ts
@@ -65,4 +60,4 @@ Use `v-model:open` and `v-model:current`. Each step’s `target` returns the ele
 ## Keyboard
 
 While open: `Esc` closes; `ArrowRight` next; `ArrowLeft` previous (when not on the first step).
-
+

@@ -8,11 +8,6 @@ description: 相对触发元素定位的浮层面板。支持 placement、Telepo
 
 相对触发元素显示的浮层，适合筛选、快捷操作或轻量表单。
 
-
-## 何时使用
-
-- 相对触发元素定位的浮层面板。支持 placement、Teleport；点击外部或 Esc 关闭。
-
 ## 引入
 
 ```ts

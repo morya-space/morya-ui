@@ -8,11 +8,6 @@ description: Chip displays tagged information, optionally with an icon, image, a
 
 Chip displays short tagged information, with optional icon/image and a remove button.
 
-
-## When to use
-
-- Chip displays tagged information, optionally with an icon, image, and remove action
-
 ## Import
 
 ```ts

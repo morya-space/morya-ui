@@ -8,11 +8,6 @@ description: Fix child content when scroll passes a threshold.
 
 Pins children with `position: fixed` after scrolling past `offsetTop` / `offsetBottom`.
 
-
-## When to use
-
-- Fix child content when scroll passes a threshold
-
 ## Import
 
 ```ts
@@ -39,4 +34,4 @@ import { MAffix } from 'morya-ui'
 | Event | Payload | Description |
 | --- | --- | --- |
 | `change` | `affixed: boolean` | Affixed state changed |
-
+

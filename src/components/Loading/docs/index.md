@@ -12,11 +12,6 @@ description: 加载指示与遮罩：多种动效、区域加载、v-loading 指
 
 全屏遮罩会 Teleport 到 `body`，避免被父级 `overflow` / `transform` 裁切。同一时间只保留一个全屏实例。
 
-
-## 何时使用
-
-- 加载指示与遮罩：多种动效、区域加载、v-loading 指令和命令式 service。
-
 ## 引入
 
 ```ts

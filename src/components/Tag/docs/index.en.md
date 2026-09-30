@@ -8,11 +8,6 @@ description: Tag for status or category.
 
 Tags display status or category.
 
-
-## When to use
-
-- Tag for status or category
-
 ## Import
 
 ```ts

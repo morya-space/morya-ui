@@ -8,11 +8,6 @@ description: Collapsible navigation rail.
 
 Application navigation sidebar (not a Drawer overlay). Exported as `MSidebar`.
 
-
-## When to use
-
-- Collapsible navigation rail
-
 ## Import
 
 ```ts

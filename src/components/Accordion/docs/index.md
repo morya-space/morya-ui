@@ -8,11 +8,6 @@ description: 可折叠面板组。支持单开 / 多开，tabs 配置 header 与
 
 可折叠面板，用于在有限空间内组织分组内容。
 
-
-## 何时使用
-
-- 可折叠面板组。支持单开 / 多开，tabs 配置 header 与 disabled。
-
 ## 引入
 
 ```ts

@@ -12,11 +12,6 @@ Common options: `action` / `httpRequest` for real uploads, `v-model:file-list` f
 
 Queue UI extras are out of scope this batch.
 
-
-## When to use
-
-- Select, drag, list, preview, and upload
-
 ## Import
 
 ```ts

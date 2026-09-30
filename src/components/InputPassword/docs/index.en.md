@@ -8,11 +8,6 @@ description: Password input with show/hide toggle and optional strength feedback
 
 Password input. Includes a show/hide toggle by default; optional password strength feedback.
 
-
-## When to use
-
-- Password input with show/hide toggle and optional strength feedback
-
 ## Import
 
 ```ts

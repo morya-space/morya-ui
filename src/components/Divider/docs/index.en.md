@@ -8,11 +8,6 @@ description: Content divider.
 
 Content divider, optionally with a label.
 
-
-## When to use
-
-- Content divider
-
 ## Import
 
 ```ts

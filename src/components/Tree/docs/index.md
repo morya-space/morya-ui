@@ -10,11 +10,6 @@ description: 树形结构。支持勾选半选、过滤、受控展开、懒加�
 
 默认插槽 `{ node, data }` 可自定义节点内容。`checkStrategy` 为 `'all' | 'parent' | 'child'`（`checkStrictly` 时忽略）。内部仍按级联计算半选；`v-model:checked-keys` 按策略投影。虚拟滚动本期不做。
 
-
-## 何时使用
-
-- 树形结构。支持勾选半选、过滤、受控展开、懒加载与拖拽。
-
 ## 引入
 
 ```ts

@@ -8,11 +8,6 @@ description: Shows the current page position in a hierarchy.
 
 Breadcrumb navigation. Items with `to` / `href` render as links; otherwise as text.
 
-
-## When to use
-
-- Shows the current page position in a hierarchy
-
 ## Import
 
 ```ts

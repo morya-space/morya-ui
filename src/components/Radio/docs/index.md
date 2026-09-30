@@ -8,11 +8,6 @@ description: 单选框。支持 invalid。
 
 单选框。
 
-
-## 何时使用
-
-- 单选框。支持 invalid。
-
 ## 引入
 
 ```ts

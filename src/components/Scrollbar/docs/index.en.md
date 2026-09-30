@@ -8,11 +8,6 @@ description: Themeable custom scrollbar for a consistent scrolling experience.
 
 Replaces the native browser scrollbar with a themeable, cross-browser scrolling experience.
 
-
-## When to use
-
-- Themeable custom scrollbar for a consistent scrolling experience
-
 ## Import
 
 ```ts

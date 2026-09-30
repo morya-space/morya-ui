@@ -13,11 +13,6 @@ description: 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列�
 
 两套可混用，但同一层级内建议只选一套。
 
-
-## 何时使用
-
-- 基于 CSS Grid 的响应式栅格，配合 GridItem 控制跨列。
-
 ## 引入
 
 ```ts

@@ -8,11 +8,6 @@ description: A button that switches between on and off labels.
 
 A boolean toggle button with configurable on/off labels and icons.
 
-
-## When to use
-
-- A button that switches between on and off labels
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: List-based single or multiple selection with optional filtering.
 
 Present options as a list with single selection, multiple selection, and filtering.
 
-
-## When to use
-
-- List-based single or multiple selection with optional filtering
-
 ## Import
 
 ```ts

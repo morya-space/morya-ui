@@ -8,11 +8,6 @@ description: 将输入框与前后缀附加内容组合为同一控件组。
 
 组合输入与前后缀。附加内容使用 `MInputGroupAddon`，或手动添加 `m-inputgroup-addon` class。
 
-
-## 何时使用
-
-- 将输入框与前后缀附加内容组合为同一控件组。
-
 ## 引入
 
 ```ts

@@ -8,11 +8,6 @@ description: Canvas 平铺水印，包裹业务内容。
 
 在子元素上方叠加 repeating 水印。颜色与透明度走 `--m-*` 解析后的 canvas 绘制。
 
-
-## 何时使用
-
-- Canvas 平铺水印，包裹业务内容。
-
 ## 引入
 
 ```ts

@@ -12,11 +12,6 @@ Action menu overlay. Opens a set of actions from a trigger.
 
 Supports groups (`type: 'group'`), dividers (`separator` / `type: 'divider'`), nested `items`, and `trigger: 'hover'` with `showDelay` / `hideDelay`. Keyboard highlight still covers top-level leaves only.
 
-
-## When to use
-
-- Action menu overlay (not a form select). Unlike Select, it is used to trigger actions such as edit and delete
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: Shows suggestion lists while typing; filter locally or supply sugge
 
 Input suggestions and completion; the `complete` event makes async loading from the parent easy.
 
-
-## When to use
-
-- Shows suggestion lists while typing; filter locally or supply suggestions from the parent
-
 ## Import
 
 ```ts

@@ -16,13 +16,6 @@ description: General list with data-driven rows, Meta pattern, pagination, and o
 
 Renders a homogeneous collection (notifications, articles, user rows). Unlike layout-oriented `MDataView`, List focuses on item + meta + actions.
 
-
-
-
-## When to use
-
-- General list with data-driven rows, Meta pattern, pagination, and optional grid
-
 ## Import
 
 

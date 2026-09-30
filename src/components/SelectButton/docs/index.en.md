@@ -8,11 +8,6 @@ description: Single or multiple selection presented as a button group.
 
 Present options as a button group, with single and multiple selection.
 
-
-## When to use
-
-- Single or multiple selection presented as a button group
-
 ## Import
 
 ```ts

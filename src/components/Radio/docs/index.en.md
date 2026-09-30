@@ -8,11 +8,6 @@ description: Radio button. Supports invalid.
 
 Radio button.
 
-
-## When to use
-
-- Radio button. Supports invalid
-
 ## Import
 
 ```ts

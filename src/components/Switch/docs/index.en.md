@@ -8,11 +8,6 @@ description: Toggle switch.
 
 Toggle switch control.
 
-
-## When to use
-
-- Toggle switch
-
 ## Import
 
 ```ts

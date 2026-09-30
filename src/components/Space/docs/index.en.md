@@ -8,11 +8,6 @@ description: Layout helper that adds consistent gaps between children.
 
 Adds consistent spacing between children. Prefer [`Flex`](/components/Flex/) for new layouts (native CSS `gap`).
 
-
-## When to use
-
-- Layout helper that adds consistent gaps between children
-
 ## Import
 
 ```ts

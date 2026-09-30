@@ -8,11 +8,6 @@ description: Read-only field list with columns, borders, and horizontal/vertical
 
 Detail panels and read-only drawers: label + content pairs.
 
-
-## When to use
-
-- Read-only field list with columns, borders, and horizontal/vertical layout
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: 内容容器。通过 title / subtitle 或 header / footer 插槽�
 
 内容容器，适合分组展示标题、正文与操作。Footer 仅通过插槽扩展（不提供 `footer` prop）。
 
-
-## 何时使用
-
-- 内容容器。通过 title / subtitle 或 header / footer 插槽组织结构。
-
 ## 引入
 
 ```ts

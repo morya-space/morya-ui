@@ -8,11 +8,6 @@ description: A primary action button with extra dropdown items.
 
 The left primary button emits `click`; items in the right-side menu emit `command`.
 
-
-## When to use
-
-- A primary action button with extra dropdown items
-
 ## Import
 
 ```ts

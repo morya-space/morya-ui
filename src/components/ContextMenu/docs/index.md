@@ -8,11 +8,6 @@ description: 右键上下文菜单，支持 show(event) / hide()。
 
 在指针位置弹出的上下文菜单。支持嵌套 `items`。也可用 `useContextMenu()` 绑定 `v-model` / `v-model:position`。
 
-
-## 何时使用
-
-- 右键上下文菜单，支持 show(event) / hide()。
-
 ## 引入
 
 ```ts

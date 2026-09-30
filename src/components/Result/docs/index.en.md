@@ -10,11 +10,6 @@ For submit outcomes, failures, forbidden access, and missing pages. Use [Empty](
 
 Core API: `status` + `size` + `title` / `description`, slots `icon` / `default` / `footer`.
 
-
-## When to use
-
-- Outcome / terminal pages for success, failure, 403, 404, and more
-
 ## Import
 
 ```ts

@@ -8,11 +8,6 @@ description: Multi-cell single-character input for verification codes.
 
 Split a string across multiple single-character inputs.
 
-
-## When to use
-
-- Multi-cell single-character input for verification codes
-
 ## Import
 
 ```ts

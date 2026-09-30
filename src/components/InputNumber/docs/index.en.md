@@ -8,11 +8,6 @@ description: Number input with optional steppers, min/max bounds, and sizes.
 
 Number input. Can show increment and decrement buttons, and constrain values with `min` / `max` / `step`.
 
-
-## When to use
-
-- Number input with optional steppers, min/max bounds, and sizes
-
 ## Import
 
 ```ts

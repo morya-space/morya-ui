@@ -8,11 +8,6 @@ description: In-page anchor nav with scroll spy and smooth scroll.
 
 **In-page navigation** for long docs and settings pages. Highlights the active section while scrolling; link clicks smooth-scroll to targets.
 
-
-## When to use
-
-- In-page anchor nav with scroll spy and smooth scroll
-
 ## Import
 
 ```ts

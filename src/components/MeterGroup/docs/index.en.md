@@ -8,11 +8,6 @@ description: Segmented meter for proportional values.
 
 Displays multiple `{ label, value, color }` segments as a proportion of the total.
 
-
-## When to use
-
-- Segmented meter for proportional values
-
 ## Import
 
 ```ts

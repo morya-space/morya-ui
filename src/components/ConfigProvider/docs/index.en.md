@@ -8,11 +8,6 @@ description: Global configuration entry. Unifies app-level defaults such as over
 
 Provide global defaults for the component tree via `MConfigProvider` or `createMoryaUI`. Local props take precedence over global config.
 
-
-## When to use
-
-- Global configuration entry. Unifies app-level defaults such as overlay mount, size, density, and locale strings
-
 ## Capabilities
 
 | Capability | Description |

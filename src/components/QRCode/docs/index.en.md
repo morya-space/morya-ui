@@ -8,11 +8,6 @@ description: QR code with status overlay and refresh.
 
 Canvas QR codes. Encoding uses embedded Nayuki MIT `qrcodegen` (no extra runtime npm deps).
 
-
-## When to use
-
-- QR code with status overlay and refresh
-
 ## Import
 
 ```ts
@@ -53,4 +48,4 @@ import { MQRCode } from 'morya-ui'
 | Event | Description |
 | --- | --- |
 | `refresh` | Fired when user clicks refresh on expired state |
-
+

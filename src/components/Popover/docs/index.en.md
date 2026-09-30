@@ -8,11 +8,6 @@ description: Floating panel positioned relative to a trigger. Supports placement
 
 Overlay positioned relative to a trigger. Use it for filters, quick actions, or lightweight forms.
 
-
-## When to use
-
-- Floating panel positioned relative to a trigger. Supports placement and Teleport. Closes on outside click or Esc
-
 ## Import
 
 ```ts

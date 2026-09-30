@@ -18,11 +18,6 @@ description: 顶部居中浮层提示，支持 API 调用。
 
 **快速判断**：只有一句话 → `message.success('已保存')`；有标题 + 详情 → `toast.success({ summary, detail })`。
 
-
-## 何时使用
-
-- 顶部居中浮层提示，支持 API 调用。
-
 ## 引入
 
 ```ts

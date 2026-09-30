@@ -8,11 +8,6 @@ description: Renders long lists within the visible viewport.
 
 Windowed list rendering based on scroll position. Best for large, **equal-height** rows.
 
-
-## When to use
-
-- Renders long lists within the visible viewport
-
 ## Import
 
 ```ts

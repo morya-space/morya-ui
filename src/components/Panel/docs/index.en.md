@@ -8,11 +8,6 @@ description: Content panel with optional collapse.
 
 Panel for grouping content. Collapse can be enabled.
 
-
-## When to use
-
-- Content panel with optional collapse
-
 ## Import
 
 ```ts

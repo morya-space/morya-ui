@@ -8,11 +8,6 @@ description: Single-choice segmented control.
 
 Switch between mutually exclusive modes or views. Unlike [SelectButton](/components/SelectButton), Segmented uses a track + raised thumb look and **single-select** `radiogroup` semantics (not `aria-pressed` toggles).
 
-
-## When to use
-
-- Single-choice segmented control
-
 ## Import
 
 ```ts
