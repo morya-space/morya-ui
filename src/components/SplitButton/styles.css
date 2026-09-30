@@ -1,4 +1,4 @@
-/* â€”â€?Primitive: SplitButton â€”â€?*/
+/* --- Primitive: SplitButton --- */
 .m-splitbutton {
     --m-button-padding-x-medium: calc(
         var(--m-control-padding-x-medium) + var(--m-space-1)

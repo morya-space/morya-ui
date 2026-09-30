@@ -1,4 +1,4 @@
-/* ?Form: DatePicker ?*/
+/* --- Form: DatePicker --- */
 .m-datepicker,
 .m-datepicker__panel {
     --m-datepicker-calendar-cell-size: var(--m-control-affix-size, 2rem);

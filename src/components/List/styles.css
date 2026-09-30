@@ -1,457 +1,229 @@
-/* â€”â€?Data display: List â€”â€?*/
-
+/* --- Data display: List --- */
 .m-list {
-
     --m-list-pad-y: var(--m-space-4);
-
     --m-list-pad-x: var(--m-space-4);
-
     --m-list-item-gap: var(--m-space-4);
-
     --m-list-font-size: var(--m-font-size-md);
-
     --m-list-meta-title-size: var(--m-font-size-md);
-
     --m-list-meta-desc-color: var(--m-color-text-muted);
-
     --m-list-grid-gutter: var(--m-space-4);
-
     --m-list-grid-column: 1;
-
     --m-list-grid-column-xs: var(--m-list-grid-column);
-
     --m-list-grid-column-sm: var(--m-list-grid-column);
-
     --m-list-grid-column-md: var(--m-list-grid-column);
-
     --m-list-grid-column-lg: var(--m-list-grid-column);
-
     --m-list-grid-column-xl: var(--m-list-grid-column);
-
     box-sizing: border-box;
-
     color: var(--m-color-text);
-
     font-family: var(--m-font-sans);
-
     font-size: var(--m-list-font-size);
-
     width: 100%;
-
 }
-
-
 
 .m-list--small {
-
     --m-list-pad-y: var(--m-space-2);
-
     --m-list-pad-x: var(--m-space-3);
-
     --m-list-item-gap: var(--m-space-3);
-
     --m-list-font-size: var(--m-font-size-sm);
-
     --m-list-meta-title-size: var(--m-font-size-sm);
-
 }
-
-
 
 .m-list--large {
-
     --m-list-pad-y: var(--m-space-5);
-
     --m-list-pad-x: var(--m-space-5);
-
     --m-list-item-gap: var(--m-space-5);
-
     --m-list-font-size: var(--m-font-size-lg);
-
     --m-list-meta-title-size: var(--m-font-size-lg);
-
 }
-
-
 
 .m-list--bordered {
-
     border: var(--m-border-width) solid var(--m-color-border);
-
     border-radius: var(--m-radius-control);
-
 }
-
-
 
 .m-list__header,
-
 .m-list__footer {
-
     padding: var(--m-list-pad-y) var(--m-list-pad-x);
-
 }
-
-
 
 .m-list__header {
-
     border-bottom: var(--m-border-width) solid var(--m-color-split);
-
     font-weight: 500;
-
 }
-
-
 
 .m-list__footer {
-
     border-top: var(--m-border-width) solid var(--m-color-split);
-
     color: var(--m-color-text-muted);
-
 }
-
-
 
 .m-list__pagination {
-
     display: flex;
-
     padding: var(--m-space-3) var(--m-list-pad-x);
-
 }
-
-
 
 .m-list__pagination--start {
-
     justify-content: flex-start;
-
 }
-
-
 
 .m-list__pagination--center {
-
     justify-content: center;
-
 }
-
-
 
 .m-list__pagination--end {
-
     justify-content: flex-end;
-
 }
-
-
 
 .m-list__items {
-
     list-style: none;
-
     margin: 0;
-
     padding: 0;
-
 }
-
-
 
 .m-list__items--grid {
-
     display: grid;
-
     gap: var(--m-list-grid-gutter);
-
     grid-template-columns: repeat(var(--m-list-grid-column, 1), minmax(0, 1fr));
-
     padding: var(--m-list-pad-y) var(--m-list-pad-x);
-
 }
-
-
 
 .m-list__items:not(.m-list__items--grid) {
-
     padding: 0;
-
 }
-
-
 
 @media (min-width: 480px) {
-
     .m-list__items--grid[data-grid-xs] {
-
         grid-template-columns: repeat(var(--m-list-grid-column-xs, var(--m-list-grid-column, 1)), minmax(0, 1fr));
-
     }
-
 }
-
-
 
 @media (min-width: 576px) {
-
     .m-list__items--grid[data-grid-sm] {
-
         grid-template-columns: repeat(var(--m-list-grid-column-sm, var(--m-list-grid-column, 1)), minmax(0, 1fr));
-
     }
-
 }
-
-
 
 @media (min-width: 768px) {
-
     .m-list__items--grid[data-grid-md] {
-
         grid-template-columns: repeat(var(--m-list-grid-column-md, var(--m-list-grid-column, 1)), minmax(0, 1fr));
-
     }
-
 }
-
-
 
 @media (min-width: 992px) {
-
     .m-list__items--grid[data-grid-lg] {
-
         grid-template-columns: repeat(var(--m-list-grid-column-lg, var(--m-list-grid-column, 1)), minmax(0, 1fr));
-
     }
-
 }
-
-
 
 @media (min-width: 1200px) {
-
     .m-list__items--grid[data-grid-xl] {
-
         grid-template-columns: repeat(var(--m-list-grid-column-xl, var(--m-list-grid-column, 1)), minmax(0, 1fr));
-
     }
-
 }
-
-
 
 .m-list-item {
-
     align-items: flex-start;
-
     display: flex;
-
     gap: var(--m-list-item-gap);
-
     padding: var(--m-list-pad-y) var(--m-list-pad-x);
-
 }
-
-
 
 .m-list-item--split + .m-list-item--split {
-
     border-top: var(--m-border-width) solid var(--m-color-split);
-
 }
-
-
 
 .m-list--bordered .m-list-item--bordered {
-
     padding-inline: var(--m-list-pad-x);
-
 }
-
-
 
 .m-list-item--grid {
-
     border: var(--m-border-width) solid var(--m-color-border);
-
     border-radius: var(--m-radius-control);
-
     padding: var(--m-list-pad-y) var(--m-list-pad-x);
-
 }
-
-
 
 .m-list-item--vertical {
-
     flex-direction: column;
-
 }
-
-
 
 .m-list-item--vertical:not(.m-list-item--grid) {
-
     align-items: stretch;
-
 }
-
-
 
 .m-list-item__main {
-
     flex: 1 1 auto;
-
     min-width: 0;
-
 }
-
-
 
 .m-list-item__extra {
-
     flex-shrink: 0;
-
     margin-inline-start: auto;
-
 }
-
-
 
 .m-list-item--vertical .m-list-item__extra {
-
     margin-inline-start: 0;
-
     width: 100%;
-
 }
-
-
 
 .m-list-item__actions {
-
     align-items: center;
-
     display: flex;
-
     flex-shrink: 0;
-
     gap: 0;
-
     list-style: none;
-
     margin: 0;
-
     padding: 0;
-
 }
-
-
 
 .m-list-item__action {
-
     align-items: center;
-
     display: inline-flex;
-
 }
-
-
 
 .m-list-item__action:not(:last-child)::after {
-
     color: var(--m-color-border);
-
     content: '|';
-
     margin-inline: var(--m-space-2);
-
 }
-
-
 
 .m-list-item-meta {
-
     align-items: flex-start;
-
     display: flex;
-
     gap: var(--m-space-3);
-
     min-width: 0;
-
     width: 100%;
-
 }
-
-
 
 .m-list-item-meta__avatar {
-
     flex-shrink: 0;
-
     line-height: 0;
-
 }
-
-
 
 .m-list-item-meta__content {
-
     flex: 1 1 auto;
-
     min-width: 0;
-
 }
-
-
 
 .m-list-item-meta__title {
-
     color: var(--m-color-text);
-
     font-size: var(--m-list-meta-title-size);
-
     font-weight: 500;
-
     line-height: 1.5;
-
     margin: 0 0 var(--m-space-1);
-
 }
-
-
 
 .m-list-item-meta__description {
-
     color: var(--m-list-meta-desc-color);
-
     font-size: var(--m-list-font-size);
-
     line-height: 1.6;
-
 }
-
-
 
 .m-list__empty {
-
     padding: var(--m-space-8) var(--m-list-pad-x);
-
 }
-
-
 
 .m-list__load-more {
-
     border-top: var(--m-border-width) solid var(--m-color-split);
-
     padding: var(--m-space-3) var(--m-list-pad-x);
-
     text-align: center;
-
 }
-
 

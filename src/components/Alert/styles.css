@@ -1,4 +1,4 @@
-/* â€”â€?Feedback: Alert (page-inline notice) â€”â€?*/
+/* --- Feedback: Alert (page-inline notice) --- */
 .m-alert {
     --m-alert-tone: var(--m-color-info);
     --m-alert-bg: color-mix(

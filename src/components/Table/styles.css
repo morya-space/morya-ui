@@ -1,6 +1,4 @@
-/**
- * MTable â€?Morya UI design tokens and table interaction patterns.
- */
+/* --- MTable Morya UI design tokens and table interaction patterns. --- */
 
 .m-table {
     --m-table-cell-padding-block: var(--m-space-2);
@@ -629,7 +627,7 @@
     border-right: 0;
 }
 
-/* â€”â€?Tree mode â€”â€?*/
+/* â€”ï¿½?Tree mode â€”ï¿½?*/
 .m-table__tree-cell {
     align-items: center;
     display: flex;

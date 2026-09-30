@@ -1,4 +1,4 @@
-/* â€”â€?Menu â€”â€?*/
+/* --- Menu --- */
 .m-menu {
     --m-menu-indent: var(--m-space-3);
     --m-menu-root-indent: var(--m-space-4);
@@ -217,7 +217,7 @@
     );
 }
 
-/* â€”â€?Collapsed (icon rail) â€”â€?*/
+/* â€”ï¿½?Collapsed (icon rail) â€”ï¿½?*/
 .m-menu--collapsed {
     padding: var(--m-space-1) 0;
 }

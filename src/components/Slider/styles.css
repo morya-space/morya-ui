@@ -1,4 +1,4 @@
-/* —�?Form: Slider —�?*/
+/* --- Form: Slider --- */
 .m-slider-field {
     display: grid;
     gap: var(--m-space-2);
@@ -65,7 +65,7 @@
     pointer-events: auto;
 }
 
-/* range 模式�?end 输入框绘制在上层，其滑轨会盖�?start 的滚顶点，因此隐藏它的滑�?*/
+/* range 模式�?end 输入框绘制在上层，其滑轨会盖�?start 的滚顶点，因此隐藏它的滑�?*/
 .m-slider--range .m-slider__input--end::-webkit-slider-runnable-track {
     background: transparent;
 }
