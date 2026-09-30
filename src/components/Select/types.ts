@@ -23,6 +23,7 @@ export type SelectModelValue =
   | SelectValue[]
   | SelectLabeledValue
   | SelectLabeledValue[]
+  | null
   | undefined
 
 export interface SelectOption {

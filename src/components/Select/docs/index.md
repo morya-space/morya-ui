@@ -177,6 +177,8 @@ import { MSelect } from 'morya-ui'
 | `show` | — | 菜单打开。 |
 | `hide` | — | 菜单关闭。 |
 | `search` | `string` | 筛选词变化（`filter` / `remote`）。 |
+| `select` | `value, option` | 选中某一项。 |
+| `deselect` | `value, option` | 多选模式下取消某一项。 |
 | `create` | [SelectOption](/docs/types#SelectOption) `{ label, value, disabled? }` | `tag` 模式下创建了新选项。 |
 
 ## Slots

@@ -86,6 +86,15 @@
     color: var(--m-color-text-muted);
 }
 
+.m-select--filled {
+    background: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 12%,
+        var(--m-color-surface)
+    );
+    border-color: transparent;
+}
+
 .m-select__value {
     flex: 1 1 auto;
     min-width: 0;

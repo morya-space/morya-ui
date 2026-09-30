@@ -12,7 +12,7 @@ import type {
 } from './types'
 import { computed, defineComponent, inject, nextTick, onBeforeUnmount, ref, useAttrs, useSlots, watch } from 'vue'
 import { formatLocale, useMLocale } from '../../locale'
-import { useComponentDefaults, useConfiguredSize, useMConfig } from '../../shared/config'
+import { useComponentDefaults, useConfiguredSize, useConfiguredVariant, useMConfig } from '../../shared/config'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { MRenderableView } from '../../shared/Renderable'
@@ -132,6 +132,7 @@ const menuFilter = computed<MenuFilterConfig>(() => ({
 /** Options normalized through `fieldNames` into the internal shape. */
 const normalizedOptions = computed(() => normalizeOptions(props.options, props.fieldNames))
 const sizeClass = useConfiguredSize('Select', () => props.size ?? form?.value.size)
+const resolvedVariant = useConfiguredVariant('Select', () => props.variant)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 const isInvalid = computed(
@@ -464,6 +465,7 @@ onBeforeUnmount(() => {
         :class="[
           `m-select--${sizeClass}`,
           {
+            'm-select--filled': resolvedVariant === 'filled',
             'm-select--invalid': isInvalid,
             'm-select--warning': isWarning,
             'm-select--open': open,

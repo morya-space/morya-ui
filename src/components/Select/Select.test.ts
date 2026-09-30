@@ -439,4 +439,12 @@ describe('muSelect — field remapping and options', () => {
       fallback.get('.m-select__suffix').html(),
     )
   })
+
+  it('applies filled variant class', () => {
+    const wrapper = mount(MSelect, {
+      props: { options, variant: 'filled', teleport: false },
+    })
+
+    expect(wrapper.get('[role="combobox"]').classes()).toContain('m-select--filled')
+  })
 })

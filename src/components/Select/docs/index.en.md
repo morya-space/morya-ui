@@ -197,6 +197,8 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | `show`              | —                                                                      | Emitted when the menu opens.                               |
 | `hide`              | —                                                                      | Emitted when the menu closes.                              |
 | `search`            | `string`                                                               | Emitted as the filter query changes (`filter` / `remote`). |
+| `select`            | `value, option`                                                        | Emitted when an option is selected.                        |
+| `deselect`          | `value, option`                                                        | Emitted when an option is deselected (multiple mode).      |
 | `create`            | [SelectOption](/docs/types#SelectOption) `{ label, value, disabled? }` | Emitted when `tag` creates a new option.                   |
 
 ## Slots
