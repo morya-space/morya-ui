@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { MCard } from 'morya-ui'
+import { MCard, MInput } from 'morya-ui'
+import { ref } from 'vue';
+
+const inputValue = ref('')
 </script>
 
 <template>
@@ -9,6 +12,8 @@ import { MCard } from 'morya-ui'
     </MCard>
     <MCard title="Hover shadow" shadow="hover">
       Same elevation as `always`, shown only on hover (`--m-card-shadow-rest`).
+
+      <MInput v-model="inputValue" placeholder="Hover me" />
     </MCard>
     <MCard title="Always elevated" shadow="always">
       Resting shadow (`--m-card-shadow-rest` → `--m-shadow-raised`); use for dashboard modules.
