@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T09:28:56.715Z",
-  "catalogGeneratedAt": "2026-09-30T09:28:54.470Z",
+  "generatedAt": "2026-10-08T08:29:21.331Z",
+  "catalogGeneratedAt": "2026-10-08T08:29:10.652Z",
   "components": [
     {
       "id": "Accordion",
@@ -221,10 +221,11 @@
       "exportName": "MBadge",
       "examples": 10,
       "props": {
-        "total": 6,
+        "total": 7,
         "covered": 5,
         "missing": [
-          "offset"
+          "offset",
+          "pt"
         ]
       },
       "events": {
@@ -537,10 +538,11 @@
       "exportName": "MChip",
       "examples": 4,
       "props": {
-        "total": 7,
+        "total": 8,
         "covered": 6,
         "missing": [
-          "image"
+          "image",
+          "pt"
         ]
       },
       "events": {
@@ -927,11 +929,12 @@
       "exportName": "MDivider",
       "examples": 14,
       "props": {
-        "total": 8,
+        "total": 9,
         "covered": 6,
         "missing": [
           "orientation",
-          "size"
+          "size",
+          "pt"
         ]
       },
       "events": {
@@ -2454,10 +2457,11 @@
       "exportName": "MProgressBar",
       "examples": 6,
       "props": {
-        "total": 6,
+        "total": 7,
         "covered": 5,
         "missing": [
-          "color"
+          "color",
+          "pt"
         ]
       },
       "events": {
@@ -3408,10 +3412,11 @@
       "exportName": "MTag",
       "examples": 14,
       "props": {
-        "total": 11,
+        "total": 12,
         "covered": 10,
         "missing": [
-          "disabled"
+          "disabled",
+          "pt"
         ]
       },
       "events": {

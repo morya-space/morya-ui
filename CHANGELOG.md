@@ -1,5 +1,32 @@
 # morya-ui
 
+## 0.4.1
+
+### 破坏性变更
+
+- rewrite with Naive-inspired API
+
+### 新功能
+
+- ability to add transparent root node attributes to multiple components
+
+### 修复
+
+- components name change
+- ensure single root vnode for Transition classes and update design tokens
+
+### 文档
+
+- add components pt attr
+- refresh demos for effects, multi-view, and vertical
+
+### 变更
+
+- update component library
+- unify focus and hover states across components
+- sync MCP catalog and design tokens for Carousel
+- standardize import statements across components and update styles
+
 ## 0.4.0
 
 ### 新功能
