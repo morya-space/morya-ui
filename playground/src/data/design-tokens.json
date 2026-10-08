@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T09:36:22.722Z",
+  "generatedAt": "2026-10-08T07:21:37.749Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 436,
+  "tokenCount": 440,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -1087,6 +1087,36 @@
       "description": {
         "zh-CN": "颜色相关变量：Color Contrast Hover",
         "en-US": "Color token: Color Contrast Hover"
+      }
+    },
+    {
+      "name": "--m-color-control-outline",
+      "category": "focus",
+      "source": "src/theme/styles.css",
+      "default": "rgba(23, 117, 249, 0.31)",
+      "description": {
+        "zh-CN": "表单控件聚焦光晕底色。",
+        "en-US": "Soft outline color for focused form controls."
+      }
+    },
+    {
+      "name": "--m-color-control-outline-danger",
+      "category": "focus",
+      "source": "src/theme/styles.css",
+      "default": "rgba(249, 75, 78, 0.31)",
+      "description": {
+        "zh-CN": "危险态控件聚焦光晕底色。",
+        "en-US": "Soft outline color for danger-focused controls."
+      }
+    },
+    {
+      "name": "--m-color-control-outline-warning",
+      "category": "focus",
+      "source": "src/theme/styles.css",
+      "default": "rgba(250, 173, 20, 0.3)",
+      "description": {
+        "zh-CN": "警告态控件聚焦光晕底色。",
+        "en-US": "Soft outline color for warning-focused controls."
       }
     },
     {
@@ -1897,20 +1927,30 @@
       }
     },
     {
+      "name": "--m-focus-outline-width",
+      "category": "focus",
+      "source": "src/theme/styles.css",
+      "default": "2px",
+      "description": {
+        "zh-CN": "聚焦光晕宽度（默认 2px）。",
+        "en-US": "Focus outline width (default 2px)."
+      }
+    },
+    {
       "name": "--m-focus-shadow",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-primary) 50%, transparent)",
+      "default": "0 0 0 var(--m-focus-outline-width) var(--m-color-control-outline)",
       "description": {
-        "zh-CN": "默认聚焦光晕（主色约 45% 混合）。",
-        "en-US": "Default focus glow (primary at ~45% mix)."
+        "zh-CN": "默认聚焦光晕。",
+        "en-US": "Default focus glow."
       }
     },
     {
       "name": "--m-focus-shadow-danger",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-danger) 50%, transparent)",
+      "default": "0 0 0 var(--m-focus-outline-width) var(--m-color-control-outline-danger)",
       "description": {
         "zh-CN": "危险态控件聚焦光晕。",
         "en-US": "Focus glow for danger-styled controls."
@@ -1920,7 +1960,7 @@
       "name": "--m-focus-shadow-warning",
       "category": "focus",
       "source": "src/theme/styles.css",
-      "default": "0 0 0 2px color-mix(in srgb, var(--m-color-warning) 50%, transparent)",
+      "default": "0 0 0 var(--m-focus-outline-width) var(--m-color-control-outline-warning)",
       "description": {
         "zh-CN": "警告态控件聚焦光晕。",
         "en-US": "Focus glow for warning-styled controls."

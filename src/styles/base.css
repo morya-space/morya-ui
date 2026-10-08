@@ -710,7 +710,7 @@
     opacity: var(--m-opacity-disabled);
 }
 
-/* Shared hover/focus for remaining form triggers (Ant-like active border + soft outline) */
+/* Shared hover/focus for remaining form triggers */
 .m-inputotp__input:hover:not(:disabled):not(:focus),
 .m-cascadeselect:not(.m-cascadeselect--open)
     .m-cascadeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),

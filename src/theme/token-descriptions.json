@@ -277,8 +277,8 @@
     "--m-color-control-outline": {
       "category": "focus",
       "description": {
-        "zh-CN": "表单控件聚焦光晕底色（对齐 Ant Design controlOutline / getAlphaColor）。",
-        "en-US": "Soft outline color for focused form controls (Ant Design controlOutline via getAlphaColor)."
+        "zh-CN": "表单控件聚焦光晕底色。",
+        "en-US": "Soft outline color for focused form controls."
       }
     },
     "--m-color-control-outline-danger": {
@@ -515,8 +515,8 @@
     "--m-focus-shadow": {
       "category": "focus",
       "description": {
-        "zh-CN": "默认聚焦光晕（Ant Design 风格软描边）。",
-        "en-US": "Default focus glow (soft Ant Design–style outline)."
+        "zh-CN": "默认聚焦光晕。",
+        "en-US": "Default focus glow."
       }
     },
     "--m-focus-shadow-danger": {

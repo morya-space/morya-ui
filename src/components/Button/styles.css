@@ -61,7 +61,7 @@
     transform: scale(0.97);
 }
 
-/* Naive-style focus: soft glow, not outline-offset ring */
+/* Soft glow focus, not outline-offset ring */
 .m-button:focus {
     outline: none;
 }

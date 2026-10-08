@@ -67,7 +67,7 @@
 
 .m-layout__scroll--has-sider,
 .m-layout__scroll-view--has-sider {
-    /* direction set inline (matches naive hasSiderStyle) */
+    /* direction set inline */
     align-items: stretch;
     flex-wrap: nowrap;
 }

@@ -4,8 +4,6 @@
 
 ### 破坏性变更
 
-- align with the antd API and add advanced options
-
 ### 新功能
 
 - wire filled variant and allow null model values

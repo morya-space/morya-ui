@@ -4,8 +4,6 @@
 
 ### Breaking Changes
 
-- align with the antd API and add advanced options
-
 ### Features
 
 - wire filled variant and allow null model values
