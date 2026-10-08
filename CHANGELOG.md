@@ -2,8 +2,6 @@
 
 ## 0.4.0
 
-### 破坏性变更
-
 ### 新功能
 
 - wire filled variant and allow null model values

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { ChipProps } from './types'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { normalizeSeverity, resolveIconSize, resolveSizeClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ChipProps>(), {
   removable: false,
@@ -11,6 +14,9 @@ const props = withDefaults(defineProps<ChipProps>(), {
 })
 
 const emit = defineEmits<{ (event: 'remove', value: MouseEvent): void }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
 const locale = useMLocale()
 const severityTone = computed(() => (props.severity ? normalizeSeverity(props.severity) : undefined))
 const sizeTone = computed(() => resolveSizeClass(props.size))
@@ -34,7 +40,7 @@ function handleRemove(event: MouseEvent) {
 </script>
 
 <template>
-  <span :class="chipClass" :aria-disabled="disabled || undefined">
+  <span v-bind="rootAttrs" :class="chipClass" :aria-disabled="disabled || undefined">
     <slot name="icon">
       <img v-if="image" class="m-chip__image" :src="image" alt="">
       <MIcon v-else-if="icon" class="m-chip__icon" :name="icon" :size="iconSize" />

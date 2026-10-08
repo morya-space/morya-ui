@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput, MTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
@@ -32,6 +33,8 @@ export interface TagProps {
   checkable?: boolean
   /** Selected state when `checkable`. */
   checked?: boolean
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface TagEmits {

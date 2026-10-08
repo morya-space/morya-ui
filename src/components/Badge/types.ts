@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput, MTagSeverity } from '../../shared/types'
 
 export type BadgeSeverity = MTagSeverity | 'warning'
@@ -22,4 +23,6 @@ export interface BadgeProps {
   offset?: BadgeOffset
   /** Pulse animation. */
   processing?: boolean
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }

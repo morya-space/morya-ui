@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { ProgressBarProps } from './types'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { normalizeSeverity } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ProgressBarProps>(), {
   value: 0,
@@ -9,6 +12,9 @@ const props = withDefaults(defineProps<ProgressBarProps>(), {
   type: 'line',
   showValue: true,
 })
+
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const clampedValue = computed(() => Math.min(100, Math.max(0, props.value)))
 const isIndeterminate = computed(() => props.mode === 'indeterminate')
@@ -56,6 +62,7 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
 
 <template>
   <div
+    v-bind="rootAttrs"
     :class="progressClass"
     :style="progressStyle"
     role="progressbar"

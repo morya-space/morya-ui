@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { DividerProps } from './types'
-import { computed, useSlots } from 'vue'
+import { computed, useAttrs, useSlots } from 'vue'
+import { useRootParts } from '../../shared/useComponentAttrs'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<DividerProps>(), {
   type: 'solid',
@@ -8,6 +11,8 @@ const props = withDefaults(defineProps<DividerProps>(), {
   plain: false,
 })
 
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const slots = useSlots()
 const resolvedLayout = computed(
   () => props.layout ?? props.orientation ?? 'horizontal',
@@ -34,6 +39,7 @@ const rootClass = computed(() => [
 
 <template>
   <div
+    v-bind="rootAttrs"
     :class="rootClass"
     role="separator"
     :aria-orientation="resolvedLayout"

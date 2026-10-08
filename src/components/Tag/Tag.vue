@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { TagProps } from './types'
-import { computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
 import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TagProps>(), {
   severity: 'primary',
@@ -21,6 +24,8 @@ const emit = defineEmits<{
   (event: 'update:checked', value: boolean): void
   (event: 'change', value: boolean): void
 }>()
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('Tag', () => props.size)
@@ -73,6 +78,7 @@ function onRootKeydown(event: KeyboardEvent) {
 
 <template>
   <span
+    v-bind="rootAttrs"
     :class="rootClass"
     :style="rootStyle"
     :role="checkable ? 'button' : undefined"

@@ -1,3 +1,5 @@
+import type { RootPassThrough } from '../../shared/passThrough'
+
 export type DividerLayout = 'horizontal' | 'vertical'
 export type DividerType = 'solid' | 'dashed' | 'dotted'
 export type DividerAlign = 'left' | 'center' | 'right'
@@ -29,4 +31,6 @@ export interface DividerProps {
    */
   size?: DividerSize
   label?: string
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }

@@ -1,3 +1,4 @@
+import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput, MTagSeverity } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
@@ -19,6 +20,8 @@ export interface ChipProps {
   severity?: ChipSeverity
   /** Size. Also accepts legacy `sm` / `lg`. */
   size?: ChipSize
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
 
 export interface ChipEmits {

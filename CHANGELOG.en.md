@@ -2,8 +2,6 @@
 
 ## 0.4.0
 
-### Breaking Changes
-
 ### Features
 
 - wire filled variant and allow null model values

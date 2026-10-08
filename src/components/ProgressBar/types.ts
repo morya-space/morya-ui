@@ -1,3 +1,5 @@
+import type { RootPassThrough } from '../../shared/passThrough'
+
 export type ProgressBarMode = 'determinate' | 'indeterminate'
 export type ProgressBarType = 'line' | 'circle'
 /**
@@ -34,4 +36,6 @@ export interface ProgressBarProps {
   color?: string
   /** Show percentage label in determinate mode. */
   showValue?: boolean
+  /** Pass-through attrs/classes/styles for the root element. */
+  pt?: RootPassThrough
 }
