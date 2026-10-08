@@ -30,6 +30,7 @@ import { MChip } from 'morya-ui'
 | `disabled` | `boolean` | `false` | 禁用交互。 |
 | `severity` | `MTagSeverity \| 'warning'` | — | 语义色。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
 ## Events

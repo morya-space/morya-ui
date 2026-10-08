@@ -68,6 +68,7 @@ When the divider is horizontal and has a label, use `align` to control the label
 | `plain` | `boolean` | `false` | Use body text style for the label. |
 | `size` | `'small' \| 'medium' \| 'large'` | 鈥?| Vertical margin for horizontal dividers (`--m-space-*`). |
 | `label` | `string` | 鈥?| Center label text. The default slot takes precedence when present. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |
 
 
 ## Slots

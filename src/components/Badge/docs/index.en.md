@@ -52,6 +52,7 @@ Wrap content with the default slot. `max` caps numeric values; `processing` puls
 | `max` | `number` | 鈥?| Cap numeric values as `{max}+`. |
 | `offset` | `[number, number]` | 鈥?| Offset `[x, y]` when wrapping content. |
 | `processing` | `boolean` | `false` | Pulse animation. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |
 
 
 ## Slots

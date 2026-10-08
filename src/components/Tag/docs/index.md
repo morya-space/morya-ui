@@ -69,6 +69,7 @@ import { MTag } from 'morya-ui'
 | `disabled` | `boolean` | `false` | 禁用交互。 |
 | `checkable` | `boolean` | `false` | 可切换选中。 |
 | `checked` | `boolean` | `false` | 选中态；配合 `v-model:checked`。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
 ## Events

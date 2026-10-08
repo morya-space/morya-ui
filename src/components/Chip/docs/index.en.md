@@ -30,6 +30,7 @@ import { MChip } from 'morya-ui'
 | `disabled` | `boolean` | `false` | Disable interaction. |
 | `severity` | `MTagSeverity \| 'warning'` | 鈥?| Semantic color. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| Size. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |
 
 
 ## Events

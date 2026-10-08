@@ -68,6 +68,7 @@ import { MDivider } from 'morya-ui'
 | `plain` | `boolean` | `false` | 标签使用正文样式。 |
 | `size` | `'small' \| 'medium' \| 'large'` | — | 水平分隔的上下间距（`--m-space-*`）。 |
 | `label` | `string` | — | 中间标签文案。存在默认插槽时以插槽为准。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
 ## Slots

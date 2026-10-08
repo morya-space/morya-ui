@@ -69,6 +69,7 @@ Pass a `MIcon` icon name to `icon`.
 | `disabled` | `boolean` | `false` | Disable interaction. |
 | `checkable` | `boolean` | `false` | Toggleable selection. |
 | `checked` | `boolean` | `false` | Checked state; use with `v-model:checked`. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |
 
 
 ## Events

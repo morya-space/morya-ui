@@ -34,6 +34,7 @@ import { MProgressBar } from 'morya-ui'
 | `type` | `'line' \| 'circle'` | `'line'` | 线形或环形。 |
 | `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| …` | — | 语义色。`exception`→danger；`active`→线形条纹动效；`normal`→主色。 |
 | `color` | `string` | — | 自定义填充色。 |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 ## Events
 

@@ -34,6 +34,7 @@ import { MProgressBar } from 'morya-ui'
 | `type` | `'line' \| 'circle'` | `'line'` | Line or circle. |
 | `status` | `'success' \| 'info' \| 'warning' \| 'danger' \| 'exception' \| 'active' \| 'normal' \| 鈥 | 鈥?| Semantic fill. `exception`鈫抎anger; `active`鈫抣ine stripe; `normal`鈫抪rimary. |
 | `color` | `string` | 鈥?| Custom fill color. |
+| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |
 
 ## Events
 
