@@ -308,6 +308,15 @@
     text-align: right;
 }
 
+/* Cell content lives in a flex box, so text-align alone cannot move it. */
+.m-table__cell--center > .m-table__cell-inner {
+    justify-content: center;
+}
+
+.m-table__cell--right > .m-table__cell-inner {
+    justify-content: flex-end;
+}
+
 .m-table__cell-inner {
     box-sizing: border-box;
     display: flex;

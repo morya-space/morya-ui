@@ -1,7 +1,8 @@
+import type { TableItem } from './types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { h } from 'vue'
-import type { TableItem } from './types'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import MTable from './Table.vue'
 
 const columns = [
@@ -45,6 +46,51 @@ describe('mTable', () => {
       },
     })
     expect(wrapper.find('.m-table__scrollbar.m-scrollbar').exists()).toBe(true)
+  })
+
+  it('maps tableHeight to scrollbar height and maxHeight to max-height', () => {
+    const fixed = mount(MTable, {
+      props: {
+        columns,
+        rows: [{ id: 1, name: 'A' }],
+        tableHeight: 320,
+        paginator: false,
+      },
+    })
+    const fixedScrollbar = fixed.findComponent(MScrollbar)
+    expect(fixedScrollbar.props('height')).toBe('320px')
+    expect(fixedScrollbar.props('maxHeight')).toBe('')
+
+    const capped = mount(MTable, {
+      props: {
+        columns,
+        rows: [{ id: 1, name: 'A' }],
+        maxHeight: 240,
+        paginator: false,
+      },
+    })
+    const cappedScrollbar = capped.findComponent(MScrollbar)
+    expect(cappedScrollbar.props('maxHeight')).toBe('240px')
+    expect(cappedScrollbar.props('height')).toBe('')
+  })
+
+  it('applies per-column align to header and body cells', () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [
+          { key: 'name', label: 'Name', align: 'center' as const },
+          { key: 'score', label: 'Score', align: 'end' as const },
+        ],
+        rows: [{ id: 1, name: 'A', score: 10 }],
+        paginator: false,
+      },
+    })
+    expect(wrapper.find('th:nth-child(1) .m-table__header-inner').classes())
+      .toContain('m-table__header-inner--center')
+    expect(wrapper.find('th:nth-child(2) .m-table__header-inner').classes())
+      .toContain('m-table__header-inner--right')
+    expect(wrapper.find('tbody td:nth-child(1)').classes()).toContain('m-table__cell--center')
+    expect(wrapper.find('tbody td:nth-child(2)').classes()).toContain('m-table__cell--right')
   })
 
   it('fills parent height so paginator can sit at the page bottom', () => {

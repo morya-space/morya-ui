@@ -15,6 +15,7 @@ export interface HeaderForRender {
   fixed?: boolean | 'left' | 'right'
   width?: number
   minWidth?: number
+  align?: 'start' | 'center' | 'end'
   resizable?: boolean
   filterable?: boolean
   filters?: TableColumnFilter[]

@@ -16,6 +16,29 @@ import { useControllable } from '../../shared/useControllable'
 import MLoading from '../Loading/Loading.vue'
 import MPagination from '../Pagination/Pagination.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
+import { isSyntheticColumn, M_TABLE_ROOT_KEY, SYNTHETIC } from './columns/keys'
+import {
+  getColStyleForHeader,
+  getFixedDistanceStyle,
+  resolveCellAlignClass,
+  useDisplayHeaderRows,
+} from './core/layout'
+import {
+  buildHeaderRows,
+  normalizeAlign,
+  normalizeColumnList,
+  resolveSortField,
+  resolveSortOrder,
+  resolveVisibleColumns,
+} from './core/normalize'
+import {
+  collectSubtree,
+  computeTreeIndeterminateKeys,
+  isRowCheckable,
+  syncTreeParentSelection,
+  toggleTreeCheckboxSelection,
+} from './core/treeSelection'
+import { resolveRowKey, sameTableItem, stripSyntheticFields } from './core/utils'
 import {
   useClickRow,
   useColumnResize,
@@ -30,31 +53,8 @@ import {
   useTreeRows,
   useVirtualRows,
 } from './hooks'
-import { M_TABLE_ROOT_KEY, SYNTHETIC, isSyntheticColumn } from './columns/keys'
-import {
-  buildHeaderRows,
-  normalizeAlign,
-  normalizeColumnList,
-  resolveSortField,
-  resolveSortOrder,
-  resolveVisibleColumns,
-} from './core/normalize'
-import {
-  getColStyleForHeader,
-  getFixedDistanceStyle,
-  resolveCellAlignClass,
-  useDisplayHeaderRows,
-} from './core/layout'
-import TableThead from './render/TableThead.vue'
 import TableTbody from './render/TableTbody.vue'
-import { resolveRowKey, sameTableItem, stripSyntheticFields } from './core/utils'
-import {
-  collectSubtree,
-  computeTreeIndeterminateKeys,
-  isRowCheckable,
-  syncTreeParentSelection,
-  toggleTreeCheckboxSelection,
-} from './core/treeSelection'
+import TableThead from './render/TableThead.vue'
 defineOptions({ inheritAttrs: false })
 
 
@@ -358,10 +358,11 @@ const resolvedTableHeight = computed(() => maxHeight.value ?? tableHeight.value)
 
 const tableFillsParent = computed(() => fill.value && !resolvedTableHeight.value)
 const tableHeightPx = computed(() => {
-  if (resolvedTableHeight.value) return `${resolvedTableHeight.value}px`
+  if (tableHeight.value) return `${tableHeight.value}px`
   if (tableFillsParent.value) return '100%'
   return null
 })
+const tableMaxHeightPx = computed(() => (maxHeight.value ? `${maxHeight.value}px` : null))
 const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
 
 const slots = useSlots()
@@ -1105,6 +1106,7 @@ defineExpose({
         ref="scrollbarRef"
         class="m-table__scrollbar"
         :height="tableHeightPx || undefined"
+        :max-height="tableMaxHeightPx || undefined"
         :wrap-style="scrollbarWrapStyle"
         :wrap-class="mainWrapClass"
         noresize

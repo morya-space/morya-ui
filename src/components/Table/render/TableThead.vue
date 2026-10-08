@@ -5,12 +5,13 @@ import type {
   TableHeaderItemClassName,
   TableTextDirection,
 } from '../types'
-import { computed, useSlots } from 'vue'
+import { useSlots } from 'vue'
 import { useMLocale } from '../../../locale'
 import MCheckbox from '../../Checkbox/Checkbox.vue'
 import MIcon from '../../Icon/Icon.vue'
 import { SYNTHETIC } from '../columns/keys'
 import { getFixedDistanceStyle } from '../core/layout'
+import { normalizeAlign } from '../core/normalize'
 import TableHeaderFilter from './TableHeaderFilter.vue'
 
 const props = defineProps<{
@@ -40,10 +41,21 @@ const emit = defineEmits<{
 const slots = useSlots()
 const locale = useMLocale()
 
-const headerInnerClass = computed(() => [
-  'm-table__header-inner',
-  `m-table__header-inner--${props.headerTextDirection}`,
-])
+/** Per-column align takes precedence over the table-level header direction. */
+function headerDirection(header: HeaderForRender): TableTextDirection {
+  const align = normalizeAlign(header.align)
+  if (align === 'center') return 'center'
+  if (align === 'end') return 'right'
+  if (align === 'start') return 'left'
+  return props.headerTextDirection
+}
+
+function headerInnerClass(header: HeaderForRender) {
+  return [
+    'm-table__header-inner',
+    `m-table__header-inner--${headerDirection(header)}`,
+  ]
+}
 
 function headerCellClass(header: HeaderForRender, index: number) {
   const custom = typeof props.headerItemClassName === 'string'
@@ -129,7 +141,7 @@ function fixedStyle(column: string) {
         />
         <span
           v-else
-          :class="headerInnerClass"
+          :class="headerInnerClass(header)"
         >
           <slot
             v-if="slots[`header-${header.value}`]"
