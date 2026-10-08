@@ -82,7 +82,7 @@ describe('deriveCssVars — light seed', () => {
     expect(vars['--m-font-size-sm']).toBeUndefined()
     expect(vars['--m-font-size-lg']).toBeUndefined()
   })
-  it('reproduces Ant Design controlOutline soft focus glow', () => {
+  it('derives the soft control-outline focus glow', () => {
     expect(vars['--m-color-control-outline']).toBe('rgba(5, 145, 255, 0.1)')
     expect(vars['--m-color-control-outline-danger']).toBe('rgba(255, 38, 5, 0.06)')
     expect(vars['--m-color-control-outline-warning']).toBe('rgba(255, 215, 5, 0.1)')
@@ -103,7 +103,7 @@ describe('deriveCssVars — dark seed', () => {
     expect(vars['--m-color-text-muted']).toBe('rgba(255, 255, 255, 0.45)')
   })
 
-  it('reproduces Ant Design dark controlOutline soft focus glow', () => {
+  it('derives the dark soft control-outline focus glow', () => {
     expect(vars['--m-color-control-outline']).toBe('rgba(23, 117, 249, 0.31)')
     expect(vars['--m-color-control-outline-danger']).toBe('rgba(249, 75, 78, 0.31)')
     expect(vars['--m-color-control-outline-warning']).toBe('rgba(250, 173, 20, 0.3)')

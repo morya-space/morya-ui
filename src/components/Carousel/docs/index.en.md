@@ -6,7 +6,7 @@ description: Carousel for a set of content items with slide / fade / card effect
 
 # Carousel
 
-Inspired by Naive UI: default slot + `MCarouselItem`, multiple effects, dot styles/placement, touch/drag/wheel/keyboard, and autoplay.
+Supports a default slot + `MCarouselItem`, multiple effects, dot styles/placement, touch/drag/wheel/keyboard, and autoplay.
 
 ## Import
 

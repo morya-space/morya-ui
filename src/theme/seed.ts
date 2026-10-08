@@ -1,8 +1,8 @@
 /**
  * Seed tokens — the single source of truth every other token is derived from.
  *
- * Mirrors the classic seed layer (same names, same meanings) so palettes
- * derived here stay compatible with the design language the library targets.
+ * A classic seed layer with stable names and meanings, so palettes derived
+ * here stay consistent with the design language the library targets.
  * Values are plain data; no CSS units, no `var()` references.
  */
 

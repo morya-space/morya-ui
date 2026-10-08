@@ -265,8 +265,8 @@ export function withAlpha(color: string, alpha: number): string {
 }
 
 /**
- * Ant Design `getAlphaColor`: find an rgba string that composites to
- * `frontColor` when drawn over `backgroundColor`. Used for controlOutline.
+ * Find an rgba string that composites to `frontColor` when drawn over
+ * `backgroundColor`. Used for the soft control-outline ring.
  */
 export function getAlphaColor(frontColor: string, backgroundColor: string): string {
   const front = parseHex(frontColor)

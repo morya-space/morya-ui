@@ -228,8 +228,8 @@ function deriveAliasTokens(seed: MSeedTokens, dark: boolean, tokens: TokenMap): 
     colorBgMask: alphaOf('#000000', 0.45),
     colorWhite: '#ffffff',
     colorSplit: pick(tokens, 'colorBorderSecondary'),
-    // Ant Design: controlOutline = getAlphaColor(colorPrimaryBg, colorBgContainer)
-    // → soft translucent ring, e.g. rgba(5, 145, 255, 0.1) for the default light theme.
+    // Soft translucent focus ring: composite the primary background over the
+    // container, e.g. rgba(5, 145, 255, 0.1) for the default light theme.
     controlOutline: getAlphaColor(pick(tokens, 'colorPrimaryBg'), pick(tokens, 'colorBgContainer')),
     controlOutlineWidth: '2px',
     controlOutlineDanger: getAlphaColor(pick(tokens, 'colorErrorBg'), pick(tokens, 'colorBgContainer')),

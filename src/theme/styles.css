@@ -9,7 +9,7 @@
     --m-color-border: #d9d9d9;
     --m-color-split: #f0f0f0;
     --m-color-focus-ring: #1677ff;
-    /* Ant Design controlOutline = getAlphaColor(colorPrimaryBg, colorBgContainer) */
+    /* Soft translucent control-outline ring (primary bg composited over container) */
     --m-color-control-outline: rgba(5, 145, 255, 0.1);
     --m-color-control-outline-danger: rgba(255, 38, 5, 0.06);
     --m-color-control-outline-warning: rgba(255, 215, 5, 0.1);
@@ -257,7 +257,7 @@
     animation-play-state: paused !important;
 }
 
-/* Global density: scales spacing + control heights (Vuetify-inspired, WD tokens) */
+/* Global density: scales spacing + control heights (WD tokens) */
 :root,
 [data-m-density="comfortable"] {
     --m-density-scale: 1;

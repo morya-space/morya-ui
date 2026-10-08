@@ -4,7 +4,7 @@
     border-color: var(--m-color-primary-hover);
 }
 
-/* Ant Design outlined active: borderColor + soft controlOutline shadow */
+/* Outlined active state: border color + soft control-outline shadow */
 .m-input:focus,
 .m-input:focus-visible {
     border-color: var(--m-color-primary);
