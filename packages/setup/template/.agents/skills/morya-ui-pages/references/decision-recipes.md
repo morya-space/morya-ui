@@ -847,7 +847,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · props**
 
 - label + value
-- trend / trendSeverity / trendDirection 按需
+- trend / trendType / trendDirection 按需
 - loading 骨架；layout card|plain
 
 **Anti-patterns**
@@ -1197,7 +1197,7 @@ This file is the **offline** mirror for agents without MCP.
 
 **Recipe · props**
 
-- label + severity
+- label + type
 - variant 默认 dot；可用 tag|text
 - 表格状态列优先 MStatus，不要一排实心 Tag
 
@@ -1221,7 +1221,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · props**
 
 - value 或默认插槽文案
-- severity；closable + @close
+- type；closable + @close
 - rounded / bordered 按需
 
 **Recipe · events**
@@ -1248,7 +1248,7 @@ This file is the **offline** mirror for agents without MCP.
 
 - label；icon 或 image
 - removable + @remove
-- severity 按需
+- type 按需
 
 **Recipe · events**
 
@@ -1272,7 +1272,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · props**
 
 - value 数量；省略则圆点
-- severity；max 封顶
+- type；max 封顶
 - 默认插槽包裹宿主控件
 
 **Recipe · slots**
@@ -1381,7 +1381,7 @@ This file is the **offline** mirror for agents without MCP.
 
 - :model / items 操作项
 - 触发器放默认插槽（按钮/图标）
-- 危险项用文档 severity / 确认流
+- 危险项走确认流（ConfirmDialog）
 
 **Related snippets**
 
@@ -1513,7 +1513,7 @@ This file is the **offline** mirror for agents without MCP.
 **Anti-patterns**
 
 - toast.add({ summary: '已保存' }) → message.success('已保存')
-- <MMessage severity> 当内嵌 Alert → errorMessage / role="alert"
+- <MMessage type> 当内嵌 Alert → errorMessage / role="alert"
 
 
 ### toast
@@ -1562,7 +1562,7 @@ This file is the **offline** mirror for agents without MCP.
 **Anti-patterns**
 
 - 登录失败只闪 Toast → 表单区 alert / errorMessage
-- 编造 MMessage severity 插槽 Alert API
+- 编造 MMessage type / 插槽 Alert API
 
 
 ---

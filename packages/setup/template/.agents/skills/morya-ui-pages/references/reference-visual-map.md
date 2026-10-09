@@ -28,7 +28,7 @@ This file only covers **visual traits** after structure mapping exists.
 | Soft elevated cards (no blur) | `MCard` / section surface + `--m-shadow-sm/md` + `--m-radius-md` | Extra nested cards for decoration only |
 | Pill / capsule primary CTA | `MButton type="primary" shape="round"` — **one** in the main viewport | Multiple filled primaries |
 | Quiet secondary actions | `MButton type="text"` / default outlined | Competing solid colors |
-| Soft status / category chips | `MStatus` for state; `MTag` for labels; soft severity — not a row of solid blocks | Decorative `MTag` where `MStatus` belongs |
+| Soft status / category chips | `MStatus` for state; `MTag` for labels; soft semantic `type` — not a row of solid blocks | Decorative `MTag` where `MStatus` belongs |
 | Count on a control | Wrap host with `MBadge` | Invented `MButton badge` props |
 | Left brand art + right form | `auth-split-shell` / Account split; art slot = project asset or simple token panel | Hand-rolled auth outside `MForm` |
 | Empty state with illustration | `MEmpty` + `illustration` / `#illustration` when available; clear next action | Blank table with no empty |

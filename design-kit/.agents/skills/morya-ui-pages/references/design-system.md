@@ -6,7 +6,7 @@ Canonical long form lives in project-root `DESIGN.md` when the AI config pack is
 
 1. **Components first** — layout, forms, tables, overlays use `M*` from `morya-ui`, not equivalent hand-rolled DOM.
 2. **Tokens first** — color, space, radius, shadow, motion via `--m-*`. No raw `#hex` / `rgb()` in page styles.
-3. **Semantic actions** — primary work uses `MButton type="primary"`; destructive uses `danger` / `color="danger"` or confirm dialogs. Badge / Tag / Alert still use `severity`.
+3. **Semantic actions** — primary work uses `MButton type="primary"`; destructive uses `danger` / `color="danger"` or confirm dialogs. Badge / Tag / Status / Alert use semantic `type` for tone (not Button's appearance sugar `type`).
 4. **Accessibility** — fields have visible labels; icon buttons have `aria-label`; overlays dismiss with Esc (library default).
 5. **ConfigProvider** — wrap the app (or isolated demo) in `MConfigProvider` for locale, theme, density, overlay mount.
 

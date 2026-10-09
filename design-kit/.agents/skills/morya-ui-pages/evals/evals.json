@@ -22,7 +22,7 @@
     {
       "id": 4,
       "prompt": "给「青禾书房」这个独立书店品牌做登录页：左品牌、右表单（邮箱+密码+登录）。要有一点品牌感（token 氛围即可），但控件必须用 morya-ui；登录失败用表单区常驻错误（字段 errorMessage 或 token role=alert），不要一闪而过的 Toast，也不要把 MMessage 当成内嵌 Alert。输出单个 Vue SFC。",
-      "expected_output": "Account+craft via auth-split-shell: split shell, MForm/MInputPassword/MButton, token role=alert or field error for failure, brand panel with flat --m-* color-mix (no stacked radial+linear aurora), no MMessage severity alert, no second UI kit.",
+      "expected_output": "Account+craft via auth-split-shell: split shell, MForm/MInputPassword/MButton, token role=alert or field error for failure, brand panel with flat --m-* color-mix (no stacked radial+linear aurora), no MMessage-as-inline-alert, no second UI kit.",
       "files": []
     },
     {
@@ -76,7 +76,7 @@
     {
       "id": 13,
       "prompt": "列表行删除：点删除后用 MConfirmDialog（危险确认），确认后 message.success('已删除')。不要用 toast，也不要手写 Dialog 当确认框。输出片段或 SFC 均可。",
-      "expected_output": "confirm-delete snippet + feedback-choice: MConfirmDialog v-model header/message acceptSeverity=danger @accept, message.success not toast, no hand Dialog confirm.",
+      "expected_output": "confirm-delete snippet + feedback-choice: MConfirmDialog v-model header/message acceptColor=danger @accept, message.success not toast, no hand Dialog confirm.",
       "files": []
     },
     {

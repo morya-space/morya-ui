@@ -92,8 +92,8 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | --- | --- |
 | `MDropdown` as form enum | `MSelect` (`selection-choice`) |
 | `MTable` `:data` | `:rows` (`data-display-choice`) |
-| `<MMessage severity>` as an inline alert | Field `errorMessage`, or token `role="alert"` (`feedback-choice`) |
-| `MButton severity="primary"` / `severity="danger"` | `type="primary"` / `danger` or `color="danger"` |
+| `<MMessage type>` (or legacy `severity`) as an inline alert | Field `errorMessage`, or token `role="alert"` (`feedback-choice`) |
+| `MButton severity="…"` / treating Button sugar `type` as status tone | `type="primary"` for look; status via `MStatus` / `MTag type="…"`; danger via `danger` / `color="danger"` |
 | `MButton badge` / `badgeColor` | Wrap with `MBadge` (`status-label-choice`) |
 | Hand `<table>` | `MTable` |
 | Hand modal div | `MDialog` / `MConfirmDialog` |

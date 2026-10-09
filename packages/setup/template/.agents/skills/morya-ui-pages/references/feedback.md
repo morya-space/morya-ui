@@ -49,7 +49,7 @@ toast.success({
 
 - Field validation: component `invalid` / `errorMessage` (preferred).
 - Form-level persistent errors (login/auth): token-styled `role="alert"` bar as in MCP `get_golden_page` `login-page`.
-- Note: `<MMessage>` today is primarily the **message service host** (`messages` / teleport). Do not invent a `severity` + default-slot Alert API unless docs add it.
+- Note: `<MMessage>` today is primarily the **message service host** (`messages` / teleport). Do not invent a `type` + default-slot Alert API unless docs add it.
 
 ```vue
 <p v-if="formError" class="form-alert" role="alert">{{ formError }}</p>
