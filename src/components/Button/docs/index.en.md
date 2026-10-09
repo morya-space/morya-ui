@@ -1,31 +1,32 @@
 ---
 title: Button
 category: 01 / BASIC
-description: Buttons trigger immediate actions.
+description: A button that triggers an immediate action.
 ---
 
 # Button
 
-Buttons trigger immediate actions.
+Use Button for submit, confirm, navigate, and other immediate actions.
 
 ## When to use
 
-- Use for submit, confirm, navigate, or other immediate actions.
-- Prefer `type="primary"` for the main action; use the default button or `type="dashed"` / `type="text"` for secondary actions.
-- Use `danger` or `color="danger"` for destructive actions; use `type="text"` / `type="link"` for lightweight inline actions.
-- Group related actions with `MButtonGroup`.
+- Primary action: `type="primary"`. Keep one primary action in a region.
+- Secondary action: the default button, or `type="dashed"` / `type="text"`.
+- Inline or low-emphasis action: `type="link"` / `type="text"`.
+- Destructive action: add `danger`, and confirm when needed.
+- Related adjacent actions: wrap them in `MButtonGroup`.
 
 ## Import
 
 ```ts
-import { MButton } from "morya-ui";
+import { MButton, MButtonGroup } from 'morya-ui'
 ```
 
 ## Examples
 
 ### Basic
 
-`type` is sugar for a color/variant pair. The default is an outlined button.
+`type` is sugar for a `color` + `variant` pair. Omit it for the default outlined button.
 
 ```vue preview src="./demos/Basic.vue"
 
@@ -33,7 +34,7 @@ import { MButton } from "morya-ui";
 
 ### Color & variant
 
-`color` and `variant` compose freely and win over `type` when both are set.
+Set `color` and `variant` for finer control. When both are set, they win over `type`.
 
 ```vue preview src="./demos/ColorVariant.vue"
 
@@ -41,9 +42,17 @@ import { MButton } from "morya-ui";
 
 ### Icon
 
-Supports `icon`, `iconPlacement`, and `iconOnly`.
+`icon` accepts a name or component. Use `iconPlacement` for position. Icon-only buttons need `ariaLabel`.
 
 ```vue preview src="./demos/Icon.vue"
+
+```
+
+### Badge
+
+Use `badge` / `badgeColor` to show a count or status mark on the button.
+
+```vue preview src="./demos/Badge.vue"
 
 ```
 
@@ -53,63 +62,63 @@ Supports `icon`, `iconPlacement`, and `iconOnly`.
 
 ```
 
+### Shape
+
+`shape`: `default` / `round` / `circle` / `square`.
+
+```vue preview src="./demos/Shape.vue"
+
+```
+
+### Danger
+
+`danger` switches the color to danger while keeping the current `type` / `variant` look.
+
+```vue preview src="./demos/Danger.vue"
+
+```
+
+### Ghost
+
+`ghost` makes the background transparent for dark or busy surfaces. It is ignored for `text` / `link`.
+
+```vue preview src="./demos/Ghost.vue"
+
+```
+
+### Loading
+
+`loading` accepts a boolean or `{ delay, icon }`. Clicks are blocked while loading.
+
+```vue preview src="./demos/Loading.vue"
+
+```
+
 ### Disabled
 
 ```vue preview src="./demos/Disabled.vue"
 
 ```
 
-### Loading
-
-`loading` accepts a boolean or `{ delay, icon }`.
-
-```vue preview src="./demos/Loading.vue"
-
-```
-
-### Ghost
-
-`ghost` makes the background transparent for dark or busy surfaces.
-
-```vue preview src="./demos/Ghost.vue"
-
-```
-
-### Danger
-
-```vue preview src="./demos/Danger.vue"
-
-```
-
 ### Block
+
+`block` stretches the button to the parent width.
 
 ```vue preview src="./demos/Block.vue"
 
 ```
 
-### Shape
-
-```vue preview src="./demos/Shape.vue"
-
-```
-
 ### Button group
+
+`MButtonGroup` joins adjacent buttons. It also supports `block`.
 
 ```vue preview src="./demos/ButtonGroup.en.vue"
 
 ```
 
-### Icons & badge
-
-Library extension: `badge` / `badgeColor`.
-
-```vue preview src="./demos/IconsAndBadge.vue"
-
-```
-
 ### Ripple & press
 
-Library extension: `ripple` / `press`.
+`ripple` and `press` are off by default. Turn them on when you want the motion.
 
 ```vue preview src="./demos/RipplePress.vue"
 
@@ -117,7 +126,7 @@ Library extension: `ripple` / `press`.
 
 ## API
 
-Compose styles in this order: `type` → `shape` → `size` → `loading` → `disabled`.
+Suggested composition order: `type` → `shape` → `size` → `loading` → `disabled`.
 
 ### Props
 
@@ -126,17 +135,17 @@ Compose styles in this order: `type` → `shape` → `size` → `loading` → `d
 | `type` | `'default' \| 'primary' \| 'dashed' \| 'link' \| 'text'` | `'default'` | Sugar. When both `color` and `variant` are set, they win. |
 | `color` | `'default' \| 'primary' \| 'danger' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'contrast'` | — | Color axis. |
 | `variant` | `'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'` | — | Variant axis. |
-| `danger` | `boolean` | `false` | Sugar that forces the danger color. `color` wins when set. |
+| `danger` | `boolean` | `false` | Danger-color sugar. `color` wins when set. |
 | `ghost` | `boolean` | `false` | Transparent background. Ignored for `text` / `link`. |
 | `shape` | `'default' \| 'circle' \| 'round' \| 'square'` | `'default'` | Corner shape. |
 | `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; can inherit from ConfigProvider. |
-| `block` | `boolean` | `false` | Stretch to full container width. |
+| `block` | `boolean` | `false` | Stretch to the parent width. |
 | `loading` | `boolean \| { delay?: number; icon?: IconName \| Component }` | `false` | Loading state with optional delay and icon. |
 | `disabled` | `boolean` | `false` | Disabled; can inherit from ConfigProvider. |
-| `htmlType` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. |
+| `htmlType` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button `type`. |
 | `href` | `string` | — | Renders as `<a>` when set. |
-| `target` | `string` | — | Anchor target; requires `href`. |
-| `label` | `string` | — | Label text; default slot wins when present. |
+| `target` | `string` | — | Anchor `target`; requires `href`. |
+| `label` | `string` | — | Label text; the default slot wins when present. |
 | `icon` | `IconName \| Component` | — | Icon name or component. |
 | `iconPlacement` | `'start' \| 'end'` | `'start'` | Icon placement. |
 | `iconOnly` | `boolean` | `false` | Force a square icon-only button. |
@@ -163,7 +172,7 @@ Compose styles in this order: `type` → `shape` → `size` → `loading` → `d
 | `icon` | Custom icon. |
 | `loadingicon` | Custom loading icon. |
 
-### Exposed
+### Instance
 
 | Member | Description |
 | --- | --- |
@@ -174,38 +183,63 @@ Compose styles in this order: `type` → `shape` → `size` → `loading` → `d
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `block` | `boolean` | `false` | Stretch to full container width. |
+| `block` | `boolean` | `false` | Stretch to the parent width. |
 | `ariaLabel` | `string` | — | Accessible name for the group. |
 | `pt` | `{ root? }` | — | Group wrapper pass-through. |
 
+## Design Token
+
+Reuses global `--m-*` tokens; see [Design Tokens](/docs/design-tokens). Button composes color and variant through `--m-button-*`.
+
 ## Semantic DOM
+
+The root is the interactive element: `<a class="m-button">` when `href` is set, otherwise `<button class="m-button">`.
 
 ```text
 button.m-button / a.m-button
-  span.m-button__ripple*        ← when ripple is on
-  span.m-button__icon*          ← icon / loading
-  span.m-button__label*         ← label
-  span.m-button__badge*         ← badge
+  span.m-button__ripple*   ← when ripple is on
+  span.m-button__icon*     ← icon / loading
+  span.m-button__label*    ← label
+  span.m-button__badge*    ← badge
 ```
 
-Override parts with `pt.root` / `pt.icon` / `pt.content` / `pt.badge`.
+Override parts with `pt.root` / `pt.icon` / `pt.content` / `pt.badge`. See also [Attrs](/docs/attrs) and [Common Props](/docs/common-props).
 
 ## FAQ
 
-### How do `type` and `color` / `variant` relate?
+### How do I choose between `type` and `color` / `variant`?
 
-`type` maps to a `[color, variant]` pair. When both `color` and `variant` are set, they win.
+Prefer `type` for everyday use. Reach for `color` + `variant` when you need finer cross-tone control. When both axes are set, they override `type`.
+
+| `type` | Equals |
+| --- | --- |
+| `primary` | `color="primary"` + `variant="solid"` |
+| `default` | `color="default"` + `variant="outlined"` |
+| `dashed` | `color="default"` + `variant="dashed"` |
+| `text` | `color="default"` + `variant="text"` |
+| `link` | `color="link"` + `variant="link"` |
 
 ```vue
-<MButton type="primary">click</MButton>
+<MButton type="primary">Save</MButton>
 ```
 
 equals
 
 ```vue
-<MButton color="primary" variant="solid">click</MButton>
+<MButton color="primary" variant="solid">Save</MButton>
 ```
 
-### Color vocabulary across components
+### Button `color` vs other components' `severity`?
 
 Button uses `color` / `variant`. Feedback components such as Badge, Tag, Alert, Message, and Toast still use `severity`.
+
+### `text` vs `link`?
+
+`type="text"` (or `variant="text"`) keeps button height and hit area. `type="link"` is closer to an inline link.
+
+## Accessibility
+
+- Renders a native `<button>` by default; renders `<a>` when `href` is set.
+- Provide `ariaLabel` (or visible text) for icon-only buttons.
+- Sets `aria-busy` while `loading` and blocks interaction.
+- A disabled link button drops `href` and sets `aria-disabled` with `tabindex="-1"`.
