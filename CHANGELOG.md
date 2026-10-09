@@ -7,12 +7,20 @@
 - **Button**：改为 `type` / `color` × `variant` 双轴 API
   - 新增 `type` 语法糖（`default` / `primary` / `dashed` / `link` / `text`）与 `color` × `variant`
   - 删除 `severity`；危险色改用 `danger` / `color="danger"`
-  - `fluid` → `block`；`nativeType` → `htmlType`；`iconPos` → `iconPlacement`；`badgeSeverity` → `badgeColor`
+  - `fluid` → `block`；`nativeType` → `htmlType`；`iconPos` → `iconPlacement`
+  - 删除内置 `badge` / `badgeColor`；角标请用 `MBadge` 包裹按钮
   - 支持 `href` / `ghost` / `loading` 对象形态与 `pt`
+
+### 修复
+
+- **Button**：loading 时不再误加原生 `disabled`（避免灰掉主色）
+- **Button**：`shape` / `ripple` / `press` 正确继承 `componentDefaults`，本地可覆盖
+- **Button**：`:active` 同步边框与文字色；默认 outlined / dashed 按下保持表面色背景
 
 ### 文档
 
 - 补齐 Button 文档 demo：ColorVariant / Icon / Size / Ghost / Danger / Block / RipplePress
+- 同步 MCP catalog、setup / design-kit 约定，以及 `morya-ui-pages` skill 中的 Button API
 
 ## 0.4.1
 

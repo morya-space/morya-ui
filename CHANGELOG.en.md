@@ -7,12 +7,20 @@
 - **Button**: switch to `type` / `color` × `variant` dual-axis API
   - added `type` sugar (`default` / `primary` / `dashed` / `link` / `text`) plus `color` × `variant`
   - removed `severity`; use `danger` / `color="danger"` for destructive tone
-  - `fluid` → `block`; `nativeType` → `htmlType`; `iconPos` → `iconPlacement`; `badgeSeverity` → `badgeColor`
+  - `fluid` → `block`; `nativeType` → `htmlType`; `iconPos` → `iconPlacement`
+  - removed built-in `badge` / `badgeColor`; wrap with `MBadge` when a count mark is needed
   - supports `href` / `ghost` / object `loading` and `pt`
+
+### Fixes
+
+- **Button**: keep the native control enabled while loading (no greyed-out primary fill)
+- **Button**: honor `shape` / `ripple` / `press` from `componentDefaults`, with local override
+- **Button**: sync active border/text colors; default outlined / dashed keep surface background on press
 
 ### Docs
 
 - restored Button demos: ColorVariant / Icon / Size / Ghost / Danger / Block / RipplePress
+- synced MCP catalog, setup / design-kit conventions, and Button API wording in `morya-ui-pages`
 
 ## 0.4.1
 
