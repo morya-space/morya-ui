@@ -118,7 +118,7 @@ Inline style is acceptable for control widths (e.g. filter `width: 14rem`).
 2. `MPageHeader` (title + short description)
 3. `MTabs` with **`v-model` + `:tabs`** (not `:items` / `:value`)
 4. Per tab: `MPageSection variant="form"` + `MForm` + save in `variant="actions"`
-5. Dangerous zone last: `severity="danger"` + confirm
+5. Dangerous zone last: `MButton danger` (or `color="danger"`) + confirm
 
 ## Wizard — block order
 

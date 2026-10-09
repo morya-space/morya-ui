@@ -1220,7 +1220,10 @@ export const componentDecisions: ComponentDecision[] = [
           ],
           [['默认插槽：被角标包裹的控件', 'Default slot: host control']],
         ),
-        ...anti([['独立状态文案用 Badge → Status / Tag', 'Standalone status sentence via Badge → Status / Tag']]),
+        ...anti([
+          ['独立状态文案用 Badge → Status / Tag', 'Standalone status sentence via Badge → Status / Tag'],
+          ['MButton badge / badgeColor → 用 MBadge 包裹按钮', 'MButton badge / badgeColor → wrap the button with MBadge'],
+        ]),
       },
     ],
   },

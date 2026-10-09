@@ -32,7 +32,7 @@ This file is the **offline** mirror for agents without MCP.
 - v-model / modelValue 控制开关（不要用 visible）
 - header 或 title 设弹窗标题
 - width 约 32rem 适配短表单（见 form-in-dialog snippet）
-- 表单字段用 fluid；主按钮 severity="primary"
+- 表单字段用 fluid；主按钮 type="primary"
 
 **Recipe · slots**
 
@@ -117,7 +117,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · events**
 
 - MForm @submit（或 @submit.prevent）
-- 提交按钮 type="submit" + severity="primary"
+- 提交按钮 html-type="submit" + type="primary"
 
 **Related snippets**
 
@@ -770,7 +770,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · props**
 
 - 左侧标题、右侧主按钮
-- 主按钮 severity="primary"；全页仅一个主按钮
+- 主按钮 type="primary"；全页仅一个主按钮
 - 批量操作条也可放工具栏区
 
 **Recipe · slots**
@@ -1282,6 +1282,7 @@ This file is the **offline** mirror for agents without MCP.
 **Anti-patterns**
 
 - 独立状态文案用 Badge → Status / Tag
+- MButton badge / badgeColor → 用 MBadge 包裹按钮
 
 
 ---
@@ -1588,7 +1589,7 @@ This file is the **offline** mirror for agents without MCP.
 - v-model / modelValue
 - header + message
 - acceptLabel / rejectLabel
-- acceptSeverity="danger" 用于删除
+- acceptColor="danger" 用于删除
 
 **Recipe · events**
 
@@ -1620,7 +1621,7 @@ This file is the **offline** mirror for agents without MCP.
 **Recipe · props**
 
 - v-model / modelValue
-- message；acceptSeverity="danger" 按需
+- message；acceptColor="danger" 按需
 - target 锚定触发元素（或 position）
 - placement top|bottom|left|right
 
