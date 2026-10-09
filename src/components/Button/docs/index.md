@@ -189,7 +189,7 @@ import { MButton, MButtonGroup } from 'morya-ui'
 
 ## Design Token
 
-复用全局 `--m-*` 令牌，见[设计令牌](/docs/design-tokens)。按钮内部通过 `--m-button-*` 组合颜色与变体。
+复用全局 `--m-*` 令牌，见[设计令牌](/docs/design-tokens)。按钮在根节点暴露 `--m-button-*`（尺寸、圆角、色阶、填充透明度、动效等），主题切换时跟随 `--m-color-*` / `--m-control-*` / `--m-motion-*`。
 
 ## Semantic DOM
 

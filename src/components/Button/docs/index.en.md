@@ -189,7 +189,7 @@ Suggested composition order: `type` → `shape` → `size` → `loading` → `di
 
 ## Design Token
 
-Reuses global `--m-*` tokens; see [Design Tokens](/docs/design-tokens). Button composes color and variant through `--m-button-*`.
+Reuses global `--m-*` tokens; see [Design Tokens](/docs/design-tokens). Button exposes `--m-button-*` on the root (size, radius, tones, fill opacity, motion). Theme switches follow `--m-color-*` / `--m-control-*` / `--m-motion-*`.
 
 ## Semantic DOM
 

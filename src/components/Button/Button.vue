@@ -34,8 +34,7 @@ import {
 
 defineOptions({ inheritAttrs: false })
 
-const RIPPLE_MS = 560
-const RIPPLE_MS_REDUCED = 280
+const RIPPLE_MS_FALLBACK = 560
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: undefined,
@@ -244,8 +243,13 @@ function shouldSkipRipple(): boolean {
 }
 
 function rippleDuration(): number {
-  if (typeof document === 'undefined') return RIPPLE_MS
-  return document.documentElement.dataset.mMotion === 'reduced' ? RIPPLE_MS_REDUCED : RIPPLE_MS
+  const button = buttonElement.value
+  if (button && typeof getComputedStyle === 'function') {
+    const raw = getComputedStyle(button).getPropertyValue('--m-button-ripple-duration').trim()
+    const ms = Number.parseFloat(raw)
+    if (Number.isFinite(ms)) return ms
+  }
+  return RIPPLE_MS_FALLBACK
 }
 
 function spawnRipple(clientX: number, clientY: number, centered = false) {
