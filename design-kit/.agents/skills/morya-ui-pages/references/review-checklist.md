@@ -17,24 +17,38 @@
 ## Craft (all lanes — default pass)
 
 - [ ] Style direction resolved: followed user reference/description, or inferred from clear cues, or **asked** when uncertain — never silent invent; **no preset catalog**
-- [ ] Reference fidelity: `map_reference` mapping blocks present (filters/table/status/… as required)
-- [ ] Signature shell from `get_style_shells` when Account / Express / Flow need presence
+- [ ] Reply states `style:` (and `signature:` when a richer reference exists)
+- [ ] Default stays restrained when there is **no** reference (quiet flat / Ops polish)
 - [ ] Lane craft from [visual-craft.md](visual-craft.md) applied
 - [ ] If companions ran: still only `M*` + `--m-*`; no second kit ([optional-companions.md](optional-companions.md))
 - [ ] At most one primary filled button in the main viewport
 - [ ] Copy is domain-real; empty / error states say what to do next
 - [ ] Numeric table columns use `align: 'end'` + tabular nums when amounts/counts are shown
-- [ ] No AI-default look clusters unless the user/reference asked for them
-- [ ] No unearned atmosphere: stacked radial+linear washes, purple mesh, frosted glass, neon glow stacks
+- [ ] No **unearned** AI-default look clusters (reference-visible atmosphere is allowed — see [style-presets.md](style-presets.md))
 - [ ] Motion (if any) is 1–3 intentional moments and follows `useMotion` / `data-m-motion`
 - [ ] Brand differences via theme `--m-*` overrides, not page hex
 
-## Screenshot self-check (optional — when user gave a visual reference)
+## Reference fidelity (required when user gave a visual reference)
+
+Structure:
+
+- [ ] `map_reference` / `recommend_page({ brief })` mapping blocks present (filters/table/status/… as required)
+- [ ] Same `brief` passed to `validate_page`; contract `ok`
+
+Visual (use [reference-visual-map.md](reference-visual-map.md)):
+
+- [ ] Atmosphere present in the reference was approximated (not stripped “to be safe”)
+- [ ] Decorations **absent** from the reference were not invented
+- [ ] Primary CTA role/shape roughly matches (e.g. round primary when the reference shows a pill)
+- [ ] Density and status treatment roughly match
+- [ ] Delivery notes include `style:` / `signature:` / `approx:` when needed
+
+Screenshot self-check:
 
 1. Start the consumer app locally (Vite / Nuxt preview).
 2. Open the generated route; capture the first viewport.
-3. Compare to the reference: block order, primary CTA, density, status treatment — not pixel-perfect chrome.
-4. If blocks are missing, fix via snippets + re-run `validate_page({ brief })`.
+3. Compare to the reference on the bullets above — not pixel-perfect chrome or custom illustration art.
+4. If blocks or required atmosphere are missing, fix via snippets/tokens + re-run `validate_page({ brief })`.
 
 If Playwright / `webapp-testing` is available in the project, prefer an automated screenshot; otherwise a manual capture is enough.
 ## Ops

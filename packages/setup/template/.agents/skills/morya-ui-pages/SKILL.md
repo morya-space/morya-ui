@@ -19,12 +19,15 @@ description: >
 
 Guide agents that **consume morya-ui** across the full product surface — not only admin CRUD.
 
-Two layers always apply:
+## Must follow (restrained)
 
-1. **Contract** — only `M*` controls, `--m-*` tokens, real APIs (MCP/docs). Never invent props or mix UI kits.
-2. **Craft** — pick the right surface pattern, then apply intentional visual direction (distilled from Frontend Design / Impeccable / UI-UX-Pro-Max ideas). Ops stays disciplined; expressive surfaces (landing, auth brand moments, empty states) may take a justified aesthetic risk — still on-token and on-component.
+1. **Contract first** — only `M*` + `--m-*` + real MCP/docs APIs. No second UI kit, no invented props.
+2. **Default quieter** — no reference / vague ask → quiet flat on-token face. Do not invent glass, neon, aurora, or marketing heroes.
+3. **Reference wins atmosphere** — if the user gives a screenshot/mock/description, follow traits that appear there (map via [reference-visual-map.md](references/reference-visual-map.md)); do **not** strip them to “look safer,” and do **not** add decorations the reference lacks.
+4. **Say the direction** — in the reply, one line `style:` + optional `signature:` (e.g. `style: quiet flat`, or `style: follow reference — soft frosted cards + round primary`).
+5. **Gate** — `validate_usage` + `validate_page({ brief })`. With a visual reference, also run the fidelity check in [review-checklist.md](references/review-checklist.md).
 
-**Default build path (composition-first):** pin surface → **`map_reference` / `recommend_page({ brief, density })`** → L2 decisions + page snippets → signature shell (`get_style_shells`) → craft → **`validate_usage` + `validate_page({ brief })`**. Golden pages are an **optional** whole-page block-order check — not the default clone target.
+**Default build path:** pin surface → **`map_reference` / `recommend_page({ brief, density })`** → decisions + snippets → shell only if needed → craft → **`validate_usage` + `validate_page`**. Golden pages are an **optional** block-order check.
 
 When companions conflict with this skill or project `DESIGN.md`, **this skill wins**.
 
@@ -76,6 +79,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 | Reference fidelity | **`map_reference`** (description / requiredBlocks / density) → follow `mapping` | Describe blocks in chat; compose matching snippets |
 | Ops pattern + snippets | `recommend_page({ density, brief })` → **`suggestedSnippets`** / **`referenceMapping`** / **`get_page_snippet`** + **`recommend_component`** | [page-layouts.md](references/page-layouts.md) + [decision-recipes.md](references/decision-recipes.md) |
 | Style direction | `recommend_page({ style })` / **`get_style_direction`** | [style-presets.md](references/style-presets.md) |
+| Screenshot / mock → library moves | — | [reference-visual-map.md](references/reference-visual-map.md) |
 | Signature shells (Account / Express / Flow) | **`get_style_shells`** (`account-split`, `express-hero`, …) | [visual-craft.md](references/visual-craft.md) |
 | Account / Express / empty / result | snippets (`auth-split-shell`, `empty-block`, `result-block`, …) + `recommend_page` | [surfaces.md](references/surfaces.md) |
 | Optional whole-page block order | `get_golden_page` only when unsure of section order or user asks to mirror a golden sample | [page-layouts.md](references/page-layouts.md) |
@@ -112,19 +116,20 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 Run **before** delivery. Do not stop at a structurally correct shell.
 
-1. Resolve **style direction** ([style-presets.md](references/style-presets.md)) — reference/description first; else prompt cues; else **ask**; never silent AI face. **No preset catalog.**
-2. Apply lane craft from [visual-craft.md](references/visual-craft.md):
-   - **Ops / Operate:** resolved direction + § Ops polish (one primary, menu icons, `MStatus`, designed empty, no decorative cards).
-   - **Account / Flow:** one calm brand or empty-state cue from § Shell recipes; form errors via `errorMessage` / token `role="alert"`.
-   - **Express / Persuade:** short design plan + one signature; avoid AI-default looks; optional 1–2 token-only motions via `useMotion`. Signature ≠ unearned gradient/glass/neon.
-3. **If companions are already installed** (see [optional-companions.md](references/optional-companions.md)):
-   - Express / brand → may load **`frontend-design`** for POV after contract **and style direction** are fixed
-   - User asks 更大胆/更克制/polish/audit → may load **`impeccable`** command (`bolder` / `quieter` / `polish` / …) **inside** the resolved direction
-   - Mood/industry keywords only → optional **`ui-ux-pro-max`** search, then map to `--m-*` (not a preset id)
-   - a11y pass → optional **`fixing-accessibility`** after visual
-   - Max **one** visual companion per task; always remediate with `M*` + `--m-*`; strip companion-added AI atmosphere the user did not ask for
-4. If companions are **absent**, use distilled visual-craft / style-direction — do **not** block or ask to install mid-task.
-5. **All lanes:** responsive, focus visible, domain-real copy. User **reference** overrides companion taste within the morya contract.
+1. Resolve **style direction** ([style-presets.md](references/style-presets.md)) — reference first; else cues; else **ask**; else quieter flat. **No preset catalog.**
+2. If a screenshot/mock is present, translate visible traits with [reference-visual-map.md](references/reference-visual-map.md) — approximate with `M*` + tokens; state what cannot be 1:1.
+3. Apply lane craft from [visual-craft.md](references/visual-craft.md):
+   - **Ops / Operate:** resolved direction + § Ops polish (one primary, menu icons, `MStatus`, designed empty, no decorative cards). Stay restrained unless the reference shows more.
+   - **Account / Flow:** calm shell; form errors via `errorMessage` / token `role="alert"`.
+   - **Express / Persuade:** short design plan + one signature **only when** the brief/reference calls for it; optional 1–2 token-only motions via `useMotion`.
+4. **If companions are already installed** (see [optional-companions.md](references/optional-companions.md)):
+   - Express / brand → may load **`frontend-design`** after contract **and style direction** are fixed
+   - User asks 更大胆/更克制/polish/audit → may load **`impeccable`** **inside** the resolved direction
+   - Mood keywords only → optional **`ui-ux-pro-max`** search → map to `--m-*`
+   - a11y → optional **`fixing-accessibility`**
+   - Max **one** visual companion; remediate with `M*` + `--m-*`; strip companion atmosphere the user/reference did not ask for
+5. Companions absent → do **not** block or ask to install mid-task.
+6. **All lanes:** responsive, focus visible, domain-real copy. State `style:` (+ `signature:` when useful) before delivery.
 
 Named polish modes (`quieter` | `bolder` | `clarify` | `audit` | …): extra pass when the user asks to improve an existing screen.
 
@@ -136,7 +141,7 @@ Use [review-checklist.md](references/review-checklist.md) (contract + craft sect
 
 1. `validate_usage` on the page (or per component) — API accuracy gate  
 2. `validate_page` with the **same `brief`** used in `map_reference` / `recommend_page` — **`ok` must be true** (contract); craft suggestions addressed or consciously waived  
-3. Optional screenshot self-check when the user gave a visual reference (see [review-checklist.md](references/review-checklist.md))
+3. **Required** fidelity check when the user gave a visual reference (see [review-checklist.md](references/review-checklist.md) § Reference fidelity)
 
 Do not deliver with unresolved `unknown-prop` / `unknown-event` or `validate_page` contract failures (`brief-missing-*`, wrong table props, …).
 
@@ -150,7 +155,8 @@ Do not deliver with unresolved `unknown-prop` / `unknown-event` or `validate_pag
 - Ops surfaces follow page-layout **block order** — do not replace them with marketing heroes.
 - Express surfaces still use `M*` for controls and `--m-*` for color/space; do not introduce shadcn/Element/etc. stacks suggested by generic design skills.
 - Soft-load companions only; never require Impeccable / UI-UX-Pro-Max / Frontend Design to be installed.
-- Do **not** invent decorative glass / neon / aurora / neumorph / full-page gradients unless the **user reference or description** clearly asks for them.
+- **Restrained by default:** do **not** invent decorative glass / neon / aurora / neumorph / full-page gradients when there is no reference/description asking for them.
+- **With a reference:** follow atmosphere that is **visible in the reference**; do not “sanitize” it away; do not add extra decoration beyond it. Approximate with tokens — pixel-perfect art is out of scope.
 - Do **not** add new golden-page craft variants (`list-page-*`); express density/sider via style direction + polish.
 
 ## Soft companions
@@ -171,7 +177,8 @@ Routing, conflict rules, and load budget: [optional-companions.md](references/op
 - Vue 3 `<script setup lang="ts">`.
 - PascalCase `M*` in templates.
 - Domain-real copy and data shapes (not placeholder “示例 / Name / No data” when the brief names a product).
-- Scoped CSS minimal; tokens only (`color-mix` OK). Prefer **flat** surfaces; gradients / glass / glow **only** when the user/reference asks (control widths may be inline).
+- Scoped CSS minimal; tokens only (`color-mix` OK). Prefer **flat** surfaces by default; gradients / glass / glow only from user/reference (control widths may be inline).
+- Reply includes `style:` (and `signature:` when following a richer reference).
 - Craft pass completed for the lane (see step 5).
 - For multi-file asks: sensible `views/` / `components/` split; otherwise one SFC is fine.
 
@@ -181,11 +188,12 @@ Routing, conflict rules, and load budget: [optional-companions.md](references/op
 | --- | --- |
 | [surfaces.md](references/surfaces.md) | Choosing / composing non-Ops (and hybrid) surfaces |
 | [page-layouts.md](references/page-layouts.md) | Ops block-order checklists (fill with snippets) |
-| [style-presets.md](references/style-presets.md) | Style resolution (no preset catalog) |
+| [style-presets.md](references/style-presets.md) | Style resolution (no preset catalog); reference vs restrained default |
+| [reference-visual-map.md](references/reference-visual-map.md) | Screenshot/mock traits → `M*` / token / shell moves |
 | [visual-craft.md](references/visual-craft.md) | Ops polish, shell recipes, anti-defaults, polish modes |
 | [design-system.md](references/design-system.md) | Principles, tokens, bans |
 | [component-index.md](references/component-index.md) | Catalog + decision-id index |
 | [decision-recipes.md](references/decision-recipes.md) | Scenario → component → key props (generated; offline MCP mirror) |
 | [feedback.md](references/feedback.md) | message / toast / MMessage |
-| [review-checklist.md](references/review-checklist.md) | Pre-delivery checks |
+| [review-checklist.md](references/review-checklist.md) | Pre-delivery checks + reference fidelity |
 | [optional-companions.md](references/optional-companions.md) | Combining with external design skills |

@@ -77,7 +77,7 @@ Ops beauty = alignment + semantics + restraint + the right `M*` for the job, **n
 
 ## Anti-default looks
 
-Unless the user **asks** or a reference **shows** them, do not use:
+**Default is restrained.** Unless the user **asks** or a reference **shows** them, do not use:
 
 1. Cream + serif + terracotta  
 2. Acid-green / dual neon on black  
@@ -87,7 +87,8 @@ Unless the user **asks** or a reference **shows** them, do not use:
 6. Unsolicited glass, neumorph on dense tables, full-page gradients  
 7. Stacked radial + linear “atmosphere” brand panels  
 
-**Token gradients are not a free pass** — only when the user/reference asks.
+**Token gradients are not a free pass** without user/reference ask.  
+If a **reference shows** frosted cards or a light tinted wash, a tokenized approximation is following the reference — see [reference-visual-map.md](reference-visual-map.md). Do not invent richer atmosphere beyond the reference.
 
 ## Shell recipes (token-only — defaults are flat)
 
