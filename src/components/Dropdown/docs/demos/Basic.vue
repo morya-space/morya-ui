@@ -18,7 +18,7 @@ function onSelect(item: { value?: string; label?: string }) {
 <template>
   <MDropdown v-model="open" :items="items" @select="onSelect">
     <template #trigger>
-      <MButton label="Actions" icon="chevron-down" icon-pos="right" severity="secondary" />
+      <MButton label="Actions" icon="chevron-down" icon-placement="end"/>
     </template>
   </MDropdown>
 </template>

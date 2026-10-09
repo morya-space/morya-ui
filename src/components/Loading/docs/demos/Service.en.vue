@@ -33,7 +33,7 @@ function openFullscreen() {
       Region covered by the service
     </div>
     <div class="flex flex-wrap gap-3">
-      <MButton label="Cover region" severity="secondary" @click="openRegion" />
+      <MButton label="Cover region" @click="openRegion"/>
       <MButton label="Fullscreen" @click="openFullscreen" />
     </div>
   </div>

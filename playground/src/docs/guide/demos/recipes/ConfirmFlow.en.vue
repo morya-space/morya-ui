@@ -21,7 +21,7 @@ async function onImperativeDelete() {
             "Are you sure you want to delete this item? This action cannot be undone.",
         acceptLabel: "Delete",
         rejectLabel: "Cancel",
-        acceptSeverity: "danger",
+        acceptColor: "danger",
         type: "warning",
     });
     lastResult.value = ok ? "Imperative: deleted" : "Imperative: cancelled";
@@ -31,17 +31,8 @@ async function onImperativeDelete() {
 <template>
     <div style="display: grid; gap: 0.75rem; max-width: 28rem">
         <div style="display: flex; flex-wrap: wrap; gap: 0.75rem">
-            <MButton
-                label="Declarative confirm"
-                severity="danger"
-                @click="visible = true"
-            />
-            <MButton
-                label="Imperative confirm"
-                severity="danger"
-                variant="outlined"
-                @click="onImperativeDelete"
-            />
+            <MButton label="Declarative confirm" type="primary" danger @click="visible = true" />
+            <MButton label="Imperative confirm" type="primary" danger @click="onImperativeDelete" />
         </div>
         <p
             v-if="lastResult"
@@ -59,7 +50,7 @@ async function onImperativeDelete() {
             message="Are you sure you want to delete this item? This action cannot be undone."
             accept-label="Delete"
             reject-label="Cancel"
-            accept-severity="danger"
+            accept-color="danger"
             type="warning"
             @accept="onAccept"
             @reject="onReject"

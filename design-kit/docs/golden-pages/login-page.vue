@@ -96,8 +96,8 @@ async function onSubmit() {
             </MFormItem>
 
             <MSpace style="margin-top: var(--m-space-2)" alignment="center">
-              <MButton type="submit" label="登录" severity="primary" :loading="submitting" />
-              <MButton type="button" label="忘记密码" severity="secondary" text />
+              <MButton type="primary" html-type="submit" label="登录" :loading="submitting" />
+              <MButton type="text" label="忘记密码" />
             </MSpace>
           </MForm>
         </div>

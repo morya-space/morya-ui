@@ -11,7 +11,7 @@ const tabs = [
 <template>
   <MAccordion v-model="active" :tabs="tabs">
     <template #extra="{ tab }">
-      <MButton :label="tab.header" size="small" text />
+      <MButton :label="tab.header" size="small" type="text"/>
     </template>
     <template #a>
       <p style="margin:0">

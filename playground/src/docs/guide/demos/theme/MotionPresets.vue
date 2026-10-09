@@ -90,8 +90,8 @@ function showToast() {
 
       <div class="motion-preset-lab__actions">
         <MButton label="打开 Dialog" size="small" @click="dialogOpen = true" />
-        <MButton label="打开 Drawer" size="small" outlined @click="drawerOpen = true" />
-        <MButton label="弹出 Toast" size="small" text @click="showToast" />
+        <MButton label="打开 Drawer" size="small" @click="drawerOpen = true"/>
+        <MButton label="弹出 Toast" size="small" @click="showToast" type="text"/>
         <MSelect
           v-model="selectValue"
           class="motion-preset-lab__select"

@@ -43,10 +43,10 @@ import {
             >
               <template #footer>
                 <MSpace>
-                  <MButton severity="primary">
+                  <MButton type="primary">
                     返回上一页
                   </MButton>
-                  <MButton severity="secondary" text>
+                  <MButton type="text">
                     联系管理员
                   </MButton>
                 </MSpace>

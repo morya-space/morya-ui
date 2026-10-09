@@ -2,7 +2,7 @@ import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
-import type { ButtonSeverity } from '../Button/types'
+import type { ButtonColor } from '../Button/types'
 import type { DialogType } from '../Dialog/types'
 
 export interface ConfirmDialogProps {
@@ -12,7 +12,7 @@ export interface ConfirmDialogProps {
   message?: string
   acceptLabel?: string
   rejectLabel?: string
-  acceptSeverity?: ButtonSeverity
+  acceptColor?: ButtonColor
   /** Status icon beside the message. `warning` is an alias of `warn`. */
   type?: DialogType
   /** Show a loading spinner on the accept button. */

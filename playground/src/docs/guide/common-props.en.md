@@ -12,15 +12,15 @@ Most Morya components share one interaction vocabulary and style targeting model
 
 | Prop                 | Meaning             | Common values                                                                                                      |
 | -------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `severity`           | Semantic color      | `primary` (often omitted) / `secondary` / `success` / `info` / `warning` (`warn`) / `help` / `danger` / `contrast` |
-| `variant`            | Appearance shortcut | Per component: `outlined` / `dashed` / `text` / `link` / `ghost` / `quaternary` / input `filled`, etc.             |
+| `severity`           | Semantic color      | Badge / Tag / Alert / Message: `primary` / `secondary` / `success` / `info` / `warning` (`warn`) / `danger` / `contrast` |
+| `type` / `color` / `variant` | Button appearance | Button uses `type` (sugar) + `color` + `variant` (`solid` / `outlined` / `dashed` / `filled` / `text` / `link`); default is `color=default` + `variant=outlined`; solid primary needs `type="primary"` |
 | `size`               | Control size        | `small` / `medium` / `large` (`sm` / `md` / `lg` aliases); often inherits Config when omitted                      |
 | `disabled`           | Disabled            | Blocks interaction; visuals use `--m-opacity-disabled` and related tokens                                          |
 | `loading`            | Busy                | Common on Button; prevents double submit                                                                           |
-| `fluid`              | Full width          | Stretch to parent width                                                                                            |
+| `fluid` / `block`    | Full width          | Most fields use `fluid`; Button / ButtonGroup use `block`                                                          |
 | `status` / `invalid` | Form validation     | e.g. `error` / `warning`; pair with `error-message`                                                                |
 
-Boolean mirrors (`outlined`, `text`, `link`, …) may equal `variant`—pick one. **`severity` colors; `variant` shapes**; they compose (e.g. `severity="danger"` + `outlined`).
+**Badge / Tag / Alert**: `severity` sets tone. **Button**: `type` / `color` / `variant` set tone and shape (e.g. `type="primary"`, or `color="danger"` + `variant="outlined"`); solid danger can be `type="primary" danger`.
 
 ## Where class / style / events land
 
@@ -72,7 +72,7 @@ Leaf components such as `MButton` bind `class` on the `<button>` directly; group
 
 | Do                                                     | Don't                                                      |
 | ------------------------------------------------------ | ---------------------------------------------------------- |
-| Keep one `severity` vocabulary across components       | Mix foreign names like `type="danger"` in the same product |
+| Use `severity` on Badge / Tag / Alert; `type` / `color` / `variant` on Button | Keep removed Button props (`severity` / `fluid` / boolean `outlined`) |
 | Put layout `class` on the field root                   | Expect `class` to fall through onto the inner input        |
 | Use `pt` for prefix / inner tweaks                     | Fork a component to change one class                       |
 | Align Semantic DOM names with BEM (`.m-button__label`) | Invent undocumented `pt` keys                              |

@@ -1,96 +1,99 @@
-import type { ButtonHTMLAttributes, Component } from 'vue'
-import type { RootPassThrough } from '../../shared/passThrough'
+import type { ButtonHTMLAttributes, Component, CSSProperties } from 'vue'
+import type { PassThroughPart } from '../../shared/passThrough'
 import type { IconName } from '../Icon/types'
 
-/** Color tone aligned with `severity`. Omit for primary. */
-export type ButtonSeverity =
+/** Sugar type that maps to a `[color, variant]` pair. */
+export type ButtonType = 'default' | 'primary' | 'dashed' | 'link' | 'text'
+
+/** Color axis. `link` is an internal tone used by `type="link"`. */
+export type ButtonColor =
+  | 'default'
   | 'primary'
-  | 'secondary'
+  | 'danger'
   | 'success'
   | 'info'
   | 'warning'
-  /** @deprecated Use `'warning'` instead. */
-  | 'warn'
   | 'help'
-  | 'danger'
   | 'contrast'
-
-/** Visual variant aligned with `variant`. */
-export type ButtonVariant =
-  | 'outlined'
-  | 'dashed'
-  | 'text'
   | 'link'
-  | 'ghost'
-  | 'quaternary'
 
-/** Corner shape. Legacy `rounded` prop maps to `round`. */
+/** Visual variant axis. */
+export type ButtonVariant = 'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'
+
+/** Corner shape. */
 export type ButtonShape = 'default' | 'circle' | 'round' | 'square'
 
 export type ButtonSize = 'small' | 'medium' | 'large'
 
-export type ButtonIconPos = 'left' | 'right' | 'top' | 'bottom'
+export type ButtonIconPlacement = 'start' | 'end'
 
-export type ButtonBadgeSeverity = Exclude<ButtonSeverity, 'primary' | 'help'> | null
+export type ButtonBadgeColor = Exclude<ButtonColor, 'link' | 'primary' | 'help' | 'default'> | 'secondary' | null
+
+export type ButtonHtmlType = NonNullable<ButtonHTMLAttributes['type']>
+
+export type ButtonLoading =
+  | boolean
+  | {
+      delay?: number
+      icon?: IconName | Component
+    }
+
+export interface ButtonPassThrough {
+  root?: PassThroughPart
+  icon?: PassThroughPart
+  content?: PassThroughPart
+  badge?: PassThroughPart
+}
 
 export interface ButtonProps {
-  /** Button label text. Ignored when default slot has content. */
+  /** Sugar for a preset `[color, variant]` pair. Overridden when both `color` and `variant` are set. */
+  type?: ButtonType
+  /** Color axis. */
+  color?: ButtonColor
+  /** Variant axis. */
+  variant?: ButtonVariant
+  /** Force danger color while keeping the resolved variant. */
+  danger?: boolean
+  /** Transparent background; ignored for `text` / `link` variants. */
+  ghost?: boolean
+  /** Corner shape. */
+  shape?: ButtonShape
+  /** Control size. Also accepts legacy `sm` / `md` / `lg`. */
+  size?: ButtonSize | 'sm' | 'md' | 'lg'
+  /** Stretch to full container width. */
+  block?: boolean
+  /** Loading state. Object form supports delay and a custom icon. */
+  loading?: ButtonLoading
+  disabled?: boolean
+  /** Native button `type` when rendered as `<button>`. */
+  htmlType?: ButtonHtmlType
+  /** Render as an anchor when set. */
+  href?: string
+  /** Anchor target; only applies with `href`. */
+  target?: string
+  /** Button label. Ignored when the default slot has content. */
   label?: string
   /** Leading/trailing icon from MIcon, or a Vue component. */
   icon?: IconName | Component
-  /** Icon position relative to the label. */
-  iconPos?: ButtonIconPos
+  /** Icon placement relative to the label. */
+  iconPlacement?: ButtonIconPlacement
   /** Force square icon-only footprint. */
   iconOnly?: boolean
-  /** Semantic color. Omit for primary. */
-  severity?: ButtonSeverity
-  /** Custom fill/text color. Overrides `severity` tones when set. */
-  color?: string
-  /** Elevated shadow. */
-  raised?: boolean
-  /** Fully rounded corners. Prefer `shape="round"`; kept for compatibility. */
-  rounded?: boolean
-  /** Corner shape; `rounded` prop implies `round`. */
-  shape?: ButtonShape
-  /** Textual button without solid fill. */
-  text?: boolean
-  /** Border-only button. */
-  outlined?: boolean
-  /** Dashed border (`variant="dashed"` or `dashed`). */
-  dashed?: boolean
-  /** Link-styled button. */
-  link?: boolean
-  /**
-   * Underline on hover for `link` buttons. Default `true`.
-   * Set `false` for a compact link look without underline.
-   */
-  underline?: boolean
-  /** Soft fill matching text hover. */
-  ghost?: boolean
-  /** Extra-quiet text button. */
-  quaternary?: boolean
-  /** Soft fill matching outlined hover. Can also mute `text` / `outlined` / `link`. */
-  plain?: boolean
-  /** Shortcut for outlined / dashed / text / link / ghost / quaternary. */
-  variant?: ButtonVariant
-  /** Size alternative to the default. Also accepts legacy `sm` / `md` / `lg`. */
-  size?: ButtonSize | 'sm' | 'md' | 'lg'
-  /** Full-width button (`fluid`). */
-  fluid?: boolean
-  loading?: boolean
-  disabled?: boolean
+  /** Insert a space between two Chinese characters. */
+  autoInsertSpace?: boolean
   /** Optional badge value rendered after the label. */
   badge?: string
-  badgeSeverity?: ButtonBadgeSeverity
+  /** Badge tone. */
+  badgeColor?: ButtonBadgeColor
   autofocus?: boolean
-  /** Native button `type` attribute. */
-  nativeType?: ButtonHTMLAttributes['type']
   /** Accessible name, recommended for icon-only buttons. */
   ariaLabel?: string
-  /** Click ripple ink. Default `false`. Disabled when theme motion is `none`. */
+  /** Click ripple ink. Disabled when theme motion is `none`. */
   ripple?: boolean
-  /** Press scale on click. Default `false`. */
+  /** Press scale on click. */
   press?: boolean
+  /** Semantic DOM pass-through. */
+  pt?: ButtonPassThrough
 }
 
 export interface ButtonEmits {
@@ -99,13 +102,24 @@ export interface ButtonEmits {
 
 export interface ButtonInstance {
   focus: () => void
-  ref: HTMLButtonElement | null
+  ref: HTMLButtonElement | HTMLAnchorElement | null
 }
 
 export interface ButtonGroupProps {
-  pt?: RootPassThrough
+  pt?: { root?: PassThroughPart }
   /** Stretch to full container width. */
-  fluid?: boolean
+  block?: boolean
   /** Accessible name for the group. */
   ariaLabel?: string
 }
+
+export type ButtonColorVariantPair = [color: ButtonColor, variant: ButtonVariant]
+
+export interface ButtonResolvedAppearance {
+  color: ButtonColor
+  variant: ButtonVariant
+  ghost: boolean
+}
+
+/** Style bag used when merging content pass-through. */
+export type ButtonContentStyle = CSSProperties

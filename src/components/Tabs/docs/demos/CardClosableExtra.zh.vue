@@ -31,7 +31,7 @@ function onAdd() {
     @add="onAdd"
   >
     <template #extra>
-      <MButton label="操作" size="small" severity="secondary" />
+      <MButton label="操作" size="small"/>
     </template>
     <template #default="{ activeValue }">
       <p style="margin:0">

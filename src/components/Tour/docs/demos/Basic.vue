@@ -33,10 +33,7 @@ const steps = computed((): TourStep[] => [
   <MSpace vertical>
     <MSpace>
       <span ref="firstEl">
-        <MButton
-          severity="primary"
-          @click="open = true"
-        >
+        <MButton @click="open = true" type="primary">
           Start tour
         </MButton>
       </span>

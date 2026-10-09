@@ -8,7 +8,7 @@ const open = ref(false)
 <template>
   <div style="display:flex;justify-content:center;padding:2rem">
     <MPopover v-model="open" placement="bottom-start">
-      <MButton label="bottom-start" severity="secondary" @click="open = !open" />
+      <MButton label="bottom-start" @click="open = !open"/>
       <template #content>
         <p style="margin:0">
           Aligned to the start of the trigger.

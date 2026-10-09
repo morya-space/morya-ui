@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
- * 黄金样例：分步向导（wizard-form）
- * MStepper + 每步一个主任务；完成态可接 result-page。
+ * 黄金样例：分步向导（wizard-form�?
+ * MStepper + 每步一个主任务；完成态可�?result-page�?
  * @see DESIGN.md · surfaces § Flow · pattern wizard-form
  */
 import {
@@ -30,9 +30,9 @@ const activeStep = ref(0)
 const submitting = ref(false)
 
 const steps = [
-  { label: '工作空间', description: '名称与地区' },
-  { label: '邀请成员', description: '可选邮箱' },
-  { label: '确认', description: '核对后创建' },
+  { label: '工作空间', description: '名称与地�? },
+  { label: '邀请成�?, description: '可选邮�? },
+  { label: '确认', description: '核对后创�? },
 ]
 
 const model = reactive({
@@ -65,7 +65,7 @@ async function finish() {
   submitting.value = true
   try {
     // await api.createWorkspace(model)
-    message.success('工作空间已创建')
+    message.success('工作空间已创�?)
     // 成功页可镜像 get_golden_page('result-page')，将 status 改为 success
   } finally {
     submitting.value = false
@@ -89,8 +89,7 @@ async function finish() {
       <MLayoutContent>
         <MPageContent width="narrow">
           <MPageHeader
-            title="创建工作空间"
-            description="三步完成；每步只做一件事。Stepper 使用 steps（不是 items）。"
+            title="创建工作空间" description="三步完成；每步只做一件事。Stepper 使用 steps（不�?items）�?
           />
 
           <MStepper v-model="activeStep" :steps="steps" linear />
@@ -98,59 +97,44 @@ async function finish() {
           <MPageSection variant="form">
             <MForm v-if="activeStep === 0" @submit.prevent="next">
               <MFormItem label="名称" name="name" required>
-                <MInput v-model="model.name" placeholder="例如：青禾书房" fluid />
+                <MInput v-model="model.name" placeholder="例如：青禾书�? fluid />
               </MFormItem>
               <MFormItem label="地区" name="region" required>
                 <MSelect
-                  v-model="model.region"
-                  :options="regionOptions"
-                  placeholder="选择地区"
-                  fluid
+                  v-model="model.region" :options="regionOptions" placeholder="选择地区" fluid
                 />
               </MFormItem>
             </MForm>
 
             <MForm v-else-if="activeStep === 1" @submit.prevent="next">
-              <MFormItem label="邀请邮箱" name="invites">
+              <MFormItem label="邀请邮�? name="invites">
                 <MInputTags
-                  v-model="model.invites"
-                  placeholder="输入邮箱后回车"
+                  v-model="model.invites" placeholder="输入邮箱后回�?
                 />
               </MFormItem>
               <p class="wizard-hint">
-                可跳过；稍后也可在成员管理中邀请。
+                可跳过；稍后也可在成员管理中邀请�?
               </p>
             </MForm>
 
             <div v-else class="wizard-summary">
-              <p><strong>名称</strong> {{ model.name || '—' }}</p>
-              <p><strong>地区</strong> {{ model.region || '—' }}</p>
-              <p><strong>邀请</strong> {{ model.invites.length ? model.invites.join('、') : '暂无' }}</p>
+              <p><strong>名称</strong> {{ model.name || '�? }}</p>
+              <p><strong>地区</strong> {{ model.region || '�? }}</p>
+              <p><strong>邀�?/strong> {{ model.invites.length ? model.invites.join('�?) : '暂无' }}</p>
             </div>
 
             <MPageSection variant="actions">
               <MSpace>
-                <MButton
-                  severity="secondary"
-                  text
-                  :disabled="activeStep === 0 || submitting"
-                  @click="back"
+                <MButton type="text" :disabled="activeStep === 0 || submitting" @click="back"
                 >
-                  上一步
+                  上一�?
                 </MButton>
-                <MButton
-                  v-if="activeStep < steps.length - 1"
-                  severity="primary"
-                  :disabled="!canNext"
-                  @click="next"
+                <MButton v-if="activeStep < steps.length - 1" type="primary" :disabled="!canNext" @click="next"
                 >
-                  下一步
+                  下一�?
                 </MButton>
-                <MButton
-                  v-else
-                  severity="primary"
-                  :loading="submitting"
-                  @click="finish"
+                <MButton v-else
+                  type="primary" :loading="submitting" @click="finish"
                 >
                   创建
                 </MButton>

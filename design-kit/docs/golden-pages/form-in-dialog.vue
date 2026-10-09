@@ -103,7 +103,7 @@ async function onSave() {
         <MPageContent>
           <MPageHeader title="用户管理" description="短表单留在列表内弹窗；字段多时再走独立表单页。">
             <template #actions>
-              <MButton severity="primary" @click="openCreate">
+              <MButton @click="openCreate" type="primary">
                 新建用户
               </MButton>
             </template>
@@ -124,7 +124,7 @@ async function onSave() {
               />
             </template>
             <template #cell-actions="{ row }">
-              <MButton severity="secondary" size="small" text @click="openEdit(row)">
+              <MButton size="small" @click="openEdit(row)" type="text">
                 编辑
               </MButton>
             </template>
@@ -153,10 +153,10 @@ async function onSave() {
 
       <template #footer>
         <MSpace style="justify-content: flex-end; width: 100%">
-          <MButton severity="secondary" text :disabled="submitting" @click="closeDialog">
+          <MButton :disabled="submitting" @click="closeDialog" type="text">
             取消
           </MButton>
-          <MButton severity="primary" :loading="submitting" @click="onSave">
+          <MButton :loading="submitting" @click="onSave" type="primary">
             保存
           </MButton>
         </MSpace>

@@ -2,7 +2,7 @@ import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
-import type { ButtonSeverity } from '../Button/types'
+import type { ButtonColor } from '../Button/types'
 
 export type DialogType = 'info' | 'success' | 'warning' | 'error' | 'warn'
 
@@ -62,8 +62,8 @@ export interface DialogProps {
   positiveText?: string
   /** Preset cancel button label. Ignored when the `footer` slot is used. */
   negativeText?: string
-  /** Severity of the preset confirm button. */
-  positiveSeverity?: ButtonSeverity
+  /** Color of the preset confirm button. */
+  positiveColor?: ButtonColor
   /**
    * Preset confirm handler. Return `false` (or a Promise of `false`) to keep the dialog open.
    * Use `:on-positive-click` — do not combine with a `positiveClick` emit.

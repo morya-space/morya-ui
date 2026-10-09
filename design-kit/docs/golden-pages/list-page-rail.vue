@@ -126,7 +126,7 @@ const rows = [
           <MPageContent fill>
             <MPageHeader title="用户管理" description="维护账号、角色与权限。">
               <template #actions>
-                <MButton severity="primary">
+                <MButton type="primary">
                   新建用户
                 </MButton>
               </template>
@@ -149,10 +149,10 @@ const rows = [
                 />
               </MSpace>
               <template #actions>
-                <MButton severity="secondary">
+                <MButton>
                   查询
                 </MButton>
-                <MButton severity="secondary" text @click="resetFilters">
+                <MButton @click="resetFilters" type="text">
                   重置
                 </MButton>
               </template>
@@ -200,10 +200,10 @@ const rows = [
               </template>
               <template #cell-actions>
                 <MSpace>
-                  <MButton severity="secondary" size="small" text>
+                  <MButton size="small" type="text">
                     编辑
                   </MButton>
-                  <MButton severity="danger" size="small" text>
+                  <MButton size="small" type="text" danger>
                     删除
                   </MButton>
                 </MSpace>
@@ -215,7 +215,7 @@ const rows = [
                   icon="user"
                 >
                   <template #extra>
-                    <MButton severity="primary">
+                    <MButton type="primary">
                       新建用户
                     </MButton>
                   </template>

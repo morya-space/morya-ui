@@ -19,8 +19,8 @@ function onScroll(payload: { scrollTop: number }) {
   <div class="grid gap-3">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
       <MButton label="Top" size="small" @click="jump(0)" />
-      <MButton label="Mid" size="small" severity="secondary" @click="jump(200)" />
-      <MButton label="Bottom" size="small" severity="secondary" @click="jump(9999)" />
+      <MButton label="Mid" size="small" @click="jump(200)"/>
+      <MButton label="Bottom" size="small" @click="jump(9999)"/>
       <span style="color:var(--m-color-text-muted);font-size:0.875rem">scrollTop: {{ scrollTop }}</span>
     </div>
     <MScrollbar ref="scrollbarRef" height="200px" style="width: 200px" always @scroll="onScroll">

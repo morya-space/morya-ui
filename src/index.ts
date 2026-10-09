@@ -61,15 +61,19 @@ export type {
 export { default as MButton } from "./components/Button/Button.vue";
 export { default as MButtonGroup } from "./components/Button/ButtonGroup.vue";
 export type {
-  ButtonBadgeSeverity,
+  ButtonBadgeColor,
+  ButtonColor,
   ButtonEmits,
   ButtonGroupProps,
-  ButtonIconPos,
+  ButtonHtmlType,
+  ButtonIconPlacement,
   ButtonInstance,
+  ButtonLoading,
+  ButtonPassThrough,
   ButtonProps,
-  ButtonSeverity,
   ButtonShape,
   ButtonSize,
+  ButtonType,
   ButtonVariant,
 } from "./components/Button/types";
 export { default as MCard } from "./components/Card/Card.vue";

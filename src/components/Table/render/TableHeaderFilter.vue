@@ -123,7 +123,7 @@ function resetDraft() {
             <MButton size="sm" variant="text" @click="resetDraft">
               {{ locale.clear }}
             </MButton>
-            <MButton size="sm" severity="primary" @click="apply">
+            <MButton size="sm" @click="apply" type="primary">
               {{ locale.confirm }}
             </MButton>
           </div>

@@ -14,9 +14,9 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
 <template>
   <div class="flex flex-wrap gap-3">
     <MButton label="Center" size="small" @click="openAt('center')" />
-    <MButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
+    <MButton label="Top" size="small" @click="openAt('top')"/>
     <MButton label="Top Right" size="small" @click="openAt('topright')" />
-    <MButton label="Bottom Left" size="small" severity="secondary" @click="openAt('bottomleft')" />
+    <MButton label="Bottom Left" size="small" @click="openAt('bottomleft')"/>
     <MDialog v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">
         Dialog can dock to edges and corners.

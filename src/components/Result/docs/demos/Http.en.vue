@@ -6,7 +6,7 @@ import { MButton, MResult } from 'morya-ui'
   <div class="grid gap-8">
     <MResult status="403" description="You do not have permission to access this resource.">
       <template #footer>
-        <MButton label="Go back" severity="secondary" />
+        <MButton label="Go back"/>
       </template>
     </MResult>
     <MResult status="404" description="This page does not exist or was removed." />

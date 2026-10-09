@@ -18,7 +18,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<ConfirmDialogProps>(), {
   transition: undefined,
   modelValue: false,
-  acceptSeverity: undefined,
+  acceptColor: undefined,
   loading: false,
   closeOnEsc: true,
   closeOnOutsideClick: true,
@@ -41,6 +41,12 @@ const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value
 const title = computed(() => props.header ?? locale.value.confirm)
 const acceptText = computed(() => props.acceptLabel ?? locale.value.accept)
 const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
+const acceptButtonProps = computed(() => {
+  const color = props.acceptColor
+  if (!color || color === 'primary') return { type: 'primary' as const }
+  if (color === 'danger') return { type: 'primary' as const, danger: true }
+  return { color, variant: 'solid' as const }
+})
 const origin = ref(getLastPointer())
 const pending = ref<'accept' | 'reject' | null>(null)
 const { transitionName, transitionCss } = useMotionTransition({
@@ -159,16 +165,10 @@ useModalOverlay({
             </div>
             <footer class="m-dialog__footer m-confirmdialog__footer">
               <slot name="footer">
+                <MButton :label="rejectText" :disabled="busy" :loading="pending === 'reject'" @click="reject" />
                 <MButton
-                  :label="rejectText"
-                  severity="secondary"
-                  :disabled="busy"
-                  :loading="pending === 'reject'"
-                  @click="reject"
-                />
-                <MButton
+                  v-bind="acceptButtonProps"
                   :label="acceptText"
-                  :severity="acceptSeverity"
                   :disabled="busy && pending !== 'accept'"
                   :loading="loading || pending === 'accept'"
                   @click="accept"

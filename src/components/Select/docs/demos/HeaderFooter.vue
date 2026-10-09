@@ -18,7 +18,7 @@ const options = [
       </span>
     </template>
     <template #footer>
-      <MButton label="Manage teams" variant="text" size="sm" />
+      <MButton label="Manage teams" variant="text" size="sm"/>
     </template>
   </MSelect>
 </template>

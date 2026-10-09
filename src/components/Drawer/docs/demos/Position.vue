@@ -14,9 +14,9 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
 <template>
   <div class="flex flex-wrap gap-3">
     <MButton label="Left" size="small" @click="openAt('left')" />
-    <MButton label="Right" size="small" severity="secondary" @click="openAt('right')" />
-    <MButton label="Top" size="small" severity="secondary" @click="openAt('top')" />
-    <MButton label="Bottom" size="small" severity="secondary" @click="openAt('bottom')" />
+    <MButton label="Right" size="small" @click="openAt('right')"/>
+    <MButton label="Top" size="small" @click="openAt('top')"/>
+    <MButton label="Bottom" size="small" @click="openAt('bottom')"/>
     <MDrawer v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">
         Use <code>dismissable</code> to control mask dismiss.

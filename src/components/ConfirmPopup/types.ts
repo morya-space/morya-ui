@@ -2,7 +2,7 @@ import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
-import type { ButtonSeverity } from '../Button/types'
+import type { ButtonColor } from '../Button/types'
 import type { IconName } from '../Icon/types'
 
 export type ConfirmPopupPlacement = 'top' | 'bottom' | 'left' | 'right'
@@ -13,8 +13,8 @@ export interface ConfirmPopupProps {
   message?: string
   acceptLabel?: string
   rejectLabel?: string
-  /** Severity of the accept button, e.g. `'danger'` for destructive confirmations. */
-  acceptSeverity?: ButtonSeverity
+  /** Color of the accept button, e.g. `'danger'` for destructive confirmations. */
+  acceptColor?: ButtonColor
   /** Icon beside the message. */
   icon?: IconName
   /** Return `false` to keep the popup open and skip the `accept` emit. */

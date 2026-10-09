@@ -1,15 +1,30 @@
 import './style'
 export { default as MButton } from './Button.vue'
 export { default as MButtonGroup } from './ButtonGroup.vue'
+export {
+  ButtonTypeMap,
+  formatButtonLabel,
+  getLoadingConfig,
+  isTwoCNChar,
+  isUnBorderedButtonVariant,
+  resolveButtonAppearance,
+  resolveColorVariant,
+} from './buttonHelpers'
 export type {
-  ButtonBadgeSeverity,
+  ButtonBadgeColor,
+  ButtonColor,
+  ButtonColorVariantPair,
   ButtonEmits,
   ButtonGroupProps,
-  ButtonIconPos,
+  ButtonHtmlType,
+  ButtonIconPlacement,
   ButtonInstance,
+  ButtonLoading,
+  ButtonPassThrough,
   ButtonProps,
-  ButtonSeverity,
+  ButtonResolvedAppearance,
   ButtonShape,
   ButtonSize,
+  ButtonType,
   ButtonVariant,
 } from './types'

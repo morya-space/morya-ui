@@ -44,7 +44,7 @@ const faqTabs = [
         </MParagraph>
         <div class="landing-hero__cta">
           <MButton label="开始使用" />
-          <MButton label="查看文档" severity="secondary" text />
+          <MButton label="查看文档" type="text"/>
         </div>
         <div class="landing-hero__visual" role="img" aria-label="构建时间线示意">
           <div class="landing-hero__track">
@@ -142,7 +142,7 @@ const faqTabs = [
 
       <footer class="landing-footer">
         <span>流水线 CI</span>
-        <MButton label="联系销售" severity="secondary" text />
+        <MButton label="联系销售" type="text"/>
       </footer>
     </div>
   </MConfigProvider>

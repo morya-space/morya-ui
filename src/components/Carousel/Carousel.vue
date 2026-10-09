@@ -528,28 +528,8 @@ defineExpose({
         name="arrow"
         v-bind="arrowSlotProps"
       >
-        <MButton
-          class="m-carousel__arrow m-carousel__arrow--prev"
-          icon="chevron-left"
-          icon-only
-          shape="circle"
-          severity="secondary"
-          size="small"
-          :aria-label="locale.prev"
-          :disabled="prevDisabled"
-          @click="prev"
-        />
-        <MButton
-          class="m-carousel__arrow m-carousel__arrow--next"
-          icon="chevron-right"
-          icon-only
-          shape="circle"
-          severity="secondary"
-          size="small"
-          :aria-label="locale.next"
-          :disabled="nextDisabled"
-          @click="next"
-        />
+        <MButton class="m-carousel__arrow m-carousel__arrow--prev" icon="chevron-left" icon-only shape="circle" size="small" :aria-label="locale.prev" :disabled="prevDisabled" @click="prev"/>
+        <MButton class="m-carousel__arrow m-carousel__arrow--next" icon="chevron-right" icon-only shape="circle" size="small" :aria-label="locale.next" :disabled="nextDisabled" @click="next"/>
       </slot>
     </div>
 

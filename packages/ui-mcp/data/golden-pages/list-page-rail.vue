@@ -2,7 +2,7 @@
 /**
  * 黄金样例：列表页 · rail（侧栏强调）
  * structure: list · style: rail
- * 氛围只在 chrome（侧栏）；内容区保持克制。镜像区块顺序。
+ * 氛围只在 chrome（侧栏）；内容区保持克制。镜像区块顺序�?
  * @see list-page.vue · style-presets.md · visual-craft § Atmosphere
  */
 import {
@@ -63,7 +63,7 @@ const activeFilters = computed(() => {
     items.push({ key: 'status', label: `状态：${label}` })
   }
   if (department.value) {
-    items.push({ key: 'department', label: `部门：${department.value}` })
+    items.push({ key: 'department', label: `部门�?{department.value}` })
   }
   return items
 })
@@ -82,7 +82,7 @@ function resetFilters() {
 
 const columns = [
   { key: 'name', label: '名称' },
-  { key: 'status', label: '状态', width: 120 },
+  { key: 'status', label: '状�?, width: 120 },
   { key: 'updatedAt', label: '更新时间', width: 140 },
   { key: 'actions', label: '操作', width: 148 },
 ]
@@ -100,20 +100,15 @@ const rows = [
   <MConfigProvider :locale="zhCN">
     <MLayout has-sider fill-viewport>
       <MLayoutSider
-        v-model:collapsed="siderCollapsed"
-        bordered
-        :collapsed-width="72"
-        class="gp-rail-sider"
+        v-model:collapsed="siderCollapsed" bordered
+        :collapsed-width="72" class="gp-rail-sider"
       >
         <div class="gp-rail-sider__brand">
           <span class="gp-rail-sider__mark" aria-hidden="true" />
           <span v-if="!siderCollapsed" class="gp-rail-sider__name">Acme Ops</span>
         </div>
         <MMenu
-          :model="menuModel"
-          :collapsed="siderCollapsed"
-          :collapsed-width="72"
-          selected-key="users"
+          :model="menuModel" :collapsed="siderCollapsed" :collapsed-width="72" selected-key="users"
         />
       </MLayoutSider>
 
@@ -124,98 +119,82 @@ const rows = [
 
         <MLayoutContent>
           <MPageContent fill>
-            <MPageHeader title="用户管理" description="维护账号、角色与权限。">
+            <MPageHeader title="用户管理" description="维护账号、角色与权限�?>
               <template #actions>
-                <MButton severity="primary">
+                <MButton type="primary">
                   新建用户
                 </MButton>
               </template>
             </MPageHeader>
 
             <MPageFilters
-              v-model:expanded="filtersExpanded"
-              aria-label="筛选"
-              variant="filled"
-              collapsible
+              v-model:expanded="filtersExpanded" aria-label="筛�?
+              variant="filled" collapsible
             >
               <MSpace wrap>
                 <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
                 <MSelect
-                  v-model="status"
-                  :options="statusOptions"
-                  placeholder="状态"
+                  v-model="status" :options="statusOptions" placeholder="状�?
                   clearable
                   style="width: 10rem"
                 />
               </MSpace>
               <template #actions>
-                <MButton severity="secondary">
+                <MButton>
                   查询
                 </MButton>
-                <MButton severity="secondary" text @click="resetFilters">
+                <MButton type="text" @click="resetFilters">
                   重置
                 </MButton>
               </template>
               <template #advanced>
                 <MSpace wrap>
                   <MSelect
-                    v-model="department"
-                    :options="departmentOptions"
-                    placeholder="部门"
-                    clearable
+                    v-model="department" :options="departmentOptions" placeholder="部门" clearable
                     style="width: 10rem"
                   />
                 </MSpace>
               </template>
             </MPageFilters>
 
-            <MPageFilterChips v-if="activeFilters.length" label="已选" aria-label="已选筛选">
+            <MPageFilterChips v-if="activeFilters.length" label="已�? aria-label="已选筛�?>
               <MTag
-                v-for="item in activeFilters"
-                :key="item.key"
-                :value="item.label"
-                size="small"
-                bordered
+                v-for="item in activeFilters" :key="item.key" :value="item.label" size="small" bordered
                 closable
                 @close="clearFilter(item.key)"
               />
             </MPageFilterChips>
 
             <MTable
-              :columns="columns"
-              :rows="rows"
-              :rows-per-page="5"
-              fill
+              :columns="columns" :rows="rows" :rows-per-page="5" fill
               paginator
               striped
               bordered
-              row-key="id"
-              aria-label="用户列表"
+              row-key="id" aria-label="用户列表"
             >
               <template #cell-status="{ value }">
                 <MStatus
-                  :label="value === 'active' ? '启用' : '停用'"
-                  :severity="value === 'active' ? 'success' : 'secondary'"
+                  :label="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'"
                 />
               </template>
               <template #cell-actions>
                 <MSpace>
-                  <MButton severity="secondary" size="small" text>
+                  <MButton size="small" type="text">
                     编辑
                   </MButton>
-                  <MButton severity="danger" size="small" text>
+                  <MButton danger size="small" type="text">
                     删除
                   </MButton>
                 </MSpace>
               </template>
               <template #empty>
                 <MEmpty
-                  title="还没有用户"
-                  description="创建第一个用户后，即可分配角色与权限。"
+                  title="还没有用�?
+                  description="创建第一个用户后，即可分配角色与权限�?
                   icon="user"
                 >
                   <template #extra>
-                    <MButton severity="primary">
+                    <MButton type="primary">
                       新建用户
                     </MButton>
                   </template>

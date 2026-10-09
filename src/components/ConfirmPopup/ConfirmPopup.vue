@@ -144,6 +144,12 @@ onBeforeUnmount(() => {
 const visible = computed(() => props.modelValue)
 const acceptText = computed(() => props.acceptLabel ?? locale.value.accept)
 const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
+const acceptButtonProps = computed(() => {
+  const color = props.acceptColor
+  if (!color || color === 'primary') return { type: 'primary' as const }
+  if (color === 'danger') return { type: 'primary' as const, danger: true }
+  return { color, variant: 'solid' as const }
+})
 </script>
 
 <template>
@@ -164,11 +170,11 @@ const rejectText = computed(() => props.rejectLabel ?? locale.value.reject)
           <slot>{{ message }}</slot>
         </div>
         <div class="m-confirmpopup__footer">
-          <MButton :label="rejectText" severity="secondary" size="small" @click="reject" />
+          <MButton :label="rejectText" size="small" @click="reject" />
           <MButton
+            v-bind="acceptButtonProps"
             :label="acceptText"
             size="small"
-            :severity="acceptSeverity"
             :loading="pending"
             @click="accept"
           />

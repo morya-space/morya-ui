@@ -65,12 +65,9 @@ function toggleExpanded() {
         </div>
         <MButton
           v-if="showCollapsible"
-          type="button"
-          severity="secondary"
-          text
           class="m-page-filters__toggle"
           :icon="toggleIcon"
-          icon-pos="right"
+          icon-placement="end"
           :label="toggleLabel"
           :aria-expanded="expanded"
           :aria-controls="advancedId"

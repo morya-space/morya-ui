@@ -12,7 +12,7 @@ description: 声明式 MConfirmDialog 与命令式 useConfirm 两种确认交互
 
 - 模板里用 `MConfirmDialog` + `v-model` 控制显隐
 - 脚本里用 `useConfirm().require(...)`，得到 `Promise<boolean>`
-- 危险操作用 `accept-severity="danger"`（可选 `type="warning"`）
+- 危险操作用 `accept-color="danger"`（可选 `type="warning"`）
 
 ## 何时使用
 
@@ -26,7 +26,7 @@ description: 声明式 MConfirmDialog 与命令式 useConfirm 两种确认交互
 
 1. **声明式**：`visible` 驱动 `v-model`；按钮打开对话框；监听 `@accept` / `@reject`。
 2. **命令式**：`const confirm = useConfirm()`，`await confirm.require({ header, message, ... })`；`true` 表示确认，`false` 表示取消或关闭。
-3. 确认按钮语义色用 `acceptSeverity: 'danger'`；需要状态图标时加 `type: 'warning'`。
+3. 确认按钮颜色用 `acceptColor: 'danger'`；需要状态图标时加 `type: 'warning'`。
 4. 真正删数据放在确认之后；若删除是异步的，可在声明式路径用 `beforeAccept`，或命令式路径里先 `await` 再反馈结果。
 
 ## 预览

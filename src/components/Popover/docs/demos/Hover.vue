@@ -7,7 +7,7 @@ const open = ref(false)
 
 <template>
   <MPopover v-model="open" trigger="hover" :show-delay="80" :hide-delay="120">
-    <MButton label="Hover me" severity="secondary" />
+    <MButton label="Hover me"/>
     <template #content>
       <p style="margin:0">
         Opens on hover.

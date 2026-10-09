@@ -56,38 +56,14 @@ onBeforeUnmount(() => {
 <template>
   <div style="display:grid;gap:0.75rem">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <MButton
-        size="small"
-        :outlined="isDark"
-        label="浅色"
-        @click="setTheme('light')"
-      />
-      <MButton
-        size="small"
-        :outlined="!isDark"
-        label="深色"
-        @click="setTheme('dark')"
-      />
+      <MButton size="small" :type="isDark ? 'default' : 'primary'" label="浅色" @click="setTheme('light')" />
+      <MButton size="small" :type="isDark ? 'primary' : 'default'" label="深色" @click="setTheme('dark')" />
       <span style="width:1px;height:1.25rem;background:var(--m-color-border)" />
-      <MButton
-        v-for="item in (['compact', 'comfortable', 'spacious'] as const)"
-        :key="item"
-        size="small"
-        :outlined="density !== item"
-        :label="item"
-        @click="density = item"
-      />
+      <MButton v-for="item in (['compact', 'comfortable', 'spacious'] as const)" :key="item" size="small" :type="density === item ? 'primary' : 'default'" :label="item" @click="density = item" />
     </div>
 
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center">
-      <MButton
-        v-for="preset in presets"
-        :key="preset.value"
-        size="small"
-        :outlined="primary !== preset.value"
-        :label="preset.label"
-        @click="primary = preset.value"
-      />
+      <MButton v-for="preset in presets" :key="preset.value" size="small" :type="primary === preset.value ? 'primary' : 'default'" :label="preset.label" @click="primary = preset.value" />
       <code style="font-size:0.75rem;color:var(--m-color-text-muted)">{{ primary }}</code>
     </div>
 
@@ -97,8 +73,8 @@ onBeforeUnmount(() => {
     >
       <MConfigProvider :density="density" :global-density="false">
         <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
-          <MButton label="主按钮" />
-          <MButton label="描边" outlined />
+          <MButton type="primary" label="主按钮" />
+          <MButton label="描边"/>
           <MInput placeholder="预览输入" class="w-48" />
         </div>
       </MConfigProvider>

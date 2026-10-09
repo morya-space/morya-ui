@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import { MButton } from 'morya-ui'
 import { ref } from 'vue'
+import { MButton, MFlex } from 'morya-ui'
 
 const loading = ref(false)
 
-function toggleLoading() {
+function toggle() {
   loading.value = true
   window.setTimeout(() => {
     loading.value = false
-  }, 900)
+  }, 2000)
 }
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-3 items-center">
-    <MButton label="Search" icon="search" :loading="loading" @click="toggleLoading" />
-    <MButton label="Always Loading" loading severity="secondary" />
-  </div>
+  <MFlex gap="small" wrap>
+    <MButton type="primary" label="Always" loading />
+    <MButton label="Delayed" :loading="{ delay: 400 }" />
+    <MButton type="primary" :loading="loading" label="Click me" @click="toggle" />
+  </MFlex>
 </template>

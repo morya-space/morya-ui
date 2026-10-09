@@ -1,205 +1,168 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
+import MConfigProvider from '../ConfigProvider/ConfigProvider.vue'
 import MButton from './Button.vue'
+import { formatButtonLabel, resolveButtonAppearance, resolveColorVariant } from './buttonHelpers'
 
-describe('muButton', () => {
-  it('renders slot label and emits click when enabled', async () => {
-    const wrapper = mount(MButton, { slots: { default: 'Save' } })
-
-    await wrapper.get('button').trigger('click')
-
-    expect(wrapper.text()).toContain('Save')
-    expect(wrapper.classes()).toContain('m-button--primary')
-    expect(wrapper.emitted('click')).toHaveLength(1)
+describe('buttonHelpers', () => {
+  it('maps type sugar to color/variant pairs', () => {
+    expect(resolveColorVariant({ type: 'primary' })).toEqual(['primary', 'solid'])
+    expect(resolveColorVariant({ type: 'default' })).toEqual(['default', 'outlined'])
+    expect(resolveColorVariant({ type: 'dashed' })).toEqual(['default', 'dashed'])
+    expect(resolveColorVariant({ type: 'text' })).toEqual(['default', 'text'])
+    expect(resolveColorVariant({ type: 'link' })).toEqual(['link', 'link'])
   })
 
-  it('renders label prop when no default slot content', () => {
-    const wrapper = mount(MButton, { props: { label: 'Submit' } })
-    expect(wrapper.text()).toContain('Submit')
+  it('prefers explicit color+variant over type', () => {
+    expect(resolveColorVariant({ type: 'primary', color: 'danger', variant: 'filled' })).toEqual([
+      'danger',
+      'filled',
+    ])
   })
 
-  it('does not emit click while disabled or loading', async () => {
-    const disabled = mount(MButton, { props: { disabled: true, label: 'X' } })
-    const loading = mount(MButton, { props: { loading: true, label: 'X' } })
-
-    await disabled.get('button').trigger('click')
-    await loading.get('button').trigger('click')
-
-    expect(disabled.emitted('click')).toBeUndefined()
-    expect(loading.emitted('click')).toBeUndefined()
-    expect(loading.get('button').attributes('aria-busy')).toBe('true')
-    expect(loading.find('.m-button__spinner').exists()).toBe(true)
+  it('applies danger sugar onto the resolved variant', () => {
+    expect(resolveColorVariant({ type: 'primary', danger: true })).toEqual(['danger', 'solid'])
+    expect(resolveColorVariant({ type: 'dashed', danger: true })).toEqual(['danger', 'dashed'])
   })
 
-  it('applies severity and style modifiers', () => {
-    const wrapper = mount(MButton, {
-      props: {
-        label: 'Warn',
-        severity: 'warn',
-        raised: true,
-        rounded: true,
-        outlined: true,
-        text: true,
-        link: true,
-        plain: true,
-        fluid: true,
-      },
+  it('falls back to default outlined', () => {
+    expect(resolveColorVariant({})).toEqual(['default', 'outlined'])
+  })
+
+  it('converts ghost solid into outlined ghost', () => {
+    expect(resolveButtonAppearance({ type: 'primary', ghost: true })).toEqual({
+      color: 'primary',
+      variant: 'outlined',
+      ghost: true,
     })
+  })
 
+  it('formats two chinese characters with a space', () => {
+    expect(formatButtonLabel('确定', true)).toBe('确 定')
+    expect(formatButtonLabel('确定', false)).toBe('确定')
+    expect(formatButtonLabel('提交中', true)).toBe('提交中')
+  })
+})
+
+describe('MButton', () => {
+  it('defaults to default outlined', () => {
+    const wrapper = mount(MButton, { props: { label: 'Default' } })
     expect(wrapper.classes()).toEqual(
+      expect.arrayContaining(['m-button', 'm-button--color-default', 'm-button--variant-outlined']),
+    )
+  })
+
+  it('applies type sugar and color/variant modifiers', () => {
+    const primary = mount(MButton, { props: { label: 'Go', type: 'primary' } })
+    expect(primary.classes()).toEqual(
+      expect.arrayContaining(['m-button--color-primary', 'm-button--variant-solid']),
+    )
+
+    const matrix = mount(MButton, {
+      props: { label: 'Save', color: 'success', variant: 'filled', shape: 'round', block: true },
+    })
+    expect(matrix.classes()).toEqual(
       expect.arrayContaining([
-        'm-button--warn',
-        'm-button--raised',
-        'm-button--rounded',
-        'm-button--outlined',
-        'm-button--text',
-        'm-button--link',
-        'm-button--link-underline',
-        'm-button--plain',
-        'm-button--fluid',
+        'm-button--color-success',
+        'm-button--variant-filled',
+        'm-button--shape-round',
+        'm-button--block',
       ]),
     )
   })
 
-  it('can disable link underline', () => {
-    const withUnderline = mount(MButton, { props: { label: 'Link', link: true } })
-    const withoutUnderline = mount(MButton, {
-      props: { label: 'Plain Link', link: true, underline: false },
-    })
+  it('supports danger and ghost', () => {
+    const danger = mount(MButton, { props: { label: 'Delete', danger: true, type: 'primary' } })
+    expect(danger.classes()).toContain('m-button--color-danger')
+    expect(danger.classes()).toContain('m-button--variant-solid')
 
-    expect(withUnderline.classes()).toContain('m-button--link-underline')
-    expect(withoutUnderline.classes()).toContain('m-button--link')
-    expect(withoutUnderline.classes()).not.toContain('m-button--link-underline')
-  })
-
-  it('supports dashed variant and shape', () => {
-    const dashed = mount(MButton, { props: { label: 'Dash', variant: 'dashed' } })
-    const circle = mount(MButton, {
-      props: { icon: 'edit', iconOnly: true, shape: 'circle', ariaLabel: 'Edit' },
-    })
-    const round = mount(MButton, { props: { label: 'Round', shape: 'round' } })
-    const roundedCompat = mount(MButton, { props: { label: 'R', rounded: true } })
-
-    expect(dashed.classes()).toContain('m-button--dashed')
-    expect(circle.classes()).toEqual(
-      expect.arrayContaining(['m-button--shape-circle', 'm-button--rounded']),
+    const ghost = mount(MButton, { props: { label: 'Ghost', type: 'primary', ghost: true } })
+    expect(ghost.classes()).toEqual(
+      expect.arrayContaining([
+        'm-button--color-primary',
+        'm-button--variant-outlined',
+        'm-button--ghost',
+      ]),
     )
-    expect(round.classes()).toContain('m-button--shape-round')
-    expect(roundedCompat.classes()).toContain('m-button--shape-round')
   })
 
-  it('supports variant shortcut and size aliases', () => {
-    const outlined = mount(MButton, { props: { label: 'A', variant: 'outlined', size: 'small' } })
-    const large = mount(MButton, { props: { label: 'B', size: 'lg' } })
-
-    expect(outlined.classes()).toEqual(expect.arrayContaining(['m-button--outlined', 'm-button--small']))
-    expect(large.classes()).toContain('m-button--large')
-  })
-
-  it('renders icon, iconPos, iconOnly, badge and aria-label', () => {
+  it('renders icon, iconPlacement, iconOnly, badge and aria-label', () => {
     const wrapper = mount(MButton, {
       props: {
-        icon: 'edit',
-        iconOnly: true,
-        iconPos: 'top',
+        icon: 'search',
+        label: 'Search',
+        iconPlacement: 'end',
         badge: '2',
-        badgeSeverity: 'danger',
-        ariaLabel: 'Edit item',
-        severity: 'help',
+        badgeColor: 'danger',
+        ariaLabel: 'Find',
       },
     })
-
+    expect(wrapper.classes()).toContain('m-button--icon-end')
     expect(wrapper.find('.m-button__icon').exists()).toBe(true)
-    expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(['m-button--icon-only', 'm-button--icon-top', 'm-button--help']),
-    )
-    expect(wrapper.get('button').attributes('aria-label')).toBe('Edit item')
     expect(wrapper.find('.m-button__badge--danger').text()).toBe('2')
+    expect(wrapper.attributes('aria-label')).toBe('Find')
   })
 
-  it('supports fluid layout and exposes focus/ref', () => {
+  it('supports loading delay and blocks click while loading', async () => {
+    vi.useFakeTimers()
     const wrapper = mount(MButton, {
-      props: { label: 'Focus', fluid: true },
-      attachTo: document.body,
+      props: { label: 'Save', loading: { delay: 100 } },
     })
-    const instance = wrapper.vm as unknown as { focus: () => void; ref: HTMLButtonElement | null }
-
-    expect(wrapper.classes()).toContain('m-button--fluid')
-    instance.focus()
-    expect(document.activeElement).toBe(wrapper.get('button').element)
-    expect(instance.ref).toBe(wrapper.get('button').element)
-
-    wrapper.unmount()
+    expect(wrapper.classes()).not.toContain('m-button--loading')
+    await vi.advanceTimersByTimeAsync(100)
+    await nextTick()
+    expect(wrapper.classes()).toContain('m-button--loading')
+    await wrapper.trigger('click')
+    expect(wrapper.emitted('click')).toBeUndefined()
+    vi.useRealTimers()
   })
 
-  it('applies ghost, quaternary, and custom color', () => {
-    const ghost = mount(MButton, { props: { label: 'Ghost', variant: 'ghost' } })
-    const color = mount(MButton, { props: { label: 'Tint', color: '#e11d48' } })
-    expect(ghost.classes()).toContain('m-button--ghost')
-    expect(color.classes()).toContain('m-button--custom')
-    expect(color.attributes('style')).toContain('--m-button-color: #e11d48')
-  })
-
-  it('maps button size to icon sizing', () => {
-    const small = mount(MButton, { props: { icon: 'edit', iconOnly: true, size: 'small', ariaLabel: 'Edit' } })
-    const large = mount(MButton, { props: { icon: 'edit', iconOnly: true, size: 'large', ariaLabel: 'Edit' } })
-
-    expect(small.find('.m-icon').classes()).toContain('m-icon--small')
-    expect(large.find('.m-icon').classes()).toContain('m-icon--large')
-  })
-
-  it('tags custom icon components for button icon normalization', () => {
-    const LargeIcon = {
-      template: '<svg data-testid="custom-icon" />',
-    }
+  it('renders as an anchor when href is set', async () => {
     const wrapper = mount(MButton, {
-      props: { icon: LargeIcon, iconOnly: true, ariaLabel: 'Custom' },
+      props: { label: 'Docs', href: '/docs', target: '_blank' },
     })
+    expect(wrapper.element.tagName).toBe('A')
+    expect(wrapper.attributes('href')).toBe('/docs')
+    expect(wrapper.attributes('target')).toBe('_blank')
 
-    expect(wrapper.find('[data-testid="custom-icon"]').classes()).toContain('m-button__icon-graphic')
+    await wrapper.setProps({ disabled: true })
+    expect(wrapper.attributes('href')).toBeUndefined()
+    expect(wrapper.attributes('aria-disabled')).toBe('true')
   })
 
-  it('does not spawn a click ripple or press scale unless enabled', async () => {
-    document.documentElement.dataset.mMotion = 'full'
+  it('exposes focus/ref and inserts space for two chinese chars', async () => {
+    const wrapper = mount(MButton, { props: { label: '确定' } })
+    expect(wrapper.find('.m-button__label').text()).toBe('确 定')
+    const exposed = wrapper.vm as unknown as { focus: () => void; ref: HTMLButtonElement | null }
+    exposed.focus()
+    expect(exposed.ref).toBeTruthy()
+  })
 
-    const defaults = mount(MButton, {
-      props: { label: 'Plain' },
-      attachTo: document.body,
+  it('inherits disabled from ConfigProvider', () => {
+    const wrapper = mount({
+      components: { MConfigProvider, MButton },
+      template: `
+        <MConfigProvider :disabled="true">
+          <MButton label="Locked" />
+        </MConfigProvider>
+      `,
     })
-    const button = defaults.get('button').element as HTMLButtonElement
-    button.getBoundingClientRect = () =>
-      ({
-        width: 120,
-        height: 40,
-        left: 10,
-        top: 20,
-        right: 130,
-        bottom: 60,
-        x: 10,
-        y: 20,
-        toJSON: () => ({}),
-      }) as DOMRect
+    expect(wrapper.find('button').attributes('disabled')).toBeDefined()
+  })
 
-    await defaults.get('button').trigger('pointerdown', { clientX: 40, clientY: 35, button: 0 })
-    expect(defaults.classes()).not.toContain('m-button--ripple')
-    expect(defaults.find('.m-button__ripple-wave').exists()).toBe(false)
-    expect(defaults.classes()).not.toContain('m-button--press')
-
-    const withRipple = mount(MButton, {
-      props: { label: 'Ripple', ripple: true },
-      attachTo: document.body,
+  it('reads Button defaults from componentDefaults', () => {
+    const wrapper = mount({
+      components: { MConfigProvider, MButton },
+      template: `
+        <MConfigProvider :component-defaults="{ Button: { type: undefined, color: 'primary', variant: 'solid' } }">
+          <MButton label="Inherited" />
+        </MConfigProvider>
+      `,
     })
-    const rippleButton = withRipple.get('button').element as HTMLButtonElement
-    rippleButton.getBoundingClientRect = button.getBoundingClientRect
-    await withRipple.get('button').trigger('pointerdown', { clientX: 40, clientY: 35, button: 0 })
-    expect(withRipple.classes()).toContain('m-button--ripple')
-    expect(withRipple.find('.m-button__ripple-wave').exists()).toBe(true)
-
-    const withPress = mount(MButton, { props: { label: 'Press', press: true } })
-    expect(withPress.classes()).toContain('m-button--press')
-    withPress.unmount()
-
-    withRipple.unmount()
-    defaults.unmount()
+    // Without type/danger, context color+variant apply
+    expect(wrapper.find('button').classes()).toEqual(
+      expect.arrayContaining(['m-button--color-primary', 'm-button--variant-solid']),
+    )
   })
 })

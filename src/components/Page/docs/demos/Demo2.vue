@@ -28,10 +28,10 @@ const name = ref('')
           </MFormItem>
           <MPageSection variant="actions">
             <MSpace>
-              <MButton native-type="submit" severity="primary">
+              <MButton html-type="submit">
                 保存
               </MButton>
-              <MButton severity="secondary">
+              <MButton>
                 取消
               </MButton>
             </MSpace>

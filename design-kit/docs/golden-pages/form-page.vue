@@ -90,10 +90,10 @@ async function onSubmit() {
 
               <MPageSection variant="actions">
                 <MSpace>
-                  <MButton native-type="submit" severity="primary" :loading="submitting">
+                  <MButton type="primary" html-type="submit" :loading="submitting">
                     保存
                   </MButton>
-                  <MButton severity="secondary">
+                  <MButton>
                     取消
                   </MButton>
                 </MSpace>

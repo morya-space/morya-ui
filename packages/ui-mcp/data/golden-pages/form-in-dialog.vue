@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
- * 黄金样例：列表内短表单弹窗（form-in-dialog）
- * 留在列表页，用 MDialog 承载 ≤8 字段的新建/编辑；长表单仍走 form-page / Drawer。
+ * 黄金样例：列表内短表单弹窗（form-in-dialog�?
+ * 留在列表页，�?MDialog 承载 �? 字段的新�?编辑；长表单仍走 form-page / Drawer�?
  * @see DESIGN.md · page-layouts.md · pattern form-in-dialog
  */
 import {
@@ -37,14 +37,14 @@ const model = reactive({
 })
 
 const roleOptions = [
-  { label: '管理员', value: 'admin' },
+  { label: '管理�?, value: 'admin' },
   { label: '成员', value: 'member' },
 ]
 
 const columns = [
   { key: 'name', label: '姓名' },
   { key: 'email', label: '邮箱' },
-  { key: 'status', label: '状态', width: 100 },
+  { key: 'status', label: '状�?, width: 100 },
   { key: 'actions', label: '操作', width: 120 },
 ]
 
@@ -84,7 +84,7 @@ async function onSave() {
   submitting.value = true
   try {
     // await api.save(model)
-    message.success(editingId.value ? '已保存' : '已创建')
+    message.success(editingId.value ? '已保�? : '已创�?)
     closeDialog()
   } finally {
     submitting.value = false
@@ -101,30 +101,26 @@ async function onSave() {
 
       <MLayoutContent>
         <MPageContent>
-          <MPageHeader title="用户管理" description="短表单留在列表内弹窗；字段多时再走独立表单页。">
+          <MPageHeader title="用户管理" description="短表单留在列表内弹窗；字段多时再走独立表单页�?>
             <template #actions>
-              <MButton severity="primary" @click="openCreate">
+              <MButton type="primary" @click="openCreate">
                 新建用户
               </MButton>
             </template>
           </MPageHeader>
 
           <MTable
-            :columns="columns"
-            :rows="rows"
-            row-key="id"
-            striped
+            :columns="columns" :rows="rows" row-key="id" striped
             bordered
             aria-label="用户列表"
           >
             <template #cell-status="{ value }">
               <MStatus
-                :label="value === 'active' ? '启用' : '停用'"
-                :severity="value === 'active' ? 'success' : 'secondary'"
+                :label="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'"
               />
             </template>
             <template #cell-actions="{ row }">
-              <MButton severity="secondary" size="small" text @click="openEdit(row)">
+              <MButton size="small" type="text" @click="openEdit(row)">
                 编辑
               </MButton>
             </template>
@@ -134,14 +130,11 @@ async function onSave() {
     </MLayout>
 
     <MDialog
-      v-model="dialogOpen"
-      :header="dialogTitle()"
-      width="32rem"
-      @close="resetModel"
+      v-model="dialogOpen" :header="dialogTitle()" width="32rem" @close="resetModel"
     >
       <MForm @submit.prevent="onSave">
         <MFormItem label="姓名" name="name" required>
-          <MInput v-model="model.name" placeholder="请输入姓名" fluid />
+          <MInput v-model="model.name" placeholder="请输入姓�? fluid />
         </MFormItem>
         <MFormItem label="邮箱" name="email" required>
           <MInput v-model="model.email" type="email" placeholder="name@example.com" fluid />
@@ -153,10 +146,10 @@ async function onSave() {
 
       <template #footer>
         <MSpace style="justify-content: flex-end; width: 100%">
-          <MButton severity="secondary" text :disabled="submitting" @click="closeDialog">
+          <MButton type="text" :disabled="submitting" @click="closeDialog">
             取消
           </MButton>
-          <MButton severity="primary" :loading="submitting" @click="onSave">
+          <MButton type="primary" :loading="submitting" @click="onSave">
             保存
           </MButton>
         </MSpace>

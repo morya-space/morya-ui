@@ -52,6 +52,12 @@ export interface MComponentDefaultMap {
   }
   Button?: {
     size?: MSizeInput
+    color?: 'default' | 'primary' | 'danger' | 'success' | 'info' | 'warning' | 'help' | 'contrast' | 'link'
+    variant?: 'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'
+    shape?: 'default' | 'circle' | 'round' | 'square'
+    autoInsertSpace?: boolean
+    ripple?: boolean
+    press?: boolean
   }
   Space?: {
     size?: MGapSize

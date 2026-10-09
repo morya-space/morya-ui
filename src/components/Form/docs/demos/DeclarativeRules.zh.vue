@@ -39,6 +39,6 @@ async function onSubmit() {
         <MInput :id="id" v-model="model.email" type="email" fluid :invalid="invalid" />
       </template>
     </MFormItem>
-    <MButton native-type="submit" label="提交" />
+    <MButton html-type="submit" label="提交"/>
   </MForm>
 </template>

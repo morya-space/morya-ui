@@ -6,20 +6,44 @@
     --m-button-padding-x-large: calc(
         var(--m-control-padding-x-large) + var(--m-space-1)
     );
-    --m-button-icon-stack-min-height: 3.25rem;
-    --m-button-badge-min-width: 1.15rem;
     --m-button-spinner-size: 0.875rem;
     --m-button-icon-size: 1rem;
-    --m-button-bg: var(--m-color-primary);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-primary);
-    --m-button-hover-bg: var(--m-color-primary-hover);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: var(--m-color-primary-hover);
-    --m-button-active-bg: var(--m-color-primary-active);
+    --m-button-badge-min-width: 1.15rem;
+
+    /* Color axis defaults (overridden by --color-*) */
+    --m-button-color-base: var(--m-color-primary);
+    --m-button-color-hover: var(--m-color-primary-hover);
+    --m-button-color-active: var(--m-color-primary-active);
+    --m-button-color-light: color-mix(
+        in srgb,
+        var(--m-button-color-base) 10%,
+        transparent
+    );
+    --m-button-color-light-hover: color-mix(
+        in srgb,
+        var(--m-button-color-base) 16%,
+        transparent
+    );
+    --m-button-color-light-active: color-mix(
+        in srgb,
+        var(--m-button-color-base) 22%,
+        transparent
+    );
+    --m-button-on-color: var(--m-color-on-emphasis);
+
+    /* Variant template vars */
+    --m-button-bg: var(--m-color-surface);
+    --m-button-fg: var(--m-color-text);
+    --m-button-border: var(--m-color-border);
+    --m-button-hover-bg: var(--m-button-bg);
+    --m-button-hover-fg: var(--m-button-fg);
+    --m-button-hover-border: var(--m-button-border);
+    --m-button-active-bg: var(--m-button-bg);
+    --m-button-border-style: solid;
+
     align-items: center;
     background: var(--m-button-bg);
-    border: var(--m-border-width) solid var(--m-button-border);
+    border: var(--m-border-width) var(--m-button-border-style) var(--m-button-border);
     border-radius: var(--m-radius-control);
     color: var(--m-button-fg);
     cursor: pointer;
@@ -34,6 +58,7 @@
     min-height: var(--m-control-height-medium);
     padding: 0 var(--m-button-padding-x-medium);
     position: relative;
+    text-decoration: none;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
         border-color var(--m-motion-fast) var(--m-motion-ease),
@@ -46,22 +71,21 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .m-button:hover:not(:disabled) {
+    .m-button:hover:not(:disabled):not(.m-button--disabled) {
         background: var(--m-button-hover-bg);
         border-color: var(--m-button-hover-border);
         color: var(--m-button-hover-fg);
     }
 }
 
-.m-button:active:not(:disabled) {
+.m-button:active:not(:disabled):not(.m-button--disabled) {
     background: var(--m-button-active-bg);
 }
 
-.m-button--press:active:not(:disabled) {
+.m-button--press:active:not(:disabled):not(.m-button--disabled) {
     transform: scale(0.97);
 }
 
-/* Soft glow focus, not outline-offset ring */
 .m-button:focus {
     outline: none;
 }
@@ -71,695 +95,300 @@
     outline: none;
 }
 
-.m-button:disabled {
-    background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+.m-button:disabled,
+.m-button--disabled {
+    background: var(--m-color-bg-disabled);
     border-color: var(--m-color-border);
-    color: color-mix(in srgb, var(--m-color-text) 35%, var(--m-color-surface));
+    color: var(--m-color-text-disabled);
     cursor: not-allowed;
     opacity: 1;
 }
 
-.m-button--text:disabled,
-.m-button--link:disabled,
+.m-button--variant-text:disabled,
+.m-button--variant-link:disabled,
+.m-button--variant-text.m-button--disabled,
+.m-button--variant-link.m-button--disabled,
 .m-button--ghost:disabled,
-.m-button--quaternary:disabled {
+.m-button--ghost.m-button--disabled {
     background: transparent;
     border-color: transparent;
 }
 
-.m-button--primary {
-    --m-button-bg: var(--m-color-primary);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-primary);
-    --m-button-hover-bg: var(--m-color-primary-hover);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: var(--m-color-primary-hover);
-    --m-button-active-bg: var(--m-color-primary-active);
-}
+/* ---------- Color axis ---------- */
 
-.m-button--secondary {
-    --m-button-bg: var(--m-color-surface);
-    --m-button-fg: var(--m-color-text);
-    --m-button-border: var(--m-color-border);
-    --m-button-hover-bg: var(--m-color-surface);
-    --m-button-hover-fg: var(--m-color-primary-hover);
-    --m-button-hover-border: var(--m-color-primary-hover);
-    --m-button-active-bg: var(--m-color-surface);
-}
-
-.m-button--success {
-    --m-button-bg: var(--m-color-success);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-success);
-    --m-button-hover-bg: color-mix(
+.m-button--color-default {
+    --m-button-color-base: var(--m-color-text);
+    --m-button-color-hover: var(--m-color-primary-hover);
+    --m-button-color-active: var(--m-color-primary-active);
+    --m-button-color-light: color-mix(
         in srgb,
-        var(--m-color-success) 85%,
-        black
-    );
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: color-mix(
-        in srgb,
-        var(--m-color-success) 85%,
-        black
-    );
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-success) 75%,
-        black
-    );
-}
-
-.m-button--info {
-    --m-button-bg: var(--m-color-info);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-info);
-    --m-button-hover-bg: color-mix(in srgb, var(--m-color-info) 85%, black);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: color-mix(
-        in srgb,
-        var(--m-color-info) 85%,
-        black
-    );
-    --m-button-active-bg: color-mix(in srgb, var(--m-color-info) 75%, black);
-}
-
-.m-button--warn {
-    --m-button-bg: var(--m-color-warn);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-warn);
-    --m-button-hover-bg: color-mix(in srgb, var(--m-color-warn) 85%, black);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: color-mix(
-        in srgb,
-        var(--m-color-warn) 85%,
-        black
-    );
-    --m-button-active-bg: color-mix(in srgb, var(--m-color-warn) 75%, black);
-}
-
-.m-button--help {
-    --m-button-bg: var(--m-color-help);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-help);
-    --m-button-hover-bg: color-mix(in srgb, var(--m-color-help) 85%, black);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: color-mix(
-        in srgb,
-        var(--m-color-help) 85%,
-        black
-    );
-    --m-button-active-bg: color-mix(in srgb, var(--m-color-help) 75%, black);
-}
-
-.m-button--danger {
-    --m-button-bg: var(--m-color-danger);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-color-danger);
-    --m-button-hover-bg: color-mix(in srgb, var(--m-color-danger) 85%, black);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: color-mix(
-        in srgb,
-        var(--m-color-danger) 85%,
-        black
-    );
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-danger) 75%,
-        black
-    );
-}
-
-.m-button--contrast {
-    --m-button-bg: var(--m-color-contrast);
-    --m-button-fg: var(--m-color-contrast-fg);
-    --m-button-border: var(--m-color-contrast);
-    --m-button-hover-bg: var(--m-color-contrast-hover);
-    --m-button-hover-fg: var(--m-color-contrast-fg);
-    --m-button-hover-border: var(--m-color-contrast-hover);
-    --m-button-active-bg: var(--m-color-contrast-active);
-}
-
-.m-button--outlined {
-    --m-button-bg: transparent;
-    --m-button-fg: var(--m-button-border);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-button-border) 10%,
+        var(--m-color-text) 6%,
         transparent
     );
-    --m-button-hover-fg: var(--m-button-border);
-    --m-button-hover-border: var(--m-button-border);
-    --m-button-active-bg: color-mix(
+    --m-button-color-light-hover: color-mix(
         in srgb,
-        var(--m-button-border) 16%,
+        var(--m-color-text) 10%,
         transparent
     );
+    --m-button-color-light-active: color-mix(
+        in srgb,
+        var(--m-color-text) 14%,
+        transparent
+    );
+    --m-button-solid-bg: rgba(0, 0, 0, 0.88);
+    --m-button-solid-bg-hover: rgba(0, 0, 0, 0.65);
+    --m-button-solid-bg-active: rgba(0, 0, 0, 0.88);
+    --m-button-outlined-border: var(--m-color-border);
+    --m-button-outlined-fg: var(--m-color-text);
+    --m-button-outlined-hover-border: var(--m-color-primary-hover);
+    --m-button-outlined-hover-fg: var(--m-color-primary-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
 }
 
-/* Idle matches outlined hover; hover/active deepen the tint. */
-.m-button--plain {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-button-border) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-button-border);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-button-border) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-button-border);
-    --m-button-hover-border: var(--m-button-border);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-button-border) 22%,
-        transparent
-    );
+.m-button--color-primary {
+    --m-button-color-base: var(--m-color-primary);
+    --m-button-color-hover: var(--m-color-primary-hover);
+    --m-button-color-active: var(--m-color-primary-active);
+    --m-button-solid-bg: var(--m-color-primary);
+    --m-button-solid-bg-hover: var(--m-color-primary-hover);
+    --m-button-solid-bg-active: var(--m-color-primary-active);
+    --m-button-outlined-border: var(--m-color-primary);
+    --m-button-outlined-fg: var(--m-color-primary);
+    --m-button-outlined-hover-border: var(--m-color-primary-hover);
+    --m-button-outlined-hover-fg: var(--m-color-primary-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
 }
 
-.m-button--secondary.m-button--outlined,
-.m-button--secondary.m-button--plain {
-    --m-button-border: var(--m-color-border);
-    --m-button-fg: var(--m-color-text);
-    --m-button-hover-fg: var(--m-color-text);
+.m-button--color-danger {
+    --m-button-color-base: var(--m-color-danger);
+    --m-button-color-hover: color-mix(in srgb, var(--m-color-danger) 85%, black);
+    --m-button-color-active: color-mix(in srgb, var(--m-color-danger) 75%, black);
+    --m-button-solid-bg: var(--m-color-danger);
+    --m-button-solid-bg-hover: var(--m-button-color-hover);
+    --m-button-solid-bg-active: var(--m-button-color-active);
+    --m-button-outlined-border: var(--m-color-danger);
+    --m-button-outlined-fg: var(--m-color-danger);
+    --m-button-outlined-hover-border: var(--m-button-color-hover);
+    --m-button-outlined-hover-fg: var(--m-button-color-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
 }
 
-.m-button--text,
-.m-button--link {
-    --m-button-bg: transparent;
+.m-button--color-success {
+    --m-button-color-base: var(--m-color-success);
+    --m-button-color-hover: color-mix(in srgb, var(--m-color-success) 85%, black);
+    --m-button-color-active: color-mix(in srgb, var(--m-color-success) 75%, black);
+    --m-button-solid-bg: var(--m-color-success);
+    --m-button-solid-bg-hover: var(--m-button-color-hover);
+    --m-button-solid-bg-active: var(--m-button-color-active);
+    --m-button-outlined-border: var(--m-color-success);
+    --m-button-outlined-fg: var(--m-color-success);
+    --m-button-outlined-hover-border: var(--m-button-color-hover);
+    --m-button-outlined-hover-fg: var(--m-button-color-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
+}
+
+.m-button--color-info {
+    --m-button-color-base: var(--m-color-info);
+    --m-button-color-hover: color-mix(in srgb, var(--m-color-info) 85%, black);
+    --m-button-color-active: color-mix(in srgb, var(--m-color-info) 75%, black);
+    --m-button-solid-bg: var(--m-color-info);
+    --m-button-solid-bg-hover: var(--m-button-color-hover);
+    --m-button-solid-bg-active: var(--m-button-color-active);
+    --m-button-outlined-border: var(--m-color-info);
+    --m-button-outlined-fg: var(--m-color-info);
+    --m-button-outlined-hover-border: var(--m-button-color-hover);
+    --m-button-outlined-hover-fg: var(--m-button-color-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
+}
+
+.m-button--color-warning {
+    --m-button-color-base: var(--m-color-warn);
+    --m-button-color-hover: color-mix(in srgb, var(--m-color-warn) 85%, black);
+    --m-button-color-active: color-mix(in srgb, var(--m-color-warn) 75%, black);
+    --m-button-solid-bg: var(--m-color-warn);
+    --m-button-solid-bg-hover: var(--m-button-color-hover);
+    --m-button-solid-bg-active: var(--m-button-color-active);
+    --m-button-outlined-border: var(--m-color-warn);
+    --m-button-outlined-fg: var(--m-color-warn);
+    --m-button-outlined-hover-border: var(--m-button-color-hover);
+    --m-button-outlined-hover-fg: var(--m-button-color-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
+}
+
+.m-button--color-help {
+    --m-button-color-base: var(--m-color-help);
+    --m-button-color-hover: color-mix(in srgb, var(--m-color-help) 85%, black);
+    --m-button-color-active: color-mix(in srgb, var(--m-color-help) 75%, black);
+    --m-button-solid-bg: var(--m-color-help);
+    --m-button-solid-bg-hover: var(--m-button-color-hover);
+    --m-button-solid-bg-active: var(--m-button-color-active);
+    --m-button-outlined-border: var(--m-color-help);
+    --m-button-outlined-fg: var(--m-color-help);
+    --m-button-outlined-hover-border: var(--m-button-color-hover);
+    --m-button-outlined-hover-fg: var(--m-button-color-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
+}
+
+.m-button--color-contrast {
+    --m-button-color-base: var(--m-color-contrast);
+    --m-button-color-hover: var(--m-color-contrast-hover);
+    --m-button-color-active: var(--m-color-contrast-active);
+    --m-button-on-color: var(--m-color-contrast-fg);
+    --m-button-solid-bg: var(--m-color-contrast);
+    --m-button-solid-bg-hover: var(--m-color-contrast-hover);
+    --m-button-solid-bg-active: var(--m-color-contrast-active);
+    --m-button-outlined-border: var(--m-color-contrast);
+    --m-button-outlined-fg: var(--m-color-contrast);
+    --m-button-outlined-hover-border: var(--m-color-contrast-hover);
+    --m-button-outlined-hover-fg: var(--m-color-contrast-hover);
+    --m-button-outlined-bg: var(--m-color-surface);
+    --m-button-outlined-hover-bg: var(--m-color-surface);
+}
+
+.m-button--color-link {
+    --m-button-color-base: var(--m-color-primary);
+    --m-button-color-hover: var(--m-color-primary-hover);
+    --m-button-color-active: var(--m-color-primary-active);
+}
+
+/* ---------- Variant axis ---------- */
+
+.m-button--variant-solid {
+    --m-button-bg: var(--m-button-solid-bg, var(--m-button-color-base));
+    --m-button-fg: var(--m-button-on-color);
     --m-button-border: transparent;
-    --m-button-fg: var(--m-color-primary);
-    --m-button-hover-fg: var(--m-color-primary);
+    --m-button-hover-bg: var(--m-button-solid-bg-hover, var(--m-button-color-hover));
+    --m-button-hover-fg: var(--m-button-on-color);
     --m-button-hover-border: transparent;
+    --m-button-active-bg: var(--m-button-solid-bg-active, var(--m-button-color-active));
 }
 
-.m-button--text {
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        transparent
+.m-button--variant-outlined,
+.m-button--variant-dashed {
+    --m-button-bg: var(--m-button-outlined-bg, var(--m-color-surface));
+    --m-button-fg: var(--m-button-outlined-fg, var(--m-button-color-base));
+    --m-button-border: var(--m-button-outlined-border, var(--m-button-color-base));
+    --m-button-hover-bg: var(--m-button-outlined-hover-bg, var(--m-color-surface));
+    --m-button-hover-fg: var(--m-button-outlined-hover-fg, var(--m-button-color-hover));
+    --m-button-hover-border: var(
+        --m-button-outlined-hover-border,
+        var(--m-button-color-hover)
     );
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-primary) 16%,
-        transparent
-    );
+    --m-button-active-bg: var(--m-button-outlined-hover-bg, var(--m-color-surface));
 }
 
-.m-button--link {
+.m-button--variant-dashed {
+    --m-button-border-style: dashed;
+}
+
+.m-button--variant-filled {
+    --m-button-bg: var(--m-button-color-light);
+    --m-button-fg: var(--m-button-color-base);
+    --m-button-border: transparent;
+    --m-button-hover-bg: var(--m-button-color-light-hover);
+    --m-button-hover-fg: var(--m-button-color-base);
+    --m-button-hover-border: transparent;
+    --m-button-active-bg: var(--m-button-color-light-active);
+}
+
+.m-button--variant-text,
+.m-button--variant-link {
     --m-button-bg: transparent;
-    --m-button-hover-bg: transparent;
+    --m-button-fg: var(--m-button-color-base);
+    --m-button-border: transparent;
+    --m-button-hover-fg: var(--m-button-color-hover);
+    --m-button-hover-border: transparent;
     --m-button-active-bg: transparent;
+}
+
+.m-button--variant-text {
+    --m-button-hover-bg: var(--m-button-color-light);
+    --m-button-active-bg: var(--m-button-color-light-active);
+}
+
+.m-button--variant-link {
+    --m-button-hover-bg: transparent;
     height: auto;
     min-height: 0;
     padding: 0;
 }
 
-.m-button--link.m-button--link-underline:hover:not(:disabled) {
+.m-button--variant-link:hover:not(:disabled):not(.m-button--disabled) {
     text-decoration: underline;
 }
 
-.m-button--link:not(.m-button--link-underline):hover:not(:disabled) {
-    opacity: 0.8;
+.m-button--color-default.m-button--variant-text {
+    --m-button-color-base: var(--m-color-text);
+    --m-button-color-hover: var(--m-color-text);
+    --m-button-hover-bg: color-mix(in srgb, var(--m-color-text) 6%, transparent);
+    --m-button-active-bg: color-mix(in srgb, var(--m-color-text) 10%, transparent);
 }
 
-.m-button--secondary.m-button--text {
-    --m-button-fg: var(--m-color-text-muted);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 12%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-text);
+.m-button--color-default.m-button--variant-filled {
+    --m-button-color-base: var(--m-color-text);
 }
 
-.m-button--secondary.m-button--link {
-    --m-button-fg: var(--m-color-text-muted);
-    --m-button-hover-fg: var(--m-color-text);
+.m-button--color-link.m-button--variant-link {
+    --m-button-color-base: var(--m-color-primary);
+    --m-button-color-hover: var(--m-color-primary-hover);
 }
 
-.m-button--success.m-button--text,
-.m-button--success.m-button--outlined {
-    --m-button-fg: var(--m-color-success);
-    --m-button-border: var(--m-color-success);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-success) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-success);
-    --m-button-hover-border: var(--m-color-success);
-}
-
-.m-button--success.m-button--link {
-    --m-button-fg: var(--m-color-success);
-    --m-button-hover-fg: var(--m-color-success);
-}
-
-.m-button--info.m-button--text,
-.m-button--info.m-button--outlined {
-    --m-button-fg: var(--m-color-info);
-    --m-button-border: var(--m-color-info);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-info) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-info);
-    --m-button-hover-border: var(--m-color-info);
-}
-
-.m-button--info.m-button--link {
-    --m-button-fg: var(--m-color-info);
-    --m-button-hover-fg: var(--m-color-info);
-}
-
-.m-button--warn.m-button--text,
-.m-button--warn.m-button--outlined {
-    --m-button-fg: var(--m-color-warn);
-    --m-button-border: var(--m-color-warn);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-warn) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-warn);
-    --m-button-hover-border: var(--m-color-warn);
-}
-
-.m-button--warn.m-button--link {
-    --m-button-fg: var(--m-color-warn);
-    --m-button-hover-fg: var(--m-color-warn);
-}
-
-.m-button--help.m-button--text,
-.m-button--help.m-button--outlined {
-    --m-button-fg: var(--m-color-help);
-    --m-button-border: var(--m-color-help);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-help) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-help);
-    --m-button-hover-border: var(--m-color-help);
-}
-
-.m-button--help.m-button--link {
-    --m-button-fg: var(--m-color-help);
-    --m-button-hover-fg: var(--m-color-help);
-}
-
-.m-button--danger.m-button--text,
-.m-button--danger.m-button--outlined {
-    --m-button-fg: var(--m-color-danger);
-    --m-button-border: var(--m-color-danger);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-danger) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-danger);
-    --m-button-hover-border: var(--m-color-danger);
-}
-
-.m-button--danger.m-button--link {
-    --m-button-fg: var(--m-color-danger);
-    --m-button-hover-fg: var(--m-color-danger);
-}
-
-.m-button--contrast.m-button--text,
-.m-button--contrast.m-button--outlined {
-    --m-button-fg: var(--m-color-contrast);
-    --m-button-border: var(--m-color-contrast);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-contrast) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-contrast);
-    --m-button-hover-border: var(--m-color-contrast);
-}
-
-.m-button--contrast.m-button--link {
-    --m-button-fg: var(--m-color-contrast);
-    --m-button-hover-fg: var(--m-color-contrast);
-}
-
-.m-button--plain.m-button--text,
-.m-button--plain.m-button--outlined {
-    --m-button-bg: transparent;
-    --m-button-fg: var(--m-color-text-muted);
-    --m-button-border: var(--m-color-border);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 12%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-text);
-    --m-button-hover-border: var(--m-color-border);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 18%,
-        transparent
-    );
-}
-
-.m-button--plain.m-button--link {
-    --m-button-fg: var(--m-color-text-muted);
-    --m-button-hover-fg: var(--m-color-text);
-}
-
+/* Ghost: transparent fill on bordered variants */
 .m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        transparent
-    );
-    --m-button-border: transparent;
-    --m-button-fg: var(--m-color-primary);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-primary) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-primary);
-    --m-button-hover-border: transparent;
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-primary) 22%,
-        transparent
-    );
-}
-
-.m-button--secondary.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 12%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-text);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 18%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-text);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 24%,
-        transparent
-    );
-}
-
-.m-button--success.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-success) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-success);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-success) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-success);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-success) 22%,
-        transparent
-    );
-}
-
-.m-button--info.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-info) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-info);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-info) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-info);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-info) 22%,
-        transparent
-    );
-}
-
-.m-button--warn.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-warn) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-warn);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-warn) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-warn);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-warn) 22%,
-        transparent
-    );
-}
-
-.m-button--help.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-help) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-help);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-help) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-help);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-help) 22%,
-        transparent
-    );
-}
-
-.m-button--danger.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-danger) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-danger);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-danger) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-danger);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-danger) 22%,
-        transparent
-    );
-}
-
-.m-button--contrast.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-color-contrast) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-color-contrast);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-contrast) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-contrast);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-contrast) 22%,
-        transparent
-    );
-}
-
-.m-button--quaternary {
     --m-button-bg: transparent;
-    --m-button-border: transparent;
-    --m-button-fg: var(--m-color-text);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 10%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-color-text);
-    --m-button-hover-border: transparent;
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 16%,
-        transparent
-    );
-}
-
-.m-button--custom {
-    --m-button-bg: var(--m-button-color);
-    --m-button-fg: var(--m-color-on-emphasis);
-    --m-button-border: var(--m-button-color);
-    --m-button-hover-bg: color-mix(in srgb, var(--m-button-color) 85%, black);
-    --m-button-hover-fg: var(--m-color-on-emphasis);
-    --m-button-hover-border: color-mix(
-        in srgb,
-        var(--m-button-color) 85%,
-        black
-    );
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 75%,
-        black
-    );
-}
-
-.m-button--custom.m-button--outlined {
-    --m-button-bg: transparent;
-    --m-button-fg: var(--m-button-color);
-    --m-button-border: var(--m-button-color);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 12%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-button-color);
-    --m-button-hover-border: var(--m-button-color);
-}
-
-.m-button--custom.m-button--ghost {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-button-color);
-    --m-button-border: transparent;
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-button-color);
-    --m-button-hover-border: transparent;
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 22%,
-        transparent
-    );
-}
-
-.m-button--custom.m-button--text,
-.m-button--custom.m-button--quaternary {
-    --m-button-bg: transparent;
-    --m-button-fg: var(--m-button-color);
-    --m-button-border: transparent;
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 12%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-button-color);
-    --m-button-hover-border: transparent;
-}
-
-.m-button--custom.m-button--plain {
-    --m-button-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 10%,
-        transparent
-    );
-    --m-button-fg: var(--m-button-color);
-    --m-button-border: var(--m-button-color);
-    --m-button-hover-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 16%,
-        transparent
-    );
-    --m-button-hover-fg: var(--m-button-color);
-    --m-button-hover-border: var(--m-button-color);
-    --m-button-active-bg: color-mix(
-        in srgb,
-        var(--m-button-color) 22%,
-        transparent
-    );
-}
-
-.m-button--custom.m-button--link {
-    --m-button-bg: transparent;
-    --m-button-fg: var(--m-button-color);
-    --m-button-border: transparent;
     --m-button-hover-bg: transparent;
-    --m-button-hover-fg: var(--m-button-color);
-    --m-button-hover-border: transparent;
     --m-button-active-bg: transparent;
 }
 
-.m-button-group {
-    display: inline-flex;
-    vertical-align: middle;
+.m-button--ghost.m-button--variant-solid,
+.m-button--ghost.m-button--variant-outlined,
+.m-button--ghost.m-button--variant-dashed {
+    --m-button-fg: var(--m-button-color-base);
+    --m-button-border: var(--m-button-color-base);
+    --m-button-hover-fg: var(--m-button-color-hover);
+    --m-button-hover-border: var(--m-button-color-hover);
 }
 
-.m-button-group--fluid {
+.m-button--ghost.m-button--color-default {
+    --m-button-fg: #ffffff;
+    --m-button-border: #ffffff;
+    --m-button-hover-fg: #ffffff;
+    --m-button-hover-border: #ffffff;
+    --m-button-color-base: #ffffff;
+    --m-button-color-hover: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- Size / shape / layout ---------- */
+
+.m-button--small {
+    --m-button-icon-size: 0.875rem;
+    font-size: var(--m-control-font-small);
+    min-height: var(--m-control-height-small);
+    padding: 0 var(--m-button-padding-x-small);
+}
+
+.m-button--large {
+    --m-button-icon-size: 1.25rem;
+    font-size: var(--m-control-font-large);
+    min-height: var(--m-control-height-large);
+    padding: 0 var(--m-button-padding-x-large);
+}
+
+.m-button--block {
     display: flex;
     width: 100%;
 }
 
-.m-button-group--fluid > .m-button {
-    flex: 1;
-}
-
-.m-button-group > .m-button {
-    border-radius: 0;
-    margin: 0;
-}
-
-.m-button-group > .m-button + .m-button {
-    margin-left: calc(var(--m-border-width) * -1);
-}
-
-.m-button-group > .m-button:hover,
-.m-button-group > .m-button:focus-visible,
-.m-button-group > .m-button:active {
-    position: relative;
-    z-index: 1;
-}
-
-.m-button-group > .m-button:first-child {
-    border-top-left-radius: var(--m-radius-control);
-    border-bottom-left-radius: var(--m-radius-control);
-}
-
-.m-button-group > .m-button:last-child {
-    border-top-right-radius: var(--m-radius-control);
-    border-bottom-right-radius: var(--m-radius-control);
-}
-
-.m-button--raised {
-    box-shadow: var(--m-shadow-raised);
-}
-
-.m-button--raised:focus-visible {
-    box-shadow: var(--m-focus-shadow), var(--m-shadow-raised);
-}
-
-.m-button--rounded {
+.m-button--shape-round {
     border-radius: var(--m-radius-full);
+    padding-inline: calc(var(--m-button-padding-x-medium) + var(--m-space-2));
 }
 
 .m-button--shape-circle {
@@ -779,43 +408,8 @@
     width: var(--m-control-height-large);
 }
 
-.m-button--shape-round {
-    border-radius: var(--m-radius-full);
-    padding-inline: calc(var(--m-button-padding-x-medium) + var(--m-space-2));
-}
-
 .m-button--shape-square {
     border-radius: 0;
-}
-
-.m-button--dashed {
-    background: var(--m-color-surface);
-    border-style: dashed;
-    color: var(--m-color-text);
-}
-
-.m-button--dashed:not(:disabled):hover {
-    border-color: var(--m-color-primary-hover);
-    color: var(--m-color-primary-hover);
-}
-
-.m-button--primary.m-button--dashed {
-    --m-button-bg: var(--m-color-surface);
-    --m-button-fg: var(--m-color-primary);
-    --m-button-border: var(--m-color-primary);
-    --m-button-hover-bg: var(--m-color-surface);
-    --m-button-hover-fg: var(--m-color-primary-hover);
-    --m-button-hover-border: var(--m-color-primary-hover);
-    --m-button-active-bg: var(--m-color-surface);
-}
-
-.m-button--secondary.m-button--dashed {
-    --m-button-bg: var(--m-color-surface);
-    --m-button-fg: var(--m-color-text);
-    --m-button-border: var(--m-color-border);
-    --m-button-hover-bg: var(--m-color-surface);
-    --m-button-hover-fg: var(--m-color-primary-hover);
-    --m-button-hover-border: var(--m-color-primary-hover);
 }
 
 .m-button--icon-only {
@@ -835,40 +429,22 @@
     width: var(--m-control-height-large);
 }
 
-.m-button--icon-right {
+.m-button--icon-end {
     flex-direction: row-reverse;
 }
 
-.m-button--icon-top {
-    flex-direction: column;
-    min-height: var(--m-button-icon-stack-min-height);
-    padding-block: var(--m-space-2);
+.m-button--two-chinese-chars > .m-button__label {
+    letter-spacing: 0.3em;
+    margin-inline-end: -0.3em;
 }
 
-.m-button--icon-bottom {
-    flex-direction: column-reverse;
-    min-height: var(--m-button-icon-stack-min-height);
-    padding-block: var(--m-space-2);
+.m-button--loading {
+    cursor: default;
+    opacity: 0.72;
+    pointer-events: none;
 }
 
-.m-button--fluid {
-    display: flex;
-    width: 100%;
-}
-
-.m-button--small {
-    --m-button-icon-size: 0.875rem;
-    font-size: var(--m-control-font-small);
-    min-height: var(--m-control-height-small);
-    padding: 0 var(--m-button-padding-x-small);
-}
-
-.m-button--large {
-    --m-button-icon-size: 1.25rem;
-    font-size: var(--m-control-font-large);
-    min-height: var(--m-control-height-large);
-    padding: 0 var(--m-button-padding-x-large);
-}
+/* ---------- Parts ---------- */
 
 .m-button__icon,
 .m-button__label {
@@ -903,7 +479,6 @@
     will-change: transform, opacity;
 }
 
-/* Used only when Web Animations API is unavailable. */
 .m-button__ripple-wave--fallback {
     animation: m-button-ripple 560ms var(--m-motion-ease) forwards;
 }
@@ -925,21 +500,21 @@
 
 .m-button__icon {
     flex: 0 0 auto;
-    width: var(--m-button-icon-size);
     height: var(--m-button-icon-size);
     line-height: 0;
+    width: var(--m-button-icon-size);
 }
 
 .m-button__icon :is(.m-icon, .m-button__icon-graphic, svg) {
     display: block;
     flex-shrink: 0;
-    width: 100%;
     height: 100%;
+    width: 100%;
 }
 
 .m-button__icon .m-icon {
-    max-width: 100%;
     max-height: 100%;
+    max-width: 100%;
 }
 
 .m-button__badge {
@@ -994,8 +569,8 @@
 .m-button__spinner {
     animation: m-button-spin var(--m-motion-spin-fast) linear infinite;
     border: 2px solid currentColor;
-    border-right-color: transparent;
     border-radius: var(--m-radius-full);
+    border-right-color: transparent;
     height: var(--m-button-spinner-size);
     width: var(--m-button-spinner-size);
 }
@@ -1006,11 +581,54 @@
     }
 }
 
-[data-m-motion="reduced"] .m-button__spinner,
-[data-m-motion="none"] .m-button__spinner {
-    animation: none;
+@media (prefers-reduced-motion: reduce) {
+    .m-button {
+        transition-duration: 0ms;
+    }
+
+    .m-button__spinner {
+        animation-duration: 0ms;
+    }
 }
 
-[data-m-motion="none"] .m-button__ripple-wave {
-    display: none;
+/* ---------- Group ---------- */
+
+.m-button-group {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.m-button-group--block {
+    display: flex;
+    width: 100%;
+}
+
+.m-button-group--block > .m-button {
+    flex: 1;
+}
+
+.m-button-group > .m-button {
+    border-radius: 0;
+    margin: 0;
+}
+
+.m-button-group > .m-button + .m-button {
+    margin-inline-start: calc(var(--m-border-width) * -1);
+}
+
+.m-button-group > .m-button:hover,
+.m-button-group > .m-button:focus-visible,
+.m-button-group > .m-button:active {
+    position: relative;
+    z-index: 1;
+}
+
+.m-button-group > .m-button:first-child {
+    border-end-start-radius: var(--m-radius-control);
+    border-start-start-radius: var(--m-radius-control);
+}
+
+.m-button-group > .m-button:last-child {
+    border-end-end-radius: var(--m-radius-control);
+    border-start-end-radius: var(--m-radius-control);
 }

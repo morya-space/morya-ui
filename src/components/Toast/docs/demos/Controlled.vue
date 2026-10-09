@@ -20,8 +20,8 @@ function onClose(message: ToastMessage) {
 
 <template>
   <div class="flex flex-wrap gap-3 items-center">
-    <MButton label="Success" severity="success" @click="push('success', 'Saved', 'Your changes are live.')" />
-    <MButton label="Info" severity="info" @click="push('info', 'Tip', 'Something to know.')" />
+    <MButton label="Success" @click="push('success', 'Saved', 'Your changes are live.')" color="success" variant="solid"/>
+    <MButton label="Info" @click="push('info', 'Tip', 'Something to know.')" color="info" variant="solid"/>
   </div>
   <MToast :messages="messages" position="top-right" @close="onClose" />
 </template>

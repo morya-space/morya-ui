@@ -12,6 +12,6 @@ function ask(event: MouseEvent) {
 </script>
 
 <template>
-  <MButton label="Delete" severity="danger" @click="ask" />
+  <MButton label="Delete" @click="ask" danger type="primary"/>
   <MConfirmPopup v-model="open" :target="target" message="Delete this item?" icon="info" placement="top" />
 </template>

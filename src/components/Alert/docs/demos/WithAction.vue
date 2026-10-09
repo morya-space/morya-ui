@@ -13,11 +13,7 @@ function onUndo() {
     </template>
     该记录已移入归档。你可以撤销此次操作。
     <template #action>
-      <MButton
-        size="small"
-        text
-        @click="onUndo"
-      >
+      <MButton size="small" @click="onUndo" type="text">
         撤销
       </MButton>
     </template>

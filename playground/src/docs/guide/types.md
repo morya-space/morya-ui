@@ -99,20 +99,37 @@ type MSizeInput = 'small' | 'medium' | 'large' | 'sm' | 'md' | 'lg'
 type MInputVariant = 'outlined' | 'filled'
 ```
 
-<h3 id="ButtonSeverity">ButtonSeverity</h3>
+<h3 id="ButtonType">ButtonType</h3>
 
-按钮语义色（[`Button`](/components/Button)、Dialog 页脚等）：
+按钮类型糖（[`Button`](/components/Button)）：
 
 ```ts
-type ButtonSeverity =
+type ButtonType = 'default' | 'primary' | 'dashed' | 'link' | 'text'
+```
+
+<h3 id="ButtonColor">ButtonColor</h3>
+
+按钮颜色轴（Button、ConfirmDialog `acceptColor`、Dialog `positiveColor` 等）：
+
+```ts
+type ButtonColor =
+  | 'default'
   | 'primary'
-  | 'secondary'
+  | 'danger'
   | 'success'
   | 'info'
-  | 'warning'   // 'warn' 为别名
+  | 'warning'
   | 'help'
-  | 'danger'
   | 'contrast'
+  | 'link'
+```
+
+<h3 id="ButtonVariant">ButtonVariant</h3>
+
+按钮变体轴：
+
+```ts
+type ButtonVariant = 'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'
 ```
 
 <h3 id="MAppendTo">MAppendTo</h3>

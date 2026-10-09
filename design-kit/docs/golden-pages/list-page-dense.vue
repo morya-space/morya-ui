@@ -88,7 +88,7 @@ const rows = [
           <MPageContent fill density="compact">
             <MPageHeader title="用户管理">
               <template #actions>
-                <MButton severity="primary" size="small">
+                <MButton size="small" type="primary">
                   新建
                 </MButton>
               </template>
@@ -113,10 +113,10 @@ const rows = [
                 />
               </MSpace>
               <template #actions>
-                <MButton severity="secondary" size="small">
+                <MButton size="small">
                   查询
                 </MButton>
-                <MButton severity="secondary" size="small" text @click="resetFilters">
+                <MButton size="small" @click="resetFilters" type="text">
                   重置
                 </MButton>
               </template>
@@ -142,10 +142,10 @@ const rows = [
               </template>
               <template #cell-actions>
                 <MSpace>
-                  <MButton severity="secondary" size="small" text>
+                  <MButton size="small" type="text">
                     编辑
                   </MButton>
-                  <MButton severity="danger" size="small" text>
+                  <MButton size="small" type="text" danger>
                     删除
                   </MButton>
                 </MSpace>
@@ -153,7 +153,7 @@ const rows = [
               <template #empty>
                 <MEmpty title="暂无数据" description="创建后在此浏览。" icon="user">
                   <template #extra>
-                    <MButton severity="primary" size="small">
+                    <MButton size="small" type="primary">
                       新建
                     </MButton>
                   </template>

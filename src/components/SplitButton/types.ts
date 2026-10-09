@@ -1,7 +1,7 @@
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
-import type { ButtonSeverity, ButtonSize } from '../Button/types'
+import type { ButtonColor, ButtonSize, ButtonVariant } from '../Button/types'
 
 export interface SplitButtonItem {
   label: string
@@ -14,9 +14,9 @@ export interface SplitButtonProps {
   label?: string
   icon?: string
   model?: SplitButtonItem[]
-  severity?: ButtonSeverity
+  color?: ButtonColor
   disabled?: boolean
-  outlined?: boolean
+  variant?: ButtonVariant
   size?: ButtonSize | 'sm' | 'md' | 'lg'
   /**
    * 是否将菜单 Teleport 出去。默认 `true`。

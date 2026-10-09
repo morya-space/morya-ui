@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { MButton } from 'morya-ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-3 items-center">
-    <MButton icon="check" label="Save" />
-    <MButton icon="search" label="Search" icon-pos="right" severity="secondary" />
-    <MButton icon="plus" icon-only rounded aria-label="Add" />
-    <MButton icon="trash" icon-only rounded outlined severity="danger" aria-label="Delete" />
-    <MButton label="Messages" badge="2" badge-severity="danger" severity="secondary" />
-  </div>
+  <MFlex gap="small" wrap>
+    <MButton icon="search" label="Search" icon-placement="end" />
+    <MButton type="primary" icon="check" label="Done" badge="3" />
+    <MButton icon="trash" icon-only shape="round" variant="outlined" danger aria-label="Delete"/>
+    <MButton label="Messages" badge="2" badge-color="danger" />
+  </MFlex>
 </template>

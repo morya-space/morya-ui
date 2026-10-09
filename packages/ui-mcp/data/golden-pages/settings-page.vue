@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
- * 黄金样例：设置 / 配置页
- * 窄栏 + Tabs 分组 + MPageSection form；保存用 message 单行回执。
+ * 黄金样例：设�?/ 配置�?
+ * 窄栏 + Tabs 分组 + MPageSection form；保存用 message 单行回执�?
  * @see DESIGN.md · page-layouts.md § Settings · visual-craft § Ops polish
  */
 import {
@@ -47,7 +47,7 @@ const notify = reactive({
 })
 
 const languageOptions = [
-  { label: '简体中文', value: 'zh-CN' },
+  { label: '简体中�?, value: 'zh-CN' },
   { label: 'English', value: 'en-US' },
 ]
 
@@ -55,7 +55,7 @@ async function saveProfile() {
   submitting.value = true
   try {
     // await api.saveProfile(profile)
-    message.success('资料已保存')
+    message.success('资料已保�?)
   } finally {
     submitting.value = false
   }
@@ -65,7 +65,7 @@ async function saveNotify() {
   submitting.value = true
   try {
     // await api.saveNotify(notify)
-    message.success('通知偏好已保存')
+    message.success('通知偏好已保�?)
   } finally {
     submitting.value = false
   }
@@ -82,8 +82,7 @@ async function saveNotify() {
       <MLayoutContent>
         <MPageContent width="narrow">
           <MPageHeader
-            title="系统设置"
-            description="按域分组配置；切换 Tab 时保留未保存输入，保存成功用 message 一句话回执。"
+            title="系统设置" description="按域分组配置；切�?Tab 时保留未保存输入，保存成功用 message 一句话回执�?
           />
 
           <MTabs v-model="activeTab" :tabs="tabs">
@@ -98,18 +97,15 @@ async function saveNotify() {
                   </MFormItem>
                   <MFormItem label="界面语言" name="language">
                     <MSelect
-                      v-model="profile.language"
-                      :options="languageOptions"
-                      placeholder="选择语言"
-                      fluid
+                      v-model="profile.language" :options="languageOptions" placeholder="选择语言" fluid
                     />
                   </MFormItem>
                   <MPageSection variant="actions">
                     <MSpace>
-                      <MButton native-type="submit" severity="primary" :loading="submitting">
+                      <MButton html-html-type="submit" type="primary" :loading="submitting">
                         保存资料
                       </MButton>
-                      <MButton severity="secondary" text native-type="button">
+                      <MButton type="text" html-type="button">
                         恢复默认
                       </MButton>
                     </MSpace>
@@ -122,11 +118,11 @@ async function saveNotify() {
                   <MFormItem label="邮件摘要" name="emailDigest">
                     <MSwitch v-model="notify.emailDigest" />
                   </MFormItem>
-                  <MFormItem label="产品动态" name="productUpdates">
+                  <MFormItem label="产品动�? name="productUpdates">
                     <MSwitch v-model="notify.productUpdates" />
                   </MFormItem>
                   <MPageSection variant="actions">
-                    <MButton native-type="submit" severity="primary" :loading="submitting">
+                    <MButton html-html-type="submit" type="primary" :loading="submitting">
                       保存通知
                     </MButton>
                   </MPageSection>
@@ -135,13 +131,13 @@ async function saveNotify() {
 
               <MPageSection v-else variant="form" title="安全">
                 <p class="settings-hint">
-                  修改密码、两步验证等敏感操作放在此区；危险动作使用 severity="danger" 并配合确认。
+                  修改密码、两步验证等敏感操作放在此区；危险动作使�?danger 并配合确认�?
                 </p>
                 <MSpace>
-                  <MButton severity="secondary">
+                  <MButton>
                     修改密码
                   </MButton>
-                  <MButton severity="danger" text>
+                  <MButton type="text" danger>
                     注销账号
                   </MButton>
                 </MSpace>

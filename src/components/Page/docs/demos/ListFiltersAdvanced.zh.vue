@@ -52,7 +52,7 @@ function resetAll() {
     <MPageContent>
       <MPageHeader title="用户管理" description="折叠高级筛选（chevron + 收起），查询/重置放 #actions。">
         <template #actions>
-          <MButton severity="primary">
+          <MButton type="primary">
             新建
           </MButton>
         </template>
@@ -77,10 +77,10 @@ function resetAll() {
           />
         </MSpace>
         <template #actions>
-          <MButton severity="secondary">
+          <MButton>
             查询
           </MButton>
-          <MButton severity="secondary" text @click="resetAll">
+          <MButton @click="resetAll" type="text">
             重置
           </MButton>
         </template>

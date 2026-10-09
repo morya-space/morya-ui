@@ -9,7 +9,7 @@ import { MButton, MCard } from 'morya-ui'
     </p>
     <template #footer>
       <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-        <MButton label="Dismiss" severity="secondary" text />
+        <MButton label="Dismiss" type="text"/>
         <MButton label="Continue" />
       </div>
     </template>

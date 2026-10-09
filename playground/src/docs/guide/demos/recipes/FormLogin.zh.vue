@@ -68,7 +68,7 @@ async function onSubmit() {
                     />
                 </template>
             </MFormItem>
-            <MButton native-type="submit" label="登录" fluid />
+            <MButton type="primary" html-type="submit" label="登录" block />
         </MForm>
         <p
             v-if="status"

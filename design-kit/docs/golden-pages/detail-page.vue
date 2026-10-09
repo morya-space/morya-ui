@@ -67,13 +67,13 @@ const activityRows = [
                   :label="profile.status === 'active' ? '启用' : '停用'"
                   :severity="profile.status === 'active' ? 'success' : 'secondary'"
                 />
-                <MButton severity="primary">
+                <MButton type="primary">
                   编辑
                 </MButton>
-                <MButton severity="secondary">
+                <MButton>
                   返回
                 </MButton>
-                <MButton severity="danger" text>
+                <MButton type="text" danger>
                   删除
                 </MButton>
               </MSpace>

@@ -13,7 +13,7 @@ const items = [
 <template>
   <MDropdown v-model="open" :items="items" trigger="hover" :show-delay="0" :hide-delay="200">
     <template #trigger>
-      <MButton label="Hover to open" severity="secondary" />
+      <MButton label="Hover to open"/>
     </template>
   </MDropdown>
 </template>

@@ -216,7 +216,7 @@ npx -y @morya-ui/mcp
 
 > 搜索和「日期」相关的组件，选一个适合表单的，按文档写出最小用法。
 
-> 根据 MCP 里 Button 的文档，写一个 `severity="danger"` 的删除按钮，并校验 props 是否合法。
+> 根据 MCP 里 Button 的文档，写一个 `type="primary" danger` 的删除按钮，并校验 props 是否合法。
 
 助手应先调用工具，再基于返回内容生成类似：
 
@@ -226,7 +226,7 @@ import { MButton } from 'morya-ui'
 </script>
 
 <template>
-  <MButton label="删除" severity="danger" />
+  <MButton label="删除" danger type="primary"/>
 </template>
 ```
 

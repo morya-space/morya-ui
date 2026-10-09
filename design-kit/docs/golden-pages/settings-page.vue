@@ -106,10 +106,10 @@ async function saveNotify() {
                   </MFormItem>
                   <MPageSection variant="actions">
                     <MSpace>
-                      <MButton native-type="submit" severity="primary" :loading="submitting">
+                      <MButton type="primary" html-type="submit" :loading="submitting">
                         保存资料
                       </MButton>
-                      <MButton severity="secondary" text native-type="button">
+                      <MButton html-type="button">
                         恢复默认
                       </MButton>
                     </MSpace>
@@ -126,7 +126,7 @@ async function saveNotify() {
                     <MSwitch v-model="notify.productUpdates" />
                   </MFormItem>
                   <MPageSection variant="actions">
-                    <MButton native-type="submit" severity="primary" :loading="submitting">
+                    <MButton type="primary" html-type="submit" :loading="submitting">
                       保存通知
                     </MButton>
                   </MPageSection>
@@ -135,13 +135,13 @@ async function saveNotify() {
 
               <MPageSection v-else variant="form" title="安全">
                 <p class="settings-hint">
-                  修改密码、两步验证等敏感操作放在此区；危险动作使用 severity="danger" 并配合确认。
+                  修改密码、两步验证等敏感操作放在此区；危险动作使用 danger / color="danger" 并配合确认。
                 </p>
                 <MSpace>
-                  <MButton severity="secondary">
+                  <MButton>
                     修改密码
                   </MButton>
-                  <MButton severity="danger" text>
+                  <MButton type="text" danger>
                     注销账号
                   </MButton>
                 </MSpace>

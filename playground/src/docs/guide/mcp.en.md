@@ -219,7 +219,7 @@ After connecting, you can ask the assistant to use this server, for example:
 
 > Search for date-related components, pick one suitable for forms, and write a minimal usage from the docs.
 
-> Following the Button docs from MCP, write a delete button with `severity="danger"` and validate the props.
+> Following the Button docs from MCP, write a delete button with `type="primary" danger` and validate the props.
 
 The assistant should call tools first, then produce something like:
 
@@ -229,7 +229,7 @@ import { MButton } from 'morya-ui'
 </script>
 
 <template>
-  <MButton label="Delete" severity="danger" />
+  <MButton label="Delete" danger type="primary"/>
 </template>
 ```
 

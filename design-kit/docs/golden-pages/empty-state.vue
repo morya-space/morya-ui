@@ -29,7 +29,7 @@ import {
         <MPageContent>
           <MPageHeader title="课程" description="管理目录与可见性。">
             <template #actions>
-              <MButton severity="primary">
+              <MButton type="primary">
                 新建课程
               </MButton>
             </template>
@@ -41,10 +41,10 @@ import {
             illustration="no-content"
           >
             <template #extra>
-              <MButton severity="primary">
+              <MButton type="primary">
                 创建第一门课程
               </MButton>
-              <MButton severity="secondary" text>
+              <MButton type="text">
                 从模板导入
               </MButton>
             </template>

@@ -12,15 +12,15 @@ description: 跨组件公共 props、Semantic DOM 与 pt 约定。
 
 | Prop                 | 含义         | 常见取值                                                                                                      |
 | -------------------- | ------------ | ------------------------------------------------------------------------------------------------------------- |
-| `severity`           | 语义色       | `primary`（常可省略）/ `secondary` / `success` / `info` / `warning`（`warn`）/ `help` / `danger` / `contrast` |
-| `variant`            | 外观快捷方式 | 随组件：`outlined` / `dashed` / `text` / `link` / `ghost` / `quaternary` / 输入框 `filled` 等                 |
+| `severity`           | 语义色       | Badge / Tag / Alert / Message 等：`primary` / `secondary` / `success` / `info` / `warning`（`warn`）/ `danger` / `contrast` |
+| `type` / `color` / `variant` | Button 外观 | Button 用 `type`（糖）+ `color` + `variant`（`solid` / `outlined` / `dashed` / `filled` / `text` / `link`）；默认 `color=default` + `variant=outlined`；主实心用 `type="primary"` |
 | `size`               | 控件尺寸     | `small` / `medium` / `large`（兼容 `sm` / `md` / `lg`）；未传常继承 Config                                    |
 | `disabled`           | 禁用         | 交互与点击关闭；视觉用 `--m-opacity-disabled` 等                                                              |
 | `loading`            | 加载中       | 常见于 Button；阻止重复提交                                                                                   |
-| `fluid`              | 通栏         | 宽度撑满父级                                                                                                  |
+| `fluid` / `block`    | 通栏         | 多数字段用 `fluid`；Button / ButtonGroup 用 `block`                                                          |
 | `status` / `invalid` | 表单校验态   | 如 `error` / `warning`；配合 `error-message`                                                                  |
 
-布尔形态（`outlined`、`text`、`link`…）与 `variant` 等价时可择一；**severity 管色，variant 管形**，可组合（如 `severity="danger"` + `outlined`）。
+**Badge / Tag / Alert 等**：`severity` 管色。**Button**：`type` / `color` / `variant` 管色与形（如 `type="primary"`，或 `color="danger"` + `variant="outlined"`）；危险实心可用 `type="primary" danger`。
 
 ## 样式落点：class / style / 事件
 
@@ -72,7 +72,7 @@ description: 跨组件公共 props、Semantic DOM 与 pt 约定。
 
 | 建议                                                  | 避免                                  |
 | ----------------------------------------------------- | ------------------------------------- |
-| 跨组件统一 `severity` 词表                            | 同一产品里混用 `type="danger"` 等异名 |
+| Badge / Tag / Alert 用 `severity`；Button 用 `type` / `color` / `variant` | 在 Button 上继续写已移除的 `severity` / `fluid` / `outlined` 布尔 |
 | 布局 class 加在字段根                                 | 指望 `class` 自动落到内层 input       |
 | 用 `pt` 改前缀 / 控件细节                             | 为改一处 class 去 fork 组件           |
 | Semantic DOM 名称与 BEM（`.m-button__label`）对齐记忆 | 臆造未文档化的 `pt` 键                |

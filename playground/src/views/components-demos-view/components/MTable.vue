@@ -69,20 +69,15 @@ const filteredRows = computed(() => {
       </template>
       <template #cell-actions>
         <MSpace>
-          <MButton label="编辑" severity="secondary" size="small" text />
-          <MButton
-            label="切换状态"
-            severity="secondary"
-            size="small"
-            text
-          />
-          <MButton label="删除" severity="danger" size="small" text />
+          <MButton label="编辑" size="small" type="text"/>
+          <MButton label="切换状态" size="small" type="text"/>
+          <MButton label="删除" size="small" type="text" danger/>
         </MSpace>
       </template>
       <template #empty>
         <MEmpty title="还没有商品" description="创建第一个套餐或增值包后即可上架销售。" icon="box">
           <template #extra>
-            <MButton label="新建商品" severity="primary" />
+            <MButton label="新建商品" type="primary"/>
           </template>
         </MEmpty>
       </template>

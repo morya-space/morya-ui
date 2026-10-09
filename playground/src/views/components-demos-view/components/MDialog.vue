@@ -18,7 +18,7 @@ const  openDialog  =() => {
     <MButton type="primary">
       Click me
     </MButton>
-    <MButton type="danger">
+    <MButton type="primary" danger>
       Click me
     </MButton>
   </MFlex>

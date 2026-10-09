@@ -9,7 +9,7 @@ const count = ref(3)
   <div class="grid gap-3">
     <div style="display:flex;gap:0.5rem">
       <MButton label="Add" size="small" @click="count++" />
-      <MButton label="Remove" severity="secondary" size="small" @click="count = Math.max(0, count - 1)" />
+      <MButton label="Remove" size="small" @click="count = Math.max(0, count - 1)"/>
     </div>
     <MScrollbar max-height="220px" always class="w-full">
       <p

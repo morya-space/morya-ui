@@ -74,7 +74,7 @@ import { MButton, MDialog } from 'morya-ui'
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
 | `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | 标题状态图标；`warning` 与 `warn` 同义 |
 | `positiveText` / `negativeText` | `string` | — | 预设页脚按钮；有 `footer` 插槽时忽略 |
-| `positiveSeverity` | [ButtonSeverity](/docs/types#ButtonSeverity) | — | 确认按钮语义色 |
+| `positiveColor` | [ButtonColor](/docs/types#ButtonColor) | — | 确认按钮颜色 |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
 | `ariaLabel` | `string` | — | 对话框可访问名称。 |
@@ -151,7 +151,7 @@ dialog.success({ title: '已保存' })
 | `type` | `DialogType` | — | 头部状态图标 |
 | `okText` / `cancelText` | `string` | locale | 按钮文案 |
 | `showCancel` | `boolean` | 状态弹窗 `false`，`confirm` `true` | 是否显示取消按钮 |
-| `okSeverity` | `ButtonSeverity` | `'primary'` | 确认按钮语义色 |
+| `okColor` | `ButtonColor` | `'primary'` | 确认按钮颜色 |
 | `width` / `position` / `centered` | 同 Dialog | — | 布局 |
 | `maskClosable` | `boolean` | `false` | 点击遮罩关闭 |
 | `onOk` | `() => void \| Promise<void>` | — | 确认回调；返回 Promise 时按钮进入 loading |

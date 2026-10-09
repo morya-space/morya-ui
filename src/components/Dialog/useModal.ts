@@ -31,8 +31,8 @@ export interface ModalStaticOptions {
   cancelText?: string
   /** Show the cancel button. Defaults to `false` for the status helpers. */
   showCancel?: boolean
-  /** Confirm button severity. Defaults to `primary`. */
-  okSeverity?: DialogProps['positiveSeverity']
+  /** Confirm button color. Defaults to `primary`. */
+  okColor?: DialogProps['positiveColor']
   /** Dialog width, e.g. `'520px'`. */
   width?: string
   /** Placement. */
@@ -157,28 +157,36 @@ function createModal(options: ModalStaticOptions): ModalStaticHandle {
         },
         {
           default: () => state.content,
-          footer: () => [
-            state.showCancel
-              ? h(
-                  MButton,
-                  {
-                    severity: 'secondary',
-                    disabled: loading.value,
-                    onClick: handleCancel,
-                  },
-                  { default: () => state.cancelText ?? locale.value.reject ?? 'Cancel' },
-                )
-              : null,
-            h(
-              MButton,
-              {
-                severity: state.okSeverity ?? 'primary',
-                loading: loading.value,
-                onClick: () => void handleOk(),
-              },
-              { default: () => state.okText ?? locale.value.confirm ?? 'OK' },
-            ),
-          ],
+          footer: () => {
+            const okColor = state.okColor ?? 'primary'
+            const okProps =
+              okColor === 'primary'
+                ? { type: 'primary' as const }
+                : okColor === 'danger'
+                  ? { type: 'primary' as const, danger: true }
+                  : { color: okColor, variant: 'solid' as const }
+            return [
+              state.showCancel
+                ? h(
+                    MButton,
+                    {
+                      disabled: loading.value,
+                      onClick: handleCancel,
+                    },
+                    { default: () => state.cancelText ?? locale.value.reject ?? 'Cancel' },
+                  )
+                : null,
+              h(
+                MButton,
+                {
+                  ...okProps,
+                  loading: loading.value,
+                  onClick: () => void handleOk(),
+                },
+                { default: () => state.okText ?? locale.value.confirm ?? 'OK' },
+              ),
+            ]
+          },
         },
       )
     },

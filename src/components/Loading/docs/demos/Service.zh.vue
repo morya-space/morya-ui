@@ -33,7 +33,7 @@ function openFullscreen() {
       可被服务盖住的区域
     </div>
     <div class="flex flex-wrap gap-3">
-      <MButton label="区域加载" severity="secondary" @click="openRegion" />
+      <MButton label="区域加载" @click="openRegion"/>
       <MButton label="全屏加载" @click="openFullscreen" />
     </div>
   </div>

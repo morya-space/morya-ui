@@ -39,7 +39,7 @@ A copy-paste login form with declarative `rules`: email + password, validate on 
 - [ ] `name` matches the `rules` keys (`email` / `password`)
 - [ ] Controls receive `id` and `invalid` so errors link to labels
 - [ ] Password uses `MInputPassword` (avoid a plain `type="password"` unless you intentionally simplify)
-- [ ] Submit button uses `native-type="submit"` so native form submit is not skipped
+- [ ] Submit button uses `html-type="submit"` so native form submit is not skipped
 - [ ] `morya-ui` and styles are imported
 
 ## Related

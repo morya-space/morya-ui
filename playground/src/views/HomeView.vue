@@ -145,17 +145,17 @@ async function copyInstall() {
                     <RouterLink
                         :to="{ name: 'docs', params: { slug: 'quick-start' } }"
                     >
-                        <MButton :label="t.start" />
+                        <MButton type="primary" :label="t.start" />
                     </RouterLink>
                     <RouterLink :to="{ name: 'components' }">
-                        <MButton :label="t.browse" outlined />
+                        <MButton :label="t.browse"/>
                     </RouterLink>
                     <a
                         :href="SITE_GITHUB_URL"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <MButton :label="t.viewGithub" outlined />
+                        <MButton :label="t.viewGithub"/>
                     </a>
                 </div>
                 <div class="home-meta" :aria-label="t.techTags">
@@ -257,12 +257,8 @@ async function copyInstall() {
                     </div>
                 </div>
                 <div class="home-theme-preview__stage">
-                    <MButton :label="t.homeThemePreviewSample" />
-                    <MButton
-                        :label="t.homeThemePreviewSecondary"
-                        severity="secondary"
-                        outlined
-                    />
+                    <MButton type="primary" :label="t.homeThemePreviewSample" />
+                    <MButton :label="t.homeThemePreviewSecondary" />
                     <MInput
                         v-model="previewInput"
                         :placeholder="t.homeThemePreviewInput"

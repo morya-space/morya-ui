@@ -1,19 +1,19 @@
 ---
 title: Button
 category: 01 / BASIC
-description: Button triggers an immediate action.
+description: Buttons trigger immediate actions.
 ---
 
 # Button
 
-Button triggers an immediate action.
+Buttons trigger immediate actions.
 
 ## When to use
 
-- Use when the user needs to trigger a submit, confirm, navigate, or other immediate action.
-- Prefer the default (primary) button for the main action; use `severity="secondary"` or `outlined` / `text` for secondary actions.
-- Use `severity="danger"` for destructive actions; use `text` or `link` for lightweight inline actions.
-- Use `MButtonGroup` when adjacent buttons belong together.
+- Use for submit, confirm, navigate, or other immediate actions.
+- Prefer `type="primary"` for the main action; use the default button or `type="dashed"` / `type="text"` for secondary actions.
+- Use `danger` or `color="danger"` for destructive actions; use `type="text"` / `type="link"` for lightweight inline actions.
+- Group related actions with `MButtonGroup`.
 
 ## Import
 
@@ -25,81 +25,31 @@ import { MButton } from "morya-ui";
 
 ### Basic
 
-Show button text via the default slot or the `label` prop.
+`type` is sugar for a color/variant pair. The default is an outlined button.
 
 ```vue preview src="./demos/Basic.vue"
 
 ```
 
-### Types
+### Color & variant
 
-Common combinations: default primary, `severity="secondary"`, `variant="dashed"`, `text` / `link`, `severity="danger"`, and `fluid` for full width.
+`color` and `variant` compose freely and win over `type` when both are set.
 
-```vue preview src="./demos/VariantTypes.vue"
-
-```
-
-### Shape
-
-`shape`: `default` / `round` / `circle` / `square`. Legacy `rounded` maps to `shape="round"`.
-
-```vue preview src="./demos/Shape.vue"
+```vue preview src="./demos/ColorVariant.vue"
 
 ```
 
-### Severity
+### Icon
 
-Use `severity` for semantic color; defaults to primary when omitted.
+Supports `icon`, `iconPlacement`, and `iconOnly`.
 
-```vue preview src="./demos/Severity.vue"
-
-```
-
-### Styles
-
-`outlined`, `text`, `link`, `raised`, `rounded`, and `plain` can be combined freely.
-
-```vue preview src="./demos/Styles.vue"
+```vue preview src="./demos/Icon.vue"
 
 ```
 
-### Text & Link
+### Size
 
-`text` is a lightweight text button; `link` renders as a backgroundless inline link style with underline on hover by default. Set `:underline="false"` to disable. Both can be combined with `severity`.
-
-```vue preview src="./demos/TextAndLink.vue"
-
-```
-
-### Ghost & Quaternary
-
-`ghost` is a soft fill matching text hover; `quaternary` is quieter for secondary toolbar actions. Both can be set via `variant`.
-
-```vue preview src="./demos/GhostAndQuaternary.vue"
-
-```
-
-### Button Group
-
-`MButtonGroup` joins adjacent buttons.
-
-```vue preview src="./demos/ButtonGroup.en.vue"
-
-```
-
-### Icons & Badge
-
-Supports `icon`, `iconPos`, `iconOnly`, and a `badge`.
-
-```vue preview src="./demos/IconsAndBadge.vue"
-
-```
-
-### Loading
-
-In the `loading` state, a spinner is shown and clicks are blocked.
-
-```vue preview src="./demos/Loading.vue"
+```vue preview src="./demos/Size.vue"
 
 ```
 
@@ -109,100 +59,153 @@ In the `loading` state, a spinner is shown and clicks are blocked.
 
 ```
 
+### Loading
+
+`loading` accepts a boolean or `{ delay, icon }`.
+
+```vue preview src="./demos/Loading.vue"
+
+```
+
+### Ghost
+
+`ghost` makes the background transparent for dark or busy surfaces.
+
+```vue preview src="./demos/Ghost.vue"
+
+```
+
+### Danger
+
+```vue preview src="./demos/Danger.vue"
+
+```
+
+### Block
+
+```vue preview src="./demos/Block.vue"
+
+```
+
+### Shape
+
+```vue preview src="./demos/Shape.vue"
+
+```
+
+### Button group
+
+```vue preview src="./demos/ButtonGroup.en.vue"
+
+```
+
+### Icons & badge
+
+Library extension: `badge` / `badgeColor`.
+
+```vue preview src="./demos/IconsAndBadge.vue"
+
+```
+
+### Ripple & press
+
+Library extension: `ripple` / `press`.
+
+```vue preview src="./demos/RipplePress.vue"
+
+```
+
 ## API
+
+Compose styles in this order: `type` → `shape` → `size` → `loading` → `disabled`.
 
 ### Props
 
-| Prop            | Type                                                                               | Default    | Description                                                           |
-| --------------- | ---------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------- |
-| `label`         | `string`                                                                           | —          | Button text. Default slot content takes precedence when present.      |
-| `icon`          | `IconName \| Component`                                                            | —          | Icon name or custom component.                                        |
-| `iconPos`       | `'left' \| 'right' \| 'top' \| 'bottom'`                                           | `'left'`   | Icon position relative to the label.                                  |
-| `iconOnly`      | `boolean`                                                                          | `false`    | Force a square icon-only button.                                      |
-| `badge`         | `string`                                                                           | —          | Badge text.                                                           |
-| `badgeSeverity` | `'secondary' \| 'info' \| 'success' \| 'warn' \| 'danger' \| 'contrast' \| null`   | `null`     | Badge semantic color.                                                 |
-| `severity`      | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | —          | Semantic color. Defaults to primary when omitted.                     |
-| `color`         | `string`                                                                           | —          | Custom color; overrides `severity`.                                   |
-| `size`          | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'`                                       | —          | Size. Medium by default; `sm` / `lg` aliases supported.               |
-| `variant`       | `'outlined' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'`                        | —          | Style variant shortcut, equivalent to the matching boolean prop.      |
-| `outlined`      | `boolean`                                                                          | `false`    | Outlined button.                                                      |
-| `text`          | `boolean`                                                                          | `false`    | Text button.                                                          |
-| `link`          | `boolean`                                                                          | `false`    | Link button.                                                          |
-| `underline`     | `boolean`                                                                          | `true`     | Underline on hover for `link`. Set `false` to disable.                |
-| `ghost`         | `boolean`                                                                          | `false`    | Soft fill matching text hover.                                        |
-| `quaternary`    | `boolean`                                                                          | `false`    | Extra-quiet text button.                                              |
-| `plain`         | `boolean`                                                                          | `false`    | Soft fill matching outlined hover; can also mute `text` / `outlined`. |
-| `raised`        | `boolean`                                                                          | `false`    | Raised shadow.                                                        |
-| `rounded`       | `boolean`                                                                          | `false`    | Fully rounded.                                                        |
-| `fluid`         | `boolean`                                                                          | `false`    | Stretch to full container width.                                      |
-| `loading`       | `boolean`                                                                          | `false`    | Loading state; disables clicks and shows a spinner.                   |
-| `disabled`      | `boolean`                                                                          | `false`    | Disabled.                                                             |
-| `ripple`        | `boolean`                                                                          | `false`    | Click ripple ink. Set `true` to enable.                               |
-| `press`         | `boolean`                                                                          | `false`    | Slight scale while pressed. Set `true` to enable.                     |
-| `nativeType`    | `'button' \| 'submit' \| 'reset'`                                                  | `'button'` | Native button type.                                                   |
-| `autofocus`     | `boolean`                                                                          | `false`    | Native autofocus.                                                     |
-| `ariaLabel`     | `string`                                                                           | —          | Accessible name; recommended for icon-only buttons.                   |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | `'default' \| 'primary' \| 'dashed' \| 'link' \| 'text'` | `'default'` | Sugar. When both `color` and `variant` are set, they win. |
+| `color` | `'default' \| 'primary' \| 'danger' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'contrast'` | — | Color axis. |
+| `variant` | `'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'` | — | Variant axis. |
+| `danger` | `boolean` | `false` | Sugar that forces the danger color. `color` wins when set. |
+| `ghost` | `boolean` | `false` | Transparent background. Ignored for `text` / `link`. |
+| `shape` | `'default' \| 'circle' \| 'round' \| 'square'` | `'default'` | Corner shape. |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; can inherit from ConfigProvider. |
+| `block` | `boolean` | `false` | Stretch to full container width. |
+| `loading` | `boolean \| { delay?: number; icon?: IconName \| Component }` | `false` | Loading state with optional delay and icon. |
+| `disabled` | `boolean` | `false` | Disabled; can inherit from ConfigProvider. |
+| `htmlType` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type. |
+| `href` | `string` | — | Renders as `<a>` when set. |
+| `target` | `string` | — | Anchor target; requires `href`. |
+| `label` | `string` | — | Label text; default slot wins when present. |
+| `icon` | `IconName \| Component` | — | Icon name or component. |
+| `iconPlacement` | `'start' \| 'end'` | `'start'` | Icon placement. |
+| `iconOnly` | `boolean` | `false` | Force a square icon-only button. |
+| `autoInsertSpace` | `boolean` | `true` | Insert a space between two Chinese characters. |
+| `badge` | `string` | — | Badge text. |
+| `badgeColor` | `'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'contrast' \| null` | `null` | Badge tone. |
+| `ripple` | `boolean` | `false` | Click ripple. |
+| `press` | `boolean` | `false` | Press scale. |
+| `autofocus` | `boolean` | `false` | Native autofocus. |
+| `ariaLabel` | `string` | — | Accessible name; recommended for icon-only buttons. |
+| `pt` | `{ root?, icon?, content?, badge? }` | — | Semantic DOM pass-through. |
 
 ### Events
 
-| Event   | Prop         | Description                  |
-| ------- | ------------ | ---------------------------- |
-| `click` | `MouseEvent` | Fired on click when enabled. |
+| Event | Payload | Description |
+| --- | --- | --- |
+| `click` | `MouseEvent` | Fired on click; suppressed while `loading` / `disabled`. |
 
 ### Slots
 
-| Slot          | Description                                    |
-| ------------- | ---------------------------------------------- |
-| `default`     | Button content; takes precedence over `label`. |
-| `icon`        | Custom icon.                                   |
-| `loadingicon` | Custom loading icon.                           |
+| Slot | Description |
+| --- | --- |
+| `default` | Button content; wins over `label`. |
+| `icon` | Custom icon. |
+| `loadingicon` | Custom loading icon. |
 
-### Instance
+### Exposed
 
-| Method / Property | Description                     |
-| ----------------- | ------------------------------- |
-| `focus()`         | Focus the underlying button.    |
-| `ref`             | Underlying `HTMLButtonElement`. |
+| Member | Description |
+| --- | --- |
+| `focus()` | Focus the root element. |
+| `ref` | Root `HTMLButtonElement` or `HTMLAnchorElement`. |
 
-### Props — ButtonGroup
+### MButtonGroup Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `fluid` | `boolean` | `false` | Stretch to full container width. |
+| `block` | `boolean` | `false` | Stretch to full container width. |
 | `ariaLabel` | `string` | — | Accessible name for the group. |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Group wrapper pass-through. |
-
-## Design Token
-
-Reuses global `--m-*` tokens; see [Design Tokens](/docs/design-tokens). A component-level `--m-button-*` table will follow later.
+| `pt` | `{ root? }` | — | Group wrapper pass-through. |
 
 ## Semantic DOM
 
-`MButton` is a leaf control: the root is the native `<button class="m-button">`. `class` / `style` / events land on that element (see [Attrs](/docs/attrs) and [Common Props](/docs/common-props)).
-
 ```text
-button.m-button                 ← root (interactive element)
-  span.m-button__ripple         ← optional ripple layer
-  span.m-button__icon           ← icon / loading spinner (aria-hidden)
-    span.m-button__spinner      ← while loading
-  span.m-button__label          ← label (slot or `label` prop)
-  span.m-button__badge*         ← optional badge
+button.m-button / a.m-button
+  span.m-button__ripple*        ← when ripple is on
+  span.m-button__icon*          ← icon / loading
+  span.m-button__label*         ← label
+  span.m-button__badge*         ← badge
 ```
 
-`MButton` itself does not expose `pt`; use `MButtonGroup` `pt.root` for the group wrapper. Target `.m-button` first when styling, then `__icon` / `__label` / `__badge` as needed.
+Override parts with `pt.root` / `pt.icon` / `pt.content` / `pt.badge`.
 
 ## FAQ
 
-### What is the difference between `severity` and `variant`?
+### How do `type` and `color` / `variant` relate?
 
-`severity` sets the semantic color (e.g. `danger`, `success`); primary is used when omitted. `variant` (or the matching boolean prop) sets the visual style such as `outlined`, `text`, `link`, or `ghost`. They compose, e.g. `severity="danger"` + `variant="outlined"`.
+`type` maps to a `[color, variant]` pair. When both `color` and `variant` are set, they win.
 
-### When should I use `text` vs `link`, or `rounded` vs `shape`?
+```vue
+<MButton type="primary">click</MButton>
+```
 
-`text` is a lightweight text button; `link` behaves more like an inline link (underline on hover by default). Prefer `shape` (`round` / `circle` / `square`) for geometry; legacy `rounded` still works and maps to `shape="round"`.
+equals
 
-## Accessibility
+```vue
+<MButton color="primary" variant="solid">click</MButton>
+```
 
-- Renders a native `<button>`.
-- For icon-only buttons, set `ariaLabel` (or provide an accessible text label).
-- Sets `aria-busy` while `loading` and disables interaction.
+### Color vocabulary across components
+
+Button uses `color` / `variant`. Feedback components such as Badge, Tag, Alert, Message, and Toast still use `severity`.

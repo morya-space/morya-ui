@@ -50,7 +50,7 @@ Dark example: `--m-color-surface: #141414`, body `rgba(255,255,255,0.85)`. Full 
 | `danger` | `--m-color-danger` |
 | `contrast` | `--m-color-contrast` family |
 
-Destructive actions: use `severity="danger"` on buttons / confirms—do not paint delete as primary.
+Destructive actions: use `danger` or `color="danger"` on buttons / confirms—do not paint delete as primary.
 
 ## Overrides
 

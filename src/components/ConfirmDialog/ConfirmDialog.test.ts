@@ -33,7 +33,7 @@ describe('muConfirmDialog', () => {
     })
     await nextTick()
     const buttons = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button'))
-    const reject = buttons.find((btn) => btn.textContent?.includes('取消'))
+    const reject = buttons.find((btn) => btn.textContent?.replace(/\s/g, '').includes('取消'))
     expect(reject).toBeTruthy()
     reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await nextTick()

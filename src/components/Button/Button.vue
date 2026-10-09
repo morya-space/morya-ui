@@ -1,107 +1,204 @@
 <script setup lang="ts">
-import type {VNode, VNodeChild} from 'vue';
+import type { Component, VNode, VNodeChild } from 'vue'
 import type { IconName } from '../Icon/types'
-import type { ButtonProps } from './types'
-import { Comment, computed, Fragment, onBeforeUnmount, ref, Text, useSlots   } from 'vue'
-import { useConfiguredSize } from '../../shared/config'
-import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
+import type { ButtonColor, ButtonProps } from './types'
+import {
+  Comment,
+  Fragment,
+  Text,
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  useAttrs,
+  useSlots,
+  watch,
+} from 'vue'
+import {
+  getComponentDefault,
+  useConfiguredSize,
+  useDisabled,
+  useMConfig,
+} from '../../shared/config'
+import { resolveIconSizeFromClass } from '../../shared/types'
+import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
+import {
+  formatButtonLabel,
+  getLoadingConfig,
+  isTwoCNChar,
+  isUnBorderedButtonVariant,
+  resolveButtonAppearance,
+} from './buttonHelpers'
+
+defineOptions({ inheritAttrs: false })
 
 const RIPPLE_MS = 560
 const RIPPLE_MS_REDUCED = 280
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  iconPos: 'left',
-  iconOnly: false,
-  raised: false,
-  rounded: false,
-  shape: undefined,
-  text: false,
-  outlined: false,
-  dashed: false,
-  link: false,
-  underline: true,
+  type: undefined,
+  color: undefined,
+  variant: undefined,
+  danger: false,
   ghost: false,
-  quaternary: false,
-  plain: false,
-  fluid: false,
+  shape: 'default',
+  block: false,
   loading: false,
-  disabled: false,
+  disabled: undefined,
+  htmlType: 'button',
+  iconPlacement: 'start',
+  iconOnly: false,
+  autoInsertSpace: undefined,
+  badgeColor: null,
   autofocus: false,
-  nativeType: 'button',
-  badgeSeverity: null,
   ripple: false,
   press: false,
 })
 
 const emit = defineEmits<{ (event: 'click', value: MouseEvent): void }>()
 const slots = useSlots()
-const buttonElement = ref<HTMLButtonElement | null>(null)
+const attrs = useAttrs()
+const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
+const buttonElement = ref<HTMLButtonElement | HTMLAnchorElement | null>(null)
 const rippleLayer = ref<HTMLSpanElement | null>(null)
 const rippleAnimations = new Set<Animation>()
+const hasTwoCNChar = ref(false)
+const innerLoading = ref(false)
+let loadingTimer: ReturnType<typeof setTimeout> | undefined
 
-const hasDefaultContent = computed(() => Boolean(slots.default?.().some((node) => hasRenderableContent(node))))
-const hasLabel = computed(() => hasDefaultContent.value || Boolean(props.label?.trim()))
-
-const isOutlined = computed(() => props.outlined || props.variant === 'outlined')
-const isDashed = computed(() => props.dashed || props.variant === 'dashed')
-const isText = computed(() => props.text || props.variant === 'text')
-const isLink = computed(() => props.link || props.variant === 'link')
-const isGhost = computed(() => props.ghost || props.variant === 'ghost')
-const isQuaternary = computed(() => props.quaternary || props.variant === 'quaternary')
-const isFluid = computed(() => props.fluid)
-
-const resolvedShape = computed(() => {
-  if (props.shape) return props.shape
-  if (props.rounded) return 'round'
-  return 'default'
-})
-
+const config = useMConfig()
+const mergedDisabled = useDisabled(() => props.disabled)
 const resolvedSize = useConfiguredSize('Button', () => props.size)
-
 const iconSize = computed(() => resolveIconSizeFromClass(resolvedSize.value))
 
-const isIconOnly = computed(() => props.iconOnly || ((!hasLabel.value) && Boolean(props.icon || slots.icon || props.loading)))
+const contextColor = computed(() =>
+  getComponentDefault<ButtonColor>(config.value.componentDefaults, 'Button', 'color'),
+)
+const contextVariant = computed(() =>
+  getComponentDefault<ButtonProps['variant']>(config.value.componentDefaults, 'Button', 'variant'),
+)
+const contextShape = computed(() =>
+  getComponentDefault<ButtonProps['shape']>(config.value.componentDefaults, 'Button', 'shape') ?? 'default',
+)
+const contextAutoInsertSpace = computed(() =>
+  getComponentDefault<boolean>(config.value.componentDefaults, 'Button', 'autoInsertSpace'),
+)
+const contextRipple = computed(() =>
+  getComponentDefault<boolean>(config.value.componentDefaults, 'Button', 'ripple'),
+)
+const contextPress = computed(() =>
+  getComponentDefault<boolean>(config.value.componentDefaults, 'Button', 'press'),
+)
 
-const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
+const mergedShape = computed(() => props.shape || contextShape.value || 'default')
+const mergedAutoInsertSpace = computed(
+  () => props.autoInsertSpace ?? contextAutoInsertSpace.value ?? true,
+)
+const mergedRipple = computed(() => props.ripple || contextRipple.value || false)
+const mergedPress = computed(() => props.press || contextPress.value || false)
+
+const appearance = computed(() =>
+  resolveButtonAppearance({
+    color: props.color,
+    variant: props.variant,
+    type: props.type,
+    danger: props.danger,
+    ghost: props.ghost,
+    contextColor: contextColor.value,
+    contextVariant: contextVariant.value,
+  }),
+)
+
+const loadingConfig = computed(() => getLoadingConfig(props.loading))
+
+watch(
+  loadingConfig,
+  (cfg) => {
+    if (loadingTimer !== undefined) {
+      clearTimeout(loadingTimer)
+      loadingTimer = undefined
+    }
+    if (cfg.delay > 0 && (props.loading === true || (props.loading && typeof props.loading === 'object'))) {
+      innerLoading.value = false
+      loadingTimer = setTimeout(() => {
+        innerLoading.value = true
+        loadingTimer = undefined
+      }, cfg.delay)
+      return
+    }
+    innerLoading.value = cfg.loading
+  },
+  { immediate: true },
+)
+
+const hasDefaultContent = computed(() =>
+  Boolean(slots.default?.().some((node) => hasRenderableContent(node))),
+)
+const hasLabel = computed(() => hasDefaultContent.value || Boolean(props.label?.trim()))
+
+const isIconOnly = computed(
+  () =>
+    props.iconOnly
+    || ((!hasLabel.value) && Boolean(props.icon || slots.icon || innerLoading.value)),
+)
 
 const iconName = computed(() => (typeof props.icon === 'string' ? (props.icon as IconName) : undefined))
-const iconComponent = computed(() => (typeof props.icon === 'string' || !props.icon ? undefined : props.icon))
+const iconComponent = computed(() =>
+  typeof props.icon === 'string' || !props.icon ? undefined : props.icon,
+)
+
+const loadingIconName = computed(() => {
+  const icon = loadingConfig.value.icon
+  return typeof icon === 'string' ? (icon as IconName) : undefined
+})
+const loadingIconComponent = computed(() => {
+  const icon = loadingConfig.value.icon
+  return typeof icon === 'string' || !icon ? undefined : (icon as Component)
+})
+
+const displayLabel = computed(() => {
+  if (!props.label) return ''
+  return formatButtonLabel(props.label, mergedAutoInsertSpace.value && !innerLoading.value)
+})
+
+const isAnchor = computed(() => props.href !== undefined)
 
 const buttonClass = computed(() => [
   'm-button',
-  `m-button--${severityTone.value}`,
+  `m-button--color-${appearance.value.color === 'danger' ? 'danger' : appearance.value.color}`,
+  `m-button--variant-${appearance.value.variant}`,
   `m-button--${resolvedSize.value}`,
-  `m-button--icon-${props.iconPos}`,
-  `m-button--shape-${resolvedShape.value}`,
+  `m-button--shape-${mergedShape.value}`,
   {
-    'm-button--raised': props.raised,
-    'm-button--rounded': resolvedShape.value === 'round' || resolvedShape.value === 'circle',
-    'm-button--text': isText.value,
-    'm-button--outlined': isOutlined.value && !isDashed.value,
-    'm-button--dashed': isDashed.value,
-    'm-button--link': isLink.value,
-    'm-button--link-underline': isLink.value && props.underline,
-    'm-button--ghost': isGhost.value,
-    'm-button--quaternary': isQuaternary.value,
-    'm-button--plain': props.plain,
-    'm-button--fluid': isFluid.value,
-    'm-button--loading': props.loading,
+    'm-button--ghost': appearance.value.ghost,
+    'm-button--block': props.block,
+    'm-button--loading': innerLoading.value,
     'm-button--icon-only': isIconOnly.value,
-    'm-button--custom': Boolean(props.color),
-    'm-button--ripple': props.ripple,
-    'm-button--press': props.press,
+    'm-button--icon-end': props.iconPlacement === 'end',
+    'm-button--two-chinese-chars': hasTwoCNChar.value && mergedAutoInsertSpace.value && !innerLoading.value,
+    'm-button--ripple': mergedRipple.value,
+    'm-button--press': mergedPress.value,
+    'm-button--disabled': mergedDisabled.value && isAnchor.value,
   },
 ])
 
-const buttonStyle = computed(() =>
-  props.color ? { '--m-button-color': props.color } : undefined,
-)
-
 const badgeClass = computed(() => [
   'm-button__badge',
-  props.badgeSeverity ? `m-button__badge--${normalizeSeverity(props.badgeSeverity)}` : 'm-button__badge--contrast',
+  props.badgeColor
+    ? `m-button__badge--${props.badgeColor === 'warning' ? 'warn' : props.badgeColor}`
+    : 'm-button__badge--contrast',
 ])
+
+const needInserted = computed(
+  () =>
+    !props.icon
+    && !slots.icon
+    && !isIconOnly.value
+    && !isUnBorderedButtonVariant(appearance.value.variant),
+)
 
 function hasRenderableContent(node: VNodeChild): boolean {
   if (node == null || typeof node === 'boolean') return false
@@ -117,10 +214,32 @@ function hasRenderableContent(node: VNodeChild): boolean {
   return false
 }
 
-/** Honor library motion preference; only `none` disables press ink. */
+function syncTwoCNChar() {
+  if (!buttonElement.value || !mergedAutoInsertSpace.value || !needInserted.value) {
+    hasTwoCNChar.value = false
+    return
+  }
+  const text = (buttonElement.value.textContent || '').replace(/\s/g, '')
+  hasTwoCNChar.value = isTwoCNChar(text)
+}
+
+watch(
+  () => [props.label, hasDefaultContent.value, mergedAutoInsertSpace.value, needInserted.value, innerLoading.value],
+  async () => {
+    await nextTick()
+    syncTwoCNChar()
+  },
+)
+
+onMounted(() => {
+  syncTwoCNChar()
+  if (props.autofocus) buttonElement.value?.focus()
+})
+
 function shouldSkipRipple(): boolean {
-  if (!props.ripple) return true
+  if (!mergedRipple.value) return true
   if (typeof document === 'undefined') return true
+  if (isUnBorderedButtonVariant(appearance.value.variant)) return true
   return document.documentElement.dataset.mMotion === 'none'
 }
 
@@ -174,20 +293,21 @@ function spawnRipple(clientX: number, clientY: number, centered = false) {
     return
   }
 
-  // Fallback when WAAPI is unavailable: CSS keyframes still apply.
   wave.classList.add('m-button__ripple-wave--fallback')
   window.setTimeout(finish, duration)
 }
 
 function handlePointerDown(event: PointerEvent) {
-  if (props.disabled || props.loading) return
+  if (mergedDisabled.value || innerLoading.value) return
   if (event.button !== 0) return
   spawnRipple(event.clientX, event.clientY)
 }
 
 function handleClick(event: MouseEvent) {
-  if (props.disabled || props.loading) return
-  // Keyboard activation does not fire pointerdown with coordinates.
+  if (mergedDisabled.value || innerLoading.value) {
+    event.preventDefault()
+    return
+  }
   if (event.detail === 0) spawnRipple(0, 0, true)
   emit('click', event)
 }
@@ -197,6 +317,7 @@ function focus() {
 }
 
 onBeforeUnmount(() => {
+  if (loadingTimer !== undefined) clearTimeout(loadingTimer)
   for (const animation of rippleAnimations) animation.cancel()
   rippleAnimations.clear()
 })
@@ -205,41 +326,63 @@ defineExpose({ focus, ref: buttonElement })
 </script>
 
 <template>
-  <button
+  <component
+    :is="isAnchor ? 'a' : 'button'"
     ref="buttonElement"
+    v-bind="rootAttrs"
     :class="buttonClass"
-    :style="buttonStyle"
-    :type="nativeType"
-    :disabled="disabled || loading"
-    :autofocus="autofocus || undefined"
-    :aria-busy="loading || undefined"
+    :type="isAnchor ? undefined : htmlType"
+    :href="isAnchor ? (mergedDisabled ? undefined : href) : undefined"
+    :target="isAnchor ? target : undefined"
+    :disabled="isAnchor ? undefined : (mergedDisabled || innerLoading)"
+    :tabindex="isAnchor && mergedDisabled ? -1 : undefined"
+    :aria-disabled="isAnchor && mergedDisabled ? true : undefined"
+    :aria-busy="innerLoading || undefined"
     :aria-label="ariaLabel || (isIconOnly ? label : undefined)"
+    :autofocus="!isAnchor && autofocus ? true : undefined"
     @pointerdown="handlePointerDown"
     @click="handleClick"
   >
-    <span v-if="ripple" ref="rippleLayer" class="m-button__ripple" aria-hidden="true" />
+    <span v-if="mergedRipple" ref="rippleLayer" class="m-button__ripple" aria-hidden="true" />
 
     <span
-      v-if="loading || icon || $slots.icon"
+      v-if="innerLoading || icon || $slots.icon || $slots.loadingicon"
       class="m-button__icon"
-      :class="{ 'm-button__icon--loading': loading }"
+      :class="{ 'm-button__icon--loading': innerLoading }"
       aria-hidden="true"
+      v-bind="pt?.icon"
     >
-      <slot v-if="loading" name="loadingicon">
-        <span class="m-button__spinner" />
-      </slot>
+      <template v-if="innerLoading">
+        <slot name="loadingicon">
+          <MIcon v-if="loadingIconName" :name="loadingIconName" :size="iconSize" />
+          <component
+            :is="loadingIconComponent"
+            v-else-if="loadingIconComponent"
+            class="m-button__icon-graphic"
+          />
+          <span v-else class="m-button__spinner" />
+        </slot>
+      </template>
       <template v-else>
-        <slot name="icon" class="m-button__icon-slot">
+        <slot name="icon">
           <MIcon v-if="iconName" :name="iconName" :size="iconSize" />
           <component :is="iconComponent" v-else-if="iconComponent" class="m-button__icon-graphic" />
         </slot>
       </template>
     </span>
 
-    <span v-if="hasLabel && !iconOnly" class="m-button__label">
-      <slot>{{ label }}</slot>
+    <span
+      v-if="hasLabel && !iconOnly"
+      class="m-button__label"
+      v-bind="pt?.content"
+    >
+      <slot>{{ displayLabel }}</slot>
     </span>
 
-    <span v-if="badge != null && badge !== ''" :class="badgeClass">{{ badge }}</span>
-  </button>
+    <span
+      v-if="badge != null && badge !== ''"
+      :class="badgeClass"
+      v-bind="pt?.badge"
+    >{{ badge }}</span>
+  </component>
 </template>

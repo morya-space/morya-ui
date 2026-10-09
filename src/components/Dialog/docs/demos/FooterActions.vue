@@ -14,7 +14,7 @@ const open = ref(false)
       </p>
       <template #footer>
         <div style="display:flex;gap:0.75rem;justify-content:flex-end;width:100%">
-          <MButton label="Cancel" severity="secondary" text @click="open = false" />
+          <MButton label="Cancel" @click="open = false" type="text"/>
           <MButton label="Confirm" @click="open = false" />
         </div>
       </template>

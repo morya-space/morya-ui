@@ -103,11 +103,7 @@ function onRefresh() {
           <p class="m-qrcode__status-text">
             {{ locale.qrCodeExpired }}
           </p>
-          <MButton
-            variant="text"
-            size="small"
-            @click="onRefresh"
-          >
+          <MButton variant="text" size="small" @click="onRefresh">
             <MIcon
               name="refresh"
               size="sm"

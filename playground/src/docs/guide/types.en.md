@@ -97,20 +97,37 @@ type MSizeInput = 'small' | 'medium' | 'large' | 'sm' | 'md' | 'lg'
 type MInputVariant = 'outlined' | 'filled'
 ```
 
-<h3 id="ButtonSeverity">ButtonSeverity</h3>
+<h3 id="ButtonType">ButtonType</h3>
 
-Button / dialog footer tones:
+Button type sugar ([`Button`](/components/Button)):
 
 ```ts
-type ButtonSeverity =
+type ButtonType = 'default' | 'primary' | 'dashed' | 'link' | 'text'
+```
+
+<h3 id="ButtonColor">ButtonColor</h3>
+
+Button color axis (Button, ConfirmDialog `acceptColor`, Dialog `positiveColor`, …):
+
+```ts
+type ButtonColor =
+  | 'default'
   | 'primary'
-  | 'secondary'
+  | 'danger'
   | 'success'
   | 'info'
-  | 'warning'   // alias: 'warn'
+  | 'warning'
   | 'help'
-  | 'danger'
   | 'contrast'
+  | 'link'
+```
+
+<h3 id="ButtonVariant">ButtonVariant</h3>
+
+Button variant axis:
+
+```ts
+type ButtonVariant = 'solid' | 'outlined' | 'dashed' | 'filled' | 'text' | 'link'
 ```
 
 <h3 id="MAppendTo">MAppendTo</h3>

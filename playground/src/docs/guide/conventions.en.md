@@ -6,7 +6,7 @@ description: Naming, severity, size, and theme conventions in morya-ui.
 
 # Conventions
 
-Morya UI has its own vocabulary: `M*` components, `severity` for tone, `variant` for appearance, and `--m-*` design tokens. Follow these conventions when you assemble product UI.
+Morya UI has its own vocabulary: `M*` components, `severity` for tone on Badge / Tag / Alert, Button `type` / `color` / `variant`, and `--m-*` design tokens. Follow these conventions when you assemble product UI.
 
 ## Components and tokens
 
@@ -24,13 +24,13 @@ See [Design tokens](/docs/design-tokens) and [Theme](/docs/theme).
 
 | Word | Use |
 | --- | --- |
-| `severity` | Semantic color: `primary` / `secondary` / `success` / `info` / `warning` / `danger` |
-| `variant` | Appearance: `outlined` / `dashed` / `text` / `link` / `ghost`, etc. |
-| `fluid` | Full width of the parent |
+| `severity` | Semantic color on Badge / Tag / Alert: `primary` / `secondary` / `success` / `info` / `warning` / `danger` |
+| `type` / `color` / `variant` | Button: `type` sugar (`primary` / `dashed` / `text` / `link`…) + `color` + `variant` (`solid` / `outlined` / `filled`…) |
+| `fluid` / `block` | Full width; fields mostly use `fluid`, Button / ButtonGroup use `block` |
 | `size` | `small` / `medium` / `large` (some controls still accept `sm` / `md` / `lg`) |
 | `status` | Field validation: `error` / `warning` |
 
-The default button is a solid primary action. Use `severity="secondary"` for quiet actions and `severity="danger"` for destructive ones.
+Buttons default to gray outlined (`default` + `outlined`). Use `type="primary"` for solid primary, keep the default or `type="text"` for quiet actions, and `danger` / `color="danger"` for destructive ones.
 
 ## Feedback
 

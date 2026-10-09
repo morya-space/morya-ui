@@ -12,11 +12,11 @@ const text = ref('Morya')
     <section class="visual-panel" data-case="button">
       <h1>Button</h1>
       <div class="row">
-        <MButton>Primary</MButton>
-        <MButton severity="secondary" label="Secondary" />
-        <MButton severity="danger" label="Danger" />
-        <MButton outlined label="Outlined" />
-        <MButton text label="Text" />
+        <MButton type="primary">Primary</MButton>
+        <MButton label="Secondary"/>
+        <MButton label="Danger" danger type="primary"/>
+        <MButton label="Outlined"/>
+        <MButton label="Text" type="text"/>
         <MButton loading label="Loading" />
         <MButton disabled label="Disabled" />
       </div>

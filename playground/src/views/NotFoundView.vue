@@ -16,10 +16,10 @@ const { t } = useDocsI18n()
       <p>{{ t.notFoundBody }}</p>
       <div class="not-found__actions">
         <RouterLink :to="{ name: 'home' }">
-          <MButton :label="t.notFoundHome" />
+          <MButton type="primary" :label="t.notFoundHome" />
         </RouterLink>
         <RouterLink :to="{ name: 'components' }">
-          <MButton :label="t.browse" outlined />
+          <MButton :label="t.browse"/>
         </RouterLink>
       </div>
     </section>

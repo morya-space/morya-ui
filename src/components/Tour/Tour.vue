@@ -278,17 +278,12 @@ const isLast = computed(() => stepIndex.value >= totalSteps.value - 1)
             <MButton
               v-if="stepIndex > 0"
               size="small"
-              severity="secondary"
-              variant="text"
+              type="text"
               @click="goPrev"
             >
               {{ currentStep?.prevButtonProps?.children ?? labels.prev }}
             </MButton>
-            <MButton
-              size="small"
-              :severity="panelType === 'primary' ? 'primary' : 'secondary'"
-              @click="goNext"
-            >
+            <MButton size="small" @click="goNext" :type="panelType === 'primary' ? 'primary' : 'default'">
               {{ isLast
                 ? (currentStep?.nextButtonProps?.children ?? labels.finish)
                 : (currentStep?.nextButtonProps?.children ?? labels.next) }}

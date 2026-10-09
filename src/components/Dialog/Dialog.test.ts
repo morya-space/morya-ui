@@ -116,7 +116,7 @@ describe('muDialog', () => {
     expect(document.body.querySelector('.m-dialog--info')).toBeTruthy()
     expect(document.body.querySelector('.m-dialog__type-icon')).toBeTruthy()
     const labels = Array.from(document.body.querySelectorAll('.m-dialog__footer--preset .m-button')).map(
-      (btn) => btn.textContent?.trim(),
+      (btn) => btn.textContent?.replace(/\s/g, ''),
     )
     expect(labels).toEqual(expect.arrayContaining(['保存', '取消']))
     wrapper.unmount()
@@ -147,7 +147,7 @@ describe('muDialog', () => {
     })
     await nextTick()
     const positive = Array.from(document.body.querySelectorAll('.m-dialog__footer--preset .m-button')).find((btn) =>
-      btn.textContent?.includes('保存'),
+      btn.textContent?.replace(/\s/g, '').includes('保存'),
     )
     positive!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await nextTick()

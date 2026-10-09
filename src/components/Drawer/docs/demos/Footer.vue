@@ -14,7 +14,7 @@ const open = ref(false)
       </p>
       <template #footer>
         <MSpace style="justify-content: flex-end; width: 100%">
-          <MButton label="Cancel" severity="secondary" text @click="open = false" />
+          <MButton label="Cancel" @click="open = false" type="text"/>
           <MButton label="Save" @click="open = false" />
         </MSpace>
       </template>

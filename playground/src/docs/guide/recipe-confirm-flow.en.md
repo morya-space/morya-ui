@@ -12,7 +12,7 @@ For deletes, disables, and other hard-to-undo actions, ask once before running t
 
 - Control `MConfirmDialog` with `v-model` in the template
 - Call `useConfirm().require(...)` from script and await a `Promise<boolean>`
-- Mark destructive accepts with `accept-severity="danger"` (optional `type="warning"`)
+- Mark destructive accepts with `accept-color="danger"` (optional `type="warning"`)
 
 ## When to use
 
@@ -26,7 +26,7 @@ For deletes, disables, and other hard-to-undo actions, ask once before running t
 
 1. **Declarative**: drive visibility with `v-model`; open from a button; handle `@accept` / `@reject`.
 2. **Imperative**: `const confirm = useConfirm()`, then `await confirm.require({ header, message, ... })`. `true` means accepted; `false` means cancelled or dismissed.
-3. Set `acceptSeverity: 'danger'` for destructive confirms; add `type: 'warning'` when you want a status icon.
+3. Set `acceptColor: 'danger'` for destructive confirms; add `type: 'warning'` when you want a status icon.
 4. Run the real side effect after confirm. For async deletes, use `beforeAccept` on the declarative path, or `await` your API after `require()` resolves `true`.
 
 ## Preview

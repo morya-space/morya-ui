@@ -7,7 +7,7 @@ import { MButton, MResult } from 'morya-ui'
     <MResult status="success" description="订单已创建，可在列表中查看详情。">
       <template #footer>
         <MButton label="查看订单" />
-        <MButton label="返回首页" severity="secondary" text />
+        <MButton label="返回首页" type="text"/>
       </template>
     </MResult>
     <MResult status="error" description="请检查网络后重试，或联系管理员。">

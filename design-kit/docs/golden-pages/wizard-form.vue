@@ -130,28 +130,13 @@ async function finish() {
 
             <MPageSection variant="actions">
               <MSpace>
-                <MButton
-                  severity="secondary"
-                  text
-                  :disabled="activeStep === 0 || submitting"
-                  @click="back"
-                >
+                <MButton :disabled="activeStep === 0 || submitting" @click="back" type="text">
                   上一步
                 </MButton>
-                <MButton
-                  v-if="activeStep < steps.length - 1"
-                  severity="primary"
-                  :disabled="!canNext"
-                  @click="next"
-                >
+                <MButton v-if="activeStep < steps.length - 1" :disabled="!canNext" @click="next" type="primary">
                   下一步
                 </MButton>
-                <MButton
-                  v-else
-                  severity="primary"
-                  :loading="submitting"
-                  @click="finish"
-                >
+                <MButton v-else :loading="submitting" @click="finish" type="primary">
                   创建
                 </MButton>
               </MSpace>

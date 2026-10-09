@@ -14,7 +14,7 @@ This page is the Design Spec hub. Principles come from [`design-kit/DESIGN.md`](
 
 1. **Components first**: Prefer library `M*` controls over hand-rolled DOM equivalents.
 2. **Tokens first**: App styles consume `--m-*` only; no raw `#hex` / `rgb()` in product CSS (change brand at the theme entry).
-3. **Semantic consistency**: Primary actions default to primary; destructive work uses `severity="danger"` or a confirm flow.
+3. **Semantic consistency**: Primary actions use `type="primary"`; destructive work uses `danger` / `color="danger"` or a confirm flow.
 4. **Accessibility**: Controls need accessible names; icon-only buttons need `aria-label`; overlays dismiss via keyboard.
 5. **Single source of truth**: Trust component docs / MCP for APIs; do not invent props.
 

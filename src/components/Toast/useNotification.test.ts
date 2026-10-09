@@ -71,7 +71,7 @@ describe('useNotification', () => {
     const api = useNotification()
     api.open({
       message: 'Delete?',
-      btn: h(MButton, { severity: 'primary' }, { default: () => 'Undo' }),
+      btn: h(MButton, { type: 'primary' }, { default: () => 'Undo' }),
     })
     await nextTick()
 

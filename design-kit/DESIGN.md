@@ -7,7 +7,7 @@
 
 1. **组件优先**：交互与布局使用库内 `M*`，不手写等价 DOM。
 2. **令牌优先**：颜色、间距、圆角、阴影、动效使用 `--m-*`；禁止裸 `#hex` / `rgb()`（`scripts/check-raw-colors.mjs` 可扫描）。
-3. **语义一致**：主操作 `severity="primary"`；破坏性操作用 `severity="danger"` 或确认。
+3. **语义一致**：主操作 `type="primary"`；破坏性操作用 `danger` / `color="danger"` 或确认。Badge / Tag / Alert 仍用 `severity`。
 4. **可访问性**：控件有可访问名称；仅图标的按钮带 `aria-label`；浮层可键盘关闭。
 5. **单一事实源**：组件 API 以 MCP / 文档为准，禁止臆造 prop、event、slot。
 

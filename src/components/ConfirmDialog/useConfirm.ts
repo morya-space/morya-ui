@@ -5,7 +5,7 @@ import MConfirmDialog from './ConfirmDialog.vue'
 
 export type ConfirmRequireOptions = Pick<
   ConfirmDialogProps,
-  'header' | 'message' | 'acceptLabel' | 'rejectLabel' | 'acceptSeverity' | 'type' | 'loading'
+  'header' | 'message' | 'acceptLabel' | 'rejectLabel' | 'acceptColor' | 'type' | 'loading'
 >
 
 /**

@@ -11,7 +11,7 @@ import { MButton, MToolbar } from 'morya-ui'
       <span>工具栏</span>
     </template>
     <template #end>
-      <MButton label="导出" severity="secondary" size="small" />
+      <MButton label="导出" size="small"/>
     </template>
   </MToolbar>
 </template>

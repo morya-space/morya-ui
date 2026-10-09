@@ -2,7 +2,7 @@
 /**
  * 黄金样例：列表页 · dense（高密度工具台）
  * structure: list · style: dense
- * 镜像区块顺序；气质跟 styleDirection / 参考走，不要把本文件当唯一审美。
+ * 镜像区块顺序；气质跟 styleDirection / 参考走，不要把本文件当唯一审美�?
  * @see list-page.vue · style-presets.md · page-layouts.md
  */
 import {
@@ -50,7 +50,7 @@ function resetFilters() {
 
 const columns = [
   { key: 'name', label: '名称' },
-  { key: 'status', label: '状态', width: 96 },
+  { key: 'status', label: '状�?, width: 96 },
   { key: 'updatedAt', label: '更新', width: 110 },
   { key: 'actions', label: '操作', width: 120 },
 ]
@@ -72,10 +72,7 @@ const rows = [
     <MLayout has-sider fill-viewport>
       <MLayoutSider v-model:collapsed="siderCollapsed" bordered :collapsed-width="64">
         <MMenu
-          :model="menuModel"
-          :collapsed="siderCollapsed"
-          :collapsed-width="64"
-          selected-key="users"
+          :model="menuModel" :collapsed="siderCollapsed" :collapsed-width="64" selected-key="users"
         />
       </MLayoutSider>
 
@@ -88,72 +85,60 @@ const rows = [
           <MPageContent fill density="compact">
             <MPageHeader title="用户管理">
               <template #actions>
-                <MButton severity="primary" size="small">
+                <MButton type="primary" size="small">
                   新建
                 </MButton>
               </template>
             </MPageHeader>
 
-            <MPageFilters aria-label="筛选" variant="plain">
+            <MPageFilters aria-label="筛�? variant="plain">
               <MSpace wrap>
                 <MInput
-                  v-model="keyword"
-                  placeholder="搜索"
-                  clearable
-                  size="small"
-                  style="width: 11rem"
+                  v-model="keyword" placeholder="搜索" clearable
+                  size="small" style="width: 11rem"
                 />
                 <MSelect
-                  v-model="status"
-                  :options="statusOptions"
-                  placeholder="状态"
+                  v-model="status" :options="statusOptions" placeholder="状�?
                   clearable
-                  size="small"
-                  style="width: 8rem"
+                  size="small" style="width: 8rem"
                 />
               </MSpace>
               <template #actions>
-                <MButton severity="secondary" size="small">
+                <MButton size="small">
                   查询
                 </MButton>
-                <MButton severity="secondary" size="small" text @click="resetFilters">
+                <MButton size="small" type="text" @click="resetFilters">
                   重置
                 </MButton>
               </template>
             </MPageFilters>
 
             <MTable
-              :columns="columns"
-              :rows="rows"
-              :rows-per-page="10"
-              fill
+              :columns="columns" :rows="rows" :rows-per-page="10" fill
               paginator
-              size="small"
-              striped
+              size="small" striped
               bordered
-              row-key="id"
-              aria-label="用户列表"
+              row-key="id" aria-label="用户列表"
             >
               <template #cell-status="{ value }">
                 <MStatus
-                  :label="value === 'active' ? '启用' : '停用'"
-                  :severity="value === 'active' ? 'success' : 'secondary'"
+                  :label="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'"
                 />
               </template>
               <template #cell-actions>
                 <MSpace>
-                  <MButton severity="secondary" size="small" text>
+                  <MButton size="small" type="text">
                     编辑
                   </MButton>
-                  <MButton severity="danger" size="small" text>
+                  <MButton danger size="small" type="text">
                     删除
                   </MButton>
                 </MSpace>
               </template>
               <template #empty>
-                <MEmpty title="暂无数据" description="创建后在此浏览。" icon="user">
+                <MEmpty title="暂无数据" description="创建后在此浏览�? icon="user">
                   <template #extra>
-                    <MButton severity="primary" size="small">
+                    <MButton type="primary" size="small">
                       新建
                     </MButton>
                   </template>

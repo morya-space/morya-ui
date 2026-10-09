@@ -17,6 +17,6 @@ const form = reactive({ name: '' })
         <MInput :id="id" v-model="form.name" fluid :invalid="invalid" />
       </template>
     </MFormItem>
-    <MButton native-type="submit" label="Submit" />
+    <MButton html-type="submit" label="Submit"/>
   </MForm>
 </template>

@@ -5,7 +5,7 @@ import { MButton, MSpace } from 'morya-ui'
 <template>
   <MSpace>
     <MButton label="Save" size="small" />
-    <MButton label="Cancel" size="small" severity="secondary" />
-    <MButton label="Reset" size="small" severity="secondary" />
+    <MButton label="Cancel" size="small"/>
+    <MButton label="Reset" size="small"/>
   </MSpace>
 </template>

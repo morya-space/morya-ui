@@ -21,7 +21,7 @@ const keyword = ref('')
     <MPageContent>
       <MPageHeader title="用户管理" description="维护账号与角色。">
         <template #actions>
-          <MButton severity="primary">
+          <MButton type="primary">
             新建
           </MButton>
         </template>
@@ -31,7 +31,7 @@ const keyword = ref('')
           <MInput v-model="keyword" placeholder="搜索" clearable class="w-48" />
         </MSpace>
         <template #actions>
-          <MButton severity="secondary">
+          <MButton>
             查询
           </MButton>
         </template>
@@ -39,10 +39,10 @@ const keyword = ref('')
       <MPageToolbar>
         <span style="color:var(--m-color-text-muted);font-size:var(--m-font-size-sm)">已选 0 项</span>
         <template #actions>
-          <MButton severity="secondary" text>
+          <MButton type="text">
             导出
           </MButton>
-          <MButton severity="danger" text>
+          <MButton type="text" danger>
             删除
           </MButton>
         </template>

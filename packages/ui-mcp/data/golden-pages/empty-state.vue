@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
- * 黄金样例：列表空状态（Flow）
+ * 黄金样例：列表空状态（Flow�?
  * @see DESIGN.md · page-layouts.md · surfaces § Flow
- * 可嵌在列表页 MPageContent / MTable #empty 中；此处给出完整可运行骨架。
+ * 可嵌在列表页 MPageContent / MTable #empty 中；此处给出完整可运行骨架�?
  */
 import {
   MBreadcrumb,
@@ -27,25 +27,25 @@ import {
 
       <MLayoutContent>
         <MPageContent>
-          <MPageHeader title="课程" description="管理目录与可见性。">
+          <MPageHeader title="课程" description="管理目录与可见性�?>
             <template #actions>
-              <MButton severity="primary">
+              <MButton type="primary">
                 新建课程
               </MButton>
             </template>
           </MPageHeader>
 
           <MEmpty
-            title="还没有课程"
-            description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。"
+            title="还没有课�?
+            description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入�?
             illustration="no-content"
           >
             <template #extra>
-              <MButton severity="primary">
-                创建第一门课程
+              <MButton type="primary">
+                创建第一门课�?
               </MButton>
-              <MButton severity="secondary" text>
-                从模板导入
+              <MButton type="text" >
+                从模板导�?
               </MButton>
             </template>
           </MEmpty>

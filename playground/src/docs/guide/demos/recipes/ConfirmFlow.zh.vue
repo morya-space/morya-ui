@@ -20,7 +20,7 @@ async function onImperativeDelete() {
         message: "确定要删除该项吗？此操作不可撤销。",
         acceptLabel: "删除",
         rejectLabel: "取消",
-        acceptSeverity: "danger",
+        acceptColor: "danger",
         type: "warning",
     });
     lastResult.value = ok ? "命令式：已确认删除" : "命令式：已取消";
@@ -30,17 +30,8 @@ async function onImperativeDelete() {
 <template>
     <div style="display: grid; gap: 0.75rem; max-width: 28rem">
         <div style="display: flex; flex-wrap: wrap; gap: 0.75rem">
-            <MButton
-                label="声明式确认"
-                severity="danger"
-                @click="visible = true"
-            />
-            <MButton
-                label="命令式确认"
-                severity="danger"
-                variant="outlined"
-                @click="onImperativeDelete"
-            />
+            <MButton label="声明式确认" type="primary" danger @click="visible = true" />
+            <MButton label="命令式确认" type="primary" danger @click="onImperativeDelete" />
         </div>
         <p
             v-if="lastResult"
@@ -58,7 +49,7 @@ async function onImperativeDelete() {
             message="确定要删除该项吗？此操作不可撤销。"
             accept-label="删除"
             reject-label="取消"
-            accept-severity="danger"
+            accept-color="danger"
             type="warning"
             @accept="onAccept"
             @reject="onReject"

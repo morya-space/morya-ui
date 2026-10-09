@@ -55,7 +55,7 @@ function resetAll() {
     <MPageContent>
       <MPageHeader title="Users" description="Collapsible advanced filters (chevron + Collapse); query/reset in #actions.">
         <template #actions>
-          <MButton severity="primary">
+          <MButton type="primary">
             Create
           </MButton>
         </template>
@@ -80,10 +80,10 @@ function resetAll() {
           />
         </MSpace>
         <template #actions>
-          <MButton severity="secondary">
+          <MButton>
             Search
           </MButton>
-          <MButton severity="secondary" text @click="resetAll">
+          <MButton @click="resetAll" type="text">
             Reset
           </MButton>
         </template>

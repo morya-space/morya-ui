@@ -74,7 +74,7 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}` / `maskClosable
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` renders in place. |
 | `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | Status icon in the header; `warning` is an alias of `warn` |
 | `positiveText` / `negativeText` | `string` | — | Preset footer buttons; ignored when the `footer` slot is used |
-| `positiveSeverity` | [ButtonSeverity](/docs/types#ButtonSeverity) | — | Confirm button severity |
+| `positiveColor` | [ButtonColor](/docs/types#ButtonColor) | — | Confirm button color |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | Return `false` to keep the dialog open |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | Runs before X / Esc / mask dismiss; return `false` to keep open |
 | `ariaLabel` | `string` | — | Accessible dialog name. |
@@ -151,7 +151,7 @@ Passing a string as `options` is shorthand for `{ content: '...' }`.
 | `type` | `DialogType` | — | Header status icon |
 | `okText` / `cancelText` | `string` | locale | Button labels |
 | `showCancel` | `boolean` | `false` for status helpers, `true` for `confirm` | Show the cancel button |
-| `okSeverity` | `ButtonSeverity` | `'primary'` | Confirm button tone |
+| `okColor` | `ButtonColor` | `'primary'` | Confirm button color |
 | `width` / `position` / `centered` | as Dialog | — | Layout |
 | `maskClosable` | `boolean` | `false` | Dismiss by clicking the mask |
 | `onOk` | `() => void \| Promise<void>` | — | Confirm handler; a returned Promise puts the button in a loading state |

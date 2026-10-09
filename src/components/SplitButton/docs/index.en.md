@@ -26,7 +26,7 @@ import { MSplitButton } from 'morya-ui'
 | `label` | `string` | — | Primary button label. |
 | `icon` | `string` | — | Optional icon character. |
 | `model` | `{ label, command?, disabled? }[]` | `[]` | Menu items. |
-| `severity` / `outlined` / `size` | — | — | Visual variants. |
+| `color` / `variant` / `size` | — | — | Visual variants. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `teleport` | `boolean` | `true` | Whether to Teleport the menu. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` keeps it in place. |

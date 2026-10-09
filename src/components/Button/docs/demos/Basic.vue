@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { MButton } from 'morya-ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-3 items-center">
-    <MButton>Submit</MButton>
-    <MButton label="Label Prop" />
-    <MButton severity="secondary" label="Secondary" />
-  </div>
+  <MFlex gap="small" wrap>
+    <MButton type="primary" label="Primary" />
+    <MButton label="Default" />
+    <MButton type="dashed" label="Dashed"/>
+    <MButton type="text" label="Text"/>
+    <MButton type="link" label="Link"/>
+  </MFlex>
 </template>

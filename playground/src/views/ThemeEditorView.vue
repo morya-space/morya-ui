@@ -397,13 +397,7 @@ async function copyExport() {
                             </div>
                         </div>
 
-                        <MButton
-                            :label="pageCopy.reset"
-                            severity="secondary"
-                            outlined
-                            fluid
-                            @click="resetPresets"
-                        />
+                        <MButton :label="pageCopy.reset" @click="resetPresets" block/>
                     </div>
                 </MCard>
 
@@ -413,16 +407,9 @@ async function copyExport() {
                 >
                     <div class="theme-editor-preview">
                         <div class="theme-editor-preview__row">
-                            <MButton :label="pageCopy.samplePrimary" />
-                            <MButton
-                                :label="pageCopy.sampleSecondary"
-                                severity="secondary"
-                                outlined
-                            />
-                            <MButton
-                                :label="pageCopy.sampleDanger"
-                                severity="danger"
-                            />
+                            <MButton type="primary" :label="pageCopy.samplePrimary" />
+                            <MButton :label="pageCopy.sampleSecondary" />
+                            <MButton type="primary" danger :label="pageCopy.sampleDanger" />
                         </div>
                         <div class="theme-editor-preview__row">
                             <MInput

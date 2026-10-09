@@ -4,25 +4,9 @@ import { MButton, toast } from 'morya-ui'
 
 <template>
   <div class="flex flex-wrap gap-3 items-center">
-    <MButton
-      label="Success"
-      severity="success"
-      @click="toast.success({ summary: 'Saved', detail: 'Your changes are live.' })"
-    />
-    <MButton
-      label="Info"
-      severity="info"
-      @click="toast.info({ summary: 'Tip', detail: 'You can continue.' })"
-    />
-    <MButton
-      label="Warn"
-      severity="warn"
-      @click="toast.warn({ summary: 'Caution', detail: 'Please double-check.' })"
-    />
-    <MButton
-      label="Error"
-      severity="danger"
-      @click="toast.error({ summary: 'Failed', detail: 'Try again later.' })"
-    />
+    <MButton label="Success" @click="toast.success({ summary: 'Saved', detail: 'Your changes are live.' })" color="success" variant="solid"/>
+    <MButton label="Info" @click="toast.info({ summary: 'Tip', detail: 'You can continue.' })" color="info" variant="solid"/>
+    <MButton label="Warn" @click="toast.warn({ summary: 'Caution', detail: 'Please double-check.' })" color="warning" variant="solid"/>
+    <MButton label="Error" @click="toast.error({ summary: 'Failed', detail: 'Try again later.' })" danger type="primary"/>
   </div>
 </template>

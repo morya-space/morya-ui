@@ -11,9 +11,9 @@ description: 按钮用于触发即时动作。
 ## 何时使用
 
 - 需要触发表单提交、确认、导航或其它即时操作时。
-- 页面主操作使用默认（primary）按钮；次要操作用 `severity="secondary"` 或 `outlined` / `text`。
-- 危险、破坏性操作用 `severity="danger"`；轻量内联操作用 `text` 或 `link`。
-- 相邻一组互斥或相关操作用 `MButtonGroup`。
+- 主操作使用 `type="primary"`；次要操作用默认按钮或 `type="dashed"` / `type="text"`。
+- 危险操作用 `danger` 或 `color="danger"`；轻量内联操作用 `type="text"` / `type="link"`。
+- 相邻一组相关操作用 `MButtonGroup`。
 
 ## 引入
 
@@ -25,186 +25,187 @@ import { MButton } from "morya-ui";
 
 ### 基础用法
 
-通过默认插槽或 `label` 展示按钮文案。
+`type` 是颜色与变体的语法糖。省略时为默认描边按钮。
 
 ```vue preview src="./demos/Basic.vue"
 
 ```
 
-### 类型
+### 颜色与变体
 
-常用组合：`severity="secondary"` 默认样式、`variant="dashed"` 虚线、`text` / `link` 文字链、`severity="danger"` 危险、`fluid` 通栏。
+`color` 与 `variant` 可自由组合；同时设置时优先于 `type`。
 
-```vue preview src="./demos/VariantTypes.vue"
-
-```
-
-### Shape
-
-`shape`：`default` / `round` / `circle` / `square`。旧 `rounded` 等价于 `shape="round"`。
-
-```vue preview src="./demos/Shape.vue"
+```vue preview src="./demos/ColorVariant.vue"
 
 ```
 
-### Severity
+### 图标
 
-使用 `severity` 定义按钮语义色；省略时为 primary。
+支持 `icon`、`iconPlacement`、`iconOnly`。
 
-```vue preview src="./demos/Severity.vue"
-
-```
-
-### Styles
-
-`outlined`、`text`、`link`、`raised`、`rounded`、`plain` 可自由组合。
-
-```vue preview src="./demos/Styles.vue"
+```vue preview src="./demos/Icon.vue"
 
 ```
 
-### Text & Link
+### 尺寸
 
-`text` 为轻量文字按钮；`link` 呈现为无背景的内联链接样式，默认悬浮下划线，设 `:underline="false"` 可关闭。二者均可与 `severity` 组合。
-
-```vue preview src="./demos/TextAndLink.vue"
+```vue preview src="./demos/Size.vue"
 
 ```
 
-### Ghost & Quaternary
-
-`ghost` 为浅色填充，等同于 `text` 的悬浮态；`quaternary` 更克制，适合工具栏次要操作。也可通过 `variant` 指定。
-
-```vue preview src="./demos/GhostAndQuaternary.vue"
-
-```
-
-### Button Group
-
-`MButtonGroup` 将相邻按钮拼成一组。
-
-```vue preview src="./demos/ButtonGroup.zh.vue"
-
-```
-
-### Icons & Badge
-
-支持 `icon`、`iconPos`、`iconOnly`，以及 `badge` 徽标。
-
-```vue preview src="./demos/IconsAndBadge.vue"
-
-```
-
-### Loading
-
-`loading` 状态下显示 spinner 并阻止点击。
-
-```vue preview src="./demos/Loading.vue"
-
-```
-
-### Disabled
+### 不可用
 
 ```vue preview src="./demos/Disabled.vue"
 
 ```
 
+### 加载中
+
+`loading` 可为布尔值，或 `{ delay, icon }` 对象。
+
+```vue preview src="./demos/Loading.vue"
+
+```
+
+### 幽灵按钮
+
+`ghost` 使背景透明，适合深色或复杂背景。
+
+```vue preview src="./demos/Ghost.vue"
+
+```
+
+### 危险按钮
+
+```vue preview src="./demos/Danger.vue"
+
+```
+
+### Block 按钮
+
+```vue preview src="./demos/Block.vue"
+
+```
+
+### 形状
+
+```vue preview src="./demos/Shape.vue"
+
+```
+
+### 按钮组
+
+```vue preview src="./demos/ButtonGroup.zh.vue"
+
+```
+
+### 图标与徽标
+
+本库扩展：`badge` / `badgeColor`。
+
+```vue preview src="./demos/IconsAndBadge.vue"
+
+```
+
+### 水波纹与按压缩放
+
+本库扩展：`ripple` / `press`。
+
+```vue preview src="./demos/RipplePress.vue"
+
+```
+
 ## API
+
+通过属性组合按钮样式，推荐顺序：`type` → `shape` → `size` → `loading` → `disabled`。
 
 ### Props
 
-| 参数            | 类型                                                                               | 默认值      | 说明                                                                        |
-| --------------- | ---------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------- |
-| `label`         | `string`                                                                           | —           | 按钮文案。存在默认插槽内容时以插槽为准。                                    |
-| `icon`          | `IconName \| Component`                                                            | —           | 图标名称或自定义组件。                                                      |
-| `iconPos`       | `'left' \| 'right' \| 'top' \| 'bottom'`                                           | `'left'`    | 图标相对标签的位置。                                                        |
-| `iconOnly`      | `boolean`                                                                          | `false`     | 强制方形纯图标按钮。                                                        |
-| `badge`         | `string`                                                                           | —           | 徽标文本。                                                                  |
-| `badgeSeverity` | `'secondary' \| 'info' \| 'success' \| 'warn' \| 'danger' \| 'contrast' \| null`   | `null`      | 徽标语义色。                                                                |
-| `severity`      | `'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast'` | —           | 语义色。省略时为 primary。                                                  |
-| `color`         | `string`                                                                           | —           | 自定义颜色，覆盖 `severity`。                                               |
-| `size`          | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'`                                       | —           | 尺寸。默认中等；兼容 `sm` / `lg`。                                          |
-| `variant`       | `'outlined' \| 'dashed' \| 'text' \| 'link' \| 'ghost' \| 'quaternary'`            | —           | 样式变体快捷方式，等价于对应布尔 prop。                                     |
-| `outlined`      | `boolean`                                                                          | `false`     | 描边按钮。                                                                  |
-| `dashed`        | `boolean`                                                                          | `false`     | 虚线边框。                                                                  |
-| `text`          | `boolean`                                                                          | `false`     | 文字按钮。                                                                  |
-| `link`          | `boolean`                                                                          | `false`     | 链接按钮。                                                                  |
-| `underline`     | `boolean`                                                                          | `true`      | `link` 悬浮下划线。设为 `false` 可关闭。                                    |
-| `ghost`         | `boolean`                                                                          | `false`     | 浅色填充，等同于 `text` 的悬浮态。                                          |
-| `quaternary`    | `boolean`                                                                          | `false`     | 极轻量文字按钮。                                                            |
-| `plain`         | `boolean`                                                                          | `false`     | 浅色填充，等同于 `outlined` 的悬浮态；也可与 `text` / `outlined` 组合弱化。 |
-| `raised`        | `boolean`                                                                          | `false`     | 浮起阴影。                                                                  |
-| `rounded`       | `boolean`                                                                          | `false`     | 全圆角（兼容；推荐 `shape="round"`）。                                      |
-| `shape`         | `'default' \| 'circle' \| 'round' \| 'square'`                                     | `'default'` | 形状。                                                                      |
-| `fluid`         | `boolean`                                                                          | `false`     | 宽度撑满容器。                                                              |
-| `loading`       | `boolean`                                                                          | `false`     | 加载中，禁用点击并显示 spinner。                                            |
-| `disabled`      | `boolean`                                                                          | `false`     | 禁用。                                                                      |
-| `ripple`        | `boolean`                                                                          | `false`     | 点击水波纹。设为 `true` 可开启。                                            |
-| `press`         | `boolean`                                                                          | `false`     | 按下时轻微缩放。设为 `true` 可开启。                                        |
-| `nativeType`    | `'button' \| 'submit' \| 'reset'`                                                  | `'button'`  | 原生 button type。                                                          |
-| `autofocus`     | `boolean`                                                                          | `false`     | 原生 autofocus。                                                            |
-| `ariaLabel`     | `string`                                                                           | —           | 可访问名称；图标按钮建议提供。                                              |
+| 参数 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `type` | `'default' \| 'primary' \| 'dashed' \| 'link' \| 'text'` | `'default'` | 语法糖。与 `color`+`variant` 同时存在时以后者为准。 |
+| `color` | `'default' \| 'primary' \| 'danger' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'contrast'` | — | 颜色轴。 |
+| `variant` | `'solid' \| 'outlined' \| 'dashed' \| 'filled' \| 'text' \| 'link'` | — | 变体轴。 |
+| `danger` | `boolean` | `false` | 语法糖，将颜色设为危险色。设置 `color` 时以后者为准。 |
+| `ghost` | `boolean` | `false` | 幽灵按钮（透明背景）。对 `text` / `link` 无效。 |
+| `shape` | `'default' \| 'circle' \| 'round' \| 'square'` | `'default'` | 形状。 |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；可继承 ConfigProvider。 |
+| `block` | `boolean` | `false` | 宽度撑满容器。 |
+| `loading` | `boolean \| { delay?: number; icon?: IconName \| Component }` | `false` | 加载中；支持延迟与自定义图标。 |
+| `disabled` | `boolean` | `false` | 禁用；可继承 ConfigProvider。 |
+| `htmlType` | `'button' \| 'submit' \| 'reset'` | `'button'` | 原生 button type。 |
+| `href` | `string` | — | 存在时渲染为 `<a>`。 |
+| `target` | `string` | — | 链接 target，需配合 `href`。 |
+| `label` | `string` | — | 文案；有默认插槽时以插槽为准。 |
+| `icon` | `IconName \| Component` | — | 图标名称或组件。 |
+| `iconPlacement` | `'start' \| 'end'` | `'start'` | 图标位置。 |
+| `iconOnly` | `boolean` | `false` | 强制纯图标方形按钮。 |
+| `autoInsertSpace` | `boolean` | `true` | 两个汉字之间插入空格。 |
+| `badge` | `string` | — | 徽标文本。 |
+| `badgeColor` | `'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'contrast' \| null` | `null` | 徽标语义色。 |
+| `ripple` | `boolean` | `false` | 点击水波纹。 |
+| `press` | `boolean` | `false` | 按下轻微缩放。 |
+| `autofocus` | `boolean` | `false` | 原生 autofocus。 |
+| `ariaLabel` | `string` | — | 可访问名称；图标按钮建议提供。 |
+| `pt` | `{ root?, icon?, content?, badge? }` | — | 语义结构透传。 |
 
 ### Events
 
-| 事件名  | 参数         | 说明                 |
-| ------- | ------------ | -------------------- |
-| `click` | `MouseEvent` | 启用状态下点击触发。 |
+| 事件名 | 参数 | 说明 |
+| --- | --- | --- |
+| `click` | `MouseEvent` | 点击回调；`loading` / `disabled` 时不触发。 |
 
 ### Slots
 
-| 插槽名        | 说明                       |
-| ------------- | -------------------------- |
-| `default`     | 按钮内容，优先于 `label`。 |
-| `icon`        | 自定义图标。               |
-| `loadingicon` | 自定义加载图标。           |
+| 插槽名 | 说明 |
+| --- | --- |
+| `default` | 按钮内容，优先于 `label`。 |
+| `icon` | 自定义图标。 |
+| `loadingicon` | 自定义加载图标。 |
 
-### Instance
+### 暴露方法
 
-| 方法 / 属性 | 说明                       |
-| ----------- | -------------------------- |
-| `focus()`   | 聚焦底层 button。          |
-| `ref`       | 底层 `HTMLButtonElement`。 |
+| 方法 | 说明 |
+| --- | --- |
+| `focus()` | 聚焦根元素。 |
+| `ref` | 根 `HTMLButtonElement` 或 `HTMLAnchorElement`。 |
 
-### Props — ButtonGroup
+### MButtonGroup Props
 
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `fluid` | `boolean` | `false` | 宽度撑满容器。 |
-| `ariaLabel` | `string` | — | 组合的可访问名称。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 组容器透传。 |
-
-## Design Token
-
-复用全局 `--m-*` 令牌，见[设计令牌](/docs/design-tokens)。组件级 `--m-button-*` 表将在后续补充。
+| `block` | `boolean` | `false` | 宽度撑满容器。 |
+| `ariaLabel` | `string` | — | 组的可访问名称。 |
+| `pt` | `{ root? }` | — | 组容器透传。 |
 
 ## Semantic DOM
 
-`MButton` 是叶子组件：根节点即原生 `<button class="m-button">`，`class` / `style` / 事件直接落在该元素上（见[样式与 attrs](/docs/attrs)、[Common Props](/docs/common-props)）。
-
 ```text
-button.m-button                 ← 根（交互元素）
-  span.m-button__ripple         ← 可选：ripple 层
-  span.m-button__icon           ← 图标 / loading spinner（aria-hidden）
-    span.m-button__spinner      ← loading 时
-  span.m-button__label          ← 文案（插槽或 label）
-  span.m-button__badge*         ← 可选徽标
+button.m-button / a.m-button
+  span.m-button__ripple*        ← ripple 开启时
+  span.m-button__icon*          ← 图标 / loading
+  span.m-button__label*         ← 文案
+  span.m-button__badge*         ← 徽标
 ```
 
-`MButton` 本身不暴露 `pt`；拼组用 `MButtonGroup` 的 `pt.root` 修改组容器。绑定样式时优先针对 `.m-button`，再按需覆盖 `__icon` / `__label` / `__badge`。
+可用 `pt.root` / `pt.icon` / `pt.content` / `pt.badge` 覆盖各节点属性。
 
 ## FAQ
 
-### `severity` 和 `variant` 有什么区别？
+### `type` 和 `color` / `variant` 如何选择？
 
-`severity` 控制语义色（如 `danger`、`success`）；省略时为 primary。`variant`（或对应布尔 prop）控制样式形态，如 `outlined`、`text`、`link`、`ghost`。二者可组合，例如 `severity="danger"` + `variant="outlined"`。
+`type` 本质是一组颜色与变体的映射。两者同时存在时，优先使用 `color` 与 `variant`。
 
-### `text` 和 `link` 该怎么选？`rounded` 和 `shape` 呢？
+```vue
+<MButton type="primary">click</MButton>
+```
 
-`text` 是轻量文字按钮；`link` 更接近内联链接（默认悬浮下划线）。形状优先用 `shape`（`round` / `circle` / `square`）；旧的 `rounded` 仍可用，等价于 `shape="round"`。
+等同于
 
-## 无障碍
+```vue
+<MButton color="primary" variant="solid">click</MButton>
+```
 
-- 渲染原生 `<button>`。
-- 纯图标按钮请设置 `ariaLabel`（或可访问的文本标签）。
-- `loading` 时设置 `aria-busy`，并禁用交互。
+### 按钮与其它组件的颜色词表
+
+Button 使用 `color` / `variant`。Badge、Tag、Alert、Message、Toast 等反馈组件仍使用 `severity`。

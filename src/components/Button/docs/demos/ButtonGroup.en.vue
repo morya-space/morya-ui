@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { MButton, MButtonGroup } from 'morya-ui'
+import { MButton, MButtonGroup, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <MButtonGroup aria-label="Align">
-    <MButton label="Left" />
-    <MButton label="Center" severity="secondary" />
-    <MButton label="Right" severity="secondary" />
-  </MButtonGroup>
+  <MFlex vertical gap="medium">
+    <MButtonGroup aria-label="Align">
+      <MButton label="Left" />
+      <MButton label="Center" />
+      <MButton label="Right" />
+    </MButtonGroup>
+    <MButtonGroup block aria-label="Block group">
+      <MButton label="Cancel" />
+      <MButton type="primary" label="Confirm" />
+    </MButtonGroup>
+  </MFlex>
 </template>

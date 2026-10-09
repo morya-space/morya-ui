@@ -20,7 +20,6 @@ const props = withDefaults(defineProps<SplitButtonProps>(), {
   transition: undefined,
   model: () => [],
   disabled: false,
-  outlined: false,
   teleport: true,
 })
 
@@ -57,8 +56,9 @@ const rootClass = computed(() => [
   `m-splitbutton--${sizeClass.value}`,
   {
     'm-splitbutton--disabled': props.disabled,
-    'm-splitbutton--outlined': props.outlined,
-    [`m-splitbutton--${props.severity}`]: Boolean(props.severity),
+    'm-splitbutton--outlined': props.variant === 'outlined',
+    [`m-splitbutton--${props.color === 'default' ? 'secondary' : props.color}`]:
+      Boolean(props.color && props.color !== 'primary' && props.color !== 'link'),
     'm-splitbutton--open': open.value,
   },
 ])

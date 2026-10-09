@@ -50,7 +50,7 @@ description: 品牌色、语义色、中性色与对比度约定。
 | `danger` | `--m-color-danger` |
 | `contrast` | `--m-color-contrast` 系 |
 
-破坏性操作：按钮 / 确认用 `severity="danger"`，不要用主色冒充删除。
+破坏性操作：按钮 / 确认用 `danger` 或 `color="danger"`，不要用主色冒充删除。
 
 ## 覆盖方式
 

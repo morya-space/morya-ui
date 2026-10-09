@@ -10,11 +10,7 @@ import { MButton, MResult } from 'morya-ui'
       title="Saved"
     >
       <template #footer>
-        <MButton
-          label="OK"
-          size="small"
-          severity="secondary"
-        />
+        <MButton label="OK" size="small"/>
       </template>
     </MResult>
     <MResult

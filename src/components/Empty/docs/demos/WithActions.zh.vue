@@ -10,7 +10,7 @@ import { MButton, MEmpty } from 'morya-ui'
   >
     <template #extra>
       <MButton label="创建第一门课程" />
-      <MButton label="从模板导入" severity="secondary" text />
+      <MButton label="从模板导入" type="text"/>
     </template>
   </MEmpty>
 </template>

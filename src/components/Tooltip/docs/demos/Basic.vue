@@ -8,7 +8,7 @@ import { MButton, MTooltip } from 'morya-ui'
       <MButton icon="check" icon-only aria-label="Save" />
     </MTooltip>
     <MTooltip content="Delete item" placement="bottom" :show-delay="200" :hide-delay="120" :max-width="160">
-      <MButton icon="trash" icon-only severity="danger" outlined aria-label="Delete" />
+      <MButton icon="trash" icon-only aria-label="Delete" danger/>
     </MTooltip>
   </div>
 </template>

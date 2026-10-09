@@ -39,7 +39,7 @@ description: 用 MForm + FormRules 做邮箱/密码登录校验。
 - [ ] `name` 与 `rules` 键一致（`email` / `password`）
 - [ ] 控件收到 `id` 与 `invalid`，错误能关联到 label
 - [ ] 密码使用 `MInputPassword`（不要用明文 `type="password"` 凑合，除非刻意简化）
-- [ ] 提交按钮 `native-type="submit"`，避免只绑 `@click` 漏掉原生提交
+- [ ] 提交按钮 `html-type="submit"`，避免只绑 `@click` 漏掉原生提交
 - [ ] 已引入 `morya-ui` 与样式
 
 ## 相关

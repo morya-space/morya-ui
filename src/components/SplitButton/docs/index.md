@@ -26,7 +26,7 @@ import { MSplitButton } from 'morya-ui'
 | `label` | `string` | — | 主按钮文案。 |
 | `icon` | `string` | — | 可选图标字符。 |
 | `model` | `{ label, command?, disabled? }[]` | `[]` | 菜单项。 |
-| `severity` / `outlined` / `size` | — | — | 视觉变体。 |
+| `color` / `variant` / `size` | — | — | 视觉变体。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `teleport` | `boolean` | `true` | 是否将菜单 Teleport 出去。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 表示就地渲染。 |

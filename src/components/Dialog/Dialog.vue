@@ -110,6 +110,12 @@ const showPresetFooter = computed(
   () => !slots.footer && Boolean(props.positiveText || props.negativeText),
 )
 const showFooter = computed(() => Boolean(slots.footer || showPresetFooter.value))
+const positiveButtonProps = computed(() => {
+  const color = props.positiveColor
+  if (!color || color === 'primary') return { type: 'primary' as const }
+  if (color === 'danger') return { type: 'primary' as const, danger: true }
+  return { color, variant: 'solid' as const }
+})
 const busy = computed(() => pending.value != null)
 const dialogAriaLabel = computed(() => props.ariaLabel ?? dialogTitle.value)
 const backdropStyle = computed(() => ({
@@ -297,15 +303,14 @@ defineExpose({
                 <MButton
                   v-if="negativeText"
                   :label="negativeText"
-                  severity="secondary"
                   :disabled="busy"
                   :loading="pending === 'negative'"
                   @click="onNegative"
                 />
                 <MButton
                   v-if="positiveText"
+                  v-bind="positiveButtonProps"
                   :label="positiveText"
-                  :severity="positiveSeverity"
                   :disabled="busy && pending !== 'positive'"
                   :loading="pending === 'positive'"
                   @click="onPositive"

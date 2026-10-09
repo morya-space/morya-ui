@@ -1,25 +1,12 @@
 <script setup lang="ts">
-import { MButton, MSpace } from 'morya-ui'
+import { MButton, MFlex } from 'morya-ui'
 </script>
 
 <template>
-  <MSpace wrap>
-    <MButton label="Default" />
-    <MButton
-      shape="round"
-      label="Round"
-    />
-    <MButton
-      shape="circle"
-      icon="search"
-      icon-only
-      aria-label="Search"
-    />
-    <MButton
-      shape="square"
-      icon="edit"
-      icon-only
-      aria-label="Edit"
-    />
-  </MSpace>
+  <MFlex gap="small" wrap align="center">
+    <MButton type="primary" label="Default" />
+    <MButton type="primary" shape="round" label="Round" />
+    <MButton type="primary" shape="circle" icon="search" aria-label="Search" />
+    <MButton type="primary" shape="square" icon="plus" aria-label="Add" />
+  </MFlex>
 </template>

@@ -28,7 +28,7 @@ describe('muConfirmPopup', () => {
     })
     await nextTick()
     const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
-    const reject = buttons.find((btn) => btn.textContent?.includes('取消'))
+    const reject = buttons.find((btn) => btn.textContent?.replace(/\s/g, '').includes('取消'))
     expect(reject).toBeTruthy()
     reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await nextTick()
@@ -87,15 +87,15 @@ describe('muConfirmPopup', () => {
     target.remove()
   })
 
-  it('applies acceptSeverity to the accept button', async () => {
+  it('applies acceptColor to the accept button', async () => {
     const wrapper = mount(MConfirmPopup, {
-      props: { modelValue: true, message: 'Delete?', acceptLabel: 'Yes', acceptSeverity: 'danger' },
+      props: { modelValue: true, message: 'Delete?', acceptLabel: 'Yes', acceptColor: 'danger' },
       attachTo: document.body,
     })
     await nextTick()
     const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
-    expect(accept?.classList.contains('m-button--danger')).toBe(true)
+    expect(accept?.classList.contains('m-button--color-danger')).toBe(true)
     wrapper.unmount()
   })
 })

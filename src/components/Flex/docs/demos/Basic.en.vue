@@ -5,7 +5,7 @@ import { MButton, MFlex } from 'morya-ui'
 <template>
   <MFlex>
     <MButton label="One" size="small" />
-    <MButton label="Two" size="small" severity="secondary" />
-    <MButton label="Three" size="small" severity="secondary" />
+    <MButton label="Two" size="small"/>
+    <MButton label="Three" size="small"/>
   </MFlex>
 </template>
