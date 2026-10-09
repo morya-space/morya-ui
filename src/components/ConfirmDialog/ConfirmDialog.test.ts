@@ -58,14 +58,14 @@ describe('muConfirmDialog', () => {
       props: {
         modelValue: true,
         message: 'Delete this?',
-        type: 'error',
+        type: 'danger',
         beforeAccept: () => false,
         acceptLabel: 'Yes',
       },
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-dialog--error .m-dialog__type-icon')).toBeTruthy()
+    expect(document.body.querySelector('.m-dialog--danger .m-dialog__type-icon')).toBeTruthy()
     const accept = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button')).find((btn) =>
       btn.textContent?.includes('Yes'),
     )

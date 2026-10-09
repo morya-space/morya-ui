@@ -3,12 +3,11 @@ import type { IconName } from "../Icon/types";
 import type { StatusProps } from "./types";
 import { computed, ref, useSlots } from "vue";
 import { useConfiguredSize } from "../../shared/config";
-import { normalizeSeverity } from "../../shared/types";
 import { usePauseOffscreen } from "../../shared/usePauseOffscreen";
 import MIcon from "../Icon/Icon.vue";
 
 const props = withDefaults(defineProps<StatusProps>(), {
-    severity: "secondary",
+    type: "secondary",
     processing: false,
     variant: "dot",
     disabled: false,
@@ -17,15 +16,13 @@ const props = withDefaults(defineProps<StatusProps>(), {
 const slots = useSlots();
 const rootRef = ref<HTMLElement | null>(null);
 const sizeClass = useConfiguredSize("Status", () => props.size);
-const severityTone = computed(
-    () => normalizeSeverity(props.severity) ?? "secondary",
-);
+const typeTone = computed(() => props.type ?? "secondary");
 
-/** Severity → default leading icon (skipped for neutral tones / text variant). */
+/** Type → default leading icon (skipped for neutral tones / text variant). */
 const AUTO_ICONS: Partial<Record<string, IconName>> = {
     success: "check-circle",
     danger: "x-circle",
-    warn: "warning",
+    warning: "warning",
     info: "info",
     primary: "info",
     help: "info",
@@ -34,7 +31,7 @@ const AUTO_ICONS: Partial<Record<string, IconName>> = {
 const autoIcon = computed<IconName | undefined>(() => {
     if (props.variant === "text") return undefined;
     if (props.icon || slots.icon) return undefined;
-    return AUTO_ICONS[severityTone.value];
+    return AUTO_ICONS[typeTone.value];
 });
 
 const resolvedIcon = computed<IconName | undefined>(
@@ -55,7 +52,7 @@ const { pauseAttrs } = usePauseOffscreen(
 
 const rootClass = computed(() => [
     "m-status",
-    `m-status--${severityTone.value}`,
+    `m-status--${typeTone.value}`,
     `m-status--${sizeClass.value}`,
     `m-status--${props.variant}`,
     {

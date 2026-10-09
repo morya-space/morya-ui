@@ -4,7 +4,7 @@ import type { RootPassThrough } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
 import type { ButtonColor } from '../Button/types'
 
-export type DialogType = 'info' | 'success' | 'warning' | 'error' | 'warn'
+export type DialogType = 'info' | 'success' | 'warning' | 'danger'
 
 export type DialogCloseGuard = AsyncGuard
 export type DialogClickGuard = AsyncGuard<[MouseEvent]>
@@ -55,7 +55,6 @@ export interface DialogProps {
   blockScroll?: boolean
   /**
    * Status icon in the header. Visual only — use ConfirmDialog for accept/reject flows.
-   * `warning` is an alias of `warn`.
    */
   type?: DialogType
   /** Preset confirm button label. Ignored when the `footer` slot is used. */

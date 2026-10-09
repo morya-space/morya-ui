@@ -24,11 +24,11 @@ import { MStatus } from "morya-ui";
 
 ```
 
-## Severity
+## Type
 
-使用 `severity` 定义语义色；默认 `secondary`（圆点、中性）。
+使用 `type` 定义语义色；默认 `secondary`（圆点、中性）。
 
-```vue preview src="./demos/Severity.vue"
+```vue preview src="./demos/Types.vue"
 
 ```
 
@@ -56,10 +56,10 @@ import { MStatus } from "morya-ui";
 | 参数         | 类型                                                                                                         | 默认值        | 说明                                                         |
 | ------------ | ------------------------------------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------ |
 | `label`      | `string`                                                                                                     | —             | 状态文案。存在默认插槽内容时以插槽为准。                     |
-| `severity`   | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'secondary'` | 语义色。非中性态默认带图标。                                 |
+| `type`       | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'danger' \| 'contrast'`           | `'secondary'` | 语义色。非中性态默认带图标。                                 |
 | `processing` | `boolean`                                                                                                    | `false`       | 标识脉冲动画。                                               |
 | `size`       | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'`                                                                 | —             | 尺寸。                                                       |
-| `color`      | `string`                                                                                                     | —             | 自定义颜色，覆盖 `severity`。                                |
+| `color`      | `string`                                                                                                     | —             | 自定义颜色，覆盖 `type`。                                    |
 | `variant`    | `'dot' \| 'tag' \| 'text'`                                                                                   | `'dot'`       | 展示形态：圆点/图标 / 胶囊 / 纯文字。                        |
 | `icon`       | [IconName](/docs/types#IconName)                                                                             | —             | 前导图标；覆盖自动图标。                                     |
 | `disabled`   | `boolean`                                                                                                    | `false`       | 禁用弱化样式。                                               |

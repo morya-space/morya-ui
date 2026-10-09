@@ -72,7 +72,7 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}` / `maskClosable
 | `width` | `string` | — | Dialog width (ignored when maximized). |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` renders in place. |
-| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | Status icon in the header; `warning` is an alias of `warn` |
+| `type` | `'info' \| 'success' \| 'warning' \| 'danger'` | — | Status icon in the header |
 | `positiveText` / `negativeText` | `string` | — | Preset footer buttons; ignored when the `footer` slot is used |
 | `positiveColor` | [ButtonColor](/docs/types#ButtonColor) | — | Confirm button color |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | Return `false` to keep the dialog open |

@@ -3,10 +3,10 @@ import { describe, expect, it } from 'vitest'
 import MAlert from './Alert.vue'
 
 describe('muAlert', () => {
-  it('renders title and description with severity tone', () => {
+  it('renders title and description with type tone', () => {
     const wrapper = mount(MAlert, {
       props: {
-        severity: 'success',
+        type: 'success',
         title: 'Saved',
         description: 'Your changes are live.',
       },
@@ -17,12 +17,12 @@ describe('muAlert', () => {
     expect(wrapper.attributes('role')).toBe('status')
   })
 
-  it('uses role=alert for warning and error', () => {
-    const warning = mount(MAlert, { props: { severity: 'warning', description: 'Careful' } })
-    const error = mount(MAlert, { props: { severity: 'error', description: 'Failed' } })
+  it('uses role=alert for warning and danger', () => {
+    const warning = mount(MAlert, { props: { type: 'warning', description: 'Careful' } })
+    const danger = mount(MAlert, { props: { type: 'danger', description: 'Failed' } })
     expect(warning.attributes('role')).toBe('alert')
-    expect(error.attributes('role')).toBe('alert')
-    expect(error.classes()).toContain('m-alert--error')
+    expect(danger.attributes('role')).toBe('alert')
+    expect(danger.classes()).toContain('m-alert--danger')
   })
 
   it('hides icon when showIcon is false', () => {
@@ -43,7 +43,7 @@ describe('muAlert', () => {
 
   it('renders action and title slots', () => {
     const wrapper = mount(MAlert, {
-      props: { severity: 'info' },
+      props: { type: 'info' },
       slots: {
         title: 'Custom title',
         default: 'Body copy',

@@ -75,8 +75,18 @@ const TYPES = {
     '',
     '',
   ],
-  MSeverity: [
-    '[MSeverity](/docs/types#MSeverity)',
+  MToneType: [
+    '[MToneType](/docs/types#MToneType)',
+    '',
+    '',
+  ],
+  MTagType: [
+    '[MTagType](/docs/types#MTagType)',
+    '',
+    '',
+  ],
+  MToastType: [
+    '[MToastType](/docs/types#MToastType)',
     '',
     '',
   ],

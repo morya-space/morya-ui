@@ -44,8 +44,8 @@ import { message, MMessage, useMessage } from 'morya-ui'
 | --- | --- |
 | `message.success(content \| options)` | 成功提示 |
 | `message.info(content \| options)` | 信息提示 |
-| `message.warn(content \| options)` | 警告提示（`warning` 同义） |
-| `message.error(content \| options)` | 错误提示 |
+| `message.warn(content \| options)` | 警告提示（内部 `type: 'warning'`） |
+| `message.error(content \| options)` | 错误提示（内部 `type: 'danger'`） |
 | `message.open(content \| options)` | 自定义打开 |
 | `message.close(id?)` | 关闭指定 / 全部 |
 | `message.closeAll()` / `message.destroyAll()` | 关闭全部（二者等价） |
@@ -58,7 +58,7 @@ import { message, MMessage, useMessage } from 'morya-ui'
 | 字段 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `content` | `string \| number \| VNode \| Component \| (() => VNodeChild)` | — | 正文；也可把可渲染值直接当作入参 |
-| `severity` | `'success' \| 'info' \| 'warn' \| 'error' \| 'secondary' \| 'contrast'` | `'info'` | 语义色 |
+| `type` | `MessageType`（`'success' \| 'info' \| 'warning' \| 'danger' \| 'secondary' \| 'contrast'`） | `'info'` | 语义色 |
 | `closable` | `boolean` | `false` | 显示关闭按钮 |
 | `life` | `number` | `3000` | 自动关闭毫秒；`0` 不自动关闭 |
 | `icon` | `boolean` | `true` | 显示语义图标 |
@@ -105,7 +105,7 @@ import { message, MMessage, useMessage } from 'morya-ui'
 interface MessageItem {
   id: string | number
   content: MRenderable
-  severity?: MessageSeverity
+  type?: MessageType
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
   life?: number

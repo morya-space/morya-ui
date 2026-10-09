@@ -1,8 +1,8 @@
 import type { RootPassThrough } from '../../shared/passThrough'
-import type { MSizeInput, MTagSeverity } from '../../shared/types'
+import type { MSizeInput, MTagType } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type ChipSeverity = MTagSeverity | 'warning'
+export type ChipType = MTagType
 export type ChipSize = MSizeInput
 
 export interface ChipProps {
@@ -17,7 +17,7 @@ export interface ChipProps {
   /** Disable interaction. */
   disabled?: boolean
   /** Semantic color. */
-  severity?: ChipSeverity
+  type?: ChipType
   /** Size. Also accepts legacy `sm` / `lg`. */
   size?: ChipSize
   /** Pass-through attrs/classes/styles for the root element. */

@@ -11,7 +11,7 @@ description: 品牌色、语义色、中性色与对比度约定。
 ## 原则
 
 - **换品牌改令牌**：在主题入口覆盖 `--m-color-primary`（及派生 hover / active / bg），页面仍写 `var(--m-*)`。
-- **语义先于色相**：按钮、Tag、Alert 用 `severity`，不要用裸色冒充状态。
+- **语义先于色相**：Tag / Alert 等用语义 `type`，Button 用 `type` / `color` / `variant`，不要用裸色冒充状态。
 - **暗色必须可跟随**：业务 CSS 勿写死浅色专用 hex；依赖 `[data-theme="dark"]` 覆盖。
 - **不只靠颜色传达**：错误 / 成功同时给文案或图标（见 [无障碍](/docs/accessibility)）。
 
@@ -37,15 +37,15 @@ description: 品牌色、语义色、中性色与对比度约定。
 
 暗色示例：`--m-color-surface: #141414`，正文 `rgba(255,255,255,0.85)`。完整表见 [设计令牌](/docs/design-tokens)。
 
-## severity 映射
+## type 映射
 
-| `severity` | 对应色 |
+| 语义 `type` | 对应色 |
 | --- | --- |
 | （省略 / primary） | `--m-color-primary` |
 | `secondary` | 中性次要外观 |
 | `success` | `--m-color-success` |
 | `info` | `--m-color-info` |
-| `warning` / `warn` | `--m-color-warning` |
+| `warning` | `--m-color-warning` |
 | `help` | `--m-color-help` |
 | `danger` | `--m-color-danger` |
 | `contrast` | `--m-color-contrast` 系 |

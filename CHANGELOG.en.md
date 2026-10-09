@@ -33,6 +33,9 @@
   - `fluid` → `block`; `nativeType` → `htmlType`; `iconPos` → `iconPlacement`
   - removed built-in `badge` / `badgeColor`; wrap with `MBadge` when a count mark is needed
   - supports `href` / `ghost` / object `loading` and `pt`
+- **Semantic tone prop**: Badge / Tag / Chip / Status / Alert / Message / Toast rename `severity` → `type`
+  - `warn` → `warning`; Alert / Message / Toast failure `error` → `danger`
+  - shared types are now `MToneType` / `MTagType` / `MToastType` (`MSeverity` removed)
 
 ### Fixes
 

@@ -43,7 +43,7 @@ You can still manage the list yourself with `messages` + `close`.
 
 | Method | Description |
 | --- | --- |
-| `toast.success / info / warn / error` | Add by severity |
+| `toast.success / info / warn / error` | Add by type (`warn`→`warning`, `error`→`danger`) |
 | `toast.add(options)` | Add one |
 | `toast.remove(id)` / `toast.close(id)` | Remove |
 | `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | Clear all |
@@ -84,7 +84,7 @@ interface ToastMessage {
   id: string | number
   summary: MRenderable
   detail?: MRenderable
-  severity?: ToastSeverity
+  type?: ToastType
   closable?: boolean
   /** Custom leading icon */
   icon?: IconName
@@ -113,7 +113,7 @@ api.open({ message: 'Done', key: 'job', type: 'success' })
 | Method | Description |
 | --- | --- |
 | `open(options)` | Open one notification |
-| `info` / `success` / `warning` / `error` | Type shortcuts |
+| `info` / `success` / `warning` / `error` | Type shortcuts (`error`→`danger`) |
 | `close(key)` | Close by key |
 | `destroy()` | Close all |
 

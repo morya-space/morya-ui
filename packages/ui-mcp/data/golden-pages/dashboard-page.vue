@@ -27,8 +27,8 @@ import {
 const stats = [
   { label: '总用户', value: '12,480', trend: '+8.2%', trendDirection: 'up' as const, trendLabel: '较上月', icon: 'users' },
   { label: '今日活跃', value: '1,926', trend: '+3.1%', trendDirection: 'up' as const, trendLabel: '较昨日', icon: 'activity' },
-  { label: '待处理工单', value: '47', trend: '-12%', trendDirection: 'down' as const, trendLabel: '较上周', trendSeverity: 'warn' as const, icon: 'clipboard' },
-  { label: '系统健康', value: '99.9%', trend: '稳定', trendSeverity: 'secondary' as const, icon: 'heart' },
+  { label: '待处理工单', value: '47', trend: '-12%', trendDirection: 'down' as const, trendLabel: '较上周', trendType: 'warning' as const, icon: 'clipboard' },
+  { label: '系统健康', value: '99.9%', trend: '稳定', trendType: 'secondary' as const, icon: 'heart' },
 ]
 
 const recentColumns = [
@@ -44,9 +44,9 @@ const recentRows = [
   { id: 'WO-1022', title: '权限配置咨询', priority: 'low', status: 'done' },
 ]
 
-function prioritySeverity(p: string) {
+function priorityType(p: string) {
   if (p === 'high') return 'danger'
-  if (p === 'medium') return 'warn'
+  if (p === 'medium') return 'warning'
   return 'secondary'
 }
 
@@ -62,8 +62,8 @@ function statusLabel(s: string) {
   return '已完成'
 }
 
-function statusSeverity(s: string) {
-  if (s === 'open') return 'warn'
+function statusType(s: string) {
+  if (s === 'open') return 'warning'
   if (s === 'progress') return 'info'
   return 'success'
 }
@@ -84,7 +84,7 @@ function statusSeverity(s: string) {
           />
 
           <MAlert
-            severity="info"
+            type="info"
             title="报表管道延迟约 15 分钟"
             description="实时告警仍可用；看板数字以管道落库为准。"
             closable
@@ -96,7 +96,7 @@ function statusSeverity(s: string) {
                 :label="item.label"
                 :value="item.value"
                 :trend="item.trend"
-                :trend-severity="item.trendSeverity ?? 'primary'"
+                :trend-type="item.trendType ?? 'primary'"
                 :trend-direction="item.trendDirection"
                 :trend-label="item.trendLabel"
                 :icon="item.icon"
@@ -132,13 +132,13 @@ function statusSeverity(s: string) {
                   <template #cell-priority="{ value }">
                     <MTag
                       :value="priorityLabel(String(value))"
-                      :severity="prioritySeverity(String(value))"
+                      :type="priorityType(String(value))"
                     />
                   </template>
                   <template #cell-status="{ value }">
                     <MStatus
                       :label="statusLabel(String(value))"
-                      :severity="statusSeverity(String(value))"
+                      :type="statusType(String(value))"
                     />
                   </template>
                 </MTable>

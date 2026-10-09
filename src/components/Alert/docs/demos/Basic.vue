@@ -13,17 +13,17 @@ import { MAlert, MSpace } from 'morya-ui'
       description="这是一条信息说明。"
     />
     <MAlert
-      severity="success"
+      type="success"
       title="成功"
       description="操作已完成。"
     />
     <MAlert
-      severity="warning"
+      type="warning"
       title="注意"
       description="请核对后再提交。"
     />
     <MAlert
-      severity="error"
+      type="danger"
       title="错误"
       description="请求失败，请稍后重试。"
     />

@@ -8,7 +8,7 @@ description: Inline status marker with a colored dot or semantic icon plus label
 
 Lightweight status for tables and detail headers. Prefer [Tag](/components/Tag) when you need a chip-like label or closable control.
 
-Non-neutral severities show a semantic icon by default so the status reads as a marker, not plain tinted text.
+Non-neutral types show a semantic icon by default so the status reads as a marker, not plain tinted text.
 
 ## Import
 
@@ -24,11 +24,11 @@ Pass `label` or use the default slot. Neutral status uses a dot; success / dange
 
 ```
 
-## Severity
+## Type
 
-Use `severity` for semantic color; defaults to `secondary` (dot, neutral).
+Use `type` for semantic color; defaults to `secondary` (dot, neutral).
 
-```vue preview src="./demos/Severity.vue"
+```vue preview src="./demos/Types.vue"
 
 ```
 
@@ -56,10 +56,10 @@ Use `severity` for semantic color; defaults to `secondary` (dot, neutral).
 | Prop         | Type                                                                                                         | Default       | Description                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------ | ------------- | -------------------------------------------------------- |
 | `label`      | `string`                                                                                                     | —             | Status text. Slot content wins when present.             |
-| `severity`   | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'secondary'` | Semantic color. Non-neutral tones get a default icon.    |
+| `type`       | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'danger' \| 'contrast'`           | `'secondary'` | Semantic color. Non-neutral tones get a default icon.    |
 | `processing` | `boolean`                                                                                                    | `false`       | Pulse animation on the indicator.                        |
 | `size`       | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'`                                                                 | —             | Size.                                                    |
-| `color`      | `string`                                                                                                     | —             | Custom color; overrides `severity`.                      |
+| `color`      | `string`                                                                                                     | —             | Custom color; overrides `type`.                          |
 | `variant`    | `'dot' \| 'tag' \| 'text'`                                                                                   | `'dot'`       | Presentation: marker / soft pill / text only.            |
 | `icon`       | [IconName](/docs/types#IconName)                                                                             | —             | Leading icon; overrides auto icon.                       |
 | `disabled`   | `boolean`                                                                                                    | `false`       | Muted disabled appearance.                               |

@@ -6,7 +6,7 @@ description: Morya 设计原则与 Design Spec 章节入口。
 
 # 设计语言
 
-Morya UI 是一套**令牌驱动**的 Vue 3 组件库：颜色、间距、圆角、字号与动效统一走 `--m-*`，交互词表用 `severity` / `variant` / `size`，全局行为由 `MConfigProvider`、`useTheme`、`useDensity`、`useMotion` 协同。
+Morya UI 是一套**令牌驱动**的 Vue 3 组件库：颜色、间距、圆角、字号与动效统一走 `--m-*`，交互词表用语义 `type` / `variant` / `size`（Button 另有 `color`），全局行为由 `MConfigProvider`、`useTheme`、`useDensity`、`useMotion` 协同。
 
 本文是 Design Spec 总览。原则摘要来自仓库 [`design-kit/DESIGN.md`](https://github.com/morya-space/morya-ui/blob/main/design-kit/DESIGN.md)；完整变量目录见 [设计令牌](/docs/design-tokens)。
 

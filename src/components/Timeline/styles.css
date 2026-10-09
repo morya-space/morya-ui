@@ -64,13 +64,11 @@
     color: var(--m-color-info);
 }
 
-.m-timeline__marker--warn,
 .m-timeline__marker--warning {
-    border-color: var(--m-color-warn);
-    color: var(--m-color-warn);
+    border-color: var(--m-color-warning);
+    color: var(--m-color-warning);
 }
 
-.m-timeline__marker--error,
 .m-timeline__marker--danger {
     border-color: var(--m-color-danger);
     color: var(--m-color-danger);

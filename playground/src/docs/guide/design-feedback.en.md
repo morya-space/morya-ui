@@ -27,7 +27,7 @@ Also summarized in [Conventions](/docs/conventions).
 
 - **Prefer non-blocking success**: save → `message`, not a Dialog every time.
 - **Confirm destruction**: delete / clear with `danger` + Confirm and clear consequence copy.
-- **Shared severity colors**: success / warning / danger align with button `severity` ([Color](/docs/design-color)).
+- **Shared semantic colors**: success / warning / danger align with semantic `type` / Button `color="danger"` ([Color](/docs/design-color)).
 - **Ordered stacking**: Toast above menus; Dialog scrims use `--m-z-*` / Config `zIndex`.
 - **Dismiss + focus**: modals support Esc; focus moves into the panel ([Accessibility](/docs/accessibility)).
 

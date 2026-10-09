@@ -25,13 +25,13 @@ If an API is unclear: **MCP / docs first — never guess.**
 | --- | --- |
 | Shared props / Semantic DOM | [Common Props](/docs/common-props) |
 | class / style / `pt` landing | [Styling & attrs](/docs/attrs) |
-| Naming & severity | [Conventions](/docs/conventions) |
+| Naming & semantic type | [Conventions](/docs/conventions) |
 | Design tokens `--m-*` | [Design tokens](/docs/design-tokens) |
 
 ## Hard rules (summary)
 
 - Compose documented `M*` components and `--m-*` tokens only  
-- Appearance vocabulary: `severity` / `variant` / `size`; do not introduce prop names outside the docs  
+- Appearance vocabulary: semantic `type` / `variant` / `size` (Button: `type` / `color` / `variant`); do not introduce prop names outside the docs  
 - Pick by scenario and role — do not copy same-named props blindly  
 - Feedback: short results → `message`; summary + detail / async feel → `toast`; confirms → Confirm family  
 

@@ -502,10 +502,10 @@ describe('@morya-ui/mcp handlers', () => {
     expect(result.suggestions.some((item) => item.type === 'table-data-prop' && item.severity === 'contract')).toBe(true)
   })
 
-  it('flags MMessage severity as inline-alert misuse', () => {
+  it('flags MMessage type as inline-alert misuse', () => {
     const result = read<{ ok: boolean; suggestions: Array<{ type: string; severity?: string }> }>(
       handlers.validatePage({
-        code: '<MMessage severity="error">登录失败</MMessage>',
+        code: '<MMessage type="danger">登录失败</MMessage>',
       }),
     )
     expect(result.ok).toBe(false)

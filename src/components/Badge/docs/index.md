@@ -21,11 +21,11 @@ import { MBadge } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## Severity
+## Type
 
-使用 `severity` 定义语义色；省略时为 primary。兼容旧值 `warning`（映射为 `warn`）。
+使用 `type` 定义语义色；省略时为 primary。
 
-```vue preview src="./demos/Severity.vue"
+```vue preview src="./demos/Types.vue"
 ```
 
 ## Size
@@ -47,7 +47,7 @@ import { MBadge } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `value` | `string \| number` | — | 角标内容。省略时显示为圆点。 |
-| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
+| `type` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'contrast'` | `'primary'` | 语义色。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸；`sm` / `lg` 为别名。 |
 | `max` | `number` | — | 数字上限，超出显示 `{max}+`。 |
 | `offset` | `[number, number]` | — | 包裹模式下的位移 `[x, y]`。 |

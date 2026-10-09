@@ -1,9 +1,8 @@
 <script setup lang="ts">
 
 import type { IconName } from '../Icon/types'
-import type { TimelineEvent, TimelineProps, TimelineSeverity } from './types'
+import type { TimelineEvent, TimelineProps } from './types'
 import { computed, useAttrs } from 'vue'
-import { normalizeSeverity } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 import { isIconName } from '../Icon/icons'
@@ -45,20 +44,13 @@ function side(index: number): 'left' | 'right' {
   return 'left'
 }
 
-function markerTone(severity?: TimelineSeverity) {
-  if (!severity) return undefined
-  if (severity === 'help') return 'help'
-  return normalizeSeverity(severity) ?? undefined
-}
-
 function markerStyle(event: TimelineEvent) {
   if (event.color) return { background: event.color, borderColor: event.color, color: 'var(--m-color-contrast-fg)' }
   return undefined
 }
 
 function markerClass(event: TimelineEvent) {
-  const tone = markerTone(event.severity)
-  return tone ? `m-timeline__marker--${tone}` : undefined
+  return event.type ? `m-timeline__marker--${event.type}` : undefined
 }
 
 function iconName(event: TimelineEvent): IconName | undefined {

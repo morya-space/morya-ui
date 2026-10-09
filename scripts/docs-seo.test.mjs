@@ -127,7 +127,7 @@ more
       },
     ]);
     assert.match(txt, /^# morya-ui/m);
-    assert.match(txt, /severity/);
+    assert.match(txt, /`type`/);
     assert.match(txt, new RegExp(`${SITE_ORIGIN}/docs/quick-start`));
     assert.match(txt, /\[Quick start\]/);
     assert.match(txt, /Install morya-ui/);

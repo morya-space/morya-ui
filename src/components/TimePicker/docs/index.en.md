@@ -65,4 +65,4 @@ Same behavior. `MTimePicker` is a dedicated entry and clearer types (no `type` p
 
 ### When to use this one?
 
-Use it when you need a time only (no date) and a narrower API (`severity` / `size` / `showSeconds`, etc.).
+Use it when you need a time only (no date) and a narrower API (`size` / `showSeconds`, etc.).

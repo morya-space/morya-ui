@@ -29,7 +29,7 @@ import { MButton, MConfirmDialog } from 'morya-ui'
 | `acceptLabel` | `string` | locale `accept` | Accept button label. |
 | `rejectLabel` | `string` | locale `reject` | Reject button label. |
 | `acceptColor` | [ButtonColor](/docs/types#ButtonColor) | — | Accept button color. |
-| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | Status icon beside the message. |
+| `type` | `'info' \| 'success' \| 'warning' \| 'danger'` | — | Status icon beside the message. |
 | `loading` | `boolean` | `false` | Loading state on the accept button. |
 | `beforeAccept` | `() => unknown \| Promise<unknown>` | — | Return `false` to keep open and skip `accept`. |
 | `beforeReject` | `() => unknown \| Promise<unknown>` | — | Return `false` to keep open and skip `reject`. |

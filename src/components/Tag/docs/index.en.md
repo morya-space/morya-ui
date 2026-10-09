@@ -1,6 +1,6 @@
 ---
 title: Tag
-category: 01 / BASIC
+category: 01 / DATA
 description: Tag for status or category.
 ---
 
@@ -21,11 +21,11 @@ Show text via `value` or the default slot.
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## Severity
+## Type
 
-Use `severity` for semantic color; defaults to primary when omitted. The legacy value `warning` is mapped to `warn`.
+Use `type` for semantic color; defaults to primary when omitted.
 
-```vue preview src="./demos/Severity.vue"
+```vue preview src="./demos/Types.vue"
 ```
 
 ## Icons
@@ -58,14 +58,14 @@ Pass a `MIcon` icon name to `icon`.
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string` | 鈥?| Tag text. The default slot takes precedence when present. |
-| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
+| `value` | `string` | — | Tag text. The default slot takes precedence when present. |
+| `type` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'danger' \| 'contrast'` | `'primary'` | Semantic color. Custom `color` overrides `type`. |
 | `rounded` | `boolean` | `false` | Fully rounded. |
-| `icon` | [IconName](/docs/types#IconName) | 鈥?| `MIcon` icon name. |
+| `icon` | [IconName](/docs/types#IconName) | — | `MIcon` icon name. |
 | `closable` | `boolean` | `false` | Show a close control (ignored when `checkable`). |
-| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| Size. |
+| `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `bordered` | `boolean` | `false` | Draw a border. |
-| `color` | `string` | 鈥?| Custom color. |
+| `color` | `string` | — | Custom color; overrides `type`. |
 | `disabled` | `boolean` | `false` | Disable interaction. |
 | `checkable` | `boolean` | `false` | Toggleable selection. |
 | `checked` | `boolean` | `false` | Checked state; use with `v-model:checked`. |

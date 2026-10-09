@@ -3,14 +3,14 @@ import type { TagProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { normalizeSeverity, resolveIconSizeFromClass } from '../../shared/types'
+import { resolveIconSizeFromClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<TagProps>(), {
-  severity: 'primary',
+  type: 'primary',
   rounded: false,
   closable: false,
   bordered: false,
@@ -30,12 +30,12 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('Tag', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
-const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
+const typeTone = computed(() => props.type ?? 'primary')
 const showClose = computed(() => props.closable && !props.checkable)
 
 const rootClass = computed(() => [
   'm-tag',
-  `m-tag--${severityTone.value}`,
+  `m-tag--${typeTone.value}`,
   `m-tag--${sizeClass.value}`,
   {
     'm-tag--rounded': props.rounded,

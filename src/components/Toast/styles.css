@@ -61,12 +61,10 @@
     border-left-color: var(--m-color-success);
 }
 
-.m-toast__message--warn,
 .m-toast__message--warning {
-    border-left-color: var(--m-color-warn);
+    border-left-color: var(--m-color-warning);
 }
 
-.m-toast__message--error,
 .m-toast__message--danger {
     border-left-color: var(--m-color-danger);
 }

@@ -25,13 +25,13 @@ description: 给编码 Agent / LLM 的文档入口：先读什么、再调什么
 | --- | --- |
 | 公共 props / Semantic DOM | [Common Props](/docs/common-props) |
 | class / style / `pt` 落点 | [样式与 attrs](/docs/attrs) |
-| 命名与 severity | [约定](/docs/conventions) |
+| 命名与语义 type | [约定](/docs/conventions) |
 | 设计令牌 `--m-*` | [设计令牌](/docs/design-tokens) |
 
 ## 硬规则（摘要）
 
 - 只组合文档中的 `M*` 组件与 `--m-*` token  
-- 外观词表：`severity` / `variant` / `size`；不要引入文档之外的 prop 名  
+- 外观词表：语义 `type` / `variant` / `size`（Button：`type` / `color` / `variant`）；不要引入文档之外的 prop 名  
 - 选型按场景与角色判断，不照抄其他库的同名 props  
 - 反馈：短结果用 `message`；摘要+详情或异步感用 `toast`；确认用 Confirm 系列  
 

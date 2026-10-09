@@ -65,4 +65,4 @@ import { MTimePicker } from 'morya-ui'
 
 ### 何时用本组件？
 
-只需要时间（无日期）时用它，API 更窄（`severity` / `size` / `showSeconds` 等）。
+只需要时间（无日期）时用它，API 更窄（`size` / `showSeconds` 等）。

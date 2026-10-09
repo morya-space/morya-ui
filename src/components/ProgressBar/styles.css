@@ -89,7 +89,7 @@
     --m-progressbar-fill: var(--m-color-info);
 }
 
-.m-progressbar--warn {
+.m-progressbar--warning {
     --m-progressbar-fill: var(--m-color-warn);
 }
 

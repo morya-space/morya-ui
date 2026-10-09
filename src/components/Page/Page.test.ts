@@ -189,7 +189,7 @@ describe('mPageStat', () => {
         trend: '+8.2%',
         trendDirection: 'up',
         trendLabel: 'vs last month',
-        trendSeverity: 'success',
+        trendType: 'success',
       },
     })
     expect(wrapper.find('.m-page-stat__label').text()).toBe('Total users')

@@ -796,7 +796,7 @@ export const componentDecisions: ComponentDecision[] = [
         recipe: recipe(
           [
             ['label + value', 'label + value'],
-            ['trend / trendSeverity / trendDirection 按需', 'trend / trendSeverity / trendDirection as needed'],
+            ['trend / trendType / trendDirection 按需', 'trend / trendType / trendDirection as needed'],
             ['loading 骨架；layout card|plain', 'loading skeleton; layout card|plain'],
           ],
         ),
@@ -1162,7 +1162,7 @@ export const componentDecisions: ComponentDecision[] = [
         avoidWhenEn: ['A closable category label', 'A count attached to a button'],
         recipe: recipe(
           [
-            ['label + severity', 'label + severity'],
+            ['label + type', 'label + type'],
             ['variant 默认 dot；可用 tag|text', 'variant default dot; or tag|text'],
             ['表格状态列优先 MStatus，不要一排实心 Tag', 'Prefer MStatus in table status columns over solid Tags'],
           ],
@@ -1181,7 +1181,7 @@ export const componentDecisions: ComponentDecision[] = [
         recipe: recipe(
           [
             ['value 或默认插槽文案', 'value or default-slot copy'],
-            ['severity；closable + @close', 'severity; closable + @close'],
+            ['type；closable + @close', 'type; closable + @close'],
             ['rounded / bordered 按需', 'rounded / bordered as needed'],
           ],
           undefined,
@@ -1199,7 +1199,7 @@ export const componentDecisions: ComponentDecision[] = [
           [
             ['label；icon 或 image', 'label; icon or image'],
             ['removable + @remove', 'removable + @remove'],
-            ['severity 按需', 'severity as needed'],
+            ['type 按需', 'type as needed'],
           ],
           undefined,
           [['@remove', '@remove']],
@@ -1215,7 +1215,7 @@ export const componentDecisions: ComponentDecision[] = [
         recipe: recipe(
           [
             ['value 数量；省略则圆点', 'value count; omit for dot'],
-            ['severity；max 封顶', 'severity; max cap'],
+            ['type；max 封顶', 'type; max cap'],
             ['默认插槽包裹宿主控件', 'Default slot wraps the host control'],
           ],
           [['默认插槽：被角标包裹的控件', 'Default slot: host control']],
@@ -1333,7 +1333,7 @@ export const componentDecisions: ComponentDecision[] = [
           [
             [':model / items 操作项', ':model / items for actions'],
             ['触发器放默认插槽（按钮/图标）', 'Trigger in default slot (button/icon)'],
-            ['危险项用文档 severity / 确认流', 'Danger items: docs severity / confirm flow'],
+            ['危险项走确认流（ConfirmDialog）', 'Danger items: confirm flow (ConfirmDialog)'],
           ],
         ),
         relatedSnippets: ['row-actions-menu', 'list-row-actions'],
@@ -1439,7 +1439,7 @@ export const componentDecisions: ComponentDecision[] = [
         relatedSnippets: ['confirm-delete', 'form-in-dialog'],
         ...anti([
           ["toast.add({ summary: '已保存' }) → message.success('已保存')", "toast.add({ summary: 'Saved' }) → message.success('Saved')"],
-          ['<MMessage severity> 当内嵌 Alert → errorMessage / role="alert"', '<MMessage severity> as inline Alert → errorMessage / role="alert"'],
+          ['<MMessage type> 当内嵌 Alert → errorMessage / role="alert"', '<MMessage type> as inline Alert → errorMessage / role="alert"'],
         ]),
       },
       {
@@ -1476,7 +1476,7 @@ export const componentDecisions: ComponentDecision[] = [
         relatedSnippets: ['auth-split-shell'],
         ...anti([
           ['登录失败只闪 Toast → 表单区 alert / errorMessage', 'Login failure only via Toast → form alert / errorMessage'],
-          ['编造 MMessage severity 插槽 Alert API', 'Invented MMessage severity slot Alert API'],
+          ['编造 MMessage type / 插槽 Alert API', 'Invented MMessage type / slot Alert API'],
         ]),
       },
     ],

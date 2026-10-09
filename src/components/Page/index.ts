@@ -24,6 +24,6 @@ export type {
   PageSectionVariant,
   PageStatProps,
   PageStatTrendDirection,
-  PageStatTrendSeverity,
+  PageStatTrendType,
   PageToolbarProps,
 } from './types'

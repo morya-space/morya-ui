@@ -1,6 +1,6 @@
 ---
 title: Tag
-category: 01 / BASIC
+category: 01 / DATA
 description: 标签用于展示状态或分类。
 ---
 
@@ -21,11 +21,11 @@ import { MTag } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## Severity
+## Type
 
-使用 `severity` 定义语义色；省略时为 primary。兼容旧值 `warning`（映射为 `warn`）。
+使用 `type` 定义语义色；省略时为 primary。
 
-```vue preview src="./demos/Severity.vue"
+```vue preview src="./demos/Types.vue"
 ```
 
 ## Icons
@@ -59,13 +59,13 @@ import { MTag } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `value` | `string` | — | 标签文案。存在默认插槽内容时以插槽为准。 |
-| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'help' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | 语义色。`warning` 为兼容别名，映射为 `warn`。 |
+| `type` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'help' \| 'danger' \| 'contrast'` | `'primary'` | 语义色。自定义 `color` 会覆盖 `type`。 |
 | `rounded` | `boolean` | `false` | 全圆角。 |
 | `icon` | [IconName](/docs/types#IconName) | — | `MIcon` 图标名称。 |
 | `closable` | `boolean` | `false` | 显示关闭按钮（`checkable` 时忽略）。 |
 | `size` | `'small' \| 'medium' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `bordered` | `boolean` | `false` | 描边。 |
-| `color` | `string` | — | 自定义颜色。 |
+| `color` | `string` | — | 自定义颜色，覆盖 `type`。 |
 | `disabled` | `boolean` | `false` | 禁用交互。 |
 | `checkable` | `boolean` | `false` | 可切换选中。 |
 | `checked` | `boolean` | `false` | 选中态；配合 `v-model:checked`。 |

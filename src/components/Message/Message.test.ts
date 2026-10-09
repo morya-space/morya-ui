@@ -14,16 +14,19 @@ describe('message API', () => {
     expect(messageState.items[0]).toMatchObject({
       id: handle.id,
       content: 'Saved',
-      severity: 'success',
+      type: 'success',
     })
     await nextTick()
     expect(document.body.querySelector('.m-message-host')).toBeTruthy()
     expect(document.body.textContent).toContain('Saved')
   })
 
-  it('normalizes warning to warn', () => {
-    message.warning('Careful')
-    expect(messageState.items[0]?.severity).toBe('warn')
+  it('maps warn/error convenience methods to warning/danger types', () => {
+    message.warn('Careful')
+    expect(messageState.items[0]?.type).toBe('warning')
+    message.closeAll()
+    message.error('Failed')
+    expect(messageState.items[0]?.type).toBe('danger')
   })
 
   it('auto-closes after life ms', async () => {

@@ -13,7 +13,7 @@ export interface ConfirmDialogProps {
   acceptLabel?: string
   rejectLabel?: string
   acceptColor?: ButtonColor
-  /** Status icon beside the message. `warning` is an alias of `warn`. */
+  /** Status icon beside the message. */
   type?: DialogType
   /** Show a loading spinner on the accept button. */
   loading?: boolean

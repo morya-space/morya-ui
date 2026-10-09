@@ -4,25 +4,24 @@ import MTag from './Tag.vue'
 
 describe('muTag', () => {
   it('renders its value with selected visual props', () => {
-    const wrapper = mount(MTag, { props: { value: 'Published', severity: 'success', rounded: true } })
+    const wrapper = mount(MTag, { props: { value: 'Published', type: 'success', rounded: true } })
     expect(wrapper.text()).toBe('Published')
     expect(wrapper.classes()).toContain('m-tag--success')
     expect(wrapper.classes()).toContain('m-tag--rounded')
   })
 
-  it('normalizes legacy warning severity to warn', () => {
-    const wrapper = mount(MTag, { props: { value: 'Caution', severity: 'warning' } })
-    expect(wrapper.classes()).toContain('m-tag--warn')
-    expect(wrapper.classes()).not.toContain('m-tag--warning')
+  it('applies warning type class', () => {
+    const wrapper = mount(MTag, { props: { value: 'Caution', type: 'warning' } })
+    expect(wrapper.classes()).toContain('m-tag--warning')
   })
 
   it('renders MIcon when icon is a string name', () => {
-    const wrapper = mount(MTag, { props: { value: 'Done', icon: 'check', severity: 'success' } })
+    const wrapper = mount(MTag, { props: { value: 'Done', icon: 'check', type: 'success' } })
     expect(wrapper.find('.m-icon').exists()).toBe(true)
     expect(wrapper.text()).toContain('Done')
   })
 
-  it('defaults severity to primary', () => {
+  it('defaults type to primary', () => {
     const wrapper = mount(MTag, { props: { value: 'Default' } })
     expect(wrapper.classes()).toContain('m-tag--primary')
   })

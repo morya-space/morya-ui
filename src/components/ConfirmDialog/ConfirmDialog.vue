@@ -56,18 +56,13 @@ const { transitionName, transitionCss } = useMotionTransition({
   fallback: 'zoom',
 })
 const busy = computed(() => pending.value != null || props.loading)
-const resolvedType = computed(() => {
-  const type = props.type
-  if (type === 'warning' || type === 'warn') return 'warn'
-  return type
-})
 const typeIcon = computed<IconName | undefined>(() => {
-  switch (resolvedType.value) {
+  switch (props.type) {
     case 'success':
       return 'check-circle'
-    case 'warn':
+    case 'warning':
       return 'warning'
-    case 'error':
+    case 'danger':
       return 'x-circle'
     case 'info':
       return 'info'
@@ -144,7 +139,7 @@ useModalOverlay({
           <section
             ref="dialogElement"
             class="m-dialog m-confirmdialog"
-            :class="{ [`m-dialog--${resolvedType}`]: resolvedType }"
+            :class="{ [`m-dialog--${props.type}`]: props.type }"
             role="alertdialog"
             aria-modal="true"
             :aria-label="title"

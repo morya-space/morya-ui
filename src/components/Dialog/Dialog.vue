@@ -87,18 +87,13 @@ const { transitionName, transitionCss } = useMotionTransition({
 
 const dialogTitle = computed(() => props.header ?? props.title)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
-const resolvedType = computed(() => {
-  const type = props.type
-  if (type === 'warning' || type === 'warn') return 'warn'
-  return type
-})
 const typeIcon = computed<IconName | undefined>(() => {
-  switch (resolvedType.value) {
+  switch (props.type) {
     case 'success':
       return 'check-circle'
-    case 'warn':
+    case 'warning':
       return 'warning'
-    case 'error':
+    case 'danger':
       return 'x-circle'
     case 'info':
       return 'info'
@@ -249,7 +244,7 @@ defineExpose({
             class="m-dialog"
             :class="{
               'm-dialog--maximized': maximized,
-              [`m-dialog--${resolvedType}`]: resolvedType,
+              [`m-dialog--${props.type}`]: props.type,
             }"
             :style="panelStyle"
             role="dialog"

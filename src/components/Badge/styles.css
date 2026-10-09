@@ -90,7 +90,6 @@
     color: var(--m-color-on-emphasis);
 }
 
-.m-badge--warn,
 .m-badge--warning {
     background: var(--m-color-warn);
     color: var(--m-color-on-emphasis);

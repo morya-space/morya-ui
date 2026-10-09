@@ -1,7 +1,7 @@
 import type { RootPassThrough } from '../../shared/passThrough'
-import type { MSizeInput, MTagSeverity } from '../../shared/types'
+import type { MSizeInput, MTagType } from '../../shared/types'
 
-export type BadgeSeverity = MTagSeverity | 'warning'
+export type BadgeType = MTagType
 
 export type BadgeSize = MSizeInput
 
@@ -12,9 +12,8 @@ export interface BadgeProps {
   value?: string | number
   /**
    * Semantic color. Omit / `primary` for brand primary.
-   * Legacy `warning` is normalized to `warn`.
    */
-  severity?: BadgeSeverity
+  type?: BadgeType
   /** Size. Also accepts legacy `sm` / `lg`. */
   size?: BadgeSize
   /** Cap numeric values; shows `{max}+` when exceeded. */

@@ -1,13 +1,13 @@
 import type { MRenderable } from '../../shared/content'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
-import type { MToastSeverity } from '../../shared/types'
+import type { MToastType } from '../../shared/types'
 import type { MotionPresetId } from '../../theme/motionPresets'
 
 export type { MRenderable }
 
-/** message severities; `warning` kept as legacy alias for `warn`. */
-export type MessageSeverity = MToastSeverity | 'warning'
+/** Message tone. Canonical values from `MToastType`. */
+export type MessageType = MToastType
 
 export type MessagePlacement =
   | 'top'
@@ -20,7 +20,7 @@ export type MessagePlacement =
 export interface MessageItem {
   id: string | number
   content: MRenderable
-  severity?: MessageSeverity
+  type?: MessageType
   closable?: boolean
   /** Auto-close delay in ms. `0` keeps it open. Default `3000` for API calls. */
   life?: number

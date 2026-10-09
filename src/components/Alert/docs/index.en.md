@@ -1,7 +1,7 @@
 ---
 title: Alert
 category: 05 / FEEDBACK
-description: Inline page notice with severity, close, and action slot.
+description: Inline page notice with type, close, and action slot.
 ---
 
 # Alert
@@ -16,7 +16,7 @@ import { MAlert } from 'morya-ui'
 
 ## Basic
 
-`severity` sets tone and default icon: `info` / `success` / `warning` / `error`.
+`type` sets tone and default icon: `info` / `success` / `warning` / `danger`.
 
 ```vue preview src="./demos/Basic.vue"
 ```
@@ -39,7 +39,7 @@ Use `#action` for secondary actions (e.g. Undo); `#title` / default slot customi
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `severity` | `AlertSeverity` | `'info'` | Tone and default icon |
+| `type` | `AlertType` | `'info'` | Tone and default icon |
 | `title` | `string` | — | Title |
 | `description` | `string` | — | Description (or default slot) |
 | `showIcon` | `boolean` | `true` | Show leading icon |
@@ -65,10 +65,10 @@ Use `#action` for secondary actions (e.g. Undo); `#title` / default slot customi
 
 ## Types
 
-### AlertSeverity
+### AlertType
 
 ```ts
-type AlertSeverity = 'info' | 'success' | 'warning' | 'error'
+type AlertType = 'info' | 'success' | 'warning' | 'danger'
 ```
 
 ### AlertSize

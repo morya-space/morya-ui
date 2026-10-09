@@ -33,6 +33,9 @@
   - `fluid` → `block`；`nativeType` → `htmlType`；`iconPos` → `iconPlacement`
   - 删除内置 `badge` / `badgeColor`；角标请用 `MBadge` 包裹按钮
   - 支持 `href` / `ghost` / `loading` 对象形态与 `pt`
+- **语义色 prop**：Badge / Tag / Chip / Status / Alert / Message / Toast 等将 `severity` 统一为 `type`
+  - `warn` → `warning`；Alert / Message / Toast 失败态 `error` → `danger`
+  - 共享类型改为 `MToneType` / `MTagType` / `MToastType`（不再导出 `MSeverity`）
 
 ### 修复
 

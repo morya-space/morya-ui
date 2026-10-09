@@ -17,5 +17,5 @@ export type {
   ToastOptions,
   ToastPosition,
   ToastProps,
-  ToastSeverity,
+  ToastType,
 } from './types'

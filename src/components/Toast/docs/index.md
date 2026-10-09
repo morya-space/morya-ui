@@ -43,7 +43,7 @@ import { MToast, toast, useToast } from 'morya-ui'
 
 | 方法 | 说明 |
 | --- | --- |
-| `toast.success / info / warn / error` | 按语义添加 |
+| `toast.success / info / warn / error` | 按语义添加（`warn`→`warning`，`error`→`danger`） |
 | `toast.add(options)` | 添加一条 |
 | `toast.remove(id)` / `toast.close(id)` | 移除 |
 | `toast.clear()` / `toast.closeAll()` / `toast.destroyAll()` | 清空 |
@@ -85,7 +85,7 @@ interface ToastMessage {
   id: string | number
   summary: MRenderable
   detail?: MRenderable
-  severity?: ToastSeverity
+  type?: ToastType
   closable?: boolean
   /** 自定义前置图标 */
   icon?: IconName
@@ -114,7 +114,7 @@ api.open({ message: '完成', key: 'job', type: 'success' })
 | 方法 | 说明 |
 | --- | --- |
 | `open(options)` | 打开一条通知 |
-| `info` / `success` / `warning` / `error` | 类型快捷方法 |
+| `info` / `success` / `warning` / `error` | 类型快捷方法（`error`→`danger`） |
 | `close(key)` | 按 key 关闭 |
 | `destroy()` | 关闭全部 |
 

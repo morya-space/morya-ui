@@ -2,7 +2,7 @@
 import type { ChipProps } from './types'
 import { computed, useAttrs } from 'vue'
 import { useMLocale } from '../../locale'
-import { normalizeSeverity, resolveIconSize, resolveSizeClass } from '../../shared/types'
+import { resolveIconSize, resolveSizeClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 
@@ -18,7 +18,7 @@ const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
-const severityTone = computed(() => (props.severity ? normalizeSeverity(props.severity) : undefined))
+const typeTone = computed(() => props.type)
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const iconSize = computed(() => resolveIconSize(props.size))
 
@@ -27,7 +27,7 @@ const chipClass = computed(() => [
   {
     'm-chip--disabled': props.disabled,
     'm-chip--removable': props.removable,
-    [`m-chip--${severityTone.value}`]: Boolean(severityTone.value),
+    [`m-chip--${typeTone.value}`]: Boolean(typeTone.value),
     'm-chip--small': sizeTone.value === 'small',
     'm-chip--large': sizeTone.value === 'large',
   },

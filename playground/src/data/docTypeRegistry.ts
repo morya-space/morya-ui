@@ -15,7 +15,9 @@ export const GLOBAL_DOC_TYPE_IDS = new Set([
   'SelectOption',
   'SelectModelValue',
   'IconName',
-  'MSeverity',
+  'MToneType',
+  'MTagType',
+  'MToastType',
   'MenuNodeBase',
 ])
 

@@ -14,8 +14,8 @@ export { default as MAlert } from "./components/Alert/Alert.vue";
 export type {
   AlertEmits,
   AlertProps,
-  AlertSeverity,
   AlertSize,
+  AlertType,
 } from "./components/Alert/types";
 export { MAnchor, MAnchorLink } from "./components/Anchor";
 export type {
@@ -47,7 +47,7 @@ export { default as MBadge } from "./components/Badge/Badge.vue";
 export type {
   BadgeOffset,
   BadgeProps,
-  BadgeSeverity,
+  BadgeType,
   BadgeSize,
 } from "./components/Badge/types";
 export { default as MBlockUI } from "./components/BlockUI/BlockUI.vue";
@@ -124,7 +124,7 @@ export { default as MChip } from "./components/Chip/Chip.vue";
 export type {
   ChipEmits,
   ChipProps,
-  ChipSeverity,
+  ChipType,
   ChipSize,
 } from "./components/Chip/types";
 export { default as MCommandMenu } from "./components/CommandMenu/CommandMenu.vue";
@@ -492,7 +492,7 @@ export type {
   MessageOptions,
   MessagePlacement,
   MessageProps,
-  MessageSeverity,
+  MessageType,
 } from "./components/Message/types";
 export { default as MMeterGroup } from "./components/MeterGroup/MeterGroup.vue";
 export type {
@@ -536,7 +536,7 @@ export type {
   PageStatOrientation,
   PageStatProps,
   PageStatTrendDirection,
-  PageStatTrendSeverity,
+  PageStatTrendType,
   PageToolbarProps,
 } from "./components/Page/types";
 export { default as MPagination } from "./components/Pagination/Pagination.vue";
@@ -697,7 +697,7 @@ export type {
 export { default as MStatus } from "./components/Status/Status.vue";
 export type {
   StatusProps,
-  StatusSeverity,
+  StatusType,
   StatusSize,
   StatusVariant,
 } from "./components/Status/types";
@@ -753,7 +753,7 @@ export { default as MTag } from "./components/Tag/Tag.vue";
 export type {
   TagEmits,
   TagProps,
-  TagSeverity,
+  TagType,
   TagSize,
 } from "./components/Tag/types";
 export { default as MTerminal } from "./components/Terminal/Terminal.vue";
@@ -777,7 +777,7 @@ export type {
   TimelineEvent,
   TimelineLayout,
   TimelineProps,
-  TimelineSeverity,
+  TimelineType,
 } from "./components/Timeline/types";
 export {
   MLink,
@@ -822,7 +822,7 @@ export type {
   ToastOptions,
   ToastPosition,
   ToastProps,
-  ToastSeverity,
+  ToastType,
 } from "./components/Toast/types";
 export { default as MToggleButton } from "./components/ToggleButton/ToggleButton.vue";
 export type {
@@ -918,13 +918,13 @@ export { isOverlayTeleported, resolveOverlayTeleport } from "./shared/overlay";
 export type {
   MFieldStatus,
   MInputVariant,
-  MSeverity,
   MSize,
   MSizeInput,
-  MTagSeverity,
-  MToastSeverity,
+  MTagType,
+  MToastType,
+  MToneType,
 } from "./shared/types";
-export { normalizeSeverity, resolveSizeClass } from "./shared/types";
+export { resolveSizeClass } from "./shared/types";
 export { useModalOverlay } from "./shared/useModalOverlay";
 
 export type { UseModalOverlayOptions } from "./shared/useModalOverlay";

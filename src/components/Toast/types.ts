@@ -1,14 +1,14 @@
 import type { MRenderable } from '../../shared/content'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
-import type { MToastSeverity } from '../../shared/types'
+import type { MToastType } from '../../shared/types'
 import type { MotionPresetId } from '../../theme/motionPresets'
 import type { IconName } from '../Icon/types'
 
 export type { MRenderable }
 
-/** toast severities; `warning` kept as legacy alias for `warn`. */
-export type ToastSeverity = MToastSeverity | 'warning'
+/** Toast tone. Canonical values from `MToastType`. */
+export type ToastType = MToastType
 
 export type ToastPosition =
   | 'top-right'
@@ -22,9 +22,9 @@ export interface ToastMessage {
   id: string | number
   summary: MRenderable
   detail?: MRenderable
-  severity?: ToastSeverity
+  type?: ToastType
   closable?: boolean
-  /** Custom leading icon. Defaults to the icon implied by `severity`. */
+  /** Custom leading icon. Defaults to the icon implied by `type`. */
   icon?: IconName
   /** Extra action area rendered under the detail (e.g. buttons). */
   actions?: MRenderable

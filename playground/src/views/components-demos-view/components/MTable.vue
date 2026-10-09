@@ -64,7 +64,7 @@ const filteredRows = computed(() => {
       <template #cell-status="{ value }">
         <MStatus
           :label="value === 'on' ? '上架' : '下架'"
-          :severity="value === 'on' ? 'success' : 'secondary'"
+          :type="value === 'on' ? 'success' : 'secondary'"
         />
       </template>
       <template #cell-actions>

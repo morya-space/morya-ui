@@ -11,7 +11,7 @@ describe('muToast', () => {
   })
 
   it('renders messages and emits the closed message', async () => {
-    const message = { id: 'saved', summary: 'Saved', detail: 'Your changes are live.', severity: 'success' as const }
+    const message = { id: 'saved', summary: 'Saved', detail: 'Your changes are live.', type: 'success' as const }
     const wrapper = mount(MToast, { attachTo: document.body, props: { messages: [message] } })
     expect(document.body.textContent).toContain('Your changes are live.')
     const closeButton = document.body.querySelector('.m-toast__close')
@@ -22,15 +22,15 @@ describe('muToast', () => {
     wrapper.unmount()
   })
 
-  it('maps warn severity and legacy warning to warn class', async () => {
+  it('applies warning and danger type classes', async () => {
     const messages = [
-      { id: 'w1', summary: 'Warn', severity: 'warn' as const },
-      { id: 'w2', summary: 'Warning', severity: 'warning' as const },
+      { id: 'w1', summary: 'Warn', type: 'warning' as const },
+      { id: 'd1', summary: 'Danger', type: 'danger' as const },
     ]
     const wrapper = mount(MToast, { attachTo: document.body, props: { messages } })
     const nodes = document.body.querySelectorAll('.m-toast__message')
-    expect(nodes[0]?.classList.contains('m-toast__message--warn')).toBe(true)
-    expect(nodes[1]?.classList.contains('m-toast__message--warn')).toBe(true)
+    expect(nodes[0]?.classList.contains('m-toast__message--warning')).toBe(true)
+    expect(nodes[1]?.classList.contains('m-toast__message--danger')).toBe(true)
     wrapper.unmount()
   })
 })
@@ -47,7 +47,7 @@ describe('toast API', () => {
     expect(toastState.messages[0]).toMatchObject({
       summary: 'Saved',
       detail: 'Done',
-      severity: 'success',
+      type: 'success',
     })
     await nextTick()
     expect(document.body.querySelector('.m-toast')).toBeTruthy()

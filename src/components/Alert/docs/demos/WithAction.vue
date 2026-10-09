@@ -7,7 +7,7 @@ function onUndo() {
 </script>
 
 <template>
-  <MAlert severity="info">
+  <MAlert type="info">
     <template #title>
       已归档
     </template>

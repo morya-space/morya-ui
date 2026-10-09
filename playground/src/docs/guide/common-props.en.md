@@ -12,15 +12,15 @@ Most Morya components share one interaction vocabulary and style targeting model
 
 | Prop                 | Meaning             | Common values                                                                                                      |
 | -------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `severity`           | Semantic color      | Badge / Tag / Alert / Message: `primary` / `secondary` / `success` / `info` / `warning` (`warn`) / `danger` / `contrast` |
-| `type` / `color` / `variant` | Button appearance | Button uses `type` (sugar) + `color` + `variant` (`solid` / `outlined` / `dashed` / `filled` / `text` / `link`); default is `color=default` + `variant=outlined`; solid primary needs `type="primary"` |
+| `type` (semantic)    | Semantic tone       | Badge / Tag / Status / Alert / Message / Toast: `primary` / `secondary` / `success` / `info` / `warning` / `danger` / `contrast` (Alert subset: `info` / `success` / `warning` / `danger`) |
+| `type` / `color` / `variant` (Button) | Button appearance | Button uses `type` (sugar) + `color` + `variant` (`solid` / `outlined` / `dashed` / `filled` / `text` / `link`); default is `color=default` + `variant=outlined`; solid primary needs `type="primary"` |
 | `size`               | Control size        | `small` / `medium` / `large` (`sm` / `md` / `lg` aliases); often inherits Config when omitted                      |
 | `disabled`           | Disabled            | Blocks interaction; visuals use `--m-opacity-disabled` and related tokens                                          |
 | `loading`            | Busy                | Common on Button; prevents double submit                                                                           |
 | `fluid` / `block`    | Full width          | Most fields use `fluid`; Button / ButtonGroup use `block`                                                          |
 | `status` / `invalid` | Form validation     | e.g. `error` / `warning`; pair with `error-message`                                                                |
 
-**Badge / Tag / Alert**: `severity` sets tone. **Button**: `type` / `color` / `variant` set tone and shape (e.g. `type="primary"`, or `color="danger"` + `variant="outlined"`); solid danger can be `type="primary" danger`.
+**Semantic components**: `type` sets tone (e.g. `type="success"`). **Button**: the same prop name is appearance sugar with `color` / `variant` (e.g. `type="primary"`, or `color="danger"` + `variant="outlined"`); solid danger can be `type="primary" danger`.
 
 ## Where class / style / events land
 
@@ -72,7 +72,7 @@ Leaf components such as `MButton` bind `class` on the `<button>` directly; group
 
 | Do                                                     | Don't                                                      |
 | ------------------------------------------------------ | ---------------------------------------------------------- |
-| Use `severity` on Badge / Tag / Alert; `type` / `color` / `variant` on Button | Keep removed Button props (`severity` / `fluid` / boolean `outlined`) |
+| Use semantic `type` for tone; Button `type` / `color` / `variant` for appearance | Keep removed Button props (`severity` / `fluid` / boolean `outlined`); mix Button sugar `type` with semantic tone `type` blindly |
 | Put layout `class` on the field root                   | Expect `class` to fall through onto the inner input        |
 | Use `pt` for prefix / inner tweaks                     | Fork a component to change one class                       |
 | Align Semantic DOM names with BEM (`.m-button__label`) | Invent undocumented `pt` keys                              |

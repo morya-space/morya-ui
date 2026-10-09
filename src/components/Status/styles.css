@@ -78,7 +78,6 @@
     color: var(--m-color-info);
 }
 
-.m-status--warn,
 .m-status--warning {
     color: var(--m-color-warn);
 }

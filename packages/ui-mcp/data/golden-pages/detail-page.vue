@@ -65,7 +65,7 @@ const activityRows = [
               <MSpace>
                 <MStatus
                   :label="profile.status === 'active' ? '启用' : '停用'"
-                  :severity="profile.status === 'active' ? 'success' : 'secondary'"
+                  :type="profile.status === 'active' ? 'success' : 'secondary'"
                 />
                 <MButton type="primary">
                   编辑
@@ -83,7 +83,7 @@ const activityRows = [
           <MPageSection title="摘要">
             <MSpace wrap style="gap: var(--m-space-2)">
               <MTag :value="profile.role" />
-              <MTag :value="profile.dept" severity="info" />
+              <MTag :value="profile.dept" type="info" />
             </MSpace>
             <p class="detail-lead">
               工作邮箱 {{ profile.email }} · 入职 {{ profile.joinedAt }}
@@ -109,7 +109,7 @@ const activityRows = [
             <MDescriptionsItem label="状态">
               <MStatus
                 :label="profile.status === 'active' ? '启用' : '停用'"
-                :severity="profile.status === 'active' ? 'success' : 'secondary'"
+                :type="profile.status === 'active' ? 'success' : 'secondary'"
               />
             </MDescriptionsItem>
           </MDescriptions>

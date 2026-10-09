@@ -7,7 +7,6 @@ import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { MRenderableView } from '../../shared/Renderable'
-import { normalizeSeverity } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
@@ -67,11 +66,11 @@ watch(
   { immediate: true },
 )
 
-function iconName(severity?: MessageItem['severity']): IconName {
-  switch (normalizeSeverity(severity) ?? 'info') {
+function iconName(type?: MessageItem['type']): IconName {
+  switch (type ?? 'info') {
     case 'success':
       return 'check-circle'
-    case 'warn':
+    case 'warning':
       return 'warning'
     case 'danger':
       return 'x-circle'
@@ -80,8 +79,8 @@ function iconName(severity?: MessageItem['severity']): IconName {
   }
 }
 
-function severityClass(severity?: MessageItem['severity']) {
-  return `m-message--${normalizeSeverity(severity) ?? 'info'}`
+function typeClass(type?: MessageItem['type']) {
+  return `m-message--${type ?? 'info'}`
 }
 
 function onClose(item: MessageItem) {
@@ -111,13 +110,13 @@ function onMouseLeave(item: MessageItem) {
           v-for="item in list"
           :key="item.id"
           class="m-message"
-          :class="severityClass(item.severity)"
+          :class="typeClass(item.type)"
           role="status"
           @mouseenter="onMouseEnter(item)"
           @mouseleave="onMouseLeave(item)"
         >
           <span v-if="item.icon !== false" class="m-message__icon" aria-hidden="true">
-            <MIcon :name="iconName(item.severity)" size="sm" />
+            <MIcon :name="iconName(item.type)" size="sm" />
           </span>
           <div class="m-message__content">
             <MRenderableView :value="item.content" />

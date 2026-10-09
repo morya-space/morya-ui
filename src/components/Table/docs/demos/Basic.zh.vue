@@ -20,7 +20,7 @@ const rows = [
     <template #cell-status="{ value }">
       <MTag
         :value="String(value)"
-        :severity="value === 'Published' ? 'success' : value === 'Review' ? 'warn' : 'secondary'"
+        :type="value === 'Published' ? 'success' : value === 'Review' ? 'warning' : 'secondary'"
       />
     </template>
   </MTable>

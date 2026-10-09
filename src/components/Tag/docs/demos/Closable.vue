@@ -5,6 +5,6 @@ import { MTag } from 'morya-ui'
 <template>
   <div class="flex flex-wrap gap-3 items-center">
     <MTag value="Draft" closable bordered />
-    <MTag value="Small" size="small" severity="success" closable />
+    <MTag value="Small" size="small" type="success" closable />
   </div>
 </template>

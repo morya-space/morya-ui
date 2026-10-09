@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IconName } from '../Icon/types'
-import type { AlertProps, AlertSeverity } from './types'
+import type { AlertProps, AlertType } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
@@ -11,7 +11,7 @@ import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AlertProps>(), {
-  severity: 'info',
+  type: 'info',
   showIcon: true,
   closable: false,
   banner: false,
@@ -26,21 +26,15 @@ const sizeClass = useConfiguredSize('Alert', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const closed = ref(false)
 
-const SEVERITY_ICON: Record<AlertSeverity, IconName> = {
+const TYPE_ICON: Record<AlertType, IconName> = {
   info: 'info-circle',
   success: 'check-circle',
   warning: 'warning',
-  error: 'x-circle',
+  danger: 'x-circle',
 }
 
-const toneClass = computed(() => {
-  if (props.severity === 'error') return 'error'
-  if (props.severity === 'warning') return 'warning'
-  return props.severity
-})
-
 const statusRole = computed(() =>
-  props.severity === 'error' || props.severity === 'warning' ? 'alert' : 'status',
+  props.type === 'danger' || props.type === 'warning' ? 'alert' : 'status',
 )
 
 const showTitle = computed(() => Boolean(slots.title || props.title))
@@ -50,7 +44,7 @@ const showDescription = computed(() =>
 
 const rootClass = computed(() => [
   'm-alert',
-  `m-alert--${toneClass.value}`,
+  `m-alert--${props.type}`,
   `m-alert--${sizeClass.value}`,
   {
     'm-alert--banner': props.banner,
@@ -80,7 +74,7 @@ function onClose() {
     >
       <slot name="icon">
         <MIcon
-          :name="SEVERITY_ICON[severity]"
+          :name="TYPE_ICON[type]"
           :size="iconSize"
         />
       </slot>

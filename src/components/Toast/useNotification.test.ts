@@ -17,7 +17,7 @@ describe('useNotification', () => {
     await nextTick()
 
     expect(toastState.messages).toHaveLength(1)
-    expect(toastState.messages[0]?.severity).toBe('success')
+    expect(toastState.messages[0]?.type).toBe('success')
     expect(document.body.textContent).toContain('Your changes are live.')
   })
 
@@ -125,6 +125,12 @@ describe('notification singleton', () => {
     notification.warning({ message: 'Careful' })
     await nextTick()
 
-    expect(toastState.messages[0]?.severity).toBe('warning')
+    expect(toastState.messages[0]?.type).toBe('warning')
+
+    notification.destroy()
+    notification.error({ message: 'Failed' })
+    await nextTick()
+
+    expect(toastState.messages[0]?.type).toBe('danger')
   })
 })

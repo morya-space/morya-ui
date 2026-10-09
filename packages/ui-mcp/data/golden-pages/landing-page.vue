@@ -88,7 +88,7 @@ const faqTabs = [
         </MParagraph>
         <div class="landing-cards">
           <article>
-            <MTag value="构建" severity="info" />
+            <MTag value="构建" type="info" />
             <MTitle :level="3">
               并行矩阵
             </MTitle>
@@ -97,7 +97,7 @@ const faqTabs = [
             </MParagraph>
           </article>
           <article>
-            <MTag value="发布" severity="success" />
+            <MTag value="发布" type="success" />
             <MTitle :level="3">
               环境门禁
             </MTitle>

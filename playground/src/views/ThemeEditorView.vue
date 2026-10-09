@@ -423,7 +423,7 @@ async function copyExport() {
                             v-model="previewSwitch"
                             :label="pageCopy.sampleSwitch"
                         />
-                        <MAlert :title="pageCopy.sampleAlert" severity="info" />
+                        <MAlert :title="pageCopy.sampleAlert" type="info" />
                     </div>
                 </MCard>
 

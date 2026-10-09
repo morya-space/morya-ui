@@ -1,8 +1,8 @@
 import type { RootPassThrough } from '../../shared/passThrough'
-import type { MSizeInput, MTagSeverity } from '../../shared/types'
+import type { MSizeInput, MTagType } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
-export type TagSeverity = MTagSeverity | 'warning'
+export type TagType = MTagType
 export type TagSize = MSizeInput
 
 export interface TagProps {
@@ -10,9 +10,8 @@ export interface TagProps {
   value?: string
   /**
    * Semantic color. Omit / `primary` for brand primary.
-   * Legacy `warning` is normalized to `warn`.
    */
-  severity?: TagSeverity
+  type?: TagType
   /** Fully rounded corners. */
   rounded?: boolean
   /** Icon name from MIcon. */
@@ -23,7 +22,7 @@ export interface TagProps {
   size?: TagSize
   /** Draw a border using the tone color (`bordered` / outlined look). */
   bordered?: boolean
-  /** Custom color. Overrides `severity` when set. */
+  /** Custom color. Overrides `type` when set. */
   color?: string
   disabled?: boolean
   /**

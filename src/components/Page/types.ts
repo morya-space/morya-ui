@@ -11,7 +11,7 @@ export type PageStatLayout = 'card' | 'plain'
 export type PageStatDensity = 'default' | 'compact'
 export type PageStatOrientation = 'stacked' | 'inline'
 export type PageSectionVariant = 'default' | 'muted' | 'form' | 'actions'
-export type PageStatTrendSeverity = 'primary' | 'success' | 'warn' | 'danger' | 'secondary'
+export type PageStatTrendType = 'primary' | 'success' | 'warning' | 'danger' | 'secondary'
 export type PageStatTrendDirection = 'up' | 'down'
 
 export interface PageContentProps {
@@ -80,7 +80,7 @@ export interface PageStatProps {
   label?: string
   value?: string | number
   trend?: string
-  trendSeverity?: PageStatTrendSeverity
+  trendType?: PageStatTrendType
   /** Renders a direction arrow beside the trend text. */
   trendDirection?: PageStatTrendDirection
   /** Muted suffix after the trend, e.g. "较上月". */

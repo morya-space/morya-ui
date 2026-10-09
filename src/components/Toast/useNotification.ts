@@ -12,7 +12,7 @@
 
 import type { MRenderable } from '../../shared/content'
 import type { IconName } from '../Icon/types'
-import type { ToastHandle, ToastPosition } from './types'
+import type { ToastHandle, ToastPosition, ToastType } from './types'
 import { toast } from './toast'
 
 /** Camel-cased notification placements. */
@@ -24,7 +24,7 @@ export type NotificationPlacement =
   | 'top'
   | 'bottom'
 
-export type NotificationType = 'info' | 'success' | 'warning' | 'error'
+export type NotificationType = ToastType
 
 export interface NotificationOptions {
   /** Title. */
@@ -58,6 +58,7 @@ export interface NotificationApi {
   success: (options: NotificationOptions) => ToastHandle
   info: (options: NotificationOptions) => ToastHandle
   warning: (options: NotificationOptions) => ToastHandle
+  /** Maps to type `'danger'`. */
   error: (options: NotificationOptions) => ToastHandle
   /** Close the notification with the given key. */
   close: (key: string | number) => void
@@ -85,7 +86,7 @@ function toHandle(options: NotificationOptions, type?: NotificationType): ToastH
     detail: options.description,
     actions: options.btn,
     icon: options.icon,
-    severity: resolvedType,
+    type: resolvedType,
     closable: options.closable ?? true,
     life: (options.duration ?? DEFAULT_DURATION_SECONDS) * 1000,
     position: options.placement ? PLACEMENT_MAP[options.placement] : undefined,
@@ -102,7 +103,7 @@ export function useNotification(): NotificationApi {
     success: options => toHandle(options, 'success'),
     info: options => toHandle(options, 'info'),
     warning: options => toHandle(options, 'warning'),
-    error: options => toHandle(options, 'error'),
+    error: options => toHandle(options, 'danger'),
     close: key => toast.close(key),
     destroy: () => toast.clear(),
   }

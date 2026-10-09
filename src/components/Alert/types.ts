@@ -1,15 +1,15 @@
 import type { RootPassThrough } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
-/** Alert tone. Maps to semantic `--m-color-*` (error → danger). */
-export type AlertSeverity = 'info' | 'success' | 'warning' | 'error'
+/** Alert tone. Maps to semantic `--m-color-*`. */
+export type AlertType = 'info' | 'success' | 'warning' | 'danger'
 
 export type AlertSize = MSizeInput
 
 export interface AlertProps {
   pt?: RootPassThrough
   /** Semantic color and default icon. Default `info`. */
-  severity?: AlertSeverity
+  type?: AlertType
   /** Title text. Prefer `#title` slot for custom markup. */
   title?: string
   /** Description text. Prefer default slot for custom markup. */

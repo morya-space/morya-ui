@@ -210,18 +210,40 @@ interface MenuNodeBase {
 }
 ```
 
-<h3 id="MSeverity">MSeverity</h3>
+<h3 id="MToneType">MToneType</h3>
 
-Message、Tag 等的状态色：
+显示 / 反馈组件的语义色基集：
 
 ```ts
-type MSeverity =
-  | 'primary'
+type MToneType =
   | 'secondary'
   | 'success'
   | 'info'
   | 'warning'
+  | 'help'
   | 'danger'
+  | 'contrast'
+```
+
+<h3 id="MTagType">MTagType</h3>
+
+Tag / Badge / Chip / Status：`MToneType` 加上品牌色 `primary`。
+
+```ts
+type MTagType = MToneType | 'primary'
+```
+
+<h3 id="MToastType">MToastType</h3>
+
+Message / Toast / Timeline 的语义色：
+
+```ts
+type MToastType =
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'danger'
+  | 'secondary'
   | 'contrast'
 ```
 

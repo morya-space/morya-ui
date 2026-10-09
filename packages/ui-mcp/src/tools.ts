@@ -173,7 +173,7 @@ async function submit() {
             </MPageFilters>
             <MTable :columns="columns" :rows="rows" :loading="loading" fill paginator :rows-per-page="10" striped bordered row-key="id">
               <template #cell-status="{ value }">
-                <MStatus :label="String(value ?? '')" :severity="value === 'active' ? 'success' : 'secondary'" />
+                <MStatus :label="String(value ?? '')" :type="value === 'active' ? 'success' : 'secondary'" />
               </template>
               <template #empty>
                 <MEmpty
@@ -219,7 +219,7 @@ async function submit() {
   const detailContent = `            <MPageHeader :title="title" :description="${zh ? '查看资源摘要与属性。' : 'Review summary and properties.'}">
               <template #actions>
                 <MSpace>
-                  <MStatus :label="${zh ? '启用' : 'Active'}" severity="success" />
+                  <MStatus :label="${zh ? '启用' : 'Active'}" type="success" />
                   <MButton type="primary">${zh ? '编辑' : 'Edit'}</MButton>
                   <MButton>${zh ? '返回' : 'Back'}</MButton>
                 </MSpace>
@@ -344,7 +344,7 @@ ${content}
   <main class="m-generated-page">
     <MCard>
       <p class="m-generated-muted">${zh ? '将此区域替换为页面内容。' : 'Replace this area with page content.'}</p>
-      <MTag value="${zh ? '示例' : 'Example'}" severity="info" />
+      <MTag value="${zh ? '示例' : 'Example'}" type="info" />
     </MCard>
   </main>
 </MConfigProvider>`
@@ -1398,7 +1398,7 @@ export function createToolHandlers(catalog = loadCatalog()) {
       )
     }
 
-    if (/<MMessage\b[^>]*\bseverity\b/i.test(code)) {
+    if (/<MMessage\b[^>]*\b(?:severity|type)\s*=/i.test(code)) {
       push(
         'contract',
         'feedback',

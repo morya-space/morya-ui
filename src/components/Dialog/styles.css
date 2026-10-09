@@ -133,12 +133,11 @@
     color: var(--m-color-success);
 }
 
-.m-dialog--warn .m-dialog__type-icon,
 .m-dialog--warning .m-dialog__type-icon {
-    color: var(--m-color-warn);
+    color: var(--m-color-warning);
 }
 
-.m-dialog--error .m-dialog__type-icon {
+.m-dialog--danger .m-dialog__type-icon {
     color: var(--m-color-danger);
 }
 

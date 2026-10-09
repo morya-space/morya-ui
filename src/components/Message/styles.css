@@ -147,26 +147,23 @@
     color: var(--m-color-info);
 }
 
-.m-message--warn,
 .m-message--warning {
     background: color-mix(
         in srgb,
-        var(--m-color-warn) 10%,
+        var(--m-color-warning) 10%,
         var(--m-color-surface)
     );
     border-color: color-mix(
         in srgb,
-        var(--m-color-warn) 28%,
+        var(--m-color-warning) 28%,
         var(--m-color-border)
     );
 }
 
-.m-message--warn .m-message__icon,
 .m-message--warning .m-message__icon {
-    color: var(--m-color-warn);
+    color: var(--m-color-warning);
 }
 
-.m-message--error,
 .m-message--danger {
     background: color-mix(
         in srgb,
@@ -180,7 +177,6 @@
     );
 }
 
-.m-message--error .m-message__icon,
 .m-message--danger .m-message__icon {
     color: var(--m-color-danger);
 }

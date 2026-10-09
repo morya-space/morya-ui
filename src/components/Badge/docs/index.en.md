@@ -21,11 +21,11 @@ Pass `value` to show text or a number; omit `value` to render a dot.
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## Severity
+## Type
 
-Use `severity` for semantic color; defaults to primary when omitted. Legacy value `warning` is supported (mapped to `warn`).
+Use `type` for semantic color; defaults to primary when omitted.
 
-```vue preview src="./demos/Severity.vue"
+```vue preview src="./demos/Types.vue"
 ```
 
 ## Size
@@ -46,11 +46,11 @@ Wrap content with the default slot. `max` caps numeric values; `processing` puls
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | `string \| number` | 鈥?| Badge content. Renders as a dot when omitted. |
-| `severity` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'danger' \| 'contrast' \| 'warning'` | `'primary'` | Semantic color. `warning` is a compatibility alias mapped to `warn`. |
-| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | 鈥?| Size; `sm` / `lg` are aliases. |
-| `max` | `number` | 鈥?| Cap numeric values as `{max}+`. |
-| `offset` | `[number, number]` | 鈥?| Offset `[x, y]` when wrapping content. |
+| `value` | `string \| number` | — | Badge content. Renders as a dot when omitted. |
+| `type` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'contrast'` | `'primary'` | Semantic color. |
+| `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size; `sm` / `lg` are aliases. |
+| `max` | `number` | — | Cap numeric values as `{max}+`. |
+| `offset` | `[number, number]` | — | Offset `[x, y]` when wrapping content. |
 | `processing` | `boolean` | `false` | Pulse animation. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |
 

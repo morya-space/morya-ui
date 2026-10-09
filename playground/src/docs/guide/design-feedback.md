@@ -27,7 +27,7 @@ description: Message、Toast、Dialog、Alert 等反馈层级与选型。
 
 - **能不打断就不打断**：成功保存优先 `message`，不要每次 `Dialog`。
 - **破坏性必须确认**：删除 / 清空用 `danger` + Confirm，文案说清后果。
-- **同源语义色**：成功 / 警告 / 危险与按钮 `severity` 同一套（见 [色彩](/docs/design-color)）。
+- **同源语义色**：成功 / 警告 / 危险与语义 `type` / Button `color="danger"` 同一套令牌（见 [色彩](/docs/design-color)）。
 - **层叠有序**：Toast 高于下拉，Dialog 遮罩统一走 `--m-z-*` / Config `zIndex`。
 - **可关闭与焦点**：模态应支持 Esc；打开后焦点进入面板（见 [无障碍](/docs/accessibility)）。
 

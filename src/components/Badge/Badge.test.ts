@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest'
 import MBadge from './Badge.vue'
 
 describe('muBadge', () => {
-  it('renders value with severity and size classes', () => {
-    const wrapper = mount(MBadge, { props: { value: 3, severity: 'success', size: 'large' } })
+  it('renders value with type and size classes', () => {
+    const wrapper = mount(MBadge, { props: { value: 3, type: 'success', size: 'large' } })
     expect(wrapper.text()).toBe('3')
     expect(wrapper.classes()).toContain('m-badge--success')
     expect(wrapper.classes()).toContain('m-badge--large')
@@ -12,15 +12,14 @@ describe('muBadge', () => {
   })
 
   it('renders as a dot when value is omitted', () => {
-    const wrapper = mount(MBadge, { props: { severity: 'danger' } })
+    const wrapper = mount(MBadge, { props: { type: 'danger' } })
     expect(wrapper.classes()).toContain('m-badge--dot')
     expect(wrapper.text()).toBe('')
   })
 
-  it('normalizes legacy warning severity to warn', () => {
-    const wrapper = mount(MBadge, { props: { value: '!', severity: 'warning' } })
-    expect(wrapper.classes()).toContain('m-badge--warn')
-    expect(wrapper.classes()).not.toContain('m-badge--warning')
+  it('applies warning type class', () => {
+    const wrapper = mount(MBadge, { props: { value: '!', type: 'warning' } })
+    expect(wrapper.classes()).toContain('m-badge--warning')
   })
 
   it('maps sm size alias to small', () => {

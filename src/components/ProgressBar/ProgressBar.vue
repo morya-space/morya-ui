@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ProgressBarProps } from './types'
 import { computed, useAttrs } from 'vue'
-import { normalizeSeverity } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 
 defineOptions({ inheritAttrs: false })
@@ -22,11 +21,8 @@ const isCircle = computed(() => props.type === 'circle')
 const isActive = computed(() => props.status === 'active' && !isIndeterminate.value && !isCircle.value)
 const statusTone = computed(() => {
   if (!props.status || props.status === 'active' || props.status === 'normal') return undefined
-  // `error` / `exception` → `danger` stays local: shared normalizeSeverity must pass `error` through
-  // unchanged for Toast/Message/Timeline (their styles and the Message icon map key on
-  // `error`) until Toast/Message/Timeline migrate off the `error` alias.
-  if (props.status === 'error' || props.status === 'exception') return 'danger'
-  return normalizeSeverity(props.status)
+  if (props.status === 'exception') return 'danger'
+  return props.status
 })
 
 const progressClass = computed(() => [

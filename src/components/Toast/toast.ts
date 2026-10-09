@@ -4,7 +4,7 @@ import type {
   ToastMessage,
   ToastOptions,
   ToastPosition,
-  ToastSeverity,
+  ToastType,
 } from './types'
 import { defineComponent, h } from 'vue'
 import { isToastOptionsObject } from '../../shared/content'
@@ -41,14 +41,14 @@ function ensureHost() {
   setToastAutoHost(mountOverlayHost(AutoToastHost, 'm-toast-host-root'))
 }
 
-function toMessage(input: ToastInput, severity?: ToastSeverity): ToastMessage {
+function toMessage(input: ToastInput, type?: ToastType): ToastMessage {
   const options: ToastOptions = isToastOptionsObject(input) ? input : { summary: input }
   if (options.position) toastState.position = options.position
   return {
     id: options.id ?? `m-toast-${Date.now()}-${++seed}`,
     summary: options.summary,
     detail: options.detail,
-    severity: severity ?? options.severity ?? 'info',
+    type: type ?? options.type ?? 'info',
     closable: options.closable ?? true,
     icon: options.icon,
     actions: options.actions,
@@ -56,12 +56,12 @@ function toMessage(input: ToastInput, severity?: ToastSeverity): ToastMessage {
   }
 }
 
-function add(input: ToastInput, severity?: ToastSeverity): ToastHandle {
+function add(input: ToastInput, type?: ToastType): ToastHandle {
   ensureHost()
   applyToastMax(toastState.max)
 
   const options = isToastOptionsObject(input) ? input : undefined
-  const item = toMessage(input, severity)
+  const item = toMessage(input, type)
   if (options?.onClose) setToastCloseCallback(item.id, options.onClose)
 
   // An explicit `id` replaces the existing message in place (`useNotification` keyed updates).
@@ -79,7 +79,7 @@ function add(input: ToastInput, severity?: ToastSeverity): ToastHandle {
     const existing = findDuplicateToast(item)
     if (existing) {
       if (item.life !== undefined) existing.life = item.life
-      if (item.severity !== undefined) existing.severity = item.severity
+      if (item.type !== undefined) existing.type = item.type
       scheduleToastLife(existing, closeToastItem)
       return {
         id: existing.id,
@@ -99,9 +99,11 @@ export const toast = {
   add: (input: ToastInput) => add(input),
   success: (input: ToastInput) => add(input, 'success'),
   info: (input: ToastInput) => add(input, 'info'),
-  warn: (input: ToastInput) => add(input, 'warn'),
-  warning: (input: ToastInput) => add(input, 'warn'),
-  error: (input: ToastInput) => add(input, 'error'),
+  /** Maps to type `'warning'`. */
+  warn: (input: ToastInput) => add(input, 'warning'),
+  warning: (input: ToastInput) => add(input, 'warning'),
+  /** Maps to type `'danger'`. */
+  error: (input: ToastInput) => add(input, 'danger'),
   /** Patch an open message in place. Returns a handle, or `undefined` when it is not open. */
   update(id: string | number, patch: Partial<Omit<ToastMessage, 'id'>>): ToastHandle | undefined {
     const target = toastState.messages.find((message) => message.id === id)

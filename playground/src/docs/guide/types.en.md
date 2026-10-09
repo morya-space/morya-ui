@@ -208,18 +208,40 @@ interface MenuNodeBase {
 }
 ```
 
-<h3 id="MSeverity">MSeverity</h3>
+<h3 id="MToneType">MToneType</h3>
 
-Status tone for Message, Tag, etc.:
+Base semantic tones for display / feedback components:
 
 ```ts
-type MSeverity =
-  | 'primary'
+type MToneType =
   | 'secondary'
   | 'success'
   | 'info'
   | 'warning'
+  | 'help'
   | 'danger'
+  | 'contrast'
+```
+
+<h3 id="MTagType">MTagType</h3>
+
+Tag / Badge / Chip / Status: `MToneType` plus brand `primary`.
+
+```ts
+type MTagType = MToneType | 'primary'
+```
+
+<h3 id="MToastType">MToastType</h3>
+
+Message / Toast / Timeline tones:
+
+```ts
+type MToastType =
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'danger'
+  | 'secondary'
   | 'contrast'
 ```
 

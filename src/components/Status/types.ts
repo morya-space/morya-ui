@@ -1,7 +1,7 @@
-import type { MSizeInput, MTagSeverity } from "../../shared/types";
+import type { MSizeInput, MTagType } from "../../shared/types";
 import type { IconName } from "../Icon/types";
 
-export type StatusSeverity = MTagSeverity | "warning";
+export type StatusType = MTagType;
 export type StatusSize = MSizeInput;
 /** Visual presentation: colored dot (default), soft pill tag, or text only. */
 export type StatusVariant = "dot" | "tag" | "text";
@@ -11,14 +11,13 @@ export interface StatusProps {
   label?: string;
   /**
    * Semantic color. Defaults to `secondary` (neutral).
-   * Legacy `warning` is normalized to `warn`.
    */
-  severity?: StatusSeverity;
+  type?: StatusType;
   /** Pulse animation on the status indicator (dot). */
   processing?: boolean;
   /** Size. Also accepts legacy `sm` / `lg`. */
   size?: StatusSize;
-  /** Custom color. Overrides `severity` when set. */
+  /** Custom color. Overrides `type` when set. */
   color?: string;
   /**
    * Presentation style.

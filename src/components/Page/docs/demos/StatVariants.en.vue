@@ -15,7 +15,7 @@ import { MGrid, MGridItem, MPageContent, MPageStat } from 'morya-ui'
             value="1,284"
             trend="+6.1%"
             trend-direction="up"
-            trend-severity="success"
+            trend-type="success"
             layout="plain"
             orientation="inline"
             density="compact"
@@ -37,7 +37,7 @@ import { MGrid, MGridItem, MPageContent, MPageStat } from 'morya-ui'
             trend="+8.2%"
             trend-direction="up"
             trend-label="vs last month"
-            trend-severity="success"
+            trend-type="success"
             icon="user"
             shadow="hover"
           />

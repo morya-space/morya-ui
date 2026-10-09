@@ -147,8 +147,8 @@ const BLOCK_TO_SNIPPET: Record<string, { snippetId: string; notesZh: string; not
   },
   kpi: {
     snippetId: 'dashboard-kpi-grid',
-    notesZh: 'MPageStat 带 trend / trendDirection / trendSeverity',
-    notesEn: 'MPageStat with trend / trendDirection / trendSeverity',
+    notesZh: 'MPageStat 带 trend / trendDirection / trendType',
+    notesEn: 'MPageStat with trend / trendDirection / trendType',
   },
   chart: {
     snippetId: 'dashboard-chart-card',

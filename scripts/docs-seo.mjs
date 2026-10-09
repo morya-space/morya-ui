@@ -418,11 +418,11 @@ export function buildLlmsTxt(pages) {
   const lines = [
     "# morya-ui",
     "",
-    "> Vue 3 component library with design tokens (`--m-*`), shared props (`severity` / `variant`), themes, and agent tooling (Skill + MCP).",
+    "> Vue 3 component library with design tokens (`--m-*`), shared props (`type` / `variant`), themes, and agent tooling (Skill + MCP).",
     ">",
     `> Docs: ${SITE_ORIGIN}/`,
     "",
-    "Prefer morya API vocabulary (`severity`, `variant`, `--m-*`). Do not invent prop names that are not documented on morya components. Unsure about an API? use MCP / component docs.",
+    "Prefer morya API vocabulary (`type`, `variant`, `--m-*`). Do not invent prop names that are not documented on morya components. Unsure about an API? use MCP / component docs.",
     "",
     "## Guides",
     "",

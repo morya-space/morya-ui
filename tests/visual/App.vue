@@ -28,13 +28,13 @@ const text = ref('Morya')
         <MInput v-model="text" placeholder="Name" style="width: 220px" />
         <MCheckbox v-model="checked" label="Accept" />
         <MSwitch v-model="on" />
-        <MTag severity="success">Ready</MTag>
+        <MTag type="success">Ready</MTag>
       </div>
     </section>
 
     <section class="visual-panel" data-case="feedback">
       <h1>Feedback</h1>
-      <MAlert severity="info" title="Heads up" description="Visual fixture for regression." />
+      <MAlert type="info" title="Heads up" description="Visual fixture for regression." />
       <MCard title="Card" style="margin-top: 12px; width: 320px">
         Compact surface used in docs and apps.
       </MCard>

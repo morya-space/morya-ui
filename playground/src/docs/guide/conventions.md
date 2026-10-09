@@ -6,7 +6,7 @@ description: morya-ui 的命名、语义色、尺寸与主题约定。
 
 # 约定
 
-Morya UI 用自己的词表描述界面：组件前缀 `M*`、语义色 `severity`（Badge / Tag / Alert 等）、Button 的 `type` / `color` / `variant`、设计令牌 `--m-*`。写业务页时直接跟这套约定走。
+Morya UI 用自己的词表描述界面：组件前缀 `M*`、语义色 `type`（Badge / Tag / Status / Alert 等）、Button 的外观糖 `type` / `color` / `variant`、设计令牌 `--m-*`。写业务页时直接跟这套约定走。
 
 ## 组件与令牌
 
@@ -24,8 +24,8 @@ Morya UI 用自己的词表描述界面：组件前缀 `M*`、语义色 `severit
 
 | 词 | 用在 |
 | --- | --- |
-| `severity` | Badge / Tag / Alert 等语义色：`primary` / `secondary` / `success` / `info` / `warning` / `danger` |
-| `type` / `color` / `variant` | Button：`type` 糖（`primary` / `dashed` / `text` / `link`…）+ `color` + `variant`（`solid` / `outlined` / `filled`…） |
+| `type`（语义色） | Badge / Tag / Status / Alert / Message / Toast 等：`primary` / `secondary` / `success` / `info` / `warning` / `danger` |
+| `type` / `color` / `variant`（Button） | Button：`type` 糖（`primary` / `dashed` / `text` / `link`…）+ `color` + `variant`（`solid` / `outlined` / `filled`…） |
 | `fluid` / `block` | 通栏；字段多用 `fluid`，Button / ButtonGroup 用 `block` |
 | `size` | `small` / `medium` / `large`（部分控件仍接受 `sm` / `md` / `lg`） |
 | `status` | 表单控件校验态：`error` / `warning` |

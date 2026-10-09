@@ -31,8 +31,13 @@ describe('muChip', () => {
     expect(wrapper.classes()).toContain('m-chip--disabled')
   })
 
-  it('applies size and severity', () => {
-    const wrapper = mount(MChip, { props: { label: 'Hot', size: 'small', severity: 'danger' } })
+  it('applies size and type', () => {
+    const wrapper = mount(MChip, { props: { label: 'Hot', size: 'small', type: 'danger' } })
     expect(wrapper.classes()).toEqual(expect.arrayContaining(['m-chip--small', 'm-chip--danger']))
+  })
+
+  it('applies warning type class', () => {
+    const wrapper = mount(MChip, { props: { label: 'Caution', type: 'warning' } })
+    expect(wrapper.classes()).toContain('m-chip--warning')
   })
 })

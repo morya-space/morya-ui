@@ -7,7 +7,7 @@ import { MChip } from 'morya-ui'
     <MChip label="Basic" />
     <MChip label="With Icon" icon="check" />
     <MChip label="Removable" removable />
-    <MChip label="Success" severity="success" size="small" />
+    <MChip label="Success" type="success" size="small" />
     <MChip label="Disabled" removable disabled />
   </div>
 </template>

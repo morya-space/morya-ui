@@ -14,7 +14,7 @@ import { MPageContent, MPageStat } from 'morya-ui'
         trend="+8.2%"
         trend-direction="up"
         trend-label="较上月"
-        trend-severity="success"
+        trend-type="success"
         icon="user"
         shadow="hover"
       />

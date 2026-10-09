@@ -16,7 +16,7 @@ import { MAlert } from 'morya-ui'
 
 ## 基础用法
 
-`severity` 控制语义色与默认图标：`info` / `success` / `warning` / `error`。
+`type` 控制语义色与默认图标：`info` / `success` / `warning` / `danger`。
 
 ```vue preview src="./demos/Basic.vue"
 ```
@@ -39,7 +39,7 @@ import { MAlert } from 'morya-ui'
 
 | Prop | 类型 | 默认 | 说明 |
 | --- | --- | --- | --- |
-| `severity` | `AlertSeverity` | `'info'` | 语义色与默认图标 |
+| `type` | `AlertType` | `'info'` | 语义色与默认图标 |
 | `title` | `string` | — | 标题 |
 | `description` | `string` | — | 描述（也可用默认插槽） |
 | `showIcon` | `boolean` | `true` | 是否显示图标 |
@@ -65,10 +65,10 @@ import { MAlert } from 'morya-ui'
 
 ## 类型
 
-### AlertSeverity
+### AlertType
 
 ```ts
-type AlertSeverity = 'info' | 'success' | 'warning' | 'error'
+type AlertType = 'info' | 'success' | 'warning' | 'danger'
 ```
 
 ### AlertSize

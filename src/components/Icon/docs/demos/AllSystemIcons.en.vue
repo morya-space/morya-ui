@@ -91,7 +91,7 @@ async function copyName(name: string) {
     ...messages.value,
     {
       id,
-      severity: 'success',
+      type: 'success',
       summary: 'Copied',
       detail: name,
       closable: true,

@@ -1,31 +1,25 @@
 /**
- * Semantic severity (omit / primary = default brand).
- * Canonical vocabulary: `primary / success / info / warning / danger / help / contrast`;
- * `warn` / `error` are accepted as deprecated runtime aliases.
+ * Semantic tone for display / feedback components.
+ * Canonical vocabulary: `primary / secondary / success / info / warning / danger / help / contrast`.
  */
-export type MSeverity =
+export type MToneType =
   | 'secondary'
   | 'success'
   | 'info'
   | 'warning'
-  /** @deprecated Use `'warning'` instead. */
-  | 'warn'
   | 'help'
   | 'danger'
   | 'contrast'
 
-export type MTagSeverity = MSeverity | 'primary'
+/** Tag / Badge / Chip / Status tone presets (includes brand `primary`). */
+export type MTagType = MToneType | 'primary'
 
-/** Canonical severities: success/info/warning/danger (+ secondary/contrast). `warn` / `error` are deprecated aliases. */
-export type MToastSeverity =
+/** Message / Toast / Timeline tone presets. */
+export type MToastType =
   | 'success'
   | 'info'
   | 'warning'
-  /** @deprecated Use `'warning'` instead. */
-  | 'warn'
   | 'danger'
-  /** @deprecated Use `'danger'` instead. */
-  | 'error'
   | 'secondary'
   | 'contrast'
 
@@ -59,15 +53,4 @@ export function resolveIconSizeFromClass(sizeClass: 'small' | 'normal' | 'large'
   if (sizeClass === 'small') return 'sm'
   if (sizeClass === 'large') return 'lg'
   return 'md'
-}
-
-/**
- * Normalize severity aliases onto the vocabulary used by component styles.
- * Only `warning` → `warn` is centralized here today: Toast/Message/Timeline styles and the
- * Message icon map still key on `error`, so `error` → `danger` stays per component
- * (see ProgressBar) until Toast/Message/Timeline migrate off the `error` alias.
- */
-export function normalizeSeverity<T extends string>(severity?: T | 'warning'): T | 'warn' | undefined {
-  if (severity === 'warning') return 'warn'
-  return severity as T | undefined
 }

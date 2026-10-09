@@ -42,7 +42,7 @@ import { MTimeline } from 'morya-ui'
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
-`TimelineEvent`：`status` / `content` / `date` / `icon`（`IconName` 或文字）/ `color` / `severity`。
+`TimelineEvent`：`status` / `content` / `date` / `icon`（`IconName` 或文字）/ `color` / `type`。
 
 ## Slots
 
@@ -72,6 +72,6 @@ interface TimelineEvent {
   /** Built-in IconName, or raw text glyph fallback. */
   icon?: IconName | string
   color?: string
-  severity?: TimelineSeverity
+  type?: TimelineType
 }
 ```

@@ -218,9 +218,9 @@ button.m-button / a.m-button
 <MButton color="primary" variant="solid">保存</MButton>
 ```
 
-### Button 的 `color` 和其它组件的 `severity`？
+### Button 的 `color` 和其它组件的 `type`？
 
-Button 使用 `color` / `variant`。Badge、Tag、Alert、Message、Toast 等反馈组件仍使用 `severity`。
+Button 用 `color` / `variant`（以及外观糖 `type`）描述按钮形态。Badge、Tag、Status、Alert、Message、Toast 等组件的 `type` 表示语义色调，取值不同，不要和 Button 的 `type` 糖混用。
 
 ### `text` 和 `link` 怎么区分？
 

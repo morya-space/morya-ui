@@ -44,8 +44,8 @@ The first call auto-mounts a floating host; no template component is required.
 | --- | --- |
 | `message.success(content \| options)` | Success |
 | `message.info(content \| options)` | Info |
-| `message.warn(content \| options)` | Warn (`warning` alias) |
-| `message.error(content \| options)` | Error |
+| `message.warn(content \| options)` | Warn (maps to `type: 'warning'`) |
+| `message.error(content \| options)` | Error (maps to `type: 'danger'`) |
 | `message.open(content \| options)` | Open with options |
 | `message.close(id?)` | Close one / all |
 | `message.closeAll()` / `message.destroyAll()` | Close all (aliases of each other) |
@@ -58,10 +58,10 @@ Returns `{ id, close }`.
 | Field | Type | Default | Description |
 | --- | --- | --- | --- |
 | `content` | `string \| number \| VNode \| Component \| (() => VNodeChild)` | — | Body; a renderable value may also be passed directly |
-| `severity` | `'success' \| 'info' \| 'warn' \| 'error' \| 'secondary' \| 'contrast'` | `'info'` | Tone |
+| `type` | `MessageType` (`'success' \| 'info' \| 'warning' \| 'danger' \| 'secondary' \| 'contrast'`) | `'info'` | Tone |
 | `closable` | `boolean` | `false` | Show close button |
 | `life` | `number` | `3000` | Auto-close ms; `0` keeps open |
-| `icon` | `boolean` | `true` | Show severity icon |
+| `icon` | `boolean` | `true` | Show type icon |
 | `id` | `string \| number` | auto | Unique key |
 
 ## Optional host

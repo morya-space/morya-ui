@@ -123,7 +123,7 @@
     color: var(--m-color-info);
 }
 
-.m-chip--warn {
+.m-chip--warning {
     background: color-mix(in srgb, var(--m-color-warn) 14%, transparent);
     color: var(--m-color-warn);
 }

@@ -531,7 +531,7 @@ const loading = ref(false)`,
   <template #cell-status="{ value }">
     <MStatus
       :label="value === 'active' || value === 'online' ? '启用' : '停用'"
-      :severity="value === 'active' || value === 'online' ? 'success' : 'secondary'"
+      :type="value === 'active' || value === 'online' ? 'success' : 'secondary'"
     />
   </template>
   <template #cell-count="{ value }">
@@ -614,7 +614,7 @@ const loading = ref(false)`,
     template: `<template #cell-category="{ value }">
   <MTag
     :value="String(value ?? '')"
-    severity="info"
+    type="info"
   />
 </template>`,
     rules: ['分类/强调态用 MTag；行内业务状态用 MStatus（list-status-dot）', '不要用 Button 颜色表达状态'],
@@ -634,7 +634,7 @@ const loading = ref(false)`,
     template: `<template #cell-status="{ value }">
   <MStatus
     :label="value === 'active' || value === 'online' ? '启用' : '停用'"
-    :severity="value === 'active' || value === 'online' ? 'success' : 'secondary'"
+    :type="value === 'active' || value === 'online' ? 'success' : 'secondary'"
   />
 </template>`,
     rules: ['行内轻量业务状态优先 MStatus', '不要用 Button 颜色表达状态'],
@@ -791,9 +791,9 @@ const roleOptions = [
     title: '仪表盘 KPI 栅格',
     titleEn: 'Dashboard KPI grid',
     description:
-      'MGrid + MPageStat：带 trend / trendDirection / trendSeverity；高密条可用 density="compact"。',
+      'MGrid + MPageStat：带 trend / trendDirection / trendType；高密条可用 density="compact"。',
     descriptionEn:
-      'MGrid + MPageStat with trend / trendDirection / trendSeverity; use density="compact" for dense strips.',
+      'MGrid + MPageStat with trend / trendDirection / trendType; use density="compact" for dense strips.',
     pageTypes: ['dashboard'],
     keywords: ['kpi', '指标', 'stat', 'grid', 'metrics', 'trend', 'compact'],
     imports: ['MGrid', 'MGridItem', 'MPageStat'],
@@ -803,7 +803,7 @@ const roleOptions = [
     value: '12,480',
     trend: '+8.2%',
     trendDirection: 'up' as const,
-    trendSeverity: 'success' as const,
+    trendType: 'success' as const,
     trendLabel: '较上月',
     icon: 'users',
   },
@@ -812,7 +812,7 @@ const roleOptions = [
     value: '1,926',
     trend: '-3.1%',
     trendDirection: 'down' as const,
-    trendSeverity: 'warn' as const,
+    trendType: 'warning' as const,
     trendLabel: '较昨日',
     icon: 'activity',
   },
@@ -824,7 +824,7 @@ const roleOptions = [
       :value="metric.value"
       :trend="metric.trend"
       :trend-direction="metric.trendDirection"
-      :trend-severity="metric.trendSeverity"
+      :trend-type="metric.trendType"
       :trend-label="metric.trendLabel"
       :icon="metric.icon"
     />
@@ -833,13 +833,13 @@ const roleOptions = [
 <!-- 高密条带示例：density="compact" layout="plain" orientation="inline" -->`,
     rules: [
       'KPI 用 MPageStat，不要每页自定义 stat CSS',
-      '趋势务必带 trendDirection + trendSeverity（升 success / 降 warn|danger）',
+      '趋势务必带 trendDirection + trendType（升 success / 降 warning|danger）',
       'responsive="screen" 便于窄屏降列',
       '密集工作台可用 density="compact"；加载中用 loading',
     ],
     rulesEn: [
       'Use MPageStat for KPIs — no per-page stat CSS',
-      'Always set trendDirection + trendSeverity (up→success, down→warn|danger)',
+      'Always set trendDirection + trendType (up→success, down→warning|danger)',
       'Use responsive="screen" for narrow layouts',
       'Dense dashboards may use density="compact"; use loading while fetching',
     ],
@@ -951,7 +951,7 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     template: `<MPageHeader title="林晓" description="查看账号摘要、属性与近期活动。">
   <template #actions>
     <MSpace>
-      <MStatus label="启用" severity="success" />
+      <MStatus label="启用" type="success" />
       <MButton type="primary">编辑</MButton>
       <MButton danger type="text">删除</MButton>
     </MSpace>
@@ -978,7 +978,7 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
   <MDescriptionsItem label="部门">产品设计</MDescriptionsItem>
   <MDescriptionsItem label="入职日期">2025-03-12</MDescriptionsItem>
   <MDescriptionsItem label="状态">
-    <MStatus label="启用" severity="success" />
+    <MStatus label="启用" type="success" />
   </MDescriptionsItem>
 </MDescriptions>`,
     rules: [
@@ -1213,7 +1213,7 @@ function onAcceptDelete() {
     scriptSetup: `const rowMenu = [
   { label: '编辑', command: () => {/* open edit */} },
   { label: '复制', command: () => {/* duplicate */} },
-  { label: '删除', severity: 'danger', command: () => {/* askDelete */} },
+  { label: '删除', command: () => {/* askDelete */} },
 ]`,
     template: `<template #cell-actions>
   <MDropdown :model="rowMenu">

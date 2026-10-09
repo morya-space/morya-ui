@@ -103,7 +103,7 @@ export const pagePatterns: PagePattern[] = [
       '新增、保存等主操作使用 primary MButton',
       '查询等次要操作使用默认或 variant="outlined" MButton',
       '删除使用 danger MButton，并配合 MConfirmDialog',
-      '业务状态优先使用 MStatus（圆点+文案）或 MTag（分类标签），不使用 Button severity 表达状态',
+      '业务状态优先使用 MStatus（圆点+文案）或 MTag（分类标签），不使用 Button color 表达状态',
       '间距、颜色、圆角优先使用 --m-* 设计令牌，不直接硬编码色板',
     ],
     interactionRules: [
@@ -844,7 +844,7 @@ export const designRules = {
       when: [
         '登录/表单区常驻错误：优先字段 errorMessage',
         '表单级总结：使用 --m-* 样式的 role=alert 条（见 login-page 黄金样例）',
-        'MMessage 组件当前主要为 message 服务宿主，勿臆造 severity 子节点 API',
+        'MMessage 组件当前主要为 message 服务宿主，勿臆造 type / 子节点 Alert API',
       ],
     },
     doc: 'design-kit/.agents/skills/morya-ui-pages/references/feedback.md',

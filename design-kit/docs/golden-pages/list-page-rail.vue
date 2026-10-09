@@ -195,7 +195,7 @@ const rows = [
               <template #cell-status="{ value }">
                 <MStatus
                   :label="value === 'active' ? '启用' : '停用'"
-                  :severity="value === 'active' ? 'success' : 'secondary'"
+                  :type="value === 'active' ? 'success' : 'secondary'"
                 />
               </template>
               <template #cell-actions>

@@ -357,8 +357,8 @@
     color: var(--m-color-success);
 }
 
-.m-page-stat__trend--warn {
-    color: var(--m-color-warn);
+.m-page-stat__trend--warning {
+    color: var(--m-color-warning);
 }
 
 .m-page-stat__trend--danger {

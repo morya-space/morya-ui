@@ -159,7 +159,7 @@ import {
 | `label` | `string` | — | 指标名称。 |
 | `value` | `string \| number` | — | 主数值（等宽数字）。 |
 | `trend` | `string` | — | 变化量，渲染为与 `MStatus` 同色的文本。 |
-| `trendSeverity` | `'primary' \| 'success' \| 'warn' \| 'danger' \| 'secondary'` | `'primary'` | 趋势色。 |
+| `trendType` | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'secondary'` | `'primary'` | 趋势色。 |
 | `trendDirection` | `'up' \| 'down'` | — | 在趋势旁显示升/降箭头。 |
 | `trendLabel` | `string` | — | 趋势后的弱说明，如「较上月」。 |
 | `icon` | `string` | — | 右侧弱化图标名。 |

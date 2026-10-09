@@ -91,7 +91,7 @@ async function copyName(name: string) {
     ...messages.value,
     {
       id,
-      severity: 'success',
+      type: 'success',
       summary: '已复制',
       detail: name,
       closable: true,

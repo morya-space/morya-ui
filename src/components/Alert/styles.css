@@ -42,7 +42,7 @@
     --m-alert-tone: var(--m-color-warning);
 }
 
-.m-alert--error {
+.m-alert--danger {
     --m-alert-tone: var(--m-color-danger);
 }
 

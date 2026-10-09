@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T07:54:20.393Z",
+  "generatedAt": "2026-10-09T09:43:26.661Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 484,
+  "tokenCount": 483,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -725,26 +725,6 @@
       }
     },
     {
-      "name": "--m-button-badge-font-weight",
-      "category": "component",
-      "source": "src/components/Button/styles.css",
-      "default": "var(--m-font-weight-strong)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Button Badge Font Weight",
-        "en-US": "Component-specific token: Button Badge Font Weight"
-      }
-    },
-    {
-      "name": "--m-button-badge-min-width",
-      "category": "component",
-      "source": "src/components/Button/styles.css",
-      "default": "1.15rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Button Badge Min Width",
-        "en-US": "Component-specific token: Button Badge Min Width"
-      }
-    },
-    {
       "name": "--m-button-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
@@ -1052,6 +1032,16 @@
       "description": {
         "zh-CN": "组件专用相关变量：Button On Color",
         "en-US": "Component-specific token: Button On Color"
+      }
+    },
+    {
+      "name": "--m-button-outlined-active-bg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-surface)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Active Bg",
+        "en-US": "Component-specific token: Button Outlined Active Bg"
       }
     },
     {

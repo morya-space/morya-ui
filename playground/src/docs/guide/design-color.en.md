@@ -1,7 +1,7 @@
 ---
 title: Color
 order: 4.51
-description: Brand, severity, neutrals, and contrast conventions.
+description: Brand, semantic type, neutrals, and contrast conventions.
 ---
 
 # Color
@@ -11,7 +11,7 @@ Components consume semantic `--m-*` color variables only—there is no second pr
 ## Principles
 
 - **Brand at the theme entry**: Override `--m-color-primary` (and derived hover / active / bg); pages keep `var(--m-*)`.
-- **Semantics over hue**: Buttons, tags, and alerts use `severity`—do not fake status with raw colors.
+- **Semantics over hue**: Tags / alerts use semantic `type`; buttons use `type` / `color` / `variant`—do not fake status with raw colors.
 - **Dark must follow**: Avoid light-only hex in app CSS; rely on `[data-theme="dark"]` overrides.
 - **Never color alone**: Pair error / success with copy or icons (see [Accessibility](/docs/accessibility)).
 
@@ -37,15 +37,15 @@ Components consume semantic `--m-*` color variables only—there is no second pr
 
 Dark example: `--m-color-surface: #141414`, body `rgba(255,255,255,0.85)`. Full catalog: [Design tokens](/docs/design-tokens).
 
-## Severity mapping
+## Type mapping
 
-| `severity` | Maps to |
+| Semantic `type` | Maps to |
 | --- | --- |
 | (omit / primary) | `--m-color-primary` |
 | `secondary` | Neutral secondary treatment |
 | `success` | `--m-color-success` |
 | `info` | `--m-color-info` |
-| `warning` / `warn` | `--m-color-warning` |
+| `warning` | `--m-color-warning` |
 | `help` | `--m-color-help` |
 | `danger` | `--m-color-danger` |
 | `contrast` | `--m-color-contrast` family |

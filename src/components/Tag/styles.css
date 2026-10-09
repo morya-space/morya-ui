@@ -62,7 +62,6 @@
     color: var(--m-color-info);
 }
 
-.m-tag--warn,
 .m-tag--warning {
     background: color-mix(in srgb, var(--m-color-warn) 14%, transparent);
     color: var(--m-color-warn);

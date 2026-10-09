@@ -72,7 +72,7 @@ import { MButton, MDialog } from 'morya-ui'
 | `width` | `string` | — | 对话框宽度（最大化时忽略）。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
-| `type` | `'info' \| 'success' \| 'warning' \| 'error'` | — | 标题状态图标；`warning` 与 `warn` 同义 |
+| `type` | `'info' \| 'success' \| 'warning' \| 'danger'` | — | 标题状态图标 |
 | `positiveText` / `negativeText` | `string` | — | 预设页脚按钮；有 `footer` 插槽时忽略 |
 | `positiveColor` | [ButtonColor](/docs/types#ButtonColor) | — | 确认按钮颜色 |
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |

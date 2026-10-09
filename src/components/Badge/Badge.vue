@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { BadgeProps } from './types'
 import { computed, ref, useAttrs, useSlots } from 'vue'
-import { normalizeSeverity, resolveSizeClass } from '../../shared/types'
+import { resolveSizeClass } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { usePauseOffscreen } from '../../shared/usePauseOffscreen'
 
 defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<BadgeProps>(), {
-  severity: 'primary',
+  type: 'primary',
   processing: false,
 })
 
@@ -18,7 +18,7 @@ const slots = useSlots()
 const animRef = ref<HTMLElement | null>(null)
 const { pauseAttrs } = usePauseOffscreen(animRef, () => props.processing)
 const hasContent = computed(() => Boolean(slots.default))
-const severityTone = computed(() => normalizeSeverity(props.severity) ?? 'primary')
+const typeTone = computed(() => props.type ?? 'primary')
 const sizeTone = computed(() => resolveSizeClass(props.size))
 const isDot = computed(() => props.value == null || props.value === '')
 
@@ -32,7 +32,7 @@ const displayValue = computed(() => {
 
 const badgeClass = computed(() => [
   'm-badge',
-  `m-badge--${severityTone.value}`,
+  `m-badge--${typeTone.value}`,
   {
     'm-badge--dot': isDot.value,
     'm-badge--small': sizeTone.value === 'small',

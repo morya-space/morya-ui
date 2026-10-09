@@ -218,9 +218,9 @@ equals
 <MButton color="primary" variant="solid">Save</MButton>
 ```
 
-### Button `color` vs other components' `severity`?
+### Button `color` vs other components' `type`?
 
-Button uses `color` / `variant`. Feedback components such as Badge, Tag, Alert, Message, and Toast still use `severity`.
+Button uses `color` / `variant` (plus appearance sugar `type`) for button look. On Badge, Tag, Status, Alert, Message, and Toast, `type` means semantic tone with a different value set—do not mix it with Button's sugar `type`.
 
 ### `text` vs `link`?
 

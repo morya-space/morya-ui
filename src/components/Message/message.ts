@@ -1,4 +1,4 @@
-import type { MessageHandle, MessageHostConfig, MessageInput, MessageItem, MessageOptions, MessageSeverity } from './types'
+import type { MessageHandle, MessageHostConfig, MessageInput, MessageItem, MessageOptions, MessageType } from './types'
 import { defineComponent, h } from 'vue'
 import { isMessageOptionsObject } from '../../shared/content'
 import { mountOverlayHost } from '../../shared/overlayHost'
@@ -33,22 +33,22 @@ function ensureHost() {
   setMessageAutoHost(mountOverlayHost(AutoMessageHost, 'm-message-host-root'))
 }
 
-function toItem(input: MessageInput, severity?: MessageSeverity): MessageItem {
+function toItem(input: MessageInput, type?: MessageType): MessageItem {
   const options: MessageOptions = isMessageOptionsObject(input) ? input : { content: input }
   return {
     id: options.id ?? `m-message-${Date.now()}-${++seed}`,
     content: options.content,
-    severity: severity ?? options.severity ?? 'info',
+    type: type ?? options.type ?? 'info',
     closable: options.closable ?? false,
     life: options.life === undefined ? DEFAULT_LIFE : options.life,
     icon: options.icon ?? true,
   }
 }
 
-function open(input: MessageInput, severity?: MessageSeverity): MessageHandle {
+function open(input: MessageInput, type?: MessageType): MessageHandle {
   ensureHost()
   applyMessageMax(messageState.max)
-  const item = toItem(input, severity)
+  const item = toItem(input, type)
   const dedupe =
     (isMessageOptionsObject(input) ? input.dedupe : undefined) ??
     messageState.dedupe ??
@@ -57,7 +57,7 @@ function open(input: MessageInput, severity?: MessageSeverity): MessageHandle {
     const existing = findDuplicateMessage(item)
     if (existing) {
       if (item.life !== undefined) existing.life = item.life
-      if (item.severity !== undefined) existing.severity = item.severity
+      if (item.type !== undefined) existing.type = item.type
       scheduleMessageLife(existing, closeMessageItem)
       return {
         id: existing.id,
@@ -77,9 +77,11 @@ export const message = {
   open: (input: MessageInput) => open(input),
   success: (input: MessageInput) => open(input, 'success'),
   info: (input: MessageInput) => open(input, 'info'),
-  warn: (input: MessageInput) => open(input, 'warn'),
-  warning: (input: MessageInput) => open(input, 'warn'),
-  error: (input: MessageInput) => open(input, 'error'),
+  /** Maps to type `'warning'`. */
+  warn: (input: MessageInput) => open(input, 'warning'),
+  warning: (input: MessageInput) => open(input, 'warning'),
+  /** Maps to type `'danger'`. */
+  error: (input: MessageInput) => open(input, 'danger'),
   close: closeMessageItem,
   closeAll: closeAllMessageItems,
   destroyAll: closeAllMessageItems,

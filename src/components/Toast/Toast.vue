@@ -7,7 +7,6 @@ import { useMConfig } from '../../shared/config'
 import { plainTextOf } from '../../shared/content'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { MRenderableView } from '../../shared/Renderable'
-import { normalizeSeverity } from '../../shared/types'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
@@ -64,8 +63,8 @@ watch(
   { immediate: true },
 )
 
-function messageSeverityClass(severity?: ToastMessage['severity']) {
-  return `m-toast__message--${normalizeSeverity(severity) ?? 'info'}`
+function messageTypeClass(type?: ToastMessage['type']) {
+  return `m-toast__message--${type ?? 'info'}`
 }
 
 function closeLabel(message: ToastMessage) {
@@ -102,7 +101,7 @@ function onMouseLeave(message: ToastMessage) {
           v-for="message in list"
           :key="message.id"
           class="m-toast__message"
-          :class="messageSeverityClass(message.severity)"
+          :class="messageTypeClass(message.type)"
           role="status"
           @mouseenter="onMouseEnter(message)"
           @mouseleave="onMouseLeave(message)"

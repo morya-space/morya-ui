@@ -1,10 +1,10 @@
 import type { RootPassThrough } from '../../shared/passThrough'
-import type { MToastSeverity } from '../../shared/types'
+import type { MToastType } from '../../shared/types'
 import type { IconName } from '../Icon/types'
 
 export type TimelineAlign = 'left' | 'right' | 'alternate'
 export type TimelineLayout = 'vertical' | 'horizontal'
-export type TimelineSeverity = MToastSeverity | 'warning' | 'help'
+export type TimelineType = MToastType | 'help'
 
 export interface TimelineEvent {
   status?: string
@@ -13,7 +13,7 @@ export interface TimelineEvent {
   /** Built-in IconName, or raw text glyph fallback. */
   icon?: IconName | string
   color?: string
-  severity?: TimelineSeverity
+  type?: TimelineType
 }
 
 export interface TimelineProps {

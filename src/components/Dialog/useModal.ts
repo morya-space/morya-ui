@@ -222,7 +222,7 @@ export function useModal(): ModalStaticApi {
     info: make({ type: 'info', showCancel: false }),
     success: make({ type: 'success', showCancel: false }),
     warning: make({ type: 'warning', showCancel: false }),
-    error: make({ type: 'error', showCancel: false }),
+    error: make({ type: 'danger', showCancel: false }),
     confirm: make({ showCancel: true }),
     destroyAll: () => {
       for (const handle of [...liveHandles]) handle.destroy()

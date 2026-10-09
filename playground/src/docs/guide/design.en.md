@@ -6,7 +6,7 @@ description: Entry to Morya design principles and Design Spec chapters.
 
 # Design language
 
-Morya UI is a **token-driven** Vue 3 library: color, spacing, radius, type, and motion share `--m-*` variables; interaction vocabulary uses `severity` / `variant` / `size`; global behavior is coordinated by `MConfigProvider`, `useTheme`, `useDensity`, and `useMotion`.
+Morya UI is a **token-driven** Vue 3 library: color, spacing, radius, type, and motion share `--m-*` variables; interaction vocabulary uses semantic `type` / `variant` / `size` (Button also has `color`); global behavior is coordinated by `MConfigProvider`, `useTheme`, `useDensity`, and `useMotion`.
 
 This page is the Design Spec hub. Principles come from [`design-kit/DESIGN.md`](https://github.com/morya-space/morya-ui/blob/main/design-kit/DESIGN.md); the full variable catalog is in [Design tokens](/docs/design-tokens).
 
@@ -22,7 +22,7 @@ This page is the Design Spec hub. Principles come from [`design-kit/DESIGN.md`](
 
 | Chapter                               | Focus                                                         |
 | ------------------------------------- | ------------------------------------------------------------- |
-| [Color](/docs/design-color)           | Brand, severity, neutrals, contrast, overrides                |
+| [Color](/docs/design-color)           | Brand, semantic type, neutrals, contrast, overrides           |
 | [Typography](/docs/design-typography) | Type ramp, weights, control fonts                             |
 | [Spacing](/docs/design-spacing)       | `--m-space-*` rhythm and density scaling                      |
 | [Layout](/docs/design-layout)         | `MLayout` / `MPage*` / `MSpace` and app chrome                |

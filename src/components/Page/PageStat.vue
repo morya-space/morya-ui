@@ -10,7 +10,7 @@ import MSkeleton from '../Skeleton/Skeleton.vue'
 defineOptions({ name: 'MPageStat', inheritAttrs: false })
 
 const props = withDefaults(defineProps<PageStatProps>(), {
-  trendSeverity: 'primary',
+  trendType: 'primary',
   shadow: 'always',
   layout: 'card',
   density: 'default',
@@ -44,7 +44,7 @@ const surfaceProps = computed(() => {
 
 const trendClass = computed(() => [
   'm-page-stat__trend',
-  `m-page-stat__trend--${props.trendSeverity}`,
+  `m-page-stat__trend--${props.trendType}`,
 ])
 
 const trendIcon = computed<IconName | undefined>(() => {

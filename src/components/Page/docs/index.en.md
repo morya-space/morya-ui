@@ -155,7 +155,7 @@ Default slot: closable `MTag`s or similar.
 | `label`          | `string`                                                      | —           | Metric name.                                             |
 | `value`          | `string \| number`                                            | —           | Primary value (tabular nums).                            |
 | `trend`          | `string`                                                      | —           | Delta text colored like `MStatus`.                       |
-| `trendSeverity`  | `'primary' \| 'success' \| 'warn' \| 'danger' \| 'secondary'` | `'primary'` | Trend color.                                             |
+| `trendType`  | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'secondary'` | `'primary'` | Trend color.                                             |
 | `trendDirection` | `'up' \| 'down'`                                              | —           | Up/down arrow beside trend.                              |
 | `trendLabel`     | `string`                                                      | —           | Weak note after trend.                                   |
 | `icon`           | `string`                                                      | —           | Trailing muted icon name.                                |

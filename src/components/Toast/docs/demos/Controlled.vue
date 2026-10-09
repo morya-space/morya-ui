@@ -6,10 +6,10 @@ import { ref } from 'vue'
 const messages = ref<ToastMessage[]>([])
 let seq = 0
 
-function push(severity: ToastMessage['severity'], summary: string, detail?: string) {
+function push(type: ToastMessage['type'], summary: string, detail?: string) {
   messages.value = [
     ...messages.value,
-    { id: `toast-${++seq}`, summary, detail, severity, life: 0 },
+    { id: `toast-${++seq}`, summary, detail, type, life: 0 },
   ]
 }
 

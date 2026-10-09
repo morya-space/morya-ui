@@ -9,6 +9,6 @@ export type {
   MessageOptions,
   MessagePlacement,
   MessageProps,
-  MessageSeverity,
+  MessageType,
   MRenderable,
 } from './types'
