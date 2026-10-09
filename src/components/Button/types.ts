@@ -36,11 +36,7 @@ export type ButtonLoading =
       icon?: IconName | Component
     }
 
-export interface ButtonPassThrough {
-  root?: PassThroughPart
-  icon?: PassThroughPart
-  content?: PassThroughPart
-}
+export type ButtonPassThrough = Partial<Record<'root' | 'icon' | 'content', PassThroughPart>>
 
 export interface ButtonProps {
   /** Sugar for a preset `[color, variant]` pair. Overridden when both `color` and `variant` are set. */

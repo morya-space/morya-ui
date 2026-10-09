@@ -69,6 +69,7 @@ function toggleExpanded() {
           :icon="toggleIcon"
           icon-placement="end"
           :label="toggleLabel"
+          :auto-insert-space="false"
           :aria-expanded="expanded"
           :aria-controls="advancedId"
           @click="toggleExpanded"
