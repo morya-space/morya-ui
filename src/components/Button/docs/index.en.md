@@ -48,14 +48,6 @@ Set `color` and `variant` for finer control. When both are set, they win over `t
 
 ```
 
-### Badge
-
-Use `badge` / `badgeColor` to show a count or status mark on the button.
-
-```vue preview src="./demos/Badge.vue"
-
-```
-
 ### Size
 
 ```vue preview src="./demos/Size.vue"
@@ -150,13 +142,11 @@ Suggested composition order: `type` → `shape` → `size` → `loading` → `di
 | `iconPlacement` | `'start' \| 'end'` | `'start'` | Icon placement. |
 | `iconOnly` | `boolean` | `false` | Force a square icon-only button. |
 | `autoInsertSpace` | `boolean` | `true` | Insert a space between two Chinese characters. |
-| `badge` | `string` | — | Badge text. |
-| `badgeColor` | `'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'contrast' \| null` | `null` | Badge tone. |
 | `ripple` | `boolean` | `false` | Click ripple. |
 | `press` | `boolean` | `false` | Press scale. |
 | `autofocus` | `boolean` | `false` | Native autofocus. |
 | `ariaLabel` | `string` | — | Accessible name; recommended for icon-only buttons. |
-| `pt` | `{ root?, icon?, content?, badge? }` | — | Semantic DOM pass-through. |
+| `pt` | `{ root?, icon?, content? }` | — | Semantic DOM pass-through. |
 
 ### Events
 
@@ -200,10 +190,9 @@ button.m-button / a.m-button
   span.m-button__ripple*   ← when ripple is on
   span.m-button__icon*     ← icon / loading
   span.m-button__label*    ← label
-  span.m-button__badge*    ← badge
 ```
 
-Override parts with `pt.root` / `pt.icon` / `pt.content` / `pt.badge`. See also [Attrs](/docs/attrs) and [Common Props](/docs/common-props).
+Override parts with `pt.root` / `pt.icon` / `pt.content`. See also [Attrs](/docs/attrs) and [Common Props](/docs/common-props).
 
 ## FAQ
 

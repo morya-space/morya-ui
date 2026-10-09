@@ -48,14 +48,6 @@ import { MButton, MButtonGroup } from 'morya-ui'
 
 ```
 
-### 徽标
-
-用 `badge` / `badgeColor` 在按钮上显示数量或状态标记。
-
-```vue preview src="./demos/Badge.vue"
-
-```
-
 ### 尺寸
 
 ```vue preview src="./demos/Size.vue"
@@ -150,13 +142,11 @@ import { MButton, MButtonGroup } from 'morya-ui'
 | `iconPlacement` | `'start' \| 'end'` | `'start'` | 图标位置。 |
 | `iconOnly` | `boolean` | `false` | 强制纯图标方形按钮。 |
 | `autoInsertSpace` | `boolean` | `true` | 两个汉字之间插入空格。 |
-| `badge` | `string` | — | 徽标文本。 |
-| `badgeColor` | `'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'contrast' \| null` | `null` | 徽标颜色。 |
 | `ripple` | `boolean` | `false` | 点击水波纹。 |
 | `press` | `boolean` | `false` | 按下缩放。 |
 | `autofocus` | `boolean` | `false` | 原生 autofocus。 |
 | `ariaLabel` | `string` | — | 可访问名称；纯图标按钮建议提供。 |
-| `pt` | `{ root?, icon?, content?, badge? }` | — | 语义结构透传。 |
+| `pt` | `{ root?, icon?, content? }` | — | 语义结构透传。 |
 
 ### Events
 
@@ -200,10 +190,9 @@ button.m-button / a.m-button
   span.m-button__ripple*   ← ripple 开启时
   span.m-button__icon*     ← 图标 / loading
   span.m-button__label*    ← 文案
-  span.m-button__badge*    ← 徽标
 ```
 
-可用 `pt.root` / `pt.icon` / `pt.content` / `pt.badge` 覆盖各节点。更多约定见[样式与 attrs](/docs/attrs)、[Common Props](/docs/common-props)。
+可用 `pt.root` / `pt.icon` / `pt.content` 覆盖各节点。更多约定见[样式与 attrs](/docs/attrs)、[Common Props](/docs/common-props)。
 
 ## FAQ
 

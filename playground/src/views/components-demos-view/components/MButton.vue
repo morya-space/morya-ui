@@ -21,8 +21,6 @@ import { MButton, MFlex } from 'morya-ui'
       <MButton size="large" label="large" />
       <MButton loading label="loading" />
       <MButton disabled label="disabled" />
-      <MButton badge="8" label="badge" />
-      <MButton badge="8" badge-color="danger" label="badgeColor" />
       <MButton autofocus label="autofocus" />
       <MButton html-type="submit" label="htmlType" />
       <MButton icon="info-circle" label="ariaLabel" aria-label="ariaLabel" />

@@ -27,8 +27,6 @@ export type ButtonSize = 'small' | 'medium' | 'large'
 
 export type ButtonIconPlacement = 'start' | 'end'
 
-export type ButtonBadgeColor = Exclude<ButtonColor, 'link' | 'primary' | 'help' | 'default'> | 'secondary' | null
-
 export type ButtonHtmlType = NonNullable<ButtonHTMLAttributes['type']>
 
 export type ButtonLoading =
@@ -42,7 +40,6 @@ export interface ButtonPassThrough {
   root?: PassThroughPart
   icon?: PassThroughPart
   content?: PassThroughPart
-  badge?: PassThroughPart
 }
 
 export interface ButtonProps {
@@ -81,10 +78,6 @@ export interface ButtonProps {
   iconOnly?: boolean
   /** Insert a space between two Chinese characters. */
   autoInsertSpace?: boolean
-  /** Optional badge value rendered after the label. */
-  badge?: string
-  /** Badge tone. */
-  badgeColor?: ButtonBadgeColor
   autofocus?: boolean
   /** Accessible name, recommended for icon-only buttons. */
   ariaLabel?: string

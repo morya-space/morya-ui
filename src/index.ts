@@ -61,7 +61,6 @@ export type {
 export { default as MButton } from "./components/Button/Button.vue";
 export { default as MButtonGroup } from "./components/Button/ButtonGroup.vue";
 export type {
-  ButtonBadgeColor,
   ButtonColor,
   ButtonEmits,
   ButtonGroupProps,

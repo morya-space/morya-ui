@@ -11,7 +11,6 @@ export {
   resolveColorVariant,
 } from './buttonHelpers'
 export type {
-  ButtonBadgeColor,
   ButtonColor,
   ButtonColorVariantPair,
   ButtonEmits,
