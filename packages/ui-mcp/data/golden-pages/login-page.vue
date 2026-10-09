@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * 黄金样例：登录页（Account + 轻量品牌�?
+ * 黄金样例：登录页（Account + 轻量品牌）
  * @see DESIGN.md · surfaces § Account · visual-craft § Atmosphere
  */
 import {
@@ -25,7 +25,7 @@ const model = reactive({
   password: '',
 })
 
-/** Brand seed for Account surfaces �?prefer themeConfig over page-level hex. */
+/** Brand seed for Account surfaces — prefer themeConfig over page-level hex. */
 const themeConfig = {
   seed: { colorPrimary: '#0b6e4f' },
 }
@@ -36,7 +36,7 @@ async function onSubmit() {
   try {
     // await api.login(model)
     if (!model.email || !model.password) {
-      formError.value = '请输入邮箱和密码后再试�?
+      formError.value = '请输入邮箱和密码后再试。'
       return
     }
   } finally {
@@ -47,14 +47,16 @@ async function onSubmit() {
 
 <template>
   <MConfigProvider
-    :locale="zhCN" input-variant="filled" :theme-config="themeConfig"
+    :locale="zhCN"
+    input-variant="filled"
+    :theme-config="themeConfig"
   >
     <div class="login-shell">
       <aside class="login-brand" aria-label="品牌">
         <p class="login-brand__mark">青禾书房</p>
-        <h1 class="login-brand__title">把好书留在手�?/h1>
+        <h1 class="login-brand__title">把好书留在手边</h1>
         <p class="login-brand__lead">
-          店员与会员共用同一套账户。登录后继续进货、上架与会员服务�?
+          店员与会员共用同一套账户。登录后继续进货、上架与会员服务。
         </p>
       </aside>
 
@@ -65,7 +67,7 @@ async function onSubmit() {
               登录
             </MTitle>
             <MParagraph type="secondary">
-              使用工作邮箱进入后台�?
+              使用工作邮箱进入后台。
             </MParagraph>
           </header>
 
@@ -76,20 +78,26 @@ async function onSubmit() {
           <MForm @submit="onSubmit">
             <MFormItem label="邮箱" name="email" required>
               <MInput
-                v-model="model.email" type="email" placeholder="name@qinghe.example" autocomplete="username" fluid
+                v-model="model.email"
+                type="email"
+                placeholder="name@qinghe.example"
+                autocomplete="username"
+                fluid
               />
             </MFormItem>
 
             <MFormItem label="密码" name="password" required>
               <MInputPassword
-                v-model="model.password" placeholder="请输入密�?
-                autocomplete="current-password" fluid
+                v-model="model.password"
+                placeholder="请输入密码"
+                autocomplete="current-password"
+                fluid
               />
             </MFormItem>
 
             <MSpace style="margin-top: var(--m-space-2)" alignment="center">
-              <MButton html-type="submit" label="登录" type="primary" :loading="submitting" />
-              <MButton html-type="button" label="忘记密码" type="text" />
+              <MButton type="primary" html-type="submit" label="登录" :loading="submitting" />
+              <MButton type="text" label="忘记密码" />
             </MSpace>
           </MForm>
         </div>

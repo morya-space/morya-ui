@@ -53,8 +53,8 @@ function resetFilters() {
     />
   </MSpace>
   <template #actions>
-    <MButton severity="secondary">查询</MButton>
-    <MButton severity="secondary" text @click="resetFilters">重置</MButton>
+    <MButton>查询</MButton>
+    <MButton type="text" @click="resetFilters">重置</MButton>
   </template>
 </MPageFilters>`,
     rules: [
@@ -128,8 +128,8 @@ function resetFilters() {
     />
   </MSpace>
   <template #actions>
-    <MButton severity="secondary">查询</MButton>
-    <MButton severity="secondary" text @click="resetFilters">重置</MButton>
+    <MButton>查询</MButton>
+    <MButton type="text" @click="resetFilters">重置</MButton>
   </template>
   <template #advanced>
     <MSpace wrap>
@@ -327,8 +327,8 @@ function resetFilters() {
     />
   </MSpace>
   <template #actions>
-    <MButton severity="secondary">查询</MButton>
-    <MButton severity="secondary" text @click="resetFilters">重置</MButton>
+    <MButton>查询</MButton>
+    <MButton type="text" @click="resetFilters">重置</MButton>
   </template>
   <template #advanced>
     <MSpace wrap>
@@ -419,8 +419,8 @@ function resetFilters() {
     />
   </MSpace>
   <template #actions>
-    <MButton severity="secondary" size="small">查询</MButton>
-    <MButton severity="secondary" size="small" text @click="resetFilters">重置</MButton>
+    <MButton size="small">查询</MButton>
+    <MButton size="small" type="text" @click="resetFilters">重置</MButton>
   </template>
 </MPageFilters>`,
     rules: [
@@ -453,7 +453,7 @@ function resetFilters() {
     imports: ['MPageHeader', 'MButton'],
     template: `<MPageHeader title="用户管理" description="维护账号、角色与权限。">
   <template #actions>
-    <MButton severity="primary">新建用户</MButton>
+    <MButton type="primary">新建用户</MButton>
   </template>
 </MPageHeader>`,
     rules: ['页级标题用 MPageHeader，不要用 MPageToolbar 当第二页头', '主操作放 #actions'],
@@ -473,12 +473,12 @@ function resetFilters() {
     template: `<MPageToolbar>
   <span style="color:var(--m-color-text-muted);font-size:var(--m-font-size-sm)">已选 0 项</span>
   <template #actions>
-    <MButton severity="secondary" text>导出</MButton>
-    <MButton severity="danger" text>删除</MButton>
+    <MButton type="text">导出</MButton>
+    <MButton danger type="text">删除</MButton>
   </template>
 </MPageToolbar>`,
-    rules: ['左侧用 default 插槽展示已选数量', '批量操作用 text/outlined，danger 仅 destructive', '放在 FilterChips 之后、表格之前'],
-    rulesEn: ['Use the default slot for selection count', 'Batch actions use text/outlined; danger only for destructive ops', 'Place after FilterChips and before the table'],
+    rules: ['左侧用 default 插槽展示已选数量', '批量操作用 type="text" / variant="outlined"，danger 仅 destructive', '放在 FilterChips 之后、表格之前'],
+    rulesEn: ['Use the default slot for selection count', 'Batch actions use type="text" / variant="outlined"; danger only for destructive ops', 'Place after FilterChips and before the table'],
     avoid: ['不要用 Toolbar title 充当页面标题'],
     avoidEn: ['Do not use Toolbar title as the page heading'],
   },
@@ -539,8 +539,8 @@ const loading = ref(false)`,
   </template>
   <template #cell-actions>
     <MSpace>
-      <MButton severity="secondary" size="small" text>编辑</MButton>
-      <MButton severity="danger" size="small" text>删除</MButton>
+      <MButton size="small" type="text">编辑</MButton>
+      <MButton danger size="small" type="text">删除</MButton>
     </MSpace>
   </template>
   <template #empty>
@@ -550,7 +550,7 @@ const loading = ref(false)`,
       icon="inbox"
     >
       <template #extra>
-        <MButton severity="primary">新建成员</MButton>
+        <MButton type="primary">新建成员</MButton>
       </template>
     </MEmpty>
   </template>
@@ -593,12 +593,12 @@ const loading = ref(false)`,
     imports: ['MSpace', 'MButton'],
     template: `<template #cell-actions>
   <MSpace>
-    <MButton severity="secondary" size="small" text>编辑</MButton>
-    <MButton severity="danger" size="small" text>删除</MButton>
+    <MButton size="small" type="text">编辑</MButton>
+    <MButton danger size="small" type="text">删除</MButton>
   </MSpace>
 </template>`,
-    rules: ['行内操作用 size="small" + text/outlined，避免一排实心按钮', '危险操作使用 severity="danger" 并配合确认弹窗'],
-    rulesEn: ['Use size="small" with text/outlined row actions', 'Use severity="danger" with confirmation for destructive actions'],
+    rules: ['行内操作用 size="small" + type="text" / variant="outlined"，避免一排实心按钮', '危险操作使用 danger 并配合确认弹窗'],
+    rulesEn: ['Use size="small" with type="text" / variant="outlined" row actions', 'Use danger with confirmation for destructive actions'],
     avoid: ['不要用 Dropdown 代替明确的行内按钮组，除非操作很多'],
     avoidEn: ['Do not replace explicit row buttons with Dropdown unless there are many actions'],
   },
@@ -659,20 +659,20 @@ const loading = ref(false)`,
   illustration="no-content"
 >
   <template #extra>
-    <MButton severity="primary">新建成员</MButton>
-    <MButton severity="secondary" text>导入名单</MButton>
+    <MButton type="primary">新建成员</MButton>
+    <MButton type="text">导入名单</MButton>
   </template>
 </MEmpty>`,
     rules: [
       '正常无数据用 MEmpty，不要用错误色',
       '主区域空态优先 illustration（no-content / no-result / no-message / network-error…）；轻量内嵌可用 icon',
-      '主 CTA 用 severity="primary"，次动作用 text/secondary',
+      '主 CTA 用 type="primary"，次动作用 type="text"',
       '文案写清「现在可以做什么」，禁止「暂无数据 / No data / 示例」',
     ],
     rulesEn: [
       'Use MEmpty for normal emptiness, not error colors',
       'Main-region empties prefer illustration; light in-table empties may use icon',
-      'Primary CTA with severity="primary"; lesser actions text/secondary',
+      'Primary CTA with type="primary"; lesser actions type="text"',
       'Copy says what to do next — no “暂无数据 / No data / 示例”',
     ],
     avoid: ['不要用手写 div 拼空态', '不要用 MResult 表达无数据', '不要放两个 filled primary'],
@@ -690,7 +690,7 @@ const loading = ref(false)`,
     template: `<MResult status="success" description="订单已创建，可在列表中查看详情。">
   <template #extra>
     <MButton label="查看订单" />
-    <MButton label="返回列表" severity="secondary" text />
+    <MButton label="返回列表" type="text" />
   </template>
 </MResult>`,
     rules: ['流程终点用 MResult', '提供明确下一步操作'],
@@ -777,8 +777,8 @@ const roleOptions = [
     imports: ['MPageSection', 'MSpace', 'MButton'],
     template: `<MPageSection variant="actions">
   <MSpace>
-    <MButton native-type="submit" severity="primary" :loading="submitting">保存</MButton>
-    <MButton severity="secondary">取消</MButton>
+    <MButton html-type="submit" type="primary" :loading="submitting">保存</MButton>
+    <MButton>取消</MButton>
   </MSpace>
 </MPageSection>`,
     rules: ['提交按钮在前，取消 secondary', '保存中传 loading 防重复提交'],
@@ -892,7 +892,7 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     template: `<MCard title="最近工单">
   <MTable :columns="recentColumns" :rows="recentRows" size="small" :paginator="false" bordered row-key="id">
     <template #cell-status="{ value }">
-      <MStatus :label="String(value ?? '')" severity="secondary" />
+      <MStatus :label="String(value ?? '')" default / type="text" />
     </template>
   </MTable>
 </MCard>`,
@@ -952,8 +952,8 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
   <template #actions>
     <MSpace>
       <MStatus label="启用" severity="success" />
-      <MButton severity="primary">编辑</MButton>
-      <MButton severity="danger" text>删除</MButton>
+      <MButton type="primary">编辑</MButton>
+      <MButton danger type="text">删除</MButton>
     </MSpace>
   </template>
 </MPageHeader>`,
@@ -1006,8 +1006,8 @@ const recentRows = ref<Record<string, unknown>[]>([])`,
     template: `<MPageHeader title="用户管理" description="管理成员与角色。">
   <template #actions>
     <MSpace>
-      <MButton severity="secondary" text>导入</MButton>
-      <MButton severity="primary">新建用户</MButton>
+      <MButton type="text">导入</MButton>
+      <MButton type="primary">新建用户</MButton>
     </MSpace>
   </template>
 </MPageHeader>`,
@@ -1081,10 +1081,10 @@ async function onSave() {
   </MForm>
   <template #footer>
     <MSpace style="justify-content: flex-end; width: 100%">
-      <MButton severity="secondary" text :disabled="submitting" @click="dialogOpen = false">
+      <MButton type="text" :disabled="submitting" @click="dialogOpen = false">
         取消
       </MButton>
-      <MButton severity="primary" :loading="submitting" @click="onSave">
+      <MButton type="primary" :loading="submitting" @click="onSave">
         保存
       </MButton>
     </MSpace>
@@ -1150,10 +1150,10 @@ async function onSave() {
   </MForm>
   <template #footer>
     <MSpace style="justify-content: flex-end; width: 100%">
-      <MButton severity="secondary" text :disabled="submitting" @click="drawerOpen = false">
+      <MButton type="text" :disabled="submitting" @click="drawerOpen = false">
         取消
       </MButton>
-      <MButton severity="primary" :loading="submitting" @click="onSave">
+      <MButton type="primary" :loading="submitting" @click="onSave">
         保存
       </MButton>
     </MSpace>
@@ -1193,11 +1193,11 @@ function onAcceptDelete() {
   message="删除后不可恢复，确定继续？"
   accept-label="删除"
   reject-label="取消"
-  accept-severity="danger"
+  accept-danger
   @accept="onAcceptDelete"
 />`,
-    rules: ['用 MConfirmDialog，不要手写 Dialog 确定/取消', 'acceptSeverity="danger"', '成功用 message.success，不要 toast'],
-    rulesEn: ['Use MConfirmDialog; do not hand-roll Dialog Yes/No', 'acceptSeverity="danger"', 'Success via message.success, not toast'],
+    rules: ['用 MConfirmDialog，不要手写 Dialog 确定/取消', 'acceptColor="danger"', '成功用 message.success，不要 toast'],
+    rulesEn: ['Use MConfirmDialog; do not hand-roll Dialog Yes/No', 'acceptColor="danger"', 'Success via message.success, not toast'],
     avoid: ['普通 Dialog 冒充删除确认', '编辑表单误用 ConfirmDialog'],
     avoidEn: ['Faking delete confirm with Dialog', 'Using ConfirmDialog for edit forms'],
   },
@@ -1217,7 +1217,7 @@ function onAcceptDelete() {
 ]`,
     template: `<template #cell-actions>
   <MDropdown :model="rowMenu">
-    <MButton severity="secondary" size="small" text icon="more-horizontal" aria-label="更多操作" />
+    <MButton size="small" type="text" icon="more-horizontal" aria-label="更多操作" />
   </MDropdown>
 </template>`,
     rules: ['操作很多时再用 Dropdown；2–3 个明确操作用 text 按钮', '危险项走 confirm-delete', '图标按钮必须 aria-label'],
@@ -1269,9 +1269,9 @@ async function finish() {
 </MPageSection>
 <MPageSection variant="actions">
   <MSpace>
-    <MButton severity="secondary" text :disabled="activeStep === 0" @click="back">上一步</MButton>
-    <MButton v-if="activeStep < steps.length - 1" severity="primary" @click="next">下一步</MButton>
-    <MButton v-else severity="primary" :loading="submitting" @click="finish">创建</MButton>
+    <MButton type="text" :disabled="activeStep === 0" @click="back">上一步</MButton>
+    <MButton v-if="activeStep < steps.length - 1" type="primary" @click="next">下一步</MButton>
+    <MButton v-else type="primary" :loading="submitting" @click="finish">创建</MButton>
   </MSpace>
 </MPageSection>`,
     rules: ['用 :steps（不是 :items）', '每步一个主任务；进入下一步前校验当前步', '完成文案与「下一步」区分'],
@@ -1328,8 +1328,8 @@ async function onSubmit() {
             <MInputPassword v-model="model.password" autocomplete="current-password" fluid />
           </MFormItem>
           <MSpace style="margin-top: var(--m-space-2)" alignment="center">
-            <MButton type="submit" label="登录" severity="primary" :loading="submitting" />
-            <MButton type="button" label="忘记密码" severity="secondary" text />
+            <MButton html-type="submit" label="登录" type="primary" :loading="submitting" />
+            <MButton html-type="button" label="忘记密码" type="text" />
           </MSpace>
         </MForm>
       </div>

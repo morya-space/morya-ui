@@ -101,7 +101,7 @@ export const pagePatterns: PagePattern[] = [
     },
     styleRules: [
       '新增、保存等主操作使用 primary MButton',
-      '查询等次要操作使用 secondary 或 outlined MButton',
+      '查询等次要操作使用默认或 variant="outlined" MButton',
       '删除使用 danger MButton，并配合 MConfirmDialog',
       '业务状态优先使用 MStatus（圆点+文案）或 MTag（分类标签），不使用 Button severity 表达状态',
       '间距、颜色、圆角优先使用 --m-* 设计令牌，不直接硬编码色板',
@@ -493,7 +493,7 @@ export const pagePatterns: PagePattern[] = [
     styleRules: [
       '轻量状态优先 MStatus；需要芯片感或可关闭时用 MTag',
       '属性网格用 MDescriptions，不要手写 dl',
-      '编辑使用 primary 或 outlined MButton，删除使用 danger',
+      '编辑使用 type="primary" 或 variant="outlined"，删除使用 danger',
       '不使用大面积自定义背景色覆盖组件库 surface Token',
     ],
     interactionRules: [
@@ -804,10 +804,10 @@ export const designRules = {
     ],
   },
   actions: {
-    primary: { component: 'MButton', props: ['severity omitted or primary'] },
-    secondary: { component: 'MButton', props: ['severity="secondary"', 'outlined or text'] },
-    destructive: { component: 'MButton', props: ['severity="danger"'], requiresConfirmation: true },
-    cancel: { component: 'MButton', props: ['severity="secondary"', 'text'] },
+    primary: { component: 'MButton', props: ['type="primary"'] },
+    secondary: { component: 'MButton', props: ['default', 'type="text" or variant="outlined"'] },
+    destructive: { component: 'MButton', props: ['danger'], requiresConfirmation: true },
+    cancel: { component: 'MButton', props: ['type="text"'] },
   },
   status: {
     preferred: 'MStatus',

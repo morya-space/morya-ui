@@ -18,7 +18,7 @@ Until `baselines/linux/` is committed, CI bootstraps Linux PNGs and uploads the 
 
 | File           | Coverage                                                 |
 | -------------- | -------------------------------------------------------- |
-| `button.png`   | Button severities / outlined / text / loading / disabled |
+| `button.png`   | Button types / danger / text / loading / disabled |
 | `form.png`     | Input, Checkbox, Switch, Tag                             |
 | `feedback.png` | Alert + Card                                             |
 | `full.png`     | Entire fixture page                                      |

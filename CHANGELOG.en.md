@@ -1,6 +1,21 @@
 # morya-ui
 
+## Unreleased
+
+### Breaking Changes
+
+- **Button**: switch to `type` / `color` × `variant` dual-axis API
+  - added `type` sugar (`default` / `primary` / `dashed` / `link` / `text`) plus `color` × `variant`
+  - removed `severity`; use `danger` / `color="danger"` for destructive tone
+  - `fluid` → `block`; `nativeType` → `htmlType`; `iconPos` → `iconPlacement`; `badgeSeverity` → `badgeColor`
+  - supports `href` / `ghost` / object `loading` and `pt`
+
+### Docs
+
+- restored Button demos: ColorVariant / Icon / Size / Ghost / Danger / Block / RipplePress
+
 ## 0.4.1
+
 
 ### Breaking Changes
 

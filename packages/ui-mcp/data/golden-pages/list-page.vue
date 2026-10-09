@@ -1,9 +1,9 @@
 <script setup lang="ts">
 /**
- * 黄金样例：列表页（结构母�?· style: soft�?
+ * 黄金样例：列表页（结构母版 · style: soft）
  * structure: list · style: soft
- * 全视口主列表使用 fill；气质变体见 list-page-dense / list-page-rail�?
- * 镜像区块顺序；视觉跟 styleDirection / 参考走，不要把 soft 当唯一正确答案�?
+ * 全视口主列表使用 fill；气质变体见 list-page-dense / list-page-rail。
+ * 镜像区块顺序；视觉跟 styleDirection / 参考走，不要把 soft 当唯一正确答案。
  * @see DESIGN.md · page-layouts.md · style-presets.md · visual-craft § Ops polish
  */
 import {
@@ -64,7 +64,7 @@ const activeFilters = computed(() => {
     items.push({ key: 'status', label: `状态：${label}` })
   }
   if (department.value) {
-    items.push({ key: 'department', label: `部门�?{department.value}` })
+    items.push({ key: 'department', label: `部门：${department.value}` })
   }
   return items
 })
@@ -83,7 +83,7 @@ function resetFilters() {
 
 const columns = [
   { key: 'name', label: '名称' },
-  { key: 'status', label: '状�?, width: 120 },
+  { key: 'status', label: '状态', width: 120 },
   { key: 'updatedAt', label: '更新时间', width: 140 },
   { key: 'actions', label: '操作', width: 148 },
 ]
@@ -102,7 +102,10 @@ const rows = [
     <MLayout has-sider fill-viewport>
       <MLayoutSider v-model:collapsed="siderCollapsed" bordered :collapsed-width="72">
         <MMenu
-          :model="menuModel" :collapsed="siderCollapsed" :collapsed-width="72" selected-key="users"
+          :model="menuModel"
+          :collapsed="siderCollapsed"
+          :collapsed-width="72"
+          selected-key="users"
         />
       </MLayoutSider>
 
@@ -113,7 +116,7 @@ const rows = [
 
         <MLayoutContent>
           <MPageContent fill>
-            <MPageHeader title="用户管理" description="维护账号、角色与权限�?>
+            <MPageHeader title="用户管理" description="维护账号、角色与权限。">
               <template #actions>
                 <MButton type="primary">
                   新建用户
@@ -122,13 +125,17 @@ const rows = [
             </MPageHeader>
 
             <MPageFilters
-              v-model:expanded="filtersExpanded" aria-label="筛�?
-              variant="filled" collapsible
+              v-model:expanded="filtersExpanded"
+              aria-label="筛选"
+              variant="filled"
+              collapsible
             >
               <MSpace wrap>
                 <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
                 <MSelect
-                  v-model="status" :options="statusOptions" placeholder="状�?
+                  v-model="status"
+                  :options="statusOptions"
+                  placeholder="状态"
                   clearable
                   style="width: 10rem"
                 />
@@ -137,38 +144,50 @@ const rows = [
                 <MButton>
                   查询
                 </MButton>
-                <MButton type="text" @click="resetFilters">
+                <MButton @click="resetFilters" type="text">
                   重置
                 </MButton>
               </template>
               <template #advanced>
                 <MSpace wrap>
                   <MSelect
-                    v-model="department" :options="departmentOptions" placeholder="部门" clearable
+                    v-model="department"
+                    :options="departmentOptions"
+                    placeholder="部门"
+                    clearable
                     style="width: 10rem"
                   />
                 </MSpace>
               </template>
             </MPageFilters>
 
-            <MPageFilterChips v-if="activeFilters.length" label="已�? aria-label="已选筛�?>
+            <MPageFilterChips v-if="activeFilters.length" label="已选" aria-label="已选筛选">
               <MTag
-                v-for="item in activeFilters" :key="item.key" :value="item.label" size="small" bordered
+                v-for="item in activeFilters"
+                :key="item.key"
+                :value="item.label"
+                size="small"
+                bordered
                 closable
                 @close="clearFilter(item.key)"
               />
             </MPageFilterChips>
 
             <MTable
-              :columns="columns" :rows="rows" :rows-per-page="5" fill
+              :columns="columns"
+              :rows="rows"
+              :rows-per-page="5"
+              fill
               paginator
               striped
               bordered
-              row-key="id" aria-label="用户列表"
+              row-key="id"
+              aria-label="用户列表"
             >
               <template #cell-status="{ value }">
                 <MStatus
-                  :label="value === 'active' ? '启用' : '停用'" :severity="value === 'active' ? 'success' : 'secondary'"
+                  :label="value === 'active' ? '启用' : '停用'"
+                  :severity="value === 'active' ? 'success' : 'secondary'"
                 />
               </template>
               <template #cell-actions>
@@ -176,15 +195,15 @@ const rows = [
                   <MButton size="small" type="text">
                     编辑
                   </MButton>
-                  <MButton danger size="small" type="text">
+                  <MButton size="small" type="text" danger>
                     删除
                   </MButton>
                 </MSpace>
               </template>
               <template #empty>
                 <MEmpty
-                  title="还没有用�?
-                  description="创建第一个用户后，即可分配角色与权限�?
+                  title="还没有用户"
+                  description="创建第一个用户后，即可分配角色与权限。"
                   icon="user"
                 >
                   <template #extra>

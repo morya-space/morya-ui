@@ -8,4 +8,4 @@ coverage/
 tests/visual/.actual/
 tests/visual/.diff/
 tests/visual/dist/
-demos/
+my-demos/

@@ -36,9 +36,9 @@ const profile = {
 }
 
 const activityRows = [
-  { id: '1', time: '2026-09-20 14:22', action: '更新了个人资�?, channel: 'Web' },
-  { id: '2', time: '2026-09-18 09:05', action: '重置了登录密�?, channel: 'Web' },
-  { id: '3', time: '2026-09-12 18:41', action: '加入「产品设计」部�?, channel: 'Admin' },
+  { id: '1', time: '2026-09-20 14:22', action: '更新了个人资料', channel: 'Web' },
+  { id: '2', time: '2026-09-18 09:05', action: '重置了登录密码', channel: 'Web' },
+  { id: '3', time: '2026-09-12 18:41', action: '加入「产品设计」部门', channel: 'Admin' },
 ]
 </script>
 
@@ -58,12 +58,14 @@ const activityRows = [
       <MLayoutContent>
         <MPageContent>
           <MPageHeader
-            :title="profile.name" description="查看账号摘要、属性与近期活动。编辑走同页弹窗或独立表单页，勿做成营销落地�?
+            :title="profile.name"
+            description="查看账号摘要、属性与近期活动。编辑走同页弹窗或独立表单页，勿做成营销落地。"
           >
             <template #actions>
               <MSpace>
                 <MStatus
-                  :label="profile.status === 'active' ? '启用' : '停用'" :severity="profile.status === 'active' ? 'success' : 'secondary'"
+                  :label="profile.status === 'active' ? '启用' : '停用'"
+                  :severity="profile.status === 'active' ? 'success' : 'secondary'"
                 />
                 <MButton type="primary">
                   编辑
@@ -104,9 +106,10 @@ const activityRows = [
             <MDescriptionsItem label="入职日期">
               {{ profile.joinedAt }}
             </MDescriptionsItem>
-            <MDescriptionsItem label="状�?>
+            <MDescriptionsItem label="状态">
               <MStatus
-                :label="profile.status === 'active' ? '启用' : '停用'" :severity="profile.status === 'active' ? 'success' : 'secondary'"
+                :label="profile.status === 'active' ? '启用' : '停用'"
+                :severity="profile.status === 'active' ? 'success' : 'secondary'"
               />
             </MDescriptionsItem>
           </MDescriptions>
@@ -115,12 +118,15 @@ const activityRows = [
 
           <MCard title="近期活动">
             <MList
-              :items="activityRows" row-key="id" size="small"
+              :items="activityRows"
+              row-key="id"
+              size="small"
             >
               <template #item="{ item }">
                 <MListItem>
                   <MListItemMeta
-                    :title="item.action" :description="`${item.time} · ${item.channel}`"
+                    :title="item.action"
+                    :description="`${item.time} · ${item.channel}`"
                   />
                 </MListItem>
               </template>

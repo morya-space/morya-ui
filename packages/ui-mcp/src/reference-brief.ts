@@ -495,7 +495,7 @@ export function codeCoversBlock(code: string, block: string): boolean {
     case 'form-body':
       return /<MForm\b/i.test(c)
     case 'form-actions':
-      return /native-type=["']submit["']|type=["']submit["']|<MPageSection\b[^>]*variant=["']actions["']/i.test(c)
+      return /html-type=["']submit["']|native-type=["']submit["']|type=["']submit["']|<MPageSection\b[^>]*variant=["']actions["']/i.test(c)
     case 'kpi':
       return /<MPageStat\b/i.test(c)
     case 'chart':

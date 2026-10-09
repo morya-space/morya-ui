@@ -84,7 +84,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['v-model / modelValue 控制开关（不要用 visible）', 'v-model / modelValue for open state (not visible)'],
             ['header 或 title 设弹窗标题', 'header or title for the dialog title'],
             ['width 约 32rem 适配短表单（见 form-in-dialog snippet）', 'width ~32rem for short forms (see form-in-dialog snippet)'],
-            ['表单字段用 fluid；主按钮 severity="primary"', 'Form fields use fluid; primary button severity="primary"'],
+            ['表单字段用 fluid；主按钮 type="primary"', 'Form fields use fluid; primary button type="primary"'],
           ],
           [
             ['#footer 放取消/保存', '#footer for cancel / save'],
@@ -145,7 +145,7 @@ export const componentDecisions: ComponentDecision[] = [
           [['默认插槽：MFormItem 字段', 'Default: MFormItem fields']],
           [
             ['MForm @submit（或 @submit.prevent）', 'MForm @submit (or @submit.prevent)'],
-            ['提交按钮 type="submit" + severity="primary"', 'Submit button type="submit" + severity="primary"'],
+            ['提交按钮 html-type="submit" + type="primary"', 'Submit button html-type="submit" + type="primary"'],
           ],
         ),
         relatedSnippets: ['page-content-form', 'form-header', 'form-body', 'form-actions'],
@@ -746,7 +746,7 @@ export const componentDecisions: ComponentDecision[] = [
         recipe: recipe(
           [
             ['左侧标题、右侧主按钮', 'Title left, primary action right'],
-            ['主按钮 severity="primary"；全页仅一个主按钮', 'Primary button severity="primary"; one primary per page'],
+            ['主按钮 type="primary"；全页仅一个主按钮', 'Primary button type="primary"; one primary per page'],
             ['批量操作条也可放工具栏区', 'Bulk action bars can sit in the toolbar area'],
           ],
           [['#actions 右侧操作', '#actions for right-side actions']],
@@ -1511,7 +1511,7 @@ export const componentDecisions: ComponentDecision[] = [
             ['v-model / modelValue', 'v-model / modelValue'],
             ['header + message', 'header + message'],
             ['acceptLabel / rejectLabel', 'acceptLabel / rejectLabel'],
-            ['acceptSeverity="danger" 用于删除', 'acceptSeverity="danger" for delete'],
+            ['acceptColor="danger" 用于删除', 'acceptColor="danger" for delete'],
           ],
           undefined,
           [
@@ -1540,7 +1540,7 @@ export const componentDecisions: ComponentDecision[] = [
         recipe: recipe(
           [
             ['v-model / modelValue', 'v-model / modelValue'],
-            ['message；acceptSeverity="danger" 按需', 'message; acceptSeverity="danger" as needed'],
+            ['message；acceptColor="danger" 按需', 'message; acceptColor="danger" as needed'],
             ['target 锚定触发元素（或 position）', 'target anchors the trigger (or position)'],
             ['placement top|bottom|left|right', 'placement top|bottom|left|right'],
           ],

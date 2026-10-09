@@ -161,14 +161,14 @@ async function submit() {
 
   const listContent = `            <MPageHeader :title="title">
               <template #actions>
-                <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
+                <MButton type="primary">${zh ? '新建' : 'Create'}</MButton>
               </template>
             </MPageHeader>
             <MPageFilters variant="filled" :aria-label="${zh ? '筛选' : 'Filters'}">
               <MSpace wrap>
                 <MInput v-model="keyword" placeholder="${zh ? '搜索关键词' : 'Search keyword'}" clearable style="width: 14rem" />
-                <MButton severity="secondary">${zh ? '查询' : 'Search'}</MButton>
-                <MButton severity="secondary">${zh ? '重置' : 'Reset'}</MButton>
+                <MButton>${zh ? '查询' : 'Search'}</MButton>
+                <MButton>${zh ? '重置' : 'Reset'}</MButton>
               </MSpace>
             </MPageFilters>
             <MTable :columns="columns" :rows="rows" :loading="loading" fill paginator :rows-per-page="10" striped bordered row-key="id">
@@ -181,7 +181,7 @@ async function submit() {
                   :description="${zh ? '创建第一条记录开始使用。' : 'Create your first record to get started.'}"
                 >
                   <template #extra>
-                    <MButton severity="primary">${zh ? '新建' : 'Create'}</MButton>
+                    <MButton type="primary">${zh ? '新建' : 'Create'}</MButton>
                   </template>
                 </MEmpty>
               </template>
@@ -194,8 +194,8 @@ async function submit() {
                   <MInput v-model="model.name" fluid />
                 </MFormItem>
                 <MPageSection variant="actions">
-                  <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
-                  <MButton severity="secondary">${zh ? '取消' : 'Cancel'}</MButton>
+                  <MButton html-type="submit" type="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
+                  <MButton>${zh ? '取消' : 'Cancel'}</MButton>
                 </MPageSection>
               </MForm>
             </MPageSection>`
@@ -220,8 +220,8 @@ async function submit() {
               <template #actions>
                 <MSpace>
                   <MStatus :label="${zh ? '启用' : 'Active'}" severity="success" />
-                  <MButton severity="primary">${zh ? '编辑' : 'Edit'}</MButton>
-                  <MButton severity="secondary">${zh ? '返回' : 'Back'}</MButton>
+                  <MButton type="primary">${zh ? '编辑' : 'Edit'}</MButton>
+                  <MButton>${zh ? '返回' : 'Back'}</MButton>
                 </MSpace>
               </template>
             </MPageHeader>
@@ -238,7 +238,7 @@ async function submit() {
                       <MInput v-model="model.name" fluid />
                     </MFormItem>
                     <MPageSection variant="actions">
-                      <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
+                      <MButton html-type="submit" type="primary" :loading="loading">${zh ? '保存' : 'Save'}</MButton>
                     </MPageSection>
                   </MForm>
                 </MPageSection>
@@ -254,8 +254,8 @@ async function submit() {
                 </MFormItem>
                 <MPageSection variant="actions">
                   <MSpace>
-                    <MButton severity="secondary" text :disabled="activeStep === 0" @click="activeStep = Math.max(activeStep - 1, 0)">${zh ? '上一步' : 'Back'}</MButton>
-                    <MButton native-type="submit" severity="primary" :loading="loading">${zh ? '下一步' : 'Next'}</MButton>
+                    <MButton type="text" :disabled="activeStep === 0" @click="activeStep = Math.max(activeStep - 1, 0)">${zh ? '上一步' : 'Back'}</MButton>
+                    <MButton html-type="submit" type="primary" :loading="loading">${zh ? '下一步' : 'Next'}</MButton>
                   </MSpace>
                 </MPageSection>
               </MForm>
@@ -313,7 +313,7 @@ ${content}
         <MFormItem label="${zh ? '密码' : 'Password'}" name="password">
           <MInput type="password" fluid />
         </MFormItem>
-        <MButton native-type="submit" severity="primary" :loading="loading" fluid>${zh ? '登录' : 'Sign in'}</MButton>
+        <MButton html-type="submit" type="primary" :loading="loading" block>${zh ? '登录' : 'Sign in'}</MButton>
       </MForm>
     </MCard>
   </main>
@@ -324,7 +324,7 @@ ${content}
     <MPageContent>
       <MPageHeader :title="title">
         <template #actions>
-          <MButton severity="primary" @click="submit">${zh ? '新建' : 'Create'}</MButton>
+          <MButton type="primary" @click="submit">${zh ? '新建' : 'Create'}</MButton>
         </template>
       </MPageHeader>
     <MEmpty
@@ -333,7 +333,7 @@ ${content}
       icon="database"
     >
       <template #extra>
-        <MButton severity="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
+        <MButton type="primary" @click="submit">${zh ? '创建' : 'Create'}</MButton>
       </template>
     </MEmpty>
     </MPageContent>
@@ -1467,25 +1467,27 @@ export function createToolHandlers(catalog = loadCatalog()) {
       )
     }
 
-    // Craft: more than one filled primary in viewport (heuristic)
+    // Craft: more than one solid primary in viewport (heuristic)
     {
-      const primaryFilled = code.match(
-        /<MButton\b(?![^>]*(?:\btext\b|\boutlined\b|\blink\b))[^>]*\bseverity\s*=\s*["']primary["'][^>]*>|<MButton\b(?![^>]*(?:\btext\b|\boutlined\b|\blink\b|\bseverity\s*=))[^>]*>/gi,
-      )
-      // Count explicit severity="primary" without text/outlined
+      const nonPrimaryType = String.raw`type\s*=\s*["'](?:default|dashed|link|text)["']`
+      const nonSolidVariant = String.raw`variant\s*=\s*["'](?:outlined|dashed|filled|text|link)["']`
       const explicitPrimary = (
-        code.match(/<MButton\b(?![^>]*(?:\btext\b|\boutlined\b))[^>]*severity\s*=\s*["']primary["']/gi) || []
+        code.match(
+          new RegExp(
+            String.raw`<MButton\b(?![^>]*(?:${nonPrimaryType}|${nonSolidVariant}))[^>]*type\s*=\s*["']primary["']`,
+            'gi',
+          ),
+        ) || []
       ).length
       if (explicitPrimary > 1) {
         push(
           'craft',
           'craft',
           'multiple-primary',
-          '工艺建议：主视口内通常只需一个 filled primary 按钮。',
-          'Craft: usually only one filled primary button in the main viewport.',
+          '工艺建议：主视口内通常只需一个 type="primary" 实心按钮。',
+          'Craft: usually only one type="primary" solid button in the main viewport.',
         )
       }
-      void primaryFilled
     }
 
     // Craft: icon-only without accessible name
@@ -1623,10 +1625,10 @@ export function createToolHandlers(catalog = loadCatalog()) {
       },
       composition: designRules.composition,
       actions: {
-        primary: { component: 'MButton', props: ['omit severity or use primary'] },
-        secondary: { component: 'MButton', props: ['severity="secondary"', 'outlined or text'] },
-        destructive: { component: 'MButton', props: ['severity="danger"'], requiresConfirmation: true },
-        cancel: { component: 'MButton', props: ['severity="secondary"', 'text'] },
+        primary: { component: 'MButton', props: ['type="primary"'] },
+        secondary: { component: 'MButton', props: ['default', 'type="text" or variant="outlined"'] },
+        destructive: { component: 'MButton', props: ['danger'], requiresConfirmation: true },
+        cancel: { component: 'MButton', props: ['type="text"'] },
       },
       status: {
         preferred: 'MStatus',

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 /**
- * 黄金样例：结�?/ 阻断页（System�?
- * 默认展示 403；换�?success / 404 / 500 时只�?status + 文案 + #footer 动作�?
- * 无数据空态请�?empty-state / MEmpty，不要用 MResult�?
- * @see DESIGN.md · surfaces § System · MResult API（操作用 #footer�?
+ * 黄金样例：结果 / 阻断页（System）
+ * 默认展示 403；换成 success / 404 / 500 时只改 status + 文案 + #footer 动作。
+ * 无数据空态请用 empty-state / MEmpty，不要用 MResult。
+ * @see DESIGN.md · surfaces § System · MResult API（操作用 #footer）
  */
 import {
   MBreadcrumb,
@@ -27,7 +27,7 @@ import {
           :model="[
             { label: '首页', to: '/' },
             { label: '项目管理', to: '/projects' },
-            { label: '无权�? },
+            { label: '无权限' },
           ]"
         />
       </MLayoutHeader>
@@ -36,17 +36,18 @@ import {
         <MPageContent>
           <div class="result-shell">
             <MResult
-              status="403" title="没有权限查看该项�?
-              description="当前账号无权访问「青禾书房」工作区。可返回上一页，或联系管理员开通权限�?
+              status="403"
+              title="没有权限查看该项目"
+              description="当前账号无权访问「青禾书房」工作区。可返回上一页，或联系管理员开通权限。"
               size="large"
             >
               <template #footer>
                 <MSpace>
                   <MButton type="primary">
-                    返回上一�?
+                    返回上一页
                   </MButton>
-                  <MButton type="text" >
-                    联系管理�?
+                  <MButton type="text">
+                    联系管理员
                   </MButton>
                 </MSpace>
               </template>

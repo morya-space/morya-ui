@@ -1,5 +1,19 @@
 # morya-ui
 
+## Unreleased
+
+### 破坏性变更
+
+- **Button**：改为 `type` / `color` × `variant` 双轴 API
+  - 新增 `type` 语法糖（`default` / `primary` / `dashed` / `link` / `text`）与 `color` × `variant`
+  - 删除 `severity`；危险色改用 `danger` / `color="danger"`
+  - `fluid` → `block`；`nativeType` → `htmlType`；`iconPos` → `iconPlacement`；`badgeSeverity` → `badgeColor`
+  - 支持 `href` / `ghost` / `loading` 对象形态与 `pt`
+
+### 文档
+
+- 补齐 Button 文档 demo：ColorVariant / Icon / Size / Ghost / Danger / Block / RipplePress
+
 ## 0.4.1
 
 ### 破坏性变更

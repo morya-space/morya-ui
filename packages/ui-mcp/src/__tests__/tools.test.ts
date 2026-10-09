@@ -74,7 +74,7 @@ describe('@morya-ui/mcp handlers', () => {
     const result = read<{ ok: boolean; issues: Array<{ type: string; message: string }> }>(
       handlers.validateUsage({
         component: 'Button',
-        code: '<MButton label="Save" severity="danger" foo="bar" />',
+        code: '<MButton label="Save" danger foo="bar" />',
       }),
     )
 

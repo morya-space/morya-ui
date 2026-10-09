@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
- * 黄金样例：营销落地页（Express�?
+ * 黄金样例：营销落地页（Express）
  * @see DESIGN.md · page-layouts.md · surfaces § Express
- * 首屏单一任务；控件用 M*；色彩只�?--m-*；避开 AI 默认脸�?
+ * 首屏单一任务；控件用 M*；色彩只走 --m-*；避开 AI 默认脸。
  */
 import {
   MAccordion,
@@ -15,9 +15,9 @@ import {
 } from 'morya-ui'
 
 const faqTabs = [
-  { value: 'stack', header: '必须用特定框架吗�? },
+  { value: 'stack', header: '必须用特定框架吗？' },
   { value: 'hosting', header: '流水线跑在哪里？' },
-  { value: 'migrate', header: '如何从现�?CI 迁过来？' },
+  { value: 'migrate', header: '如何从现有 CI 迁过来？' },
 ]
 </script>
 
@@ -25,7 +25,7 @@ const faqTabs = [
   <MConfigProvider :locale="zhCN">
     <div class="landing">
       <header class="landing-nav">
-        <span class="landing-nav__brand">流水�?CI</span>
+        <span class="landing-nav__brand">流水线 CI</span>
         <nav class="landing-nav__links" aria-label="页面导航">
           <a href="#why">为何选择</a>
           <a href="#capabilities">能力</a>
@@ -35,20 +35,20 @@ const faqTabs = [
       </header>
 
       <section class="landing-hero" aria-labelledby="hero-title">
-        <p class="landing-hero__brand">流水�?CI</p>
+        <p class="landing-hero__brand">流水线 CI</p>
         <MTitle id="hero-title" class="landing-hero__title">
-          把每次提交变成可回放的交�?
+          把每次提交变成可回放的交付
         </MTitle>
         <MParagraph class="landing-hero__lead" type="secondary">
-          为工程团队准备的构建与发布编排。少点配置，多看结果�?
+          为工程团队准备的构建与发布编排。少点配置，多看结果。
         </MParagraph>
         <div class="landing-hero__cta">
-          <MButton label="开始使�? />
-          <MButton label="查看文档" type="text" />
+          <MButton label="开始使用" />
+          <MButton label="查看文档" type="text"/>
         </div>
-        <div class="landing-hero__visual" role="img" aria-label="构建时间线示�?>
+        <div class="landing-hero__visual" role="img" aria-label="构建时间线示意">
           <div class="landing-hero__track">
-            <span>检�?/span>
+            <span>检出</span>
             <span>测试</span>
             <span>制品</span>
             <span>发布</span>
@@ -61,20 +61,20 @@ const faqTabs = [
           为何选择
         </MTitle>
         <MParagraph class="landing-section__lead" type="secondary">
-          面向真实仓库节奏，而不是演示用的仪表盘皮肤�?
+          面向真实仓库节奏，而不是演示用的仪表盘皮肤。
         </MParagraph>
         <ul class="landing-points">
           <li>
-            <strong>可回�?/strong>
-            <span>每次运行保留完整日志与产物索引，失败可复现�?/span>
+            <strong>可回放</strong>
+            <span>每次运行保留完整日志与产物索引，失败可复现。</span>
           </li>
           <li>
-            <strong>少样�?/strong>
-            <span>默认流水线覆盖检出、缓存与并行矩阵，按需覆盖�?/span>
+            <strong>少样板</strong>
+            <span>默认流水线覆盖检出、缓存与并行矩阵，按需覆盖。</span>
           </li>
           <li>
             <strong>权限清楚</strong>
-            <span>环境、密钥与审批流按仓库边界隔离�?/span>
+            <span>环境、密钥与审批流按仓库边界隔离。</span>
           </li>
         </ul>
       </section>
@@ -84,7 +84,7 @@ const faqTabs = [
           能力
         </MTitle>
         <MParagraph class="landing-section__lead" type="secondary">
-          用组件库控件表达交互，不引入第二�?UI�?
+          用组件库控件表达交互，不引入第二套 UI。
         </MParagraph>
         <div class="landing-cards">
           <article>
@@ -93,7 +93,7 @@ const faqTabs = [
               并行矩阵
             </MTitle>
             <MParagraph type="secondary">
-              按系统与 Node 版本展开任务，失败任务可单独重跑�?
+              按系统与 Node 版本展开任务，失败任务可单独重跑。
             </MParagraph>
           </article>
           <article>
@@ -102,7 +102,7 @@ const faqTabs = [
               环境门禁
             </MTitle>
             <MParagraph type="secondary">
-              生产发布需要审批与变更说明，记录谁在何时放行�?
+              生产发布需要审批与变更说明，记录谁在何时放行。
             </MParagraph>
           </article>
           <article>
@@ -111,7 +111,7 @@ const faqTabs = [
               耗时对比
             </MTitle>
             <MParagraph type="secondary">
-              同分支历史耗时并排，找出突然变慢的步骤�?
+              同分支历史耗时并排，找出突然变慢的步骤。
             </MParagraph>
           </article>
         </div>
@@ -124,25 +124,25 @@ const faqTabs = [
         <MAccordion :tabs="faqTabs" default-value="stack">
           <template #stack>
             <MParagraph class="landing-faq" type="secondary">
-              任意可容器化的仓库即可。示例以 Vue / Node 为主，不绑定单一前端脚手架�?
+              任意可容器化的仓库即可。示例以 Vue / Node 为主，不绑定单一前端脚手架。
             </MParagraph>
           </template>
           <template #hosting>
             <MParagraph class="landing-faq" type="secondary">
-              可自托管 runner，也可使用托管队列。密钥不进入日志明文�?
+              可自托管 runner，也可使用托管队列。密钥不进入日志明文。
             </MParagraph>
           </template>
           <template #migrate>
             <MParagraph class="landing-faq" type="secondary">
-              从现�?YAML 映射阶段与缓存键；保留原有制品路径可降低切换成本�?
+              从现有 YAML 映射阶段与缓存键；保留原有制品路径可降低切换成本。
             </MParagraph>
           </template>
         </MAccordion>
       </section>
 
       <footer class="landing-footer">
-        <span>流水�?CI</span>
-        <MButton label="联系销�? type="text" />
+        <span>流水线 CI</span>
+        <MButton label="联系销售" type="text"/>
       </footer>
     </div>
   </MConfigProvider>
