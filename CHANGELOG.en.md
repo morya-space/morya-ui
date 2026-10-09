@@ -19,7 +19,7 @@
 
 ### Breaking Changes
 
-- rewrite with Naive-inspired API
+- rewrite public component API
 
 ### Features
 

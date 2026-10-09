@@ -18,7 +18,7 @@
 
 ### 破坏性变更
 
-- rewrite with Naive-inspired API
+- rewrite public component API
 
 ### 新功能
 
