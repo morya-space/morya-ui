@@ -1,5 +1,16 @@
 # morya-ui
 
+## 0.4.3
+
+### 修复
+
+- Button pt 类型与 PageFilters 文案插空
+
+### 变更
+
+- 语义色 severity 统一为 type
+- add ConfigProvider styles import
+
 ## 0.4.2
 
 ### 新功能
