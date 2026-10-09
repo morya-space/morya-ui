@@ -1,5 +1,28 @@
 # morya-ui
 
+## 0.4.2
+
+### Features
+
+- add MTable component and support column align props and scroll height settings
+
+### Fixes
+
+- align loading, defaults, and outlined active styles
+- MMessage component icon align center
+
+### Docs
+
+- clarify ButtonGroup as visual-only grouping
+- tighten public docs and reorder demos
+- sync demos and MCP after dual-axis API
+
+### Changes
+
+- remove built-in badge API
+- tokenize styles against theme tokens
+- update button props and remove severity prop
+
 ## Unreleased
 
 ### Breaking Changes
