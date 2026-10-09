@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-08T08:29:21.331Z",
-  "catalogGeneratedAt": "2026-10-08T08:29:10.652Z",
+  "generatedAt": "2026-10-09T08:20:15.616Z",
+  "catalogGeneratedAt": "2026-10-09T08:04:02.496Z",
   "components": [
     {
       "id": "Accordion",
@@ -305,15 +305,15 @@
     {
       "id": "Button",
       "exportName": "MButton",
-      "examples": 24,
+      "examples": 30,
       "props": {
-        "total": 30,
-        "covered": 24,
+        "total": 23,
+        "covered": 17,
         "missing": [
-          "dashed",
-          "ripple",
-          "press",
-          "nativeType",
+          "htmlType",
+          "href",
+          "target",
+          "autoInsertSpace",
           "autofocus",
           "pt"
         ]
@@ -639,9 +639,8 @@
       "examples": 4,
       "props": {
         "total": 17,
-        "covered": 6,
+        "covered": 7,
         "missing": [
-          "type",
           "loading",
           "beforeAccept",
           "beforeReject",
@@ -692,7 +691,7 @@
           "teleport",
           "appendTo",
           "transition",
-          "acceptSeverity",
+          "acceptColor",
           "pt"
         ]
       },
@@ -884,7 +883,7 @@
           "centered",
           "teleport",
           "appendTo",
-          "positiveSeverity",
+          "positiveColor",
           "onNegativeClick",
           "ariaLabel",
           "transition",
@@ -3027,8 +3026,8 @@
         "covered": 2,
         "missing": [
           "icon",
-          "severity",
-          "outlined",
+          "color",
+          "variant",
           "size",
           "disabled",
           "teleport",
@@ -4005,6 +4004,6 @@
   "summary": {
     "components": 107,
     "componentsWithMissingCoverage": 106,
-    "totalExamples": 951
+    "totalExamples": 957
   }
 }
