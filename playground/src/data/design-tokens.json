@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T04:35:32.109Z",
+  "generatedAt": "2026-10-09T07:54:20.393Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 440,
+  "tokenCount": 484,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -698,10 +698,40 @@
       "name": "--m-button-active-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-surface)",
+      "default": "transparent",
       "description": {
         "zh-CN": "组件专用相关变量：Button Active Bg",
         "en-US": "Component-specific token: Button Active Bg"
+      }
+    },
+    {
+      "name": "--m-button-active-border",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-button-color-active, var(--m-button-color-hover))",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Active Border",
+        "en-US": "Component-specific token: Button Active Border"
+      }
+    },
+    {
+      "name": "--m-button-active-fg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-button-color-active, var(--m-button-color-hover))",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Active Fg",
+        "en-US": "Component-specific token: Button Active Fg"
+      }
+    },
+    {
+      "name": "--m-button-badge-font-weight",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-font-weight-strong)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Badge Font Weight",
+        "en-US": "Component-specific token: Button Badge Font Weight"
       }
     },
     {
@@ -718,7 +748,7 @@
       "name": "--m-button-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-surface)",
+      "default": "transparent",
       "description": {
         "zh-CN": "组件专用相关变量：Button Bg",
         "en-US": "Component-specific token: Button Bg"
@@ -728,27 +758,227 @@
       "name": "--m-button-border",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-border)",
+      "default": "var(--m-color-on-emphasis)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Border",
         "en-US": "Component-specific token: Button Border"
       }
     },
     {
+      "name": "--m-button-border-style",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "dashed",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Border Style",
+        "en-US": "Component-specific token: Button Border Style"
+      }
+    },
+    {
+      "name": "--m-button-border-width",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-border-width)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Border Width",
+        "en-US": "Component-specific token: Button Border Width"
+      }
+    },
+    {
+      "name": "--m-button-cn-letter-spacing",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0.3em",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Cn Letter Spacing",
+        "en-US": "Component-specific token: Button Cn Letter Spacing"
+      }
+    },
+    {
+      "name": "--m-button-color-active",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-primary-active)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Color Active",
+        "en-US": "Component-specific token: Button Color Active"
+      }
+    },
+    {
+      "name": "--m-button-color-base",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-on-emphasis)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Color Base",
+        "en-US": "Component-specific token: Button Color Base"
+      }
+    },
+    {
+      "name": "--m-button-color-hover",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "color-mix( in srgb, var(--m-color-on-emphasis) var(--m-button-ghost-hover-opacity), transparent )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Color Hover",
+        "en-US": "Component-specific token: Button Color Hover"
+      }
+    },
+    {
+      "name": "--m-button-color-light",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "color-mix( in srgb, var(--m-color-text) var(--m-button-fill-opacity-muted), var(--m-color-surface) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Color Light",
+        "en-US": "Component-specific token: Button Color Light"
+      }
+    },
+    {
+      "name": "--m-button-color-light-active",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "color-mix( in srgb, var(--m-color-text) var(--m-button-fill-opacity-muted-active), var(--m-color-surface) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Color Light Active",
+        "en-US": "Component-specific token: Button Color Light Active"
+      }
+    },
+    {
+      "name": "--m-button-color-light-hover",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "color-mix( in srgb, var(--m-color-text) var(--m-button-fill-opacity-muted-hover), var(--m-color-surface) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Color Light Hover",
+        "en-US": "Component-specific token: Button Color Light Hover"
+      }
+    },
+    {
       "name": "--m-button-fg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-text)",
+      "default": "var(--m-color-on-emphasis)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Fg",
         "en-US": "Component-specific token: Button Fg"
       }
     },
     {
+      "name": "--m-button-fill-opacity",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "10%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Fill Opacity",
+        "en-US": "Component-specific token: Button Fill Opacity"
+      }
+    },
+    {
+      "name": "--m-button-fill-opacity-active",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "22%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Fill Opacity Active",
+        "en-US": "Component-specific token: Button Fill Opacity Active"
+      }
+    },
+    {
+      "name": "--m-button-fill-opacity-hover",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "16%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Fill Opacity Hover",
+        "en-US": "Component-specific token: Button Fill Opacity Hover"
+      }
+    },
+    {
+      "name": "--m-button-fill-opacity-muted",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "6%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Fill Opacity Muted",
+        "en-US": "Component-specific token: Button Fill Opacity Muted"
+      }
+    },
+    {
+      "name": "--m-button-fill-opacity-muted-active",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "14%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Fill Opacity Muted Active",
+        "en-US": "Component-specific token: Button Fill Opacity Muted Active"
+      }
+    },
+    {
+      "name": "--m-button-fill-opacity-muted-hover",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "10%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Fill Opacity Muted Hover",
+        "en-US": "Component-specific token: Button Fill Opacity Muted Hover"
+      }
+    },
+    {
+      "name": "--m-button-font-size",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-control-font-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Font Size",
+        "en-US": "Component-specific token: Button Font Size"
+      }
+    },
+    {
+      "name": "--m-button-font-weight",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-font-weight)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Font Weight",
+        "en-US": "Component-specific token: Button Font Weight"
+      }
+    },
+    {
+      "name": "--m-button-gap",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Gap",
+        "en-US": "Component-specific token: Button Gap"
+      }
+    },
+    {
+      "name": "--m-button-ghost-hover-opacity",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "80%",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Ghost Hover Opacity",
+        "en-US": "Component-specific token: Button Ghost Hover Opacity"
+      }
+    },
+    {
+      "name": "--m-button-height",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-control-height-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Height",
+        "en-US": "Component-specific token: Button Height"
+      }
+    },
+    {
       "name": "--m-button-hover-bg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-surface)",
+      "default": "transparent",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Bg",
         "en-US": "Component-specific token: Button Hover Bg"
@@ -758,7 +988,7 @@
       "name": "--m-button-hover-border",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-primary-hover)",
+      "default": "var(--m-button-color-hover)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Border",
         "en-US": "Component-specific token: Button Hover Border"
@@ -768,7 +998,7 @@
       "name": "--m-button-hover-fg",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "var(--m-color-primary-hover)",
+      "default": "var(--m-button-color-hover)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Hover Fg",
         "en-US": "Component-specific token: Button Hover Fg"
@@ -778,20 +1008,120 @@
       "name": "--m-button-icon-size",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "1.25rem",
+      "default": "var(--m-button-icon-size-large)",
       "description": {
         "zh-CN": "组件专用相关变量：Button Icon Size",
         "en-US": "Component-specific token: Button Icon Size"
       }
     },
     {
-      "name": "--m-button-icon-stack-min-height",
+      "name": "--m-button-icon-size-large",
       "category": "component",
       "source": "src/components/Button/styles.css",
-      "default": "3.25rem",
+      "default": "1.25rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Button Icon Stack Min Height",
-        "en-US": "Component-specific token: Button Icon Stack Min Height"
+        "zh-CN": "组件专用相关变量：Button Icon Size Large",
+        "en-US": "Component-specific token: Button Icon Size Large"
+      }
+    },
+    {
+      "name": "--m-button-icon-size-small",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0.875rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Icon Size Small",
+        "en-US": "Component-specific token: Button Icon Size Small"
+      }
+    },
+    {
+      "name": "--m-button-loading-opacity",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0.72",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Loading Opacity",
+        "en-US": "Component-specific token: Button Loading Opacity"
+      }
+    },
+    {
+      "name": "--m-button-on-color",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast-fg)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button On Color",
+        "en-US": "Component-specific token: Button On Color"
+      }
+    },
+    {
+      "name": "--m-button-outlined-bg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-surface)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Bg",
+        "en-US": "Component-specific token: Button Outlined Bg"
+      }
+    },
+    {
+      "name": "--m-button-outlined-border",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Border",
+        "en-US": "Component-specific token: Button Outlined Border"
+      }
+    },
+    {
+      "name": "--m-button-outlined-fg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Fg",
+        "en-US": "Component-specific token: Button Outlined Fg"
+      }
+    },
+    {
+      "name": "--m-button-outlined-hover-bg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-button-color-light)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Hover Bg",
+        "en-US": "Component-specific token: Button Outlined Hover Bg"
+      }
+    },
+    {
+      "name": "--m-button-outlined-hover-border",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast-hover)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Hover Border",
+        "en-US": "Component-specific token: Button Outlined Hover Border"
+      }
+    },
+    {
+      "name": "--m-button-outlined-hover-fg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast-hover)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Outlined Hover Fg",
+        "en-US": "Component-specific token: Button Outlined Hover Fg"
+      }
+    },
+    {
+      "name": "--m-button-padding-x",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-button-padding-x-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Padding X",
+        "en-US": "Component-specific token: Button Padding X"
       }
     },
     {
@@ -815,6 +1145,16 @@
       }
     },
     {
+      "name": "--m-button-padding-x-round-extra",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-space-2)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Padding X Round Extra",
+        "en-US": "Component-specific token: Button Padding X Round Extra"
+      }
+    },
+    {
       "name": "--m-button-padding-x-small",
       "category": "component",
       "source": "src/components/Button/styles.css",
@@ -822,6 +1162,114 @@
       "description": {
         "zh-CN": "组件专用相关变量：Button Padding X Small",
         "en-US": "Component-specific token: Button Padding X Small"
+      }
+    },
+    {
+      "name": "--m-button-press-duration",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "120ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Press Duration",
+        "en-US": "Component-specific token: Button Press Duration"
+      }
+    },
+    {
+      "name": "--m-button-press-scale",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0.97",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Press Scale",
+        "en-US": "Component-specific token: Button Press Scale"
+      }
+    },
+    {
+      "name": "--m-button-radius",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Radius",
+        "en-US": "Component-specific token: Button Radius"
+      }
+    },
+    {
+      "name": "--m-button-ripple-duration",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0ms",
+      "variants": {
+        "motion-reduced": "280ms",
+        "motion-none": "0ms"
+      },
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Ripple Duration",
+        "en-US": "Component-specific token: Button Ripple Duration"
+      }
+    },
+    {
+      "name": "--m-button-ripple-opacity-mid",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0.22",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Ripple Opacity Mid",
+        "en-US": "Component-specific token: Button Ripple Opacity Mid"
+      }
+    },
+    {
+      "name": "--m-button-ripple-opacity-start",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "0.42",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Ripple Opacity Start",
+        "en-US": "Component-specific token: Button Ripple Opacity Start"
+      }
+    },
+    {
+      "name": "--m-button-solid-bg",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Solid Bg",
+        "en-US": "Component-specific token: Button Solid Bg"
+      }
+    },
+    {
+      "name": "--m-button-solid-bg-active",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast-active)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Solid Bg Active",
+        "en-US": "Component-specific token: Button Solid Bg Active"
+      }
+    },
+    {
+      "name": "--m-button-solid-bg-hover",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "var(--m-color-contrast-hover)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Solid Bg Hover",
+        "en-US": "Component-specific token: Button Solid Bg Hover"
+      }
+    },
+    {
+      "name": "--m-button-spinner-border-width",
+      "category": "component",
+      "source": "src/components/Button/styles.css",
+      "default": "2px",
+      "description": {
+        "zh-CN": "组件专用相关变量：Button Spinner Border Width",
+        "en-US": "Component-specific token: Button Spinner Border Width"
       }
     },
     {

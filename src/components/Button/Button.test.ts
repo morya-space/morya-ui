@@ -87,20 +87,18 @@ describe('MButton', () => {
     )
   })
 
-  it('renders icon, iconPlacement, iconOnly, badge and aria-label', () => {
+  it('renders icon, iconPlacement, iconOnly and aria-label', () => {
     const wrapper = mount(MButton, {
       props: {
         icon: 'search',
         label: 'Search',
         iconPlacement: 'end',
-        badge: '2',
-        badgeColor: 'danger',
         ariaLabel: 'Find',
       },
     })
     expect(wrapper.classes()).toContain('m-button--icon-end')
     expect(wrapper.find('.m-button__icon').exists()).toBe(true)
-    expect(wrapper.find('.m-button__badge--danger').text()).toBe('2')
+    expect(wrapper.find('.m-button__badge').exists()).toBe(false)
     expect(wrapper.attributes('aria-label')).toBe('Find')
   })
 
@@ -116,6 +114,15 @@ describe('MButton', () => {
     await wrapper.trigger('click')
     expect(wrapper.emitted('click')).toBeUndefined()
     vi.useRealTimers()
+  })
+
+  it('does not mark the native button disabled while loading', () => {
+    const wrapper = mount(MButton, {
+      props: { label: 'Save', type: 'primary', loading: true },
+    })
+    expect(wrapper.classes()).toContain('m-button--loading')
+    expect(wrapper.attributes('disabled')).toBeUndefined()
+    expect(wrapper.attributes('aria-busy')).toBe('true')
   })
 
   it('renders as an anchor when href is set', async () => {
@@ -164,5 +171,55 @@ describe('MButton', () => {
     expect(wrapper.find('button').classes()).toEqual(
       expect.arrayContaining(['m-button--color-primary', 'm-button--variant-solid']),
     )
+  })
+
+  it('inherits shape from componentDefaults', () => {
+    const wrapper = mount({
+      components: { MConfigProvider, MButton },
+      template: `
+        <MConfigProvider :component-defaults="{ Button: { shape: 'round' } }">
+          <MButton label="Round" />
+        </MConfigProvider>
+      `,
+    })
+    expect(wrapper.find('button').classes()).toContain('m-button--shape-round')
+  })
+
+  it('allows local ripple=false to override context ripple', () => {
+    const withContext = mount({
+      components: { MConfigProvider, MButton },
+      template: `
+        <MConfigProvider :component-defaults="{ Button: { ripple: true } }">
+          <MButton label="Ripple" />
+        </MConfigProvider>
+      `,
+    })
+    expect(withContext.find('button').classes()).toContain('m-button--ripple')
+    expect(withContext.find('.m-button__ripple').exists()).toBe(true)
+
+    const overridden = mount({
+      components: { MConfigProvider, MButton },
+      template: `
+        <MConfigProvider :component-defaults="{ Button: { ripple: true } }">
+          <MButton label="No Ripple" :ripple="false" />
+        </MConfigProvider>
+      `,
+    })
+    expect(overridden.find('button').classes()).not.toContain('m-button--ripple')
+    expect(overridden.find('.m-button__ripple').exists()).toBe(false)
+  })
+
+  it('skips two-chinese-char spacing for icon and unbordered buttons', async () => {
+    const withIcon = mount(MButton, {
+      props: { label: '确定', icon: 'search' },
+    })
+    await nextTick()
+    expect(withIcon.classes()).not.toContain('m-button--two-chinese-chars')
+
+    const link = mount(MButton, {
+      props: { label: '确定', type: 'link' },
+    })
+    await nextTick()
+    expect(link.classes()).not.toContain('m-button--two-chinese-chars')
   })
 })

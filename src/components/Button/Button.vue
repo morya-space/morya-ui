@@ -4,13 +4,13 @@ import type { IconName } from '../Icon/types'
 import type { ButtonColor, ButtonProps } from './types'
 import {
   Comment,
-  Fragment,
-  Text,
   computed,
+  Fragment,
   nextTick,
   onBeforeUnmount,
   onMounted,
   ref,
+  Text,
   useAttrs,
   useSlots,
   watch,
@@ -34,15 +34,13 @@ import {
 
 defineOptions({ inheritAttrs: false })
 
-const RIPPLE_MS_FALLBACK = 560
-
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: undefined,
   color: undefined,
   variant: undefined,
   danger: false,
   ghost: false,
-  shape: 'default',
+  shape: undefined,
   block: false,
   loading: false,
   disabled: undefined,
@@ -50,13 +48,15 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconPlacement: 'start',
   iconOnly: false,
   autoInsertSpace: undefined,
-  badgeColor: null,
   autofocus: false,
-  ripple: false,
-  press: false,
+  ripple: undefined,
+  press: undefined,
 })
 
 const emit = defineEmits<{ (event: 'click', value: MouseEvent): void }>()
+
+const RIPPLE_MS_FALLBACK = 560
+
 const slots = useSlots()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
@@ -92,13 +92,12 @@ const contextPress = computed(() =>
   getComponentDefault<boolean>(config.value.componentDefaults, 'Button', 'press'),
 )
 
-const mergedShape = computed(() => props.shape || contextShape.value || 'default')
+const mergedShape = computed(() => props.shape ?? contextShape.value ?? 'default')
 const mergedAutoInsertSpace = computed(
   () => props.autoInsertSpace ?? contextAutoInsertSpace.value ?? true,
 )
-const mergedRipple = computed(() => props.ripple || contextRipple.value || false)
-const mergedPress = computed(() => props.press || contextPress.value || false)
-
+const mergedRipple = computed(() => props.ripple ?? contextRipple.value ?? false)
+const mergedPress = computed(() => props.press ?? contextPress.value ?? false)
 const appearance = computed(() =>
   resolveButtonAppearance({
     color: props.color,
@@ -184,21 +183,19 @@ const buttonClass = computed(() => [
   },
 ])
 
-const badgeClass = computed(() => [
-  'm-button__badge',
-  props.badgeColor
-    ? `m-button__badge--${props.badgeColor === 'warning' ? 'warn' : props.badgeColor}`
-    : 'm-button__badge--contrast',
-])
-
-const needInserted = computed(
-  () =>
-    !props.icon
-    && !slots.icon
-    && !isIconOnly.value
-    && !isUnBorderedButtonVariant(appearance.value.variant),
-)
-
+const needInserted = computed(() => {
+  if (
+    props.icon
+    || slots.icon
+    || isIconOnly.value
+    || isUnBorderedButtonVariant(appearance.value.variant)
+  ) {
+    return false
+  }
+  if (props.label && !hasDefaultContent.value) return true
+  const nodes = slots.default?.() ?? []
+  return nodes.filter((node) => hasRenderableContent(node)).length === 1
+})
 function hasRenderableContent(node: VNodeChild): boolean {
   if (node == null || typeof node === 'boolean') return false
   if (typeof node === 'string' || typeof node === 'number') return String(node).trim().length > 0
@@ -338,7 +335,7 @@ defineExpose({ focus, ref: buttonElement })
     :type="isAnchor ? undefined : htmlType"
     :href="isAnchor ? (mergedDisabled ? undefined : href) : undefined"
     :target="isAnchor ? target : undefined"
-    :disabled="isAnchor ? undefined : (mergedDisabled || innerLoading)"
+    :disabled="isAnchor ? undefined : mergedDisabled"
     :tabindex="isAnchor && mergedDisabled ? -1 : undefined"
     :aria-disabled="isAnchor && mergedDisabled ? true : undefined"
     :aria-busy="innerLoading || undefined"
@@ -382,11 +379,5 @@ defineExpose({ focus, ref: buttonElement })
     >
       <slot>{{ displayLabel }}</slot>
     </span>
-
-    <span
-      v-if="badge != null && badge !== ''"
-      :class="badgeClass"
-      v-bind="pt?.badge"
-    >{{ badge }}</span>
   </component>
 </template>

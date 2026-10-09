@@ -16,14 +16,12 @@
     );
     --m-button-padding-x-round-extra: var(--m-space-2);
 
-    /* Icon / spinner / badge */
+    /* Icon / spinner */
     --m-button-icon-size: 1rem;
     --m-button-icon-size-small: 0.875rem;
     --m-button-icon-size-large: 1.25rem;
     --m-button-spinner-size: 0.875rem;
     --m-button-spinner-border-width: 2px;
-    --m-button-badge-min-width: 1.15rem;
-    --m-button-badge-font-weight: var(--m-font-weight-strong);
     --m-button-cn-letter-spacing: 0.3em;
 
     /* Soft fill opacities (theme-adaptive via surface mix) */
@@ -74,6 +72,9 @@
     --m-button-active-bg: var(--m-button-bg);
     --m-button-border-style: solid;
 
+    --m-button-active-fg: var(--m-button-fg);
+    --m-button-active-border: var(--m-button-border);
+
     align-items: center;
     background: var(--m-button-bg);
     border: var(--m-button-border-width) var(--m-button-border-style)
@@ -93,6 +94,7 @@
     padding: 0 var(--m-button-padding-x);
     position: relative;
     text-decoration: none;
+    touch-action: manipulation;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
         border-color var(--m-motion-fast) var(--m-motion-ease),
@@ -100,6 +102,7 @@
         box-shadow var(--m-motion-fast) var(--m-motion-ease),
         opacity var(--m-motion-fast) var(--m-motion-ease),
         transform var(--m-button-press-duration) var(--m-motion-ease);
+    user-select: none;
     vertical-align: middle;
     white-space: nowrap;
 }
@@ -112,8 +115,10 @@
     }
 }
 
-.m-button:active:not(:disabled):not(.m-button--disabled) {
+.m-button:active:not(:disabled):not(.m-button--disabled):not(.m-button--loading) {
     background: var(--m-button-active-bg);
+    border-color: var(--m-button-active-border);
+    color: var(--m-button-active-fg);
 }
 
 .m-button--press:active:not(:disabled):not(.m-button--disabled) {
@@ -178,7 +183,9 @@
     --m-button-outlined-hover-border: var(--m-color-primary-hover);
     --m-button-outlined-hover-fg: var(--m-color-primary-hover);
     --m-button-outlined-bg: var(--m-color-surface);
-    --m-button-outlined-hover-bg: var(--m-button-color-light);
+    /* Match ant default outlined/dashed: keep surface bg, only shift border/text. */
+    --m-button-outlined-hover-bg: var(--m-color-surface);
+    --m-button-outlined-active-bg: var(--m-color-surface);
 }
 
 .m-button--color-primary {
@@ -349,6 +356,8 @@
         --m-button-solid-bg-active,
         var(--m-button-color-active)
     );
+    --m-button-active-fg: var(--m-button-on-color);
+    --m-button-active-border: transparent;
 }
 
 .m-button--variant-outlined,
@@ -372,8 +381,16 @@
         var(--m-button-color-hover)
     );
     --m-button-active-bg: var(
-        --m-button-color-light-active,
-        var(--m-button-color-light)
+        --m-button-outlined-active-bg,
+        var(--m-button-color-light-active, var(--m-button-color-light))
+    );
+    --m-button-active-fg: var(
+        --m-button-color-active,
+        var(--m-button-hover-fg)
+    );
+    --m-button-active-border: var(
+        --m-button-color-active,
+        var(--m-button-hover-border)
     );
 }
 
@@ -389,6 +406,8 @@
     --m-button-hover-fg: var(--m-button-color-base);
     --m-button-hover-border: transparent;
     --m-button-active-bg: var(--m-button-color-light-active);
+    --m-button-active-fg: var(--m-button-color-base);
+    --m-button-active-border: transparent;
 }
 
 .m-button--variant-text,
@@ -399,6 +418,8 @@
     --m-button-hover-fg: var(--m-button-color-hover);
     --m-button-hover-border: transparent;
     --m-button-active-bg: transparent;
+    --m-button-active-fg: var(--m-button-color-active, var(--m-button-color-hover));
+    --m-button-active-border: transparent;
 }
 
 .m-button--variant-text {
@@ -448,8 +469,9 @@
     --m-button-border: var(--m-button-color-base);
     --m-button-hover-fg: var(--m-button-color-hover);
     --m-button-hover-border: var(--m-button-color-hover);
+    --m-button-active-fg: var(--m-button-color-active, var(--m-button-color-hover));
+    --m-button-active-border: var(--m-button-color-active, var(--m-button-color-hover));
 }
-
 .m-button--ghost.m-button--color-default {
     --m-button-color-base: var(--m-color-on-emphasis);
     --m-button-color-hover: color-mix(
@@ -534,8 +556,7 @@
 }
 
 .m-button__icon,
-.m-button__label,
-.m-button__badge {
+.m-button__label {
     position: relative;
     z-index: 1;
 }
@@ -596,55 +617,6 @@
 .m-button__icon .m-icon {
     max-height: 100%;
     max-width: 100%;
-}
-
-.m-button__badge {
-    align-items: center;
-    background: var(--m-color-contrast);
-    border-radius: var(--m-radius-full);
-    color: var(--m-color-contrast-fg);
-    display: inline-flex;
-    font-size: var(--m-font-size-xs);
-    font-weight: var(--m-button-badge-font-weight);
-    justify-content: center;
-    line-height: 1;
-    margin-inline-start: var(--m-space-1);
-    min-width: var(--m-button-badge-min-width);
-    padding: var(--m-space-1) var(--m-space-2);
-}
-
-.m-button__badge--secondary {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 25%,
-        var(--m-color-surface)
-    );
-    color: var(--m-color-text);
-}
-
-.m-button__badge--success {
-    background: var(--m-color-success);
-    color: var(--m-color-on-emphasis);
-}
-
-.m-button__badge--info {
-    background: var(--m-color-info);
-    color: var(--m-color-on-emphasis);
-}
-
-.m-button__badge--warn {
-    background: var(--m-color-warn);
-    color: var(--m-color-on-emphasis);
-}
-
-.m-button__badge--danger {
-    background: var(--m-color-danger);
-    color: var(--m-color-on-emphasis);
-}
-
-.m-button__badge--contrast {
-    background: var(--m-color-contrast);
-    color: var(--m-color-contrast-fg);
 }
 
 .m-button__spinner {
