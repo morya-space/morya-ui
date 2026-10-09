@@ -14,7 +14,7 @@ Use Button for submit, confirm, navigate, and other immediate actions.
 - Secondary action: the default button, or `type="dashed"` / `type="text"`.
 - Inline or low-emphasis action: `type="link"` / `type="text"`.
 - Destructive action: add `danger`, and confirm when needed.
-- Related adjacent actions: wrap them in `MButtonGroup`.
+- Adjacent actions that should look joined: wrap them in `MButtonGroup` (visual only).
 
 ## Import
 
@@ -110,7 +110,7 @@ Use `badge` / `badgeColor` to show a count or status mark on the button.
 
 ### Button group
 
-`MButtonGroup` joins adjacent buttons. It also supports `block`.
+`MButtonGroup` only joins adjacent buttons visually. It has no selected state. For mutually exclusive switching, use [`SelectButton`](/components/SelectButton).
 
 ```vue preview src="./demos/ButtonGroup.en.vue"
 

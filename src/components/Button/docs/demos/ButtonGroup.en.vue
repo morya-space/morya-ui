@@ -4,12 +4,12 @@ import { MButton, MButtonGroup, MFlex } from 'morya-ui'
 
 <template>
   <MFlex vertical gap="medium">
-    <MButtonGroup aria-label="Align">
-      <MButton label="Left" />
-      <MButton label="Center" />
-      <MButton label="Right" />
+    <MButtonGroup aria-label="Row actions">
+      <MButton label="Edit" />
+      <MButton label="Share" />
+      <MButton danger label="Delete" />
     </MButtonGroup>
-    <MButtonGroup block aria-label="Block group">
+    <MButtonGroup block aria-label="Form actions">
       <MButton label="Cancel" />
       <MButton type="primary" label="Confirm" />
     </MButtonGroup>

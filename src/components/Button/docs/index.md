@@ -14,7 +14,7 @@ description: 触发即时操作的按钮。
 - 次操作：默认按钮，或 `type="dashed"` / `type="text"`。
 - 内联导航或弱操作：`type="link"` / `type="text"`。
 - 破坏性操作：加 `danger`，并配合确认。
-- 一组相邻操作：用 `MButtonGroup`。
+- 相邻操作需要拼成一组时：用 `MButtonGroup`（仅视觉拼组）。
 
 ## 引入
 
@@ -110,7 +110,7 @@ import { MButton, MButtonGroup } from 'morya-ui'
 
 ### 按钮组
 
-`MButtonGroup` 将相邻按钮拼成一组；也可设 `block`。
+`MButtonGroup` 只做视觉拼组（圆角与边框衔接），没有选中态。需要互斥切换时用 [`SelectButton`](/components/SelectButton)。
 
 ```vue preview src="./demos/ButtonGroup.zh.vue"
 
