@@ -1,6 +1,6 @@
 # 开源 Vue 3 组件库 Morya UI：把组件、文档、AI 工具链一起做进一个包
 
-![封面：Morya UI](./assets/cover.png)
+![封面：Morya UI](https://raw.gitcode.com/Wayne1308/images-list/raw/main/cover.png)
 
 做 Vue 3 项目，常见三件麻烦事：组件够用但主题难统一、文档和真实 API 对不上、交给 AI 写页面它总「发明」不存在的 props。
 
@@ -12,7 +12,7 @@
 - 演示后台：<https://github.com/xcGoGo2/morya-admin>
 - 许可证：MIT
 
-![文档站首页](./assets/01-docs-home.png)
+![文档站首页](https://raw.gitcode.com/Wayne1308/images-list/raw/main/01-docs-home.png)
 
 > 配图来自文档站与本地 `morya-admin` 截图。上一篇：[别手搓了，搓也搓不过 Agent](../dont-handcraft-agent-wins/article.md)。
 
@@ -34,7 +34,7 @@
 
 组件覆盖面是通用的，不挑业务类型。想换品牌气质就改 `--m-*` token 和字体，不用换库。
 
-![组件目录](./assets/02-components-catalog.png)
+![组件目录](https://raw.gitcode.com/Wayne1308/images-list/raw/main/02-components-catalog.png)
 
 ---
 
@@ -48,25 +48,25 @@
 
 单个组件页把说明、可交互预览、API 放在一起。Button 的 `type` / `color` / `variant` 直接点着看：
 
-![Button 组件文档与实时预览](./assets/04-button-preview.png)
+![Button 组件文档与实时预览](https://raw.gitcode.com/Wayne1308/images-list/raw/main/04-button-preview.png)
 
 文档站还有 Table、Layout 等更重的组件页可对照：
 
-![Table 文档预览](./assets/05-table-preview.png)
+![Table 文档预览](https://raw.gitcode.com/Wayne1308/images-list/raw/main/05-table-preview.png)
 
-![Layout 文档](./assets/06-layout-shell.png)
+![Layout 文档](https://raw.gitcode.com/Wayne1308/images-list/raw/main/06-layout-shell.png)
 
 ### 2. 设计令牌驱动的主题系统（`--m-*`）
 
 颜色、间距、圆角都走 CSS 变量。亮暗主题、密度（`useDensity`）、动效强度（`useMotion`）同包导出。局部可以用 `MConfigProvider` 覆盖，品牌色改 `--m-color-primary` 一类 token，不用在业务里到处写死 hex。
 
-![主题文档](./assets/03-theme-docs.png)
+![主题文档](https://raw.gitcode.com/Wayne1308/images-list/raw/main/03-theme-docs.png)
 
-![设计令牌文档](./assets/09-tokens.png)
+![设计令牌文档](https://raw.gitcode.com/Wayne1308/images-list/raw/main/09-tokens.png)
 
 业务项目里可以跑配套的 `check:colors` 脚本拦截裸 hex/rgb，逼着团队走设计系统，不能写「看起来差不多」的色值。暗色模式下同一套组件的可读性也保持住了：
 
-![暗色主题下的组件预览](./assets/03-theme-dark.png)
+![暗色主题下的组件预览](https://raw.gitcode.com/Wayne1308/images-list/raw/main/03-theme-dark.png)
 
 ### 3. TypeScript 优先 + 多种接入方式
 
@@ -93,9 +93,9 @@ Composition API + 完整 Props / Emits / locale 类型。接入方式包括：
 | `@morya-ui/mcp` | MCP 服务：组件 API、示例、页面配方、`validate_usage` / `validate_page` |
 | `@morya-ui/setup` | 一键给业务项目装库、样式、`DESIGN.md`、Agent Skill、Cursor 规则、多编辑器 MCP |
 
-![Agent MCP 文档](./assets/08-mcp.png)
+![Agent MCP 文档](https://raw.gitcode.com/Wayne1308/images-list/raw/main/08-mcp.png)
 
-![一键接入文档](./assets/08-ai-setup.png)
+![一键接入文档](https://raw.gitcode.com/Wayne1308/images-list/raw/main/08-ai-setup.png)
 
 推荐工作流：
 
@@ -106,7 +106,7 @@ Composition API + 完整 Props / Emits / locale 类型。接入方式包括：
 
 对 Cursor 这类支持 Agent 的编辑器来说，相当于给组件库装了「官方知识库 + 质检闸」。黄金样例列表页可以直接对照块顺序：
 
-![黄金样例列表页](./assets/07-golden-list.png)
+![黄金样例列表页](https://raw.gitcode.com/Wayne1308/images-list/raw/main/07-golden-list.png)
 
 ---
 
@@ -173,7 +173,7 @@ npx @morya-ui/setup ai
 
 分栏登录、记住我、暗色切换，表单和按钮直接用库内组件，视觉和文档站是同一套 token。
 
-![morya-admin 登录页](./assets/10-admin-login.png)
+![morya-admin 登录页](https://raw.gitcode.com/Wayne1308/images-list/raw/main/10-admin-login.png)
 
 试用账号提示写得很清楚：`admin` 全权限、`ops` 偏业务权限，密码任意非空即可登录，方便演示 RBAC。
 
@@ -181,23 +181,23 @@ npx @morya-ui/setup ai
 
 `MLayout` 系列布局、侧栏菜单、顶栏工具、多标签、统计指标、时间线，拼成完整的 dashboard。
 
-![morya-admin 工作台](./assets/11-admin-dashboard.png)
+![morya-admin 工作台](https://raw.gitcode.com/Wayne1308/images-list/raw/main/11-admin-dashboard.png)
 
 ### 3. 列表页范式
 
 用户管理是典型 CRUD 列表：搜索、状态下拉、高级筛选、新建、行内编辑/删除、状态 Tag、分页器。中后台大部分页面都是这个形状。
 
-![用户管理列表](./assets/12-admin-users.png)
+![用户管理列表](https://raw.gitcode.com/Wayne1308/images-list/raw/main/12-admin-users.png)
 
 订单管理用的是同一套业务列表范式，说明组件库不只能做系统管理页。
 
-![订单管理列表](./assets/13-admin-orders.png)
+![订单管理列表](https://raw.gitcode.com/Wayne1308/images-list/raw/main/13-admin-orders.png)
 
 ### 4. 布局与主题
 
 顶栏进布局设置，配合亮暗切换、密度等开关。主题系统不是文档里的概念，是产品里能拨的开关。
 
-![布局设置抽屉](./assets/14-admin-settings.png)
+![布局设置抽屉](https://raw.gitcode.com/Wayne1308/images-list/raw/main/14-admin-settings.png)
 
 ### 这个案例想说明什么
 

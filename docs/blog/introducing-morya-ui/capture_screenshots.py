@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 BASE = "http://localhost:5182"
 ROOT = Path(__file__).resolve().parents[3]
 OUT = Path(__file__).resolve().parent / "assets"
-GOLDEN_SRC = ROOT / "ai-design-config" / "docs" / "golden-pages" / "list-page.vue"
+GOLDEN_SRC = ROOT / "design-kit" / "docs" / "golden-pages" / "list-page.vue"
 GOLDEN_DST = (
     ROOT
     / "playground"
@@ -40,19 +40,24 @@ def shot(page, name: str, full_page: bool = False) -> None:
 def ensure_light(page) -> None:
     dark = page.evaluate("() => document.documentElement.getAttribute('data-theme') === 'dark'")
     if dark:
-        page.locator(
-            "button.site-icon-btn[aria-label*='浅色'], button.site-icon-btn[aria-label*='light']"
-        ).first.click()
+        page.locator("button.site-icon-btn[aria-label*='切换到']").first.click()
+        page.wait_for_function(
+            "() => document.documentElement.getAttribute('data-theme') === 'light'",
+            timeout=5000,
+        )
         page.wait_for_timeout(300)
 
 
 def ensure_dark(page) -> None:
     dark = page.evaluate("() => document.documentElement.getAttribute('data-theme') === 'dark'")
     if not dark:
-        page.locator(
-            "button.site-icon-btn[aria-label*='暗'], button.site-icon-btn[aria-label*='Dark']"
-        ).first.click()
-        page.wait_for_timeout(400)
+        # Toggle button aria-label is dynamic ("切换到暗色模式" when light).
+        page.locator("button.site-icon-btn[aria-label*='切换到']").first.click()
+        page.wait_for_function(
+            "() => document.documentElement.getAttribute('data-theme') === 'dark'",
+            timeout=5000,
+        )
+        page.wait_for_timeout(300)
 
 
 def main() -> None:
@@ -67,7 +72,12 @@ def main() -> None:
         with sync_playwright() as p:
             # System Chrome — avoids downloading Playwright browsers.
             browser = p.chromium.launch(channel="chrome", headless=True)
-            page = browser.new_page(viewport=VIEWPORT, device_scale_factor=1.5)
+            ctx = browser.new_context(
+                viewport=VIEWPORT,
+                device_scale_factor=1.5,
+                color_scheme="light",
+            )
+            page = ctx.new_page()
 
             page.goto(f"{BASE}/", wait_until="domcontentloaded")
             wait_ready(page)
