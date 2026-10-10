@@ -9,9 +9,9 @@ import {
   symlinkSync,
 } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
-import { createInterface } from 'node:readline'
 import { fileURLToPath } from 'node:url'
 import { ensureDir, readJson } from './fs-utils.mjs'
+import { question } from './prompt.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const CATALOG_PATH = join(__dirname, '..', 'catalog', 'skills.json')
@@ -444,18 +444,4 @@ export async function resolveSkillSelection(skills, { skipPrompt = false } = {})
   }
 
   return skills.map((s) => s.id).filter((id) => selected.has(id))
-}
-
-/**
- * @param {string} prompt
- * @returns {Promise<string>}
- */
-function question(prompt) {
-  const rl = createInterface({ input: process.stdin, output: process.stdout })
-  return new Promise((resolve) => {
-    rl.question(prompt, (answer) => {
-      rl.close()
-      resolve(answer)
-    })
-  })
 }
