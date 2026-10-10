@@ -9,7 +9,7 @@
 - 文档站：<https://morya-space.github.io/morya-ui/>
 - GitHub：<https://github.com/morya-space/morya-ui>
 - npm：[`morya-ui`](https://www.npmjs.com/package/morya-ui)
-- 演示后台：<https://github.com/xcGoGo2/morya-admin>
+- 演示后台：<https://github.com/morya-space/morya-admin>
 - 许可证：MIT
 
 ![文档站首页](./assets/01-docs-home.png)
@@ -165,7 +165,7 @@ npx @morya-ui/setup ai
 
 光看组件还不够。**morya-admin** 是用 `morya-ui` 搭出来的中后台演示，登录、工作台、系统管理（用户/角色/菜单/部门/字典/参数）、业务订单与商品、日志、异常页、主题与布局设置都有，一套中后台骨架基本齐了。
 
-仓库：<https://github.com/xcGoGo2/morya-admin>
+仓库：<https://github.com/morya-space/morya-admin>
 
 技术栈很干净：Vue 3 + Vite + TypeScript + Vue Router + `morya-ui`（当前依赖 `morya-ui ^0.4.3`，即本文对应的最新版）。接口层是 mock，本地能跑通体验。
 
@@ -228,7 +228,7 @@ Morya UI 把组件、设计令牌、可交互文档、AI 工具链放进了一�
 正在选 Vue 3 组件库，或者想给团队补一条「文档 + Agent 可复用」的工程化路径的话，可以按这个顺序试一下：
 
 1. 打开 [文档站](https://morya-space.github.io/morya-ui/) 翻几个组件预览
-2. clone [morya-admin](https://github.com/xcGoGo2/morya-admin) 本地 `pnpm i && pnpm dev` 点一遍
+2. clone [morya-admin](https://github.com/morya-space/morya-admin) 本地 `pnpm i && pnpm dev` 点一遍
 3. 在自己的业务仓跑一次 `npx @morya-ui/setup`，看看「装库 + AI 配置」是什么体验
 
 欢迎 Star、提 Issue，也可以直接拿 morya-admin 当脚手架骨架改成自己的项目。
@@ -242,4 +242,4 @@ Morya UI 把组件、设计令牌、可交互文档、AI 工具链放进了一�
 - npm：https://www.npmjs.com/package/morya-ui
 - MCP：https://www.npmjs.com/package/@morya-ui/mcp
 - Setup：https://www.npmjs.com/package/@morya-ui/setup
-- morya-admin：https://github.com/xcGoGo2/morya-admin
+- morya-admin：https://github.com/morya-space/morya-admin
