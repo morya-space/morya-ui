@@ -122,221 +122,221 @@ async function copyInstall() {
 </script>
 
 <template>
-    <MScrollbar class="home-scroll">
-        <div class="home-page">
-            <section class="home-hero">
-                <img
-                    class="home-logo"
-                    :src="SITE_LOGO_URL"
-                    width="96"
-                    height="96"
-                    alt=""
-                />
-                <h1 class="home-brand">
-                    {{ SITE_NAME }}
-                </h1>
-                <p class="home-headline">
-                    {{ t.headline }}
-                </p>
-                <p class="home-lead">
-                    {{ t.lead }}
-                </p>
-                <div class="home-actions">
-                    <RouterLink
-                        :to="{ name: 'docs', params: { slug: 'quick-start' } }"
-                    >
-                        <MButton type="primary" :label="t.start" />
-                    </RouterLink>
-                    <RouterLink :to="{ name: 'components' }">
-                        <MButton :label="t.browse"/>
-                    </RouterLink>
-                    <a
-                        :href="SITE_GITHUB_URL"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <MButton :label="t.viewGithub"/>
-                    </a>
-                </div>
-                <div class="home-meta" :aria-label="t.techTags">
-                    <span>Vue 3</span>
-                    <span>{{ t.homeMetaComponents }}</span>
-                    <span>TypeScript</span>
-                    <span>MIT</span>
-                </div>
-            </section>
-
-            <section class="home-install" :aria-label="t.installTitle">
-                <div class="home-install__head">
-                    <h2>{{ t.installTitle }}</h2>
-                    <p>{{ t.installHint }}</p>
-                </div>
-                <div class="home-install__cmd">
-                    <code>{{ SITE_INSTALL_CMD }}</code>
-                    <button
-                        class="home-install__copy"
-                        type="button"
-                        @click="copyInstall"
-                    >
-                        {{ copied ? t.copied : t.copy }}
-                    </button>
-                </div>
-                <a
-                    class="home-install__npm"
-                    :href="SITE_NPM_URL"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {{ t.viewNpm }}
-                </a>
-            </section>
-
-            <section class="home-pillars" :aria-label="t.capabilities">
-                <article
-                    v-for="item in pillars"
-                    :key="item.title"
-                    class="home-pillar"
-                >
-                    <h2>{{ item.title }}</h2>
-                    <p>{{ item.body }}</p>
-                </article>
-            </section>
-
-            <section
-                class="home-theme-preview"
-                :aria-label="t.homeThemePreviewTitle"
-            >
-                <div class="home-theme-preview__copy">
-                    <h2>{{ t.homeThemePreviewTitle }}</h2>
-                    <p>{{ t.homeThemePreviewBody }}</p>
-                </div>
-                <div class="home-theme-preview__controls">
-                    <div
-                        class="home-theme-preview__modes"
-                        role="group"
-                        :aria-label="t.themeMode"
-                    >
-                        <button
-                            type="button"
-                            class="home-chip"
-                            :class="{ 'is-active': !isDark }"
-                            @click="setTheme('light')"
-                        >
-                            {{ t.light }}
-                        </button>
-                        <button
-                            type="button"
-                            class="home-chip"
-                            :class="{ 'is-active': isDark }"
-                            @click="setTheme('dark')"
-                        >
-                            {{ t.dark }}
-                        </button>
-                    </div>
-                    <div
-                        class="home-theme-preview__accents"
-                        role="group"
-                        :aria-label="t.brandColor"
-                    >
-                        <button
-                            v-for="option in accentOptions"
-                            :key="option.name"
-                            type="button"
-                            class="home-swatch"
-                            :class="{
-                                'is-selected': previewAccent === option.name,
-                            }"
-                            :style="{ '--swatch-color': option.color }"
-                            :aria-label="
-                                interpolate(t.useAccent, {
-                                    label: option.label,
-                                })
-                            "
-                            @click="previewAccent = option.name"
-                        />
-                    </div>
-                </div>
-                <div class="home-theme-preview__stage">
-                    <MButton type="primary" :label="t.homeThemePreviewSample" />
-                    <MButton :label="t.homeThemePreviewSecondary" />
-                    <MInput
-                        v-model="previewInput"
-                        :placeholder="t.homeThemePreviewInput"
-                        style="max-width: 14rem"
-                    />
-                    <MTag :value="t.homeThemePreviewTag" />
-                </div>
-            </section>
-
-            <section class="home-wall" :aria-label="t.homeWallTitle">
-                <div class="home-wall__head">
-                    <h2>{{ t.homeWallTitle }}</h2>
-                    <p>{{ t.homeWallBody }}</p>
-                </div>
-                <div class="home-wall__grid">
-                    <RouterLink
-                        v-for="item in wallItems"
-                        :key="item.name"
-                        class="home-wall__card"
-                        :to="{
-                            name: 'component-doc',
-                            params: { component: item.name },
-                        }"
-                    >
-                        <strong>{{ item.name }}</strong>
-                        <span>{{ item.description ?? t.defaultDoc }}</span>
-                    </RouterLink>
-                </div>
-                <RouterLink
-                    class="home-text-link home-wall__more"
-                    :to="{ name: 'components' }"
-                >
-                    {{ t.allComponents }} →
-                </RouterLink>
-            </section>
-
-            <section class="home-cta">
-                <div>
-                    <h2>{{ t.next }}</h2>
-                    <p>{{ t.nextBody }}</p>
-                </div>
-                <div class="home-cta__links">
-                    <RouterLink
-                        class="home-text-link"
-                        :to="{ name: 'theme-editor' }"
-                    >
-                        {{ t.themeEditor }}
-                    </RouterLink>
-                    <RouterLink
-                        class="home-text-link"
-                        :to="{ name: 'docs', params: { slug: 'design' } }"
-                    >
-                        {{ t.design }}
-                    </RouterLink>
-                    <RouterLink
-                        class="home-text-link"
-                        :to="{ name: 'docs', params: { slug: 'config' } }"
-                    >
-                        {{ t.globalConfig }}
-                    </RouterLink>
-                    <RouterLink
-                        class="home-text-link"
-                        :to="{ name: 'components' }"
-                    >
-                        {{ t.allComponents }}
-                    </RouterLink>
-                    <RouterLink
-                        class="home-text-link"
-                        :to="{ name: 'changelog' }"
-                    >
-                        {{ t.changelog }}
-                    </RouterLink>
-                </div>
-            </section>
-
-            <SiteFooter />
+  <MScrollbar class="home-scroll">
+    <div class="home-page">
+      <section class="home-hero">
+        <img
+          class="home-logo"
+          :src="SITE_LOGO_URL"
+          width="96"
+          height="96"
+          alt=""
+        >
+        <h1 class="home-brand">
+          {{ SITE_NAME }}
+        </h1>
+        <p class="home-headline">
+          {{ t.headline }}
+        </p>
+        <p class="home-lead">
+          {{ t.lead }}
+        </p>
+        <div class="home-actions">
+          <RouterLink
+            :to="{ name: 'docs', params: { slug: 'quick-start' } }"
+          >
+            <MButton type="primary" :label="t.start" />
+          </RouterLink>
+          <RouterLink :to="{ name: 'components' }">
+            <MButton :label="t.browse" />
+          </RouterLink>
+          <a
+            :href="SITE_GITHUB_URL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MButton :label="t.viewGithub" />
+          </a>
         </div>
-    </MScrollbar>
+        <div class="home-meta" :aria-label="t.techTags">
+          <span>Vue 3</span>
+          <span>{{ t.homeMetaComponents }}</span>
+          <span>TypeScript</span>
+          <span>MIT</span>
+        </div>
+      </section>
+
+      <section class="home-install" :aria-label="t.installTitle">
+        <div class="home-install__head">
+          <h2>{{ t.installTitle }}</h2>
+          <p>{{ t.installHint }}</p>
+        </div>
+        <div class="home-install__cmd">
+          <code>{{ SITE_INSTALL_CMD }}</code>
+          <button
+            class="home-install__copy"
+            type="button"
+            @click="copyInstall"
+          >
+            {{ copied ? t.copied : t.copy }}
+          </button>
+        </div>
+        <a
+          class="home-install__npm"
+          :href="SITE_NPM_URL"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ t.viewNpm }}
+        </a>
+      </section>
+
+      <section class="home-pillars" :aria-label="t.capabilities">
+        <article
+          v-for="item in pillars"
+          :key="item.title"
+          class="home-pillar"
+        >
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.body }}</p>
+        </article>
+      </section>
+
+      <section
+        class="home-theme-preview"
+        :aria-label="t.homeThemePreviewTitle"
+      >
+        <div class="home-theme-preview__copy">
+          <h2>{{ t.homeThemePreviewTitle }}</h2>
+          <p>{{ t.homeThemePreviewBody }}</p>
+        </div>
+        <div class="home-theme-preview__controls">
+          <div
+            class="home-theme-preview__modes"
+            role="group"
+            :aria-label="t.themeMode"
+          >
+            <button
+              type="button"
+              class="home-chip"
+              :class="{ 'is-active': !isDark }"
+              @click="setTheme('light')"
+            >
+              {{ t.light }}
+            </button>
+            <button
+              type="button"
+              class="home-chip"
+              :class="{ 'is-active': isDark }"
+              @click="setTheme('dark')"
+            >
+              {{ t.dark }}
+            </button>
+          </div>
+          <div
+            class="home-theme-preview__accents"
+            role="group"
+            :aria-label="t.brandColor"
+          >
+            <button
+              v-for="option in accentOptions"
+              :key="option.name"
+              type="button"
+              class="home-swatch"
+              :class="{
+                'is-selected': previewAccent === option.name,
+              }"
+              :style="{ '--swatch-color': option.color }"
+              :aria-label="
+                interpolate(t.useAccent, {
+                  label: option.label,
+                })
+              "
+              @click="previewAccent = option.name"
+            />
+          </div>
+        </div>
+        <div class="home-theme-preview__stage">
+          <MButton type="primary" :label="t.homeThemePreviewSample" />
+          <MButton :label="t.homeThemePreviewSecondary" />
+          <MInput
+            v-model="previewInput"
+            :placeholder="t.homeThemePreviewInput"
+            style="max-width: 14rem"
+          />
+          <MTag :value="t.homeThemePreviewTag" />
+        </div>
+      </section>
+
+      <section class="home-wall" :aria-label="t.homeWallTitle">
+        <div class="home-wall__head">
+          <h2>{{ t.homeWallTitle }}</h2>
+          <p>{{ t.homeWallBody }}</p>
+        </div>
+        <div class="home-wall__grid">
+          <RouterLink
+            v-for="item in wallItems"
+            :key="item.name"
+            class="home-wall__card"
+            :to="{
+              name: 'component-doc',
+              params: { component: item.name },
+            }"
+          >
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.description ?? t.defaultDoc }}</span>
+          </RouterLink>
+        </div>
+        <RouterLink
+          class="home-text-link home-wall__more"
+          :to="{ name: 'components' }"
+        >
+          {{ t.allComponents }} →
+        </RouterLink>
+      </section>
+
+      <section class="home-cta">
+        <div>
+          <h2>{{ t.next }}</h2>
+          <p>{{ t.nextBody }}</p>
+        </div>
+        <div class="home-cta__links">
+          <RouterLink
+            class="home-text-link"
+            :to="{ name: 'theme-editor' }"
+          >
+            {{ t.themeEditor }}
+          </RouterLink>
+          <RouterLink
+            class="home-text-link"
+            :to="{ name: 'docs', params: { slug: 'design' } }"
+          >
+            {{ t.design }}
+          </RouterLink>
+          <RouterLink
+            class="home-text-link"
+            :to="{ name: 'docs', params: { slug: 'config' } }"
+          >
+            {{ t.globalConfig }}
+          </RouterLink>
+          <RouterLink
+            class="home-text-link"
+            :to="{ name: 'components' }"
+          >
+            {{ t.allComponents }}
+          </RouterLink>
+          <RouterLink
+            class="home-text-link"
+            :to="{ name: 'changelog' }"
+          >
+            {{ t.changelog }}
+          </RouterLink>
+        </div>
+      </section>
+
+      <SiteFooter />
+    </div>
+  </MScrollbar>
 </template>
 
 <style scoped>

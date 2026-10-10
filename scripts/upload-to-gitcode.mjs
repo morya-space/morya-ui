@@ -39,12 +39,12 @@ const UPLOAD_DELAY_MS = 1300
 // ---------- config ----------
 
 const CONFIG = {
-  token: '',
-  owner: '',
-  repo: '',
-  branch: '',
+  token: 'mzD8NsEVeVNG6yxDFiA7xgkD',
+  owner: 'Wayne1308',
+  repo: 'images-list',
+  branch: 'main',
   path: '',
-  message: '',
+  message: 'chore: upload images',
 }
 
 // ---------- args ----------
