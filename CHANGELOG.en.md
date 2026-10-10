@@ -1,5 +1,16 @@
 # morya-ui
 
+## 0.4.4
+
+### Features
+
+- add script to generate Juejin cover image and update HomeView layout
+
+### Docs
+
+- document --create scaffolding and interactive mode
+- update AGENTS.md usage rules and add new blog article on Morya UI
+
 ## 0.4.3
 
 ### Fixes
