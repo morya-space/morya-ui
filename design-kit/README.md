@@ -4,7 +4,13 @@
 
 ## 推荐：一键接入
 
-在业务项目根目录执行：
+从零创建新项目：
+
+```bash
+npx @morya-ui/setup --create my-app
+```
+
+在已有业务项目根目录执行：
 
 ```bash
 npx @morya-ui/setup

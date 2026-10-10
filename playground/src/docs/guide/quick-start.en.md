@@ -10,7 +10,15 @@ description: Install the package, import styles, and render the first component.
 
 ## Install
 
-**In an application (npm / pnpm / yarn):**
+**Create a new project (recommended):**
+
+```bash
+npx @morya-ui/setup --create my-app
+```
+
+Scaffold + install + full setup in one step. See [One-shot setup](/docs/setup).
+
+**In an existing application (npm / pnpm / yarn):**
 
 ```bash
 pnpm add morya-ui

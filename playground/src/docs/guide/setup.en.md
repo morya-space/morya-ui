@@ -8,13 +8,37 @@ description: Use @morya-ui/setup to install the library and optionally write sty
 
 [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) onboards a consumer Vue app to `morya-ui`: install the dependency, inject styles, and optionally write the Agent skill, Cursor rules, portable `AGENTS.md`, and multi-editor MCP. For manual install see [Quick start](/docs/quick-start). For AI page-generation workflow see [AI setup](/docs/ai-setup).
 
-## Commands
+## Quick start
+
+### Configure an existing project
 
 From the app project root:
 
 ```bash
 npx @morya-ui/setup
 ```
+
+### Create a new project from scratch
+
+```bash
+npx @morya-ui/setup --create my-admin
+```
+
+Scaffolds `./my-admin` via create-vite, installs dependencies, then applies the full setup (library + AI pack + MCP + styles) inside it.
+
+### Interactive mode
+
+Run without arguments in a terminal (TTY) and the CLI prompts for:
+
+1. **What to do** — configure current project, or create a new one
+2. **Project name** — when creating (with validation)
+3. **Package manager** — when creating (auto-detected default highlighted)
+4. **create-vite template** — `vue-ts` vs `vue`
+5. **Optional Agent skills** — `full` / `ai` modes
+
+Every prompt has a sensible default — press Enter to accept. Pass `--yes` (or run in a non-TTY environment like CI) to skip all prompts and use defaults.
+
+## Commands
 
 By default this will:
 
@@ -53,16 +77,35 @@ npx @morya-ui/setup ai --skip-install
 
 On a TTY, `full` / `ai` prompts for optional Agent skills (required `morya-ui-pages` is always included). Optional companions are installed at **latest** via the [skills CLI](https://skills.sh/) for the default five skill agents, and mirrored into agent-specific dirs. If MCP was written, **restart your editor or reload MCP**. Zed may require trusting the worktree before project skills load. Have the agent read `DESIGN.md` (and `AGENTS.md`) before generating pages.
 
+### Create a new project
+
+```bash
+# Interactive: prompts for name, package manager, template
+npx @morya-ui/setup --create
+
+# Explicit
+npx @morya-ui/setup --create my-admin
+npx @morya-ui/setup --create my-admin --template vue
+npx @morya-ui/setup --create my-admin --pm npm
+
+# CI / non-interactive: all defaults
+npx @morya-ui/setup --create my-admin --yes
+```
+
+`--create` runs: create-vite scaffold → `<pm> install` → full setup (equivalent to running `npx @morya-ui/setup` inside the new project).
+
 ## Options
 
 | Flag | Meaning |
 | --- | --- |
-| `--cwd <dir>` | Target project root (default: cwd) |
+| `--create <name>` | Scaffold a new project via create-vite, then run the full setup inside it |
+| `--template <tpl>` | create-vite template: `vue-ts` (default) or `vue`; only used with `--create` |
+| `--cwd <dir>` | Target project root (default: cwd); with `--create`, the parent directory |
 | `--pm pnpm\|yarn\|npm` | Package manager |
 | `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
 | `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three; always also writes `.mcp.json`) |
 | `--agents <list>` | Skill agents: `cursor`, `github-copilot`, `zed`, `claude-code`, `windsurf` (default), or `all` |
-| `--yes` / `-y` | Use default skills without prompting |
+| `--yes` / `-y` | Skip all interactive prompts and use defaults (CI-friendly) |
 | `--force` | Overwrite existing template files, MCP `morya-ui` entry, and skill-dir links |
 | `--dry-run` | Print actions only |
 | `--skip-install` | Skip install / upgrade of `morya-ui` and `@morya-ui/*` |

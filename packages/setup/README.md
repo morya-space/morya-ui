@@ -21,6 +21,32 @@ npx @morya-ui/setup
 
 On a TTY, `full` / `ai` will prompt for optional Agent skills (required `morya-ui-pages` is always included).
 
+To scaffold a brand-new project instead of configuring an existing one:
+
+```bash
+# From an empty or new directory — creates ./my-admin via create-vite, installs deps,
+# then applies the full setup (library + AI pack + MCP + styles) inside it.
+npx @morya-ui/setup --create my-admin
+
+# Pick a template explicitly (default: vue-ts; alias: vue)
+npx @morya-ui/setup --create my-admin --template vue
+
+# Use npm / yarn instead of pnpm
+npx @morya-ui/setup --create my-admin --pm npm
+```
+
+### Interactive mode
+
+Run without arguments in a terminal and the CLI prompts for the main decisions:
+
+- **What to do** — configure current project, or create a new one
+- **Project name** — when creating (with validation)
+- **Package manager** — when creating (auto-detected default)
+- **Template** — `vue-ts` vs `vue` when creating
+- **Optional Agent skills** — `full` / `ai` modes
+
+Every prompt has a sensible default — just press Enter to accept. Pass `--yes` (or run in a non-TTY environment like CI) to skip all prompts and use defaults.
+
 Other common commands:
 
 ```bash
@@ -52,7 +78,9 @@ npx @morya-ui/setup ai --skip-install
 
 | Flag | Meaning |
 | --- | --- |
-| `--cwd <dir>` | Target project root (default: current directory) |
+| `--create <name>` | Scaffold a new project via `create-vite`, then run the full setup inside it |
+| `--template <tpl>` | `create-vite` template: `vue-ts` (default) or `vue`; only used with `--create` |
+| `--cwd <dir>` | Target project root (default: current directory); with `--create`, the parent directory |
 | `--pm pnpm\|yarn\|npm` | Package manager (default: detect from lockfile, else `pnpm`) |
 | `--skills <list>` | Comma-separated skill ids, or `all` (skips the prompt) |
 | `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three). Always also writes root `.mcp.json` |

@@ -10,7 +10,15 @@ description: 安装依赖、引入样式，并渲染第一个组件。
 
 ## 安装
 
-**在应用项目中（npm / pnpm / yarn）：**
+**从零创建新项目（推荐）：**
+
+```bash
+npx @morya-ui/setup --create my-app
+```
+
+脚手架 + 安装 + 完整接入一步到位。详见 [一键接入](/docs/setup)。
+
+**在已有应用项目中手动安装（npm / pnpm / yarn）：**
 
 ```bash
 pnpm add morya-ui

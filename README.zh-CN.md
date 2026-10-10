@@ -89,6 +89,12 @@ pnpm add morya-ui
 # yarn add morya-ui
 ```
 
+或从零创建项目并自动完成全部配置：
+
+```bash
+npx @morya-ui/setup --create my-app
+```
+
 ## 快速开始
 
 全量注册并引入样式：

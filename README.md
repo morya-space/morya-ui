@@ -89,6 +89,12 @@ pnpm add morya-ui
 # yarn add morya-ui
 ```
 
+Or scaffold a new project with everything configured:
+
+```bash
+npx @morya-ui/setup --create my-app
+```
+
 ## Quick start
 
 Register all components and import the full stylesheet:

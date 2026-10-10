@@ -8,13 +8,37 @@ description: 用 @morya-ui/setup 安装组件库，并按需写入样式、Agent
 
 [`@morya-ui/setup`](https://www.npmjs.com/package/@morya-ui/setup) 用于在业务 Vue 项目中接入 `morya-ui`：安装依赖、注入样式，并可一并写入 Agent Skill、Cursor 规则、便携 `AGENTS.md` 与多编辑器 MCP。手写安装见 [快速上手](/docs/quick-start)；AI 生成页面的约定见 [AI 接入](/docs/ai-setup)。
 
-## 命令
+## 快速开始
+
+### 在现有项目中配置
 
 在业务项目根目录执行：
 
 ```bash
 npx @morya-ui/setup
 ```
+
+### 从零创建新项目
+
+```bash
+npx @morya-ui/setup --create my-admin
+```
+
+会从 create-vite 脚手架出 `./my-admin`，安装依赖，然后自动执行完整接入（组件库 + AI 配置 + MCP + 样式）。
+
+### 交互模式
+
+在终端（TTY）中裸跑 `npx @morya-ui/setup`，CLI 会按顺序询问：
+
+1. **做什么** — 配置当前项目，还是创建新项目
+2. **项目名** — 仅创建时（带校验）
+3. **包管理器** — 仅创建时（标出自动探测结果）
+4. **create-vite 模板** — `vue-ts` vs `vue`
+5. **可选 Agent Skills** — `full` / `ai` 模式
+
+每个提示都有合理默认值，直接回车即可。传 `--yes`（或在 CI 等非 TTY 环境）跳过全部提示。
+
+## 命令
 
 默认会：
 
@@ -53,16 +77,35 @@ npx @morya-ui/setup ai --skip-install
 
 在 TTY 下，`full` / `ai` 会提示勾选可选 Agent Skill（必选 `morya-ui-pages` 始终写入）。可选 companion 通过 [skills CLI](https://skills.sh/) 安装**最新版**，并同步到默认 5 个 skill agents。完成后若写入了 MCP，请 **重启编辑器或重载 MCP**。Zed 需信任 worktree 后才会加载项目 skills。生成页面前让 Agent 先读 `DESIGN.md`（及 `AGENTS.md`）。
 
+### 创建新项目
+
+```bash
+# 交互式：询问项目名、包管理器、模板
+npx @morya-ui/setup --create
+
+# 显式指定
+npx @morya-ui/setup --create my-admin
+npx @morya-ui/setup --create my-admin --template vue
+npx @morya-ui/setup --create my-admin --pm npm
+
+# CI / 非交互：全走默认值
+npx @morya-ui/setup --create my-admin --yes
+```
+
+`--create` 会自动完成：create-vite 脚手架 → `<pm> install` → 完整接入流程（相当于在新项目里再跑一次 `npx @morya-ui/setup`）。
+
 ## 选项
 
 | Flag | 说明 |
 | --- | --- |
-| `--cwd <dir>` | 目标项目根（默认当前目录） |
+| `--create <name>` | 从 create-vite 脚手架新项目，然后执行完整接入 |
+| `--template <tpl>` | create-vite 模板：`vue-ts`（默认）或 `vue`；仅配合 `--create` |
+| `--cwd <dir>` | 目标项目根（默认当前目录）；配合 `--create` 时为父目录 |
 | `--pm pnpm\|yarn\|npm` | 指定包管理器 |
 | `--skills <list>` | 逗号分隔的 skill id，或 `all`（跳过交互提示） |
 | `--editors <list>` | MCP 目标：`cursor`、`vscode`、`zed` 或 `all`（默认三者；始终另写 `.mcp.json`） |
 | `--agents <list>` | Skill agents：`cursor`、`github-copilot`、`zed`、`claude-code`、`windsurf`（默认），或 `all` |
-| `--yes` / `-y` | 使用默认 skill，不提示 |
+| `--yes` / `-y` | 跳过全部交互提示，使用默认值（CI 友好） |
 | `--force` | 覆盖已有模板文件、`morya-ui` MCP 条目与 skill 目录链接 |
 | `--dry-run` | 只打印将要执行的操作 |
 | `--skip-install` | 不安装 / 升级 `morya-ui` 与 `@morya-ui/*` |
