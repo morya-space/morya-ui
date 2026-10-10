@@ -37,7 +37,7 @@ const model = reactive({
 })
 
 const roleOptions = [
-  { label: '管理�?, value: 'admin' },
+  { label: '管理员', value: 'admin' },
   { label: '成员', value: 'member' },
 ]
 
@@ -60,12 +60,12 @@ async function onSubmit() {
 
       <MLayoutContent>
         <MPageContent width="narrow">
-          <MPageHeader title="新建用户" description="填写基本信息并分配角色�? />
+          <MPageHeader title="新建用户" description="填写基本信息并分配角色。" />
 
           <MPageSection variant="form">
             <MForm @submit="onSubmit">
               <MFormItem label="姓名" name="name" required>
-                <MInput v-model="model.name" placeholder="请输入姓�? fluid />
+                <MInput v-model="model.name" placeholder="请输入姓名" fluid />
               </MFormItem>
 
               <MFormItem label="邮箱" name="email" required>
@@ -84,13 +84,13 @@ async function onSubmit() {
                 <MSwitch v-model="model.active" />
               </MFormItem>
 
-              <MFormItem label="简�? name="bio">
-                <MTextarea v-model="model.bio" :rows="4" placeholder="可�? fluid />
+              <MFormItem label="简介" name="bio">
+                <MTextarea v-model="model.bio" :rows="4" placeholder="可选" fluid />
               </MFormItem>
 
               <MPageSection variant="actions">
                 <MSpace>
-                  <MButton html-html-type="submit" type="primary" :loading="submitting">
+                  <MButton type="primary" html-type="submit" :loading="submitting">
                     保存
                   </MButton>
                   <MButton>
