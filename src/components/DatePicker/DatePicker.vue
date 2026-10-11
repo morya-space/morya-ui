@@ -16,6 +16,7 @@ import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
+import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import {
   applyDisplayFormat,
   decadeStart,
@@ -815,7 +816,7 @@ onBeforeUnmount(() => {
 
             <!-- Time columns -->
             <div v-if="showsTime" class="m-datepicker__time" role="group" :aria-label="locale.timePickerPlaceholder">
-              <div class="m-datepicker__time-col">
+              <MScrollbar class="m-datepicker__time-col" wrap-class="m-datepicker__time-col-wrap" view-class="m-datepicker__time-col-view">
                 <button
                   v-for="h in hours"
                   :key="`h-${h}`"
@@ -826,8 +827,8 @@ onBeforeUnmount(() => {
                 >
                   {{ String(h).padStart(2, '0') }}
                 </button>
-              </div>
-              <div class="m-datepicker__time-col">
+              </MScrollbar>
+              <MScrollbar class="m-datepicker__time-col" wrap-class="m-datepicker__time-col-wrap" view-class="m-datepicker__time-col-view">
                 <button
                   v-for="m in minutes"
                   :key="`m-${m}`"
@@ -838,8 +839,8 @@ onBeforeUnmount(() => {
                 >
                   {{ String(m).padStart(2, '0') }}
                 </button>
-              </div>
-              <div v-if="showSeconds" class="m-datepicker__time-col">
+              </MScrollbar>
+              <MScrollbar v-if="showSeconds" class="m-datepicker__time-col" wrap-class="m-datepicker__time-col-wrap" view-class="m-datepicker__time-col-view">
                 <button
                   v-for="s in seconds"
                   :key="`s-${s}`"
@@ -850,7 +851,7 @@ onBeforeUnmount(() => {
                 >
                   {{ String(s).padStart(2, '0') }}
                 </button>
-              </div>
+              </MScrollbar>
             </div>
           </div>
         </div>

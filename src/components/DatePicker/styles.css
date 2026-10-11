@@ -392,21 +392,31 @@
 .m-datepicker__time {
     display: flex;
     gap: var(--m-space-1);
-    max-height: calc(
+    /* Fixed height so nested MScrollbar can resolve height: 100%. Time lists are
+       always longer than this, so the container is effectively always full. */
+    height: calc(
         6 * var(--m-datepicker-day-size) + 5 * var(--m-datepicker-grid-gap) +
             2.5rem
     );
     min-width: 0;
 }
 
+/* Time column now hosts an MScrollbar root; the inner wrap/view hold the flex column. */
 .m-datepicker__time-col {
+    height: 100%;
+    min-width: 2.5rem;
+}
+
+.m-datepicker__time-col .m-datepicker__time-col-wrap {
+    height: 100%;
+    overscroll-behavior: contain;
+}
+
+.m-datepicker__time-col .m-datepicker__time-col-view {
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
-    max-height: 100%;
-    min-width: 2.5rem;
-    overflow-y: auto;
-    overscroll-behavior: contain;
+    min-width: 100%;
 }
 
 .m-datepicker__time-item {
@@ -458,7 +468,7 @@
 
 .m-datepicker__panel--time-only .m-datepicker__time {
     flex: 1 1 auto;
-    max-height: 14rem;
+    height: 14rem;
     width: 100%;
 }
 
