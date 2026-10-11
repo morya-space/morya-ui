@@ -737,6 +737,14 @@
 
 .m-table__header-cell--draggable {
     cursor: grab;
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-table__header-cell--draggable:hover {
+    background: color-mix(in srgb, var(--m-color-primary) 4%, var(--m-table-header-bg));
 }
 
 .m-table__header-cell--draggable:active {
@@ -744,11 +752,17 @@
 }
 
 .m-table__header-cell--drag-source {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .m-table__header-cell--drag-over {
-    box-shadow: inset 2px 0 0 var(--m-color-primary);
+    background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-table-header-bg));
+    box-shadow: inset 3px 0 0 var(--m-color-primary);
+}
+
+[data-m-motion="reduced"] .m-table__header-cell--draggable,
+[data-m-motion="none"] .m-table__header-cell--draggable {
+    transition: none;
 }
 
 /* — Column settings — */

@@ -382,8 +382,9 @@ const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
 const slots = useSlots()
 const ifHasPaginationSlot = computed(() => !!slots.pagination)
 const ifHasLoadingSlot = computed(() => !!slots.loading)
-/** Skeleton replaces the spinner overlay when the table has no data yet. */
-const showSkeleton = computed(() => props.skeleton && props.loading)
+/** Skeleton replaces the spinner overlay. Enabling `skeleton` alone is enough —
+ *  pair it with `loading` to also gate on the async fetch lifecycle. */
+const showSkeleton = computed(() => props.skeleton)
 const skeletonRowCount = computed(() => Math.max(1, props.skeletonRows ?? 5))
 /** Detail expansion is disabled while tree mode owns `expandedRowKeys`. */
 const ifHasExpandSlot = computed(

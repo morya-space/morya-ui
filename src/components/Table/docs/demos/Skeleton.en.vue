@@ -38,6 +38,7 @@ reload()
     <MTable
       :columns="columns"
       :rows="rows"
+      :loading="loading"
       :skeleton="loading"
       :skeleton-rows="4"
       bordered
