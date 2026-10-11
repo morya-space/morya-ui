@@ -81,6 +81,45 @@ For time-only, prefer the dedicated [TimePicker](/components/TimePicker); `type=
 ```vue preview src="./demos/Shortcuts.en.vue"
 ```
 
+## Panel Mode Cycling
+
+Click the panel header label to cycle through days → months → years sub-panels, handy for jumping to a target year/month before returning to the day grid.
+
+## Status
+
+`status` accepts `'warning'` or `'error'` for visual emphasis (`invalid` / `errorMessage` imply `error`). Use `warning` with `helpText` for friendly reminders that don't block submission.
+
+```vue preview src="./demos/Status.en.vue"
+```
+
+## Footer & Custom Cell
+
+The `#footer` slot renders an action area at the bottom of the panel (scope `{ close }`); `#cell` customizes the day cell (scope includes `date / inMonth / selected / inRange / rangeStart / rangeEnd / isToday / disabled`) — great for holiday dots, schedule markers, or custom layouts.
+
+```vue preview src="./demos/FooterAndCell.en.vue"
+```
+
+## needConfirm
+
+With `need-confirm`, picking a value only writes to a draft; **OK** commits and closes, **Cancel** rolls back. Recommended for `datetime` / `datetimerange` / `time` where selection takes multiple steps.
+
+```vue preview src="./demos/NeedConfirm.en.vue"
+```
+
+## Multiple Dates
+
+`multiple` (only valid for `type='date'`) makes `modelValue` a `string[]`; each click toggles selection and the panel stays open.
+
+```vue preview src="./demos/Multiple.en.vue"
+```
+
+## Input Mask
+
+`mask` makes the input editable, auto-inserting `-` / `/` / `:` separators matching the display `format`. Press **Enter** to commit, **Esc** or blur to revert. Supported on `date` / `datetime` / `time` only.
+
+```vue preview src="./demos/Mask.en.vue"
+```
+
 ## Props
 
 | Prop           | Type                                                                                    | Default        | Description                                                                                  |
@@ -94,7 +133,11 @@ For time-only, prefer the dedicated [TimePicker](/components/TimePicker); `type=
 | `placeholder`  | `string`                                                                                | locale         | Placeholder.                                                                                 |
 | `format`       | `string`                                                                                | `'YYYY-MM-DD'` | Input display pattern (`YYYY`/`MM`/`DD`/`HH`/`mm`/`ss`); emitted value follows `type`.       |
 | `clearable`    | `boolean`                                                                               | `true`         | Show a clear button.                                                                         |
-| `shortcuts`    | `DatePickerShortcut[]`                                                                  | `[]`           | Panel shortcuts.                                                                             |
+| `shortcuts`    | `DatePickerShortcut[]`                                                                  | `[]`           | Panel shortcuts; the one matching the current value is highlighted.                          |
+| `status`       | `'default' \| 'warning' \| 'error'`                                                     | `'default'`    | Visual status; `invalid` / `errorMessage` imply `error`.                                     |
+| `needConfirm`  | `boolean`                                                                               | `false`        | Defer commit until OK; Cancel rolls back.                                                    |
+| `multiple`     | `boolean`                                                                               | `false`        | Pick many dates (`type='date'` only); `modelValue` is `string[]`.                            |
+| `mask`         | `boolean`                                                                               | `false`        | Editable input with auto separators; Enter commits, Esc/blur reverts.                        |
 | `fluid`        | `boolean`                                                                               | `false`        | Stretch to full width.                                                                       |
 | `size`         | [MSizeInput](/docs/types#MSizeInput)                                                    | —              | `small` / `large`; can inherit from ConfigProvider.                                          |
 | `disabled`     | `boolean`                                                                               | `false`        | Disabled.                                                                                    |
@@ -119,9 +162,11 @@ For time-only, prefer the dedicated [TimePicker](/components/TimePicker); `type=
 
 ## Slots
 
-| Slot      | Description                       |
-| --------- | --------------------------------- |
-| `trigger` | Custom trigger `{ value, open }`. |
+| Slot      | Description                                                                                                                  |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `trigger` | Custom trigger `{ value, open }`.                                                                                            |
+| `footer`  | Panel bottom action area, scope `{ close }`. When `need-confirm` is on and no footer is given, default OK/Cancel is shown.   |
+| `cell`    | Custom day cell, scope `{ date, inMonth, selected, inRange, rangeStart, rangeEnd, isToday, disabled }`.                       |
 
 ## Types
 

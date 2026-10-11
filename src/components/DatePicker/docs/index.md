@@ -81,6 +81,45 @@ import { MDatePicker } from "morya-ui";
 ```vue preview src="./demos/Shortcuts.zh.vue"
 ```
 
+## 面板模式切换
+
+点击面板头部的月份/年份标签，可在 日 → 月 → 年 三个子面板间循环切换，方便快速跳到目标年份/月份再回到日视图。
+
+## 状态（status）
+
+`status` 提供 `'warning'` 与 `'error'` 两种视觉警示（`invalid` / `errorMessage` 会自动落到 `error`）。`warning` 通常配合 `helpText` 表达温和提醒，不阻断提交。
+
+```vue preview src="./demos/Status.zh.vue"
+```
+
+## 页脚与自定义单元格
+
+`#footer` 插槽在面板底部渲染操作区（作用域 `{ close }`）；`#cell` 插槽自定义日期单元格内容（作用域含 `date / inMonth / selected / inRange / rangeStart / rangeEnd / isToday / disabled`），适合加节假日标记、日程点、自定义排版。
+
+```vue preview src="./demos/FooterAndCell.zh.vue"
+```
+
+## needConfirm 确认提交
+
+`need-confirm` 启用后，选择值只写入暂存 draft，点击「确认」才提交并关闭，「取消」回滚。适合 `datetime` / `datetimerange` / `time` 等需要多步操作的场景。
+
+```vue preview src="./demos/NeedConfirm.zh.vue"
+```
+
+## 多选日期
+
+`multiple` 仅在 `type='date'` 下生效。`modelValue` 变为 `string[]`，每次点击切换选中，面板保持打开。
+
+```vue preview src="./demos/Multiple.zh.vue"
+```
+
+## 输入掩码
+
+`mask` 让输入框可编辑，按 `format` 自动插入 `-` `/` `:` 分隔符；`Enter` 提交，`Esc` 或失焦回滚。仅 `date` / `datetime` / `time` 类型支持。
+
+```vue preview src="./demos/Mask.zh.vue"
+```
+
 ## Props
 
 | 参数           | 类型                                                                                    | 默认值         | 说明                                                                                        |
@@ -94,7 +133,11 @@ import { MDatePicker } from "morya-ui";
 | `placeholder`  | `string`                                                                                | locale         | 占位。                                                                                      |
 | `format`       | `string`                                                                                | `'YYYY-MM-DD'` | 输入框展示格式（`YYYY`/`MM`/`DD`/`HH`/`mm`/`ss`）；提交值仍按 `type` 约定。                 |
 | `clearable`    | `boolean`                                                                               | `true`         | 显示清除按钮。                                                                              |
-| `shortcuts`    | `DatePickerShortcut[]`                                                                  | `[]`           | 面板快捷选项。                                                                              |
+| `shortcuts`    | `DatePickerShortcut[]`                                                                  | `[]`           | 面板快捷选项；与当前值匹配时高亮。                                                          |
+| `status`       | `'default' \| 'warning' \| 'error'`                                                     | `'default'`    | 视觉警示；`invalid` / `errorMessage` 自动视为 `error`。                                     |
+| `needConfirm`  | `boolean`                                                                               | `false`        | 选择后仅写入 draft，按「确认」提交、「取消」回滚。                                          |
+| `multiple`     | `boolean`                                                                               | `false`        | 多选日期（仅 `type='date'`）；`modelValue` 为 `string[]`。                                  |
+| `mask`         | `boolean`                                                                               | `false`        | 输入框可编辑，按 `format` 自动补分隔符；Enter 提交，Esc/失焦回滚。                          |
 | `fluid`        | `boolean`                                                                               | `false`        | 宽度撑满。                                                                                  |
 | `size`         | [MSizeInput](/docs/types#MSizeInput)                                                    | —              | `small` / `large`；可继承 ConfigProvider。                                                  |
 | `disabled`     | `boolean`                                                                               | `false`        | 禁用。                                                                                      |
@@ -119,9 +162,11 @@ import { MDatePicker } from "morya-ui";
 
 ## Slots
 
-| 插槽名    | 说明                             |
-| --------- | -------------------------------- |
-| `trigger` | 自定义触发器 `{ value, open }`。 |
+| 插槽名    | 说明                                                                                                                              |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `trigger` | 自定义触发器 `{ value, open }`。                                                                                                  |
+| `footer`  | 面板底部自定义操作区，作用域 `{ close }`。`need-confirm` 时若未提供则显示默认「取消/确认」。                                       |
+| `cell`    | 自定义日期单元格，作用域 `{ date, inMonth, selected, inRange, rangeStart, rangeEnd, isToday, disabled }`。                         |
 
 ## 类型
 
