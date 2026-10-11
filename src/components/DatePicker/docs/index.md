@@ -81,6 +81,48 @@ import { MDatePicker } from "morya-ui";
 ```vue preview src="./demos/Shortcuts.zh.vue"
 ```
 
+## 范围快捷键
+
+`shortcuts` 在 `daterange` / `datetimerange` 下更强大：返回 `[start, end]` 元组即可一键选定区间。与当前值匹配的快捷键会自动高亮。
+
+```vue preview src="./demos/RangeShortcuts.zh.vue"
+```
+
+## 自定义格式
+
+`format` 仅控制显示，提交值仍按 `type` 约定（`YYYY-MM-DD` 等）。支持任意 `YYYY` / `MM` / `DD` / `HH` / `mm` / `ss` 组合与自由文本。
+
+```vue preview src="./demos/Format.zh.vue"
+```
+
+## 日期时间
+
+`datetime` 与 `datetimerange` 把日历与时间列放在同一面板；`show-seconds` 含秒；`need-confirm` 让用户从容完成两步选择后再提交。
+
+```vue preview src="./demos/Datetime.zh.vue"
+```
+
+## 自定义触发器
+
+`#trigger` 插槽完全接管触发元素，作用域 `{ value, open }`。适合按钮、图标或复合排版。
+
+```vue preview src="./demos/CustomTrigger.zh.vue"
+```
+
+## 禁用区间
+
+`min-date` / `max-date` 之外的日期会在日历中置灰禁用。两者可单独或组合使用。
+
+```vue preview src="./demos/DisabledDates.zh.vue"
+```
+
+## 内联面板
+
+`:teleport="false"` + `append-to="self"` 让面板嵌入文档流，不浮出层叠上下文，适合卡片、抽屉或复合表单内嵌。
+
+```vue preview src="./demos/InlinePanel.zh.vue"
+```
+
 ## 面板模式切换
 
 点击面板头部的月份/年份标签，可在 日 → 月 → 年 三个子面板间循环切换，方便快速跳到目标年份/月份再回到日视图。
@@ -111,6 +153,20 @@ import { MDatePicker } from "morya-ui";
 `multiple` 仅在 `type='date'` 下生效。`modelValue` 变为 `string[]`，每次点击切换选中，面板保持打开。
 
 ```vue preview src="./demos/Multiple.zh.vue"
+```
+
+## 多选实战：排班
+
+多选配合 `MTag` 展示所选日期，直观易读。
+
+```vue preview src="./demos/WorkSchedule.zh.vue"
+```
+
+## 表单集成
+
+结合 `required` / `error-message` / `min-date`，实现一个完整的项目日期范围校验表单。
+
+```vue preview src="./demos/FormIntegration.zh.vue"
 ```
 
 ## 输入掩码

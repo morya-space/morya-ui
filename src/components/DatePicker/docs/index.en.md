@@ -81,6 +81,48 @@ For time-only, prefer the dedicated [TimePicker](/components/TimePicker); `type=
 ```vue preview src="./demos/Shortcuts.en.vue"
 ```
 
+## Range Shortcuts
+
+`shortcuts` shine for `daterange` / `datetimerange`: return a `[start, end]` tuple to select a range in one click. The shortcut matching the current value is highlighted automatically.
+
+```vue preview src="./demos/RangeShortcuts.en.vue"
+```
+
+## Custom Format
+
+`format` only affects display; the emitted value still follows the `type` convention (`YYYY-MM-DD`, etc.). Mix `YYYY` / `MM` / `DD` / `HH` / `mm` / `ss` with free text.
+
+```vue preview src="./demos/Format.en.vue"
+```
+
+## Datetime
+
+`datetime` and `datetimerange` combine the calendar and time columns in one panel. `show-seconds` includes seconds; `need-confirm` lets users finish the two-step pick before committing.
+
+```vue preview src="./demos/Datetime.en.vue"
+```
+
+## Custom Trigger
+
+The `#trigger` slot takes full control of the trigger element with scope `{ value, open }` — handy for buttons, icons, or composite layouts.
+
+```vue preview src="./demos/CustomTrigger.en.vue"
+```
+
+## Disabled Ranges
+
+Dates outside `min-date` / `max-date` are disabled in the calendar. Use them alone or together.
+
+```vue preview src="./demos/DisabledDates.en.vue"
+```
+
+## Inline Panel
+
+`:teleport="false"` with `append-to="self"` renders the panel inline, outside the overlay stacking context — useful inside cards, drawers, or complex forms.
+
+```vue preview src="./demos/InlinePanel.en.vue"
+```
+
 ## Panel Mode Cycling
 
 Click the panel header label to cycle through days → months → years sub-panels, handy for jumping to a target year/month before returning to the day grid.
@@ -111,6 +153,20 @@ With `need-confirm`, picking a value only writes to a draft; **OK** commits and 
 `multiple` (only valid for `type='date'`) makes `modelValue` a `string[]`; each click toggles selection and the panel stays open.
 
 ```vue preview src="./demos/Multiple.en.vue"
+```
+
+## Multiple in Practice: Shift Planning
+
+Combine `multiple` with `MTag` to display picked days in a friendly, readable way.
+
+```vue preview src="./demos/WorkSchedule.en.vue"
+```
+
+## Form Integration
+
+Combine `required`, `error-message` and `min-date` for a complete date-range validation form.
+
+```vue preview src="./demos/FormIntegration.en.vue"
 ```
 
 ## Input Mask
