@@ -85,37 +85,10 @@
     margin-left: var(--m-space-2);
 }
 
+/* Size picker now uses MSelect; constrain its width so the page size stays compact. */
 .m-pagination__select {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
-    font-family: var(--m-font-sans);
-    font-size: var(--m-pagination-font);
-    height: var(--m-pagination-height);
-    padding: 0 var(--m-space-2);
-    transition:
-        border-color var(--m-motion-fast) var(--m-motion-ease),
-        box-shadow var(--m-motion-fast) var(--m-motion-ease),
-        opacity var(--m-motion-fast) var(--m-motion-ease);
-}
-
-.m-pagination__select:hover:not(:disabled):not(:focus) {
-    border-color: var(--m-color-primary-hover);
-}
-
-.m-pagination__select:focus,
-.m-pagination__select:focus-visible {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
-}
-
-.m-pagination__select:disabled {
-    background-color: var(--m-color-bg-disabled);
-    color: var(--m-color-text-disabled);
-    cursor: not-allowed;
-    opacity: 1;
+    min-width: 5.5rem;
+    width: 5.5rem;
 }
 
 .m-pagination__jumper-select {

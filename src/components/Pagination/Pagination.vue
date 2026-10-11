@@ -42,10 +42,10 @@ const pages = computed(() => {
   const start = Math.min(Math.max(1, currentPage.value - Math.floor(count / 2)), pageCount.value - count + 1)
   return Array.from({ length: count }, (_, index) => start + index)
 })
-const sizeOptions = computed(() => {
+const sizeOptions = computed<SelectOption[]>(() => {
   const sizes = [...props.pageSizes]
   if (!sizes.includes(resolvedRows.value)) sizes.unshift(resolvedRows.value)
-  return sizes
+  return sizes.map((size) => ({ label: String(size), value: size }))
 })
 const pageOptions = computed<SelectOption[]>(() => {
   if (!props.showQuickJumper || props.simple) return []
@@ -77,9 +77,10 @@ function setRows(next: number) {
   }
 }
 
-function onSizeChange(event: Event) {
-  const value = Number((event.target as HTMLSelectElement).value)
-  if (Number.isFinite(value)) setRows(value)
+function onSizeChange(value: SelectModelValue) {
+  if (typeof value !== 'number' && typeof value !== 'string') return
+  const size = typeof value === 'number' ? value : Number(value)
+  if (Number.isFinite(size)) setRows(size)
 }
 
 function onPageJump(value: SelectModelValue) {
@@ -118,9 +119,14 @@ defineExpose({ first, pageCount })
     </button>
     <label v-if="showSizer && !simple" class="m-pagination__sizer">
       <span class="m-pagination__sizer-label">{{ locale.itemsPerPage }}</span>
-      <select class="m-pagination__select" :disabled="disabled" :value="resolvedRows" @change="onSizeChange">
-        <option v-for="size in sizeOptions" :key="size" :value="size">{{ size }}</option>
-      </select>
+      <MSelect
+        class="m-pagination__select"
+        size="small"
+        :model-value="resolvedRows"
+        :options="sizeOptions"
+        :disabled="disabled"
+        @update:model-value="onSizeChange"
+      />
     </label>
     <div v-if="showQuickJumper && !simple" class="m-pagination__jumper">
       <span>{{ locale.jumpToPage }}</span>

@@ -38,7 +38,12 @@ describe('muPagination', () => {
       attachTo: document.body,
     })
     expect(wrapper.get('.m-pagination__select').element).toBeTruthy()
-    await wrapper.get('.m-pagination__select').setValue('20')
+    await wrapper.get('.m-pagination__sizer [role="combobox"]').trigger('click')
+    await nextTick()
+    const sizeOption = [...document.body.querySelectorAll('[role="option"]')].find((element) => element.textContent?.trim() === '20')
+    expect(sizeOption).toBeInstanceOf(HTMLButtonElement)
+    ;(sizeOption as HTMLButtonElement).click()
+    await nextTick()
     expect(wrapper.emitted('update:pageSize')?.at(-1)).toEqual([20])
     expect(wrapper.emitted('update:rows')?.at(-1)).toEqual([20])
 
