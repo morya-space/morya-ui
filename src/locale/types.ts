@@ -140,6 +140,12 @@ export interface MLocaleConfig {
   filterAll?: string;
   filterColumn?: string;
   selectRow?: string;
+  /** Table column settings button aria label (e.g. "Column settings"). */
+  columnSettings?: string;
+  /** Table column settings panel title (e.g. "Toggle columns"). */
+  columnSettingsTitle?: string;
+  /** Reset column visibility / order to defaults. */
+  columnSettingsReset?: string;
   closeNamed?: string;
   otpDigit?: string;
   star?: string;
