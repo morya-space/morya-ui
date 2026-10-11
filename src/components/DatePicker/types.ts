@@ -16,8 +16,9 @@ export type DatePickerDateValue = string | Date
 export type DatePickerValue =
   | DatePickerDateValue
   | [DatePickerDateValue, DatePickerDateValue]
+  | DatePickerDateValue[]
   | null
-export type DatePickerModel = string | [string, string] | null
+export type DatePickerModel = string | [string, string] | string[] | null
 
 export interface DatePickerShortcut {
   label: string
@@ -60,6 +61,17 @@ export interface DatePickerProps extends MNativeDateInputProps {
    * Recommended for `datetime` / `datetimerange` / `time` so users can finish picking time.
    */
   needConfirm?: boolean
+  /**
+   * Allow picking multiple dates (only valid for `type='date'`).
+   * `modelValue` becomes `string[]` (`YYYY-MM-DD` items) and the panel stays open after each pick.
+   */
+  multiple?: boolean
+  /**
+   * Make the input editable with a soft mask that auto-inserts `-` / `/` / `:` separators
+   * matching the display `format`. Enter commits; Escape or blur reverts.
+   * Only applies to `date` / `datetime` / `time` types.
+   */
+  mask?: boolean
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */

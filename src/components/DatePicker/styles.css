@@ -211,6 +211,35 @@
     font-weight: 500;
 }
 
+/* Header label as a clickable switch between days / months / years sub-panels. */
+button.m-datepicker__month--switch {
+    background: transparent;
+    border: 0;
+    border-radius: var(--m-radius-sm);
+    color: var(--m-color-text);
+    cursor: pointer;
+    font-family: var(--m-font-sans);
+    font-size: inherit;
+    padding: var(--m-space-1) var(--m-space-2);
+    transition:
+        background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+button.m-datepicker__month--switch:hover {
+    background: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        var(--m-color-surface)
+    );
+    color: var(--m-color-primary);
+}
+
+button.m-datepicker__month--switch:focus-visible {
+    box-shadow: var(--m-focus-shadow);
+    outline: none;
+}
+
 .m-datepicker__nav {
     align-items: center;
     background: transparent;
@@ -459,6 +488,11 @@
 .m-datepicker__cell--selected {
     background: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
+}
+
+.m-datepicker__cell--other {
+    color: var(--m-color-text-muted);
+    opacity: 0.6;
 }
 
 .m-datepicker__cell:hover:not(.m-datepicker__cell--selected) {

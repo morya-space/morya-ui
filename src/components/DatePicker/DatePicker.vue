@@ -48,6 +48,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   clearable: true,
   shortcuts: () => [],
   needConfirm: false,
+  multiple: false,
+  mask: false,
   teleport: true,
 })
 const emit = defineEmits<DatePickerEmits>()
@@ -71,6 +73,8 @@ const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const viewYear = ref(new Date().getFullYear())
 const viewMonth = ref(new Date().getMonth())
+/** Day calendar header navigation: days → months → years → back to days. */
+const dayPanelMode = ref<'days' | 'months' | 'years'>('days')
 const activeDate = ref(startOfDay(new Date()))
 const rangeDraft = ref<Date | null>(null)
 const hoverDate = ref<Date | null>(null)
@@ -120,6 +124,19 @@ function unpackValue(value: DatePickerValue | undefined): { start: Date | null; 
 }
 
 const selectedRange = computed(() => unpackValue(props.modelValue))
+
+/** Multiple-selection day timestamps (date type only). */
+const selectedDates = computed<Set<number>>(() => {
+  if (!props.multiple) return new Set<number>()
+  const value = props.modelValue
+  if (!Array.isArray(value)) return new Set<number>()
+  const set = new Set<number>()
+  for (const item of value) {
+    const date = toDate(item as DatePickerDateValue)
+    if (date) set.add(startOfDay(date).getTime())
+  }
+  return set
+})
 const min = computed(() => toDate(props.minDate))
 const max = computed(() => toDate(props.maxDate))
 
@@ -143,8 +160,18 @@ function formatSingleDisplay(date: Date): string {
 }
 
 /** Uncommitted value while needConfirm is on; emitted only on OK. */
-const confirmDraft = ref<string | [string, string] | null>(null)
+const confirmDraft = ref<string | [string, string] | string[] | null>(null)
 const confirmDirty = ref(false)
+
+/** Mask state: current editable text and whether it's been edited (to avoid reverting on first focus). */
+const maskValue = ref('')
+const maskTouched = ref(false)
+
+/** Only date / datetime / time support mask editing (others have no clear single-line format). */
+const maskEditable = computed(() => {
+  if (!props.mask || props.disabled) return false
+  return props.type === 'date' || props.type === 'datetime' || props.type === 'time'
+})
 
 /** Display source: pending needConfirm draft wins; otherwise the committed model. */
 const displaySource = computed<DatePickerValue>(() => {
@@ -156,6 +183,16 @@ const displaySource = computed<DatePickerValue>(() => {
 const displayRange = computed(() => unpackValue(displaySource.value))
 
 const displayValue = computed(() => {
+  // Multiple selection: join ISO dates with comma (matches antd token-style display).
+  if (props.multiple && Array.isArray(displaySource.value)) {
+    return (displaySource.value as DatePickerDateValue[])
+      .map((item) => {
+        const date = toDate(item)
+        return date ? formatSingleDisplay(date) : ''
+      })
+      .filter(Boolean)
+      .join(', ')
+  }
   const { start, end } = displayRange.value
   if (!start) return ''
   if (!isRange.value) return formatSingleDisplay(start)
@@ -274,11 +311,12 @@ function buildCell(date: Date, inMonth: boolean) {
   const inRange = Boolean(
     isRange.value && bounds.start && bounds.end && t > bounds.start.getTime() && t < bounds.end.getTime(),
   )
+  const multipleSelected = props.multiple && selectedDates.value.has(t)
   return {
     date: day,
     inMonth,
     disabled,
-    selected: rangeStart || rangeEnd || pendingSelected,
+    selected: rangeStart || rangeEnd || pendingSelected || multipleSelected,
     inRange,
     rangeStart,
     rangeEnd,
@@ -347,6 +385,7 @@ function setOpen(next: boolean) {
     hoverDate.value = null
     confirmDraft.value = null
     confirmDirty.value = false
+    dayPanelMode.value = 'days'
     syncViewFromValue()
     activeDate.value = startOfDay(selectedRange.value.start ?? new Date())
     void nextTick(() => updatePanelPosition())
@@ -370,7 +409,76 @@ function closePanel() {
   open.value = false
 }
 
-function commitValue(value: string | [string, string]) {
+/** Sync maskValue with the latest displayValue when not editing. */
+watch([displayValue, maskEditable], ([nextDisplay, editable]) => {
+  if (!editable) {
+    maskValue.value = ''
+    maskTouched.value = false
+    return
+  }
+  if (!maskTouched.value) maskValue.value = nextDisplay
+}, { immediate: true })
+
+/** Build a soft mask: keep digits, auto-insert separators from `format`. */
+function buildMaskTemplate(): string {
+  if (props.type === 'time') return props.showSeconds ? 'HH:mm:ss' : 'HH:mm'
+  if (props.type === 'datetime') return `${props.format} ${props.showSeconds ? 'HH:mm:ss' : 'HH:mm'}`
+  return props.format
+}
+
+function applyMask(raw: string): string {
+  const template = buildMaskTemplate()
+  const digits = raw.replace(/\D/g, '').split('')
+  let out = ''
+  for (const ch of template) {
+    if (!digits.length) break
+    if (/[A-Za-z]/.test(ch)) out += digits.shift()
+    else out += ch
+    // Skip separator chars in template when we ran out of digits mid-way
+  }
+  return out
+}
+
+function onMaskInput(event: Event) {
+  const target = event.target as HTMLInputElement
+  maskValue.value = applyMask(target.value)
+  maskTouched.value = true
+  // Force cursor to end so Vue's value update doesn't jump
+  void nextTick(() => {
+    target.setSelectionRange(maskValue.value.length, maskValue.value.length)
+  })
+}
+
+function revertMask() {
+  if (!maskTouched.value) return
+  maskValue.value = displayValue.value
+  maskTouched.value = false
+}
+
+function commitMask() {
+  if (!maskTouched.value) {
+    toggle()
+    return
+  }
+  const parsed = parseDateValue(maskValue.value)
+  if (!parsed) {
+    revertMask()
+    return
+  }
+  let payload: string
+  if (props.type === 'time') {
+    payload = formatTimeParts(parsed.date.getHours(), parsed.date.getMinutes(), parsed.date.getSeconds(), props.showSeconds)
+  } else if (props.type === 'datetime') {
+    payload = formatDateTime(parsed.date, props.showSeconds)
+  } else {
+    payload = toIsoDate(parsed.date)
+  }
+  maskTouched.value = false
+  emit('update:modelValue', payload)
+  emit('change', payload)
+}
+
+function commitValue(value: string | [string, string] | string[]) {
   if (props.needConfirm) {
     confirmDraft.value = value
     confirmDirty.value = true
@@ -396,6 +504,54 @@ function confirmCancel() {
   confirmDraft.value = null
   confirmDirty.value = false
   closePanel()
+}
+
+/** Header label: month name in days mode, year in months mode, decade range in years mode. */
+const headerLabel = computed(() => {
+  if (dayPanelMode.value === 'days') return monthLabel.value
+  if (dayPanelMode.value === 'months') return String(viewYear.value)
+  const start = decadeStart(viewYear.value)
+  return `${start}–${start + 9}`
+})
+
+/** Decade cells (12 years: 10 in decade + 2 padding) for the years sub-panel. */
+const decadeYears = computed(() => {
+  const start = decadeStart(viewYear.value)
+  return Array.from({ length: 12 }, (_, i) => {
+    const year = start - 1 + i
+    return { year, other: i === 0 || i === 11 }
+  })
+})
+
+/** Cycle days → months → years → days when clicking the header label. */
+function cyclePanelMode() {
+  if (dayPanelMode.value === 'days') dayPanelMode.value = 'months'
+  else if (dayPanelMode.value === 'months') dayPanelMode.value = 'years'
+  else dayPanelMode.value = 'days'
+}
+
+/** Prev/next button dispatch by current panel mode. */
+function onHeaderNav(direction: 1 | -1) {
+  if (dayPanelMode.value === 'days') {
+    if (direction < 0) prevMonth()
+    else nextMonth()
+  } else if (dayPanelMode.value === 'months') {
+    viewYear.value += direction
+  } else {
+    viewYear.value += direction * 10
+  }
+}
+
+/** Pick a month from the months sub-panel: switch view month and return to days. */
+function pickPanelMonth(month: number) {
+  viewMonth.value = month
+  dayPanelMode.value = 'days'
+}
+
+/** Pick a year from the years sub-panel: switch to months so user can pick a month next. */
+function pickPanelYear(year: number) {
+  viewYear.value = year
+  dayPanelMode.value = 'months'
 }
 
 function prevMonth() {
@@ -451,6 +607,18 @@ function emitDateTime(day: Date) {
 function pick(date: Date, disabled: boolean) {
   if (disabled || props.disabled) return
   activeDate.value = startOfDay(date)
+
+  // Multiple date selection: toggle the day in the model array, keep the panel open.
+  if (props.multiple && props.type === 'date') {
+    const day = startOfDay(date)
+    const iso = toIsoDate(day)
+    const existing = Array.isArray(props.modelValue) ? (props.modelValue as DatePickerDateValue[]) : []
+    const next = existing.includes(iso)
+      ? existing.filter((item) => item !== iso)
+      : [...existing, iso]
+    commitValue(next as string[])
+    return
+  }
 
   if (props.type === 'datetime') {
     pendingDate.value = startOfDay(date)
@@ -746,8 +914,8 @@ onBeforeUnmount(() => {
           class="m-datepicker__input"
           type="text"
           role="combobox"
-          readonly
-          :value="displayValue"
+          :readonly="!maskEditable"
+          :value="maskEditable ? maskValue : displayValue"
           :placeholder="placeholderText"
           :name="name"
           :autocomplete="autocomplete"
@@ -759,8 +927,11 @@ onBeforeUnmount(() => {
           :aria-describedby="feedbackText ? `${fieldId}-help` : undefined"
           aria-haspopup="dialog"
           @click="toggle"
-          @keydown.enter.prevent="toggle"
-          @keydown.space.prevent="toggle"
+          @keydown.enter.prevent="maskEditable ? commitMask() : toggle()"
+          @keydown.space.prevent="maskEditable ? undefined : toggle()"
+          @keydown.esc="maskEditable ? revertMask() : undefined"
+          @input="maskEditable ? onMaskInput($event) : undefined"
+          @blur="maskEditable ? revertMask() : undefined"
         >
         <button
           v-if="clearable && displayValue"
@@ -815,18 +986,26 @@ onBeforeUnmount(() => {
             <!-- Day calendar (date / daterange / datetime / datetimerange) -->
             <div v-if="showsCalendar" class="m-datepicker__calendar">
               <div class="m-datepicker__header">
-                <button type="button" class="m-datepicker__nav" :aria-label="locale.prevMonth" @click="prevMonth">
+                <button type="button" class="m-datepicker__nav" :aria-label="dayPanelMode === 'days' ? locale.prevMonth : dayPanelMode === 'months' ? locale.prevYear : locale.prevYear" @click="onHeaderNav(-1)">
                   <MIcon name="chevron-left" size="sm" />
                 </button>
-                <span class="m-datepicker__month">{{ monthLabel }}</span>
-                <button type="button" class="m-datepicker__nav" :aria-label="locale.nextMonth" @click="nextMonth">
+                <button
+                  type="button"
+                  class="m-datepicker__month m-datepicker__month--switch"
+                  :aria-label="dayPanelMode === 'days' ? 'Switch to month picker' : dayPanelMode === 'months' ? 'Switch to year picker' : 'Switch back to day picker'"
+                  @click="cyclePanelMode"
+                >
+                  {{ headerLabel }}
+                </button>
+                <button type="button" class="m-datepicker__nav" :aria-label="dayPanelMode === 'days' ? locale.nextMonth : dayPanelMode === 'months' ? locale.nextYear : locale.nextYear" @click="onHeaderNav(1)">
                   <MIcon name="chevron-right" size="sm" />
                 </button>
               </div>
-              <div class="m-datepicker__weekdays" aria-hidden="true">
+              <div v-if="dayPanelMode === 'days'" class="m-datepicker__weekdays" aria-hidden="true">
                 <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>
               </div>
               <div
+                v-if="dayPanelMode === 'days'"
                 class="m-datepicker__grid"
                 role="grid"
                 :aria-label="monthLabel"
@@ -866,6 +1045,49 @@ onBeforeUnmount(() => {
                   >
                     {{ cell.date.getDate() }}
                   </slot>
+                </button>
+              </div>
+
+              <!-- Month-of-year picker (within day calendar) -->
+              <div
+                v-else-if="dayPanelMode === 'months'"
+                class="m-datepicker__month-grid"
+                role="grid"
+                :aria-label="String(viewYear)"
+              >
+                <button
+                  v-for="monthLabelItem in locale.monthNames"
+                  :key="monthLabelItem"
+                  type="button"
+                  class="m-datepicker__cell"
+                  :class="{ 'm-datepicker__cell--selected': viewMonth === locale.monthNames.indexOf(monthLabelItem) }"
+                  role="gridcell"
+                  @click="pickPanelMonth(locale.monthNames.indexOf(monthLabelItem))"
+                >
+                  {{ monthLabelItem }}
+                </button>
+              </div>
+
+              <!-- Year-of-decade picker (within day calendar) -->
+              <div
+                v-else-if="dayPanelMode === 'years'"
+                class="m-datepicker__year-grid"
+                role="grid"
+                :aria-label="`${decadeStart(viewYear)}–${decadeStart(viewYear) + 9}`"
+              >
+                <button
+                  v-for="yearCell in decadeYears"
+                  :key="yearCell.year"
+                  type="button"
+                  class="m-datepicker__cell"
+                  :class="{
+                    'm-datepicker__cell--other': yearCell.other,
+                    'm-datepicker__cell--selected': yearCell.year === viewYear,
+                  }"
+                  role="gridcell"
+                  @click="pickPanelYear(yearCell.year)"
+                >
+                  {{ yearCell.year }}
                 </button>
               </div>
             </div>
