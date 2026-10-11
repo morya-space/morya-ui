@@ -66,7 +66,7 @@ export function useTreeRows(
     internalExpandedKeys.value = next
     emits('update:expandedRowKeys', next)
     if (row != null && expanded != null) {
-      emits('expand', { row: stripSyntheticFields(row), expanded })
+      emits('expand-change', { row: stripSyntheticFields(row), expanded })
     }
   }
 
@@ -203,7 +203,7 @@ export function useTreeRows(
       } else {
         next = next.filter((entry) => entry !== key)
       }
-      emits('expand', { row: stripSyntheticFields(item), expanded })
+      emits('expand-change', { row: stripSyntheticFields(item), expanded })
     }
 
     commitExpandedKeys(next)

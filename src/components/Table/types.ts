@@ -1,4 +1,4 @@
-import type { RootPassThrough } from '../../shared/passThrough'
+import type { PassThroughPart } from '../../shared/passThrough'
 import type { MSizeInput } from '../../shared/types'
 
 export type TableSize = MSizeInput
@@ -65,6 +65,25 @@ export interface TableServerOptions {
 export interface TableSortPayload {
   sortField?: string
   sortOrder?: TableSortType | null
+}
+
+/**
+ * Unified sort configuration. Replaces the legacy `sortField` / `sortOrder` /
+ * `multiSort` / `mustSort` / `sortMode` prop quintet.
+ *
+ * - `field` / `order`: initial sort state. Use `multiSort` for multi-column.
+ * - `multiple`: enable multi-column sort (Shift+click on headers adds columns).
+ * - `must`: when true, sort cannot be cleared — clicking a sorted column cycles
+ *   asc → desc → asc instead of asc → desc → none.
+ * - `mode`: `'client'` sorts in-browser; `'emit'` only fires `sort-change` and
+ *   lets the parent re-fetch / re-order `rows`.
+ */
+export interface TableSortConfig {
+  field?: string | string[]
+  order?: TableSortType | TableSortType[]
+  multiple?: boolean
+  must?: boolean
+  mode?: TableSortMode
 }
 
 /** Tree mode. Nested `children` or flat `parentId` via `transform`. */
@@ -142,8 +161,30 @@ export type TableHeaderItemClassName = string | ((header: TableHeader, columnNum
 export type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)
 export type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)
 
+/**
+ * Multi-part pass-through for the Table compound component.
+ * Each key targets a specific DOM part; values are merged onto the corresponding
+ * element's attributes (class/style are merged, other keys overwrite).
+ */
+export interface TablePassThrough {
+  /** Outermost `.m-table` wrapper. */
+  root?: PassThroughPart
+  /** Scrollbar wrapper (the horizontal/vertical scroll container). */
+  scrollbar?: PassThroughPart
+  /** `<thead>` element. */
+  thead?: PassThroughPart
+  /** `<tbody>` element. */
+  tbody?: PassThroughPart
+  /** `<tfoot>` element when `showFooter`. */
+  tfoot?: PassThroughPart
+  /** Pagination footer wrapper (`.m-table__footer`). */
+  pagination?: PassThroughPart
+  /** Empty-state message container. */
+  emptyMessage?: PassThroughPart
+}
+
 export interface TableProps {
-  pt?: RootPassThrough
+  pt?: TablePassThrough
   columns: TableColumnDefinition[]
   rows: TableItem[]
   selection?: TableItem[] | null
@@ -151,13 +192,12 @@ export interface TableProps {
   selectedItem?: TableItem | null
   serverOptions?: TableServerOptions | null
   serverTotal?: number
-  sortField?: string | string[]
-  sortOrder?: TableSortType | TableSortType[]
-  sortMode?: TableSortMode
-  multiSort?: boolean
-  mustSort?: boolean
+  /** Unified sort configuration. */
+  sortConfig?: TableSortConfig | null
+  /** Structured filter conditions applied client-side (e.g. `{ field, comparison: '>', criteria: 18 }`). */
   filterOptions?: TableFilterOption[] | null
-  filters?: Record<string, unknown> | null
+  /** Active column filters (v-model capable). */
+  filterModel?: Record<string, unknown> | null
   searchField?: string | string[]
   searchValue?: string
   rowsPerPage?: number
@@ -165,6 +205,14 @@ export interface TableProps {
   page?: number
   paginator?: boolean
   loading?: boolean
+  /**
+   * When true with `loading`, render skeleton rows inside the table body instead
+   * of the overlay spinner. Useful for initial page loads where the spinner
+   * would cover the whole table.
+   */
+  skeleton?: boolean
+  /** Number of skeleton rows to render while `skeleton && loading`. Defaults to 5. */
+  skeletonRows?: number
   emptyText?: string
   emptyDescription?: string
   striped?: boolean
@@ -207,8 +255,24 @@ export interface TableProps {
   columnWidths?: Record<string, number> | null
   virtual?: boolean
   virtualRowHeight?: number
+  /**
+   * When true with `virtual`, row heights are measured via ResizeObserver and
+   * cached per row. Use when rows have varying heights (e.g. wrapped text).
+   * `virtualRowHeight` is still used as an estimate for unmeasured rows.
+   */
+  virtualDynamicRowHeight?: boolean
   hiddenColumns?: string[] | null
   columnOrder?: string[] | null
+  /**
+   * Render a gear button above the table that opens a column-visibility panel.
+   * Toggling writes to `hiddenColumns` (v-model capable).
+   */
+  columnSetting?: boolean
+  /**
+   * Enable header drag-to-reorder. Dropping a column onto another writes the new
+   * leaf-column order to `columnOrder` (v-model capable).
+   */
+  columnDrag?: boolean
   showFooter?: boolean
   footerMethod?: TableFooterMethod | null
   spanMethod?: TableSpanMethod | null
@@ -224,9 +288,12 @@ export interface TableEmits {
   (event: 'select-row', item: TableItem): void
   (event: 'deselect-row', item: TableItem): void
   (event: 'select-all'): void
-  (event: 'expand', payload: { row: TableItem; expanded: boolean }): void
-  (event: 'sort', payload: TableSortPayload): void
-  (event: 'filter', filters: Record<string, unknown> | null): void
+  /** Fired when a row's expanded state changes (detail expand or tree expand). */
+  (event: 'expand-change', payload: { row: TableItem; expanded: boolean }): void
+  /** Fired when sort state changes (single- or multi-column). */
+  (event: 'sort-change', payload: TableSortPayload): void
+  /** Fired when column filter state changes. */
+  (event: 'filter-change', filters: Record<string, unknown> | null): void
   (event: 'update:selection', value: TableItem[]): void
   (event: 'update:selectedItem', value: TableItem | null): void
   (event: 'update:serverOptions', value: TableServerOptions): void
@@ -234,7 +301,7 @@ export interface TableEmits {
   (event: 'current-change', item: TableItem | null, oldItem: TableItem | null): void
   (event: 'update:page', value: number): void
   (event: 'update:expandedRowKeys', value: Array<string | number>): void
-  (event: 'update:filters', value: Record<string, unknown> | null): void
+  (event: 'update:filterModel', value: Record<string, unknown> | null): void
   (event: 'update:columnWidths', value: Record<string, number>): void
   (event: 'update:hiddenColumns', value: string[]): void
   (event: 'update:columnOrder', value: string[]): void

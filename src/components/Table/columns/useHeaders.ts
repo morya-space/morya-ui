@@ -252,7 +252,7 @@ export function useHeaders(options: UseHeadersOptions) {
       }
     }
 
-    emits('sort', { sortField: newSortBy, sortOrder: newSortType })
+    emits('sort-change', { sortField: newSortBy, sortOrder: newSortType })
   }
 
   const clearSort = () => {
@@ -266,7 +266,7 @@ export function useHeaders(options: UseHeadersOptions) {
         sortType: null,
       }
     }
-    emits('sort', { sortField: undefined, sortOrder: null })
+    emits('sort-change', { sortField: undefined, sortOrder: null })
   }
 
   const isMultiSorting = (headerValue: string): boolean => {

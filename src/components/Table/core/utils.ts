@@ -32,19 +32,29 @@ export function resolveRowKey(
   return index
 }
 
-/** Remove transient table meta fields before emitting row payloads. */
+/**
+ * Remove transient table meta fields before emitting row payloads.
+ * Only strips `__m_`-prefixed synthetic columns — never user data fields.
+ */
 export function stripSyntheticFields(item: TableItem): TableItem {
   const next = { ...item }
   delete next[SYNTHETIC.index]
   delete next[SYNTHETIC.checkbox]
-  delete next.index
-  delete next.checkbox
+  delete next[SYNTHETIC.radio]
+  delete next[SYNTHETIC.expand]
   return next
 }
 
+let sameTableItemFallbackWarned = false
+
 /**
- * Row identity comparison. Prefers `rowKey` values; falls back to reference,
- * then deep JSON when either row lacks a usable key.
+ * Row identity comparison. Prefers `rowKey` values; falls back to reference equality.
+ *
+ * Rows without a usable `rowKey` value cannot be reliably matched — a missing key
+ * means selection/expansion/current-row state may break silently. In dev builds we
+ * warn once and fall back to reference equality (the safest deterministic check).
+ * JSON.stringify comparison was removed: it was O(n·size), key-order-sensitive,
+ * and silently dropped function/undefined fields, causing flaky identity matches.
  */
 export function sameTableItem(a: TableItem, b: TableItem, rowKey = 'id'): boolean {
   if (a === b) return true
@@ -54,7 +64,15 @@ export function sameTableItem(a: TableItem, b: TableItem, rowKey = 'id'): boolea
   const bUsable = typeof bKey === 'string' || typeof bKey === 'number'
   if (aUsable && bUsable) return aKey === bKey
   if (aUsable || bUsable) return false
-  return JSON.stringify(a) === JSON.stringify(b)
+  if (import.meta.env.DEV && !sameTableItemFallbackWarned) {
+    sameTableItemFallbackWarned = true
+    console.warn(
+      `[MTable] Rows are missing a usable \`rowKey\` field (expected string|number at "${rowKey}"). `
+      + 'Selection, expansion, and current-row state may not persist correctly. '
+      + 'Set `rowKey` to a unique field on your row data.',
+    )
+  }
+  return false
 }
 
 /** Collect usable rowKey values into a Set for O(1) selection lookups. */

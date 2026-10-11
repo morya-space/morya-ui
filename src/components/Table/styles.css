@@ -127,6 +127,15 @@
     background: var(--m-table-row-hover-bg);
 }
 
+/* Visible focus ring when navigating rows via keyboard. */
+.m-table__body tr:focus-visible {
+    outline: none;
+}
+
+.m-table__body tr:focus-visible > td {
+    box-shadow: var(--m-focus-shadow);
+}
+
 .m-table--enable-row-hover.m-table--striped
     .m-table__body tr.m-table__row--striped:hover > td {
     background: var(--m-table-row-hover-bg);
@@ -472,6 +481,12 @@
     width: 100%;
     min-height: calc(var(--m-table-row-height) * 2);
     padding: var(--m-space-5);
+}
+
+/* Allow clicks inside custom empty slots (e.g. "create record" actions) while keeping
+ * plain empty text non-interactive so it doesn't block horizontal scrollbars. */
+.m-table__message > p,
+.m-table__message > span {
     pointer-events: none;
 }
 
@@ -715,5 +730,71 @@
 
 [data-m-motion="reduced"] .m-table__loading-line::before,
 [data-m-motion="none"] .m-table__loading-line::before {
+    animation: none;
+}
+
+/* — Column drag-to-reorder — */
+
+.m-table__header-cell--draggable {
+    cursor: grab;
+}
+
+.m-table__header-cell--draggable:active {
+    cursor: grabbing;
+}
+
+.m-table__header-cell--drag-source {
+    opacity: 0.5;
+}
+
+.m-table__header-cell--drag-over {
+    box-shadow: inset 2px 0 0 var(--m-color-primary);
+}
+
+/* — Column settings — */
+
+.m-table__column-setting-anchor {
+    position: absolute;
+    top: var(--m-space-2);
+    right: var(--m-space-2);
+    z-index: 5;
+    display: inline-flex;
+    background: var(--m-table-header-bg);
+    border-radius: var(--m-radius-control);
+    box-shadow: var(--m-shadow-sm);
+}
+
+/* — Skeleton rows — */
+
+.m-table__body--skeleton td {
+    border-bottom: var(--m-border-width) solid var(--m-table-border-color);
+}
+
+.m-table__skeleton-bar {
+    display: block;
+    flex: 1 1 auto;
+    height: calc(var(--m-table-cell-line-height) * 0.6);
+    border-radius: var(--m-radius-sm);
+    background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--m-color-text) 8%, transparent) 25%,
+        color-mix(in srgb, var(--m-color-text) 14%, transparent) 37%,
+        color-mix(in srgb, var(--m-color-text) 8%, transparent) 63%
+    );
+    background-size: 400% 100%;
+    animation: m-table-skeleton-wave 1.4s ease infinite;
+}
+
+@keyframes m-table-skeleton-wave {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+[data-m-motion="reduced"] .m-table__skeleton-bar,
+[data-m-motion="none"] .m-table__skeleton-bar {
     animation: none;
 }

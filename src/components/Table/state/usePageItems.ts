@@ -2,7 +2,6 @@ import type { ComputedRef, Ref } from 'vue'
 import type { TableItem } from '../types'
 import type { MultipleSelectStatus } from './internal'
 import { computed } from 'vue'
-import { SYNTHETIC } from '../columns/keys'
 import {
   buildSelectedKeySet,
   isItemInSelection,
@@ -35,13 +34,14 @@ export function usePageItems(
     return totalItems.value.slice(currentPageFirstIndex.value - 1, currentPageLastIndex.value)
   })
 
-  const pageItems = computed(() => {
-    if (!showIndex.value) return itemsInPage.value
-    return itemsInPage.value.map((item, index) => ({
-      ...item,
-      [SYNTHETIC.index]: currentPageFirstIndex.value + index,
-    }))
-  })
+  /**
+   * Identity-preserving alias of `itemsInPage`. Row indices used to be injected
+   * as a synthetic `__m_index` field here, but that created a new object per row
+   * on every page/sort/filter change — invalidating `<tr :key>` diffing and
+   * forcing a full page re-render. The index column is now computed in the
+   * template from `currentPageFirstIndex + bodyRowIndex(index)`.
+   */
+  const pageItems = itemsInPage
 
   const selectedKeySet = computed(() =>
     buildSelectedKeySet(selectItemsComputed.value, rowKey.value),

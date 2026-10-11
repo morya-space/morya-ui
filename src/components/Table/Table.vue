@@ -8,10 +8,10 @@ import type {
   TableItem,
   TableProps,
 } from './types'
-import { computed, nextTick, onMounted, provide, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref, toRefs, useAttrs, useSlots, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize } from '../../shared/config'
-import { useRootParts } from '../../shared/useComponentAttrs'
+import { mergePtPart } from '../../shared/useComponentAttrs'
 import { useControllable } from '../../shared/useControllable'
 import MLoading from '../Loading/Loading.vue'
 import MPagination from '../Pagination/Pagination.vue'
@@ -53,6 +53,7 @@ import {
   useTreeRows,
   useVirtualRows,
 } from './hooks'
+import TableColumnSetting from './render/TableColumnSetting.vue'
 import TableTbody from './render/TableTbody.vue'
 import TableThead from './render/TableThead.vue'
 defineOptions({ inheritAttrs: false })
@@ -65,13 +66,9 @@ const props = withDefaults(defineProps<TableProps>(), {
   selectedItem: null,
   serverOptions: null,
   serverTotal: 0,
-  sortField: '',
-  sortOrder: 'asc',
-  sortMode: 'client',
-  multiSort: false,
-  mustSort: false,
+  sortConfig: null,
   filterOptions: null,
-  filters: null,
+  filterModel: null,
   searchField: '',
   searchValue: '',
   rowsPerPage: 25,
@@ -79,6 +76,8 @@ const props = withDefaults(defineProps<TableProps>(), {
   page: 1,
   paginator: false,
   loading: false,
+  skeleton: false,
+  skeletonRows: 5,
   emptyText: undefined,
   emptyDescription: undefined,
   striped: false,
@@ -120,8 +119,11 @@ const props = withDefaults(defineProps<TableProps>(), {
   columnWidths: null,
   virtual: false,
   virtualRowHeight: 40,
+  virtualDynamicRowHeight: false,
   hiddenColumns: null,
   columnOrder: null,
+  columnSetting: false,
+  columnDrag: false,
   showFooter: false,
   footerMethod: null,
   spanMethod: null,
@@ -133,7 +135,19 @@ const props = withDefaults(defineProps<TableProps>(), {
 
 const emit = defineEmits<TableEmits>()
 const attrs = useAttrs()
-const { rootAttrs } = useRootParts(attrs, () => props.pt)
+
+/**
+ * Multi-part pass-through: fallthrough attrs land on the root, each `pt.<part>`
+ * is merged onto its corresponding inner element. Class / style are merged,
+ * other keys overwrite (see `mergePtPart`).
+ */
+const rootAttrs = computed(() => mergePtPart(attrs, props.pt?.root))
+const scrollbarPt = computed(() => props.pt?.scrollbar)
+const theadPt = computed(() => props.pt?.thead)
+const tbodyPt = computed(() => props.pt?.tbody)
+const tfootPt = computed(() => props.pt?.tfoot)
+const paginationPt = computed(() => props.pt?.pagination)
+const emptyMessagePt = computed(() => props.pt?.emptyMessage)
 
 const tableEmit: TableEmitFn = (event, ...args) => {
   ;(emit as (event: string, ...args: unknown[]) => void)(event, ...args)
@@ -143,12 +157,12 @@ const { value: activeFilters, setValue: setActiveFilters } = useControllable<
   Record<string, unknown> | null
 >(
   {
-    controlled: () => props.filters ?? undefined,
+    controlled: () => props.filterModel ?? undefined,
     defaultValue: null,
   },
   (next) => {
-    emit('filter', next)
-    emit('update:filters', next)
+    emit('filter-change', next)
+    emit('update:filterModel', next)
   },
 )
 
@@ -205,8 +219,6 @@ const {
   selectionMode,
   selectedItem,
   loading,
-  mustSort,
-  multiSort,
   pageSizes,
   rowsPerPage,
   searchField,
@@ -214,7 +226,6 @@ const {
   serverTotal,
   serverOptions,
   showIndex,
-  sortMode,
   tableHeight,
   tableMinHeight,
   fill,
@@ -290,8 +301,11 @@ const {
 const items = computed(() => (treeEnabled.value ? flatRows.value : props.rows))
 const pipelineSearchValue = computed(() => (treeEnabled.value ? '' : searchValue.value))
 const itemsSelected = computed(() => props.selection ?? null)
-const sortBy = computed(() => resolveSortField(props.sortField))
-const sortType = computed(() => resolveSortOrder(props.sortOrder))
+const sortBy = computed(() => resolveSortField(props.sortConfig?.field))
+const sortType = computed(() => resolveSortOrder(props.sortConfig?.order))
+const multiSort = computed(() => Boolean(props.sortConfig?.multiple))
+const mustSort = computed(() => Boolean(props.sortConfig?.must))
+const sortMode = computed(() => props.sortConfig?.mode ?? 'client')
 const currentPage = computed(() => props.page ?? 1)
 const resolvedStriped = computed(() => props.striped)
 const resolvedBorderCell = computed(() => props.bordered)
@@ -368,6 +382,9 @@ const tableMinHeightPx = computed(() => `${tableMinHeight.value}px`)
 const slots = useSlots()
 const ifHasPaginationSlot = computed(() => !!slots.pagination)
 const ifHasLoadingSlot = computed(() => !!slots.loading)
+/** Skeleton replaces the spinner overlay when the table has no data yet. */
+const showSkeleton = computed(() => props.skeleton && props.loading)
+const skeletonRowCount = computed(() => Math.max(1, props.skeletonRows ?? 5))
 /** Detail expansion is disabled while tree mode owns `expandedRowKeys`. */
 const ifHasExpandSlot = computed(
   () => !treeEnabled.value && (expandable.value || !!expandConfig.value || !!slots.expansion),
@@ -414,8 +431,35 @@ function onScrollbarScroll(payload: { scrollTop: number; scrollLeft: number }) {
   showShadowEnd.value = wrap
     ? wrap.scrollWidth - wrap.clientWidth - wrap.scrollLeft > 1
     : false
+}
+
+/**
+ * Track viewport height via ResizeObserver rather than on every scroll event —
+ * scroll handlers fire at pointer rate and re-assigning viewportHeight there
+ * triggers dependent virtual-scroll recomputation needlessly.
+ */
+let viewportResizeObserver: ResizeObserver | undefined
+
+function syncViewportHeight() {
+  const wrap = scrollbarRef.value?.wrapRef
   if (wrap) viewportHeight.value = wrap.clientHeight
 }
+
+function observeViewportHeight() {
+  if (typeof ResizeObserver === 'undefined') return
+  const wrap = scrollbarRef.value?.wrapRef
+  if (!wrap) return
+  viewportResizeObserver?.disconnect()
+  viewportResizeObserver = new ResizeObserver(() => {
+    syncViewportHeight()
+  })
+  viewportResizeObserver.observe(wrap)
+}
+
+onBeforeUnmount(() => {
+  viewportResizeObserver?.disconnect()
+  viewportResizeObserver = undefined
+})
 
 const selectionColumn = computed((): 'checkbox' | 'radio' | null => {
   const mode = selectionMode.value ?? (itemsSelected.value !== null ? 'multiple' : null)
@@ -687,17 +731,26 @@ const virtualEnabled = computed(
     && Boolean(resolvedTableHeight.value || tableFillsParent.value),
 )
 
+const virtualDynamicRowHeightRef = computed(() => Boolean(props.virtualDynamicRowHeight))
+
 const {
   virtualItems,
   startIndex: virtualStartIndex,
   offsetTop,
   offsetBottom,
+  observeRow,
+  dynamicEnabled: virtualDynamicEnabled,
 } = useVirtualRows(
   virtualEnabled,
   pageItems,
   virtualRowHeight,
   scrollTop,
   viewportHeight,
+  5,
+  {
+    dynamic: virtualDynamicRowHeightRef,
+    rowKey,
+  },
 )
 
 const bodyItems = computed(() => (virtualEnabled.value ? virtualItems.value : pageItems.value))
@@ -861,6 +914,46 @@ function onRowDblClick(item: TableItem, index: number, event: Event) {
   dblClickRow(item, prevPageEndIndex.value + bodyRowIndex(index), event)
 }
 
+/** Leaf columns eligible for the settings panel (excludes synthetic columns). */
+const columnSettingColumns = computed(() =>
+  headers.value.filter((header) => !isSyntheticColumn(header.value)),
+)
+
+function onColumnSettingToggle(key: string, visible: boolean) {
+  const current = new Set(activeHiddenColumns.value ?? [])
+  if (visible) current.delete(key)
+  else current.add(key)
+  setActiveHiddenColumns(current.size ? [...current] : null)
+}
+
+function onColumnSettingReset() {
+  setActiveHiddenColumns(null)
+}
+
+/**
+ * Reorder `columnOrder` so `sourceKey` takes `targetKey`'s position (target and
+ * everything after it shift one slot). Builds a full leaf-column key list when
+ * no prior order exists.
+ */
+function onColumnDrop(sourceKey: string, targetKey: string) {
+  const leafKeys = headers.value
+    .filter((header) => !isSyntheticColumn(header.value))
+    .map((header) => header.value)
+  const current = activeColumnOrder.value?.length ? [...activeColumnOrder.value] : leafKeys
+  const sourceIndex = current.indexOf(sourceKey)
+  if (sourceIndex === -1) return
+  const targetIndex = current.indexOf(targetKey)
+  if (targetIndex === -1) return
+  current.splice(sourceIndex, 1)
+  // Insert at the target's *current* index after removal — this puts source
+  // before target when source was originally after target, and right at
+  // target's old slot when source was originally before it.
+  const newTargetIndex = current.indexOf(targetKey)
+  const insertAt = sourceIndex < targetIndex ? newTargetIndex + 1 : newTargetIndex
+  current.splice(insertAt, 0, sourceKey)
+  setActiveColumnOrder(current)
+}
+
 function onHeaderFilterApply(columnKey: string, value: unknown) {
   const next = { ...(activeFilters.value ?? {}) }
   if (value == null || value === '' || (Array.isArray(value) && value.length === 0)) {
@@ -875,11 +968,6 @@ function onSortHeader(header: HeaderForRender) {
   if (header.sortable && header.sortType) {
     updateSortField(header.value, header.sortType)
   }
-}
-
-function syncViewportHeight() {
-  const wrap = scrollbarRef.value?.wrapRef
-  if (wrap) viewportHeight.value = wrap.clientHeight
 }
 
 function getCheckboxRecords() {
@@ -981,7 +1069,10 @@ function seedCheckboxRowKeys() {
 }
 
 onMounted(() => {
-  if (virtualEnabled.value) syncViewportHeight()
+  if (virtualEnabled.value) {
+    syncViewportHeight()
+    observeViewportHeight()
+  }
   seedCheckboxRowKeys()
 })
 
@@ -998,8 +1089,8 @@ watch([searchValue, filterOptions, activeFilters], () => {
   if (!isServerSideMode.value) updatePage(1)
 })
 
-watch(() => props.filters, (value) => {
-  emit('filter', value ?? null)
+watch(() => props.filterModel, (value) => {
+  emit('filter-change', value ?? null)
 }, { deep: true })
 
 watch(currentPaginationNumber, (value) => {
@@ -1007,9 +1098,14 @@ watch(currentPaginationNumber, (value) => {
 })
 
 watch(virtualEnabled, async (enabled) => {
-  if (!enabled) return
+  if (!enabled) {
+    viewportResizeObserver?.disconnect()
+    viewportResizeObserver = undefined
+    return
+  }
   await nextTick()
   syncViewportHeight()
+  observeViewportHeight()
 })
 
 if (import.meta.env.DEV) {
@@ -1101,9 +1197,18 @@ defineExpose({
     class="m-table"
     :class="tableRootClass"
   >
-    <MLoading :loading="loading" size="sm">
+    <MLoading :loading="loading && !showSkeleton" size="sm">
+      <div v-if="columnSetting" class="m-table__column-setting-anchor">
+        <TableColumnSetting
+          :columns="columnSettingColumns"
+          :hidden-keys="activeHiddenColumns ?? []"
+          @toggle="onColumnSettingToggle"
+          @reset="onColumnSettingReset"
+        />
+      </div>
       <MScrollbar
         ref="scrollbarRef"
+        v-bind="scrollbarPt"
         class="m-table__scrollbar"
         :height="tableHeightPx || undefined"
         :max-height="tableMaxHeightPx || undefined"
@@ -1141,10 +1246,14 @@ defineExpose({
               :filter-values="activeFilters"
               :is-multi-sorting="isMultiSorting"
               :get-multi-sort-number="getMultiSortNumber"
+              :tree-enabled="treeEnabled"
+              :pt="theadPt"
+              :column-drag="columnDrag"
               @sort="onSortHeader"
               @toggle-select-all="onToggleSelectAll"
               @filter-apply="onHeaderFilterApply"
               @resize-start="onResizeStart"
+              @column-drop="onColumnDrop"
             >
               <template
                 v-for="(_, name) in slots"
@@ -1162,6 +1271,26 @@ defineExpose({
               name="body"
               v-bind="pageItems"
             />
+            <tbody
+              v-else-if="showSkeleton && headerColumns.length"
+              class="m-table__body m-table__body--skeleton"
+              aria-hidden="true"
+            >
+              <tr
+                v-for="rowIndex in skeletonRowCount"
+                :key="rowIndex"
+                class="m-table__skeleton-row"
+              >
+                <td
+                  v-for="header in headersForRender"
+                  :key="header.value"
+                >
+                  <div class="m-table__cell-inner">
+                    <span class="m-table__skeleton-bar" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
             <TableTbody
               v-else-if="headerColumns.length"
               :body-items="bodyItems"
@@ -1202,6 +1331,10 @@ defineExpose({
               :tree-indent="treeResolved.indent"
               :get-tree-meta="bodyTreeMeta"
               :is-tree-node-expanded="isTreeNodeExpanded"
+              :is-multiple-selectable="isMultipleSelectable"
+              :is-single-selectable="isSingleSelectable"
+              :observe-row="virtualDynamicEnabled ? observeRow : undefined"
+              :pt="tbodyPt"
               @row-click="onRowClick"
               @row-dblclick="onRowDblClick"
               @row-contextmenu="contextMenuRow"
@@ -1221,7 +1354,11 @@ defineExpose({
                 />
               </template>
             </TableTbody>
-            <tfoot v-if="showFooter && (ifHasFooterSlot || footerRows.length)" class="m-table__tfoot">
+            <tfoot
+              v-if="showFooter && (ifHasFooterSlot || footerRows.length)"
+              v-bind="tfootPt"
+              class="m-table__tfoot"
+            >
               <slot
                 v-if="ifHasFooterSlot"
                 name="footer"
@@ -1242,7 +1379,12 @@ defineExpose({
             </tfoot>
           </table>
 
-          <div v-if="!pageItems.length && !loading" class="m-table__message" role="status">
+          <div
+            v-if="!pageItems.length && !loading && !showSkeleton"
+            v-bind="emptyMessagePt"
+            class="m-table__message"
+            role="status"
+          >
             <slot v-if="slots.empty" name="empty" />
             <slot v-else name="empty">
               <p class="m-table__empty-text">
@@ -1260,7 +1402,7 @@ defineExpose({
       </template>
     </MLoading>
 
-    <div v-if="paginator" class="m-table__footer">
+    <div v-if="paginator" v-bind="paginationPt" class="m-table__footer">
       <div class="m-table__items-index">
         {{ `${currentPageFirstIndex}–${currentPageLastIndex}` }}
         {{ pageRangeSeparator }} {{ totalItemsLength }}

@@ -5,11 +5,11 @@ import type {
   TableHeaderItemClassName,
   TableTextDirection,
 } from '../types'
-import { useSlots } from 'vue'
+import { ref, useSlots } from 'vue'
 import { useMLocale } from '../../../locale'
 import MCheckbox from '../../Checkbox/Checkbox.vue'
 import MIcon from '../../Icon/Icon.vue'
-import { SYNTHETIC } from '../columns/keys'
+import { isSyntheticColumn, SYNTHETIC } from '../columns/keys'
 import { getFixedDistanceStyle } from '../core/layout'
 import { normalizeAlign } from '../core/normalize'
 import TableHeaderFilter from './TableHeaderFilter.vue'
@@ -29,6 +29,12 @@ const props = defineProps<{
   filterValues: Record<string, unknown> | null
   isMultiSorting: (headerValue: string) => boolean
   getMultiSortNumber: (headerValue: string) => number | false
+  /** When true, emit ARIA `row` / `columnheader` roles required by `treegrid`. */
+  treeEnabled?: boolean
+  /** Pass-through attrs merged onto the `<thead>` element. */
+  pt?: Record<string, unknown>
+  /** Enable header drag-to-reorder. */
+  columnDrag?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -36,6 +42,7 @@ const emit = defineEmits<{
   'toggle-select-all': [checked: boolean | unknown]
   'filter-apply': [columnKey: string, value: unknown]
   'resize-start': [header: HeaderForRender, event: MouseEvent]
+  'column-drop': [sourceKey: string, targetKey: string]
 }>()
 
 const slots = useSlots()
@@ -96,28 +103,98 @@ function onSortHeaderKeydown(header: HeaderForRender, event: KeyboardEvent) {
 function fixedStyle(column: string) {
   return getFixedDistanceStyle(column, 'th', props.fixedColumnsInfos, props.hasFixedHeaders)
 }
+
+/* — Column drag-to-reorder — */
+
+const dragSourceKey = ref<string | null>(null)
+const dragOverKey = ref<string | null>(null)
+
+/** Only leaf (non-group, non-synthetic) columns participate in drag. */
+function isDraggable(header: HeaderForRender): boolean {
+  if (!props.columnDrag) return false
+  if ((header.colspan ?? 1) > 1) return false
+  return !isSyntheticColumn(header.value)
+}
+
+function onDragStart(header: HeaderForRender, event: DragEvent) {
+  if (!isDraggable(header)) {
+    event.preventDefault()
+    return
+  }
+  dragSourceKey.value = header.value
+  if (event.dataTransfer) {
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.setData('text/plain', header.value)
+  }
+}
+
+function onDragOver(header: HeaderForRender, event: DragEvent) {
+  if (!props.columnDrag) return
+  if (!dragSourceKey.value || dragSourceKey.value === header.value) return
+  if (!isDraggable(header)) return
+  event.preventDefault()
+  if (event.dataTransfer) event.dataTransfer.dropEffect = 'move'
+  dragOverKey.value = header.value
+}
+
+function onDragLeave(header: HeaderForRender) {
+  if (dragOverKey.value === header.value) dragOverKey.value = null
+}
+
+function onDrop(header: HeaderForRender, event: DragEvent) {
+  if (!props.columnDrag) return
+  event.preventDefault()
+  const source = dragSourceKey.value
+  const target = header.value
+  dragSourceKey.value = null
+  dragOverKey.value = null
+  if (!source || source === target) return
+  if (!isDraggable(header)) return
+  emit('column-drop', source, target)
+}
+
+function onDragEnd() {
+  dragSourceKey.value = null
+  dragOverKey.value = null
+}
 </script>
 
 <template>
   <thead
+    v-bind="pt"
     class="m-table__header"
     :class="[headerClassName]"
   >
     <tr
       v-for="(row, rowIndex) in rows"
       :key="rowIndex"
+      :role="treeEnabled ? 'row' : undefined"
     >
       <th
         v-for="(header, index) in row"
         :key="`${header.value}-${index}`"
-        :class="headerCellClass(header, index)"
+        :class="[
+          headerCellClass(header, index),
+          {
+            'm-table__header-cell--draggable': isDraggable(header),
+            'm-table__header-cell--drag-over': dragOverKey === header.value,
+            'm-table__header-cell--drag-source': dragSourceKey === header.value,
+          },
+        ]"
         :style="fixedStyle(header.value)"
         :colspan="header.colspan || 1"
         :rowspan="header.rowspan || 1"
         :aria-sort="getAriaSort(header)"
         :tabindex="header.sortable ? 0 : undefined"
+        :role="treeEnabled ? 'columnheader' : undefined"
+        :draggable="isDraggable(header) || undefined"
         @click.stop="onSortHeaderClick(header)"
         @keydown="onSortHeaderKeydown(header, $event)"
+        @dragstart="onDragStart(header, $event)"
+        @dragover="onDragOver(header, $event)"
+        @dragleave="onDragLeave(header)"
+        @drop="onDrop(header, $event)"
+        @dragend="onDragEnd"
       >
         <div
           v-if="header.value === SYNTHETIC.checkbox"

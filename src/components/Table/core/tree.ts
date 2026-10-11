@@ -6,6 +6,10 @@ export interface TableTreeNodeMeta {
   hasChildren: boolean
   loading: boolean
   parentKey: string | number | null
+  /** 1-based position among siblings (for ARIA `aria-posinset` on treegrid rows). */
+  posInSet: number
+  /** Total sibling count at this level (for ARIA `aria-setsize` on treegrid rows). */
+  setSize: number
 }
 
 export function resolveTreeConfig(config: TableTreeConfig | null | undefined): Required<
@@ -142,6 +146,7 @@ export function flattenVisibleTree(
     depth: number,
     parentKey: string | number | null,
   ) => {
+    const setSize = nodes.length
     nodes.forEach((node, index) => {
       const key = resolveRowKey(node, index, rowKey)
       const hasChildren = nodeHasChildren(node, childrenField, lazy, hasChildField)
@@ -150,6 +155,8 @@ export function flattenVisibleTree(
         hasChildren,
         loading: loadingKeys.has(key),
         parentKey,
+        posInSet: index + 1,
+        setSize,
       })
       rows.push(node)
       if (hasChildren && expanded.has(key)) {

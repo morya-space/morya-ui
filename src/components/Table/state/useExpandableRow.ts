@@ -30,7 +30,7 @@ export function useExpandableRow(
     internalExpandedKeys.value = next
     emits('update:expandedRowKeys', next)
     if (row != null && expanded != null) {
-      emits('expand', { row: stripSyntheticFields(row), expanded })
+      emits('expand-change', { row: stripSyntheticFields(row), expanded })
     }
   }
 
@@ -98,7 +98,7 @@ export function useExpandableRow(
       } else {
         next = next.filter((entry) => entry !== key)
       }
-      emits('expand', { row: stripSyntheticFields(item), expanded })
+      emits('expand-change', { row: stripSyntheticFields(item), expanded })
     }
     commit(next)
   }

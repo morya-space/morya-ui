@@ -735,6 +735,7 @@ export type {
   TableRadioConfig,
   TableServerOptions,
   TableSize,
+  TableSortConfig,
   TableSortMode,
   TableSortPayload,
   TableSortType,

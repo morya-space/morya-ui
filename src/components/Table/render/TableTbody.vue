@@ -71,6 +71,22 @@ const props = defineProps<{
   treeIndent?: number
   getTreeMeta?: (item: TableItem, index: number) => TableTreeNodeMeta | undefined
   isTreeNodeExpanded?: (item: TableItem, index: number) => boolean
+  /** Used to compute `aria-selected` on treegrid rows. */
+  isMultipleSelectable?: boolean
+  isSingleSelectable?: boolean
+  /**
+   * Tabindex applied to body rows. `0` puts rows in tab order; `-1` keeps them
+   * focusable programmatically (e.g. arrow-key navigation). Defaults to `-1`.
+   */
+  rowTabindex?: number
+  /** Pass-through attrs merged onto the `<tbody>` element. */
+  pt?: Record<string, unknown>
+  /**
+   * ResizeObserver hook for dynamic row heights in virtual scroll. Called
+   * with each `<tr>` element after render so its measured height can be fed
+   * back into the virtual slice computation.
+   */
+  observeRow?: (el: HTMLElement | null, row: TableItem, index: number) => void
 }>()
 
 const emit = defineEmits<{
@@ -87,6 +103,7 @@ const slots = useSlots()
 const locale = useMLocale()
 
 const colCount = computed(() => props.headersForRender.length)
+const rowTabindex = computed(() => props.rowTabindex ?? -1)
 
 function cellAlign(column: string) {
   return resolveCellAlignClass(column, props.columnAlignMap, props.bodyTextDirection)
@@ -112,12 +129,19 @@ function columnOverflowTooltip(column: string) {
   return Boolean(header?.showOverflowTooltip)
 }
 
-function cellSlotProps(column: string, item: TableItem) {
+/** Cache Map.get per cell to avoid double lookups in the template. */
+function columnRender(column: string) {
+  return props.columnRenderMap.get(column)
+}
+
+function cellSlotProps(column: string, item: TableItem, index: number) {
   return {
     row: item,
     item,
     column,
-    value: getItemValue(column, item),
+    value: column === SYNTHETIC.index
+      ? props.currentPageFirstIndex + props.bodyRowIndex(index)
+      : getItemValue(column, item),
   }
 }
 
@@ -128,8 +152,26 @@ function onRowClick(item: TableItem, index: number, event: Event) {
   }
 }
 
+/**
+ * Keyboard access for rows: Enter/Space triggers the same path as a row click.
+ * We only handle the event when focus is on the row itself, not on any inner
+ * interactive element (checkbox, button, link, input), to avoid double-firing.
+ */
+function onRowKeydown(item: TableItem, index: number, event: KeyboardEvent) {
+  if (event.key !== 'Enter' && event.key !== ' ') return
+  if (event.target !== event.currentTarget) return
+  event.preventDefault()
+  onRowClick(item, index, event)
+}
+
 function treeMetaOf(item: TableItem, index: number) {
   return props.getTreeMeta?.(item, index)
+}
+
+/** Forward `<tr>` refs to the virtual-scroll row observer when configured. */
+function setRowRef(el: Element | any, item: TableItem, index: number) {
+  if (!props.observeRow) return
+  props.observeRow((el ?? null) as HTMLElement | null, item, index)
 }
 
 function isTreeColumn(column: string) {
@@ -138,7 +180,7 @@ function isTreeColumn(column: string) {
 </script>
 
 <template>
-  <tbody class="m-table__body">
+  <tbody v-bind="pt" class="m-table__body">
     <slot
       name="body-prepend"
       v-bind="{
@@ -162,6 +204,7 @@ function isTreeColumn(column: string) {
       :key="getBodyRowKey(item, index)"
     >
       <tr
+        :ref="(el) => setRowRef(el, item, index)"
         :class="[
           {
             'm-table__row--striped': striped && (bodyRowIndex(index) + 1) % 2 === 0,
@@ -171,13 +214,21 @@ function isTreeColumn(column: string) {
           typeof bodyRowClassName === 'string' ? bodyRowClassName : bodyRowClassName(item, bodyRowIndex(index) + 1),
         ]"
         :data-row-key="String(getBodyRowKey(item, index))"
+        :role="treeEnabled ? 'row' : undefined"
         :aria-level="treeEnabled ? (treeMetaOf(item, index)?.depth ?? 0) + 1 : undefined"
+        :aria-posinset="treeEnabled ? treeMetaOf(item, index)?.posInSet : undefined"
+        :aria-setsize="treeEnabled ? treeMetaOf(item, index)?.setSize : undefined"
         :aria-expanded="treeEnabled && treeMetaOf(item, index)?.hasChildren
           ? isTreeNodeExpanded?.(item, index) ?? false
           : undefined"
+        :aria-selected="treeEnabled && (isMultipleSelectable || isSingleSelectable)
+          ? isRowSelected(item, index)
+          : undefined"
+        :tabindex="rowTabindex"
         @click="onRowClick(item, index, $event)"
         @dblclick="emit('row-dblclick', item, index, $event)"
         @contextmenu="emit('row-contextmenu', item, $event)"
+        @keydown="onRowKeydown(item, index, $event)"
       >
         <template
           v-for="cell in rowCells(item, bodyRowIndex(index))"
@@ -188,6 +239,7 @@ function isTreeColumn(column: string) {
             :style="fixedStyle(cell.column)"
             :rowspan="cell.rowspan"
             :colspan="cell.colspan"
+            :role="treeEnabled ? 'gridcell' : undefined"
             :class="[
               {
                 'm-table__cell--shadow': cell.column === lastFixedColumn,
@@ -239,15 +291,15 @@ function isTreeColumn(column: string) {
                 <slot
                   v-if="slots[`cell-${cell.column}`]"
                   :name="`cell-${cell.column}`"
-                  v-bind="cellSlotProps(cell.column, item)"
+                  v-bind="cellSlotProps(cell.column, item, index)"
                 />
                 <slot
                   v-else-if="slots[`cell-${cell.column.toLowerCase()}`]"
                   :name="`cell-${cell.column.toLowerCase()}`"
-                  v-bind="cellSlotProps(cell.column, item)"
+                  v-bind="cellSlotProps(cell.column, item, index)"
                 />
-                <template v-else-if="columnRenderMap.get(cell.column)">
-                  <span class="m-table__cell-text">{{ columnRenderMap.get(cell.column)!(item) }}</span>
+                <template v-else-if="columnRender(cell.column)">
+                  <span class="m-table__cell-text">{{ columnRender(cell.column)!(item) }}</span>
                 </template>
                 <TableDefaultCell
                   v-else
@@ -259,12 +311,12 @@ function isTreeColumn(column: string) {
               <slot
                 v-else-if="slots[`cell-${cell.column}`]"
                 :name="`cell-${cell.column}`"
-                v-bind="cellSlotProps(cell.column, item)"
+                v-bind="cellSlotProps(cell.column, item, index)"
               />
               <slot
                 v-else-if="slots[`cell-${cell.column.toLowerCase()}`]"
                 :name="`cell-${cell.column.toLowerCase()}`"
-                v-bind="cellSlotProps(cell.column, item)"
+                v-bind="cellSlotProps(cell.column, item, index)"
               />
               <template v-else-if="cell.column === SYNTHETIC.expand">
                 <button
@@ -298,13 +350,17 @@ function isTreeColumn(column: string) {
                   @click.stop
                 />
               </template>
+              <span
+                v-else-if="cell.column === SYNTHETIC.index"
+                class="m-table__cell-text m-table__cell-text--index"
+              >{{ currentPageFirstIndex + bodyRowIndex(index) }}</span>
               <slot
                 v-else-if="slots['body-cell']"
                 name="body-cell"
                 v-bind="{ column: cell.column, item, row: item, value: getItemValue(cell.column, item) }"
               />
-              <template v-else-if="columnRenderMap.get(cell.column)">
-                <span class="m-table__cell-text">{{ columnRenderMap.get(cell.column)!(item) }}</span>
+              <template v-else-if="columnRender(cell.column)">
+                <span class="m-table__cell-text">{{ columnRender(cell.column)!(item) }}</span>
               </template>
               <TableDefaultCell
                 v-else

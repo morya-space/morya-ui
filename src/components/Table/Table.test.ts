@@ -160,6 +160,41 @@ describe('mTable', () => {
     expect(wrapper.find('.m-loading-indicator').exists()).toBe(false)
   })
 
+  it('renders skeleton rows instead of the spinner overlay when `skeleton`', () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns,
+        rows: [],
+        loading: true,
+        skeleton: true,
+        skeletonRows: 3,
+        paginator: false,
+      },
+    })
+    expect(wrapper.find('.m-loading-mask').exists()).toBe(false)
+    expect(wrapper.findAll('.m-table__skeleton-row')).toHaveLength(3)
+    expect(wrapper.findAll('.m-table__skeleton-bar').length).toBeGreaterThan(0)
+    expect(wrapper.find('.m-table__message').exists()).toBe(false)
+  })
+
+  it('virtual mode still slices rows when dynamic row height is enabled', () => {
+    const rows = Array.from({ length: 100 }, (_, i) => ({ id: i + 1, name: `R${i + 1}` }))
+    const wrapper = mount(MTable, {
+      props: {
+        columns,
+        rows,
+        virtual: true,
+        virtualDynamicRowHeight: true,
+        virtualRowHeight: 32,
+        tableHeight: 320,
+        paginator: false,
+      },
+    })
+    const rendered = wrapper.findAll('tbody tr:not(.m-table__virtual-spacer)')
+    expect(rendered.length).toBeLessThan(rows.length)
+    expect(rendered.length).toBeGreaterThan(0)
+  })
+
   it('sorts rows when sortable header is clicked', async () => {
     const wrapper = mount(MTable, {
       props: {
@@ -174,7 +209,7 @@ describe('mTable', () => {
     await wrapper.get('th.m-table__header-cell--sortable').trigger('click')
     const firstCell = wrapper.find('tbody td').text()
     expect(firstCell).toBe('Ada')
-    expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
+    expect(wrapper.emitted('sort-change')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
   })
 
   it('emits selection updates in multi-select mode', async () => {
@@ -267,7 +302,7 @@ describe('mTable', () => {
     })
     await wrapper.get('.m-table__expand-btn').trigger('click')
     expect(wrapper.get('.m-table__cell--expanded').text()).toContain('Ada Design system')
-    expect(wrapper.emitted('expand')).toBeTruthy()
+    expect(wrapper.emitted('expand-change')).toBeTruthy()
   })
 
   it('renders column render output', () => {
@@ -359,11 +394,11 @@ describe('mTable', () => {
     expect(opsHeader.classes()).toContain('m-table__header-cell--shadow-end')
   })
 
-  it('sortMode emit only emits without client sorting', async () => {
+  it('sortConfig mode="emit" only emits without client sorting', async () => {
     const wrapper = mount(MTable, {
       props: {
         columns,
-        sortMode: 'emit' as const,
+        sortConfig: { mode: 'emit' as const },
         rows: [
           { id: 1, name: 'Lin', status: 'a' },
           { id: 2, name: 'Ada', status: 'b' },
@@ -372,11 +407,11 @@ describe('mTable', () => {
       },
     })
     await wrapper.get('th.m-table__header-cell--sortable').trigger('click')
-    expect(wrapper.emitted('sort')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
+    expect(wrapper.emitted('sort-change')?.[0]?.[0]).toMatchObject({ sortField: 'name', sortOrder: 'asc' })
     expect(wrapper.find('tbody td').text()).toBe('Lin')
   })
 
-  it('filters rows via controlled filters prop', async () => {
+  it('filters rows via controlled filterModel prop', async () => {
     const wrapper = mount(MTable, {
       props: {
         columns,
@@ -384,18 +419,91 @@ describe('mTable', () => {
           { id: 1, name: 'Ada', status: 'Draft' },
           { id: 2, name: 'Lin', status: 'Live' },
         ],
-        filters: { status: 'Live' },
+        filterModel: { status: 'Live' },
         paginator: false,
       },
     })
     expect(wrapper.findAll('tbody tr')).toHaveLength(1)
     expect(wrapper.text()).toContain('Lin')
-    await wrapper.setProps({ filters: { status: 'Draft' } })
+    await wrapper.setProps({ filterModel: { status: 'Draft' } })
     expect(wrapper.text()).toContain('Ada')
-    expect(wrapper.emitted('filter')).toBeTruthy()
+    expect(wrapper.emitted('filter-change')).toBeTruthy()
   })
 
-  it('emits update:filters when setFilters is called', async () => {
+  it('column settings panel toggles hiddenColumns v-model', async () => {
+    const wrapper = mount(MTable, {
+      attachTo: document.body,
+      props: {
+        columns,
+        rows: [{ id: 1, name: 'Ada', status: 'Draft' }],
+        columnSetting: true,
+        'hiddenColumns': [],
+        'onUpdate:hiddenColumns': (value: string[]) =>
+          wrapper.setProps({ hiddenColumns: value }),
+        'paginator': false,
+      },
+    })
+    await wrapper.get('.m-table__column-setting-anchor button').trigger('click')
+    const options = document.body.querySelectorAll<HTMLInputElement>(
+      '.m-table__filter-panel .m-checkbox__input',
+    )
+    expect(options.length).toBeGreaterThanOrEqual(2)
+    options[0]!.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted('update:hiddenColumns')?.at(-1)?.[0]).toEqual(['name'])
+    wrapper.unmount()
+  })
+
+  it('column settings reset restores all columns', async () => {
+    const wrapper = mount(MTable, {
+      attachTo: document.body,
+      props: {
+        columns,
+        rows: [{ id: 1, name: 'Ada', status: 'Draft' }],
+        columnSetting: true,
+        'hiddenColumns': ['name'],
+        'onUpdate:hiddenColumns': (value: string[] | null) =>
+          wrapper.setProps({ hiddenColumns: value }),
+        'paginator': false,
+      },
+    })
+    await wrapper.get('.m-table__column-setting-anchor button').trigger('click')
+    const resetButton = document.body.querySelector<HTMLButtonElement>(
+      '.m-table__filter-actions button',
+    )
+    resetButton?.click()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.emitted('update:hiddenColumns')?.at(-1)?.[0]).toEqual([])
+    wrapper.unmount()
+  })
+
+  it('column drag reorders columns via columnOrder v-model', async () => {
+    const wrapper = mount(MTable, {
+      props: {
+        columns: [
+          { key: 'name', label: 'Name' },
+          { key: 'status', label: 'Status' },
+          { key: 'age', label: 'Age' },
+        ],
+        rows: [{ id: 1, name: 'Ada', status: 'Draft', age: 30 }],
+        columnDrag: true,
+        'columnOrder': null,
+        'onUpdate:columnOrder': (value: string[] | null) =>
+          wrapper.setProps({ columnOrder: value }),
+        'paginator': false,
+      },
+    })
+    const headers = wrapper.findAll('th.m-table__header-cell--draggable')
+    expect(headers.length).toBe(3)
+    // Drag 'name' onto 'age'
+    await headers[0]!.trigger('dragstart')
+    await headers[2]!.trigger('dragover')
+    await headers[2]!.trigger('drop')
+    await headers[0]!.trigger('dragend')
+    expect(wrapper.emitted('update:columnOrder')?.at(-1)?.[0]).toEqual(['status', 'age', 'name'])
+  })
+
+  it('emits update:filterModel when setFilters is called', async () => {
     const wrapper = mount(MTable, {
       props: {
         columns,
@@ -410,8 +518,8 @@ describe('mTable', () => {
       status: 'Live',
     })
     await wrapper.vm.$nextTick()
-    expect(wrapper.emitted('update:filters')?.at(-1)).toEqual([{ status: 'Live' }])
-    expect(wrapper.emitted('filter')?.at(-1)).toEqual([{ status: 'Live' }])
+    expect(wrapper.emitted('update:filterModel')?.at(-1)).toEqual([{ status: 'Live' }])
+    expect(wrapper.emitted('filter-change')?.at(-1)).toEqual([{ status: 'Live' }])
     expect(wrapper.findAll('tbody tr')).toHaveLength(1)
   })
 
@@ -461,7 +569,7 @@ describe('mTable', () => {
           { id: 2, name: 'A', status: 'y' },
           { id: 3, name: 'A', status: 'x' },
         ],
-        multiSort: true,
+        sortConfig: { multiple: true },
         paginator: false,
       },
     })
@@ -481,7 +589,7 @@ describe('mTable', () => {
           { key: 'status', label: 'Status', sortable: true },
         ],
         'rows': [{ id: 1, name: 'Ada', status: 'Live' }],
-        'multiSort': true,
+        'sortConfig': { multiple: true },
         'serverOptions': { page: 1, rowsPerPage: 10, sortBy: [] as string[], sortType: [] as Array<'asc' | 'desc'> },
         'serverTotal': 1,
         'onUpdate:serverOptions': (value: {
