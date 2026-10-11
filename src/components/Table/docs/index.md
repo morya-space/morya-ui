@@ -1,7 +1,7 @@
 ---
 title: Table
 category: 03 / DATA
-description: 数据表格。支持排序、筛选、选择、分页、固定列与空/加载态。列宽支持 width / minWidth / fit。
+description: 数据表格。支持排序、筛选、选择、分页、固定列、列拖拽、列设置、骨架屏与虚拟滚动。列宽支持 width / minWidth / fit。
 ---
 
 # Table
@@ -19,7 +19,7 @@ description: 数据表格。支持排序、筛选、选择、分页、固定列�
 ## 引入
 
 ```ts
-import type { TableColumnDefinition, TableItem } from 'morya-ui'
+import type { TableColumnDefinition, TableItem, TableSortConfig, TablePassThrough } from 'morya-ui'
 import { MTable, MTag } from 'morya-ui'
 ```
 
@@ -56,11 +56,39 @@ import { MTable, MTag } from 'morya-ui'
 ```vue preview src="./demos/ExpandableRows.zh.vue"
 ```
 
+## 排序（sortConfig）
+
+通过 `sort-config` 统一配置排序：`{ field, order, multiple, must, mode }`。`mode: 'client'`（默认）由表格内部对当前页数据排序；`mode: 'emit'` 时表格只触发 `sort-change` 事件，数据由外部接管（适合服务端排序）。多列排序设 `multiple: true`，禁止取消排序设 `must: true`。
+
+```vue preview src="./demos/Sorting.zh.vue"
+```
+
 ## 列宽拖拽与表头筛选
 
-列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，可选 `filters` 为多选选项，否则为文本包含筛选。面板内 **清除** 仅重置草稿，**确认** 后才写入 `v-model:filters`。
+列设置 `resizable` 可拖拽改宽（`v-model:column-widths`）；`filterable` 显示表头筛选，列定义里的 `filters` 为多选选项，省略则为文本包含筛选。面板内 **清除** 仅重置草稿，**确认** 后才写入 `v-model:filter-model`（旧 prop 名 `filters` 仍兼容）。
 
 ```vue preview src="./demos/ResizeAndFilter.zh.vue"
+```
+
+## 列设置面板
+
+开启 `column-setting` 在表头右上角显示「列设置」按钮，弹出面板可勾选显示/隐藏列，配合 `v-model:hidden-columns` 持久化。面板文案随 `MLocale` 切换。
+
+```vue preview src="./demos/ColumnSetting.zh.vue"
+```
+
+## 列拖拽排序
+
+开启 `column-drag` 后，拖拽表头单元格可调整叶列顺序，顺序由 `v-model:column-order` 同步。拖放仅在同一层级内进行，不会破坏多级表头结构。
+
+```vue preview src="./demos/ColumnDrag.zh.vue"
+```
+
+## 骨架屏加载
+
+通过 `skeleton` 启用骨架屏加载态，替代整页遮罩 spinner；`skeleton-rows` 控制骨架行数（默认 `5`）。骨架屏会让用户提前感知表格布局，加载体验更好。
+
+```vue preview src="./demos/Skeleton.zh.vue"
 ```
 
 ## 虚拟滚动
@@ -68,6 +96,13 @@ import { MTable, MTag } from 'morya-ui'
 开启 `virtual`，并提供 `maxHeight` / `tableHeight` / `fill` 之一以形成滚动视口；缺高度时开发环境会 `console.warn`。展开行 / `#expansion` / `expandConfig` 与虚拟滚动互斥，会自动降级为普通渲染（开发环境会提示）。
 
 ```vue preview src="./demos/VirtualScroll.zh.vue"
+```
+
+## 动态行高虚拟滚动
+
+默认虚拟滚动要求所有行等高（由 `virtual-row-height` 估算）。如果某些行由于内容差异存在不同高度，可开启 `virtual-dynamic-row-height`：表格会通过 `ResizeObserver` 实测每行高度并缓存，配合前缀和 + 二分查找实现 O(log n) 滚动定位，长列表下滚动仍保持流畅。
+
+```vue preview src="./demos/DynamicRowHeight.zh.vue"
 ```
 
 ## 多级表头、表尾与合并
@@ -108,9 +143,12 @@ import { MTable, MTag } from 'morya-ui'
 - `hideHeader` 移除；改用 `showHeader`（默认 `true`）
 - `hideRowsPerPage` 移除；改用 `showRowsPerPage`（默认 `true`）
 - 移除：`clickEventType`、`rowsPerPageMessage`、`rowsOfPageSeparatorMessage`、`preventContextMenuRow`、`tableNodeId`
-- 事件：`contextmenuRow` → `row-contextmenu`；`selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`
+- 事件：`sortChange` → `sort-change`；`expandRow` → `expand-change`；`contextmenuRow` → `row-contextmenu`；`selectRow` / `deselectRow` / `selectAll` → `select-row` / `deselect-row` / `select-all`
+- 新增事件：`filter-change`（列筛选提交）
 - 移除事件：`updatePageItems`、`updateTotalItems`、`page`（保留 `update:page`）
 - 行交互：始终同时支持单击 / 双击（`row-click` / `row-dblclick`）；右键始终 `preventDefault` 并抛出 `row-contextmenu`
+- 排序 props 合并：`sortField` / `sortOrder` / `multiSort` / `mustSort` / `sortMode` 仍兼容，新代码请使用 `sortConfig: TableSortConfig`
+- 筛选 v-model：`v-model:filters` 仍兼容，新代码请使用 `v-model:filter-model`
 
 ## TableColumnDefinition
 
@@ -152,8 +190,14 @@ import { MTable, MTag } from 'morya-ui'
 | `columnWidths` | `Record<string, number> \| null` | `null` | 列宽（`v-model:column-widths`）。 |
 | `virtual` | `boolean` | `false` | 行虚拟滚动（需高度；展开行时跳过）。 |
 | `virtualRowHeight` | `number` | `40` | 虚拟行高估算。 |
+| `virtualDynamicRowHeight` | `boolean` | `false` | 动态行高虚拟滚动（实测行高缓存，配合 `ResizeObserver`）。 |
+| `virtualOverscan` | `number` | `4` | 虚拟滚动上下额外渲染的行数，减少白屏闪烁。 |
 | `hiddenColumns` | `string[] \| null` | `null` | 隐藏列键（`v-model:hidden-columns`）。 |
 | `columnOrder` | `string[] \| null` | `null` | 叶列顺序（`v-model:column-order`）。 |
+| `columnSetting` | `boolean` | `false` | 显示列设置按钮（显示/隐藏列）。 |
+| `columnDrag` | `boolean` | `false` | 表头拖拽排序。 |
+| `skeleton` | `boolean` | `false` | 骨架屏加载态。 |
+| `skeletonRows` | `number` | `5` | 骨架屏行数。 |
 | `showFooter` | `boolean` | `false` | 显示表尾。 |
 | `footerMethod` | `TableFooterMethod \| null` | `null` | 表尾数据。 |
 | `spanMethod` | `TableSpanMethod \| null` | `null` | 单元格合并。 |
@@ -166,10 +210,16 @@ import { MTable, MTag } from 'morya-ui'
 | `bordered` | `boolean` | `false` | 单元格边框。 |
 | `highlightCurrent` | `boolean` | `false` | 高亮当前行，配合 `v-model:current-row-key`。 |
 | `rowHover` | `boolean` | `true` | 行 hover 高亮。 |
-| `sortField` / `sortOrder` | — | — | 受控排序字段与方向。 |
-| `sortMode` | `'client' \| 'emit'` | `'client'` | 客户端排序或仅抛出排序事件。 |
+| `sortConfig` | `TableSortConfig \| null` | `null` | 统一排序配置 `{ field, order, multiple, must, mode }`。 |
+| `sortField` | `string \| null` | `null` | （兼容）单字段排序。建议用 `sortConfig`。 |
+| `sortOrder` | `'asc' \| 'desc' \| null` | `null` | （兼容）单字段排序方向。建议用 `sortConfig`。 |
+| `multiSort` | `boolean` | `false` | （兼容）多列排序。建议用 `sortConfig.multiple`。 |
+| `mustSort` | `boolean` | `false` | （兼容）禁止取消排序。建议用 `sortConfig.must`。 |
+| `sortMode` | `'client' \| 'emit'` | `'client'` | （兼容）排序模式。建议用 `sortConfig.mode`。 |
 | `searchField` / `searchValue` | — | — | 客户端搜索。 |
 | `filterOptions` | `TableFilterOption[]` | `null` | 结构化筛选条件。 |
+| `filterModel` | `Record<string, unknown> \| null` | `null` | 列筛选 v-model（与 `update:filter-model` 配合）。 |
+| `filters` | `Record<string, unknown> \| null` | `null` | （兼容）旧筛选 v-model 名。 |
 | `loading` | `boolean` | `false` | 加载中。 |
 | `emptyText` | `string` | — | 空数据文案。 |
 | `emptyDescription` | `string` | — | 空数据补充说明。 |
@@ -187,7 +237,6 @@ import { MTable, MTag } from 'morya-ui'
 | `currentRowKey` | `string \| number \| null` | — | — |
 | `expandColumnWidth` | `number` | — | — |
 | `expandedRowKeys` | `Array<string \| number>` | — | — |
-| `filters` | `Record<string, unknown> \| null` | — | — |
 | `fixedCheckbox` | `boolean` | — | — |
 | `fixedExpand` | `boolean` | — | — |
 | `fixedHeader` | `boolean` | — | — |
@@ -196,15 +245,12 @@ import { MTable, MTag } from 'morya-ui'
 | `headerItemClassName` | `TableHeaderItemClassName` | — | — |
 | `headerTextDirection` | `TableTextDirection` | — | — |
 | `indexColumnWidth` | `number` | — | — |
-| `multiSort` | `boolean` | — | — |
-| `mustSort` | `boolean` | — | — |
 | `showIndex` | `boolean` | — | — |
 | `showIndexSymbol` | `string` | — | — |
 | `tableClassName` | `string` | — | — |
 | `tableHeight` | `number \| null` | — | — |
 | `tableMinHeight` | `number` | — | — |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
-
+| `pt` | `TablePassThrough` | — | 多部分 DOM 透传：`{ root, scrollbar, thead, tbody, tfoot, pagination, emptyMessage }`。 |
 
 ## Slots
 
@@ -215,7 +261,7 @@ import { MTable, MTag } from 'morya-ui'
 | `body-cell` | 任意单元格，作用域 `{ row, column, value }`。 |
 | `expansion` | 展开行内容，作用域 `{ row }`。 |
 | `empty` | 自定义空态。 |
-| `loading` | 自定义加载态。 |
+| `loading` | 自定义加载态（`skeleton` 为 true 时不生效）。 |
 | `pagination` | 自定义分页区域。 |
 | `body` | 自定义 `body` 内容。 |
 | `body-append` | 自定义 `body-append` 内容。 |
@@ -228,7 +274,9 @@ import { MTable, MTag } from 'morya-ui'
 
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
-| `sort` | `{ sortField?, sortOrder? }` | 排序变化。 |
+| `sort-change` | `{ sortField?, sortOrder? }` | 排序变化。 |
+| `filter-change` | `Record<string, unknown> \| null` | 列筛选提交（与 `update:filter-model` 同步）。 |
+| `expand-change` | `{ row, expanded }` | 行展开状态变化（详情展开或树节点展开）。 |
 | `row-click` | `{ row, index }`, `Event` | 行单击。 |
 | `row-dblclick` | `{ row, index }`, `Event` | 行双击。 |
 | `row-contextmenu` | `item`, `MouseEvent` | 行右键。 |
@@ -236,18 +284,16 @@ import { MTable, MTag } from 'morya-ui'
 | `deselect-row` | `TableItem` | 取消选中一行。 |
 | `select-all` | — | 全选当前页。 |
 | `current-change` | `row \| null, oldRow \| null` | 当前高亮行变化。 |
-| `expand` | `{ row, expanded }` | 行展开。 |
 | `update:selection` | `TableItem[]` | 多选 v-model。 |
 | `update:page` | `number` | 页码 v-model。 |
 | `update:server-options` | `TableServerOptions` | 服务端选项 v-model。 |
 | `update:current-row-key` | `string \| number \| null` | 当前行键 v-model。 |
-| `filter` | — | — |
-| `update:expandedRowKeys` | — | — |
-| `update:filters` | — | — |
-| `update:columnWidths` | `Record<string, number>` | 列宽 v-model。 |
-| `update:hiddenColumns` | `string[]` | 隐藏列 v-model。 |
-| `update:columnOrder` | `string[]` | 列顺序 v-model。 |
-| `update:selectedItem` | — | — |
+| `update:expanded-row-keys` | `Array<string \| number>` | 树/详情展开键 v-model。 |
+| `update:filter-model` | `Record<string, unknown> \| null` | 列筛选 v-model。 |
+| `update:column-widths` | `Record<string, number>` | 列宽 v-model。 |
+| `update:hidden-columns` | `string[]` | 隐藏列 v-model。 |
+| `update:column-order` | `string[]` | 列顺序 v-model。 |
+| `update:selected-item` | `TableItem \| null` | 单选 v-model。 |
 
 ## 实例方法
 
@@ -285,15 +331,41 @@ import { MTable, MTag } from 'morya-ui'
 
 <h4 id="TableItem">TableItem</h4>
 
-完整定义见源码 `types.ts`。
-
 ```ts
 type TableItem = Record<string, unknown>
 ```
 
-<h4 id="TableTextDirection">TableTextDirection</h4>
+<h4 id="TableSortConfig">TableSortConfig</h4>
 
-完整定义见源码 `types.ts`。
+统一排序配置；`field` / `order` 描述当前单列排序状态，`mode` 决定由表格内部或外部接管排序：
+
+```ts
+interface TableSortConfig {
+  field?: string | null
+  order?: 'asc' | 'desc' | null
+  multiple?: boolean
+  must?: boolean
+  mode?: 'client' | 'emit'
+}
+```
+
+<h4 id="TablePassThrough">TablePassThrough</h4>
+
+多部分 DOM 透传，支持 class / style / 任意 attrs：
+
+```ts
+interface TablePassThrough {
+  root?: Record<string, unknown>
+  scrollbar?: Record<string, unknown>
+  thead?: Record<string, unknown>
+  tbody?: Record<string, unknown>
+  tfoot?: Record<string, unknown>
+  pagination?: Record<string, unknown>
+  emptyMessage?: Record<string, unknown>
+}
+```
+
+<h4 id="TableTextDirection">TableTextDirection</h4>
 
 ```ts
 type TableTextDirection = 'left' | 'center' | 'right'
@@ -301,10 +373,9 @@ type TableTextDirection = 'left' | 'center' | 'right'
 
 <h4 id="TableFilterOption">TableFilterOption</h4>
 
-完整定义见源码 `types.ts`。
-
 ```ts
-type TableFilterOption = | { field: string; comparison: 'between'; criteria: [number, number] }
+type TableFilterOption =
+  | { field: string; comparison: 'between'; criteria: [number, number] }
   | { field: string; comparison: '=' | '!='; criteria: number | string }
   | { field: string; comparison: '>' | '>=' | '<' | '<='; criteria: number }
   | { field: number | string; comparison: 'in'; criteria: number[] | string[] }
@@ -313,15 +384,11 @@ type TableFilterOption = | { field: string; comparison: 'between'; criteria: [nu
 
 <h4 id="TableHeaderItemClassName">TableHeaderItemClassName</h4>
 
-完整定义见源码 `types.ts`。
-
 ```ts
 type TableHeaderItemClassName = string | ((header: TableHeader, columnNumber: number) => string)
 ```
 
 <h4 id="TableBodyRowClassName">TableBodyRowClassName</h4>
-
-完整定义见源码 `types.ts`。
 
 ```ts
 type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => string)
@@ -329,12 +396,9 @@ type TableBodyRowClassName = string | ((item: TableItem, rowNumber: number) => s
 
 <h4 id="TableBodyItemClassName">TableBodyItemClassName</h4>
 
-完整定义见源码 `types.ts`。
-
 ```ts
 type TableBodyItemClassName = string | ((column: string, rowNumber: number) => string)
 ```
-
 
 <h4 id="TableTreeConfig">TableTreeConfig</h4>
 
@@ -371,6 +435,10 @@ interface TableColumnDefinition {
   align?: 'start' | 'center' | 'end'
   render?: (row: TableItem) => unknown
   showOverflowTooltip?: boolean
+  resizable?: boolean
+  filterable?: boolean
+  filters?: TableColumnFilter[]
+  children?: TableColumnDefinition[]
 }
 ```
 
