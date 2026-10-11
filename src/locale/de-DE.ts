@@ -5,6 +5,8 @@ export const deDE: MLocaleMessages = {
   accept: 'OK',
   reject: 'Abbrechen',
   confirm: 'Bestätigen',
+  cancel: 'Abbrechen',
+  ok: 'OK',
   emptyMessage: 'Keine Daten',
   emptyOptions: 'Keine Optionen',
   resultSuccess: 'Erfolgreich',

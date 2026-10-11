@@ -16,6 +16,8 @@ export interface MLocaleConfig {
   accept?: string;
   reject?: string;
   confirm?: string;
+  cancel?: string;
+  ok?: string;
   emptyMessage?: string;
   emptyOptions?: string;
   resultSuccess?: string;

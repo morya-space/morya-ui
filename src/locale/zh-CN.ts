@@ -5,6 +5,8 @@ export const zhCN: MLocaleMessages = {
   accept: '确认',
   reject: '取消',
   confirm: '确认',
+  cancel: '取消',
+  ok: '确定',
   emptyMessage: '暂无数据',
   emptyOptions: '暂无选项',
   resultSuccess: '操作成功',

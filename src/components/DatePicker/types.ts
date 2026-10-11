@@ -55,6 +55,11 @@ export interface DatePickerProps extends MNativeDateInputProps {
   showSeconds?: boolean
   clearable?: boolean
   shortcuts?: DatePickerShortcut[]
+  /**
+   * Show OK / Cancel buttons and defer commit until confirmed.
+   * Recommended for `datetime` / `datetimerange` / `time` so users can finish picking time.
+   */
+  needConfirm?: boolean
   /** Teleport overlay. Defaults to `true`. */
   teleport?: boolean
   /** Teleport target. Defaults to `'body'` (or ConfigProvider `appendTo`). */

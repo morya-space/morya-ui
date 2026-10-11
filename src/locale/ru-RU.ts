@@ -5,6 +5,8 @@ export const ruRU: MLocaleMessages = {
   accept: 'ОК',
   reject: 'Отмена',
   confirm: 'Подтвердить',
+  cancel: 'Отмена',
+  ok: 'OK',
   emptyMessage: 'Нет данных',
   emptyOptions: 'Нет вариантов',
   resultSuccess: 'Успешно',

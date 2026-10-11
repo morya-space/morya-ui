@@ -5,6 +5,8 @@ export const jaJP: MLocaleMessages = {
   accept: 'OK',
   reject: 'キャンセル',
   confirm: '確認',
+  cancel: 'キャンセル',
+  ok: 'OK',
   emptyMessage: 'データがありません',
   emptyOptions: 'オプションがありません',
   resultSuccess: '成功しました',

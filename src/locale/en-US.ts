@@ -5,6 +5,8 @@ export const enUS: MLocaleMessages = {
   accept: 'OK',
   reject: 'Cancel',
   confirm: 'Confirm',
+  cancel: 'Cancel',
+  ok: 'OK',
   emptyMessage: 'No data',
   emptyOptions: 'No options',
   resultSuccess: 'Success',

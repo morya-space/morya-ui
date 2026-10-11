@@ -5,6 +5,8 @@ export const koKR: MLocaleMessages = {
   accept: '확인',
   reject: '취소',
   confirm: '확인',
+  cancel: '취소',
+  ok: '확인',
   emptyMessage: '데이터가 없습니다',
   emptyOptions: '옵션이 없습니다',
   resultSuccess: '작업에 성공했습니다',

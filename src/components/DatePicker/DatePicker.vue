@@ -47,6 +47,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   showSeconds: false,
   clearable: true,
   shortcuts: () => [],
+  needConfirm: false,
   teleport: true,
 })
 const emit = defineEmits<DatePickerEmits>()
@@ -141,8 +142,21 @@ function formatSingleDisplay(date: Date): string {
   }
 }
 
+/** Uncommitted value while needConfirm is on; emitted only on OK. */
+const confirmDraft = ref<string | [string, string] | null>(null)
+const confirmDirty = ref(false)
+
+/** Display source: pending needConfirm draft wins; otherwise the committed model. */
+const displaySource = computed<DatePickerValue>(() => {
+  if (props.needConfirm && confirmDirty.value && confirmDraft.value != null) {
+    return confirmDraft.value as DatePickerValue
+  }
+  return props.modelValue ?? null
+})
+const displayRange = computed(() => unpackValue(displaySource.value))
+
 const displayValue = computed(() => {
-  const { start, end } = selectedRange.value
+  const { start, end } = displayRange.value
   if (!start) return ''
   if (!isRange.value) return formatSingleDisplay(start)
   if (!end) return formatSingleDisplay(start)
@@ -331,6 +345,8 @@ function setOpen(next: boolean) {
   if (next) {
     rangeDraft.value = null
     hoverDate.value = null
+    confirmDraft.value = null
+    confirmDirty.value = false
     syncViewFromValue()
     activeDate.value = startOfDay(selectedRange.value.start ?? new Date())
     void nextTick(() => updatePanelPosition())
@@ -342,6 +358,9 @@ function toggle() {
 }
 
 function closeAndFocus() {
+  // In needConfirm mode, selecting a value should not close the panel;
+  // only OK / Cancel / outside click / Esc closes it.
+  if (props.needConfirm && confirmDirty.value) return
   open.value = false
   inputEl.value?.focus({ preventScroll: true })
 }
@@ -352,8 +371,31 @@ function closePanel() {
 }
 
 function commitValue(value: string | [string, string]) {
+  if (props.needConfirm) {
+    confirmDraft.value = value
+    confirmDirty.value = true
+    return
+  }
   emit('update:modelValue', value)
   emit('change', value)
+}
+
+/** OK button: emit pending draft and close. */
+function confirmOk() {
+  if (confirmDirty.value && confirmDraft.value != null) {
+    emit('update:modelValue', confirmDraft.value)
+    emit('change', confirmDraft.value)
+  }
+  confirmDraft.value = null
+  confirmDirty.value = false
+  closeAndFocus()
+}
+
+/** Cancel button: drop pending draft and close. */
+function confirmCancel() {
+  confirmDraft.value = null
+  confirmDirty.value = false
+  closePanel()
 }
 
 function prevMonth() {
@@ -510,6 +552,42 @@ function pickTimeUnit(unit: 'hour' | 'minute' | 'second', value: number) {
     commitValue(payload)
     if (isFinest) closeAndFocus()
   }
+}
+
+/** Serialize a shortcut's value the same way applyShortcut commits, for active-state comparison. */
+function serializeShortcutValue(shortcut: DatePickerShortcut): string | [string, string] | null {
+  const raw = typeof shortcut.value === 'function' ? shortcut.value() : shortcut.value
+  if (Array.isArray(raw)) {
+    const start = toDate(raw[0])
+    const end = toDate(raw[1])
+    if (!start || !end) return null
+    const [from, to] = start.getTime() <= end.getTime() ? [start, end] : [end, start]
+    if (props.type === 'datetimerange') {
+      return [formatDateTime(from, props.showSeconds), formatDateTime(to, props.showSeconds)]
+    }
+    if (isRange.value) return [toIsoDate(from), toIsoDate(to)]
+    return toIsoDate(from)
+  }
+  const date = toDate(raw)
+  if (!date) return null
+  if (props.type === 'time') {
+    return formatTimeParts(date.getHours(), date.getMinutes(), date.getSeconds(), props.showSeconds)
+  }
+  if (props.type === 'month') return toIsoMonth(date)
+  if (props.type === 'year') return toIsoYear(date)
+  if (props.type === 'datetime') return formatDateTime(date, props.showSeconds)
+  return toIsoDate(date)
+}
+
+function isShortcutActive(shortcut: DatePickerShortcut): boolean {
+  const serialized = serializeShortcutValue(shortcut)
+  if (serialized == null) return false
+  const current = props.modelValue
+  if (current == null) return false
+  if (Array.isArray(serialized) && Array.isArray(current)) {
+    return serialized[0] === current[0] && serialized[1] === current[1]
+  }
+  return serialized === current
 }
 
 function applyShortcut(shortcut: DatePickerShortcut) {
@@ -727,6 +805,7 @@ onBeforeUnmount(() => {
               :key="shortcut.label"
               type="button"
               class="m-datepicker__shortcut"
+              :class="{ 'm-datepicker__shortcut--active': isShortcutActive(shortcut) }"
               @click="applyShortcut(shortcut)"
             >
               {{ shortcut.label }}
@@ -887,6 +966,23 @@ onBeforeUnmount(() => {
           </div>
           <div v-if="$slots.footer" class="m-datepicker__footer">
             <slot name="footer" :close="closePanel" />
+          </div>
+          <div v-else-if="needConfirm" class="m-datepicker__footer m-datepicker__footer--confirm">
+            <button
+              type="button"
+              class="m-datepicker__footer-btn"
+              @click="confirmCancel"
+            >
+              {{ locale.cancel }}
+            </button>
+            <button
+              type="button"
+              class="m-datepicker__footer-btn m-datepicker__footer-btn--primary"
+              :disabled="!confirmDirty"
+              @click="confirmOk"
+            >
+              {{ locale.confirm }}
+            </button>
           </div>
         </div>
       </Transition>

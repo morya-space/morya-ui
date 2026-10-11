@@ -5,6 +5,8 @@ export const ptBR: MLocaleMessages = {
   accept: 'OK',
   reject: 'Cancelar',
   confirm: 'Confirmar',
+  cancel: 'Cancelar',
+  ok: 'OK',
   emptyMessage: 'Nenhum dado',
   emptyOptions: 'Nenhuma opção',
   resultSuccess: 'Sucesso',
