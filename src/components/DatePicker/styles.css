@@ -443,11 +443,26 @@
     outline: none;
 }
 
-/* Time-only panel: stack columns without calendar */
+/* Time-only panel: stack columns without calendar; use a compact width
+   derived from time columns instead of the wider 7-day calendar grid. */
+.m-datepicker__panel--time-only {
+    --m-datepicker-panel-min-width: calc(
+        3 * 4rem + 2 * var(--m-space-1) + 2 * var(--m-space-3)
+    );
+}
+
 .m-datepicker__panel--time-only .m-datepicker__body {
     flex-direction: row;
+    width: 100%;
 }
 
 .m-datepicker__panel--time-only .m-datepicker__time {
+    flex: 1 1 auto;
     max-height: 14rem;
+    width: 100%;
+}
+
+.m-datepicker__panel--time-only .m-datepicker__time-col {
+    flex: 1 1 0;
+    min-width: 0;
 }
