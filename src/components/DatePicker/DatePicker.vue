@@ -38,6 +38,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   id: undefined,
   disabled: false,
   invalid: false,
+  status: 'default',
   fluid: false,
   placeholder: undefined,
   errorMessage: undefined,
@@ -226,6 +227,7 @@ const calendarDays = computed(() => {
     inRange: boolean
     rangeStart: boolean
     rangeEnd: boolean
+    isToday: boolean
   }[] = []
 
   for (let i = 0; i < startWeekday; i++) {
@@ -250,6 +252,7 @@ function buildCell(date: Date, inMonth: boolean) {
   if (max.value && day > startOfDay(max.value)) disabled = true
   const bounds = highlightBounds()
   const t = day.getTime()
+  const today = startOfDay(new Date()).getTime()
   const pending = pendingDate.value ? startOfDay(pendingDate.value) : null
   const rangeStart = Boolean(bounds.start && t === bounds.start.getTime())
   const rangeEnd = Boolean(bounds.end && t === bounds.end.getTime())
@@ -265,8 +268,16 @@ function buildCell(date: Date, inMonth: boolean) {
     inRange,
     rangeStart,
     rangeEnd,
+    isToday: t === today,
   }
 }
+
+/** Resolved visual status: explicit `status` prop wins, otherwise derive from `invalid` / `errorMessage`. */
+const resolvedStatus = computed<'default' | 'warning' | 'error'>(() => {
+  if (props.status && props.status !== 'default') return props.status
+  if (props.invalid || props.errorMessage) return 'error'
+  return 'default'
+})
 
 const rootClass = computed(() => [
   'm-datepicker',
@@ -275,6 +286,8 @@ const rootClass = computed(() => [
     'm-datepicker--fluid': props.fluid,
     'm-datepicker--disabled': props.disabled,
     'm-datepicker--invalid': props.invalid,
+    'm-datepicker--warning': resolvedStatus.value === 'warning',
+    'm-datepicker--error': resolvedStatus.value === 'error',
     'm-datepicker--open': open.value,
     'm-datepicker--range': isRange.value,
   },
@@ -331,6 +344,11 @@ function toggle() {
 function closeAndFocus() {
   open.value = false
   inputEl.value?.focus({ preventScroll: true })
+}
+
+/** Close the panel without refocusing the input (used by footer slot buttons). */
+function closePanel() {
+  open.value = false
 }
 
 function commitValue(value: string | [string, string]) {
@@ -746,6 +764,7 @@ onBeforeUnmount(() => {
                     'm-datepicker__day--in-range': cell.inRange,
                     'm-datepicker__day--range-start': cell.rangeStart,
                     'm-datepicker__day--range-end': cell.rangeEnd,
+                    'm-datepicker__day--today': cell.isToday,
                   }"
                   role="gridcell"
                   :aria-selected="cell.selected"
@@ -755,7 +774,19 @@ onBeforeUnmount(() => {
                   @click="pick(cell.date, cell.disabled)"
                   @mouseenter="isRange && rangeDraft && (hoverDate = cell.date)"
                 >
-                  {{ cell.date.getDate() }}
+                  <slot
+                    name="cell"
+                    :date="cell.date"
+                    :in-month="cell.inMonth"
+                    :selected="cell.selected"
+                    :in-range="cell.inRange"
+                    :range-start="cell.rangeStart"
+                    :range-end="cell.rangeEnd"
+                    :is-today="cell.isToday"
+                    :disabled="cell.disabled"
+                  >
+                    {{ cell.date.getDate() }}
+                  </slot>
                 </button>
               </div>
             </div>
@@ -853,6 +884,9 @@ onBeforeUnmount(() => {
                 </button>
               </MScrollbar>
             </div>
+          </div>
+          <div v-if="$slots.footer" class="m-datepicker__footer">
+            <slot name="footer" :close="closePanel" />
           </div>
         </div>
       </Transition>

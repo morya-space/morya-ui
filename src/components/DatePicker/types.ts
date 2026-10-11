@@ -35,6 +35,8 @@ export interface DatePickerProps extends MNativeDateInputProps {
   id?: string
   disabled?: boolean
   invalid?: boolean
+  /** Visual status. `'warning'` highlights the field without implying a hard error. */
+  status?: 'default' | 'warning' | 'error'
   fluid?: boolean
   size?: MSizeInput
   minDate?: DatePickerDateValue | null

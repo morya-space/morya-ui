@@ -68,15 +68,30 @@
     box-shadow: var(--m-focus-shadow);
 }
 
-.m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input) {
+.m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input),
+.m-datepicker--error .m-datepicker__control:has(.m-datepicker__input) {
     border-color: var(--m-color-danger);
+}
+
+.m-datepicker--warning .m-datepicker__control:has(.m-datepicker__input) {
+    border-color: var(--m-color-warning);
 }
 
 .m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input):focus-within,
 .m-datepicker--invalid.m-datepicker--open
+    .m-datepicker__control:has(.m-datepicker__input),
+.m-datepicker--error .m-datepicker__control:has(.m-datepicker__input):focus-within,
+.m-datepicker--error.m-datepicker--open
     .m-datepicker__control:has(.m-datepicker__input) {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
+}
+
+.m-datepicker--warning .m-datepicker__control:has(.m-datepicker__input):focus-within,
+.m-datepicker--warning.m-datepicker--open
+    .m-datepicker__control:has(.m-datepicker__input) {
+    border-color: var(--m-color-warning);
+    box-shadow: var(--m-focus-shadow-warning, 0 0 0 3px color-mix(in srgb, var(--m-color-warning) 20%, transparent));
 }
 
 .m-datepicker__input {
@@ -264,6 +279,13 @@
     color: var(--m-color-on-emphasis);
 }
 
+/* Today's ring: 1px inner border in primary, suppressed once selected. */
+.m-datepicker__day--today:not(.m-datepicker__day--selected) {
+    box-shadow: inset 0 0 0 1px var(--m-color-primary);
+    color: var(--m-color-primary);
+    font-weight: 500;
+}
+
 .m-datepicker__day:hover:not(:disabled):not(.m-datepicker__day--selected) {
     background: color-mix(
         in srgb,
@@ -292,6 +314,16 @@
     display: grid;
     gap: var(--m-space-1);
     min-width: var(--m-datepicker-shortcuts-width);
+}
+
+/* Extra footer (slot): typical "Now / Today / Clear" actions. */
+.m-datepicker__footer {
+    align-items: center;
+    border-top: var(--m-border-width) solid var(--m-color-border);
+    display: flex;
+    gap: var(--m-space-2);
+    justify-content: flex-end;
+    padding: var(--m-space-2) var(--m-space-3);
 }
 
 .m-datepicker__shortcut {
