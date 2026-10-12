@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-10T16:01:08.098Z",
-  "catalogGeneratedAt": "2026-10-10T16:01:00.709Z",
+  "generatedAt": "2026-10-12T07:47:11.724Z",
+  "catalogGeneratedAt": "2026-10-12T07:47:04.752Z",
   "components": [
     {
       "id": "Accordion",
@@ -794,17 +794,13 @@
     {
       "id": "DatePicker",
       "exportName": "MDatePicker",
-      "examples": 24,
+      "examples": 50,
       "props": {
-        "total": 21,
-        "covered": 13,
+        "total": 25,
+        "covered": 21,
         "missing": [
-          "showSeconds",
-          "format",
           "clearable",
-          "teleport",
           "transition",
-          "errorMessage",
           "id",
           "pt"
         ]
@@ -821,11 +817,9 @@
         ]
       },
       "slots": {
-        "total": 1,
-        "covered": 0,
-        "missing": [
-          "trigger"
-        ]
+        "total": 3,
+        "covered": 3,
+        "missing": []
       },
       "methods": {
         "total": 0,
@@ -2237,12 +2231,12 @@
     {
       "id": "OrderList",
       "exportName": "MOrderList",
-      "examples": 4,
+      "examples": 8,
       "props": {
-        "total": 6,
-        "covered": 1,
+        "total": 8,
+        "covered": 3,
         "missing": [
-          "dataKey",
+          "selection",
           "listStyle",
           "dragdrop",
           "emptyMessage",
@@ -2250,18 +2244,18 @@
         ]
       },
       "events": {
-        "total": 2,
+        "total": 3,
         "covered": 0,
         "missing": [
           "update:modelValue",
+          "update:selection",
           "reorder"
         ]
       },
       "slots": {
         "total": 2,
-        "covered": 0,
+        "covered": 1,
         "missing": [
-          "item",
           "empty"
         ]
       },
@@ -3241,10 +3235,10 @@
     {
       "id": "Table",
       "exportName": "MTable",
-      "examples": 36,
+      "examples": 56,
       "props": {
-        "total": 72,
-        "covered": 27,
+        "total": 80,
+        "covered": 35,
         "missing": [
           "fit",
           "selectedItem",
@@ -3252,19 +3246,22 @@
           "showHeader",
           "showRowsPerPage",
           "fill",
-          "columnOrder",
+          "virtualOverscan",
           "expandConfig",
           "radioConfig",
           "rowHover",
           "sortField",
           "sortOrder",
+          "multiSort",
+          "mustSort",
           "sortMode",
           "searchField",
           "searchValue",
           "filterOptions",
+          "filterModel",
+          "filters",
           "showOverflowTooltip",
           "rowKey",
-          "size",
           "ariaLabel",
           "bodyExpandRowClassName",
           "bodyItemClassName",
@@ -3274,7 +3271,6 @@
           "clickRowToExpand",
           "currentRowKey",
           "expandColumnWidth",
-          "filters",
           "fixedCheckbox",
           "fixedExpand",
           "fixedHeader",
@@ -3283,8 +3279,6 @@
           "headerItemClassName",
           "headerTextDirection",
           "indexColumnWidth",
-          "multiSort",
-          "mustSort",
           "showIndex",
           "showIndexSymbol",
           "tableClassName",
@@ -3295,9 +3289,11 @@
       },
       "events": {
         "total": 20,
-        "covered": 6,
+        "covered": 7,
         "missing": [
-          "sort",
+          "sort-change",
+          "filter-change",
+          "expand-change",
           "row-click",
           "row-dblclick",
           "row-contextmenu",
@@ -3305,12 +3301,9 @@
           "deselect-row",
           "select-all",
           "current-change",
-          "expand",
           "update:current-row-key",
-          "filter",
-          "update:filters",
-          "update:columnOrder",
-          "update:selectedItem"
+          "update:filter-model",
+          "update:selected-item"
         ]
       },
       "slots": {
@@ -4004,6 +3997,6 @@
   "summary": {
     "components": 107,
     "componentsWithMissingCoverage": 106,
-    "totalExamples": 957
+    "totalExamples": 1007
   }
 }

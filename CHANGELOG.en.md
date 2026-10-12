@@ -1,5 +1,41 @@
 # morya-ui
 
+## 0.4.5
+
+### Features
+
+- add disabled, v-model:selection, top/bottom buttons, drag preview, drop indicator, flip animation
+- scale size across panel, center cells, stretch fluid calendar, add time column headers
+- add moveTop, moveBottom, hour, minute, second, today messages
+- align control size tokens with ant design (small 8px, medium 12px, large 16px font)
+- add panel mode cycling, multiple selection and input mask
+- add needConfirm and shortcut active state
+- add status, today ring, footer and cell slots
+- add column settings copy for all locales
+- sort config, column settings, column drag, skeleton, dynamic rows
+
+### Fixes
+
+- stretch time-only panel columns to fill width
+- make skeleton work without loading and add column drag motion
+
+### Docs
+
+- restyle docs, components, design, and changelog pages
+- restyle docs reading layout and demo cards
+- add disabled and custom item demos, document pt, selection, disabled, keyboard
+- enrich demos with real-world scenarios
+- add demos and sections for new features
+- refresh Table documentation for new APIs
+- add demos for sorting, column settings, drag, skeleton, dynamic rows
+
+### Changes
+
+- enhance UI components with refined shadows, borders, and transitions
+- cover disabled, selection, top/bottom, ctrl+home/end, drop indicator, reorder payload
+- use MScrollbar for time columns
+- use MSelect for size picker
+
 ## 0.4.4
 
 ### Features
