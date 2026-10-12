@@ -1,14 +1,50 @@
-/* --- Form: DatePicker --- */
+/* --- Form: DatePicker ---
+ * Size-aware tokens follow Ant Design DatePicker sizing:
+ * - small  : 24px input, 24px calendar cells, 14px font
+ * - medium : 32px input, 24px calendar cells, 14px font (default)
+ * - large  : 40px input, 28px calendar cells, 16px font
+ * Override `--m-datepicker-*` tokens to customize per-size appearance.
+ */
 .m-datepicker,
 .m-datepicker__panel {
-    --m-datepicker-calendar-cell-size: var(--m-control-affix-size, 2rem);
+    --m-datepicker-calendar-cell-size: 1.5rem;
     --m-datepicker-day-size: var(--m-datepicker-calendar-cell-size);
     --m-datepicker-grid-gap: 0.125rem;
+    --m-datepicker-control-height: var(--m-control-height-medium);
+    --m-datepicker-font-size: var(--m-control-font-medium);
+    --m-datepicker-padding-x: var(--m-control-padding-x-medium);
+    --m-datepicker-affix-size: var(--m-control-affix-size);
     --m-datepicker-panel-min-width: calc(
         7 * var(--m-datepicker-calendar-cell-size) + 6 *
             var(--m-datepicker-grid-gap) + 2 * var(--m-space-3)
     );
     --m-datepicker-shortcuts-width: 6rem;
+}
+
+/* Size variants: scale input height, font, padding, calendar cell, affix.
+ * Panel gets its own class (m-datepicker__panel--{size}) because it can be
+ * teleported outside the root element. */
+.m-datepicker--small,
+.m-datepicker__panel--small {
+    --m-datepicker-calendar-cell-size: 1.375rem;
+    --m-datepicker-control-height: var(--m-control-height-small);
+    --m-datepicker-font-size: var(--m-control-font-small);
+    --m-datepicker-padding-x: var(--m-control-padding-x-small);
+    --m-datepicker-affix-size: calc(
+        var(--m-control-height-small) - 2 * var(--m-border-width)
+    );
+}
+
+.m-datepicker--large,
+.m-datepicker__panel--large {
+    /* antd large: slightly bigger calendar cells */
+    --m-datepicker-calendar-cell-size: 1.75rem;
+    --m-datepicker-control-height: var(--m-control-height-large);
+    --m-datepicker-font-size: var(--m-control-font-large);
+    --m-datepicker-padding-x: var(--m-control-padding-x-large);
+    --m-datepicker-affix-size: calc(
+        var(--m-control-height-large) - 2 * var(--m-border-width)
+    );
 }
 
 .m-datepicker {
@@ -52,7 +88,7 @@
     box-sizing: border-box;
     display: flex;
     max-width: 100%;
-    min-height: var(--m-control-height-medium);
+    min-height: var(--m-datepicker-control-height);
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
         box-shadow var(--m-motion-fast) var(--m-motion-ease);
@@ -103,35 +139,13 @@
     cursor: pointer;
     flex: 1 1 auto;
     font-family: var(--m-font-sans);
-    font-size: var(--m-control-font-medium);
-    height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
-    line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
+    font-size: var(--m-datepicker-font-size);
+    height: calc(var(--m-datepicker-control-height) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-datepicker-control-height) - 2 * var(--m-border-width));
     min-height: 0;
     min-width: 0;
-    padding: 0 var(--m-control-padding-x-medium);
+    padding: 0 var(--m-datepicker-padding-x);
     width: 100%;
-}
-
-.m-datepicker--small .m-datepicker__control:has(.m-datepicker__input) {
-    min-height: var(--m-control-height-small);
-}
-
-.m-datepicker--small .m-datepicker__input {
-    font-size: var(--m-control-font-small);
-    height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
-    line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
-    padding: 0 var(--m-control-padding-x-small);
-}
-
-.m-datepicker--large .m-datepicker__control:has(.m-datepicker__input) {
-    min-height: var(--m-control-height-large);
-}
-
-.m-datepicker--large .m-datepicker__input {
-    font-size: var(--m-control-font-large);
-    height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
-    line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
-    padding: 0 var(--m-control-padding-x-large);
 }
 
 .m-datepicker__input:focus,
@@ -159,10 +173,10 @@
     display: inline-flex;
     flex: 0 0 auto;
     font: inherit;
-    height: var(--m-control-affix-size);
+    height: var(--m-datepicker-affix-size);
     justify-content: center;
     padding: 0;
-    width: var(--m-control-affix-size);
+    width: var(--m-datepicker-affix-size);
 }
 
 .m-datepicker__clear:hover:not(:disabled) {
@@ -179,6 +193,7 @@
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
+    font-size: var(--m-datepicker-font-size);
     margin-top: var(--m-space-1);
     min-width: max(100%, var(--m-datepicker-panel-min-width));
     padding: var(--m-space-3);
@@ -208,6 +223,7 @@
 }
 
 .m-datepicker__month {
+    font-size: var(--m-datepicker-font-size);
     font-weight: 500;
 }
 
@@ -271,31 +287,46 @@ button.m-datepicker__month--switch:focus-visible {
 .m-datepicker__grid {
     display: grid;
     gap: var(--m-datepicker-grid-gap);
+    /* Cells fill the available panel width (e.g. fluid trigger) while keeping
+       a minimum of the size-aware cell size. */
     grid-template-columns: repeat(
         7,
-        var(--m-datepicker-calendar-cell-size, var(--m-control-affix-size, 2rem))
+        minmax(var(--m-datepicker-calendar-cell-size), 1fr)
     );
     place-items: center;
 }
 
 .m-datepicker__weekdays {
     color: var(--m-color-text-muted);
-    font-size: var(--m-font-size-xs);
+    font-size: calc(var(--m-datepicker-font-size) - 2px);
     margin-bottom: var(--m-space-1);
     text-align: center;
 }
 
+.m-datepicker__weekdays > span {
+    /* Match the stretched day cells so headers align with columns. */
+    width: 100%;
+}
+
 .m-datepicker__day {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
     cursor: pointer;
+    display: inline-flex;
     font-family: var(--m-font-sans);
+    font-size: var(--m-datepicker-font-size);
     height: var(--m-datepicker-day-size);
+    justify-content: center;
+    /* Reset UA button padding so the label centers in the cell. */
+    padding: 0;
     transition: background-color var(--m-motion-fast) var(--m-motion-ease),
         color var(--m-motion-fast) var(--m-motion-ease);
-    width: var(--m-datepicker-day-size);
+    /* Stretch to the grid column so fluid panels fill the trigger width;
+       height stays size-aware so cells read as rows, not oversized squares. */
+    width: 100%;
 }
 
 .m-datepicker__day--other {
@@ -362,7 +393,7 @@ button.m-datepicker__month--switch:focus-visible {
     color: var(--m-color-text);
     cursor: pointer;
     font-family: var(--m-font-sans);
-    font-size: var(--m-font-size-sm);
+    font-size: var(--m-datepicker-font-size);
     height: var(--m-control-height-sm, 1.75rem);
     padding: 0 var(--m-space-3);
     transition:
@@ -400,11 +431,12 @@ button.m-datepicker__month--switch:focus-visible {
 
 .m-datepicker__shortcut {
     background: transparent;
-    border: 0; 
+    border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
     cursor: pointer;
     font-family: var(--m-font-sans);
+    font-size: var(--m-datepicker-font-size);
     padding: var(--m-space-1) var(--m-space-2);
     text-align: left;
     transition: background-color var(--m-motion-fast) var(--m-motion-ease),
@@ -472,12 +504,16 @@ button.m-datepicker__month--switch:focus-visible {
 }
 
 .m-datepicker__cell {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
     cursor: pointer;
+    display: inline-flex;
     font-family: var(--m-font-sans);
+    font-size: var(--m-datepicker-font-size);
+    justify-content: center;
     min-height: var(--m-datepicker-day-size);
     padding: var(--m-space-2) var(--m-space-1);
     transition:
@@ -520,18 +556,35 @@ button.m-datepicker__month--switch:focus-visible {
     min-width: 0;
 }
 
-/* Time column now hosts an MScrollbar root; the inner wrap/view hold the flex column. */
+/* Each time column: header label on top + scrollable list below. */
 .m-datepicker__time-col {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     min-width: 2.5rem;
 }
 
-.m-datepicker__time-col .m-datepicker__time-col-wrap {
+.m-datepicker__time-header {
+    color: var(--m-color-text);
+    flex: 0 0 auto;
+    font-size: var(--m-datepicker-font-size);
+    line-height: 1;
+    padding: var(--m-space-1) 0 var(--m-space-2);
+    text-align: center;
+}
+
+/* Scrollable list region below the header. */
+.m-datepicker__time-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.m-datepicker__time-scroll .m-datepicker__time-col-wrap {
     height: 100%;
     overscroll-behavior: contain;
 }
 
-.m-datepicker__time-col .m-datepicker__time-col-view {
+.m-datepicker__time-scroll .m-datepicker__time-col-view {
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
@@ -539,16 +592,19 @@ button.m-datepicker__month--switch:focus-visible {
 }
 
 .m-datepicker__time-item {
+    align-items: center;
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
     cursor: pointer;
+    display: inline-flex;
     flex: 0 0 auto;
     font-family: var(--m-font-sans);
+    font-size: var(--m-datepicker-font-size);
     font-variant-numeric: tabular-nums;
     height: var(--m-datepicker-day-size);
-    line-height: var(--m-datepicker-day-size);
+    justify-content: center;
     padding: 0;
     text-align: center;
     width: 100%;
