@@ -1,4 +1,7 @@
-/* —— Data: OrderList —— */
+/* —— Data: OrderList ——
+ * Shared list/item/scrollbar visuals live in styles/base.css (with PickList).
+ * Only OrderList-specific layout, drag affordance, and motion live here.
+ */
 .m-orderlist {
     display: flex;
     gap: var(--m-space-2);
@@ -18,14 +21,21 @@
 
 .m-orderlist__item {
     align-items: center;
-    border-radius: var(--m-radius-sm);
     display: flex;
     gap: var(--m-space-2);
 }
 
-.m-orderlist__item:focus-visible {
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
+.m-orderlist__item--disabled {
+    color: var(--m-color-text-disabled);
+    cursor: not-allowed;
+}
+
+.m-orderlist__item--disabled:hover {
+    background: transparent;
+}
+
+.m-orderlist--disabled .m-orderlist__handle {
+    cursor: not-allowed;
 }
 
 .m-orderlist__handle {
@@ -39,17 +49,60 @@
     padding: 0;
 }
 
-.m-orderlist__handle:active {
+.m-orderlist__handle:disabled {
+    cursor: not-allowed;
+    opacity: var(--m-opacity-disabled);
+}
+
+.m-orderlist__handle:not(:disabled):active {
     cursor: grabbing;
 }
 
+.m-orderlist__label {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Drag source: dimmed placeholder left in the list. */
 .m-orderlist__ghost {
     background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
     opacity: var(--m-opacity-disabled);
 }
 
+/* Insertion indicator: a line above (moving up) or below (moving down) the target. */
 .m-orderlist__drop-target {
-    box-shadow: inset 0 0 0 1px var(--m-color-primary);
+    position: relative;
+}
+
+.m-orderlist__drop-target::after {
+    background: var(--m-color-primary);
+    border-radius: 1px;
+    content: '';
+    height: 2px;
+    left: var(--m-space-1);
+    position: absolute;
+    right: var(--m-space-1);
+}
+
+.m-orderlist__drop-before::after {
+    top: 0;
+}
+
+.m-orderlist__drop-after::after {
+    bottom: 0;
+}
+
+/* Drag preview that follows the pointer (cloned from the source row). */
+.m-orderlist__drag-preview {
+    background: var(--m-color-surface);
+    border-radius: var(--m-radius-sm);
+    box-shadow: var(--m-shadow-md);
+    left: -9999px;
+    opacity: 0.9;
+    pointer-events: none;
+    position: fixed;
+    top: -9999px;
+    z-index: var(--m-z-tooltip);
 }
 
 .m-orderlist__message {
@@ -66,4 +119,24 @@
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
     line-height: 1.5;
+}
+
+/* Reorder FLIP animation (TransitionGroup move). Respects reduced motion. */
+.m-orderlist-move {
+    transition: transform var(--m-motion-normal) var(--m-motion-ease);
+}
+
+.m-orderlist-leave-active {
+    transition: opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-orderlist-leave-to {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .m-orderlist-move,
+    .m-orderlist-leave-active {
+        transition: none;
+    }
 }
