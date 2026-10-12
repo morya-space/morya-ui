@@ -91,8 +91,9 @@ const { t } = useDocsI18n()
 
 .doc-section-nav__list::before {
   background: var(--docs-edge);
+  border-radius: 999px;
   content: '';
-  left: 0.45rem;
+  left: 0;
   position: absolute;
   top: 0.25rem;
   bottom: 0.25rem;
@@ -111,7 +112,7 @@ const { t } = useDocsI18n()
   cursor: pointer;
   font-size: 0.8rem;
   line-height: 1.45;
-  padding: 0.4rem 0.55rem 0.4rem 1.15rem;
+  padding: 0.4rem 0.55rem 0.4rem 0.95rem;
   position: relative;
   text-align: left;
   transition:
@@ -120,12 +121,13 @@ const { t } = useDocsI18n()
   width: 100%;
 }
 
+/* dot centered exactly on the 1px rail at left:0 (center = 0.5px) */
 .doc-section-nav__item button::before {
   background: var(--m-color-text-muted);
   border-radius: 50%;
   content: '';
   height: 0.35rem;
-  left: 0.24rem;
+  left: calc(0.5px - 0.175rem);
   opacity: 0.45;
   position: absolute;
   top: 50%;
@@ -133,6 +135,7 @@ const { t } = useDocsI18n()
   transition:
     background-color var(--m-motion-fast) var(--m-motion-ease),
     height var(--m-motion-fast) var(--m-motion-ease),
+    left var(--m-motion-fast) var(--m-motion-ease),
     opacity var(--m-motion-fast) var(--m-motion-ease),
     width var(--m-motion-fast) var(--m-motion-ease);
   width: 0.35rem;
@@ -152,25 +155,32 @@ const { t } = useDocsI18n()
   font-weight: 600;
 }
 
+/* active pill keeps the same center on the rail */
 .doc-section-nav__item--active button::before {
   background: var(--m-color-primary);
   border-radius: 999px;
-  height: 1.1rem;
+  height: 1.05rem;
+  left: calc(0.5px - 0.1rem);
   opacity: 1;
   width: 0.2rem;
 }
 
 .doc-section-nav__item--sub button {
   font-size: 0.74rem;
-  padding-left: 1.65rem;
+  padding-left: 1.45rem;
 }
 
+/* sub-items sit on their own inner guide at 0.5rem */
 .doc-section-nav__item--sub button::before {
-  left: 0.75rem;
+  left: calc(0.5rem + 0.5px - 0.15rem);
+  height: 0.3rem;
+  width: 0.3rem;
 }
 
 .doc-section-nav__item--sub.doc-section-nav__item--active button::before {
-  left: 0.68rem;
+  left: calc(0.5rem + 0.5px - 0.09rem);
+  height: 0.9rem;
+  width: 0.18rem;
 }
 
 .doc-section-nav__empty {

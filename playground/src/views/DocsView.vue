@@ -309,7 +309,7 @@ watch(
 .docs-shell {
     display: grid;
     flex: 1;
-    grid-template-columns: 15rem minmax(0, 1fr) 13rem;
+    grid-template-columns: 14.5rem minmax(0, 1fr) 15rem;
     min-height: 0;
     overflow: hidden;
 }
@@ -420,7 +420,7 @@ watch(
 }
 
 .docs-toc__body {
-    padding: 1.75rem 1rem;
+    padding: 1.75rem 1.1rem;
 }
 
 .docs-toc__body :deep(.doc-section-nav) {
@@ -429,9 +429,7 @@ watch(
 }
 
 .docs-main__body {
-    margin: 0 auto;
-    max-width: 46rem;
-    padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem) 4rem;
+    padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.5rem, 4vw, 3rem) 4rem;
     width: 100%;
 }
 

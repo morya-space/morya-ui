@@ -146,7 +146,6 @@ defineExpose({ scrollToSection })
   font-size: 1.05rem;
   line-height: 1.65;
   margin: 0;
-  max-width: var(--docs-measure);
 }
 
 .component-doc-viewer__stats {

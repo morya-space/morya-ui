@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+    createTheme,
     MAlert,
     MButton,
     MCard,
@@ -7,7 +8,6 @@ import {
     MScrollbar,
     MSwitch,
     MTag,
-    createTheme,
     useDensity,
     useMotion,
     useTheme,
@@ -70,7 +70,7 @@ const radiusOptions = computed(() => [
 const activePrimary = computed(() => {
     if (accent.value === "custom") {
         const value = customPrimary.value.trim();
-        return /^#[0-9a-fA-F]{6}$/.test(value) ? value : "#1677ff";
+        return /^#[0-9a-f]{6}$/i.test(value) ? value : "#1677ff";
     }
     return (
         accentOptions.find((item) => item.name === accent.value)?.color ??
@@ -223,260 +223,262 @@ async function copyExport() {
 </script>
 
 <template>
-    <MScrollbar class="theme-editor-scroll">
-        <div class="theme-editor-page">
-            <header class="theme-editor-hero">
-                <p class="theme-editor-kicker">{{ t.themeEditor }}</p>
-                <h1>{{ pageCopy.title }}</h1>
-                <p class="theme-editor-lead">{{ pageCopy.lead }}</p>
-                <div class="theme-editor-links">
-                    <RouterLink
-                        :to="{ name: 'docs', params: { slug: 'theme' } }"
-                    >
-                        {{ pageCopy.docsTheme }}
-                    </RouterLink>
-                    <RouterLink
-                        :to="{
-                            name: 'docs',
-                            params: { slug: 'design-tokens' },
-                        }"
-                    >
-                        {{ pageCopy.docsTokens }}
-                    </RouterLink>
-                    <RouterLink
-                        :to="{ name: 'docs', params: { slug: 'design' } }"
-                    >
-                        {{ pageCopy.docsDesign }}
-                    </RouterLink>
-                </div>
-            </header>
+  <MScrollbar class="theme-editor-scroll">
+    <div class="theme-editor-page">
+      <header class="theme-editor-hero">
+        <p class="theme-editor-kicker">
+          {{ t.themeEditor }}
+        </p>
+        <h1>{{ pageCopy.title }}</h1>
+        <p class="theme-editor-lead">
+          {{ pageCopy.lead }}
+        </p>
+        <div class="theme-editor-links">
+          <RouterLink
+            :to="{ name: 'docs', params: { slug: 'theme' } }"
+          >
+            {{ pageCopy.docsTheme }}
+          </RouterLink>
+          <RouterLink
+            :to="{
+              name: 'docs',
+              params: { slug: 'design-tokens' },
+            }"
+          >
+            {{ pageCopy.docsTokens }}
+          </RouterLink>
+          <RouterLink
+            :to="{ name: 'docs', params: { slug: 'design' } }"
+          >
+            {{ pageCopy.docsDesign }}
+          </RouterLink>
+        </div>
+      </header>
 
-            <div class="theme-editor-grid">
-                <MCard class="theme-editor-panel" :title="pageCopy.controls">
-                    <div class="theme-editor-panel__body">
-                        <div class="setting-group">
-                            <span class="setting-label">{{ t.themeMode }}</span>
-                            <div
-                                class="segmented-control"
-                                role="group"
-                                :aria-label="t.themeMode"
-                            >
-                                <button
-                                    type="button"
-                                    :class="{ 'is-selected': !isDark }"
-                                    @click="setTheme('light')"
-                                >
-                                    {{ t.light }}
-                                </button>
-                                <button
-                                    type="button"
-                                    :class="{ 'is-selected': isDark }"
-                                    @click="setTheme('dark')"
-                                >
-                                    {{ t.dark }}
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <span class="setting-label">{{
-                                t.brandColor
-                            }}</span>
-                            <div
-                                class="swatch-row"
-                                role="group"
-                                :aria-label="t.brandColor"
-                            >
-                                <button
-                                    v-for="option in accentOptions"
-                                    :key="option.name"
-                                    type="button"
-                                    class="swatch"
-                                    :class="{
-                                        'is-selected': accent === option.name,
-                                        'is-custom': option.name === 'custom',
-                                    }"
-                                    :style="
-                                        option.color
-                                            ? { '--swatch-color': option.color }
-                                            : undefined
-                                    "
-                                    :aria-label="
-                                        interpolate(t.useAccent, {
-                                            label: option.label,
-                                        })
-                                    "
-                                    @click="accent = option.name"
-                                >
-                                    <span v-if="option.name === 'custom'"
-                                        >+</span
-                                    >
-                                </button>
-                            </div>
-                            <label
-                                v-if="accent === 'custom'"
-                                class="custom-primary"
-                            >
-                                <span>{{ pageCopy.customPrimary }}</span>
-                                <input
-                                    v-model="customPrimary"
-                                    type="color"
-                                    :aria-label="pageCopy.customPrimary"
-                                />
-                                <input
-                                    v-model="customPrimary"
-                                    class="custom-primary__text"
-                                    type="text"
-                                    spellcheck="false"
-                                    maxlength="7"
-                                />
-                            </label>
-                        </div>
-
-                        <div class="setting-group">
-                            <span class="setting-label">{{ t.radius }}</span>
-                            <div
-                                class="segmented-control segmented-control--triple"
-                                role="group"
-                                :aria-label="t.radius"
-                            >
-                                <button
-                                    v-for="option in radiusOptions"
-                                    :key="option.name"
-                                    type="button"
-                                    :class="{
-                                        'is-selected': radius === option.name,
-                                    }"
-                                    @click="radius = option.name"
-                                >
-                                    {{ option.label }}
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <span class="setting-label">{{ t.density }}</span>
-                            <div
-                                class="segmented-control segmented-control--triple"
-                                role="group"
-                                :aria-label="t.density"
-                            >
-                                <button
-                                    v-for="option in densityOptions"
-                                    :key="option.name"
-                                    type="button"
-                                    :class="{
-                                        'is-selected': density === option.name,
-                                    }"
-                                    @click="setDensity(option.name)"
-                                >
-                                    {{ option.label }}
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <span class="setting-label">{{ t.motion }}</span>
-                            <div
-                                class="segmented-control segmented-control--triple"
-                                role="group"
-                                :aria-label="t.motion"
-                            >
-                                <button
-                                    v-for="option in motionOptions"
-                                    :key="option.name"
-                                    type="button"
-                                    :class="{
-                                        'is-selected':
-                                            motionPreference === option.name,
-                                    }"
-                                    @click="setMotion(option.name)"
-                                >
-                                    {{ option.label }}
-                                </button>
-                            </div>
-                        </div>
-
-                        <MButton :label="pageCopy.reset" @click="resetPresets" block/>
-                    </div>
-                </MCard>
-
-                <MCard
-                    class="theme-editor-panel theme-editor-panel--preview"
-                    :title="pageCopy.preview"
+      <div class="theme-editor-grid">
+        <MCard class="theme-editor-panel" :title="pageCopy.controls">
+          <div class="theme-editor-panel__body">
+            <div class="setting-group">
+              <span class="setting-label">{{ t.themeMode }}</span>
+              <div
+                class="segmented-control"
+                role="group"
+                :aria-label="t.themeMode"
+              >
+                <button
+                  type="button"
+                  :class="{ 'is-selected': !isDark }"
+                  @click="setTheme('light')"
                 >
-                    <div class="theme-editor-preview">
-                        <div class="theme-editor-preview__row">
-                            <MButton type="primary" :label="pageCopy.samplePrimary" />
-                            <MButton :label="pageCopy.sampleSecondary" />
-                            <MButton type="primary" danger :label="pageCopy.sampleDanger" />
-                        </div>
-                        <div class="theme-editor-preview__row">
-                            <MInput
-                                v-model="previewInput"
-                                :placeholder="pageCopy.sampleInput"
-                                style="min-width: 12rem; flex: 1"
-                            />
-                            <MTag :value="pageCopy.sampleTag" />
-                        </div>
-                        <MSwitch
-                            v-model="previewSwitch"
-                            :label="pageCopy.sampleSwitch"
-                        />
-                        <MAlert :title="pageCopy.sampleAlert" type="info" />
-                    </div>
-                </MCard>
-
-                <MCard
-                    class="theme-editor-panel theme-editor-panel--export"
-                    :title="pageCopy.exportTitle"
+                  {{ t.light }}
+                </button>
+                <button
+                  type="button"
+                  :class="{ 'is-selected': isDark }"
+                  @click="setTheme('dark')"
                 >
-                    <div class="theme-editor-export">
-                        <div
-                            class="segmented-control"
-                            role="tablist"
-                            :aria-label="pageCopy.exportTitle"
-                        >
-                            <button
-                                type="button"
-                                role="tab"
-                                :aria-selected="exportTab === 'createTheme'"
-                                :class="{
-                                    'is-selected': exportTab === 'createTheme',
-                                }"
-                                @click="exportTab = 'createTheme'"
-                            >
-                                {{ pageCopy.tabCreate }}
-                            </button>
-                            <button
-                                type="button"
-                                role="tab"
-                                :aria-selected="exportTab === 'css'"
-                                :class="{ 'is-selected': exportTab === 'css' }"
-                                @click="exportTab = 'css'"
-                            >
-                                {{ pageCopy.tabCss }}
-                            </button>
-                        </div>
-                        <div class="theme-editor-export__toolbar">
-                            <button
-                                type="button"
-                                class="theme-editor-export__copy"
-                                @click="copyExport"
-                            >
-                                {{ copied ? t.copied : t.copy }}
-                            </button>
-                        </div>
-                        <pre
-                            class="theme-editor-export__code"
-                        ><code>{{ exportSnippet }}</code></pre>
-                    </div>
-                </MCard>
+                  {{ t.dark }}
+                </button>
+              </div>
             </div>
 
-            <SiteFooter />
-        </div>
-    </MScrollbar>
+            <div class="setting-group">
+              <span class="setting-label">{{
+                t.brandColor
+              }}</span>
+              <div
+                class="swatch-row"
+                role="group"
+                :aria-label="t.brandColor"
+              >
+                <button
+                  v-for="option in accentOptions"
+                  :key="option.name"
+                  type="button"
+                  class="swatch"
+                  :class="{
+                    'is-selected': accent === option.name,
+                    'is-custom': option.name === 'custom',
+                  }"
+                  :style="
+                    option.color
+                      ? { '--swatch-color': option.color }
+                      : undefined
+                  "
+                  :aria-label="
+                    interpolate(t.useAccent, {
+                      label: option.label,
+                    })
+                  "
+                  @click="accent = option.name"
+                >
+                  <span v-if="option.name === 'custom'">+</span>
+                </button>
+              </div>
+              <label
+                v-if="accent === 'custom'"
+                class="custom-primary"
+              >
+                <span>{{ pageCopy.customPrimary }}</span>
+                <input
+                  v-model="customPrimary"
+                  type="color"
+                  :aria-label="pageCopy.customPrimary"
+                >
+                <input
+                  v-model="customPrimary"
+                  class="custom-primary__text"
+                  type="text"
+                  spellcheck="false"
+                  maxlength="7"
+                >
+              </label>
+            </div>
+
+            <div class="setting-group">
+              <span class="setting-label">{{ t.radius }}</span>
+              <div
+                class="segmented-control segmented-control--triple"
+                role="group"
+                :aria-label="t.radius"
+              >
+                <button
+                  v-for="option in radiusOptions"
+                  :key="option.name"
+                  type="button"
+                  :class="{
+                    'is-selected': radius === option.name,
+                  }"
+                  @click="radius = option.name"
+                >
+                  {{ option.label }}
+                </button>
+              </div>
+            </div>
+
+            <div class="setting-group">
+              <span class="setting-label">{{ t.density }}</span>
+              <div
+                class="segmented-control segmented-control--triple"
+                role="group"
+                :aria-label="t.density"
+              >
+                <button
+                  v-for="option in densityOptions"
+                  :key="option.name"
+                  type="button"
+                  :class="{
+                    'is-selected': density === option.name,
+                  }"
+                  @click="setDensity(option.name)"
+                >
+                  {{ option.label }}
+                </button>
+              </div>
+            </div>
+
+            <div class="setting-group">
+              <span class="setting-label">{{ t.motion }}</span>
+              <div
+                class="segmented-control segmented-control--triple"
+                role="group"
+                :aria-label="t.motion"
+              >
+                <button
+                  v-for="option in motionOptions"
+                  :key="option.name"
+                  type="button"
+                  :class="{
+                    'is-selected':
+                      motionPreference === option.name,
+                  }"
+                  @click="setMotion(option.name)"
+                >
+                  {{ option.label }}
+                </button>
+              </div>
+            </div>
+
+            <MButton :label="pageCopy.reset" block @click="resetPresets" />
+          </div>
+        </MCard>
+
+        <MCard
+          class="theme-editor-panel theme-editor-panel--preview"
+          :title="pageCopy.preview"
+        >
+          <div class="theme-editor-preview">
+            <div class="theme-editor-preview__row">
+              <MButton type="primary" :label="pageCopy.samplePrimary" />
+              <MButton :label="pageCopy.sampleSecondary" />
+              <MButton type="primary" danger :label="pageCopy.sampleDanger" />
+            </div>
+            <div class="theme-editor-preview__row">
+              <MInput
+                v-model="previewInput"
+                :placeholder="pageCopy.sampleInput"
+                style="min-width: 12rem; flex: 1"
+              />
+              <MTag :value="pageCopy.sampleTag" />
+            </div>
+            <MSwitch
+              v-model="previewSwitch"
+              :label="pageCopy.sampleSwitch"
+            />
+            <MAlert :title="pageCopy.sampleAlert" type="info" />
+          </div>
+        </MCard>
+
+        <MCard
+          class="theme-editor-panel theme-editor-panel--export"
+          :title="pageCopy.exportTitle"
+        >
+          <div class="theme-editor-export">
+            <div
+              class="segmented-control"
+              role="tablist"
+              :aria-label="pageCopy.exportTitle"
+            >
+              <button
+                type="button"
+                role="tab"
+                :aria-selected="exportTab === 'createTheme'"
+                :class="{
+                  'is-selected': exportTab === 'createTheme',
+                }"
+                @click="exportTab = 'createTheme'"
+              >
+                {{ pageCopy.tabCreate }}
+              </button>
+              <button
+                type="button"
+                role="tab"
+                :aria-selected="exportTab === 'css'"
+                :class="{ 'is-selected': exportTab === 'css' }"
+                @click="exportTab = 'css'"
+              >
+                {{ pageCopy.tabCss }}
+              </button>
+            </div>
+            <div class="theme-editor-export__toolbar">
+              <button
+                type="button"
+                class="theme-editor-export__copy"
+                @click="copyExport"
+              >
+                {{ copied ? t.copied : t.copy }}
+              </button>
+            </div>
+            <pre
+              class="theme-editor-export__code"
+            ><code>{{ exportSnippet }}</code></pre>
+          </div>
+        </MCard>
+      </div>
+
+      <SiteFooter />
+    </div>
+  </MScrollbar>
 </template>
 
 <style scoped>
@@ -493,30 +495,51 @@ async function copyExport() {
 }
 
 .theme-editor-hero {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+    position: relative;
 }
 
 .theme-editor-kicker {
+    align-items: center;
     color: var(--m-color-primary);
+    display: inline-flex;
     font-family: var(--docs-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    margin: 0 0 0.45rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    gap: 0.45rem;
+    letter-spacing: 0.12em;
+    margin: 0 0 0.6rem;
     text-transform: uppercase;
 }
 
+.theme-editor-kicker::before {
+    background: var(--m-color-primary);
+    border-radius: 999px;
+    content: '';
+    height: 0.35rem;
+    width: 0.35rem;
+}
+
 .theme-editor-hero h1 {
+    background: linear-gradient(
+        120deg,
+        var(--m-color-text) 40%,
+        var(--docs-glow)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
     font-family: var(--docs-display);
-    font-size: clamp(1.7rem, 3vw, 2.2rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
     margin: 0 0 0.55rem;
 }
 
 .theme-editor-lead {
     color: var(--m-color-text-muted);
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0 0 0.85rem;
     max-width: 48rem;
 }
@@ -524,19 +547,23 @@ async function copyExport() {
 .theme-editor-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 1rem;
+    gap: 0.4rem 0.5rem;
 }
 
 .theme-editor-links a {
+    border-radius: 0.5rem;
     color: var(--m-color-primary);
     font-size: 0.84rem;
     font-weight: 600;
+    padding: 0.25rem 0.5rem;
     text-decoration: none;
+    transition:
+        background var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .theme-editor-links a:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
+    background: var(--docs-primary-soft);
 }
 
 .theme-editor-grid {
@@ -570,29 +597,21 @@ async function copyExport() {
     gap: 0.45rem;
 }
 
+/* Site card language for the MCard panels */
+.theme-editor-panel {
+    background: var(--docs-panel);
+    border: 1px solid var(--docs-edge);
+    border-radius: 1.1rem;
+    box-shadow: var(--docs-shadow-card);
+}
+
 .setting-label {
     color: var(--m-color-text-muted);
-    font-size: 0.75rem;
+    font-family: var(--docs-mono);
+    font-size: 0.7rem;
     font-weight: 600;
-}
-
-.segmented-control {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text) 5%,
-        var(--m-color-surface)
-    );
-    border: 1px solid var(--docs-edge);
-    border-radius: 999px;
-    display: inline-flex;
-    padding: 0.18rem;
-    width: fit-content;
-}
-
-.segmented-control--triple {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: 100%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .segmented-control button {
@@ -604,18 +623,28 @@ async function copyExport() {
     font-size: 0.78rem;
     font-weight: 600;
     padding: 0.4rem 0.75rem;
+    transition:
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.segmented-control button:hover {
+    color: var(--m-color-text);
 }
 
 .segmented-control button.is-selected {
     background: var(--m-color-surface);
-    box-shadow: var(--m-shadow-sm);
+    box-shadow:
+        0 0 0 1px var(--docs-primary-edge),
+        var(--m-shadow-sm);
     color: var(--m-color-primary);
 }
 
 .swatch-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
+    gap: 0.5rem;
 }
 
 .swatch {
@@ -624,7 +653,15 @@ async function copyExport() {
     border-radius: 999px;
     cursor: pointer;
     height: 1.7rem;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
     width: 1.7rem;
+}
+
+.swatch:hover {
+    transform: scale(1.12);
 }
 
 .swatch.is-custom {
@@ -647,6 +684,25 @@ async function copyExport() {
         color-mix(in srgb, var(--m-color-primary) 28%, transparent);
 }
 
+.segmented-control {
+    background: color-mix(
+        in srgb,
+        var(--m-color-text) 5%,
+        var(--m-color-surface)
+    );
+    border: 1px solid var(--docs-edge);
+    border-radius: 999px;
+    display: inline-flex;
+    padding: 0.18rem;
+    width: fit-content;
+}
+
+.segmented-control--triple {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+}
+
 .custom-primary {
     align-items: center;
     display: flex;
@@ -663,7 +719,16 @@ async function copyExport() {
     font-family: var(--docs-mono);
     font-size: 0.78rem;
     padding: 0.35rem 0.5rem;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
     width: 7.5rem;
+}
+
+.custom-primary__text:focus {
+    border-color: var(--docs-primary-edge);
+    box-shadow: 0 0 0 2px var(--docs-primary-soft);
+    outline: none;
 }
 
 .theme-editor-export__toolbar {
@@ -677,33 +742,38 @@ async function copyExport() {
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     cursor: pointer;
-    font-size: 0.75rem;
+    font-family: var(--docs-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
     padding: 0.3rem 0.65rem;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .theme-editor-export__copy:hover {
-    border-color: color-mix(
-        in srgb,
-        var(--m-color-primary) 40%,
-        var(--m-color-border)
-    );
+    background: var(--docs-primary-soft);
+    border-color: var(--docs-primary-edge);
     color: var(--m-color-primary);
 }
 
 .theme-editor-export__code {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text) 6%,
-        var(--m-color-surface)
-    );
+    background:
+        linear-gradient(
+            180deg,
+            var(--docs-primary-soft),
+            transparent 30%
+        ),
+        color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
     border: 1px solid var(--docs-edge);
     border-radius: var(--m-radius-md);
     font-family: var(--docs-mono);
     font-size: 0.78rem;
-    line-height: 1.55;
+    line-height: 1.6;
     margin: 0;
     overflow: auto;
-    padding: 0.9rem 1rem;
+    padding: 1rem 1.1rem;
     white-space: pre;
 }
 

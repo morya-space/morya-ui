@@ -291,7 +291,7 @@ async function copyInstall() {
           class="home-text-link home-wall__more"
           :to="{ name: 'components' }"
         >
-          {{ t.allComponents }} →
+          {{ t.allComponents }}
         </RouterLink>
       </section>
 
@@ -475,6 +475,14 @@ async function copyInstall() {
     justify-content: space-between;
     padding: 0.85rem 0.85rem 0.85rem 1.05rem;
     position: relative;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-install__cmd:hover {
+    border-color: var(--docs-primary-edge);
+    box-shadow: var(--docs-shadow-card-hover);
 }
 
 /* Terminal dots, keeps the install box recognizable as a shell command */
@@ -542,22 +550,52 @@ async function copyInstall() {
 
 .home-pillars {
     display: grid;
-    gap: 0;
+    gap: 0.9rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: clamp(2rem, 5vw, 3rem);
-    border-top: 1px solid var(--docs-edge);
 }
 
 .home-pillar {
     animation: home-rise 0.8s var(--m-motion-ease) both;
-    border-bottom: 1px solid var(--docs-edge);
-    padding: 1.5rem 1.25rem 1.5rem 0;
+    background: var(--docs-panel);
+    border: 1px solid var(--docs-edge);
+    border-radius: 1rem;
+    box-shadow: var(--docs-shadow-card);
+    overflow: hidden;
+    padding: 1.4rem 1.35rem;
+    position: relative;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.home-pillar:nth-child(even) {
-    padding-left: 1.25rem;
-    padding-right: 0;
-    border-left: 1px solid var(--docs-edge);
+/* top accent line revealed on hover */
+.home-pillar::before {
+    background: linear-gradient(
+        90deg,
+        var(--m-color-primary),
+        var(--docs-glow)
+    );
+    border-radius: 999px;
+    content: '';
+    height: 2px;
+    left: 1.35rem;
+    opacity: 0;
+    position: absolute;
+    right: 1.35rem;
+    top: 0;
+    transition: opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-pillar:hover {
+    border-color: var(--docs-primary-edge);
+    box-shadow: var(--docs-shadow-card-hover);
+    transform: translateY(-2px);
+}
+
+.home-pillar:hover::before {
+    opacity: 1;
 }
 
 .home-pillar:nth-child(2) {
@@ -574,16 +612,16 @@ async function copyInstall() {
 
 .home-pillar h2 {
     font-family: var(--docs-display);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: -0.03em;
-    margin: 0 0 0.55rem;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.5rem;
 }
 
 .home-pillar p {
     color: var(--m-color-text-muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.65;
     margin: 0;
     max-width: 34rem;
 }
@@ -628,19 +666,28 @@ async function copyInstall() {
 }
 
 .home-chip {
-    background: color-mix(in srgb, var(--m-color-border) 35%, transparent);
-    border: 1px solid transparent;
+    background: var(--docs-surface-subtle);
+    border: 1px solid var(--docs-edge);
     border-radius: 999px;
     color: var(--m-color-text-muted);
     cursor: pointer;
     font-size: 0.78rem;
     font-weight: 600;
-    padding: 0.35rem 0.75rem;
+    padding: 0.35rem 0.8rem;
+    transition:
+        background var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-chip:hover {
+    border-color: var(--docs-primary-edge);
+    color: var(--m-color-primary);
 }
 
 .home-chip.is-active {
-    background: color-mix(in srgb, var(--m-color-primary) 12%, transparent);
-    border-color: color-mix(in srgb, var(--m-color-primary) 35%, transparent);
+    background: var(--docs-primary-mid);
+    border-color: var(--docs-primary-edge);
     color: var(--m-color-primary);
 }
 
@@ -650,12 +697,21 @@ async function copyInstall() {
     border-radius: 999px;
     cursor: pointer;
     height: 1.15rem;
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
     width: 1.15rem;
+}
+
+.home-swatch:hover {
+    transform: scale(1.15);
 }
 
 .home-swatch.is-selected {
     border-color: var(--m-color-text);
     box-shadow: 0 0 0 2px var(--m-color-surface);
+    transform: scale(1.1);
 }
 
 .home-theme-preview__stage {
@@ -691,14 +747,16 @@ async function copyInstall() {
 
 .home-wall__card {
     animation: home-rise 0.6s var(--m-motion-ease) both;
-    background: var(--docs-surface-subtle);
+    background: var(--docs-panel);
     border: 1px solid var(--docs-edge);
     border-radius: var(--m-radius-md, 0.65rem);
+    box-shadow: var(--docs-shadow-card);
     color: inherit;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     min-height: 6.5rem;
+    overflow: hidden;
     padding: 0.95rem 1rem;
     position: relative;
     text-decoration: none;
@@ -706,6 +764,24 @@ async function copyInstall() {
         border-color var(--m-motion-fast) var(--m-motion-ease),
         box-shadow var(--m-motion-fast) var(--m-motion-ease),
         transform var(--m-motion-fast) var(--m-motion-ease);
+}
+
+/* soft glow wash revealed on hover */
+.home-wall__card::before {
+    background: linear-gradient(
+        135deg,
+        var(--docs-primary-mid),
+        transparent 55%
+    );
+    content: '';
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+    transition: opacity var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-wall__card:hover::before {
+    opacity: 1;
 }
 
 .home-wall__card:nth-child(2) { animation-delay: 0.04s; }
@@ -727,6 +803,7 @@ async function copyInstall() {
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    position: relative;
     transition: color var(--m-motion-fast) var(--m-motion-ease);
 }
 
@@ -738,6 +815,7 @@ async function copyInstall() {
     color: var(--m-color-text-muted);
     font-size: 0.78rem;
     line-height: 1.45;
+    position: relative;
 }
 
 /* Arrow affordance appears on hover, matching the "→" of the text links */
@@ -798,15 +876,24 @@ async function copyInstall() {
 }
 
 .home-text-link {
+    align-items: baseline;
     color: var(--m-color-primary);
+    display: inline-flex;
     font-family: var(--docs-display);
     font-size: 0.95rem;
     font-weight: 600;
+    gap: 0.3rem;
     text-decoration: none;
+    transition: opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.home-text-link:hover {
-    text-decoration: underline;
+.home-text-link::after {
+    content: '→';
+    transition: transform var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-text-link:hover::after {
+    transform: translateX(0.2rem);
 }
 
 @keyframes home-rise {
@@ -832,12 +919,6 @@ async function copyInstall() {
 @media (max-width: 900px) {
     .home-pillars {
         grid-template-columns: 1fr;
-    }
-
-    .home-pillar:nth-child(even) {
-        border-left: 0;
-        padding-left: 0;
-        padding-right: 0;
     }
 
     .home-wall__grid {

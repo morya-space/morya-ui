@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { MScrollbar } from 'morya-ui'
-import { computed, ref, watch } from 'vue'
+import type { TimelineEvent } from 'morya-ui'
+import { MScrollbar, MTimeline } from 'morya-ui'
+import { computed, nextTick, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { loadChangelog } from '../docs/loadChangelog'
 import { useDocsI18n } from '../i18n'
@@ -10,12 +11,40 @@ const router = useRouter()
 const { lang, t } = useDocsI18n()
 const doc = computed(() => loadChangelog(lang.value))
 
-const activeVersion = ref(doc.value.releases[0]?.version ?? doc.value.currentVersion)
+const mainScroll = ref<InstanceType<typeof MScrollbar> | null>(null)
 
-const activeRelease = computed(
-  () => doc.value.releases.find((item) => item.version === activeVersion.value) ?? doc.value.releases[0] ?? null,
+/** Timeline items: one per release, carrying the full release payload. */
+const timelineEvents = computed(() =>
+  doc.value.releases.map((release) => ({
+    status: `v${release.version}`,
+    release,
+  })),
 )
 
+function isCurrent(version: string) {
+  return version === doc.value.currentVersion
+}
+
+function anchorId(version: string) {
+  return `release-${version.replace(/[^\da-z.-]/gi, '-')}`
+}
+
+async function selectVersion(version: string) {
+  void router.replace({ name: 'changelog', query: { v: version } })
+  await nextTick()
+  const el = document.getElementById(anchorId(version))
+  if (!el) return
+  const wrap = (mainScroll.value?.$el as HTMLElement | undefined)?.querySelector?.('.m-scrollbar__wrap')
+  if (wrap) {
+    const wrapRect = wrap.getBoundingClientRect()
+    const elRect = el.getBoundingClientRect()
+    wrap.scrollTo({ top: wrap.scrollTop + (elRect.top - wrapRect.top) - 12, behavior: 'smooth' })
+  } else {
+    el.scrollIntoView({ block: 'start', behavior: 'smooth' })
+  }
+}
+
+const activeVersion = ref(doc.value.currentVersion)
 watch(
   () => route.query.v,
   (value) => {
@@ -25,11 +54,6 @@ watch(
   },
   { immediate: true },
 )
-
-function selectVersion(version: string) {
-  activeVersion.value = version
-  void router.replace({ name: 'changelog', query: { v: version } })
-}
 </script>
 
 <template>
@@ -53,7 +77,7 @@ function selectVersion(version: string) {
               @click="selectVersion(release.version)"
             >
               <span>v{{ release.version }}</span>
-              <span v-if="release.version === doc.currentVersion" class="changelog-nav__badge">{{ t.current }}</span>
+              <span v-if="isCurrent(release.version)" class="changelog-nav__badge">{{ t.current }}</span>
             </button>
           </nav>
         </div>
@@ -61,30 +85,57 @@ function selectVersion(version: string) {
     </aside>
 
     <main class="changelog-main">
-      <MScrollbar class="changelog-scroll">
+      <MScrollbar ref="mainScroll" class="changelog-scroll">
         <div class="changelog-main__body">
-          <template v-if="activeRelease">
-            <header class="changelog-hero">
-              <h2>v{{ activeRelease.version }}</h2>
-            </header>
-
-            <section
-              v-for="section in activeRelease.sections"
-              :key="section.heading"
-              class="changelog-section"
-            >
-              <h3>{{ section.heading }}</h3>
-              <ul>
-                <li v-for="(item, index) in section.items" :key="`${section.heading}-${index}`">
-                  {{ item }}
-                </li>
-              </ul>
-            </section>
-
-            <p v-if="activeRelease.sections.length === 0" class="changelog-empty">
-              {{ t.emptySection }}
+          <header class="changelog-hero">
+            <p class="changelog-hero__kicker">
+              {{ doc.packageName }}
             </p>
-          </template>
+            <h2>{{ t.changelogTitle }}</h2>
+          </header>
+
+          <MTimeline
+            v-if="doc.releases.length"
+            :value="(timelineEvents as unknown as TimelineEvent[])"
+            align="left"
+            class="changelog-timeline"
+          >
+            <template #opposite="{ item }">
+              <div
+                class="changelog-release"
+                :class="{ 'changelog-release--current': isCurrent((item as any).release.version) }"
+              >
+                <span class="changelog-release__version">v{{ (item as any).release.version }}</span>
+                <span v-if="isCurrent((item as any).release.version)" class="changelog-release__badge">
+                  {{ t.current }}
+                </span>
+              </div>
+            </template>
+
+            <template #content="{ item }">
+              <article
+                class="changelog-card"
+                :class="{ 'changelog-card--current': isCurrent((item as any).release.version) }"
+              >
+                <span :id="anchorId((item as any).release.version)" class="changelog-card__anchor" aria-hidden="true" />
+                <section
+                  v-for="section in (item as any).release.sections"
+                  :key="section.heading"
+                  class="changelog-section"
+                >
+                  <h3>{{ section.heading }}</h3>
+                  <ul>
+                    <li v-for="(entry, index) in section.items" :key="`${section.heading}-${index}`">
+                      {{ entry }}
+                    </li>
+                  </ul>
+                </section>
+                <p v-if="(item as any).release.sections.length === 0" class="changelog-empty">
+                  {{ t.emptySection }}
+                </p>
+              </article>
+            </template>
+          </MTimeline>
 
           <section v-else class="changelog-empty">
             <h2>{{ t.noReleases }}</h2>
@@ -100,7 +151,7 @@ function selectVersion(version: string) {
 .changelog-shell {
   display: grid;
   flex: 1;
-  grid-template-columns: 15.5rem minmax(0, 1fr);
+  grid-template-columns: 14.5rem minmax(0, 1fr);
   min-height: 0;
   overflow: hidden;
 }
@@ -125,18 +176,23 @@ function selectVersion(version: string) {
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.04em;
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.5rem;
 }
 
 .changelog-sidebar__meta {
   align-items: center;
+  background: var(--docs-surface-subtle);
+  border: 1px solid var(--docs-edge);
+  border-radius: 999px;
   color: var(--m-color-text-muted);
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   font-family: var(--docs-mono);
-  font-size: 0.72rem;
-  gap: 0.5rem;
-  margin: 0 0 1.15rem;
+  font-size: 0.68rem;
+  gap: 0.4rem;
+  letter-spacing: 0.03em;
+  margin: 0 0 1.25rem;
+  padding: 0.25rem 0.7rem;
 }
 
 .changelog-nav {
@@ -152,10 +208,11 @@ function selectVersion(version: string) {
   color: var(--m-color-text-muted);
   cursor: pointer;
   display: flex;
-  font-size: 0.86rem;
+  font-family: var(--docs-mono);
+  font-size: 0.82rem;
   font-weight: 500;
   justify-content: space-between;
-  padding: 0.55rem 0.7rem;
+  padding: 0.5rem 0.7rem;
   text-align: left;
   transition:
     color var(--m-motion-fast) var(--m-motion-ease),
@@ -169,22 +226,23 @@ function selectVersion(version: string) {
 }
 
 .changelog-nav__item.is-active {
-  background: var(--docs-primary-mid);
+  background: var(--docs-primary-soft);
   border-color: var(--docs-primary-edge);
   color: var(--m-color-primary);
   font-weight: 700;
 }
 
 .changelog-nav__badge {
-  background: var(--docs-primary-soft);
-  border: 1px solid var(--docs-primary-edge);
+  background: var(--m-color-primary);
   border-radius: 999px;
-  color: var(--m-color-primary);
+  color: var(--m-color-surface);
   font-family: var(--docs-mono);
   font-size: 0.6rem;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   line-height: 1;
-  padding: 0.2rem 0.45rem;
+  padding: 0.24rem 0.5rem;
+  text-transform: uppercase;
 }
 
 .changelog-main {
@@ -193,40 +251,195 @@ function selectVersion(version: string) {
 }
 
 .changelog-main__body {
-  margin: 0 auto;
-  max-width: 46rem;
-  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem) 5rem;
 }
 
+/* --- hero --- */
 .changelog-hero {
-  border-bottom: 1px solid var(--docs-edge);
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.1rem;
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+
+.changelog-hero::after {
+  background: linear-gradient(
+    90deg,
+    var(--m-color-primary),
+    var(--docs-primary-edge) 45%,
+    transparent
+  );
+  border-radius: 999px;
+  bottom: 0;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
+  width: 9rem;
+}
+
+.changelog-hero__kicker {
+  color: var(--m-color-primary);
+  font-family: var(--docs-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
 }
 
 .changelog-hero h2 {
+  background: linear-gradient(
+    120deg,
+    var(--m-color-text) 40%,
+    var(--docs-glow)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   font-family: var(--docs-display);
-  font-size: clamp(1.45rem, 2.8vw, 1.85rem);
-  font-weight: 750;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
   margin: 0;
 }
 
-.changelog-section {
-  margin: 0 0 1.5rem;
+/* --- timeline layout overrides --- */
+/* Version column hugs its content; connector sits closer to the cards. */
+.changelog-timeline :deep(.m-timeline__event) {
+  gap: 1.5rem;
+  grid-template-columns: minmax(7.5rem, auto) auto minmax(0, 1fr);
 }
 
-.changelog-section h3 {
+.changelog-timeline :deep(.m-timeline__event--left .m-timeline__opposite) {
+  padding-top: 0.55rem;
+  text-align: end;
+}
+
+.changelog-timeline :deep(.m-timeline__separator) {
+  padding-top: 0.55rem;
+}
+
+.changelog-timeline :deep(.m-timeline__marker) {
+  box-shadow: 0 0 0 4px var(--docs-primary-soft);
+}
+
+.changelog-timeline :deep(.m-timeline__connector) {
+  background: linear-gradient(
+    180deg,
+    var(--docs-edge-strong),
+    var(--docs-edge)
+  );
+  width: 2px;
+}
+
+/* --- release (opposite / left column) --- */
+.changelog-release {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.changelog-release__version {
   font-family: var(--docs-display);
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.changelog-release--current .changelog-release__version {
+  color: var(--m-color-primary);
+}
+
+.changelog-release__badge {
+  background: var(--m-color-primary);
+  border-radius: 999px;
+  color: var(--m-color-surface);
+  font-family: var(--docs-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  padding: 0.24rem 0.5rem;
+  text-transform: uppercase;
+}
+
+/* --- release card (content / right column) --- */
+.changelog-card {
+  background: var(--docs-panel);
+  border: 1px solid var(--docs-edge);
+  border-radius: 1.05rem;
+  box-shadow: var(--docs-shadow-card);
+  margin-bottom: 1.4rem;
+  overflow: hidden;
+  padding: 1.15rem 1.25rem 1.25rem;
+  position: relative;
+  transition:
+    border-color var(--m-motion-fast) var(--m-motion-ease),
+    box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.changelog-card:hover {
+  border-color: var(--docs-primary-edge);
+  box-shadow: var(--docs-shadow-card-hover);
+}
+
+.changelog-card--current {
+  border-color: var(--docs-primary-edge);
+}
+
+.changelog-card--current::before {
+  background: linear-gradient(90deg, var(--m-color-primary), var(--docs-glow));
+  border-radius: 999px;
+  content: '';
+  height: 2px;
+  left: 1.25rem;
+  position: absolute;
+  right: 1.25rem;
+  top: 0;
+}
+
+.changelog-card__anchor {
+  display: block;
+  height: 0;
+  position: absolute;
+  top: -0.5rem;
+}
+
+.changelog-section {
+  margin: 0 0 1.15rem;
+}
+
+.changelog-section:last-child {
+  margin-bottom: 0;
+}
+
+.changelog-section h3 {
+  align-items: center;
+  color: var(--m-color-text);
+  display: flex;
+  font-family: var(--docs-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0 0 0.65rem;
+}
+
+.changelog-section h3::before {
+  background: var(--docs-primary-mid);
+  border: 1px solid var(--docs-primary-edge);
+  border-radius: 0.35rem;
+  content: '';
+  height: 0.8rem;
+  margin-right: 0.55rem;
+  width: 0.32rem;
 }
 
 .changelog-section ul {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.45rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -234,21 +447,22 @@ function selectVersion(version: string) {
 
 .changelog-section li {
   color: var(--m-color-text);
-  font-size: 0.92rem;
-  line-height: 1.6;
-  opacity: 0.92;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  opacity: 0.9;
   padding-left: 1.15rem;
   position: relative;
 }
 
 .changelog-section li::before {
-  background: color-mix(in srgb, var(--m-color-primary) 55%, transparent);
+  background: var(--m-color-primary);
   border-radius: 50%;
   content: '';
   height: 0.32rem;
-  left: 0.25rem;
+  left: 0.3rem;
+  opacity: 0.7;
   position: absolute;
-  top: 0.62em;
+  top: 0.72em;
   width: 0.32rem;
 }
 
@@ -280,6 +494,33 @@ function selectVersion(version: string) {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
+  }
+
+  /* Stack the timeline: version above the card, hide the opposite column. */
+  .changelog-timeline :deep(.m-timeline__event) {
+    gap: 0.9rem;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .changelog-timeline :deep(.m-timeline__event--left .m-timeline__opposite) {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+    text-align: start;
+  }
+
+  .changelog-timeline :deep(.m-timeline__event--left .m-timeline__content) {
+    grid-column: 2;
+  }
+
+  .changelog-timeline :deep(.m-timeline__separator) {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    padding-top: 0.35rem;
+  }
+
+  .changelog-release {
+    flex-direction: row;
   }
 }
 </style>

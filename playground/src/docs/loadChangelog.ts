@@ -149,10 +149,13 @@ export function loadChangelog(lang: DocsLang = 'zh-CN'): ChangelogDocument {
   }
   flush()
 
+  // Drop unreleased / heading-only entries that have no concrete semver.
+  const published = releases.filter((release) => /^\d+\.\d+\.\d+/.test(release.version))
+
   return {
     packageName,
     currentVersion,
-    releases,
+    releases: published,
   }
 }
 

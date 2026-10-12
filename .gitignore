@@ -9,3 +9,4 @@ tests/visual/.actual/
 tests/visual/.diff/
 tests/visual/dist/
 my-demos/
+my-examples/
