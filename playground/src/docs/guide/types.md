@@ -81,6 +81,20 @@ type SplitterPassThrough = RootPassThrough & {
 
 分隔条外观也可用 `resizeTriggerClass` / `resizeTriggerStyle`，内容用 `#resize-trigger`（别名 `#gutter`）。
 
+<h3 id="OrderListPassThrough">OrderListPassThrough</h3>
+
+[`OrderList`](/components/order-list) 在 `RootPassThrough` 上增加按钮组与列表项：
+
+```ts
+type OrderListPassThrough = RootPassThrough & {
+  controls?: PassThroughPart  // 左侧按钮组
+  list?: PassThroughPart      // 滚动列表
+  item?: PassThroughPart      // 单个列表项
+  handle?: PassThroughPart    // 拖拽手柄
+  label?: PassThroughPart     // 项文本容器
+}
+```
+
 <h3 id="MSizeInput">MSizeInput</h3>
 
 控件尺寸，多数表单 / 按钮组件的 `size` prop：

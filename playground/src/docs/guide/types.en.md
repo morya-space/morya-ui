@@ -81,6 +81,20 @@ type SplitterPassThrough = RootPassThrough & {
 
 Gutter look can also use `resizeTriggerClass` / `resizeTriggerStyle`; content goes in `#resize-trigger` (alias `#gutter`).
 
+<h3 id="OrderListPassThrough">OrderListPassThrough</h3>
+
+[`OrderList`](/components/order-list) extends `RootPassThrough` with the button group and list items:
+
+```ts
+type OrderListPassThrough = RootPassThrough & {
+  controls?: PassThroughPart  // left button group
+  list?: PassThroughPart      // scrollable list
+  item?: PassThroughPart      // single item
+  handle?: PassThroughPart    // drag handle
+  label?: PassThroughPart     // item label container
+}
+```
+
 <h3 id="MSizeInput">MSizeInput</h3>
 
 Control size for many form / button props:
