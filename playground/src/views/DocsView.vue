@@ -376,14 +376,15 @@ watch(
         border-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.docs-nav__item:hover,
-.docs-nav__item.is-active {
-    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+.docs-nav__item:hover {
+    background: var(--docs-primary-soft);
     color: var(--m-color-primary);
 }
 
 .docs-nav__item.is-active {
-    border-color: color-mix(in srgb, var(--m-color-primary) 28%, transparent);
+    background: var(--docs-primary-mid);
+    border-color: var(--docs-primary-edge);
+    color: var(--m-color-primary);
     font-weight: 700;
 }
 

@@ -367,7 +367,14 @@ async function copyInstall() {
 }
 
 .home-brand {
-    color: var(--m-color-text);
+    background: linear-gradient(
+        120deg,
+        var(--m-color-text) 30%,
+        var(--docs-glow) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
     font-family: var(--docs-display);
     font-size: clamp(2.75rem, 7vw, 4.75rem);
     font-weight: 800;
@@ -389,6 +396,33 @@ async function copyInstall() {
     text-wrap: balance;
 }
 
+.home-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.1rem;
+    margin-top: 1.6rem;
+}
+
+.home-meta span {
+    align-items: center;
+    color: var(--m-color-text-muted);
+    display: inline-flex;
+    font-family: var(--docs-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    gap: 0.4rem;
+    letter-spacing: 0.02em;
+}
+
+.home-meta span::before {
+    background: var(--m-color-primary);
+    border-radius: 50%;
+    content: '';
+    height: 0.3rem;
+    opacity: 0.7;
+    width: 0.3rem;
+}
+
 .home-lead {
     color: var(--m-color-text-muted);
     font-size: 1.05rem;
@@ -406,21 +440,6 @@ async function copyInstall() {
 
 .home-actions a {
     text-decoration: none;
-}
-
-.home-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem 1.1rem;
-    margin-top: 1.6rem;
-}
-
-.home-meta span {
-    color: var(--m-color-text-muted);
-    font-family: var(--docs-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
 }
 
 .home-install {
@@ -447,23 +466,40 @@ async function copyInstall() {
 
 .home-install__cmd {
     align-items: center;
-    background: color-mix(
-        in srgb,
-        var(--m-color-text) 3%,
-        var(--m-color-surface)
-    );
+    background: var(--docs-surface-subtle);
     border: 1px solid var(--docs-edge);
     border-radius: var(--m-radius-md, 0.65rem);
+    box-shadow: var(--docs-shadow-card);
     display: flex;
     gap: 0.75rem;
     justify-content: space-between;
-    padding: 0.7rem 0.8rem;
+    padding: 0.85rem 0.85rem 0.85rem 1.05rem;
+    position: relative;
+}
+
+/* Terminal dots, keeps the install box recognizable as a shell command */
+.home-install__cmd::before {
+    background: color-mix(in srgb, var(--m-color-danger, #ff4d4f) 65%, transparent);
+    border-radius: 50%;
+    box-shadow:
+        0.95rem 0 0 color-mix(in srgb, var(--m-color-warning, #faad14) 65%, transparent),
+        1.9rem 0 0 color-mix(in srgb, var(--m-color-success, #52c41a) 65%, transparent);
+    content: '';
+    flex: 0 0 auto;
+    height: 0.55rem;
+    margin-right: 2.05rem;
+    opacity: 0.65;
+    width: 0.55rem;
 }
 
 .home-install__cmd code {
     color: var(--m-color-text);
+    flex: 1;
     font-family: var(--docs-mono);
     font-size: 0.84rem;
+    min-width: 0;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .home-install__copy {
@@ -624,17 +660,21 @@ async function copyInstall() {
 
 .home-theme-preview__stage {
     align-items: center;
-    background: color-mix(
-        in srgb,
-        var(--m-color-text) 2.5%,
-        var(--m-color-surface)
+    background-color: var(--docs-surface-subtle);
+    background-image: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--m-color-text) 8%, transparent) 1px,
+        transparent 1px
     );
+    background-position: center;
+    background-size: 14px 14px;
     border: 1px solid var(--docs-edge);
     border-radius: var(--m-radius-md, 0.65rem);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--m-color-surface) 60%, transparent);
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    padding: 1rem;
+    padding: 1.25rem 1rem;
 }
 
 .home-wall {
@@ -650,11 +690,8 @@ async function copyInstall() {
 }
 
 .home-wall__card {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text) 2%,
-        var(--m-color-surface)
-    );
+    animation: home-rise 0.6s var(--m-motion-ease) both;
+    background: var(--docs-surface-subtle);
     border: 1px solid var(--docs-edge);
     border-radius: var(--m-radius-md, 0.65rem);
     color: inherit;
@@ -663,19 +700,26 @@ async function copyInstall() {
     gap: 0.4rem;
     min-height: 6.5rem;
     padding: 0.95rem 1rem;
+    position: relative;
     text-decoration: none;
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease),
         transform var(--m-motion-fast) var(--m-motion-ease);
 }
 
+.home-wall__card:nth-child(2) { animation-delay: 0.04s; }
+.home-wall__card:nth-child(3) { animation-delay: 0.08s; }
+.home-wall__card:nth-child(4) { animation-delay: 0.12s; }
+.home-wall__card:nth-child(5) { animation-delay: 0.16s; }
+.home-wall__card:nth-child(6) { animation-delay: 0.2s; }
+.home-wall__card:nth-child(7) { animation-delay: 0.24s; }
+.home-wall__card:nth-child(8) { animation-delay: 0.28s; }
+
 .home-wall__card:hover {
-    border-color: color-mix(
-        in srgb,
-        var(--m-color-primary) 35%,
-        var(--docs-edge)
-    );
-    transform: translateY(-1px);
+    border-color: var(--docs-primary-edge);
+    box-shadow: var(--docs-shadow-card-hover);
+    transform: translateY(-2px);
 }
 
 .home-wall__card strong {
@@ -683,12 +727,38 @@ async function copyInstall() {
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    transition: color var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-wall__card:hover strong {
+    color: var(--m-color-primary);
 }
 
 .home-wall__card span {
     color: var(--m-color-text-muted);
     font-size: 0.78rem;
     line-height: 1.45;
+}
+
+/* Arrow affordance appears on hover, matching the "→" of the text links */
+.home-wall__card::after {
+    bottom: 0.8rem;
+    color: var(--m-color-primary);
+    content: '→';
+    font-family: var(--docs-display);
+    font-size: 0.85rem;
+    opacity: 0;
+    position: absolute;
+    right: 0.9rem;
+    transform: translateX(-0.3rem);
+    transition:
+        opacity var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.home-wall__card:hover::after {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .home-wall__more {
@@ -753,7 +823,8 @@ async function copyInstall() {
 @media (prefers-reduced-motion: reduce) {
     html:not([data-m-ignore-reduced-motion]) .home-hero,
     html:not([data-m-ignore-reduced-motion]) .home-install,
-    html:not([data-m-ignore-reduced-motion]) .home-pillar {
+    html:not([data-m-ignore-reduced-motion]) .home-pillar,
+    html:not([data-m-ignore-reduced-motion]) .home-wall__card {
         animation: none;
     }
 }

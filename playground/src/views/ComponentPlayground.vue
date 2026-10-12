@@ -706,11 +706,22 @@ const overviewCount = computed(() => filteredDocumented.value.length);
 .search-box {
     align-items: center;
     background: color-mix(in srgb, var(--m-color-border) 35%, transparent);
+    border: 1px solid transparent;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text-muted);
     display: flex;
     gap: 0.5rem;
     padding: 0.5rem 0.65rem;
+    transition:
+        background var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease);
+}
+.search-box:focus-within {
+    background: var(--m-color-surface);
+    border-color: var(--docs-primary-edge);
+    box-shadow: 0 0 0 3px var(--docs-primary-soft);
+    color: var(--m-color-primary);
 }
 .search-box input {
     background: transparent;
@@ -862,7 +873,7 @@ const overviewCount = computed(() => filteredDocumented.value.length);
 .nav-item {
     align-items: center;
     background: transparent;
-    border: 0;
+    border: 1px solid transparent;
     border-radius: var(--m-radius-sm);
     color: color-mix(in srgb, var(--m-color-text) 78%, var(--m-color-surface));
     cursor: pointer;
@@ -875,16 +886,22 @@ const overviewCount = computed(() => filteredDocumented.value.length);
     padding: 0.48rem 0.7rem;
     text-align: left;
     text-decoration: none;
+    transition:
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease);
 }
 .nav-item--overview {
     margin-bottom: 0.2rem;
 }
-.nav-item:hover,
-.nav-item--active {
-    background: color-mix(in srgb, var(--m-color-primary) 9%, transparent);
+.nav-item:hover {
+    background: var(--docs-primary-soft);
     color: color-mix(in srgb, var(--m-color-primary) 82%, var(--m-color-text));
 }
 .nav-item--active {
+    background: var(--docs-primary-mid);
+    border-color: var(--docs-primary-edge);
+    color: color-mix(in srgb, var(--m-color-primary) 88%, var(--m-color-text));
     font-weight: 700;
 }
 .nav-count {
@@ -936,10 +953,21 @@ const overviewCount = computed(() => filteredDocumented.value.length);
     margin-top: 1.35rem;
 }
 .doc-meta span {
+    align-items: center;
     color: var(--m-color-text-muted);
+    display: inline-flex;
     font-family: var(--docs-mono);
     font-size: 0.72rem;
     font-weight: 500;
+    gap: 0.4rem;
+}
+.doc-meta span::before {
+    background: var(--m-color-primary);
+    border-radius: 50%;
+    content: '';
+    height: 0.3rem;
+    opacity: 0.7;
+    width: 0.3rem;
 }
 .section-heading {
     align-items: end;
@@ -1004,14 +1032,9 @@ const overviewCount = computed(() => filteredDocumented.value.length);
         transform var(--m-motion-fast) var(--m-motion-ease);
 }
 .overview-card-link:hover .overview-card {
-    border-color: color-mix(
-        in srgb,
-        var(--m-color-primary) 35%,
-        var(--m-color-border)
-    );
-    box-shadow: 0 0.45rem 1.25rem
-        color-mix(in srgb, var(--m-color-text) 6%, transparent);
-    transform: translateY(-1px);
+    border-color: var(--docs-primary-edge);
+    box-shadow: var(--docs-shadow-card-hover);
+    transform: translateY(-2px);
 }
 .overview-card__head {
     align-items: start;
@@ -1026,6 +1049,10 @@ const overviewCount = computed(() => filteredDocumented.value.length);
     font-weight: 700;
     letter-spacing: -0.03em;
     margin: 0;
+    transition: color var(--m-motion-fast) var(--m-motion-ease);
+}
+.overview-card-link:hover .overview-card h2 {
+    color: var(--m-color-primary);
 }
 .overview-card__badge {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);

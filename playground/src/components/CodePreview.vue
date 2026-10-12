@@ -73,11 +73,13 @@ onBeforeUnmount(() => {
         </button>
       </div>
     </div>
-    <div v-show="codeOpen" class="code-preview__code">
-      <div v-if="$slots.code" ref="highlightEl" class="code-preview__highlight">
-        <slot name="code" />
+    <div class="code-preview__code" :class="{ 'is-open': codeOpen }">
+      <div class="code-preview__code-inner">
+        <div v-if="$slots.code" ref="highlightEl" class="code-preview__highlight">
+          <slot name="code" />
+        </div>
+        <pre v-else class="code-preview__fallback"><code>{{ code }}</code></pre>
       </div>
-      <pre v-else class="code-preview__fallback"><code>{{ code }}</code></pre>
     </div>
   </section>
 </template>
@@ -87,9 +89,7 @@ onBeforeUnmount(() => {
   background: var(--m-color-surface);
   border: 1px solid color-mix(in srgb, var(--m-color-border) 70%, transparent);
   border-radius: var(--m-radius-lg, 0.75rem);
-  box-shadow:
-    0 1px 2px color-mix(in srgb, var(--m-color-text) 3%, transparent),
-    0 4px 16px -4px color-mix(in srgb, var(--m-color-text) 4%, transparent);
+  box-shadow: var(--docs-shadow-card);
   margin: 1.5rem 0 2rem;
   overflow: hidden;
   transition:
@@ -98,10 +98,8 @@ onBeforeUnmount(() => {
 }
 
 .code-preview:hover {
-  border-color: color-mix(in srgb, var(--m-color-border) 90%, transparent);
-  box-shadow:
-    0 1px 2px color-mix(in srgb, var(--m-color-text) 4%, transparent),
-    0 8px 24px -6px color-mix(in srgb, var(--m-color-text) 6%, transparent);
+  border-color: var(--docs-edge-strong);
+  box-shadow: var(--docs-shadow-card-hover);
 }
 
 .code-preview__demo {
@@ -109,13 +107,13 @@ onBeforeUnmount(() => {
   background:
     radial-gradient(
       circle at 100% 0%,
-      color-mix(in srgb, var(--m-color-primary) 6%, transparent) 0%,
-      transparent 50%
+      color-mix(in srgb, var(--m-color-primary) 7%, transparent) 0%,
+      transparent 52%
     ),
     radial-gradient(
       circle at 0% 100%,
-      color-mix(in srgb, var(--m-color-primary) 3%, transparent) 0%,
-      transparent 45%
+      color-mix(in srgb, var(--m-color-primary) 4%, transparent) 0%,
+      transparent 46%
     ),
     var(--m-color-surface);
   display: flex;
@@ -154,7 +152,7 @@ onBeforeUnmount(() => {
 
 .code-preview__bar {
   align-items: center;
-  background: color-mix(in srgb, var(--m-color-text) 2%, var(--m-color-surface));
+  background: var(--docs-surface-subtle);
   border-top: 1px solid color-mix(in srgb, var(--m-color-border) 65%, transparent);
   display: flex;
   justify-content: space-between;
@@ -229,15 +227,43 @@ onBeforeUnmount(() => {
   transform: rotate(180deg);
 }
 
+/* Smooth expand/collapse via grid-rows trick instead of v-show jump */
 .code-preview__code {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--m-motion-normal) var(--m-motion-ease);
+}
+
+.code-preview__code.is-open {
   border-top: 1px solid color-mix(in srgb, var(--m-color-border) 65%, transparent);
+  grid-template-rows: 1fr;
+}
+
+.code-preview__code-inner {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--m-motion-normal) var(--m-motion-ease);
+}
+
+.code-preview__code.is-open .code-preview__code-inner {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-m-ignore-reduced-motion]) .code-preview__code,
+  html:not([data-m-ignore-reduced-motion]) .code-preview__code-inner {
+    transition: none;
+  }
 }
 
 .code-preview__highlight,
 .code-preview__fallback {
-  background: color-mix(in srgb, var(--m-color-text) 3.5%, var(--m-color-surface));
+  background: var(--docs-surface-sunken);
   margin: 0;
-  overflow-x: auto;
+  max-height: 26rem;
+  min-height: 6rem;
+  overflow: auto;
   padding: var(--m-space-4) var(--m-space-4) var(--m-space-4) 0;
 }
 
@@ -277,7 +303,7 @@ onBeforeUnmount(() => {
 }
 
 .code-preview__highlight :deep(.shiki .line::before) {
-  background: color-mix(in srgb, var(--m-color-text) 3.5%, var(--m-color-surface));
+  background: var(--docs-surface-sunken);
   box-sizing: border-box;
   color: var(--m-color-text-muted);
   content: counter(code-line);

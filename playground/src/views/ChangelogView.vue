@@ -163,22 +163,28 @@ function selectVersion(version: string) {
     border-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.changelog-nav__item:hover,
-.changelog-nav__item.is-active {
-  background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+.changelog-nav__item:hover {
+  background: var(--docs-primary-soft);
   color: var(--m-color-primary);
 }
 
 .changelog-nav__item.is-active {
-  border-color: color-mix(in srgb, var(--m-color-primary) 28%, transparent);
+  background: var(--docs-primary-mid);
+  border-color: var(--docs-primary-edge);
+  color: var(--m-color-primary);
   font-weight: 700;
 }
 
 .changelog-nav__badge {
+  background: var(--docs-primary-soft);
+  border: 1px solid var(--docs-primary-edge);
+  border-radius: 999px;
   color: var(--m-color-primary);
   font-family: var(--docs-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0.2rem 0.45rem;
 }
 
 .changelog-main {
@@ -193,7 +199,9 @@ function selectVersion(version: string) {
 }
 
 .changelog-hero {
-  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--docs-edge);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.1rem;
 }
 
 .changelog-hero h2 {
@@ -219,8 +227,9 @@ function selectVersion(version: string) {
 .changelog-section ul {
   display: grid;
   gap: 0.55rem;
+  list-style: none;
   margin: 0;
-  padding-left: 1.15rem;
+  padding: 0;
 }
 
 .changelog-section li {
@@ -228,6 +237,19 @@ function selectVersion(version: string) {
   font-size: 0.92rem;
   line-height: 1.6;
   opacity: 0.92;
+  padding-left: 1.15rem;
+  position: relative;
+}
+
+.changelog-section li::before {
+  background: color-mix(in srgb, var(--m-color-primary) 55%, transparent);
+  border-radius: 50%;
+  content: '';
+  height: 0.32rem;
+  left: 0.25rem;
+  position: absolute;
+  top: 0.62em;
+  width: 0.32rem;
 }
 
 .changelog-empty {

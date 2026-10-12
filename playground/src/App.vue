@@ -39,6 +39,20 @@ useDensity()
   --docs-panel: color-mix(in srgb, var(--m-color-surface) 88%, transparent);
   --docs-edge: color-mix(in srgb, var(--m-color-border) 82%, transparent);
   --docs-measure: 68ch;
+  /* Shared surfaces & tints so views don't repeat magic color-mix values */
+  --docs-surface-subtle: color-mix(in srgb, var(--m-color-text) 2.5%, var(--m-color-surface));
+  --docs-surface-sunken: color-mix(in srgb, var(--m-color-text) 3.5%, var(--m-color-surface));
+  --docs-surface-raised: color-mix(in srgb, var(--m-color-text) 5%, var(--m-color-surface));
+  --docs-edge-strong: color-mix(in srgb, var(--m-color-border) 90%, transparent);
+  --docs-primary-soft: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+  --docs-primary-mid: color-mix(in srgb, var(--m-color-primary) 14%, transparent);
+  --docs-primary-edge: color-mix(in srgb, var(--m-color-primary) 32%, var(--docs-edge));
+  --docs-shadow-card:
+    0 1px 2px color-mix(in srgb, var(--m-color-text) 3%, transparent),
+    0 4px 16px -4px color-mix(in srgb, var(--m-color-text) 4%, transparent);
+  --docs-shadow-card-hover:
+    0 1px 2px color-mix(in srgb, var(--m-color-text) 4%, transparent),
+    0 10px 28px -6px color-mix(in srgb, var(--m-color-text) 7%, transparent);
 
   color: var(--m-color-text);
   background: var(--m-color-surface);
@@ -52,6 +66,30 @@ useDensity()
 ::selection {
   background: color-mix(in srgb, var(--m-color-primary) 28%, transparent);
   color: var(--m-color-text);
+}
+
+/* Slim, theme-aware scrollbars for native scroll areas (MScrollbar covers the rest) */
+::-webkit-scrollbar {
+  height: 0.55rem;
+  width: 0.55rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--m-color-text) 14%, transparent);
+  background-clip: padding-box;
+  border: 0.14rem solid transparent;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--m-color-text) 24%, transparent);
+  background-clip: padding-box;
+  border: 0.14rem solid transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 html,
@@ -116,28 +154,38 @@ a:focus-visible {
 
 .site-atmosphere__glow {
   border-radius: 50%;
-  filter: blur(64px);
-  opacity: 0.22;
+  filter: blur(72px);
+  opacity: 0.14;
   position: absolute;
+  will-change: transform;
 }
 
 .site-atmosphere__glow--a {
-  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 40%, transparent) 0%, transparent 72%);
-  height: 24rem;
+  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 46%, transparent) 0%, transparent 72%);
+  height: 26rem;
   left: -10rem;
-  top: -12rem;
-  width: 24rem;
+  top: -13rem;
+  width: 26rem;
   animation: docs-drift 28s ease-in-out infinite alternate;
 }
 
 .site-atmosphere__glow--b {
-  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 22%, transparent) 0%, transparent 74%);
-  bottom: -14rem;
-  height: 28rem;
-  opacity: 0.16;
-  right: -12rem;
-  width: 28rem;
+  background: radial-gradient(circle, color-mix(in srgb, var(--m-color-primary) 24%, transparent) 0%, transparent 74%);
+  bottom: -15rem;
+  height: 30rem;
+  opacity: 0.1;
+  right: -13rem;
+  width: 30rem;
   animation: docs-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+/* Dark mode: richer ambient glow since surfaces are deeper */
+html[data-theme='dark'] .site-atmosphere__glow--a {
+  opacity: 0.22;
+}
+
+html[data-theme='dark'] .site-atmosphere__glow--b {
+  opacity: 0.15;
 }
 
 .site-shell__body {

@@ -252,6 +252,14 @@ const activeSection = computed(() => {
     flex: 0 0 auto;
     height: 1.85rem;
     width: 1.85rem;
+    transition:
+        transform var(--m-motion-normal) var(--m-motion-ease),
+        box-shadow var(--m-motion-normal) var(--m-motion-ease);
+}
+
+.site-brand:hover .site-brand__logo {
+    box-shadow: 0 0 0 3px var(--docs-primary-soft);
+    transform: rotate(-4deg) scale(1.04);
 }
 
 .site-brand__text {
@@ -284,27 +292,28 @@ const activeSection = computed(() => {
 }
 
 .site-nav__link {
+    border: 1px solid transparent;
     border-radius: 0.55rem;
     color: var(--m-color-text-muted);
     font-size: 0.84rem;
     font-weight: 500;
     padding: 0.4rem 0.85rem;
+    position: relative;
     text-decoration: none;
     transition:
         color var(--m-motion-fast) var(--m-motion-ease),
-        background var(--m-motion-fast) var(--m-motion-ease);
+        background var(--m-motion-fast) var(--m-motion-ease),
+        border-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .site-nav__link:hover {
+    background: color-mix(in srgb, var(--m-color-text) 4%, transparent);
     color: var(--m-color-text);
 }
 
 .site-nav__link.is-active {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        var(--m-color-surface)
-    );
+    background: var(--docs-primary-mid);
+    border-color: var(--docs-primary-edge);
     color: var(--m-color-primary);
     font-weight: 600;
 }
@@ -344,11 +353,8 @@ const activeSection = computed(() => {
 }
 
 .site-lang__btn.is-active {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 16%,
-        var(--m-color-surface)
-    );
+    background: var(--docs-primary-mid);
+    box-shadow: inset 0 0 0 1px var(--docs-primary-edge);
     color: var(--m-color-primary);
 }
 
@@ -365,17 +371,21 @@ const activeSection = computed(() => {
     text-decoration: none;
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
-        color var(--m-motion-fast) var(--m-motion-ease);
+        color var(--m-motion-fast) var(--m-motion-ease),
+        background var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
     width: 2.2rem;
 }
 
 .site-icon-btn:hover {
+    background: var(--docs-primary-soft);
     border-color: color-mix(
         in srgb,
         var(--m-color-primary) 40%,
         var(--m-color-border)
     );
     color: var(--m-color-primary);
+    transform: translateY(-1px);
 }
 
 .site-icon-btn:active {

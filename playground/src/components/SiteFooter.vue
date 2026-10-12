@@ -139,6 +139,7 @@ const contributingUrl = computed(() =>
     font-size: 0.78rem;
     font-weight: 500;
     text-decoration: none;
+    transition: color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .site-footer__nav a:hover {

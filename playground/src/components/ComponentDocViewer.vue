@@ -155,8 +155,18 @@ defineExpose({ scrollToSection })
   flex-wrap: wrap;
   font-family: var(--docs-mono);
   font-size: 0.68rem;
-  gap: 0.85rem;
+  gap: 0.45rem 0.85rem;
   margin-top: 1rem;
+}
+
+.component-doc-viewer__stats span {
+  align-items: center;
+  background: var(--docs-surface-subtle);
+  border: 1px solid var(--docs-edge);
+  border-radius: 999px;
+  display: inline-flex;
+  line-height: 1;
+  padding: 0.32rem 0.65rem;
 }
 
 .component-doc-viewer__toc {
@@ -228,18 +238,9 @@ defineExpose({ scrollToSection })
   font-size: 1.5rem;
 }
 .m-markdown-doc h2 {
+  border-bottom: 1px solid color-mix(in srgb, var(--m-color-border) 60%, transparent);
   font-size: 1.25rem;
-  position: relative;
-}
-.m-markdown-doc h2::before {
-  background: var(--m-color-primary);
-  border-radius: 999px;
-  content: '';
-  display: inline-block;
-  height: 0.85rem;
-  margin-right: 0.5rem;
-  opacity: 0.85;
-  width: 0.2rem;
+  padding-bottom: 0.45rem;
 }
 .m-markdown-doc h3 {
   font-size: 1.05rem;
@@ -263,16 +264,17 @@ defineExpose({ scrollToSection })
   text-decoration: underline;
 }
 .m-markdown-doc code {
-  background: color-mix(in srgb, var(--m-color-primary) 7%, var(--m-color-surface));
-  border: 1px solid color-mix(in srgb, var(--m-color-primary) 12%, transparent);
-  border-radius: var(--m-radius-sm);
-  color: var(--m-color-text);
+  background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
+  border: 1px solid color-mix(in srgb, var(--m-color-primary) 14%, transparent);
+  border-radius: 0.35rem;
+  color: color-mix(in srgb, var(--m-color-primary) 78%, var(--m-color-text));
   font-family: var(--docs-mono);
   font-size: 0.82em;
+  font-weight: 500;
   padding: 0.14rem 0.38rem;
 }
 .m-markdown-doc pre {
-  background: color-mix(in srgb, var(--m-color-text) 5%, var(--m-color-surface));
+  background: var(--docs-surface-raised);
   border: 1px solid color-mix(in srgb, var(--m-color-border) 70%, transparent);
   border-radius: var(--m-radius-lg, 0.75rem);
   overflow-x: auto;
@@ -342,7 +344,7 @@ defineExpose({ scrollToSection })
   margin-top: 1.5rem;
 }
 .m-markdown-doc thead th {
-  background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+  background: var(--docs-surface-sunken);
   color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
   font-size: 0.7rem;
@@ -354,8 +356,12 @@ defineExpose({ scrollToSection })
 .m-markdown-doc tbody tr {
   transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
+/* Subtle zebra so wide API tables stay scannable */
+.m-markdown-doc tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--m-color-text) 1.5%, transparent);
+}
 .m-markdown-doc tbody tr:hover {
-  background: color-mix(in srgb, var(--m-color-primary) 3%, transparent);
+  background: color-mix(in srgb, var(--m-color-primary) 4%, transparent);
 }
 .m-markdown-doc tbody td {
   color: var(--m-color-text);
@@ -397,6 +403,6 @@ html[data-theme='dark'] .m-markdown-doc .shiki span {
   text-decoration: var(--shiki-dark-text-decoration);
 }
 .m-markdown-doc pre.shiki {
-  background: color-mix(in srgb, var(--m-color-text) 5%, var(--m-color-surface)) !important;
+  background: var(--docs-surface-raised) !important;
 }
 </style>

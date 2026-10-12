@@ -48,11 +48,13 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   gap: 0.4rem;
   padding: 0.35rem 0.65rem;
   transition:
+    background var(--m-motion-fast) var(--m-motion-ease),
     border-color var(--m-motion-fast) var(--m-motion-ease),
     color var(--m-motion-fast) var(--m-motion-ease);
 }
 
 .site-search-trigger:hover {
+  background: var(--docs-primary-soft);
   border-color: color-mix(in srgb, var(--m-color-primary) 35%, var(--docs-edge));
   color: var(--m-color-text);
 }
