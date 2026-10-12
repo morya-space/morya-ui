@@ -17,11 +17,12 @@
     --m-control-height-small: 24px;
     --m-control-height-medium: 32px;
     --m-control-height-large: 40px;
+    /* Ant Design: small/medium share 14px, large uses 16px */
     --m-control-font-small: 14px;
     --m-control-font-medium: 14px;
-    --m-control-font-large: 15px;
-    --m-control-padding-x-small: 10px;
-    --m-control-padding-x-medium: 15px;
+    --m-control-font-large: 16px;
+    --m-control-padding-x-small: 8px;
+    --m-control-padding-x-medium: 12px;
     --m-control-padding-x-large: 16px;
 
     --m-radius-control: 6px;

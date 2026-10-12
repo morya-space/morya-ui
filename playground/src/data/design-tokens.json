@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T01:46:52.085Z",
+  "generatedAt": "2026-10-12T02:34:44.243Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 483,
+  "tokenCount": 487,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -2012,13 +2012,33 @@
       }
     },
     {
+      "name": "--m-datepicker-affix-size",
+      "category": "component",
+      "source": "src/components/DatePicker/styles.css",
+      "default": "calc( var(--m-control-height-large) - 2 * var(--m-border-width) )",
+      "description": {
+        "zh-CN": "组件专用相关变量：Datepicker Affix Size",
+        "en-US": "Component-specific token: Datepicker Affix Size"
+      }
+    },
+    {
       "name": "--m-datepicker-calendar-cell-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "var(--m-control-affix-size, 2rem)",
+      "default": "1.75rem",
       "description": {
         "zh-CN": "组件专用相关变量：Datepicker Calendar Cell Size",
         "en-US": "Component-specific token: Datepicker Calendar Cell Size"
+      }
+    },
+    {
+      "name": "--m-datepicker-control-height",
+      "category": "component",
+      "source": "src/components/DatePicker/styles.css",
+      "default": "var(--m-control-height-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Datepicker Control Height",
+        "en-US": "Component-specific token: Datepicker Control Height"
       }
     },
     {
@@ -2032,6 +2052,16 @@
       }
     },
     {
+      "name": "--m-datepicker-font-size",
+      "category": "component",
+      "source": "src/components/DatePicker/styles.css",
+      "default": "var(--m-control-font-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Datepicker Font Size",
+        "en-US": "Component-specific token: Datepicker Font Size"
+      }
+    },
+    {
       "name": "--m-datepicker-grid-gap",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
@@ -2042,10 +2072,20 @@
       }
     },
     {
+      "name": "--m-datepicker-padding-x",
+      "category": "component",
+      "source": "src/components/DatePicker/styles.css",
+      "default": "var(--m-control-padding-x-large)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Datepicker Padding X",
+        "en-US": "Component-specific token: Datepicker Padding X"
+      }
+    },
+    {
       "name": "--m-datepicker-panel-min-width",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "calc( 7 * var(--m-datepicker-calendar-cell-size) + 6 * var(--m-datepicker-grid-gap) + 2 * var(--m-space-3) )",
+      "default": "calc( 3 * 4rem + 2 * var(--m-space-1) + 2 * var(--m-space-3) )",
       "description": {
         "zh-CN": "组件专用相关变量：Datepicker Panel Min Width",
         "en-US": "Component-specific token: Datepicker Panel Min Width"
