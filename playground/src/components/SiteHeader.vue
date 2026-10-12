@@ -205,19 +205,36 @@ const activeSection = computed(() => {
 <style scoped>
 .site-header {
     align-items: center;
-    background: color-mix(in srgb, var(--m-color-surface) 92%, transparent);
+    background: color-mix(in srgb, var(--m-color-surface) 82%, transparent);
     border-bottom: 1px solid var(--docs-edge);
     display: grid;
     flex: 0 0 auto;
     gap: 1rem;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    height: 3.75rem;
+    height: 4rem;
     padding: 0 clamp(1rem, 3vw, 2.5rem);
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 200;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+}
+
+.site-header::after {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        color-mix(in srgb, var(--m-color-primary) 28%, transparent),
+        transparent
+    );
+    bottom: -1px;
+    content: '';
+    height: 1px;
+    left: 0;
+    opacity: 0.55;
+    position: absolute;
+    right: 0;
 }
 
 .site-brand {
@@ -361,6 +378,10 @@ const activeSection = computed(() => {
     color: var(--m-color-primary);
 }
 
+.site-icon-btn:active {
+    transform: scale(0.96);
+}
+
 .site-icon-btn--npm {
     color: #cb3837;
 }
@@ -376,6 +397,10 @@ const activeSection = computed(() => {
         height: auto;
         padding: 0.7rem 0.85rem;
         row-gap: 0.55rem;
+    }
+
+    .site-header::after {
+        display: none;
     }
 
     .site-brand__version {

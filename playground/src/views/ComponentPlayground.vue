@@ -656,7 +656,7 @@ const overviewCount = computed(() => filteredDocumented.value.length);
 .workspace {
     display: grid;
     flex: 1;
-    grid-template-columns: 15rem minmax(0, 1fr) 14rem;
+    grid-template-columns: 15rem minmax(0, 1fr) 13rem;
     min-height: 0;
     overflow: hidden;
 }
@@ -693,11 +693,11 @@ const overviewCount = computed(() => filteredDocumented.value.length);
     width: 100%;
 }
 .content-body--doc {
-    padding-top: 1.25rem;
+    padding-top: 1.5rem;
     padding-bottom: 2.5rem;
 }
 .token-panel-body {
-    padding: 2.5rem 1.25rem;
+    padding: 1.75rem 1rem;
 }
 .token-panel-body :deep(.doc-section-nav) {
     position: sticky;
@@ -1193,8 +1193,7 @@ const overviewCount = computed(() => filteredDocumented.value.length);
     .token-panel {
         display: none;
     }
-}
-@media (max-width: 700px) {
+}@media (max-width: 700px) {
     .components-shell {
         height: auto;
         min-height: 0;

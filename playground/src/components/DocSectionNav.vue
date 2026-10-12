@@ -17,7 +17,9 @@ const { t } = useDocsI18n()
 <template>
   <nav class="doc-section-nav" :aria-label="t.componentSection">
     <div class="doc-section-nav__heading">
-      <h2 class="doc-section-nav__title">{{ t.componentSection }}</h2>
+      <h2 class="doc-section-nav__title">
+        {{ t.componentSection }}
+      </h2>
       <span v-if="sections.length" class="doc-section-nav__count">
         {{ t.sectionsCount.replace('{count}', String(sections.length)) }}
       </span>
@@ -84,17 +86,33 @@ const { t } = useDocsI18n()
   list-style: none;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+
+.doc-section-nav__list::before {
+  background: var(--docs-edge);
+  content: '';
+  left: 0.45rem;
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 1px;
+}
+
+.doc-section-nav__item {
+  position: relative;
 }
 
 .doc-section-nav__item button {
   background: transparent;
   border: 0;
-  border-radius: var(--m-radius-sm);
+  border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
   color: var(--m-color-text-muted);
   cursor: pointer;
   font-size: 0.8rem;
   line-height: 1.45;
-  padding: 0.4rem 0.55rem;
+  padding: 0.4rem 0.55rem 0.4rem 1.15rem;
+  position: relative;
   text-align: left;
   transition:
     background-color var(--m-motion-fast) var(--m-motion-ease),
@@ -102,20 +120,57 @@ const { t } = useDocsI18n()
   width: 100%;
 }
 
+.doc-section-nav__item button::before {
+  background: var(--m-color-text-muted);
+  border-radius: 50%;
+  content: '';
+  height: 0.35rem;
+  left: 0.24rem;
+  opacity: 0.45;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition:
+    background-color var(--m-motion-fast) var(--m-motion-ease),
+    height var(--m-motion-fast) var(--m-motion-ease),
+    opacity var(--m-motion-fast) var(--m-motion-ease),
+    width var(--m-motion-fast) var(--m-motion-ease);
+  width: 0.35rem;
+}
+
 .doc-section-nav__item button:hover {
-  background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
   color: var(--m-color-primary);
 }
 
+.doc-section-nav__item button:hover::before {
+  background: var(--m-color-primary);
+  opacity: 0.8;
+}
+
 .doc-section-nav__item--active button {
-  background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
   color: var(--m-color-primary);
   font-weight: 600;
 }
 
+.doc-section-nav__item--active button::before {
+  background: var(--m-color-primary);
+  border-radius: 999px;
+  height: 1.1rem;
+  opacity: 1;
+  width: 0.2rem;
+}
+
 .doc-section-nav__item--sub button {
   font-size: 0.74rem;
-  padding-left: 1rem;
+  padding-left: 1.65rem;
+}
+
+.doc-section-nav__item--sub button::before {
+  left: 0.75rem;
+}
+
+.doc-section-nav__item--sub.doc-section-nav__item--active button::before {
+  left: 0.68rem;
 }
 
 .doc-section-nav__empty {

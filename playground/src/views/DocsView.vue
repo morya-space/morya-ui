@@ -309,14 +309,14 @@ watch(
 .docs-shell {
     display: grid;
     flex: 1;
-    grid-template-columns: 15.5rem minmax(0, 1fr) 14rem;
+    grid-template-columns: 15rem minmax(0, 1fr) 13rem;
     min-height: 0;
     overflow: hidden;
 }
 
 .docs-sidebar__title {
     font-family: var(--docs-display);
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: -0.04em;
     margin: 0 0 0.85rem;
@@ -419,7 +419,7 @@ watch(
 }
 
 .docs-toc__body {
-    padding: 2.5rem 1.25rem;
+    padding: 1.75rem 1rem;
 }
 
 .docs-toc__body :deep(.doc-section-nav) {
@@ -429,8 +429,8 @@ watch(
 
 .docs-main__body {
     margin: 0 auto;
-    max-width: 48rem;
-    padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+    max-width: 46rem;
+    padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem) 4rem;
     width: 100%;
 }
 
@@ -441,7 +441,7 @@ watch(
 
 @media (max-width: 1100px) {
     .docs-shell {
-        grid-template-columns: 15.5rem minmax(0, 1fr);
+        grid-template-columns: 14rem minmax(0, 1fr);
     }
 
     .docs-toc {
