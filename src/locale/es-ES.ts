@@ -69,6 +69,8 @@ export const esES: MLocaleMessages = {
   thumbnails: 'Miniaturas',
   moveUp: 'Subir',
   moveDown: 'Bajar',
+  moveTop: 'Mover arriba',
+  moveBottom: 'Mover abajo',
   dragToReorder: 'Arrastrar para reordenar',
   moveToTarget: 'Mover a la derecha',
   moveAllToTarget: 'Mover todo a la derecha',
@@ -144,4 +146,7 @@ export const esES: MLocaleMessages = {
   closeTab: 'Cerrar pestaña',
   dateRangePlaceholder: 'Seleccionar rango de fechas',
   today: 'Hoy',
+  hour: 'Hora',
+  minute: 'Minuto',
+  second: 'Segundo',
 }

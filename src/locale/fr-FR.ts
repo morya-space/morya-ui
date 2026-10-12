@@ -82,6 +82,8 @@ export const frFR: MLocaleMessages = {
   thumbnails: "Vignettes",
   moveUp: "Monter",
   moveDown: "Descendre",
+  moveTop: 'Déplacer en haut',
+  moveBottom: 'Déplacer en bas',
   dragToReorder: "Glisser pour réorganiser",
   moveToTarget: "Déplacer vers la droite",
   moveAllToTarget: "Tout déplacer vers la droite",
@@ -156,5 +158,8 @@ export const frFR: MLocaleMessages = {
   addTab: "Ajouter un onglet",
   closeTab: "Fermer l'onglet",
   dateRangePlaceholder: "Sélectionner une plage de dates",
-  today: "Aujourd'hui",
+  today: 'Aujourd’hui',
+  hour: 'Heure',
+  minute: 'Minute',
+  second: 'Seconde',
 };

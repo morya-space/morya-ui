@@ -69,6 +69,8 @@ export const jaJP: MLocaleMessages = {
   thumbnails: 'サムネイル',
   moveUp: '上へ移動',
   moveDown: '下へ移動',
+  moveTop: '先頭へ移動',
+  moveBottom: '末尾へ移動',
   dragToReorder: 'ドラッグして並び替え',
   moveToTarget: '右側へ移動',
   moveAllToTarget: 'すべて右側へ移動',
@@ -144,4 +146,7 @@ export const jaJP: MLocaleMessages = {
   closeTab: 'タブを閉じる',
   dateRangePlaceholder: '日付範囲を選択',
   today: '今日',
+  hour: '時',
+  minute: '分',
+  second: '秒',
 }

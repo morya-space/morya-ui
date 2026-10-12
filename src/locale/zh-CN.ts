@@ -69,6 +69,8 @@ export const zhCN: MLocaleMessages = {
   thumbnails: '缩略图',
   moveUp: '上移',
   moveDown: '下移',
+  moveTop: '移到顶部',
+  moveBottom: '移到底部',
   dragToReorder: '拖拽排序',
   moveToTarget: '移到右侧',
   moveAllToTarget: '全部移到右侧',
@@ -144,4 +146,7 @@ export const zhCN: MLocaleMessages = {
   closeTab: '关闭标签',
   dateRangePlaceholder: '选择日期范围',
   today: '今天',
+  hour: '时',
+  minute: '分',
+  second: '秒',
 }

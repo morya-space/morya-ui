@@ -69,6 +69,8 @@ export const koKR: MLocaleMessages = {
   thumbnails: '썸네일',
   moveUp: '위로 이동',
   moveDown: '아래로 이동',
+  moveTop: '맨 위로 이동',
+  moveBottom: '맨 아래로 이동',
   dragToReorder: '드래그하여 정렬',
   moveToTarget: '오른쪽으로 이동',
   moveAllToTarget: '모두 오른쪽으로 이동',
@@ -144,4 +146,7 @@ export const koKR: MLocaleMessages = {
   closeTab: '탭 닫기',
   dateRangePlaceholder: '날짜 범위 선택',
   today: '오늘',
+  hour: '시',
+  minute: '분',
+  second: '초',
 }

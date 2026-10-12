@@ -69,6 +69,8 @@ export const enUS: MLocaleMessages = {
   thumbnails: 'Thumbnails',
   moveUp: 'Move up',
   moveDown: 'Move down',
+  moveTop: 'Move to top',
+  moveBottom: 'Move to bottom',
   dragToReorder: 'Drag to reorder',
   moveToTarget: 'Move to target',
   moveAllToTarget: 'Move all to target',
@@ -144,4 +146,7 @@ export const enUS: MLocaleMessages = {
   closeTab: 'Close tab',
   dateRangePlaceholder: 'Select date range',
   today: 'Today',
+  hour: 'Hour',
+  minute: 'Minute',
+  second: 'Second',
 }

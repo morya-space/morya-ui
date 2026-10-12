@@ -69,6 +69,8 @@ export const ruRU: MLocaleMessages = {
   thumbnails: 'Миниатюры',
   moveUp: 'Переместить вверх',
   moveDown: 'Переместить вниз',
+  moveTop: 'В начало',
+  moveBottom: 'В конец',
   dragToReorder: 'Перетащите для сортировки',
   moveToTarget: 'Переместить вправо',
   moveAllToTarget: 'Переместить всё вправо',
@@ -144,4 +146,7 @@ export const ruRU: MLocaleMessages = {
   closeTab: 'Закрыть вкладку',
   dateRangePlaceholder: 'Выберите диапазон дат',
   today: 'Сегодня',
+  hour: 'Часы',
+  minute: 'Минуты',
+  second: 'Секунды',
 }

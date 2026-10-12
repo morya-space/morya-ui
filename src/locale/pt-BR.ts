@@ -69,6 +69,8 @@ export const ptBR: MLocaleMessages = {
   thumbnails: 'Miniaturas',
   moveUp: 'Mover para cima',
   moveDown: 'Mover para baixo',
+  moveTop: 'Mover para o topo',
+  moveBottom: 'Mover para o fim',
   dragToReorder: 'Arrastar para reordenar',
   moveToTarget: 'Mover para a direita',
   moveAllToTarget: 'Mover tudo para a direita',
@@ -144,4 +146,7 @@ export const ptBR: MLocaleMessages = {
   closeTab: 'Fechar aba',
   dateRangePlaceholder: 'Selecionar intervalo de datas',
   today: 'Hoje',
+  hour: 'Hora',
+  minute: 'Minuto',
+  second: 'Segundo',
 }

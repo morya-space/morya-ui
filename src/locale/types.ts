@@ -80,6 +80,10 @@ export interface MLocaleConfig {
   thumbnails?: string;
   moveUp?: string;
   moveDown?: string;
+  /** OrderList: move selected item to the top. */
+  moveTop?: string;
+  /** OrderList: move selected item to the bottom. */
+  moveBottom?: string;
   dragToReorder?: string;
   moveToTarget?: string;
   moveAllToTarget?: string;
@@ -160,6 +164,12 @@ export interface MLocaleConfig {
   closeTab?: string;
   dateRangePlaceholder?: string;
   today?: string;
+  /** Time column header: hours (e.g. "时" / "Hour"). */
+  hour?: string;
+  /** Time column header: minutes (e.g. "分" / "Minute"). */
+  minute?: string;
+  /** Time column header: seconds (e.g. "秒" / "Second"). */
+  second?: string;
 }
 
 export type MLocaleMessages = Required<

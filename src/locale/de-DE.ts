@@ -69,6 +69,8 @@ export const deDE: MLocaleMessages = {
   thumbnails: 'Miniaturansichten',
   moveUp: 'Nach oben',
   moveDown: 'Nach unten',
+  moveTop: 'An den Anfang',
+  moveBottom: 'Ans Ende',
   dragToReorder: 'Ziehen zum Sortieren',
   moveToTarget: 'Nach rechts verschieben',
   moveAllToTarget: 'Alle nach rechts verschieben',
@@ -144,4 +146,7 @@ export const deDE: MLocaleMessages = {
   closeTab: 'Registerkarte schließen',
   dateRangePlaceholder: 'Datumsbereich auswählen',
   today: 'Heute',
+  hour: 'Stunde',
+  minute: 'Minute',
+  second: 'Sekunde',
 }

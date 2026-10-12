@@ -69,6 +69,8 @@ export const zhTW: MLocaleMessages = {
   thumbnails: '縮圖',
   moveUp: '上移',
   moveDown: '下移',
+  moveTop: '移到頂部',
+  moveBottom: '移到底部',
   dragToReorder: '拖曳排序',
   moveToTarget: '移到右側',
   moveAllToTarget: '全部移到右側',
@@ -144,4 +146,7 @@ export const zhTW: MLocaleMessages = {
   closeTab: '關閉標籤',
   dateRangePlaceholder: '選擇日期範圍',
   today: '今天',
+  hour: '時',
+  minute: '分',
+  second: '秒',
 }
