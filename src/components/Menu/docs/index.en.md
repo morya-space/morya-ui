@@ -61,7 +61,7 @@ Recommended shell: **global Header + inner `has-sider` Layout**. Bind menu `coll
 
 ## Horizontal mode
 
-`mode="horizontal"` for top nav bars. Submenus open in a `MPopover` dropdown flyout (teleported, themed scrollbar) and close after selection. Popup mode root menus also use built-in `MScrollbar`.
+`mode="horizontal"` for top nav bars. The selected top-level item (or one containing the selection) is highlighted with a **bottom indicator bar**. Submenus open in a `MPopover` dropdown flyout (teleported, themed scrollbar) and close after selection. Popup mode root menus also use built-in `MScrollbar`.
 
 ```vue preview src="./demos/HorizontalMode.en.vue"
 ```
@@ -75,7 +75,7 @@ Use `inverted` with `MLayoutSider`'s `inverted` on dark backgrounds.
 
 ## Popup mode
 
-`popup` + `v-model` renders a floating menu, teleported to `body` by default and positioned against the **default-slot trigger** (falls back to the last pointer position when no slot). Closes on outside click or leaf selection.
+`popup` + `v-model` renders a floating menu, teleported to `body` by default and positioned against the **default-slot trigger** (falls back to the last pointer position when no slot). The panel's minimum width follows the trigger (floor `10rem`) and flips upward when space below runs out. While open, the trigger wrapper carries `m-menu-popup--open` / `data-open` and `aria-expanded` for custom highlight. Closes on outside click or leaf selection.
 
 ```vue preview src="./demos/PopupMode.en.vue"
 ```

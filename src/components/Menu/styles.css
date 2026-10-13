@@ -67,7 +67,8 @@
 
 .m-menu--popup {
     --m-menu-popup-max-height: min(18rem, 45vh);
-    box-shadow: var(--m-shadow-md);
+    border-color: color-mix(in srgb, var(--m-color-border) 85%, transparent);
+    box-shadow: var(--m-shadow-lg);
     display: flex;
     flex-direction: column;
     max-height: var(--m-menu-popup-max-height);
@@ -79,6 +80,13 @@
        (the containing block) when not teleported. */
     width: max-content;
     z-index: var(--m-z-popper);
+}
+
+/* Open-state affordance on the slotted trigger (button stays "pressed"). */
+.m-menu-popup--open .m-menu-popup__anchor > .m-button,
+.m-menu-popup[data-open='true'] .m-menu-popup__anchor > .m-button {
+    border-color: color-mix(in srgb, var(--m-color-primary) 45%, var(--m-color-border));
+    color: var(--m-color-primary);
 }
 
 .m-menu--popup .m-menu__scroll {
@@ -152,7 +160,7 @@
 .m-menu--horizontal .m-menu__item-content {
     align-items: center;
     border-bottom: none;
-    border-radius: var(--m-radius-control);
+    border-radius: var(--m-radius-control) var(--m-radius-control) 0 0;
     font-weight: 500;
     height: var(--m-menu-horizontal-height);
     padding-inline: var(--m-space-3);
@@ -160,9 +168,34 @@
 }
 
 .m-menu--horizontal .m-menu__item-content::before {
-    border-radius: var(--m-radius-control);
+    border-radius: var(--m-radius-control) var(--m-radius-control) 0 0;
     display: block;
     inset: 0;
+}
+
+/* Bottom indicator: the signature affordance of a horizontal nav */
+.m-menu--horizontal .m-menu__item-content::after {
+    background: var(--m-menu-item-text-active);
+    border-radius: 999px;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-50%) scaleX(0.3);
+    opacity: 0;
+    transition:
+        opacity var(--m-motion-fast) var(--m-motion-ease),
+        transform var(--m-motion-fast) var(--m-motion-ease);
+    width: calc(100% - 2 * var(--m-space-3));
+    z-index: 2;
+}
+
+.m-menu--horizontal .m-menu__item-content--selected::after,
+.m-menu--horizontal .m-menu__item-content--child-active::after {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
 }
 
 .m-menu--horizontal .m-menu__item-content--selected::before,
@@ -180,6 +213,15 @@
 .m-menu--horizontal .m-menu__item-content--selected .m-menu__arrow,
 .m-menu--horizontal .m-menu__item-content--child-active .m-menu__arrow {
     color: var(--m-menu-item-text-active);
+}
+
+.m-menu--horizontal .m-menu__item-content--selected .m-menu__label {
+    font-weight: 600;
+}
+
+[data-m-motion="reduced"] .m-menu--horizontal .m-menu__item-content::after,
+[data-m-motion="none"] .m-menu--horizontal .m-menu__item-content::after {
+    transition: none;
 }
 
 .m-menu--horizontal .m-menu__arrow {

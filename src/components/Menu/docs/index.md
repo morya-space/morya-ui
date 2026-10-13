@@ -63,7 +63,7 @@ import {  MMenu } from 'morya-ui'
 
 ## 水平菜单
 
-`mode="horizontal"` 用于顶栏一级导航；子菜单经 `MPopover` 以下拉飞出层展示（Teleport + 主题滚动条），选中后自动关闭。`popup` 模式的主菜单列表同样内置 `MScrollbar`。
+`mode="horizontal"` 用于顶栏一级导航；选中/含选中子项的一级项以**底部指示条**高亮，子菜单经 `MPopover` 以下拉飞出层展示（Teleport + 主题滚动条），选中后自动关闭。`popup` 模式的主菜单列表同样内置 `MScrollbar`。
 
 ```vue preview src="./demos/HorizontalMode.zh.vue"
 ```
@@ -77,7 +77,7 @@ import {  MMenu } from 'morya-ui'
 
 ## 弹出模式
 
-`popup` + `v-model` 将菜单作为浮层，默认 Teleport 到 `body` 并相对**默认插槽触发器**定位（无插槽时回退到最后一次指针位置）。点击外部或选中叶子项后关闭。
+`popup` + `v-model` 将菜单作为浮层，默认 Teleport 到 `body` 并相对**默认插槽触发器**定位（无插槽时回退到最后一次指针位置）。面板最小宽度跟随触发器（下限 `10rem`），下方空间不足时向上翻转；打开期间触发器容器带 `m-menu-popup--open` / `data-open` 与 `aria-expanded`，便于自定义高亮。点击外部或选中叶子项后关闭。
 
 ```vue preview src="./demos/PopupMode.zh.vue"
 ```

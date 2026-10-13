@@ -101,13 +101,30 @@ function resolvePopupAnchor(): DOMRect {
   } as DOMRect
 }
 
+/**
+ * Rough panel height so placement flip/clamp decisions reflect the real
+ * content instead of the 280px fallback: item rows (~40px incl. gap) plus
+ * separators and vertical padding. Still capped by the CSS max-height.
+ */
+function estimatePopupHeight(): number {
+  const rows = props.model.reduce(
+    (count, item) => count + (item.separator ? 0 : 1),
+    0,
+  )
+  const separators = props.model.length - rows
+  return rows * 40 + separators * 13 + 16
+}
+
 function updatePopupPosition() {
   if (!props.popup || !props.modelValue || !teleported.value) return
+  const anchor = resolvePopupAnchor()
   popupStyle.value = computeFloatingOverlayStyle(
-    resolvePopupAnchor(),
+    anchor,
     props.placement,
     {
-      minWidth: '10rem',
+      // Dropdown convention: panel is at least as wide as its trigger.
+      minWidth: `${Math.max(160, Math.round(anchor.width))}px`,
+      estimatedHeight: estimatePopupHeight(),
     },
   )
 }
@@ -401,8 +418,14 @@ const popupPanelStyle = computed(() =>
   >
     <MenuNodes :items="model" :depth="0" prefix="item" />
   </div>
-  <div v-else-if="hasTriggerSlot" v-bind="rootAttrs" class="m-menu-popup">
-    <div ref="triggerEl" class="m-menu-popup__anchor">
+  <div
+    v-else-if="hasTriggerSlot"
+    v-bind="rootAttrs"
+    class="m-menu-popup"
+    :class="{ 'm-menu-popup--open': modelValue }"
+    :data-open="modelValue ? 'true' : undefined"
+  >
+    <div ref="triggerEl" class="m-menu-popup__anchor" :aria-expanded="modelValue" aria-haspopup="menu">
       <slot />
     </div>
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">

@@ -15,9 +15,19 @@
     padding: var(--m-space-2) var(--m-space-3);
     pointer-events: none;
     position: absolute;
-    transform: translateX(-50%);
     white-space: nowrap;
     z-index: var(--m-z-popper);
+}
+
+/*
+ * Static centering transforms only apply to in-place (non-teleported) tips.
+ * Teleported tips get viewport coords plus the inline `translate` property
+ * from JS, and a static transform here would stack with it (double offset).
+ * Keeping the transforms off `.m-tooltip__content--teleported` also lets
+ * transition presets that animate `transform` (e.g. scale-fade) win.
+ */
+.m-tooltip__content:not(.m-tooltip__content--teleported) {
+    transform: translateX(-50%);
 }
 
 .m-tooltip__content--top {
@@ -32,12 +42,15 @@
     left: auto;
     right: calc(100% + var(--m-space-2));
     top: 50%;
-    transform: translateY(-50%);
 }
 
 .m-tooltip__content--right {
     left: calc(100% + var(--m-space-2));
     top: 50%;
+}
+
+.m-tooltip__content--left:not(.m-tooltip__content--teleported),
+.m-tooltip__content--right:not(.m-tooltip__content--teleported) {
     transform: translateY(-50%);
 }
 

@@ -143,9 +143,19 @@ function onTriggerBlur() {
 
 function updatePanelPosition() {
     if (!teleported.value || !trigger.value) return;
+    // The panel is rendered by the time we position (nextTick after open), so
+    // measure it instead of falling back to the 280px estimate — otherwise
+    // small flyouts flip over their trigger near the viewport bottom.
+    const measured = panel.value?.getBoundingClientRect();
     panelStyle.value = computeFloatingOverlayStyle(
         trigger.value.getBoundingClientRect(),
         props.placement,
+        measured && measured.height > 0
+            ? {
+                  estimatedHeight: measured.height,
+                  estimatedWidth: measured.width,
+              }
+            : undefined,
     );
 }
 
