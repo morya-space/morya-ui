@@ -1,5 +1,22 @@
 # morya-ui
 
+## 0.5.0
+
+### Features
+
+- update component import map and styles
+- add gradient support with draggable stops
+- remove InputColor component (replaced by ColorPicker)
+
+### Docs
+
+- add Methods section (open/close/toggle)
+- remove external library references and InputColor mentions
+
+### Changes
+
+- enhance button styling and layout for right-stacked configuration
+
 ## 0.4.5
 
 ### Features

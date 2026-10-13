@@ -1,7 +1,7 @@
 {
   "name": "morya-ui",
   "type": "module",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "packageManager": "pnpm@10.12.4",
   "description": "Open-source Vue 3 component library with design tokens, themes, and interactive docs.",
   "license": "MIT",
@@ -35,6 +35,7 @@
     "**/cascade-select/index.js",
     "**/checkbox/index.js",
     "**/chip/index.js",
+    "**/color-picker/index.js",
     "**/command-menu/index.js",
     "**/config-provider/index.js",
     "**/confirm-dialog/index.js",
@@ -61,7 +62,6 @@
     "**/icon-field/index.js",
     "**/image/index.js",
     "**/inplace/index.js",
-    "**/color-picker/index.js",
     "**/input/index.js",
     "**/input-group/index.js",
     "**/input-number/index.js",
@@ -233,6 +233,12 @@
     },
     "./chip/style": "./dist/chip/style.js",
     "./chip/style.css": "./dist/chip/style.css",
+    "./color-picker": {
+      "types": "./dist/components/ColorPicker/index.d.ts",
+      "import": "./dist/color-picker/index.js"
+    },
+    "./color-picker/style": "./dist/color-picker/style.js",
+    "./color-picker/style.css": "./dist/color-picker/style.css",
     "./command-menu": {
       "types": "./dist/components/CommandMenu/index.d.ts",
       "import": "./dist/command-menu/index.js"
@@ -395,12 +401,6 @@
     },
     "./input/style": "./dist/input/style.js",
     "./input/style.css": "./dist/input/style.css",
-    "./color-picker": {
-      "types": "./dist/components/ColorPicker/index.d.ts",
-      "import": "./dist/color-picker/index.js"
-    },
-    "./color-picker/style": "./dist/color-picker/style.js",
-    "./color-picker/style.css": "./dist/color-picker/style.css",
     "./input-group": {
       "types": "./dist/components/InputGroup/index.d.ts",
       "import": "./dist/input-group/index.js"

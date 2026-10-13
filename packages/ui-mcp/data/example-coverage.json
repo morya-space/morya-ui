@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-12T07:47:11.724Z",
-  "catalogGeneratedAt": "2026-10-12T07:47:04.752Z",
+  "generatedAt": "2026-10-13T08:59:00.584Z",
+  "catalogGeneratedAt": "2026-10-13T08:55:20.652Z",
   "components": [
     {
       "id": "Accordion",
@@ -564,6 +564,54 @@
         "total": 0,
         "covered": 0,
         "missing": []
+      }
+    },
+    {
+      "id": "ColorPicker",
+      "exportName": "MColorPicker",
+      "examples": 12,
+      "props": {
+        "total": 17,
+        "covered": 5,
+        "missing": [
+          "disabled",
+          "disabledAlpha",
+          "format",
+          "size",
+          "placement",
+          "teleport",
+          "appendTo",
+          "transition",
+          "pt",
+          "label",
+          "colors",
+          "defaultOpen"
+        ]
+      },
+      "events": {
+        "total": 5,
+        "covered": 0,
+        "missing": [
+          "update:modelValue",
+          "change",
+          "clear",
+          "show",
+          "hide"
+        ]
+      },
+      "slots": {
+        "total": 0,
+        "covered": 0,
+        "missing": []
+      },
+      "methods": {
+        "total": 3,
+        "covered": 0,
+        "missing": [
+          "open",
+          "close",
+          "toggle"
+        ]
       }
     },
     {
@@ -1543,48 +1591,6 @@
           "focus",
           "select"
         ]
-      }
-    },
-    {
-      "id": "ColorPicker",
-      "exportName": "MColorPicker",
-      "examples": 6,
-      "props": {
-        "total": 10,
-        "covered": 2,
-        "missing": [
-          "disabled",
-          "disabledAlpha",
-          "allowClear",
-          "format",
-          "presets",
-          "showText",
-          "size",
-          "placement",
-          "teleport",
-          "gradient"
-        ]
-      },
-      "events": {
-        "total": 5,
-        "covered": 0,
-        "missing": [
-          "update:modelValue",
-          "change",
-          "clear",
-          "show",
-          "hide"
-        ]
-      },
-      "slots": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
-      },
-      "methods": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
       }
     },
     {
@@ -4003,6 +4009,6 @@
   "summary": {
     "components": 107,
     "componentsWithMissingCoverage": 106,
-    "totalExamples": 1007
+    "totalExamples": 1013
   }
 }
