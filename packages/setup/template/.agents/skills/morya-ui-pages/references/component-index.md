@@ -69,6 +69,16 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | Select vs TreeSelect vs AutoComplete vs Radio / … | `selection-choice` |
 | Card vs Panel vs Fieldset | `surface-choice` |
 | PageContent vs Flex vs Space vs Grid | `layout-spacing-choice` |
+| Button 图标（icon prop / #icon slot / iconOnly） | `button-icon-choice` |
+| 输入框前后缀（MIconField / MInputGroup） | `input-addon-choice` |
+| Switch / Checkbox / Slider / InputTags | `toggle-input-choice` |
+| Avatar / Image / Tag / Status | `status-display-choice` |
+| Anchor / Affix / Tabs / Stepper / Breadcrumb | `nav-pattern-choice` |
+| DatePicker / TimePicker / Calendar | `date-input-choice` |
+| Carousel / Gallery / Timeline / Rating | `media-display-choice` |
+| Watermark / QRCode / Tour / Terminal | `specialized-display-choice` |
+| FloatLabel / Inplace | `form-label-choice` |
+| Knob / MeterGroup | `specialized-input-choice` |
 | PageFilters / Toolbar / Header / Section / Stat / Placeholder | `page-section-choice` |
 | Layout scroll vs MScrollbar vs built-in | `page-scroll-choice` |
 | Avoid double borders / extra Card wrappers | `surface-nesting-choice` |
@@ -94,6 +104,10 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | `MTable` `:data` | `:rows` (`data-display-choice`) |
 | `<MMessage type>` (or legacy `severity`) as an inline alert | Field `errorMessage`, or token `role="alert"` (`feedback-choice`) |
 | `MButton severity="…"` / treating Button sugar `type` as status tone | `type="primary"` for look; status via `MStatus` / `MTag type="…"`; danger via `danger` / `color="danger"` |
+| `MButton` 图标手写 `<MIcon />` 放默认插槽 | `icon="…"` prop 或 `#icon` 插槽（`button-icon-choice`） |
+| `iconOnly` 按钮把图标放默认插槽 / 不写 `aria-label` | `icon="…"` + `aria-label`（`button-icon-choice`） |
+| 输入框内手写 absolute 定位图标 | `MIconField`（`input-addon-choice`） |
+| 输入框 + 文字前缀 / 按钮手写 flex 拼接 | `MInputGroup` + `MInputGroupAddon`（`input-addon-choice`） |
 | `MButton badge` / `badgeColor` | Wrap with `MBadge` (`status-label-choice`) |
 | Hand `<table>` | `MTable` |
 | Hand modal div | `MDialog` / `MConfirmDialog` |
