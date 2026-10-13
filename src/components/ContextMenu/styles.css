@@ -1,6 +1,6 @@
 /* —— Navigation: ContextMenu —— */
 .m-contextmenu {
-    --m-contextmenu-min-width: var(--m-menu-min-width, 10rem);
+    --m-contextmenu-min-width: var(--m-overlay-menu-min-width, 10rem);
     --m-contextmenu-item-gap: var(--m-space-1);
     --m-contextmenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);

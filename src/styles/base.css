@@ -2,7 +2,7 @@
 
 :root {
     /* Shared minimum width for menu-like panels (select/orderlist/picklist) */
-    --m-menu-min-width: 12rem;
+    --m-overlay-menu-min-width: 12rem;
 }
 
 .m-button,
@@ -453,9 +453,7 @@
     font-family: var(--m-font-sans);
     gap: var(--m-space-2);
     max-width: 100%;
-    min-width: var(--m-menu-min-width);
     position: relative;
-    width: fit-content;
 }
 
 .m-textarea-field--fluid,
@@ -646,7 +644,7 @@
     flex: 1;
     max-height: 16rem;
     min-height: 12rem;
-    min-width: var(--m-menu-min-width);
+    min-width: var(--m-overlay-menu-min-width);
 }
 
 .m-orderlist__list,

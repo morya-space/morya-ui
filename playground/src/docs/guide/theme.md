@@ -38,7 +38,7 @@ toggleTheme();
 | `--m-font-size-xs/sm/md/lg`                                       | 组件正文字号阶梯                              |
 | `--m-opacity-disabled`                                            | 禁用态透明度                                  |
 | `--m-z-base` / `--m-z-overlay` / `--m-z-dropdown` / `--m-z-toast` | 浮层层叠（Config `zIndex` 会写 `--m-z-base`） |
-| `--m-menu-min-width` / `--m-control-affix-*`                      | 菜单最小宽、输入清除区尺寸                    |
+| `--m-overlay-menu-min-width` / `--m-control-affix-*`                      | 菜单最小宽、输入清除区尺寸                    |
 
 动效相关 token（`--m-motion-*`）见 [动效](/docs/motion)。
 

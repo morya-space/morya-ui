@@ -109,9 +109,9 @@
     border-radius: var(--m-radius-control);
     box-shadow: var(--m-shadow-lg);
     box-sizing: border-box;
-    min-width: 240px;
     padding: var(--m-space-3);
     position: absolute;
+    width: 260px;
     z-index: var(--m-z-overlay, 1000);
 }
 
@@ -214,39 +214,6 @@
     gap: var(--m-space-2);
 }
 
-.m-colorpicker__input {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
-    box-sizing: border-box;
-    color: var(--m-color-text);
-    flex: 1;
-    font-family: var(--m-font-sans);
-    font-size: var(--m-control-font-small);
-    font-variant-numeric: tabular-nums;
-    height: var(--m-control-height-small);
-    padding: 0 var(--m-space-2);
-    transition:
-        border-color var(--m-motion-fast) var(--m-motion-ease),
-        box-shadow var(--m-motion-fast) var(--m-motion-ease);
-    width: 100%;
-}
-
-.m-colorpicker__input:hover:not(:disabled) {
-    border-color: var(--m-color-primary-hover);
-}
-
-.m-colorpicker__input:focus {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
-}
-
-.m-colorpicker__input:disabled {
-    cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
-}
-
 /* Presets */
 .m-colorpicker__presets {
     border-top: var(--m-border-width) solid var(--m-color-border);
@@ -300,39 +267,7 @@
 
 /* Mode Switch */
 .m-colorpicker__mode-switch {
-    background: var(--m-color-surface-secondary, rgb(0 0 0 / 4%));
-    border-radius: var(--m-radius-control);
-    display: flex;
-    gap: 2px;
-    padding: 2px;
-}
-
-.m-colorpicker__mode-btn {
-    background: transparent;
-    border: 0;
-    border-radius: calc(var(--m-radius-control) - 2px);
-    color: var(--m-color-text-muted);
-    cursor: pointer;
-    flex: 1;
-    font-family: var(--m-font-sans);
-    font-size: var(--m-font-size-sm);
-    padding: var(--m-space-1) var(--m-space-2);
-    transition: all var(--m-motion-fast) var(--m-motion-ease);
-}
-
-.m-colorpicker__mode-btn:hover:not(:disabled) {
-    color: var(--m-color-text);
-}
-
-.m-colorpicker__mode-btn--active {
-    background: var(--m-color-surface);
-    color: var(--m-color-text);
-    box-shadow: var(--m-shadow-sm);
-}
-
-.m-colorpicker__mode-btn:disabled {
-    cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+    margin-bottom: var(--m-space-1);
 }
 
 /* Gradient Bar */
@@ -448,38 +383,23 @@
     gap: var(--m-space-2);
 }
 
-.m-colorpicker__gradient-type {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
-    cursor: pointer;
-    font-family: var(--m-font-sans);
-    font-size: var(--m-control-font-small);
-    height: var(--m-control-height-small);
-    padding: 0 var(--m-space-2);
+.m-colorpicker__gradient-options > * {
+    flex: 0 0 auto;
 }
 
-.m-colorpicker__gradient-angle {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
-    font-family: var(--m-font-sans);
-    font-size: var(--m-control-font-small);
-    height: var(--m-control-height-small);
-    padding: 0 var(--m-space-2);
-    width: 60px;
+.m-colorpicker__gradient-options .m-select__control {
+    width: 90px;
+}
+
+.m-colorpicker__gradient-options .m-inputnumber {
+    width: 70px;
+}
+
+.m-colorpicker__gradient-options .m-inputnumber .m-inputnumber__input-wrap {
+    width: 100%;
 }
 
 .m-colorpicker__gradient-angle-unit {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
-}
-
-.m-colorpicker__gradient-type:focus,
-.m-colorpicker__gradient-angle:focus {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
 }

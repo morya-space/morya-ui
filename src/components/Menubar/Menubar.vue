@@ -56,7 +56,7 @@ function updateSubmenuPosition() {
     gap: 4,
     // --m-menubar-menu-min-width is defined on .m-menubar and does not cross
     // the teleport boundary; reference the root-level shared token instead.
-    minWidth: 'var(--m-menu-min-width, 12rem)',
+    minWidth: 'var(--m-overlay-menu-min-width, 12rem)',
   })
 }
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import type { ColorPickerProps, ColorPickerFormat, GradientStop, GradientValue } from './types'
+import type { SelectModelValue } from '../Select/types'
+import type { ColorPickerFormat, ColorPickerProps, GradientStop, GradientValue } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useConfiguredSize, useMConfig } from '../../shared/config'
@@ -10,6 +11,10 @@ import { useFieldParts } from '../../shared/useComponentAttrs'
 import { useMId } from '../../shared/useMId'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MIcon from '../Icon/Icon.vue'
+import MInput from '../Input/Input.vue'
+import MInputNumber from '../InputNumber/InputNumber.vue'
+import MSegmented from '../Segmented/Segmented.vue'
+import MSelect from '../Select/Select.vue'
 import {
   clamp,
   hexToRgb,
@@ -92,18 +97,43 @@ const teleportTarget = computed(() =>
   resolveOverlayTeleport(props, config.value.appendTo),
 )
 
-// Sync from modelValue
+// Sync from modelValue — skip when update was emitted internally
+let lastEmittedValue: string | undefined
+
 watch(() => props.modelValue, (val) => {
   const value = val ?? '#000000'
+  if (value === lastEmittedValue) return
+  lastEmittedValue = undefined
+
   if (props.gradient && isGradient(value)) {
     mode.value = 'gradient'
     const parsed = parseGradient(value)
     if (parsed) {
+      // Preserve active stop by matching position (not ID) if possible
+      const prevActiveId = activeStopId.value
+      const prevActiveStop = prevActiveId
+        ? gradientValue.value.stops.find((s) => s.id === prevActiveId)
+        : undefined
+
       gradientValue.value = parsed
+
       if (parsed.stops.length > 0) {
-        activeStopId.value = parsed.stops[0]!.id
-        const rgb = hexToRgb(normalizeHex(parsed.stops[0]!.color))
-        if (rgb) hsb.value = rgbToHsb(rgb)
+        let restored = false
+        if (prevActiveStop) {
+          const match = parsed.stops.find(
+            (s) => Math.abs(s.position - prevActiveStop.position) < 0.5
+              && s.color.toLowerCase() === prevActiveStop.color.toLowerCase(),
+          )
+          if (match) {
+            activeStopId.value = match.id
+            restored = true
+          }
+        }
+        if (!restored) {
+          activeStopId.value = parsed.stops[0]!.id
+          const rgb = hexToRgb(normalizeHex(parsed.stops[0]!.color))
+          if (rgb) hsb.value = rgbToHsb(rgb)
+        }
       }
     }
   } else {
@@ -202,12 +232,13 @@ function updateColor(newHsb: typeof hsb.value, newAlpha?: number) {
   if (newAlpha !== undefined) alpha.value = clamp(newAlpha, 0, 1)
   const rgb = hsbToRgb(hsb.value)
   const hex = rgbToHex(rgb)
-  
+
   if (isGradientMode.value && activeStop.value) {
     activeStop.value.color = hex
     emitGradient()
   } else {
     inputValue.value = formatDisplayValue(hex)
+    lastEmittedValue = hex
     emit('update:modelValue', hex)
     emit('change', hex)
   }
@@ -215,15 +246,17 @@ function updateColor(newHsb: typeof hsb.value, newAlpha?: number) {
 
 function emitGradient() {
   const str = gradientToString(gradientValue.value)
+  lastEmittedValue = str
   inputValue.value = str
   emit('update:modelValue', str)
   emit('change', str)
 }
 
-function setMode(newMode: 'single' | 'gradient') {
-  if (props.disabled) return
-  mode.value = newMode
-  if (newMode === 'gradient' && !isGradient(props.modelValue ?? '')) {
+function setMode(newMode: string | number | boolean | null) {
+  if (props.disabled || newMode == null) return
+  const modeValue = newMode as 'single' | 'gradient'
+  mode.value = modeValue
+  if (modeValue === 'gradient' && !isGradient(props.modelValue ?? '')) {
     // Convert current color to gradient
     gradientValue.value = createDefaultGradient()
     const firstStop = gradientValue.value.stops[0]
@@ -232,7 +265,7 @@ function setMode(newMode: 'single' | 'gradient') {
       activeStopId.value = firstStop.id
     }
     emitGradient()
-  } else if (newMode === 'single') {
+  } else if (modeValue === 'single') {
     // Use first stop color as single color
     const firstStop = gradientValue.value.stops[0]
     if (firstStop) {
@@ -268,53 +301,83 @@ function onGradientBarPointerDown(event: PointerEvent) {
     }
   }
   
-  // If close to existing stop, select it; otherwise add new stop
+  // If close to existing stop, select it only (no drag)
   if (closest && minDist < 5) {
     activeStopId.value = closest.id
     const rgb = hexToRgb(normalizeHex(closest.color))
     if (rgb) hsb.value = rgbToHsb(rgb)
-  } else {
-    const newStop: GradientStop = {
-      id: createStopId(),
-      color: currentHex.value,
-      position: Math.round(x),
-    }
-    gradientValue.value.stops.push(newStop)
-    gradientValue.value.stops.sort((a, b) => a.position - b.position)
-    activeStopId.value = newStop.id
-    emitGradient()
+    return // Early return — don't start dragging existing stops
   }
   
-  // Start dragging
-  el.setPointerCapture(event.pointerId)
-  const onMove = (e: PointerEvent) => onGradientBarMove(e)
-  const onUp = () => {
-    el.removeEventListener('pointermove', onMove)
-    el.removeEventListener('pointerup', onUp)
+  // Add new stop and start dragging it
+  const newStop: GradientStop = {
+    id: createStopId(),
+    color: currentHex.value,
+    position: Math.round(x),
   }
-  el.addEventListener('pointermove', onMove)
-  el.addEventListener('pointerup', onUp)
-}
-
-function onGradientBarMove(event: PointerEvent) {
-  const el = gradientBarRef.value
-  if (!el || !activeStop.value) return
-  const rect = el.getBoundingClientRect()
-  const x = clamp((event.clientX - rect.left) / rect.width, 0, 1) * 100
-  activeStop.value.position = Math.round(x)
+  gradientValue.value.stops.push(newStop)
   gradientValue.value.stops.sort((a, b) => a.position - b.position)
+  activeStopId.value = newStop.id
+  emitGradient()
+  
+  // Start dragging the new stop — capture on the bar element since the new stop doesn't exist yet
+  startStopDrag(el, el, event.pointerId, newStop)
+}
+
+function onStopPointerDown(event: PointerEvent, stop: GradientStop) {
+  if (props.disabled) return
+  event.stopPropagation()
+  
+  // Select the stop
+  activeStopId.value = stop.id
+  const rgb = hexToRgb(normalizeHex(stop.color))
+  if (rgb) hsb.value = rgbToHsb(rgb)
+  
+  // Start dragging this stop — capture on the stop element itself
+  const stopEl = event.currentTarget as HTMLElement
+  const barEl = gradientBarRef.value
+  if (!stopEl || !barEl) return
+  startStopDrag(stopEl, barEl, event.pointerId, stop)
+}
+
+function startStopDrag(captureEl: HTMLElement, barEl: HTMLElement, pointerId: number, stop: GradientStop) {
+  captureEl.setPointerCapture(pointerId)
+  const stopId = stop.id // Capture by ID, not by reference
+  const onMove = (e: PointerEvent) => {
+    const rect = barEl.getBoundingClientRect()
+    const x = clamp((e.clientX - rect.left) / rect.width, 0, 1) * 100
+    // Find the stop by ID in the current array (it may have been re-sorted)
+    const currentStop = gradientValue.value.stops.find((s) => s.id === stopId)
+    if (currentStop) {
+      currentStop.position = x // Use float for smooth dragging, round only on emit
+      gradientValue.value.stops.sort((a, b) => a.position - b.position)
+      emitGradient()
+    }
+  }
+  const onUp = () => {
+    // Round to integer on release for cleaner values
+    const currentStop = gradientValue.value.stops.find((s) => s.id === stopId)
+    if (currentStop) {
+      currentStop.position = Math.round(currentStop.position)
+      gradientValue.value.stops.sort((a, b) => a.position - b.position)
+      emitGradient()
+    }
+    captureEl.removeEventListener('pointermove', onMove)
+    captureEl.removeEventListener('pointerup', onUp)
+  }
+  captureEl.addEventListener('pointermove', onMove)
+  captureEl.addEventListener('pointerup', onUp)
+}
+
+function onAngleChange(value: number | null) {
+  if (value == null) return
+  gradientValue.value.angle = value
   emitGradient()
 }
 
-function onAngleChange(event: Event) {
-  const target = event.target as HTMLInputElement
-  gradientValue.value.angle = parseInt(target.value, 10) || 0
-  emitGradient()
-}
-
-function onGradientTypeChange(event: Event) {
-  const target = event.target as HTMLSelectElement
-  gradientValue.value.type = target.value as 'linear' | 'radial'
+function onGradientTypeChange(value: SelectModelValue) {
+  if (value == null || typeof value === 'object') return
+  gradientValue.value.type = value as 'linear' | 'radial'
   emitGradient()
 }
 
@@ -406,13 +469,12 @@ function onAlphaMove(event: PointerEvent) {
   updateColor(hsb.value, x)
 }
 
-function onInputChange(event: Event) {
-  const target = event.target as HTMLInputElement
-  const value = target.value.trim()
+function onInputChange(value: string) {
+  const trimmed = value.trim()
   
   if (isGradientMode.value) {
     // Try to parse as gradient
-    const parsed = parseGradient(value)
+    const parsed = parseGradient(trimmed)
     if (parsed) {
       gradientValue.value = parsed
       if (parsed.stops.length > 0) {
@@ -423,8 +485,8 @@ function onInputChange(event: Event) {
       emitGradient()
     }
   } else {
-    if (isValidHex(value)) {
-      const rgb = hexToRgb(value)
+    if (isValidHex(trimmed)) {
+      const rgb = hexToRgb(trimmed)
       if (rgb) {
         updateColor(rgbToHsb(rgb))
       }
@@ -437,6 +499,7 @@ function onInputBlur() {
 }
 
 function onClear() {
+  lastEmittedValue = ''
   emit('update:modelValue', '')
   emit('clear')
   closePanel()
@@ -535,24 +598,17 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
           <div class="m-colorpicker__panel-inner">
             <!-- Mode Switch -->
             <div v-if="gradient" class="m-colorpicker__mode-switch">
-              <button
-                type="button"
-                class="m-colorpicker__mode-btn"
-                :class="{ 'm-colorpicker__mode-btn--active': mode === 'single' }"
+              <MSegmented
+                :model-value="mode"
+                block
+                :options="[
+                  { label: 'Single', value: 'single' },
+                  { label: 'Gradient', value: 'gradient' },
+                ]"
+                size="small"
                 :disabled="disabled"
-                @click="setMode('single')"
-              >
-                Single
-              </button>
-              <button
-                type="button"
-                class="m-colorpicker__mode-btn"
-                :class="{ 'm-colorpicker__mode-btn--active': mode === 'gradient' }"
-                :disabled="disabled"
-                @click="setMode('gradient')"
-              >
-                Gradient
-              </button>
+                @update:model-value="setMode"
+              />
             </div>
 
             <!-- Gradient Controls -->
@@ -572,7 +628,7 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
                     :class="{ 'm-colorpicker__gradient-stop--active': stop.id === activeStopId }"
                     :style="{ left: `${stop.position}%`, background: stop.color }"
                     @click.stop="onStopSelect(stop)"
-                    @pointerdown.stop="onGradientBarPointerDown"
+                    @pointerdown.stop="onStopPointerDown($event, stop)"
                   />
                 </div>
                 <div class="m-colorpicker__gradient-stops-list">
@@ -600,25 +656,25 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
 
               <!-- Gradient Type & Angle -->
               <div class="m-colorpicker__gradient-options">
-                <select
-                  class="m-colorpicker__gradient-type"
-                  :value="gradientValue.type"
+                <MSelect
+                  :model-value="gradientValue.type"
+                  :options="[
+                    { label: 'Linear', value: 'linear' },
+                    { label: 'Radial', value: 'radial' },
+                  ]"
+                  size="small"
                   :disabled="disabled"
-                  @change="onGradientTypeChange"
-                >
-                  <option value="linear">Linear</option>
-                  <option value="radial">Radial</option>
-                </select>
-                <input
+                  @update:model-value="onGradientTypeChange"
+                />
+                <MInputNumber
                   v-if="gradientValue.type === 'linear'"
-                  type="number"
-                  class="m-colorpicker__gradient-angle"
-                  :value="Math.round(gradientValue.angle)"
+                  :model-value="Math.round(gradientValue.angle)"
+                  size="small"
+                  :min="0"
+                  :max="360"
                   :disabled="disabled"
-                  min="0"
-                  max="360"
-                  @change="onAngleChange"
-                >
+                  @update:model-value="onAngleChange"
+                />
                 <span v-if="gradientValue.type === 'linear'" class="m-colorpicker__gradient-angle-unit">deg</span>
               </div>
             </template>
@@ -658,22 +714,23 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
 
             <!-- Input -->
             <div class="m-colorpicker__input-row">
-              <input
+              <MInput
                 :id="fieldId"
                 v-model="inputValue"
-                type="text"
-                class="m-colorpicker__input"
+                size="small"
                 :disabled="disabled"
                 spellcheck="false"
                 @change="onInputChange"
                 @blur="onInputBlur"
-              >
+              />
             </div>
 
             <!-- Presets -->
             <div v-if="presets?.length" class="m-colorpicker__presets">
               <div v-for="(preset, i) in presets" :key="i" class="m-colorpicker__preset-group">
-                <div v-if="preset.label" class="m-colorpicker__preset-label">{{ preset.label }}</div>
+                <div v-if="preset.label" class="m-colorpicker__preset-label">
+                  {{ preset.label }}
+                </div>
                 <div class="m-colorpicker__preset-colors">
                   <button
                     v-for="color in preset.colors"

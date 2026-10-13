@@ -1,6 +1,6 @@
 /* —— Navigation: Menubar —— */
 .m-menubar {
-    --m-menubar-menu-min-width: var(--m-menu-min-width, 10rem);
+    --m-menubar-menu-min-width: var(--m-overlay-menu-min-width, 10rem);
     --m-menubar-item-gap: var(--m-space-1);
     align-items: stretch;
     background: var(--m-color-surface);

@@ -38,7 +38,7 @@ See the full [Design tokens](/docs/design-tokens) catalog (searchable, grouped b
 | `--m-font-size-xs/sm/md/lg`                                       | Component type scale                            |
 | `--m-opacity-disabled`                                            | Disabled opacity                                |
 | `--m-z-base` / `--m-z-overlay` / `--m-z-dropdown` / `--m-z-toast` | Overlay stacking (`zIndex` writes `--m-z-base`) |
-| `--m-menu-min-width` / `--m-control-affix-*`                      | Menu min width, input clear-button size         |
+| `--m-overlay-menu-min-width` / `--m-control-affix-*`                      | Menu min width, input clear-button size         |
 
 Motion tokens (`--m-motion-*`) are covered in [Motion](/docs/motion).
 

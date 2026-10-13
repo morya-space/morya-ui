@@ -1,5 +1,5 @@
 .m-dropdown {
-    --m-dropdown-menu-min-width: var(--m-menu-min-width, 10rem);
+    --m-dropdown-menu-min-width: var(--m-overlay-menu-min-width, 10rem);
     display: inline-block;
     font-family: var(--m-font-sans);
     position: relative;

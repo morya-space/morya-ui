@@ -41,7 +41,7 @@ describe('MColorPicker', () => {
   it('updates input value when hex is typed', async () => {
     const wrapper = mount(MColorPicker, { props: { modelValue: '#000000', teleport: false } })
     await wrapper.find('.m-colorpicker__trigger').trigger('click')
-    const input = wrapper.find('.m-colorpicker__input')
+    const input = wrapper.find('.m-input')
     await input.setValue('#00ff00')
     await input.trigger('change')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['#00ff00'])
@@ -66,8 +66,8 @@ describe('MColorPicker', () => {
       props: { modelValue: '#ff0000', gradient: true, teleport: false },
     })
     await wrapper.find('.m-colorpicker__trigger').trigger('click')
-    const modeBtns = wrapper.findAll('.m-colorpicker__mode-btn')
-    await modeBtns[1]!.trigger('click') // Gradient button
+    const inputs = wrapper.findAll('.m-segmented__input')
+    await inputs[1]!.setValue(true) // Select Gradient option
     expect(wrapper.find('.m-colorpicker__gradient-bar').exists()).toBe(true)
   })
 
@@ -76,7 +76,8 @@ describe('MColorPicker', () => {
       props: { modelValue: '#ff0000', gradient: true, teleport: false },
     })
     await wrapper.find('.m-colorpicker__trigger').trigger('click')
-    await wrapper.findAll('.m-colorpicker__mode-btn')[1]!.trigger('click')
+    const inputs = wrapper.findAll('.m-segmented__input')
+    await inputs[1]!.setValue(true)
     
     // Initially 2 stops
     expect(wrapper.findAll('.m-colorpicker__gradient-stop').length).toBe(2)

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T07:05:16.284Z",
+  "generatedAt": "2026-10-13T07:41:31.707Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -1811,7 +1811,7 @@
       "name": "--m-contextmenu-min-width",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
-      "default": "var(--m-menu-min-width, 10rem)",
+      "default": "var(--m-overlay-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Contextmenu Min Width",
         "en-US": "Menu token: Contextmenu Min Width"
@@ -2268,7 +2268,7 @@
       "name": "--m-dropdown-menu-min-width",
       "category": "menu",
       "source": "src/components/Dropdown/styles.css",
-      "default": "var(--m-menu-min-width, 10rem)",
+      "default": "var(--m-overlay-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Dropdown Menu Min Width",
         "en-US": "Menu token: Dropdown Menu Min Width"
@@ -3338,7 +3338,7 @@
       }
     },
     {
-      "name": "--m-menu-min-width",
+      "name": "--m-overlay-menu-min-width",
       "category": "menu",
       "source": "src/styles/base.css",
       "default": "12rem",
@@ -3401,7 +3401,7 @@
       "name": "--m-menubar-menu-min-width",
       "category": "menu",
       "source": "src/components/Menubar/styles.css",
-      "default": "var(--m-menu-min-width, 10rem)",
+      "default": "var(--m-overlay-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Menubar Menu Min Width",
         "en-US": "Menu token: Menubar Menu Min Width"
@@ -5125,7 +5125,7 @@
       "name": "--m-tieredmenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
-      "default": "var(--m-menu-min-width)",
+      "default": "var(--m-overlay-menu-min-width)",
       "description": {
         "zh-CN": "菜单相关变量：Tieredmenu Min Width",
         "en-US": "Menu token: Tieredmenu Min Width"
@@ -5145,7 +5145,7 @@
       "name": "--m-tieredmenu-submenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
-      "default": "var(--m-menu-min-width, 10rem)",
+      "default": "var(--m-overlay-menu-min-width, 10rem)",
       "description": {
         "zh-CN": "菜单相关变量：Tieredmenu Submenu Min Width",
         "en-US": "Menu token: Tieredmenu Submenu Min Width"

@@ -105,7 +105,7 @@ export function parseGradient(value: string): GradientValue | null {
 
 export function gradientToString(gradient: GradientValue): string {
   const stops = gradient.stops
-    .map((s) => `${s.color} ${Math.round(s.position)}%`)
+    .map((s) => `${s.color} ${Math.round(s.position * 100) / 100}%`)
     .join(', ')
 
   if (gradient.type === 'linear') {
@@ -148,5 +148,5 @@ export function createDefaultGradient(): GradientValue {
 
 export function stopsToGradientPreview(stops: GradientStop[]): string {
   const sorted = [...stops].sort((a, b) => a.position - b.position)
-  return `linear-gradient(to right, ${sorted.map((s) => `${s.color} ${s.position}%`).join(', ')})`
+  return `linear-gradient(to right, ${sorted.map((s) => `${s.color} ${Math.round(s.position * 100) / 100}%`).join(', ')})`
 }

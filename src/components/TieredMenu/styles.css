@@ -1,7 +1,7 @@
 /* —— Navigation: TieredMenu —— */
 .m-tieredmenu {
-    --m-tieredmenu-submenu-min-width: var(--m-menu-min-width, 10rem);
-    --m-tieredmenu-min-width: var(--m-menu-min-width);
+    --m-tieredmenu-submenu-min-width: var(--m-overlay-menu-min-width, 10rem);
+    --m-tieredmenu-min-width: var(--m-overlay-menu-min-width);
     --m-tieredmenu-item-gap: var(--m-space-1);
     --m-tieredmenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
