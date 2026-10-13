@@ -1,3 +1,8 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Icon/styles.css'
+import '../Input/styles.css'
+import '../InputNumber/styles.css'
+import '../Segmented/styles.css'
+import '../Select/styles.css'
 import './styles.css'
