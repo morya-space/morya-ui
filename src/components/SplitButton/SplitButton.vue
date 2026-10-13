@@ -101,12 +101,16 @@ function onMainClick(event: MouseEvent) {
   emit('click', event)
 }
 
-function openMenu() {
+function openMenu(fromKeyboard = false) {
   open.value = true
   void nextTick(() => {
     updateMenuPosition()
-    keyboard.moveFirst()
-    focusActiveItem()
+    if (fromKeyboard) {
+      keyboard.moveFirst()
+      focusActiveItem()
+    } else {
+      keyboard.reset()
+    }
   })
 }
 
@@ -124,7 +128,7 @@ function onTriggerKeydown(event: KeyboardEvent) {
   if (!open.value) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
-      openMenu()
+      openMenu(true)
     }
     return
   }
