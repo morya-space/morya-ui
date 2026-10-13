@@ -89,3 +89,11 @@ Enable `gradient` for linear/radial gradient editing with draggable color stops.
 | Name | Description |
 | --- | --- |
 | — | No custom slots yet. |
+
+## Methods
+
+| Method | Description |
+| --- | --- |
+| `open` | Open the color picker panel. |
+| `close` | Close the color picker panel. |
+| `toggle` | Toggle the color picker panel visibility. |

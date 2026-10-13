@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-12T07:47:04.752Z",
+  "generatedAt": "2026-10-13T08:55:20.652Z",
   "library": {
     "name": "morya-ui",
-    "version": "0.4.5"
+    "version": "0.5.0"
   },
   "mcp": {
     "name": "@morya-ui/mcp",
-    "version": "0.4.5"
+    "version": "0.5.0"
   },
   "components": [
     {
@@ -4411,6 +4411,419 @@
             }
           ],
           "markdown": "---\ntitle: Chip\ncategory: 01 / BASIC\ndescription: Chip displays tagged information, optionally with an icon, image, and remove action.\n---\n\n# Chip\n\nChip displays short tagged information, with optional icon/image and a remove button.\n\n## Import\n\n```ts\nimport { MChip } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `label` | `string` | 鈥?| Chip text. |\n| `icon` | [IconName](/docs/types#IconName) | 鈥?| Leading icon name. |\n| `image` | `string` | 鈥?| Leading image URL (takes precedence over icon). |\n| `removable` | `boolean` | `false` | Show 脳 remove button. |\n| `disabled` | `boolean` | `false` | Disable interaction. |\n| `type` | `MTagType` | — | Semantic color. |\n| `size` | `'small' \\| 'large' \\| 'sm' \\| 'md' \\| 'lg'` | 鈥?| Size. |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM pass-through; see [attrs](/docs/attrs). |\n\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `remove` | `MouseEvent` | Fired when the remove button is clicked. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Label content. |\n| `icon` | Leading icon. |\n"
+        }
+      }
+    },
+    {
+      "id": "ColorPicker",
+      "name": "ColorPicker",
+      "exportName": "MColorPicker",
+      "category": "02 / FORM",
+      "description": "颜色选择器，支持面板取色、透明度与预设色板。",
+      "descriptionEn": "Color picker with panel, alpha, and preset swatches.",
+      "import": "import { MColorPicker } from 'morya-ui'",
+      "props": [
+        {
+          "name": "modelValue",
+          "type": "string",
+          "default": "'#1677ff'",
+          "description": "当前颜色值（hex）或 CSS 渐变字符串。"
+        },
+        {
+          "name": "gradient",
+          "type": "boolean",
+          "default": "false",
+          "description": "启用渐变色模式。"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "禁用。"
+        },
+        {
+          "name": "disabledAlpha",
+          "type": "boolean",
+          "default": "false",
+          "description": "禁用透明度调节。"
+        },
+        {
+          "name": "allowClear",
+          "type": "boolean",
+          "default": "false",
+          "description": "显示清空按钮。"
+        },
+        {
+          "name": "format",
+          "type": "'hex' | 'rgb' | 'hsb'",
+          "default": "'hex'",
+          "description": "显示格式。"
+        },
+        {
+          "name": "presets",
+          "type": "ColorPickerPreset[]",
+          "default": "—",
+          "description": "预设色板。"
+        },
+        {
+          "name": "showText",
+          "type": "boolean",
+          "default": "false",
+          "description": "在触发器中显示颜色文本。"
+        },
+        {
+          "name": "size",
+          "type": "MSizeInput",
+          "default": "—",
+          "description": "尺寸。"
+        },
+        {
+          "name": "placement",
+          "type": "ColorPickerPlacement",
+          "default": "'bottom-start'",
+          "description": "弹层位置。"
+        },
+        {
+          "name": "teleport",
+          "type": "boolean",
+          "default": "true",
+          "description": "是否 teleport 到 body。"
+        },
+        {
+          "name": "appendTo",
+          "type": "MAppendTo",
+          "default": "'body'",
+          "description": "挂载目标。"
+        },
+        {
+          "name": "transition",
+          "type": "MotionPresetId | false",
+          "default": "—",
+          "description": "过渡动画。"
+        },
+        {
+          "name": "pt",
+          "type": "FieldPassThrough",
+          "default": "—",
+          "description": "DOM 透传。"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "description": "分组标签。"
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "description": "颜色数组。"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "description": "默认展开。"
+        }
+      ],
+      "events": [
+        {
+          "name": "update:modelValue",
+          "payload": "string",
+          "description": "颜色变化。"
+        },
+        {
+          "name": "change",
+          "payload": "string",
+          "description": "颜色变化（同 `update:modelValue`）。"
+        },
+        {
+          "name": "clear",
+          "payload": "—",
+          "description": "点击清空。"
+        },
+        {
+          "name": "show",
+          "payload": "—",
+          "description": "面板打开。"
+        },
+        {
+          "name": "hide",
+          "payload": "—",
+          "description": "面板关闭。"
+        }
+      ],
+      "slots": [
+        {
+          "name": "—",
+          "description": "暂无自定义插槽。"
+        }
+      ],
+      "methods": [
+        {
+          "name": "open",
+          "description": "打开颜色选择面板。"
+        },
+        {
+          "name": "close",
+          "description": "关闭颜色选择面板。"
+        },
+        {
+          "name": "toggle",
+          "description": "切换颜色选择面板的显示状态。"
+        }
+      ],
+      "examples": [
+        {
+          "id": "引入-1",
+          "section": "引入",
+          "sectionId": "引入",
+          "lang": "ts",
+          "preview": false,
+          "code": "import { MColorPicker } from \"morya-ui\";",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "基础用法-1",
+          "section": "基础用法",
+          "sectionId": "基础用法",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "预设色板-1",
+          "section": "预设色板",
+          "sectionId": "预设色板",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker\n    v-model=\"color\"\n    :presets=\"[\n      { label: 'Recommended', colors: ['#1677ff', '#52c41a', '#faad14', '#f5222d', '#722ed1'] },\n    ]\"\n  />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "显示文本与清空-1",
+          "section": "显示文本与清空",
+          "sectionId": "显示文本与清空",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" show-text allow-clear />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "渐变色-1",
+          "section": "渐变色",
+          "sectionId": "渐变色",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" gradient />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "渐变值绑定-1",
+          "section": "渐变值绑定",
+          "sectionId": "渐变值绑定",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('linear-gradient(90deg, #1677ff 0%, #ff4d4f 100%)')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" gradient show-text />\n</template>",
+          "locale": "zh-CN"
+        },
+        {
+          "id": "import-1",
+          "section": "Import",
+          "sectionId": "import",
+          "lang": "ts",
+          "preview": false,
+          "code": "import { MColorPicker } from \"morya-ui\";",
+          "locale": "en-US"
+        },
+        {
+          "id": "basic-1",
+          "section": "Basic",
+          "sectionId": "basic",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "presets-1",
+          "section": "Presets",
+          "sectionId": "presets",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker\n    v-model=\"color\"\n    :presets=\"[\n      { label: 'Recommended', colors: ['#1677ff', '#52c41a', '#faad14', '#f5222d', '#722ed1'] },\n    ]\"\n  />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "show-text-and-clear-1",
+          "section": "Show text and clear",
+          "sectionId": "show-text-and-clear",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" show-text allow-clear />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "gradient-1",
+          "section": "Gradient",
+          "sectionId": "gradient",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#1677ff')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" gradient />\n</template>",
+          "locale": "en-US"
+        },
+        {
+          "id": "gradient-value-binding-1",
+          "section": "Gradient Value Binding",
+          "sectionId": "gradient-value-binding",
+          "lang": "vue",
+          "preview": true,
+          "code": "<script setup lang=\"ts\">\nimport { MColorPicker } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('linear-gradient(90deg, #1677ff 0%, #ff4d4f 100%)')\n</script>\n\n<template>\n  <MColorPicker v-model=\"color\" gradient show-text />\n</template>",
+          "locale": "en-US"
+        }
+      ],
+      "locales": {
+        "zh-CN": {
+          "title": "ColorPicker",
+          "description": "颜色选择器，支持面板取色、透明度与预设色板。",
+          "sections": [
+            {
+              "id": "overview",
+              "title": "",
+              "body": "# ColorPicker\n\n颜色选择器，支持 HSB 面板取色、透明度调节、预设色板与多种格式显示。"
+            },
+            {
+              "id": "何时使用",
+              "title": "何时使用",
+              "body": "- 需要完整的颜色选择体验，而非仅输入 hex。\n- 需要调节透明度（alpha）时。\n- 需要提供预设色板供用户快速选择时。"
+            },
+            {
+              "id": "引入",
+              "title": "引入",
+              "body": "```ts\nimport { MColorPicker } from \"morya-ui\";\n```"
+            },
+            {
+              "id": "基础用法",
+              "title": "基础用法",
+              "body": "```vue preview src=\"./demos/Basic.vue\"\n```"
+            },
+            {
+              "id": "预设色板",
+              "title": "预设色板",
+              "body": "```vue preview src=\"./demos/Presets.vue\"\n```"
+            },
+            {
+              "id": "显示文本与清空",
+              "title": "显示文本与清空",
+              "body": "```vue preview src=\"./demos/ShowText.vue\"\n```"
+            },
+            {
+              "id": "渐变色",
+              "title": "渐变色",
+              "body": "启用 `gradient` 后支持线性/径向渐变编辑，可添加/删除/拖拽色标。\n\n```vue preview src=\"./demos/Gradient.vue\"\n```"
+            },
+            {
+              "id": "渐变值绑定",
+              "title": "渐变值绑定",
+              "body": "```vue preview src=\"./demos/GradientValue.vue\"\n```"
+            },
+            {
+              "id": "props",
+              "title": "Props",
+              "body": "| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | `'#1677ff'` | 当前颜色值（hex）或 CSS 渐变字符串。 |\n| `gradient` | `boolean` | `false` | 启用渐变色模式。 |\n| `disabled` | `boolean` | `false` | 禁用。 |\n| `disabledAlpha` | `boolean` | `false` | 禁用透明度调节。 |\n| `allowClear` | `boolean` | `false` | 显示清空按钮。 |\n| `format` | `'hex' \\| 'rgb' \\| 'hsb'` | `'hex'` | 显示格式。 |\n| `presets` | `ColorPickerPreset[]` | — | 预设色板。 |\n| `showText` | `boolean` | `false` | 在触发器中显示颜色文本。 |\n| `size` | `MSizeInput` | — | 尺寸。 |\n| `placement` | `ColorPickerPlacement` | `'bottom-start'` | 弹层位置。 |\n| `teleport` | `boolean` | `true` | 是否 teleport 到 body。 |\n| `appendTo` | `MAppendTo` | `'body'` | 挂载目标。 |\n| `transition` | `MotionPresetId \\| false` | — | 过渡动画。 |\n| `pt` | `FieldPassThrough` | — | DOM 透传。 |"
+            },
+            {
+              "id": "events",
+              "title": "Events",
+              "body": "| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `string` | 颜色变化。 |\n| `change` | `string` | 颜色变化（同 `update:modelValue`）。 |\n| `clear` | — | 点击清空。 |\n| `show` | — | 面板打开。 |\n| `hide` | — | 面板关闭。 |"
+            },
+            {
+              "id": "colorpickerpreset",
+              "title": "ColorPickerPreset",
+              "body": "| 参数 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 分组标签。 |\n| `colors` | `string[]` | 颜色数组。 |\n| `defaultOpen` | `boolean` | 默认展开。 |"
+            },
+            {
+              "id": "slots",
+              "title": "Slots",
+              "body": "| 插槽名 | 说明 |\n| --- | --- |\n| — | 暂无自定义插槽。 |"
+            },
+            {
+              "id": "methods",
+              "title": "Methods",
+              "body": "| 方法名 | 说明 |\n| --- | --- |\n| `open` | 打开颜色选择面板。 |\n| `close` | 关闭颜色选择面板。 |\n| `toggle` | 切换颜色选择面板的显示状态。 |"
+            }
+          ],
+          "markdown": "---\ntitle: ColorPicker\ncategory: 02 / FORM\ndescription: 颜色选择器，支持面板取色、透明度与预设色板。\n---\n\n# ColorPicker\n\n颜色选择器，支持 HSB 面板取色、透明度调节、预设色板与多种格式显示。\n\n## 何时使用\n\n- 需要完整的颜色选择体验，而非仅输入 hex。\n- 需要调节透明度（alpha）时。\n- 需要提供预设色板供用户快速选择时。\n\n## 引入\n\n```ts\nimport { MColorPicker } from \"morya-ui\";\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## 预设色板\n\n```vue preview src=\"./demos/Presets.vue\"\n```\n\n## 显示文本与清空\n\n```vue preview src=\"./demos/ShowText.vue\"\n```\n\n## 渐变色\n\n启用 `gradient` 后支持线性/径向渐变编辑，可添加/删除/拖拽色标。\n\n```vue preview src=\"./demos/Gradient.vue\"\n```\n\n## 渐变值绑定\n\n```vue preview src=\"./demos/GradientValue.vue\"\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | `'#1677ff'` | 当前颜色值（hex）或 CSS 渐变字符串。 |\n| `gradient` | `boolean` | `false` | 启用渐变色模式。 |\n| `disabled` | `boolean` | `false` | 禁用。 |\n| `disabledAlpha` | `boolean` | `false` | 禁用透明度调节。 |\n| `allowClear` | `boolean` | `false` | 显示清空按钮。 |\n| `format` | `'hex' \\| 'rgb' \\| 'hsb'` | `'hex'` | 显示格式。 |\n| `presets` | `ColorPickerPreset[]` | — | 预设色板。 |\n| `showText` | `boolean` | `false` | 在触发器中显示颜色文本。 |\n| `size` | `MSizeInput` | — | 尺寸。 |\n| `placement` | `ColorPickerPlacement` | `'bottom-start'` | 弹层位置。 |\n| `teleport` | `boolean` | `true` | 是否 teleport 到 body。 |\n| `appendTo` | `MAppendTo` | `'body'` | 挂载目标。 |\n| `transition` | `MotionPresetId \\| false` | — | 过渡动画。 |\n| `pt` | `FieldPassThrough` | — | DOM 透传。 |\n\n## Events\n\n| 事件名 | 参数 | 说明 |\n| --- | --- | --- |\n| `update:modelValue` | `string` | 颜色变化。 |\n| `change` | `string` | 颜色变化（同 `update:modelValue`）。 |\n| `clear` | — | 点击清空。 |\n| `show` | — | 面板打开。 |\n| `hide` | — | 面板关闭。 |\n\n## ColorPickerPreset\n\n| 参数 | 类型 | 说明 |\n| --- | --- | --- |\n| `label` | `string` | 分组标签。 |\n| `colors` | `string[]` | 颜色数组。 |\n| `defaultOpen` | `boolean` | 默认展开。 |\n\n## Slots\n\n| 插槽名 | 说明 |\n| --- | --- |\n| — | 暂无自定义插槽。 |\n\n## Methods\n\n| 方法名 | 说明 |\n| --- | --- |\n| `open` | 打开颜色选择面板。 |\n| `close` | 关闭颜色选择面板。 |\n| `toggle` | 切换颜色选择面板的显示状态。 |\n"
+        },
+        "en-US": {
+          "title": "ColorPicker",
+          "description": "Color picker with panel, alpha, and preset swatches.",
+          "sections": [
+            {
+              "id": "overview",
+              "title": "",
+              "body": "# ColorPicker\n\nColor picker with HSB panel, alpha slider, preset swatches, and multiple display formats."
+            },
+            {
+              "id": "when-to-use",
+              "title": "When to use",
+              "body": "- When you need a full color picking experience, not just hex input.\n- When you need alpha channel support.\n- When you want to provide preset color palettes."
+            },
+            {
+              "id": "import",
+              "title": "Import",
+              "body": "```ts\nimport { MColorPicker } from \"morya-ui\";\n```"
+            },
+            {
+              "id": "basic",
+              "title": "Basic",
+              "body": "```vue preview src=\"./demos/Basic.vue\"\n```"
+            },
+            {
+              "id": "presets",
+              "title": "Presets",
+              "body": "```vue preview src=\"./demos/Presets.vue\"\n```"
+            },
+            {
+              "id": "show-text-and-clear",
+              "title": "Show text and clear",
+              "body": "```vue preview src=\"./demos/ShowText.vue\"\n```"
+            },
+            {
+              "id": "gradient",
+              "title": "Gradient",
+              "body": "Enable `gradient` for linear/radial gradient editing with draggable color stops.\n\n```vue preview src=\"./demos/Gradient.vue\"\n```"
+            },
+            {
+              "id": "gradient-value-binding",
+              "title": "Gradient Value Binding",
+              "body": "```vue preview src=\"./demos/GradientValue.vue\"\n```"
+            },
+            {
+              "id": "props",
+              "title": "Props",
+              "body": "| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | `'#1677ff'` | Current color value (hex) or CSS gradient string. |\n| `gradient` | `boolean` | `false` | Enable gradient mode. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `disabledAlpha` | `boolean` | `false` | Disable alpha channel. |\n| `allowClear` | `boolean` | `false` | Show clear button. |\n| `format` | `'hex' \\| 'rgb' \\| 'hsb'` | `'hex'` | Display format. |\n| `presets` | `ColorPickerPreset[]` | — | Preset color palettes. |\n| `showText` | `boolean` | `false` | Show color text in trigger. |\n| `size` | `MSizeInput` | — | Size. |\n| `placement` | `ColorPickerPlacement` | `'bottom-start'` | Popup placement. |\n| `teleport` | `boolean` | `true` | Teleport to body. |\n| `appendTo` | `MAppendTo` | `'body'` | Mount target. |\n| `transition` | `MotionPresetId \\| false` | — | Transition. |\n| `pt` | `FieldPassThrough` | — | DOM pass-through. |"
+            },
+            {
+              "id": "events",
+              "title": "Events",
+              "body": "| Event | Payload | Description |\n| --- | --- | --- |\n| `update:modelValue` | `string` | Color changed. |\n| `change` | `string` | Color changed. |\n| `clear` | — | Clear clicked. |\n| `show` | — | Panel opened. |\n| `hide` | — | Panel closed. |"
+            },
+            {
+              "id": "colorpickerpreset",
+              "title": "ColorPickerPreset",
+              "body": "| Prop | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Group label. |\n| `colors` | `string[]` | Color array. |\n| `defaultOpen` | `boolean` | Default expanded. |"
+            },
+            {
+              "id": "slots",
+              "title": "Slots",
+              "body": "| Name | Description |\n| --- | --- |\n| — | No custom slots yet. |"
+            },
+            {
+              "id": "methods",
+              "title": "Methods",
+              "body": "| Method | Description |\n| --- | --- |\n| `open` | Open the color picker panel. |\n| `close` | Close the color picker panel. |\n| `toggle` | Toggle the color picker panel visibility. |"
+            }
+          ],
+          "markdown": "---\ntitle: ColorPicker\ncategory: 02 / FORM\ndescription: Color picker with panel, alpha, and preset swatches.\n---\n\n# ColorPicker\n\nColor picker with HSB panel, alpha slider, preset swatches, and multiple display formats.\n\n## When to use\n\n- When you need a full color picking experience, not just hex input.\n- When you need alpha channel support.\n- When you want to provide preset color palettes.\n\n## Import\n\n```ts\nimport { MColorPicker } from \"morya-ui\";\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Presets\n\n```vue preview src=\"./demos/Presets.vue\"\n```\n\n## Show text and clear\n\n```vue preview src=\"./demos/ShowText.vue\"\n```\n\n## Gradient\n\nEnable `gradient` for linear/radial gradient editing with draggable color stops.\n\n```vue preview src=\"./demos/Gradient.vue\"\n```\n\n## Gradient Value Binding\n\n```vue preview src=\"./demos/GradientValue.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | `'#1677ff'` | Current color value (hex) or CSS gradient string. |\n| `gradient` | `boolean` | `false` | Enable gradient mode. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `disabledAlpha` | `boolean` | `false` | Disable alpha channel. |\n| `allowClear` | `boolean` | `false` | Show clear button. |\n| `format` | `'hex' \\| 'rgb' \\| 'hsb'` | `'hex'` | Display format. |\n| `presets` | `ColorPickerPreset[]` | — | Preset color palettes. |\n| `showText` | `boolean` | `false` | Show color text in trigger. |\n| `size` | `MSizeInput` | — | Size. |\n| `placement` | `ColorPickerPlacement` | `'bottom-start'` | Popup placement. |\n| `teleport` | `boolean` | `true` | Teleport to body. |\n| `appendTo` | `MAppendTo` | `'body'` | Mount target. |\n| `transition` | `MotionPresetId \\| false` | — | Transition. |\n| `pt` | `FieldPassThrough` | — | DOM pass-through. |\n\n## Events\n\n| Event | Payload | Description |\n| --- | --- | --- |\n| `update:modelValue` | `string` | Color changed. |\n| `change` | `string` | Color changed. |\n| `clear` | — | Clear clicked. |\n| `show` | — | Panel opened. |\n| `hide` | — | Panel closed. |\n\n## ColorPickerPreset\n\n| Prop | Type | Description |\n| --- | --- | --- |\n| `label` | `string` | Group label. |\n| `colors` | `string[]` | Color array. |\n| `defaultOpen` | `boolean` | Default expanded. |\n\n## Slots\n\n| Name | Description |\n| --- | --- |\n| — | No custom slots yet. |\n\n## Methods\n\n| Method | Description |\n| --- | --- |\n| `open` | Open the color picker panel. |\n| `close` | Close the color picker panel. |\n| `toggle` | Toggle the color picker panel visibility. |\n"
         }
       }
     },
@@ -13112,241 +13525,6 @@
             }
           ],
           "markdown": "---\ntitle: Input\ncategory: 02 / FORM\ndescription: Text input field.\n---\n\n# Input\n\nSingle-line text input.\n\n## Import\n\n```ts\nimport { MInput } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Invalid\n\nUse `invalid` for validation failure, or rely on `error-message` alone.\n\n```vue preview src=\"./demos/Invalid.vue\"\n```\n\n## Clearable\n\n```vue preview src=\"./demos/Clearable.vue\"\n```\n\n## Prefix / Suffix\n\n```vue preview src=\"./demos/PrefixSuffix.en.vue\"\n```\n\n## Password-like type\n\n```vue preview src=\"./demos/PasswordLikeType.vue\"\n```\n\n## Sizes\n\nSupports `small` / `large`, and also `sm` / `md` / `lg`.\n\n```vue preview src=\"./demos/Sizes.vue\"\n```\n\n## Count\n\n`showCount` shows the character count; pair with `maxlength` for an upper bound.\n\n```vue preview src=\"./demos/Count.vue\"\n```\n\n## Fluid\n\n```vue preview src=\"./demos/Fluid.vue\"\n```\n\n## Disabled\n\n```vue preview src=\"./demos/Disabled.vue\"\n```\n\n## Outer attrs & layout\n\nAll fallthrough attrs except **control events** (`@keydown`, `@focus`, …) bind to the field wrapper (`.m-input-field`), not the raw `<input>`—including `class`, `style`, `data-*`, `title`, `tabindex`, and undeclared attrs:\n\n```vue preview src=\"./demos/OuterAttrsAndLayout.en.vue\"\n```\n\nSee [Styling & attrs](/docs/attrs) for library-wide rules.\n\n## Keyboard & focus events\n\n`@keydown`, `@focus`, `@blur`, and similar listeners attach to the underlying input:\n\n```vue preview src=\"./demos/KeyboardAndFocusEvents.en.vue\"\n```\n\n## pt\n\nPass-through per DOM part. Common keys: `root`, `input`, `label`, `prefix`, `suffix`, `help`, `count`.\n\n```vue preview src=\"./demos/Pt.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `modelValue` | `string` | `''` | Bound value. |\n| `label` | `string` | — | Label text. |\n| `helpText` | `string` | — | Helper text. |\n| `invalid` | `boolean` | `false` | Validation failed state. |\n| `status` | `'error' \\| 'warning'` | — | Visual status; `error` matches invalid, `warning` is caution chrome. Error wins over warning. |\n| `id` | `string` | — | Native id; auto-generated when omitted. |\n| `type` | `'text' \\| 'email' \\| 'password' \\| 'search' \\| 'url' \\| 'tel'` | `'text'` | Native type. |\n| `size` | `'small' \\| 'large' \\| 'sm' \\| 'md' \\| 'lg'` | — | Size; medium by default. Inherits Form `size` when omitted. |\n| `variant` | `'outlined' \\| 'filled'` | `'outlined'` | Style variant. |\n| `fluid` | `boolean` | `false` | Full width. |\n| `disabled` | `boolean` | `false` | Disabled. |\n| `readonly` | `boolean` | `false` | Read-only. |\n| `clearable` | `boolean` | `false` | Show clear button. |\n| `allowClear` | `boolean` | — | Alias of `clearable` . |\n| `maxlength` | `number` | — | Native maxlength. |\n| `showCount` | `boolean` | `false` | Show character count. |\n| `errorMessage` | `string` | — | Error copy; implies invalid when set. |\n| `placeholder` | `string` | — | Placeholder. |\n| `name` | `string` | — | Native name. |\n| `autocomplete` | `string` | — | Native autocomplete. |\n| `autofocus` | `boolean` | `false` | Focus on mount. |\n| `pt` | [InputPassThrough](/docs/types#InputPassThrough) | — | Pass-through per DOM part; see **pt** above. |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `prefix` | Left adornment (unit, icon, and so on). |\n| `suffix` | Right adornment; can coexist with the clear button. |\n\n## Events\n\n| Event | Prop | Description |\n| --- | --- | --- |\n| `update:modelValue` | `string` | Value changed. |\n| `clear` | — | Fired when clear is clicked. |\n\n## Instance\n\n| Method | Description |\n| --- | --- |\n| `focus()` | Focus the underlying input. |\n| `blur()` | Blur the underlying input. |\n| `select()` | Select all text in the input. |\n\n## Types\n\n<h4 id=\"InputPassThrough\">InputPassThrough</h4>\n\nType of `pt`. Extends [FieldPassThrough](/docs/types#FieldPassThrough) with affix parts:\n\n```ts\ntype InputPassThrough = FieldPassThrough & {\n  prefix?: PassThroughPart\n  suffix?: PassThroughPart\n  help?: PassThroughPart\n  count?: PassThroughPart\n}\n```\n\nSee [PassThroughPart](/docs/types#PassThroughPart) in API types.\n"
-        }
-      }
-    },
-    {
-      "id": "InputColor",
-      "name": "InputColor",
-      "exportName": "MInputColor",
-      "category": "02 / FORM",
-      "description": "颜色选择，支持色板与十六进制文本。",
-      "descriptionEn": "Color picker with a palette and hexadecimal text input.",
-      "import": "import { MInputColor } from 'morya-ui'",
-      "props": [
-        {
-          "name": "modelValue",
-          "type": "string",
-          "default": "'#000000'",
-          "description": "十六进制颜色。"
-        },
-        {
-          "name": "swatches",
-          "type": "string[]",
-          "default": "—",
-          "description": "快捷色板。"
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false",
-          "description": "禁用。"
-        },
-        {
-          "name": "id",
-          "type": "string",
-          "default": "—",
-          "description": "色板 input id。"
-        },
-        {
-          "name": "invalid",
-          "type": "boolean",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "label",
-          "type": "string",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "size",
-          "type": "[MSizeInput](/docs/types#MSizeInput)",
-          "default": "—",
-          "description": "—"
-        },
-        {
-          "name": "pt",
-          "type": "[FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }",
-          "default": "—",
-          "description": "DOM 透传，见 [样式与 attrs](/docs/attrs)."
-        }
-      ],
-      "events": [
-        {
-          "name": "update:modelValue",
-          "payload": "string",
-          "description": "颜色变化。"
-        }
-      ],
-      "slots": [
-        {
-          "name": "trigger",
-          "description": "自定义颜色触发器。"
-        }
-      ],
-      "methods": [],
-      "examples": [
-        {
-          "id": "引入-1",
-          "section": "引入",
-          "sectionId": "引入",
-          "lang": "ts",
-          "preview": false,
-          "code": "import { MInputColor } from \"morya-ui\";",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "基础用法-1",
-          "section": "基础用法",
-          "sectionId": "基础用法",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MInputColor } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#2563eb')\n</script>\n\n<template>\n  <MInputColor v-model=\"color\" />\n</template>",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "swatches-1",
-          "section": "Swatches",
-          "sectionId": "swatches",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MInputColor } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#2563eb')\n</script>\n\n<template>\n  <MInputColor v-model=\"color\" :swatches=\"['#2563eb', '#16a34a', '#dc2626']\" />\n</template>",
-          "locale": "zh-CN"
-        },
-        {
-          "id": "import-1",
-          "section": "Import",
-          "sectionId": "import",
-          "lang": "ts",
-          "preview": false,
-          "code": "import { MInputColor } from \"morya-ui\";",
-          "locale": "en-US"
-        },
-        {
-          "id": "basic-1",
-          "section": "Basic",
-          "sectionId": "basic",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MInputColor } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#2563eb')\n</script>\n\n<template>\n  <MInputColor v-model=\"color\" />\n</template>",
-          "locale": "en-US"
-        },
-        {
-          "id": "swatches-1",
-          "section": "Swatches",
-          "sectionId": "swatches",
-          "lang": "vue",
-          "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MInputColor } from 'morya-ui'\nimport { ref } from 'vue'\n\nconst color = ref('#2563eb')\n</script>\n\n<template>\n  <MInputColor v-model=\"color\" :swatches=\"['#2563eb', '#16a34a', '#dc2626']\" />\n</template>",
-          "locale": "en-US"
-        }
-      ],
-      "locales": {
-        "zh-CN": {
-          "title": "InputColor",
-          "description": "颜色选择，支持色板与十六进制文本。",
-          "sections": [
-            {
-              "id": "overview",
-              "title": "",
-              "body": "# InputColor\n\n通过原生色板与文本框编辑 hex 颜色。"
-            },
-            {
-              "id": "何时使用",
-              "title": "何时使用",
-              "body": "- 表单需要选择或输入十六进制颜色时。\n- 需要预设色块（`swatches`）即可，不需要完整独立取色面板。"
-            },
-            {
-              "id": "引入",
-              "title": "引入",
-              "body": "```ts\nimport { MInputColor } from \"morya-ui\";\n```"
-            },
-            {
-              "id": "基础用法",
-              "title": "基础用法",
-              "body": "```vue preview src=\"./demos/Basic.vue\"\n```"
-            },
-            {
-              "id": "swatches",
-              "title": "Swatches",
-              "body": "`swatches` 提供快捷色板。\n\n```vue preview src=\"./demos/Swatches.vue\"\n```"
-            },
-            {
-              "id": "props",
-              "title": "Props",
-              "body": "| 参数         | 类型                                                                                   | 默认值      | 说明                                      |\n| ------------ | -------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |\n| `modelValue` | `string`                                                                               | `'#000000'` | 十六进制颜色。                            |\n| `swatches`   | `string[]`                                                                             | —           | 快捷色板。                                |\n| `disabled`   | `boolean`                                                                              | `false`     | 禁用。                                    |\n| `id`         | `string`                                                                               | —           | 色板 input id。                           |\n| `invalid`    | `boolean`                                                                              | —           | —                                         |\n| `label`      | `string`                                                                               | —           | —                                         |\n| `size`       | [MSizeInput](/docs/types#MSizeInput)                                                   | —           | —                                         |\n| `pt`         | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | —           | DOM 透传，见 [样式与 attrs](/docs/attrs). |"
-            },
-            {
-              "id": "events",
-              "title": "Events",
-              "body": "| 事件名              | 参数     | 说明       |\n| ------------------- | -------- | ---------- |\n| `update:modelValue` | `string` | 颜色变化。 |"
-            },
-            {
-              "id": "功能边界",
-              "title": "功能边界",
-              "body": "选色实现是**原生色板 + hex 文本 + 可选 swatches**，不是完整的面板级取色体验。"
-            },
-            {
-              "id": "slots",
-              "title": "Slots",
-              "body": "| 插槽名    | 说明               |\n| --------- | ------------------ |\n| `trigger` | 自定义颜色触发器。 |"
-            }
-          ],
-          "markdown": "---\ntitle: InputColor\ncategory: 02 / FORM\ndescription: 颜色选择，支持色板与十六进制文本。\n---\n\n# InputColor\n\n通过原生色板与文本框编辑 hex 颜色。\n\n## 何时使用\n\n- 表单需要选择或输入十六进制颜色时。\n- 需要预设色块（`swatches`）即可，不需要完整独立取色面板。\n\n## 引入\n\n```ts\nimport { MInputColor } from \"morya-ui\";\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Swatches\n\n`swatches` 提供快捷色板。\n\n```vue preview src=\"./demos/Swatches.vue\"\n```\n\n## Props\n\n| 参数         | 类型                                                                                   | 默认值      | 说明                                      |\n| ------------ | -------------------------------------------------------------------------------------- | ----------- | ----------------------------------------- |\n| `modelValue` | `string`                                                                               | `'#000000'` | 十六进制颜色。                            |\n| `swatches`   | `string[]`                                                                             | —           | 快捷色板。                                |\n| `disabled`   | `boolean`                                                                              | `false`     | 禁用。                                    |\n| `id`         | `string`                                                                               | —           | 色板 input id。                           |\n| `invalid`    | `boolean`                                                                              | —           | —                                         |\n| `label`      | `string`                                                                               | —           | —                                         |\n| `size`       | [MSizeInput](/docs/types#MSizeInput)                                                   | —           | —                                         |\n| `pt`         | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | —           | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n## Events\n\n| 事件名              | 参数     | 说明       |\n| ------------------- | -------- | ---------- |\n| `update:modelValue` | `string` | 颜色变化。 |\n\n## 功能边界\n\n选色实现是**原生色板 + hex 文本 + 可选 swatches**，不是完整的面板级取色体验。\n\n## Slots\n\n| 插槽名    | 说明               |\n| --------- | ------------------ |\n| `trigger` | 自定义颜色触发器。 |\n"
-        },
-        "en-US": {
-          "title": "InputColor",
-          "description": "Color picker with a palette and hexadecimal text input.",
-          "sections": [
-            {
-              "id": "overview",
-              "title": "",
-              "body": "# InputColor\n\nEdit hex colors with the native color picker and a text field."
-            },
-            {
-              "id": "when-to-use",
-              "title": "When to use",
-              "body": "- Use when a form needs a hex color value.\n- Prefer this when native picker + optional `swatches` is enough; not a full standalone color panel."
-            },
-            {
-              "id": "import",
-              "title": "Import",
-              "body": "```ts\nimport { MInputColor } from \"morya-ui\";\n```"
-            },
-            {
-              "id": "basic",
-              "title": "Basic",
-              "body": "```vue preview src=\"./demos/Basic.vue\"\n```"
-            },
-            {
-              "id": "swatches",
-              "title": "Swatches",
-              "body": "`swatches` provides a row of preset colors.\n\n```vue preview src=\"./demos/Swatches.vue\"\n```"
-            },
-            {
-              "id": "props",
-              "title": "Props",
-              "body": "| Prop         | Type                                                                                   | Default     | Description                                       |\n| ------------ | -------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |\n| `modelValue` | `string`                                                                               | `'#000000'` | Hexadecimal color.                                |\n| `swatches`   | `string[]`                                                                             | —           | Preset color chips.                               |\n| `disabled`   | `boolean`                                                                              | `false`     | Disabled.                                         |\n| `id`         | `string`                                                                               | —           | Color input id.                                   |\n| `pt`         | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | —           | Pass-through; see [Styling & attrs](/docs/attrs). |"
-            },
-            {
-              "id": "events",
-              "title": "Events",
-              "body": "| Event               | Prop     | Description    |\n| ------------------- | -------- | -------------- |\n| `update:modelValue` | `string` | Color changed. |"
-            },
-            {
-              "id": "boundaries",
-              "title": "Boundaries",
-              "body": "A **native picker + hex text + optional swatches**, not a full panel-level color experience."
-            },
-            {
-              "id": "slots",
-              "title": "Slots",
-              "body": "| Slot      | Description           |\n| --------- | --------------------- |\n| `trigger` | Custom color trigger. |"
-            }
-          ],
-          "markdown": "---\ntitle: InputColor\ncategory: 02 / FORM\ndescription: Color picker with a palette and hexadecimal text input.\n---\n\n# InputColor\n\nEdit hex colors with the native color picker and a text field.\n\n## When to use\n\n- Use when a form needs a hex color value.\n- Prefer this when native picker + optional `swatches` is enough; not a full standalone color panel.\n\n## Import\n\n```ts\nimport { MInputColor } from \"morya-ui\";\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Swatches\n\n`swatches` provides a row of preset colors.\n\n```vue preview src=\"./demos/Swatches.vue\"\n```\n\n## Props\n\n| Prop         | Type                                                                                   | Default     | Description                                       |\n| ------------ | -------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------- |\n| `modelValue` | `string`                                                                               | `'#000000'` | Hexadecimal color.                                |\n| `swatches`   | `string[]`                                                                             | —           | Preset color chips.                               |\n| `disabled`   | `boolean`                                                                              | `false`     | Disabled.                                         |\n| `id`         | `string`                                                                               | —           | Color input id.                                   |\n| `pt`         | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | —           | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n## Events\n\n| Event               | Prop     | Description    |\n| ------------------- | -------- | -------------- |\n| `update:modelValue` | `string` | Color changed. |\n\n## Boundaries\n\nA **native picker + hex text + optional swatches**, not a full panel-level color experience.\n\n## Slots\n\n| Slot      | Description           |\n| --------- | --------------------- |\n| `trigger` | Custom color trigger. |\n"
         }
       }
     },
@@ -33902,7 +34080,7 @@
         "zh-CN": {
           "title": "SSR 与服务端框架",
           "description": "在 Nuxt、Astro、Vite SSR 等环境中使用 Morya UI。",
-          "markdown": "---\ntitle: SSR 与服务端框架\norder: 10\ndescription: 在 Nuxt、Astro、Vite SSR 等环境中使用 Morya UI。\n---\n\n# SSR 与服务端框架\n\nMorya UI 面向 **Vue 3** 的 SSR 场景做了兼容（推荐 3.5 及以上）：服务端不会访问 `document` / `window`，组件实例 id 在服务端与客户端保持一致，命令式 API（`toast` / `message` / `confirm`）在服务端自动跳过。\n\n以下框架均可接入；按场景选择 **全量 SSR** 或 **客户端 Islands**。\n\n## 通用约定\n\n| 项 | 建议 |\n| --- | --- |\n| 样式 | 在应用入口或框架配置中引入 `morya-ui/styles.css` |\n| 主题 | 优先用根级 **`MConfigProvider`** 设置 `theme` / `density`，避免在 SSR 阶段单独调用 `useTheme()` 写 `document` |\n| 命令式反馈 | `toast()`、`message()`、`confirm()` 仅在浏览器执行；SSR 期间调用不会报错，但不会渲染 |\n| 按需导入 | 配合 `morya-ui/resolver` 与 `unplugin-vue-components` 减小体积 |\n| 浮层 | Dialog / Select / Tooltip 等使用 Vue `Teleport`；SSR 可输出占位，交互在客户端水合后生效 |\n\n## Nuxt 3\n\n推荐使用官方模块 **`@morya-ui/nuxt`**（同仓库 `packages/nuxt`）。\n\n### 安装\n\n```bash\npnpm add morya-ui @morya-ui/nuxt\npnpm add -D unplugin-vue-components\n```\n\n### 配置\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\n// nuxt.config.ts\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineNuxtConfig({\n  modules: ['@morya-ui/nuxt'],\n  vite: {\n    plugins: [\n      Components({\n        resolvers: [MoryaUIResolver()],\n      }),\n    ],\n  },\n})\n```\n\n模块默认会：\n\n- 引入 `morya-ui/styles.css`\n- 将 `morya-ui` 加入 `build.transpile`\n- 在客户端注册 overlay 上下文（供 `toast` / `message` 使用）\n\n### 根布局\n\n```vue\n<!-- app.vue -->\n<script setup lang=\"ts\">\nconst theme = ref<'light' | 'dark'>('light')\n</script>\n\n<template>\n  <MConfigProvider :theme=\"theme\" density=\"comfortable\">\n    <NuxtPage />\n  </MConfigProvider>\n</template>\n```\n\n按需导入时无需 `app.use(MoryaUI)`；若需全量注册，可在 `plugins/morya-ui.client.ts` 中 `nuxtApp.vueApp.use(MoryaUI)`。\n\n### 仅客户端组件\n\n极少数依赖浏览器专有 API 的场景（如自定义 `appendTo` 到尚未存在的节点），可用 Nuxt 的 `<ClientOnly>` 包裹。\n\n## Astro + Vue\n\n适合 **静态页 + Vue 岛**（管理后台、控制台嵌入营销站）。\n\n### 安装\n\n```bash\npnpm add morya-ui\nnpx astro add vue\n```\n\n### 在 Vue 岛中使用\n\n```astro\n---\n// src/pages/admin.astro\nimport AdminShell from '../components/AdminShell.vue'\n---\n<AdminShell client:load />\n```\n\n```vue\n<!-- src/components/AdminShell.vue -->\n<script setup lang=\"ts\">\nimport { MButton, MConfigProvider } from 'morya-ui'\nimport 'morya-ui/styles.css'\n</script>\n\n<template>\n  <MConfigProvider theme=\"light\">\n    <MButton label=\"Hello\" />\n  </MConfigProvider>\n</template>\n```\n\n- 交互型后台推荐 `client:load` 或 `client:only`\n- 纯展示块可用 `client:visible` 延迟水合\n- Astro 本身不做 Vue SSR 时，无需处理 hydration id 问题\n\n## Vite SSR（含自定义服务端）\n\n```ts\nimport { MConfigProvider } from 'morya-ui/config-provider'\n// main.server.ts / entry-server.ts\nimport { createSSRApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\nexport function createApp() {\n  const app = createSSRApp(App)\n  return { app }\n}\n```\n\n客户端入口可注册 overlay 插件：\n\n```ts\n// entry-client.ts\nimport { createMoryaUI } from 'morya-ui'\n\ncreateApp(/* ... */)\n  .use(createMoryaUI({ components: false }))\n  .mount('#app')\n```\n\n构建时确保 `morya-ui` 进入 `ssr.noExternal`（或 `ssr: { noExternal: ['morya-ui'] }`），以便正确处理 `.vue` 与 CSS 副作用。\n\n## 其他 Vue SSR 方案\n\n| 方案 | 说明 |\n| --- | --- |\n| **Quasar (SSR mode)** | 在 `quasar.config` 的 `build.transpileDependencies` 中加入 `morya-ui`，入口引入样式 |\n| **vite-plugin-ssr / vike** | 与 Vite SSR 相同：服务端渲染 + 客户端 `createMoryaUI({ components: false })` |\n| **Inertia + Vue SSR** | 根组件包 `MConfigProvider`；命令式 API 仅在 `onMounted` 后调用 |\n\n## 已知限制\n\n- **不支持 Vue 2**；SSR 仅适用于 Vue 3。\n- **IE** 不在支持范围内（与 Vue 3 一致）。\n- 主题 `localStorage` 持久化仅在浏览器生效；SSR 首屏使用 `MConfigProvider` 或 cookie 同步主题可避免闪动。\n- 全量 E2E SSR 回归仍在完善；若遇到 hydration 警告，请提供最小复现并 [提 Issue](https://github.com/morya-space/morya-ui/issues)。\n\n## 下一步\n\n- [快速上手](/docs/quick-start)：安装与导入方式\n- [全局配置](/docs/config)：`MConfigProvider`\n- [主题](/docs/theme)：亮暗色与 token\n",
+          "markdown": "---\ntitle: SSR 与服务端框架\norder: 10\ndescription: 在 Nuxt、Astro、Vite SSR 等环境中使用 Morya UI。\n---\n\n# SSR 与服务端框架\n\nMorya UI 面向 **Vue 3** 的 SSR 场景做了兼容（推荐 3.5 及以上）：服务端不会访问 `document` / `window`，组件实例 id 在服务端与客户端保持一致，命令式 API（`toast` / `message` / `confirm`）在服务端自动跳过。\n\n以下框架均可接入；按场景选择 **全量 SSR** 或 **客户端 Islands**。\n\n## 通用约定\n\n| 项 | 建议 |\n| --- | --- |\n| 样式 | 在应用入口或框架配置中引入 `morya-ui/styles.css` |\n| 主题 | 优先用根级 **`MConfigProvider`** 设置 `theme` / `density`，避免在 SSR 阶段单独调用 `useTheme()` 写 `document` |\n| 命令式反馈 | `toast()`、`message()`、`confirm()` 仅在浏览器执行；SSR 期间调用不会报错，但不会渲染 |\n| 按需导入 | 配合 `morya-ui/resolver` 与 `unplugin-vue-components` 减小体积 |\n| 浮层 | Dialog / Select / Tooltip 等使用 Vue `Teleport`；SSR 可输出占位，交互在客户端水合后生效 |\n\n## Nuxt 3\n\n推荐使用官方模块 **`@morya-ui/nuxt`**（同仓库 `packages/nuxt`）。\n\n### 安装\n\n```bash\npnpm add morya-ui @morya-ui/nuxt\npnpm add -D unplugin-vue-components\n```\n\n### 配置\n\n```ts\nimport { MoryaUIResolver } from 'morya-ui/resolver'\n// nuxt.config.ts\nimport Components from 'unplugin-vue-components/vite'\n\nexport default defineNuxtConfig({\n  modules: ['@morya-ui/nuxt'],\n  vite: {\n    plugins: [\n      Components({\n        resolvers: [MoryaUIResolver()],\n      }),\n    ],\n  },\n})\n```\n\n模块默认会：\n\n- 引入 `morya-ui/styles.css`\n- 将 `morya-ui` 加入 `build.transpile`\n- 在客户端注册 overlay 上下文（供 `toast` / `message` 使用）\n\n### 根布局\n\n```vue\n<!-- app.vue -->\n<script setup lang=\"ts\">\nconst theme = ref<'light' | 'dark'>('light')\n</script>\n\n<template>\n  <MConfigProvider :theme=\"theme\" density=\"comfortable\">\n    <NuxtPage />\n  </MConfigProvider>\n</template>\n```\n\n按需导入时无需 `app.use(MoryaUI)`；若需全量注册，可在 `plugins/morya-ui.client.ts` 中 `nuxtApp.vueApp.use(MoryaUI)`。\n\n### 仅客户端组件\n\n极少数依赖浏览器专有 API 的场景（如自定义 `appendTo` 到尚未存在的节点），可用 Nuxt 的 `<ClientOnly>` 包裹。\n\n## Astro + Vue\n\n适合 **静态页 + Vue 岛**（管理后台、控制台嵌入营销站）。\n\n### 安装\n\n```bash\npnpm add morya-ui\nnpx astro add vue\n```\n\n### 在 Vue 岛中使用\n\n```astro\n---\n// src/pages/admin.astro\nimport AdminShell from '../components/AdminShell.vue'\n---\n<AdminShell client:load />\n```\n\n```vue\n<!-- src/components/AdminShell.vue -->\n<script setup lang=\"ts\">\nimport { MButton, MConfigProvider } from 'morya-ui'\nimport 'morya-ui/styles.css'\n</script>\n\n<template>\n  <MConfigProvider theme=\"light\">\n    <MButton label=\"Hello\" />\n  </MConfigProvider>\n</template>\n```\n\n- 交互型后台推荐 `client:load` 或 `client:only`\n- 纯展示块可用 `client:visible` 延迟水合\n- Astro 本身不做 Vue SSR 时，无需处理 hydration id 问题\n\n## Vite SSR（含自定义服务端）\n\n```ts\nimport { MConfigProvider } from 'morya-ui/config-provider'\n// main.server.ts / entry-server.ts\nimport { createSSRApp } from 'vue'\nimport App from './App.vue'\nimport 'morya-ui/styles.css'\n\nexport function createApp() {\n  const app = createSSRApp(App)\n  return { app }\n}\n```\n\n客户端入口可注册 overlay 插件：\n\n```ts\n// entry-client.ts\nimport { createMoryaUI } from 'morya-ui'\n\ncreateApp(/* ... */)\n  .use(createMoryaUI({ components: false }))\n  .mount('#app')\n```\n\n构建时确保 `morya-ui` 进入 `ssr.noExternal`（或 `ssr: { noExternal: ['morya-ui'] }`），以便正确处理 `.vue` 与 CSS 副作用。\n\n## 其他 Vue SSR 方案\n\n| 方案 | 说明 |\n| --- | --- |\n| **vite-plugin-ssr / vike** | 与 Vite SSR 相同：服务端渲染 + 客户端 `createMoryaUI({ components: false })` |\n| **Inertia + Vue SSR** | 根组件包 `MConfigProvider`；命令式 API 仅在 `onMounted` 后调用 |\n\n## 已知限制\n\n- **不支持 Vue 2**；SSR 仅适用于 Vue 3。\n- **IE** 不在支持范围内（与 Vue 3 一致）。\n- 主题 `localStorage` 持久化仅在浏览器生效；SSR 首屏使用 `MConfigProvider` 或 cookie 同步主题可避免闪动。\n- 全量 E2E SSR 回归仍在完善；若遇到 hydration 警告，请提供最小复现并 [提 Issue](https://github.com/morya-space/morya-ui/issues)。\n\n## 下一步\n\n- [快速上手](/docs/quick-start)：安装与导入方式\n- [全局配置](/docs/config)：`MConfigProvider`\n- [主题](/docs/theme)：亮暗色与 token\n",
           "sections": [
             {
               "title": "",
@@ -33932,7 +34110,7 @@
             {
               "title": "其他 Vue SSR 方案",
               "id": "其他-vue-ssr-方案",
-              "body": "| 方案 | 说明 |\n| --- | --- |\n| **Quasar (SSR mode)** | 在 `quasar.config` 的 `build.transpileDependencies` 中加入 `morya-ui`，入口引入样式 |\n| **vite-plugin-ssr / vike** | 与 Vite SSR 相同：服务端渲染 + 客户端 `createMoryaUI({ components: false })` |\n| **Inertia + Vue SSR** | 根组件包 `MConfigProvider`；命令式 API 仅在 `onMounted` 后调用 |"
+              "body": "| 方案 | 说明 |\n| --- | --- |\n| **vite-plugin-ssr / vike** | 与 Vite SSR 相同：服务端渲染 + 客户端 `createMoryaUI({ components: false })` |\n| **Inertia + Vue SSR** | 根组件包 `MConfigProvider`；命令式 API 仅在 `onMounted` 后调用 |"
             },
             {
               "title": "已知限制",
