@@ -62,7 +62,7 @@ const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 function initHighlight() {
-  highlightedIndex.value = enabledItems.value.length ? 0 : -1
+  highlightedIndex.value = -1
 }
 
 function updateMenuPosition() {
