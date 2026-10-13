@@ -82,6 +82,11 @@
     border-radius: 0;
 }
 
+.m-inputnumber--buttons-right .m-inputnumber__input-wrap {
+    border-radius: var(--m-radius-control) 0 0 var(--m-radius-control);
+    border-right: 0;
+}
+
 .m-inputnumber__prefix,
 .m-inputnumber__suffix {
     align-items: center;
@@ -231,6 +236,29 @@
     border-radius: 0 var(--m-radius-control) var(--m-radius-control) 0;
 }
 
+/* Right-stacked buttons: only the outer corners keep radius, inner seams are square. */
+.m-inputnumber__stack {
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-left: 0;
+    border-radius: 0 var(--m-radius-control) var(--m-radius-control) 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.m-inputnumber__stack .m-inputnumber__button {
+    border: 0;
+    border-radius: 0;
+    flex: 1 1 0;
+    min-height: 0;
+    min-width: 0;
+    padding: 0 var(--m-inputnumber-stack-button-padding-x);
+}
+
+.m-inputnumber__stack .m-inputnumber__button + .m-inputnumber__button {
+    border-top: var(--m-border-width) solid var(--m-color-border);
+}
+
 .m-inputnumber__button:hover:not(:disabled) {
     background: color-mix(
         in srgb,
@@ -249,14 +277,4 @@
     box-shadow: var(--m-focus-shadow);
     outline: none;
     z-index: 1;
-}
-
-.m-inputnumber__stack {
-    display: flex;
-    flex-direction: column;
-}
-
-.m-inputnumber__stack .m-inputnumber__button {
-    min-height: 0;
-    padding: 0 var(--m-inputnumber-stack-button-padding-x);
 }
