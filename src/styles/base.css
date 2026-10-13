@@ -60,7 +60,7 @@
 .m-progress-spinner,
 .m-cascadeselect,
 .m-treeselect,
-.m-inputcolor,
+.m-colorpicker,
 .m-inputtags,
 .m-label,
 .m-speeddial,
@@ -86,8 +86,7 @@
 .m-password__input:disabled,
 .m-inputnumber__input:disabled,
 .m-inputotp__input:disabled,
-.m-inputcolor__text:disabled,
-.m-inputcolor__swatch:disabled,
+.m-colorpicker__trigger:disabled,
 .m-inputtags--disabled {
     background-color: var(--m-color-bg-disabled);
     color: var(--m-color-text-disabled);
@@ -110,8 +109,7 @@
 .m-textarea::placeholder,
 .m-password__input::placeholder,
 .m-inputnumber__input::placeholder,
-.m-inputtags__input::placeholder,
-.m-inputcolor__text::placeholder {
+.m-inputtags__input::placeholder {
     color: var(--m-color-text-muted);
     opacity: 1;
 }
@@ -716,7 +714,6 @@
     .m-cascadeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
 .m-treeselect:not(.m-treeselect--open)
     .m-treeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
-.m-inputcolor__text:hover:not(:disabled):not(:focus),
 .m-inputtags:hover:not(.m-inputtags--disabled):not(:focus-within),
 .m-togglebutton:hover:not(:disabled):not(.m-togglebutton--checked):not(:focus-visible),
 .m-inplace__display:hover:not(:focus-visible) {
@@ -731,8 +728,6 @@
 .m-treeselect--open .m-treeselect__trigger,
 .m-treeselect__trigger:focus,
 .m-treeselect__trigger:focus-visible,
-.m-inputcolor__text:focus,
-.m-inputcolor__text:focus-visible,
 .m-inputtags:focus-within,
 .m-togglebutton:focus-visible,
 .m-selectbutton__button:focus-visible,
@@ -747,9 +742,7 @@
 
 .m-inputotp--invalid .m-inputotp__input:focus,
 .m-inputotp--invalid .m-inputotp__input:focus-visible,
-.m-inputtags--invalid:focus-within,
-.m-inputcolor--invalid .m-inputcolor__text:focus,
-.m-inputcolor--invalid .m-inputcolor__text:focus-visible {
+.m-inputtags--invalid:focus-within {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }

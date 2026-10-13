@@ -1546,34 +1546,40 @@
       }
     },
     {
-      "id": "InputColor",
-      "exportName": "MInputColor",
+      "id": "ColorPicker",
+      "exportName": "MColorPicker",
       "examples": 6,
       "props": {
-        "total": 8,
+        "total": 10,
         "covered": 2,
         "missing": [
           "disabled",
-          "id",
-          "invalid",
-          "label",
+          "disabledAlpha",
+          "allowClear",
+          "format",
+          "presets",
+          "showText",
           "size",
-          "pt"
+          "placement",
+          "teleport",
+          "gradient"
         ]
       },
       "events": {
-        "total": 1,
+        "total": 5,
         "covered": 0,
         "missing": [
-          "update:modelValue"
+          "update:modelValue",
+          "change",
+          "clear",
+          "show",
+          "hide"
         ]
       },
       "slots": {
-        "total": 1,
+        "total": 0,
         "covered": 0,
-        "missing": [
-          "trigger"
-        ]
+        "missing": []
       },
       "methods": {
         "total": 0,

@@ -22,7 +22,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Forms · inputs
 
-`MForm` / `MFormItem` / `MFormList`, `MInput`, `MInputPassword`, `MInputNumber`, `MTextarea`, `MInputOtp`, `MInputColor`, `MInputGroup`, `MInputTags`, `MMentions`, `MSelect`, `MTreeSelect`, `MCascadeSelect`, `MListbox`, `MSelectButton`, `MDatePicker`, `MTimePicker`, `MCalendar`, `MAutoComplete`, `MCheckbox` / `MCheckboxGroup`, `MRadio` / `MRadioGroup`, `MSwitch`, `MToggleButton`, `MSlider`, `MRating`, `MKnob`, `MFileUpload`, `MFloatLabel`, `MIconField`, `MLabel`
+`MForm` / `MFormItem` / `MFormList`, `MInput`, `MInputPassword`, `MInputNumber`, `MTextarea`, `MInputOtp`, `MColorPicker`, `MInputGroup`, `MInputTags`, `MMentions`, `MSelect`, `MTreeSelect`, `MCascadeSelect`, `MListbox`, `MSelectButton`, `MDatePicker`, `MTimePicker`, `MCalendar`, `MAutoComplete`, `MCheckbox` / `MCheckboxGroup`, `MRadio` / `MRadioGroup`, `MSwitch`, `MToggleButton`, `MSlider`, `MRating`, `MKnob`, `MFileUpload`, `MFloatLabel`, `MIconField`, `MLabel`
 
 ## Layout helpers
 

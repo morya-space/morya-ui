@@ -7,7 +7,7 @@
 - add disabled, v-model:selection, top/bottom buttons, drag preview, drop indicator, flip animation
 - scale size across panel, center cells, stretch fluid calendar, add time column headers
 - add moveTop, moveBottom, hour, minute, second, today messages
-- align control size tokens with ant design (small 8px, medium 12px, large 16px font)
+- align control size tokens with design system (small 8px, medium 12px, large 16px font)
 - add panel mode cycling, multiple selection and input mask
 - add needConfirm and shortcut active state
 - add status, today ring, footer and cell slots
@@ -765,7 +765,7 @@
 ### 组件（88 个）
 
 - **基础**：Button、ButtonGroup、Icon、Avatar、AvatarGroup、Badge、Chip、Tag、Divider、Skeleton、ProgressBar、ProgressSpinner、BlockUI、ScrollTop
-- **表单**：Input、Textarea、InputNumber、InputPassword、InputOtp、InputTags、InputColor、InputGroup、InputGroupAddon、IconField、FloatLabel、Label、Checkbox、CheckboxGroup、Radio、RadioGroup、Switch、Select、SelectButton、ToggleButton、Slider、Knob、Rating、DatePicker、AutoComplete、CascadeSelect、TreeSelect、FileUpload、Form、FormItem
+- **表单**：Input、Textarea、InputNumber、InputPassword、InputOtp、InputTags、ColorPicker、InputGroup、InputGroupAddon、IconField、FloatLabel、Label、Checkbox、CheckboxGroup、Radio、RadioGroup、Switch、Select、SelectButton、ToggleButton、Slider、Knob、Rating、DatePicker、AutoComplete、CascadeSelect、TreeSelect、FileUpload、Form、FormItem
 - **浮层与对话框**：Dialog、Drawer、Popover、Tooltip、ConfirmDialog、ConfirmPopup、ContextMenu、Dropdown、SplitButton、SpeedDial
 - **数据展示**：Table、Tree、TreeTable、TreeSelect、DataView、VirtualScroller、Timeline、MeterGroup、Terminal、Gallery、Carousel、Inplace
 - **导航与菜单**：Menu、Menubar、MegaMenu、TieredMenu、Breadcrumb、Tabs、Stepper、Pagination、CommandMenu、Dock、Sidebar

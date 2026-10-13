@@ -169,7 +169,7 @@ Shared native prop interfaces live in `src/shared/nativeControlProps.ts`:
 
 | Interface | Use for |
 |-----------|---------|
-| `MNativeInputProps` | `<input>` / text-like controls (Input, AutoComplete, InputTags, InputColor) |
+| `MNativeInputProps` | `<input>` / text-like controls (Input, AutoComplete, InputTags) |
 | `MNativeTextareaProps` | Textarea |
 | `MNativeComboboxFieldProps` | Select, TreeSelect, CascadeSelect (`placeholder`, `name`) |
 | `MNativeDateInputProps` | DatePicker readonly input (`name`, `autocomplete`, `autofocus` + local `placeholder`) |

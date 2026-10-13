@@ -56,7 +56,7 @@ export const componentImportMap: Record<string, string> = {
   "MImagePreviewGroup": "image",
   "MInplace": "inplace",
   "MInput": "input",
-  "MInputColor": "input-color",
+  "MColorPicker": "color-picker",
   "MInputGroup": "input-group",
   "MInputGroupAddon": "input-group",
   "MInputNumber": "input-number",

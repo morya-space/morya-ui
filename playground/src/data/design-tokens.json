@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T06:52:35.547Z",
+  "generatedAt": "2026-10-13T07:05:16.284Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 487,
+  "tokenCount": 485,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -2592,26 +2592,6 @@
       "description": {
         "zh-CN": "组件专用相关变量：Gallery Thumb Width",
         "en-US": "Component-specific token: Gallery Thumb Width"
-      }
-    },
-    {
-      "name": "--m-inputcolor-preset-size",
-      "category": "component",
-      "source": "src/components/InputColor/styles.css",
-      "default": "1.25rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Inputcolor Preset Size",
-        "en-US": "Component-specific token: Inputcolor Preset Size"
-      }
-    },
-    {
-      "name": "--m-inputcolor-text-min-width",
-      "category": "component",
-      "source": "src/components/InputColor/styles.css",
-      "default": "7rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Inputcolor Text Min Width",
-        "en-US": "Component-specific token: Inputcolor Text Min Width"
       }
     },
     {

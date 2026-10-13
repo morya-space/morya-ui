@@ -378,11 +378,17 @@ export { default as MInplace } from "./components/Inplace/Inplace.vue";
 export type { InplaceEmits, InplaceProps } from "./components/Inplace/types";
 export { default as MInput } from "./components/Input/Input.vue";
 export type { InputEmits, InputProps } from "./components/Input/types";
-export { default as MInputColor } from "./components/InputColor/InputColor.vue";
+export { default as MColorPicker } from "./components/ColorPicker/ColorPicker.vue";
 export type {
-  InputColorEmits,
-  InputColorProps,
-} from "./components/InputColor/types";
+  ColorPickerEmits,
+  ColorPickerFormat,
+  ColorPickerMode,
+  ColorPickerPreset,
+  ColorPickerProps,
+  GradientStop,
+  GradientType,
+  GradientValue,
+} from "./components/ColorPicker/types";
 export { default as MInputGroup } from "./components/InputGroup/InputGroup.vue";
 export { default as MInputGroupAddon } from "./components/InputGroup/InputGroupAddon.vue";
 export type {

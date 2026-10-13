@@ -148,7 +148,6 @@ createApp(/* ... */)
 
 | 方案 | 说明 |
 | --- | --- |
-| **Quasar (SSR mode)** | 在 `quasar.config` 的 `build.transpileDependencies` 中加入 `morya-ui`，入口引入样式 |
 | **vite-plugin-ssr / vike** | 与 Vite SSR 相同：服务端渲染 + 客户端 `createMoryaUI({ components: false })` |
 | **Inertia + Vue SSR** | 根组件包 `MConfigProvider`；命令式 API 仅在 `onMounted` 后调用 |
 

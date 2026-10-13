@@ -55,7 +55,7 @@ import MImage from "./components/Image/Image.vue";
 import MImagePreviewGroup from "./components/Image/ImagePreviewGroup.vue";
 import MInplace from "./components/Inplace/Inplace.vue";
 import MInput from "./components/Input/Input.vue";
-import MInputColor from "./components/InputColor/InputColor.vue";
+import MColorPicker from "./components/ColorPicker/ColorPicker.vue";
 import MInputGroup from "./components/InputGroup/InputGroup.vue";
 import MInputGroupAddon from "./components/InputGroup/InputGroupAddon.vue";
 import MInputNumber from "./components/InputNumber/InputNumber.vue";
@@ -192,7 +192,7 @@ export const mComponents: Record<string, Component> = {
   MImagePreviewGroup,
   MInplace,
   MInput,
-  MInputColor,
+  MColorPicker,
   MInputGroup,
   MInputGroupAddon,
   MInputNumber,

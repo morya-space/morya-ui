@@ -61,8 +61,8 @@
     "**/icon-field/index.js",
     "**/image/index.js",
     "**/inplace/index.js",
+    "**/color-picker/index.js",
     "**/input/index.js",
-    "**/input-color/index.js",
     "**/input-group/index.js",
     "**/input-number/index.js",
     "**/input-otp/index.js",
@@ -395,12 +395,12 @@
     },
     "./input/style": "./dist/input/style.js",
     "./input/style.css": "./dist/input/style.css",
-    "./input-color": {
-      "types": "./dist/components/InputColor/index.d.ts",
-      "import": "./dist/input-color/index.js"
+    "./color-picker": {
+      "types": "./dist/components/ColorPicker/index.d.ts",
+      "import": "./dist/color-picker/index.js"
     },
-    "./input-color/style": "./dist/input-color/style.js",
-    "./input-color/style.css": "./dist/input-color/style.css",
+    "./color-picker/style": "./dist/color-picker/style.js",
+    "./color-picker/style.css": "./dist/color-picker/style.css",
     "./input-group": {
       "types": "./dist/components/InputGroup/index.d.ts",
       "import": "./dist/input-group/index.js"
