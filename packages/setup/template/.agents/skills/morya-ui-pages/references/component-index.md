@@ -79,6 +79,15 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | Watermark / QRCode / Tour / Terminal | `specialized-display-choice` |
 | FloatLabel / Inplace | `form-label-choice` |
 | Knob / MeterGroup | `specialized-input-choice` |
+| Segmented / Tabs / SelectButton | `segmented-tabs-choice` |
+| SplitButton / Button+Dropdown | `split-action-choice` |
+| Descriptions / Table / List | `detail-display-choice` |
+| Accordion / Panel / Card | `collapse-container-choice` |
+| OrderList / PickList / List | `sort-transfer-choice` |
+| FileUpload basic / advanced | `upload-mode-choice` |
+| AutoComplete / Mentions / Input | `suggestion-input-choice` |
+| InputNumber / Slider / Knob | `number-input-choice` |
+| VirtualScroller / 普通列表 | `large-data-choice` |
 | PageFilters / Toolbar / Header / Section / Stat / Placeholder | `page-section-choice` |
 | Layout scroll vs MScrollbar vs built-in | `page-scroll-choice` |
 | Avoid double borders / extra Card wrappers | `surface-nesting-choice` |

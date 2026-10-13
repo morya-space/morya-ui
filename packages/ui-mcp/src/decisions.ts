@@ -2389,6 +2389,608 @@ export const componentDecisions: ComponentDecision[] = [
       },
     ],
   },
+  {
+    id: 'segmented-tabs-choice',
+    title: '选项切换控件如何选择',
+    titleEn: 'Choosing segmented, tabs, or select button',
+    question: '这是视图/状态切换、内容面板切换，还是表单内选择？',
+    questionEn: 'Is this a view/state switch, a content panel switch, or a form selection?',
+    keywords: [
+      '切换',
+      '选项',
+      'segmented',
+      'tabs',
+      'selectbutton',
+      '视图切换',
+      '状态切换',
+    ],
+    options: [
+      {
+        component: 'MSegmented',
+        when: ['选项少（≤5）且需要全部露出', '切换视图 / 状态 / 密度等即时生效'],
+        whenEn: ['Few options (≤5) that should all stay visible', 'Switching views / states / density with instant effect'],
+        avoidWhen: ['选项很多需要滚动', '需要表单提交值'],
+        avoidWhenEn: ['Many options need scrolling', 'A form-submitted value is needed'],
+        recipe: recipe(
+          [
+            ['v-model 绑定当前值', 'v-model for the current value'],
+            ['options 传字符串数组或 { label, value, icon }', 'options as strings or { label, value, icon } objects'],
+            ['block 占满容器宽度', 'block for full container width'],
+            ['shape="round" 圆角药丸外观', 'shape="round" for pill corners'],
+          ],
+        ),
+        ...anti([
+          ['内容面板切换用 MSegmented → MTabs', 'Content panel switch via MSegmented → MTabs'],
+          ['表单提交值用 MSegmented → MSelectButton', 'Form value via MSegmented → MSelectButton'],
+        ]),
+      },
+      {
+        component: 'MTabs',
+        when: ['多个内容面板切换显示', '标签数量多时可滚动'],
+        whenEn: ['Switching between multiple content panels', 'Many tabs with scrolling support'],
+        avoidWhen: ['选项是表单值', '需要手风琴折叠'],
+        avoidWhenEn: ['Options are form values', 'Accordion expand/collapse is needed'],
+        recipe: recipe(
+          [
+            ['v-model:value 控制当前标签', 'v-model:value for the active tab'],
+            ['closable 可关闭标签', 'closable for dismissible tabs'],
+            ['与路由结合用 to 或 @tab-click', 'Use to or @tab-click for routes'],
+          ],
+        ),
+        ...anti([
+          ['表单选项用 MTabs → MSelectButton', 'Form options via MTabs → MSelectButton'],
+          ['视图状态切换用 MTabs → MSegmented', 'View state switch via MTabs → MSegmented'],
+        ]),
+      },
+      {
+        component: 'MSelectButton',
+        when: ['表单内选择（需要提交值）', '选项少且需要全部露出'],
+        whenEn: ['Form selection (value to be submitted)', 'Few options all visible'],
+        avoidWhen: ['选项超过约 5 个', '切换视图状态'],
+        avoidWhenEn: ['More than about 5 options', 'Switching view states'],
+        recipe: recipe(
+          [
+            ['v-model 绑定选中值', 'v-model for the selected value'],
+            [':options 选项数组', ':options array'],
+            ['与 MFormItem 一起用，参与表单校验', 'Use with MFormItem for form validation'],
+          ],
+        ),
+        ...anti([
+          ['>5 个选项仍用 MSelectButton → MSelect', '>5 options still MSelectButton → MSelect'],
+          ['视图切换用 MSelectButton → MSegmented', 'View switch via MSelectButton → MSegmented'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'split-action-choice',
+    title: '主操作+更多操作如何选择',
+    titleEn: 'Choosing split button or button + dropdown',
+    question: '这是一个主操作配更多操作，还是完全自定义的按钮组？',
+    questionEn: 'Is this one primary action with more options, or a fully custom button group?',
+    keywords: [
+      '主操作',
+      '更多操作',
+      'splitbutton',
+      'dropdown',
+      'button group',
+      '保存并继续',
+    ],
+    options: [
+      {
+        component: 'MSplitButton',
+        when: ['一个高频主操作 + 低频相关操作', '如 保存 / 保存并继续 / 另存为'],
+        whenEn: ['One frequent primary action + related低频 actions', 'e.g. Save / Save and continue / Save as'],
+        avoidWhen: ['操作之间无主次关系', '需要完全自定义触发器'],
+        avoidWhenEn: ['Actions have no clear hierarchy', 'A fully custom trigger is needed'],
+        recipe: recipe(
+          [
+            ['label 主操作文案；model 下拉操作项', 'label for primary action; model for dropdown items'],
+            ['主按钮 @click 执行主操作', 'Primary button @click for the main action'],
+            ['@command 执行下拉操作', '@command for dropdown actions'],
+            ['color / variant / size 与 MButton 一致', 'color / variant / size same as MButton'],
+          ],
+          undefined,
+          [['@command(item) 下拉操作回调', '@command(item) for dropdown action']],
+        ),
+        ...anti([
+          ['无主次关系操作用 MSplitButton → MButtonGroup / MSpace', 'No hierarchy via MSplitButton → MButtonGroup / MSpace'],
+          ['完全自定义触发器用 MSplitButton → MButton + MDropdown', 'Fully custom trigger via MSplitButton → MButton + MDropdown'],
+        ]),
+      },
+      {
+        component: 'MButton + MDropdown',
+        when: ['需要完全自定义按钮组布局', '触发器不是标准按钮（图标 / 头像）'],
+        whenEn: ['Fully custom button group layout is needed', 'The trigger is not a standard button (icon / avatar)'],
+        avoidWhen: ['标准主操作+更多操作模式'],
+        avoidWhenEn: ['Standard primary + more actions pattern'],
+        recipe: recipe(
+          [
+            ['MButton 放主操作；MDropdown 放更多操作', 'MButton for primary; MDropdown for more actions'],
+            ['MDropdown 触发器放默认插槽', 'MDropdown trigger in default slot'],
+            ['危险操作走 MConfirmDialog 确认', 'Destructive actions via MConfirmDialog'],
+          ],
+        ),
+        ...anti([
+          ['标准主操作+更多用 MButton + MDropdown → MSplitButton', 'Standard primary+more via MButton + MDropdown → MSplitButton'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'detail-display-choice',
+    title: '详情数据展示如何选择',
+    titleEn: 'Choosing descriptions, table, or list for detail display',
+    question: '这是键值对字段展示、行列数据比较，还是自由布局列表？',
+    questionEn: 'Is this key-value field display, row-column data comparison, or a free-layout list?',
+    keywords: [
+      '详情',
+      '键值对',
+      'descriptions',
+      'table',
+      'list',
+      '字段展示',
+      '数据展示',
+    ],
+    options: [
+      {
+        component: 'MDescriptions',
+        when: ['详情页字段展示（label: value 键值对）', '需要 bordered / column 控制布局'],
+        whenEn: ['Detail page field display (label: value pairs)', 'Need bordered / column layout control'],
+        avoidWhen: ['需要排序 / 筛选 / 行操作', '需要自由布局列表项'],
+        avoidWhenEn: ['Sorting / filtering / row actions are needed', 'Free-layout list items are needed'],
+        recipe: recipe(
+          [
+            ['MDescriptions 包裹 MDescriptionsItem', 'MDescriptions wraps MDescriptionsItem'],
+            ['column 每行列数；bordered 显示边框', 'column for items per row; bordered for borders'],
+            ['layout="horizontal"（默认）或 "vertical"', 'layout="horizontal" (default) or "vertical"'],
+            ['#label 自定义标签内容', '#label for custom label content'],
+          ],
+          [['MDescriptionsItem label 字段名；span 跨列', 'MDescriptionsItem label for field name; span for colspan']],
+        ),
+        ...anti([
+          ['需要排序筛选用 MDescriptions → MTable', 'Sorting/filtering via MDescriptions → MTable'],
+          ['自由布局列表用 MDescriptions → MList', 'Free-layout list via MDescriptions → MList'],
+        ]),
+      },
+      {
+        component: 'MTable',
+        when: ['行列数据比较多条记录', '需要排序 / 筛选 / 行操作'],
+        whenEn: ['Comparing multiple records in rows and columns', 'Sorting / filtering / row actions are needed'],
+        avoidWhen: ['单条记录的字段展示', '自由布局列表项'],
+        avoidWhenEn: ['Single record field display', 'Free-layout list items'],
+        recipe: recipe(
+          [
+            ['columns + rows 定义数据结构', 'columns + rows for data structure'],
+            ['#cell-{key} 自定义单元格', '#cell-{key} for custom cells'],
+            ['paginator 分页；selectionMode 行选择', 'paginator for paging; selectionMode for selection'],
+          ],
+        ),
+        ...anti([
+          ['单条记录字段展示用 MTable → MDescriptions', 'Single record fields via MTable → MDescriptions'],
+        ]),
+      },
+      {
+        component: 'MList',
+        when: ['自由布局列表项（头像+标题+描述+操作）', '需要分页或 grid 布局'],
+        whenEn: ['Free-layout list items (avatar + title + description + actions)', 'Pagination or grid layout is needed'],
+        avoidWhen: ['键值对字段展示', '需要排序筛选'],
+        avoidWhenEn: ['Key-value field display', 'Sorting/filtering is needed'],
+        recipe: recipe(
+          [
+            ['MList 包裹 MListItem；MListItemMeta 带头像标题描述', 'MList wraps MListItem; MListItemMeta for avatar/title/description'],
+            ['pagination 配置分页；grid 配置网格布局', 'pagination for paging; grid for grid layout'],
+            ['#actions 列表项操作按钮', '#actions for item action buttons'],
+          ],
+          [['MListItem #actions 操作区', 'MListItem #actions for action area']],
+        ),
+        ...anti([
+          ['键值对字段展示用 MList → MDescriptions', 'Key-value fields via MList → MDescriptions'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'collapse-container-choice',
+    title: '折叠容器如何选择',
+    titleEn: 'Choosing accordion, panel, or card',
+    question: '这是多面板手风琴、单个可折叠区块，还是独立视觉表面？',
+    questionEn: 'Is this a multi-panel accordion, a single collapsible section, or an independent visual surface?',
+    keywords: [
+      '折叠',
+      '手风琴',
+      'accordion',
+      'panel',
+      'card',
+      '容器',
+    ],
+    options: [
+      {
+        component: 'MAccordion',
+        when: ['多面板手风琴展开/收起', 'FAQ / 设置分组 / 多段内容'],
+        whenEn: ['Multi-panel accordion expand/collapse', 'FAQ / settings groups / multi-section content'],
+        avoidWhen: ['单个可折叠区块', '不需要折叠的独立表面'],
+        avoidWhenEn: ['A single collapsible section', 'An independent surface without collapse'],
+        recipe: recipe(
+          [
+            ['tabs 配置每面板（value / header / disabled）', 'tabs configures each panel (value / header / disabled)'],
+            ['v-model 控制展开的面板 key（数组 multiple）', 'v-model for expanded panel keys (array for multiple)'],
+            ['multiple 允许多面板同时展开', 'multiple for multiple open panels'],
+          ],
+          undefined,
+          [['@update:modelValue 展开状态变化', '@update:modelValue on expand change']],
+        ),
+        ...anti([
+          ['单个折叠区块用 MAccordion → MPanel', 'Single collapsible section via MAccordion → MPanel'],
+          ['不需要折叠用 MAccordion → MCard', 'No collapse needed via MAccordion → MCard'],
+        ]),
+      },
+      {
+        component: 'MPanel',
+        when: ['单个可折叠区块', '需要标题 + 展开/收起'],
+        whenEn: ['A single collapsible section', 'Need header + expand/collapse'],
+        avoidWhen: ['多面板手风琴', '独立视觉表面'],
+        avoidWhenEn: ['Multi-panel accordion', 'Independent visual surface'],
+        recipe: recipe(
+          [
+            ['header 面板标题', 'header for the panel title'],
+            ['toggleable 开启折叠功能', 'toggleable to enable collapse'],
+            ['v-model:collapsed 控制折叠状态', 'v-model:collapsed for collapse state'],
+          ],
+          undefined,
+          [['@update:collapsed 折叠状态变化', '@update:collapsed on collapse change']],
+        ),
+        ...anti([
+          ['多面板手风琴用 MPanel → MAccordion', 'Multi-panel via MPanel → MAccordion'],
+          ['独立表面用 MPanel → MCard', 'Independent surface via MPanel → MCard'],
+        ]),
+      },
+      {
+        component: 'MCard',
+        when: ['独立视觉表面（标题 / 内容 / 页脚）', '不一定需要折叠'],
+        whenEn: ['Independent visual surface (title / content / footer)', 'Collapse is not necessarily needed'],
+        avoidWhen: ['多面板手风琴', '单个可折叠区块'],
+        avoidWhenEn: ['Multi-panel accordion', 'A single collapsible section'],
+        recipe: recipe(
+          [
+            ['title / subtitle 头部信息', 'title / subtitle for header info'],
+            ['shadow="always" / "hover" / "never" 控制阴影', 'shadow="always" / "hover" / "never" for shadow'],
+            ['#header / #footer / #title 自定义区域', '#header / #footer / #title for custom areas'],
+          ],
+        ),
+        ...anti([
+          ['需要折叠用 MCard → MPanel / MAccordion', 'Need collapse via MCard → MPanel / MAccordion'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'sort-transfer-choice',
+    title: '排序和穿梭选择如何实现',
+    titleEn: 'Choosing order list, pick list, or plain list',
+    question: '这是单列表拖拽排序、左右穿梭选择，还是纯展示列表？',
+    questionEn: 'Is this drag-to-reorder in one list, left-right transfer selection, or a plain display list?',
+    keywords: [
+      '排序',
+      '穿梭',
+      'orderlist',
+      'picklist',
+      'list',
+      '拖拽',
+      '选择',
+    ],
+    options: [
+      {
+        component: 'MOrderList',
+        when: ['单列表拖拽排序', '需要上下移动 / 置顶 / 置底'],
+        whenEn: ['Drag-to-reorder in a single list', 'Move up/down / top/bottom actions are needed'],
+        avoidWhen: ['左右穿梭选择', '纯展示列表'],
+        avoidWhenEn: ['Left-right transfer selection', 'Plain display list'],
+        recipe: recipe(
+          [
+            ['v-model 绑定排序后的数组', 'v-model for the reordered array'],
+            ['dragdrop 开启拖拽（默认 true）', 'dragdrop to enable drag (default true)'],
+            ['v-model:selection 控制选中项', 'v-model:selection for the selected item'],
+            ['@reorder 排序后回调（含 from / to / item）', '@reorder after reorder (with from / to / item)'],
+          ],
+          undefined,
+          [['@reorder 排序完成回调', '@reorder after reorder']],
+        ),
+        ...anti([
+          ['左右穿梭用 MOrderList → MPickList', 'Left-right transfer via MOrderList → MPickList'],
+          ['纯展示用 MOrderList → MList', 'Plain display via MOrderList → MList'],
+        ]),
+      },
+      {
+        component: 'MPickList',
+        when: ['左右穿梭选择（从源到目标）', '如 权限分配 / 字段选择'],
+        whenEn: ['Left-right transfer selection (source to target)', 'e.g. permission assignment / field selection'],
+        avoidWhen: ['单列表排序', '纯展示列表'],
+        avoidWhenEn: ['Single list reorder', 'Plain display list'],
+        recipe: recipe(
+          [
+            ['v-model:source 源列表；v-model:target 目标列表', 'v-model:source for source; v-model:target for target'],
+            ['sourceHeader / targetHeader 列表标题', 'sourceHeader / targetHeader for list titles'],
+            ['dataKey 唯一标识字段', 'dataKey for the unique key field'],
+          ],
+        ),
+        ...anti([
+          ['单列表排序用 MPickList → MOrderList', 'Single list reorder via MPickList → MOrderList'],
+          ['纯展示用 MPickList → MList', 'Plain display via MPickList → MList'],
+        ]),
+      },
+      {
+        component: 'MList',
+        when: ['纯展示列表（不支持排序 / 穿梭）', '需要分页或 grid 布局'],
+        whenEn: ['Plain display list (no reorder / transfer)', 'Pagination or grid layout is needed'],
+        avoidWhen: ['需要排序', '需要穿梭选择'],
+        avoidWhenEn: ['Reorder is needed', 'Transfer selection is needed'],
+        recipe: recipe(
+          [
+            ['items / dataSource 数据数组', 'items / dataSource for the data array'],
+            ['MListItem + MListItemMeta 自定义布局', 'MListItem + MListItemMeta for custom layout'],
+            ['pagination 分页；grid 网格布局', 'pagination for paging; grid for grid layout'],
+          ],
+        ),
+        ...anti([
+          ['需要排序用 MList → MOrderList', 'Need reorder via MList → MOrderList'],
+          ['需要穿梭用 MList → MPickList', 'Need transfer via MList → MPickList'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'upload-mode-choice',
+    title: '文件上传模式如何选择',
+    titleEn: 'Choosing file upload mode',
+    question: '这是选择即上传、拖拽+预览+进度，还是完全自定义上传？',
+    questionEn: 'Is this select-and-upload, drag+preview+progress, or fully custom upload?',
+    keywords: [
+      '上传',
+      '文件',
+      'fileupload',
+      '拖拽',
+      '预览',
+      '进度',
+      'basic',
+      'advanced',
+    ],
+    options: [
+      {
+        component: 'MFileUpload mode="basic"',
+        when: ['选择文件后立即上传', '不需要预览和进度展示'],
+        whenEn: ['Upload immediately after file selection', 'No preview or progress display needed'],
+        avoidWhen: ['需要拖拽上传', '需要图片预览'],
+        avoidWhenEn: ['Drag-and-drop upload is needed', 'Image preview is needed'],
+        recipe: recipe(
+          [
+            ['action 上传地址；autoUpload 自动上传', 'action for upload URL; autoUpload for auto upload'],
+            ['accept 限制文件类型；maxSize 限制大小', 'accept for file types; maxSize for size limit'],
+            ['@success / @error 上传结果回调', '@success / @error for upload result'],
+          ],
+          undefined,
+          [['@success 上传成功', '@success on upload success']],
+        ),
+        ...anti([
+          ['需要拖拽预览用 basic → mode="advanced"', 'Need drag/preview via basic → mode="advanced"'],
+        ]),
+      },
+      {
+        component: 'MFileUpload mode="advanced"',
+        when: ['拖拽上传 + 文件预览 + 进度展示', '图片上传需要缩略图'],
+        whenEn: ['Drag-and-drop upload + file preview + progress', 'Image upload needs thumbnails'],
+        avoidWhen: ['选择即上传的简单场景'],
+        avoidWhenEn: ['Simple select-and-upload scenarios'],
+        recipe: recipe(
+          [
+            ['drag 开启拖拽区域', 'drag to enable the drop zone'],
+            ['listType="picture-card" 图片缩略图卡片', 'listType="picture-card" for image thumbnails'],
+            ['v-model:file-list 绑定文件列表', 'v-model:file-list for the file list'],
+            ['autoUpload=false 手动控制；submit() 触发上传', 'autoUpload=false for manual control; submit() to upload'],
+          ],
+          undefined,
+          [
+            ['@progress 上传进度', '@progress for upload progress'],
+            ['@remove 移除文件', '@remove on file removal'],
+          ],
+        ),
+        ...anti([
+          ['简单选择即上传用 advanced → mode="basic"', 'Simple select-upload via advanced → mode="basic"'],
+          ['完全自定义上传 UI 用 advanced → httpRequest 自定义', 'Fully custom upload UI via advanced → httpRequest'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'suggestion-input-choice',
+    title: '带建议的输入如何选择',
+    titleEn: 'Choosing autocomplete, mentions, or plain input',
+    question: '这是自由输入+下拉建议、@人/#话题提及，还是纯文本输入？',
+    questionEn: 'Is this free input with dropdown suggestions, @mention/#topic tagging, or plain text input?',
+    keywords: [
+      '自动完成',
+      '提及',
+      'autocomplete',
+      'mentions',
+      'input',
+      '建议',
+      '@人',
+    ],
+    options: [
+      {
+        component: 'MAutoComplete',
+        when: ['自由输入 + 下拉建议（搜索历史 / 邮箱后缀）', '输入值本身也有意义'],
+        whenEn: ['Free input with dropdown suggestions (search history / email suffixes)', 'The entered value is meaningful itself'],
+        avoidWhen: ['只能从固定选项选', '需要 @人 / #话题'],
+        avoidWhenEn: ['Selection must be from fixed options', '@mention / #topic is needed'],
+        recipe: recipe(
+          [
+            ['v-model 绑定输入值', 'v-model for the input value'],
+            ['suggestions 建议数组（字符串或 { label, value }）', 'suggestions array (strings or { label, value })'],
+            ['@complete 输入时拉取建议（支持远程）', '@complete to fetch suggestions on input (supports remote)'],
+            ['loading 建议加载中状态', 'loading for suggestion loading state'],
+          ],
+          undefined,
+          [['@complete 输入变化时拉取建议', '@complete to fetch suggestions on input']],
+        ),
+        ...anti([
+          ['固定选项用 MAutoComplete → MSelect', 'Fixed options via MAutoComplete → MSelect'],
+          ['@人 / #话题用 MAutoComplete → MMentions', '@mention/#topic via MAutoComplete → MMentions'],
+        ]),
+      },
+      {
+        component: 'MMentions',
+        when: ['@人 / #话题触发下拉选择', '社交 / 协作场景'],
+        whenEn: ['@mention / #topic triggers dropdown selection', 'Social / collaboration scenarios'],
+        avoidWhen: ['自由输入建议', '纯文本输入'],
+        avoidWhenEn: ['Free input suggestions', 'Plain text input'],
+        recipe: recipe(
+          [
+            ['v-model 绑定输入值', 'v-model for the input value'],
+            ['options 提及选项数组', 'options for mention candidates'],
+            ['prefix="@" 触发字符（可数组多个）', 'prefix="@" trigger character (array for multiple)'],
+            ['split 插入后追加字符（默认空格）', 'split for appended character after selection'],
+          ],
+          undefined,
+          [['@select 选中提及项', '@select on mention selection']],
+        ),
+        ...anti([
+          ['自由输入建议用 MMentions → MAutoComplete', 'Free suggestions via MMentions → MAutoComplete'],
+          ['纯文本输入用 MMentions → MInput', 'Plain text via MMentions → MInput'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'number-input-choice',
+    title: '数值输入方式如何选择',
+    titleEn: 'Choosing number input, slider, or knob',
+    question: '这是精确数值输入、范围调节，还是仪表盘式调节？',
+    questionEn: 'Is this exact numeric input, range adjustment, or dial-style adjustment?',
+    keywords: [
+      '数值',
+      '数字',
+      'inputnumber',
+      'slider',
+      'knob',
+      '精确',
+      '范围',
+      '调节',
+    ],
+    options: [
+      {
+        component: 'MInputNumber',
+        when: ['需要精确数值输入', '需要 min/max/step 约束'],
+        whenEn: ['Exact numeric input is required', 'min/max/step constraints are needed'],
+        avoidWhen: ['范围调节', '仪表盘式调节'],
+        avoidWhenEn: ['Range adjustment', 'Dial-style adjustment'],
+        recipe: recipe(
+          [
+            ['v-model 绑定数值', 'v-model for the number'],
+            ['min / max / step 控制范围步进', 'min / max / step for range and step'],
+            ['showButtons 显示加减按钮', 'showButtons for increment/decrement buttons'],
+            ['precision 小数位数', 'precision for decimal places'],
+          ],
+        ),
+        ...anti([
+          ['范围调节用 MInputNumber → MSlider', 'Range adjustment via MInputNumber → MSlider'],
+          ['仪表盘调节用 MInputNumber → MKnob', 'Dial adjustment via MInputNumber → MKnob'],
+        ]),
+      },
+      {
+        component: 'MSlider',
+        when: ['范围调节（音量 / 价格区间 / 阈值）', '视觉化比例比精确数值更重要'],
+        whenEn: ['Range adjustment (volume / price range / threshold)', 'Visual proportion matters more than exact value'],
+        avoidWhen: ['需要精确输入', '单点精确值'],
+        avoidWhenEn: ['Exact input is required', 'A single exact value is needed'],
+        recipe: recipe(
+          [
+            ['v-model 数值或 range 数组', 'v-model number or range array'],
+            ['min / max / step 控制范围', 'min / max / step for the range'],
+            ['marks 显示刻度标签', 'marks for tick labels'],
+            ['tooltip 拖拽时显示当前值', 'tooltip shows value while dragging'],
+          ],
+        ),
+        ...anti([
+          ['精确输入用 MSlider → MInputNumber', 'Exact input via MSlider → MInputNumber'],
+          ['仪表盘调节用 MSlider → MKnob', 'Dial adjustment via MSlider → MKnob'],
+        ]),
+      },
+      {
+        component: 'MKnob',
+        when: ['仪表盘式数值调节（阈值 / 参数）', '视觉化调节比精确输入更重要'],
+        whenEn: ['Dial-style value adjustment (threshold / params)', 'Visual adjustment matters more than exact input'],
+        avoidWhen: ['需要精确输入', '范围选择'],
+        avoidWhenEn: ['Exact input is required', 'Range selection is needed'],
+        recipe: recipe(
+          [
+            ['v-model 绑定数值', 'v-model for the number'],
+            ['min / max / step 控制范围', 'min / max / step for the range'],
+            ['diameter 控制表盘大小', 'diameter for the dial size'],
+            ['valueTemplate="{value}%" 自定义显示', 'valueTemplate="{value}%" for custom display'],
+          ],
+        ),
+        ...anti([
+          ['精确输入用 MKnob → MInputNumber', 'Exact input via MKnob → MInputNumber'],
+          ['范围选择用 MKnob → MSlider', 'Range selection via MKnob → MSlider'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'large-data-choice',
+    title: '大数据量列表渲染策略',
+    titleEn: 'Choosing large data rendering strategy',
+    question: '这是万级数据虚拟滚动，还是普通数据量的直接渲染？',
+    questionEn: 'Is this virtual scrolling for 10k+ items, or direct rendering for normal data volume?',
+    keywords: [
+      '大数据',
+      '虚拟滚动',
+      'virtualscroller',
+      '性能',
+      '万级',
+      '渲染优化',
+    ],
+    options: [
+      {
+        component: 'MVirtualScroller',
+        when: ['万级以上数据列表', '需要固定 itemSize 优化渲染'],
+        whenEn: ['Lists with 10k+ items', 'Fixed itemSize for render optimization'],
+        avoidWhen: ['数据量小（<1000）', '需要复杂动态高度'],
+        avoidWhenEn: ['Small data volume (<1000)', 'Complex dynamic heights are needed'],
+        recipe: recipe(
+          [
+            ['items 数据数组；itemSize 固定高度（px）', 'items for data; itemSize for fixed height (px)'],
+            ['height 可视区域高度', 'height for the viewport height'],
+            ['buffer 上下缓冲数量（减少白屏）', 'buffer for overscan items (reduces blank areas)'],
+            ['scrollToIndex 编程滚动到指定项', 'scrollToIndex for programmatic scrolling'],
+          ],
+          [['#item 自定义列表项内容', '#item for custom item content']],
+        ),
+        ...anti([
+          ['小数据量用 MVirtualScroller → 普通 v-for / MList', 'Small data via MVirtualScroller → plain v-for / MList'],
+          ['动态高度列表用 MVirtualScroller → 需要固定 itemSize', 'Dynamic heights via MVirtualScroller → fixed itemSize required'],
+        ]),
+      },
+      {
+        component: '普通 v-for / MList',
+        when: ['数据量小（<1000）', '需要复杂动态高度布局'],
+        whenEn: ['Small data volume (<1000)', 'Complex dynamic height layouts are needed'],
+        avoidWhen: ['万级以上数据', '性能敏感场景'],
+        avoidWhenEn: ['10k+ items', 'Performance-sensitive scenarios'],
+        recipe: recipe(
+          [
+            ['MList items / dataSource 直接渲染', 'MList items / dataSource for direct rendering'],
+            ['v-for 自定义模板渲染', 'v-for for custom template rendering'],
+            ['无需 itemSize 约束', 'No itemSize constraint needed'],
+          ],
+        ),
+        ...anti([
+          ['万级数据用普通 v-for → MVirtualScroller', '10k+ items via plain v-for → MVirtualScroller'],
+        ]),
+      },
+    ],
+  },
 ]
 
 export function findDecision(name: string): ComponentDecision | undefined {
