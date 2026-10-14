@@ -2,7 +2,7 @@
 import type { MRouteLocationRaw } from '../../shared/optionalRouter'
 import type { MenuItem } from './types'
 import { computed, inject } from 'vue'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { isExternalRoute, resolveOptionalRouterLink, resolveRouteHref } from '../../shared/optionalRouter'
 import MIcon from '../Icon/Icon.vue'
 import MPopover from '../Popover/Popover.vue'
@@ -39,7 +39,15 @@ function itemKey(item: MenuItem, index: number) {
 }
 
 function iconOf(item: MenuItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: MenuItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: MenuItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 
 function onLeafClick(item: MenuItem, event: MouseEvent) {
@@ -62,13 +70,12 @@ function isSubmenuExpanded(item: MenuItem, index: number) {
 }
 
 function contentClass(item: MenuItem, index: number) {
-  const icon = iconOf(item)
   return {
     'm-menu__item-content--selected': ctx.isSelected(item, index, props.prefix),
     'm-menu__item-content--child-active': ctx.isChildActive(item, index, props.prefix),
     'm-menu__item-content--disabled': Boolean(item.disabled),
     'm-menu__item-content--collapsed': collapsed.value,
-    'm-menu__item-content--no-icon': !icon,
+    'm-menu__item-content--no-icon': !hasIcon(item),
     'm-menu__item-content--active': ctx.activeKey.value === itemKey(item, index),
   }
 }
@@ -147,8 +154,9 @@ function flyoutTooltipSuspended(item: MenuItem, index: number) {
               aria-haspopup="menu"
               :aria-expanded="horizontal ? Boolean(ctx.flyoutOpen[itemKey(item, index)]) : undefined"
             >
-              <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
-                <MIcon :name="iconOf(item)!" size="sm" />
+              <span v-if="hasIcon(item)" class="m-menu__icon" aria-hidden="true">
+                <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+                <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
               </span>
               <span class="m-menu__label">{{ item.label }}</span>
               <span v-if="horizontal" class="m-menu__arrow" aria-hidden="true">
@@ -182,8 +190,9 @@ function flyoutTooltipSuspended(item: MenuItem, index: number) {
           :aria-disabled="item.disabled || undefined"
           @click="onParentClick(item, index)"
         >
-          <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
-            <MIcon :name="iconOf(item)!" size="sm" />
+          <span v-if="hasIcon(item)" class="m-menu__icon" aria-hidden="true">
+            <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+            <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
           </span>
           <span class="m-menu__label">{{ item.label }}</span>
           <span
@@ -234,8 +243,9 @@ function flyoutTooltipSuspended(item: MenuItem, index: number) {
           :to="leafLinkTo(item)"
           @click="onLeafClick(item, $event)"
         >
-          <span v-if="iconOf(item)" class="m-menu__icon" aria-hidden="true">
-            <MIcon :name="iconOf(item)!" size="sm" />
+          <span v-if="hasIcon(item)" class="m-menu__icon" aria-hidden="true">
+            <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+            <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
           </span>
           <span class="m-menu__label">{{ item.label }}</span>
         </component>

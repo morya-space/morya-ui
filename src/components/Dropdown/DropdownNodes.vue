@@ -2,7 +2,7 @@
 import type { DropdownItem } from './types'
 import { ref } from 'vue'
 import FlyoutSubmenu from '../../shared/FlyoutSubmenu.vue'
-import { menuNodeKey, resolveMenuIcon } from '../../shared/menu'
+import { menuNodeKey, resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import MIcon from '../Icon/Icon.vue'
 import MScrollbar from '../Scrollbar/Scrollbar.vue'
 import DropdownNodes from './DropdownNodes.vue'
@@ -58,7 +58,15 @@ function itemKey(item: DropdownItem, index: number) {
 }
 
 function iconOf(item: DropdownItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: DropdownItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: DropdownItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 
 function onEnter(item: DropdownItem, index: number, event: MouseEvent) {
@@ -121,8 +129,9 @@ function onSubmenuLeave() {
         :disabled="item.disabled"
         :aria-haspopup="true"
       >
-        <span v-if="iconOf(item)" class="m-dropdown__icon" aria-hidden="true">
-          <MIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="hasIcon(item)" class="m-dropdown__icon" aria-hidden="true">
+          <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+          <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
         </span>
         <slot name="item" :item="item">
           {{ item.label }}
@@ -169,8 +178,9 @@ function onSubmenuLeave() {
       @mouseenter="!item.disabled && $emit('highlight', item.value)"
       @click="$emit('select', item)"
     >
-      <span v-if="iconOf(item)" class="m-dropdown__icon" aria-hidden="true">
-        <MIcon :name="iconOf(item)!" size="sm" />
+      <span v-if="hasIcon(item)" class="m-dropdown__icon" aria-hidden="true">
+        <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+        <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
       </span>
       <slot name="item" :item="item">
         {{ item.label }}

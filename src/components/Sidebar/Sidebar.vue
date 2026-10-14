@@ -3,7 +3,7 @@
 import type { SidebarItem, SidebarProps } from './types'
 import { computed, useAttrs, useSlots } from 'vue'
 import { useMLocale } from '../../locale'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
@@ -29,7 +29,15 @@ function activate(item: SidebarItem) {
 }
 
 function iconOf(item: SidebarItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: SidebarItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: SidebarItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 </script>
 
@@ -45,8 +53,9 @@ function iconOf(item: SidebarItem) {
           :title="collapsed ? item.label : undefined"
           @click="activate(item)"
         >
-          <span v-if="iconOf(item)" class="m-sidebar__icon" aria-hidden="true">
-            <MIcon :name="iconOf(item)!" size="sm" />
+          <span v-if="hasIcon(item)" class="m-sidebar__icon" aria-hidden="true">
+            <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+            <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
           </span>
           <span v-if="!collapsed" class="m-sidebar__label">{{ item.label }}</span>
         </button>
@@ -58,8 +67,9 @@ function iconOf(item: SidebarItem) {
               :disabled="child.disabled"
               @click="activate(child)"
             >
-              <span v-if="iconOf(child)" class="m-sidebar__icon" aria-hidden="true">
-                <MIcon :name="iconOf(child)!" size="sm" />
+              <span v-if="hasIcon(child)" class="m-sidebar__icon" aria-hidden="true">
+                <MIcon v-if="iconOf(child)" :name="iconOf(child)!" size="sm" />
+                <component :is="iconComponentOf(child)" v-else-if="iconComponentOf(child)" />
               </span>
               <span class="m-sidebar__label">{{ child.label }}</span>
             </button>

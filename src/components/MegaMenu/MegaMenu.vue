@@ -4,7 +4,7 @@ import type { MegaMenuItem, MegaMenuProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
@@ -64,7 +64,15 @@ function isSelected(item: MegaMenuItem) {
 }
 
 function iconOf(item: MegaMenuItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: MegaMenuItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: MegaMenuItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 
 function pick(item: MegaMenuItem) {
@@ -262,8 +270,9 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="iconOf(item)" class="m-megamenu__icon" aria-hidden="true">
-          <MIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="hasIcon(item)" class="m-megamenu__icon" aria-hidden="true">
+          <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+          <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
         </span>
         {{ item.label }}
       </button>

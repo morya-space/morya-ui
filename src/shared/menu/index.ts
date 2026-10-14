@@ -1,5 +1,3 @@
-export { resolveMenuIcon } from './icon'
-export { menuNodeKey } from './key'
 export {
   flattenVisibleMenuEntries,
   mergeExpandedKeysForSelection,
@@ -7,6 +5,8 @@ export {
   toggleExpandedKeys,
 } from './expand'
 export type { FlatMenuEntry, InitialExpandedKeysOptions } from './expand'
+export { resolveMenuIcon, resolveMenuIconComponent } from './icon'
+export { menuNodeKey } from './key'
 export {
   collectExpandableKeys,
   collectTopLevelKeys,

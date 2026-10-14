@@ -41,7 +41,7 @@ import {  MMegaMenu } from 'morya-ui'
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | `label` | `string` | 展示文案。 |
-| `icon` | `string` | 可选前缀字符。 |
+| `icon` | `string \| Component` | 内置图标名、别名，或自定义 Vue 图标组件。 |
 | `command` | `() => void` | 点击时执行。 |
 | `disabled` | `boolean` | 禁用项。 |
 | `items` | `MegaMenuItem[][]` | 分栏子面板。 |

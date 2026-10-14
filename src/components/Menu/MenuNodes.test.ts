@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
+import { defineComponent, h } from 'vue'
 import { createMemoryHistory, createRouter } from 'vue-router'
 import MMenu from './Menu.vue'
 
@@ -59,5 +60,61 @@ describe('menuNodes', () => {
     })
     expect(wrapper.findComponent({ name: 'RouterLink' }).exists()).toBe(false)
     expect(wrapper.find('a.m-menu__item-content').attributes('href')).toBe('/docs')
+  })
+
+  it('renders built-in icon when icon is a valid IconName', () => {
+    const wrapper = mount(MMenu, {
+      props: {
+        model: [{ key: 'settings', label: 'Settings', icon: 'settings' }],
+      },
+    })
+    expect(wrapper.find('.m-menu__icon').exists()).toBe(true)
+    expect(wrapper.find('.m-icon').exists()).toBe(true)
+  })
+
+  it('renders custom component icon when icon is a component', () => {
+    const CustomIcon = defineComponent({
+      name: 'CustomIcon',
+      setup() {
+        return () => h('svg', { class: 'custom-icon' }, [h('path', { d: 'M0 0h24v24H0z' })])
+      },
+    })
+
+    const wrapper = mount(MMenu, {
+      props: {
+        model: [{ key: 'custom', label: 'Custom', icon: CustomIcon }],
+      },
+    })
+
+    expect(wrapper.find('.m-menu__icon').exists()).toBe(true)
+    expect(wrapper.findComponent(CustomIcon).exists()).toBe(true)
+    expect(wrapper.find('.custom-icon').exists()).toBe(true)
+  })
+
+  it('renders custom component icon for nested menu items', () => {
+    const CustomIcon = defineComponent({
+      name: 'CustomIcon',
+      setup() {
+        return () => h('svg', { class: 'custom-icon' })
+      },
+    })
+
+    const wrapper = mount(MMenu, {
+      props: {
+        model: [
+          {
+            key: 'parent',
+            label: 'Parent',
+            icon: 'settings',
+            items: [{ key: 'child', label: 'Child', icon: CustomIcon }],
+          },
+        ],
+        defaultExpandedKeys: ['parent'],
+      },
+    })
+
+    const icons = wrapper.findAll('.m-menu__icon')
+    expect(icons).toHaveLength(2)
+    expect(wrapper.findComponent(CustomIcon).exists()).toBe(true)
   })
 })

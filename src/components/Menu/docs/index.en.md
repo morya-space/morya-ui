@@ -127,7 +127,7 @@ Use `inverted` with `MLayoutSider`'s `inverted` on dark backgrounds.
 | --- | --- | --- |
 | `key` | `string` | Unique id; falls back to `label`. |
 | `label` | `string` | Display text. |
-| `icon` | `string` | [Tabler icon name](/components/Icon) or character. |
+| `icon` | `string \| Component` | [Tabler icon name](/components/Icon), alias, or custom Vue icon component. |
 | `command` | `() => void` | Click handler (also emits `select`). |
 | `disabled` | `boolean` | Disabled state. |
 | `separator` | `boolean` | Separator line (ignores other fields). |
@@ -143,7 +143,7 @@ Each entry in `model`; supports nesting:
 interface MenuItem {
   key?: string
   label?: string
-  icon?: string
+  icon?: string | Component        // Built-in icon name, alias, or custom Vue component
   to?: string | RouteLocationRaw   // RouterLink when vue-router is installed
   command?: () => void
   disabled?: boolean

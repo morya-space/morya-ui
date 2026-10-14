@@ -1,3 +1,4 @@
+import type { Component } from 'vue'
 import type { MRouteLocationRaw } from '../../shared/optionalRouter'
 import type { MAppendTo } from '../../shared/overlay'
 import type { RootPassThrough } from '../../shared/passThrough'
@@ -6,7 +7,8 @@ import type { MotionPresetId } from '../../theme/motionPresets'
 export interface MenuItem {
   key?: string
   label?: string
-  icon?: string
+  /** Built-in icon name, alias, or custom Vue component. */
+  icon?: string | Component
   /** SPA route target when vue-router is available; falls back to anchor. */
   to?: MRouteLocationRaw
   command?: () => void

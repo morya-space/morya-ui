@@ -1,7 +1,7 @@
 import type { DropdownItem } from './types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
-import { nextTick } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import MDropdown from './Dropdown.vue'
 
 const items: DropdownItem[] = [
@@ -123,5 +123,27 @@ describe('muDropdown', () => {
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     expect(wrapper.classes()).toContain('m-dropdown--disabled')
     expect(wrapper.get('.m-dropdown__trigger').attributes('aria-disabled')).toBe('true')
+  })
+
+  it('renders custom component icon for items', async () => {
+    const CustomIcon = defineComponent({
+      name: 'CustomIcon',
+      setup() {
+        return () => h('svg', { class: 'custom-icon' })
+      },
+    })
+
+    const wrapper = mount(MDropdown, {
+      props: {
+        items: [{ value: 'custom', label: 'Custom', icon: CustomIcon }],
+        modelValue: true,
+        teleport: false,
+      },
+    })
+
+    expect(wrapper.find('.m-dropdown__icon').exists()).toBe(true)
+    expect(wrapper.findComponent(CustomIcon).exists()).toBe(true)
+    expect(wrapper.find('.custom-icon').exists()).toBe(true)
+    wrapper.unmount()
   })
 })

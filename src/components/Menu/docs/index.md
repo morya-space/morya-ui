@@ -129,7 +129,7 @@ import {  MMenu } from 'morya-ui'
 | --- | --- | --- |
 | `key` | `string` | 唯一标识；未传时使用 `label`。 |
 | `label` | `string` | 展示文本。 |
-| `icon` | `string` | [Tabler 图标名](/components/Icon) 或字符。 |
+| `icon` | `string \| Component` | [Tabler 图标名](/components/Icon)、别名，或自定义 Vue 图标组件。 |
 | `command` | `() => void` | 点击回调（与 `select` 事件同时触发）。 |
 | `disabled` | `boolean` | 禁用。 |
 | `separator` | `boolean` | 分隔线（忽略其他字段）。 |
@@ -145,7 +145,7 @@ import {  MMenu } from 'morya-ui'
 interface MenuItem {
   key?: string
   label?: string
-  icon?: string
+  icon?: string | Component        // 内置图标名、别名，或自定义 Vue 组件
   to?: string | RouteLocationRaw   // 有 vue-router 时用 RouterLink
   command?: () => void
   disabled?: boolean

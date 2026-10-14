@@ -27,7 +27,7 @@ import {  MCommandMenu } from 'morya-ui'
 | Field | Type | Description |
 | --- | --- | --- |
 | `label` | `string` | Display text; included in local filtering. |
-| `icon` | `string` | Optional leading character (not a MIcon name). |
+| `icon` | `string \| Component` | Built-in icon name, alias, or custom Vue icon component. |
 | `shortcut` | `string` | Optional shortcut hint. |
 | `command` | `() => void` | Runs on activate; closes the palette afterward. |
 | `disabled` | `boolean` | Disabled items cannot be activated. |

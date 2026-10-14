@@ -5,7 +5,7 @@ import { computed, nextTick, ref, toRef, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
 import { filterItemsByLabel } from '../../shared/filterByQuery'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { resolveOverlayTeleport } from '../../shared/overlay'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
@@ -55,7 +55,15 @@ function activate(item: CommandMenuItem) {
 }
 
 function iconOf(item: CommandMenuItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: CommandMenuItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: CommandMenuItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 
 function onPanelKeydown(event: KeyboardEvent) {
@@ -141,8 +149,9 @@ watch(filtered, () => {
                 @click="activate(item)"
                 @mouseenter="activeIndex = index"
               >
-                <span v-if="iconOf(item)" class="m-commandmenu__icon" aria-hidden="true">
-                  <MIcon :name="iconOf(item)!" size="sm" />
+                <span v-if="hasIcon(item)" class="m-commandmenu__icon" aria-hidden="true">
+                  <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+                  <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
                 </span>
                 <span class="m-commandmenu__label">{{ item.label }}</span>
                 <span v-if="item.shortcut" class="m-commandmenu__shortcut">{{ item.shortcut }}</span>

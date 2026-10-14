@@ -4,7 +4,7 @@ import type { MenubarItem, MenubarProps } from './types'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle } from '../../shared/overlayPlacement'
 import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
@@ -69,7 +69,15 @@ function isSelected(item: MenubarItem) {
 }
 
 function iconOf(item: MenubarItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: MenubarItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: MenubarItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 
 function pick(item: MenubarItem) {
@@ -262,8 +270,9 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="iconOf(item)" class="m-menubar__icon" aria-hidden="true">
-          <MIcon :name="iconOf(item)!" size="sm" />
+        <span v-if="hasIcon(item)" class="m-menubar__icon" aria-hidden="true">
+          <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+          <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
         </span>
         {{ item.label }}
         <span v-if="item.items?.length" class="m-menubar__caret" aria-hidden="true">
@@ -297,8 +306,9 @@ onBeforeUnmount(() => {
                 :tabindex="subKeyboard.tabindexFor(childIndex)"
                 @click.stop="activateChild(child)"
               >
-                <span v-if="iconOf(child)" class="m-menubar__icon" aria-hidden="true">
-                  <MIcon :name="iconOf(child)!" size="sm" />
+                <span v-if="hasIcon(child)" class="m-menubar__icon" aria-hidden="true">
+                  <MIcon v-if="iconOf(child)" :name="iconOf(child)!" size="sm" />
+                  <component :is="iconComponentOf(child)" v-else-if="iconComponentOf(child)" />
                 </span>
                 {{ child.label }}
               </button>

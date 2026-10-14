@@ -5,7 +5,7 @@ import type { SpeedDialItem, SpeedDialProps } from './types'
 import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
 import { useMConfig } from '../../shared/config'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { isOverlayTeleported, resolveOverlayTeleport } from '../../shared/overlay'
 import { computeFloatingOverlayStyle  } from '../../shared/overlayPlacement'
 import { useFloatingViewportSync } from '../../shared/useFloatingViewportSync'
@@ -165,7 +165,15 @@ function activate(item: SpeedDialItem) {
 }
 
 function iconOf(item: SpeedDialItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: SpeedDialItem) {
+  return resolveMenuIconComponent(item.icon)
+}
+
+function hasIcon(item: SpeedDialItem) {
+  return Boolean(iconOf(item) || iconComponentOf(item))
 }
 
 function onViewportChange() {
@@ -245,8 +253,9 @@ onBeforeUnmount(() => {
               @click="activate(item)"
             >
               <slot name="item" :item="item">
-                <span v-if="iconOf(item)" aria-hidden="true">
-                  <MIcon :name="iconOf(item)!" size="sm" />
+                <span v-if="hasIcon(item)" aria-hidden="true">
+                  <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+                  <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
                 </span>
                 <span class="m-speeddial__action-label">{{ item.label }}</span>
               </slot>

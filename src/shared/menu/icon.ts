@@ -1,3 +1,4 @@
+import type { Component } from 'vue'
 import type { IconName } from '../../components/Icon/types'
 import { isIconName } from '../../components/Icon/icons'
 
@@ -19,4 +20,10 @@ export function resolveMenuIcon(icon?: string): IconName | undefined {
   if (!icon) return undefined
   if (isIconName(icon)) return icon
   return menuIconAliases[icon]
+}
+
+/** Resolve a menu item icon to a custom component, if applicable. */
+export function resolveMenuIconComponent(icon?: string | Component): Component | undefined {
+  if (!icon || typeof icon === 'string') return undefined
+  return icon
 }

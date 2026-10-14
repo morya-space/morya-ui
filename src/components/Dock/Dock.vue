@@ -2,7 +2,7 @@
 
 import type { DockItem, DockProps } from './types'
 import { computed, useAttrs, useSlots } from 'vue'
-import { resolveMenuIcon } from '../../shared/menu'
+import { resolveMenuIcon, resolveMenuIconComponent } from '../../shared/menu'
 import { useRootParts } from '../../shared/useComponentAttrs'
 import MIcon from '../Icon/Icon.vue'
 defineOptions({ inheritAttrs: false })
@@ -24,7 +24,11 @@ function activate(item: DockItem) {
 }
 
 function iconOf(item: DockItem) {
-  return resolveMenuIcon(item.icon)
+  return typeof item.icon === 'string' ? resolveMenuIcon(item.icon) : undefined
+}
+
+function iconComponentOf(item: DockItem) {
+  return resolveMenuIconComponent(item.icon)
 }
 </script>
 
@@ -44,6 +48,7 @@ function iconOf(item: DockItem) {
           >
             <span class="m-dock__icon" aria-hidden="true">
               <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
+              <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
               <template v-else>{{ item.label.slice(0, 1) }}</template>
             </span>
           </button>

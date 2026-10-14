@@ -41,7 +41,7 @@ Top-level entries without `items` behave as plain links via `command`.
 | Field | Type | Description |
 | --- | --- | --- |
 | `label` | `string` | Display text. |
-| `icon` | `string` | Optional leading character. |
+| `icon` | `string \| Component` | Built-in icon name, alias, or custom Vue icon component. |
 | `command` | `() => void` | Runs on activate. |
 | `disabled` | `boolean` | Disabled item. |
 | `items` | `MegaMenuItem[][]` | Column groups for the mega panel. |

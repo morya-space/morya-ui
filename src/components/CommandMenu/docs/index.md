@@ -27,7 +27,7 @@ import {  MCommandMenu } from 'morya-ui'
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | `label` | `string` | 展示文案，参与本地过滤。 |
-| `icon` | `string` | 可选前缀字符（非 MIcon 名）。 |
+| `icon` | `string \| Component` | 内置图标名、别名，或自定义 Vue 图标组件。 |
 | `shortcut` | `string` | 可选快捷键展示。 |
 | `command` | `() => void` | 选中后执行；执行完自动关闭面板。 |
 | `disabled` | `boolean` | 禁用项不可激活。 |

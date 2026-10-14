@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
+import { defineComponent, h } from 'vue'
 import MSidebar from './Sidebar.vue'
 
 describe('muSidebar', () => {
@@ -19,5 +20,22 @@ describe('muSidebar', () => {
     })
     expect(wrapper.classes()).toContain('m-sidebar--collapsed')
     expect(wrapper.find('.m-sidebar__label').exists()).toBe(false)
+  })
+
+  it('renders custom component icon for items', () => {
+    const CustomIcon = defineComponent({
+      name: 'CustomIcon',
+      setup() {
+        return () => h('svg', { class: 'custom-icon' })
+      },
+    })
+
+    const wrapper = mount(MSidebar, {
+      props: { model: [{ label: 'Custom', icon: CustomIcon }] },
+    })
+
+    expect(wrapper.find('.m-sidebar__icon').exists()).toBe(true)
+    expect(wrapper.findComponent(CustomIcon).exists()).toBe(true)
+    expect(wrapper.find('.custom-icon').exists()).toBe(true)
   })
 })
