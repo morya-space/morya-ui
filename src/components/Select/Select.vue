@@ -276,9 +276,6 @@ function updateMenuPosition() {
     rect,
     props.placement === 'bottom-end' ? 'bottom-end' : 'bottom-start',
     {
-      // Lock popup width to the trigger so long options wrap instead of
-      // stretching `.m-select__menu` (width: max-content) beyond the field.
-      width: `${rect.width}px`,
       minWidth: `${rect.width}px`,
     },
   )
