@@ -8,6 +8,7 @@ import {
   MBreadcrumb,
   MButton,
   MConfigProvider,
+  message,
   MForm,
   MFormItem,
   MInput,
@@ -21,7 +22,6 @@ import {
   MSpace,
   MSwitch,
   MTabs,
-  message,
   zhCN,
 } from 'morya-ui'
 import { reactive, ref } from 'vue'
