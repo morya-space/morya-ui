@@ -1,5 +1,27 @@
 # morya-ui
 
+## 0.5.1
+
+### 破坏性变更
+
+- unify clearable prop name across form controls
+
+### 新功能
+
+- support custom component icons across menu components
+- enhance popup behavior and styling
+
+### 修复
+
+- remove explicit width setting for popup menu
+- lock floating popup width to the trigger width
+- don't highlight first item on mouse open
+- don't highlight first item on open
+
+### 变更
+
+- sync clearable usage and regenerate MCP catalog
+
 ## 0.5.0
 
 ### 新功能

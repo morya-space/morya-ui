@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-13T08:59:00.584Z",
-  "catalogGeneratedAt": "2026-10-13T08:55:20.652Z",
+  "generatedAt": "2026-10-14T09:30:52.509Z",
+  "catalogGeneratedAt": "2026-10-14T09:30:48.391Z",
   "components": [
     {
       "id": "Accordion",
@@ -1555,13 +1555,12 @@
       "exportName": "MInput",
       "examples": 28,
       "props": {
-        "total": 22,
+        "total": 21,
         "covered": 14,
         "missing": [
           "status",
           "id",
           "readonly",
-          "allowClear",
           "errorMessage",
           "name",
           "autocomplete",
@@ -1704,7 +1703,7 @@
       "exportName": "MInputPassword",
       "examples": 12,
       "props": {
-        "total": 20,
+        "total": 19,
         "covered": 10,
         "missing": [
           "toggleMask",
@@ -1714,7 +1713,6 @@
           "status",
           "disabled",
           "readonly",
-          "allowClear",
           "id",
           "pt"
         ]
@@ -2050,7 +2048,7 @@
       "exportName": "MMentions",
       "examples": 6,
       "props": {
-        "total": 21,
+        "total": 20,
         "covered": 4,
         "missing": [
           "split",
@@ -2066,7 +2064,6 @@
           "fluid",
           "emptyMessage",
           "clearable",
-          "allowClear",
           "loading",
           "id",
           "pt"
@@ -2589,7 +2586,7 @@
         "covered": 4,
         "missing": [
           "stars",
-          "allowClear",
+          "clearable",
           "disabled",
           "ariaLabel",
           "errorMessage",
@@ -3483,7 +3480,7 @@
       "exportName": "MTextarea",
       "examples": 10,
       "props": {
-        "total": 24,
+        "total": 23,
         "covered": 13,
         "missing": [
           "status",
@@ -3492,7 +3489,6 @@
           "resize",
           "disabled",
           "readonly",
-          "allowClear",
           "name",
           "autocomplete",
           "autofocus",

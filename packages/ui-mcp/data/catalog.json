@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-14T08:52:03.965Z",
+  "generatedAt": "2026-10-14T09:30:48.391Z",
   "library": {
     "name": "morya-ui",
-    "version": "0.5.0"
+    "version": "0.5.1"
   },
   "mcp": {
     "name": "@morya-ui/mcp",
-    "version": "0.5.0"
+    "version": "0.5.1"
   },
   "components": [
     {
