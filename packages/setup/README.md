@@ -60,6 +60,35 @@ npx @morya-ui/setup app
 npx @morya-ui/setup ai --yes
 npx @morya-ui/setup ai --skills=morya-ui-pages,frontend-design,impeccable
 npx @morya-ui/setup ai --skills=all
+```
+
+### Workspaces / monorepos
+
+The CLI is workspace-aware (pnpm, npm, and Yarn workspaces). Run it **from the
+workspace root** (recommended) or from inside an app package — either way it
+splits targets correctly:
+
+- **AI pack** (skills / rules / `DESIGN.md`), **MCP configs**, and the
+  `check:colors` script are written to the **workspace root**, where you open
+  the editor.
+- **Dependencies** (`morya-ui`) are installed into the **app package** that
+  consumes them (the member that already depends on morya-ui, or the one with
+  an app entry). The package manager is detected from the workspace-root
+  lockfile, even when you run the CLI inside a member.
+- **Styles** are injected into that app package's entry file.
+
+```bash
+# From the workspace root — configures the root and installs into your app
+npx @morya-ui/setup
+
+# Or from inside the app package — same result
+cd packages/admin && npx @morya-ui/setup
+```
+
+If no member consumes morya-ui yet and none has a detectable entry file, the
+install falls back to the directory you ran it from.
+
+```bash
 
 # Only Cursor + VS Code MCP targets (still writes .mcp.json)
 npx @morya-ui/setup ai --editors=cursor,vscode

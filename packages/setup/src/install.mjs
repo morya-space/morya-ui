@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
-import { join } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { execSync } from 'node:child_process'
-import { readJson } from './fs-utils.mjs'
+import { readJson, writeJson } from './fs-utils.mjs'
 
 const LOCKFILES = [
   { pm: 'pnpm', file: 'pnpm-lock.yaml' },
@@ -19,10 +19,17 @@ export function detectPackageManager(cwd, explicit) {
     }
     return explicit
   }
-  for (const { pm, file } of LOCKFILES) {
-    if (existsSync(join(cwd, file))) return pm
+  // Walk up so a workspace member (no own lockfile) resolves to the pm of the
+  // workspace root lockfile instead of falling back to pnpm.
+  let dir = resolve(cwd)
+  for (;;) {
+    for (const { pm, file } of LOCKFILES) {
+      if (existsSync(join(dir, file))) return pm
+    }
+    const parent = dirname(dir)
+    if (parent === dir) return 'pnpm'
+    dir = parent
   }
-  return 'pnpm'
 }
 
 /**
@@ -70,12 +77,19 @@ export function installCommand(pm, packages) {
 
 /**
  * Install / upgrade `morya-ui` and any existing `@morya-ui/*` deps to the npm `latest` tag.
+ *
+ * In a pnpm workspace, `pnpm add` inside a member only *upgrades* an already
+ * declared dependency (it does not append a new one). When `seedIfMissing` is
+ * true and the target package.json declares no morya packages yet, we first
+ * write `morya-ui: latest` into `dependencies` so the add works as an install.
+ *
  * @returns {{
  *   pm: string,
  *   command: string,
  *   packages: string[],
  *   skipped?: boolean,
  *   reason?: string,
+ *   seeded?: boolean,
  * }}
  */
 export function installMoryaUi(cwd, {
@@ -83,6 +97,7 @@ export function installMoryaUi(cwd, {
   dryRun = false,
   skipInstall = false,
   ensureCore = true,
+  seedIfMissing = false,
 } = {}) {
   const resolved = detectPackageManager(cwd, pm)
   const pkgPath = join(cwd, 'package.json')
@@ -101,34 +116,36 @@ export function installMoryaUi(cwd, {
     ? installCommand(resolved, packages)
     : installCommand(resolved, [CORE_PACKAGE])
 
+  const base = { pm: resolved, command, packages }
+
   if (skipInstall) {
-    return { pm: resolved, command, packages, skipped: true, reason: 'skip-install' }
+    return { ...base, skipped: true, reason: 'skip-install' }
   }
 
   if (!existsSync(pkgPath)) {
-    return {
-      pm: resolved,
-      command,
-      packages,
-      skipped: true,
-      reason: 'no-package-json',
-    }
+    return { ...base, skipped: true, reason: 'no-package-json' }
   }
 
   if (!packages.length) {
-    return {
-      pm: resolved,
-      command,
-      packages,
-      skipped: true,
-      reason: 'no-morya-packages',
+    return { ...base, skipped: true, reason: 'no-morya-packages' }
+  }
+
+  // Seed `morya-ui: latest` when the package declares no morya deps yet, so
+  // the install command actually adds it (pnpm workspace members need this).
+  const declaresAny = pkg ? collectMoryaPackages(pkg, { ensureCore: false }).length > 0 : false
+  let seeded = false
+  if (seedIfMissing && !declaresAny && pkg) {
+    if (!dryRun) {
+      pkg.dependencies = { ...(pkg.dependencies || {}), [CORE_PACKAGE]: 'latest' }
+      writeJson(pkgPath, pkg)
     }
+    seeded = true
   }
 
   if (dryRun) {
-    return { pm: resolved, command, packages, skipped: true, reason: 'dry-run' }
+    return { ...base, skipped: true, reason: 'dry-run', seeded }
   }
 
   execSync(command, { cwd, stdio: 'inherit', shell: true })
-  return { pm: resolved, command, packages }
+  return { ...base, seeded }
 }

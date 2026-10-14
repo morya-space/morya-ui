@@ -20,6 +20,7 @@ import {
   syncProjectSkillsToAgents,
 } from './skills.mjs'
 import { ensureStylesImport } from './styles.mjs'
+import { resolveSetupContext } from './workspace.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PKG_ROOT = resolve(__dirname, '..')
@@ -377,9 +378,20 @@ export async function runSetup(rawOptions) {
   const agents = agentsFlag != null ? parseAgentsFlag(agentsFlag) : [...DEFAULT_SKILL_AGENTS]
   const agentsLabel = agents === '*' ? 'all (*)' : resolveSkillAgents(agents).join(',')
 
-  console.log(`@morya-ui/setup [${mode}] → ${targetCwd}${dryRun ? ' (dry-run)' : ''}`)
+  // Resolve workspace context: AI pack / MCP / scripts land at the workspace
+  // (or package) root, while dependencies and styles target the app package
+  // that actually consumes morya-ui. In a plain single package both are cwd.
+  const ctx = resolveSetupContext(targetCwd)
+  const configRoot = ctx.configRoot
+  const installRoot = ctx.installRoot
+
+  console.log(`@morya-ui/setup [${mode}] → ${configRoot}${dryRun ? ' (dry-run)' : ''}`)
   if (scaffold) {
     console.log(`Scaffold: create-vite ${create} (template: ${scaffold.template}, pm: ${resolvedPm})`)
+  }
+  if (ctx.isWorkspace) {
+    console.log(`Workspace: root ${rel(cwd, ctx.workspaceRoot)}`)
+    console.log(`  app package: ${ctx.appPackage ? rel(configRoot, ctx.appPackage) || '.' : '(none found — add morya-ui manually)'}`)
   }
   console.log('')
 
@@ -402,12 +414,21 @@ export async function runSetup(rawOptions) {
     console.log('')
   }
 
-  // Always ensure morya-ui@latest; also bump any existing @morya-ui/* (nuxt, mcp, …).
-  const install = installMoryaUi(targetCwd, { pm: resolvedPm, dryRun, skipInstall, ensureCore: true })
+  // Dependencies: install / upgrade in the app package (workspace member),
+  // seeding morya-ui if the package does not declare it yet.
+  const install = installMoryaUi(installRoot, {
+    pm: resolvedPm,
+    dryRun,
+    skipInstall,
+    ensureCore: true,
+    seedIfMissing: true,
+  })
 
+  // AI pack, MCP, skills, and scripts land at the config root (workspace root
+  // in a monorepo, where the editor is opened).
   const template_ = skipTemplate
     ? { copied: [], skipped: [], forced: [], skippedStep: true }
-    : copyTemplate(TEMPLATE_ROOT, targetCwd, {
+    : copyTemplate(TEMPLATE_ROOT, configRoot, {
         force,
         dryRun,
         include: aiInclude,
@@ -415,32 +436,33 @@ export async function runSetup(rawOptions) {
 
   const remoteSkills = skipTemplate || !selectedSkills.length
     ? { installed: [], commands: [], agents, skipped: true }
-    : installSkillsCli(targetCwd, selectedSkills, catalog.skills, { dryRun, agents })
+    : installSkillsCli(configRoot, selectedSkills, catalog.skills, { dryRun, agents })
 
   const skillNamesForSync = needsTemplate
     ? [
         ...new Set([
           ...skillFolderNames(selectedSkills, catalog.skills),
-          ...(dryRun ? [] : listCanonicalSkillFolders(targetCwd)),
+          ...(dryRun ? [] : listCanonicalSkillFolders(configRoot)),
         ]),
       ]
     : []
 
   const skillSync = skipTemplate || !skillNamesForSync.length
     ? { results: [], skipped: true }
-    : syncProjectSkillsToAgents(targetCwd, skillNamesForSync, { force, dryRun, agents })
+    : syncProjectSkillsToAgents(configRoot, skillNamesForSync, { force, dryRun, agents })
 
   const mcp = skipMcp
     ? { skipped: true, results: [] }
-    : mergeMcpConfig(targetCwd, { force, dryRun, editors })
+    : mergeMcpConfig(configRoot, { force, dryRun, editors })
 
+  // Styles import goes into the app package entry.
   const styles = skipStyles
     ? { action: 'skipped', reason: 'skip-styles' }
-    : ensureStylesImport(targetCwd, { dryRun })
+    : ensureStylesImport(installRoot, { dryRun })
 
   const scripts = skipScripts
     ? { action: 'skipped-flag' }
-    : ensureCheckColorsScript(targetCwd, { force, dryRun })
+    : ensureCheckColorsScript(configRoot, { force, dryRun })
 
   console.log('--- Summary ---')
   if (scaffold) {
@@ -454,10 +476,11 @@ export async function runSetup(rawOptions) {
     }
   }
   const pkgList = (install.packages || []).join(', ') || 'morya-ui'
+  const installIn = rel(cwd, installRoot) || '.'
   if (install.skipped) {
-    console.log(`Install: skipped (${install.reason}) — would run: ${install.command}`)
+    console.log(`Install: skipped (${install.reason}) — would run in ${installIn}: ${install.command}`)
   } else {
-    console.log(`Install: upgraded to latest (${install.pm}) — ${pkgList}`)
+    console.log(`Install: upgraded to latest (${install.pm}) in ${installIn} — ${pkgList}`)
     console.log(`  $ ${install.command}`)
   }
 
@@ -506,16 +529,16 @@ export async function runSetup(rawOptions) {
   } else {
     console.log(`MCP: editors=${editors.join(',')}+portable`)
     for (const entry of mcp.results) {
-      console.log(`  ${entry.editor}: ${entry.action} (${rel(targetCwd, entry.path)})`)
+      console.log(`  ${entry.editor}: ${entry.action} (${rel(configRoot, entry.path)})`)
     }
   }
 
   if (styles.reason === 'skip-styles') {
     console.log('Styles: skipped (--skip-styles or ai mode)')
   } else if (styles.action === 'injected') {
-    console.log(`Styles: injected into ${rel(targetCwd, styles.path)}`)
+    console.log(`Styles: injected into ${rel(cwd, styles.path)}`)
   } else if (styles.action === 'skipped') {
-    console.log(`Styles: skipped (${styles.reason}) in ${rel(targetCwd, styles.path)}`)
+    console.log(`Styles: skipped (${styles.reason}) in ${rel(cwd, styles.path)}`)
   } else {
     console.log('Styles: no entry file found — add manually:')
     console.log("  import 'morya-ui/styles.css'")
@@ -561,6 +584,11 @@ export async function runSetup(rawOptions) {
     skills: selectedSkills,
     editors,
     agents,
+    workspace: {
+      isWorkspace: ctx.isWorkspace,
+      root: ctx.workspaceRoot,
+      appPackage: ctx.appPackage,
+    },
   }
 }
 
