@@ -159,7 +159,7 @@ register(
 
 register(
   'recommend_page',
-  'Recommend a page pattern and component composition from product intent. Pass style as free-text look; density=compact|default|spacious; brief for reference fidelity mapping; includeScaffold for optional golden structure.',
+  'Recommend a page pattern and component composition from product intent. Default path composes suggestedSnippets + get_page_snippet (golden pages are optional block-order checks, not a default look). Pass style as free-text look; density=compact|default|spacious; brief for reference fidelity mapping; includeScaffold only when you explicitly need the golden structure source.',
   {
     intent: z.string().min(1),
     pageType: z.string().optional(),

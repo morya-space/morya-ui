@@ -1510,6 +1510,45 @@ export function createToolHandlers(catalog = loadCatalog()) {
       }
     }
 
+    // Craft: composition relations — multiple filter regions on one page
+    {
+      const filterCount = (code.match(/<MPageFilters\b/gi) || []).length
+      if (filterCount > 1) {
+        push(
+          'craft',
+          'composition',
+          'multiple-filter-regions',
+          '组合建议：一个列表视图通常只保留一个 MPageFilters 筛选区（list-filters / collapsible / stack / dense 四选一）。',
+          'Composition: keep a single MPageFilters region per list view (pick one of list-filters / collapsible / stack / dense).',
+        )
+      }
+    }
+
+    // Craft: composition relations — filter stack already carries chips; avoid stacking a standalone chip row
+    if (
+      /<MPageFilters\b[^>]*\bcollapsible\b[\s\S]*?<\/MPageFilters>/i.test(code) &&
+      /<MPageFilterChips\b/i.test(code)
+    ) {
+      push(
+        'craft',
+        'composition',
+        'redundant-filter-chips',
+        '组合建议：使用折叠筛选栈（list-filters-stack / collapsible 已含已选摘要）时，通常不再叠加独立 MPageFilterChips。',
+        'Composition: when the collapsible filter stack already renders active chips, avoid adding a standalone MPageFilterChips row.',
+      )
+    }
+
+    // Craft: composition relations — density mixed within one page
+    if (/density\s*=\s*["']compact["']/i.test(code) && /density\s*=\s*["']spacious["']/i.test(code)) {
+      push(
+        'craft',
+        'composition',
+        'mixed-density',
+        '组合建议：同一页面内保持密度一致，不要混用 compact 与 spacious。',
+        'Composition: keep density consistent within one page — do not mix compact and spacious.',
+      )
+    }
+
     // Brief fidelity: required blocks / components
     const mapped = args.brief
       ? mapReferenceBrief(args.brief)

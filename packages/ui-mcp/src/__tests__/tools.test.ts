@@ -390,7 +390,9 @@ describe('@morya-ui/mcp handlers', () => {
     )
     expect(rail.id).toBe('list-page-rail')
     expect(rail.style).toBe('rail')
-    expect(rail.source).toContain('color-mix')
+    // rail 变体差异集中在侧栏品牌 chrome；token-only，不再默认渐变
+    expect(rail.source).toContain('gp-rail-sider')
+    expect(rail.source).toContain('--m-color-primary')
   })
 
   it('exposes style direction rules without a preset catalog', () => {
@@ -530,6 +532,36 @@ describe('@morya-ui/mcp handlers', () => {
     )
     expect(result.ok).toBe(true)
     expect(result.suggestions.some((item) => item.type === 'status-cell-tag')).toBe(true)
+  })
+
+  it('suggests a single filter region when multiple MPageFilters appear', () => {
+    const result = read<{ ok: boolean; craft: Array<{ type: string; severity?: string }> }>(
+      handlers.validatePage({
+        code: '<MPageFilters /><MPageFilters collapsible />',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.craft.some((item) => item.type === 'multiple-filter-regions' && item.severity === 'craft')).toBe(true)
+  })
+
+  it('suggests dropping standalone chips when the collapsible stack already renders them', () => {
+    const result = read<{ ok: boolean; craft: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MPageFilters collapsible><MInput /></MPageFilters><MPageFilterChips />',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.craft.some((item) => item.type === 'redundant-filter-chips')).toBe(true)
+  })
+
+  it('suggests consistent density when compact and spacious are mixed', () => {
+    const result = read<{ ok: boolean; craft: Array<{ type: string }> }>(
+      handlers.validatePage({
+        code: '<MTable density="compact" /><MCard density="spacious" />',
+      }),
+    )
+    expect(result.ok).toBe(true)
+    expect(result.craft.some((item) => item.type === 'mixed-density')).toBe(true)
   })
 
   it('returns detail-page and form-in-dialog golden samples', () => {
