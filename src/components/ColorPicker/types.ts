@@ -43,7 +43,7 @@ export interface ColorPickerProps {
   /** Disable alpha channel. */
   disabledAlpha?: boolean
   /** Show clear button. */
-  allowClear?: boolean
+  clearable?: boolean
   /** Format of the displayed value. */
   format?: ColorPickerFormat
   /** Preset color palettes. */

@@ -105,7 +105,6 @@ Pass-through per DOM part. Common keys: `root`, `input`, `label`, `prefix`, `suf
 | `disabled` | `boolean` | `false` | Disabled. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `clearable` | `boolean` | `false` | Show clear button. |
-| `allowClear` | `boolean` | — | Alias of `clearable` . |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
 | `errorMessage` | `string` | — | Error copy; implies invalid when set. |

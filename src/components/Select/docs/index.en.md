@@ -1,7 +1,7 @@
----
+﻿---
 title: Select
 category: 02 / FORM
-description: "Form select: mode=multiple|tags, labelInValue, fieldNames, showSearch, allowClear, optionRender, popupRender."
+description: "Form select: mode=multiple|tags, labelInValue, fieldNames, showSearch, clearable, optionRender, popupRender."
 ---
 
 # Select
@@ -24,7 +24,7 @@ import { MSelect } from "morya-ui";
 
 ## Clearable
 
-`allowClear` shows a clear button when a value is selected.
+`clearable` shows a clear button when a value is selected.
 
 ```vue preview src="./demos/Clearable.vue"
 
@@ -146,46 +146,46 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 
 | Prop                | Type                                                                                                      | Default                     | Description                                                                      |
 | ------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------- | -------------------------------------------------------------------------------- |
-| `modelValue`        | `string \| number \| Array<string \| number> \| SelectLabeledValue`                                       | —                           | Selected value; an array in `mode`, or `{ value, label }` with `labelInValue`.   |
-| `options`           | `Array<`[SelectOption](/docs/types#SelectOption)`\|`[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | —                           | Options list; may mix in `{ label, options }` groups.                            |
-| `fieldNames`        | `{ label?, value?, disabled?, options? }`                                                                 | —                           | Remap raw option keys.                                                           |
+| `modelValue`        | `string \| number \| Array<string \| number> \| SelectLabeledValue`                                       | 鈥?                          | Selected value; an array in `mode`, or `{ value, label }` with `labelInValue`.   |
+| `options`           | `Array<`[SelectOption](/docs/types#SelectOption)`\|`[SelectOptionGroup](/docs/types#SelectOptionGroup)`>` | 鈥?                          | Options list; may mix in `{ label, options }` groups.                            |
+| `fieldNames`        | `{ label?, value?, disabled?, options? }`                                                                 | 鈥?                          | Remap raw option keys.                                                           |
 | `labelInValue`      | `boolean`                                                                                                 | `false`                     | `v-model` / events return `{ value, label }`.                                    |
-| `label`             | `string`                                                                                                  | —                           | Field label.                                                                     |
-| `helpText`          | `string`                                                                                                  | —                           | Help text.                                                                       |
+| `label`             | `string`                                                                                                  | 鈥?                          | Field label.                                                                     |
+| `helpText`          | `string`                                                                                                  | 鈥?                          | Help text.                                                                       |
 | `invalid`           | `boolean`                                                                                                 | `false`                     | Invalid state.                                                                   |
-| `status`            | `'error' \| 'warning'`                                                                                    | —                           | Visual status; `error` matches invalid, `warning` is caution chrome.             |
-| `placeholder`       | `string`                                                                                                  | —                           | Placeholder text.                                                                |
+| `status`            | `'error' \| 'warning'`                                                                                    | 鈥?                          | Visual status; `error` matches invalid, `warning` is caution chrome.             |
+| `placeholder`       | `string`                                                                                                  | 鈥?                          | Placeholder text.                                                                |
 | `disabled`          | `boolean`                                                                                                 | `false`                     | Disabled.                                                                        |
 | `required`          | `boolean`                                                                                                 | `false`                     | Form required hint.                                                              |
-| `size`              | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'`                                                              | —                           | Size; inherits Form `size` when omitted.                                         |
-| `variant`           | `'outlined' \| 'filled'`                                                                                  | —                           | Input surface style.                                                             |
+| `size`              | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'`                                                              | 鈥?                          | Size; inherits Form `size` when omitted.                                         |
+| `variant`           | `'outlined' \| 'filled'`                                                                                  | 鈥?                          | Input surface style.                                                             |
 | `fluid`             | `boolean`                                                                                                 | `false`                     | Stretch to the container width.                                                  |
-| `mode`              | `'multiple' \| 'tags'`                                                                                    | —                           | Multi-value; `tags` also allows creating options.                                |
+| `mode`              | `'multiple' \| 'tags'`                                                                                    | 鈥?                          | Multi-value; `tags` also allows creating options.                                |
 | `remote`            | `boolean`                                                                                                 | `false`                     | Skip local filtering and emit `search`.                                          |
 | `loading`           | `boolean`                                                                                                 | `false`                     | Async loading state.                                                             |
-| `maxTagCount`       | `number`                                                                                                  | —                           | Max visible tags; extras collapse.                                               |
+| `maxTagCount`       | `number`                                                                                                  | 鈥?                          | Max visible tags; extras collapse.                                               |
 | `maxTagPlaceholder` | `(omitted) => MRenderable`                                                                                | `moreTags` locale           | Collapsed-tag summary.                                                           |
-| `allowClear`        | `boolean`                                                                                                 | `false`                     | Show a clear button when a value is selected.                                    |
+| `clearable`        | `boolean`                                                                                                 | `false`                     | Show a clear button when a value is selected.                                    |
 | `notFoundContent`   | `MRenderable`                                                                                             | `emptyOptions` locale       | Empty / no-match copy.                                                           |
 | `showSearch`        | `boolean`                                                                                                 | `false`                     | Render a search input in the popup.                                              |
 | `optionFilterProp`  | `string`                                                                                                  | `'label'`                   | Option key used for local matching.                                              |
 | `filterOption`      | `boolean \| (input, option) => boolean`                                                                   | match on `optionFilterProp` | Local filter rule; `false` disables.                                             |
-| `optionRender`      | `(option) => MRenderable`                                                                                 | —                           | Custom option row (wins over the `option` slot).                                 |
-| `popupRender`       | `(menu) => VNodeChild`                                                                                    | —                           | Wrap the popup menu.                                                             |
+| `optionRender`      | `(option) => MRenderable`                                                                                 | 鈥?                          | Custom option row (wins over the `option` slot).                                 |
+| `popupRender`       | `(menu) => VNodeChild`                                                                                    | 鈥?                          | Wrap the popup menu.                                                             |
 | `suffixIcon`        | `IconName`                                                                                                | `'chevron-down'`            | Trigger icon.                                                                    |
 | `teleport`          | `boolean`                                                                                                 | `true`                      | Menu Teleport. Mounts to `body` by default.                                      |
 | `appendTo`          | `string \| HTMLElement \| 'self'`                                                                         | `'body'`                    | Mount target. `'self'` renders in place.                                         |
 | `placement`         | `'bottom-start' \| 'bottom-end'`                                                                          | `'bottom-start'`            | Menu alignment.                                                                  |
 | `transition`        | `string \| false`                                                                                         | `'scale-fade'`              | Menu enter/exit preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
-| `id`                | `string`                                                                                                  | —                           | Control id.                                                                      |
-| `errorMessage`      | `string`                                                                                                  | —                           | Validation copy; shown when combined with `invalid`.                             |
-| `name`              | `string`                                                                                                  | —                           | Native name helper (hidden input).                                               |
-| `pt`                | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }`                    | —                           | Per-part DOM pass-through.                                                       |
+| `id`                | `string`                                                                                                  | 鈥?                          | Control id.                                                                      |
+| `errorMessage`      | `string`                                                                                                  | 鈥?                          | Validation copy; shown when combined with `invalid`.                             |
+| `name`              | `string`                                                                                                  | 鈥?                          | Native name helper (hidden input).                                               |
+| `pt`                | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }`                    | 鈥?                          | Per-part DOM pass-through.                                                       |
 | `virtual`           | `boolean`                                                                                                 | auto                        | `true` forces virtualization; `false` disables; auto-on at 80+ options.          |
-| `id`                | `string`                                                                                                  | —                           | Control id.                                                                      |
-| `errorMessage`      | `string`                                                                                                  | —                           | Validation error copy.                                                           |
-| `name`              | `string`                                                                                                  | —                           | Native name when a hidden input is present.                                      |
-| `pt`                | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }`                    | —                           | Pass-through (`root`, `control`, …).                                             |
+| `id`                | `string`                                                                                                  | 鈥?                          | Control id.                                                                      |
+| `errorMessage`      | `string`                                                                                                  | 鈥?                          | Validation error copy.                                                           |
+| `name`              | `string`                                                                                                  | 鈥?                          | Native name when a hidden input is present.                                      |
+| `pt`                | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }`                    | 鈥?                          | Pass-through (`root`, `control`, 鈥?.                                             |
 
 ## Events
 
@@ -193,9 +193,9 @@ Fallthrough attrs except control **events** bind to the field wrapper; `@keydown
 | ------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `update:modelValue` | [SelectModelValue](/docs/types#SelectModelValue)                       | Emitted when the value changes.                            |
 | `change`            | [SelectModelValue](/docs/types#SelectModelValue)                       | Emitted after a selection or clear.                        |
-| `clear`             | —                                                                      | Emitted when clear is clicked.                             |
-| `show`              | —                                                                      | Emitted when the menu opens.                               |
-| `hide`              | —                                                                      | Emitted when the menu closes.                              |
+| `clear`             | 鈥?                                                                     | Emitted when clear is clicked.                             |
+| `show`              | 鈥?                                                                     | Emitted when the menu opens.                               |
+| `hide`              | 鈥?                                                                     | Emitted when the menu closes.                              |
 | `search`            | `string`                                                               | Emitted as the filter query changes (`filter` / `remote`). |
 | `select`            | `value, option`                                                        | Emitted when an option is selected.                        |
 | `deselect`          | `value, option`                                                        | Emitted when an option is deselected (multiple mode).      |

@@ -38,9 +38,9 @@ describe('MMentions', () => {
     wrapper.unmount()
   })
 
-  it('supports allowClear alias and loading panel', async () => {
+  it('supports clearable and loading panel', async () => {
     const clearable = mount(MMentions, {
-      props: { modelValue: 'Hi', options: users, allowClear: true },
+      props: { modelValue: 'Hi', options: users, clearable: true },
     })
     await clearable.get('.m-mentions__clear').trigger('click')
     expect(clearable.emitted('update:modelValue')).toEqual([['']])

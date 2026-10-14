@@ -35,8 +35,6 @@ export interface TextareaProps extends MNativeInputProps {
   disabled?: boolean
   readonly?: boolean
   clearable?: boolean
-  /** Alias of `clearable` . `clearable` wins. */
-  allowClear?: boolean
   maxlength?: number
   showCount?: boolean
   /** Pass-through attrs/classes/styles per DOM part. */

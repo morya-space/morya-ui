@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   remote: undefined,
   loading: undefined,
   fluid: undefined,
-  allowClear: undefined,
+  clearable: undefined,
   showSearch: undefined,
   virtual: undefined,
   // Declared as `boolean | Function`; without an explicit default Vue casts the
@@ -124,8 +124,8 @@ const resolvedTags = computed(() => resolvedMode.value === 'tags')
 const resolvedRemote = computed(() => props.remote ?? (defaults.value.remote as boolean | undefined) ?? false)
 const resolvedLoading = computed(() => props.loading ?? false)
 const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boolean | undefined) ?? false)
-const resolvedAllowClear = computed(
-  () => props.allowClear ?? (defaults.value.allowClear as boolean | undefined) ?? false,
+const resolvedClearable = computed(
+  () => props.clearable ?? (defaults.value.clearable as boolean | undefined) ?? false,
 )
 const resolvedShowSearch = computed(
   () => props.showSearch ?? (defaults.value.showSearch as boolean | undefined) ?? false,
@@ -174,7 +174,7 @@ const displayLabel = computed(
   () => selectedOption.value?.label ?? props.placeholder ?? locale.value.selectPlaceholder,
 )
 const hasValue = computed(() => selectedValues.value.length > 0)
-const showClearButton = computed(() => resolvedAllowClear.value && hasValue.value && !props.disabled)
+const showClearButton = computed(() => resolvedClearable.value && hasValue.value && !props.disabled)
 
 const query = computed(() => filterQuery.value.trim())
 const canCreate = computed(() =>

@@ -83,8 +83,8 @@ describe('muInputPassword', () => {
     expect(peek.get('input').attributes('type')).toBe('password')
   })
 
-  it('supports allowClear alias and warning status', async () => {
-    const clearable = mount(MInputPassword, { props: { modelValue: 'secret', allowClear: true } })
+  it('supports clearable and warning status', async () => {
+    const clearable = mount(MInputPassword, { props: { modelValue: 'secret', clearable: true } })
     await clearable.get('.m-password__clear').trigger('click')
     expect(clearable.emitted('update:modelValue')).toEqual([['']])
 

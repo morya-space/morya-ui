@@ -57,8 +57,8 @@ describe('muTextarea', () => {
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
-  it('supports allowClear alias and warning status', async () => {
-    const clearable = mount(MTextarea, { props: { modelValue: 'Draft', allowClear: true } })
+  it('supports clearable and warning status', async () => {
+    const clearable = mount(MTextarea, { props: { modelValue: 'Draft', clearable: true } })
     await clearable.get('.m-textarea__clear').trigger('click')
     expect(clearable.emitted('update:modelValue')).toEqual([['']])
 

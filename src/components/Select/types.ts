@@ -104,7 +104,7 @@ export interface SelectProps extends MNativeComboboxFieldProps {
   /** Render the collapsed-tag summary. Defaults to the locale `moreTags` copy. */
   maxTagPlaceholder?: (omitted: SelectOption[]) => MRenderable
   /** Show the clear button when a value is selected. */
-  allowClear?: boolean
+  clearable?: boolean
   /** Empty / no-match content. Falls back to ConfigProvider `locale.emptyOptions`. */
   notFoundContent?: MRenderable
   /** Show a search input when the menu is open. */

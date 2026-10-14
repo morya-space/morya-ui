@@ -12,12 +12,12 @@ export interface RatingProps {
   errorMessage?: string
   size?: MSizeInput
   /**
-   * @deprecated Use `allowClear` instead. Kept as an alias; `allowClear`
+   * @deprecated Use `clearable` instead. Kept as an alias; `clearable`
    * takes precedence when both are set.
    */
   cancel?: boolean
   /** Show a clear control. Defaults to `true`. */
-  allowClear?: boolean | null
+  clearable?: boolean | null
   /** Allow 0.5 increments. */
   allowHalf?: boolean
   /** Accessible label for the slider root. Falls back to the locale string. */

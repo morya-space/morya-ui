@@ -29,8 +29,8 @@ describe('muRating', () => {
     expect(disabled.emitted('update:modelValue')).toBeUndefined()
   })
 
-  it('supports half stars and allowClear alias', async () => {
-    const wrapper = mount(MRating, { props: { modelValue: 1, allowHalf: true, allowClear: false } })
+  it('supports half stars and clearable', async () => {
+    const wrapper = mount(MRating, { props: { modelValue: 1, allowHalf: true, clearable: false } })
     expect(wrapper.find('.m-rating__cancel').exists()).toBe(false)
     const star = wrapper.findAll('.m-rating__star')[1]!
     await star.trigger('click', { clientX: 0 })

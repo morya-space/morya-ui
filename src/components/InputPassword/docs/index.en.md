@@ -62,7 +62,6 @@ Defaults are `eye` / `eye-off`. Swap them with other system icons via props, or 
 | `disabled` | `boolean` | `false` | Disabled. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `clearable` | `boolean` | `false` | Show a clear button. |
-| `allowClear` | `boolean` | — | Alias of `clearable` . |
 | `maxlength` | `number` | — | Native maxlength. |
 | `showCount` | `boolean` | `false` | Show character count. |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) `{ root?, label?, control?, input? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |

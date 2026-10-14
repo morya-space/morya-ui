@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<ColorPickerProps>(), {
   modelValue: '#1677ff',
   disabled: false,
   disabledAlpha: false,
-  allowClear: false,
+  clearable: false,
   format: 'hex',
   presets: undefined,
   showText: false,
@@ -580,7 +580,7 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
     >
       <span class="m-colorpicker__trigger-swatch" :style="{ background: triggerBackground }" />
       <span v-if="showText" class="m-colorpicker__trigger-text">{{ displayValue }}</span>
-      <MIcon v-if="allowClear && modelValue" name="close" size="sm" class="m-colorpicker__clear" @click.stop="onClear" />
+      <MIcon v-if="clearable && modelValue" name="close" size="sm" class="m-colorpicker__clear" @click.stop="onClear" />
       <MIcon v-else name="chevron-down" size="sm" class="m-colorpicker__arrow" />
     </button>
 

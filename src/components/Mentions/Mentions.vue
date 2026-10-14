@@ -35,7 +35,6 @@ const props = withDefaults(defineProps<MentionsProps>(), {
   invalid: false,
   fluid: false,
   clearable: undefined,
-  allowClear: undefined,
   loading: false,
 })
 const emit = defineEmits<{
@@ -67,9 +66,7 @@ const resolvedRows = computed(() => props.rows ?? (defaults.value.rows as number
 const showClear = computed(
   () =>
     (props.clearable
-      ?? props.allowClear
       ?? (defaults.value.clearable as boolean | undefined)
-      ?? (defaults.value.allowClear as boolean | undefined)
       ?? false)
     && Boolean(props.modelValue)
     && !props.disabled

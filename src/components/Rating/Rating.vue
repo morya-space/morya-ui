@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<RatingProps>(), {
   readonly: false,
   invalid: false,
   cancel: undefined,
-  allowClear: null,
+  clearable: null,
   allowHalf: false,
   ariaLabel: undefined,
 })
@@ -29,7 +29,7 @@ const sizeClass = useConfiguredSize('Rating', () => props.size)
 const fieldId = useMId('m-rating')
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 
-const canClear = computed(() => props.allowClear ?? props.cancel ?? true)
+const canClear = computed(() => props.clearable ?? props.cancel ?? true)
 const sliderLabel = computed(() => props.ariaLabel ?? props.label ?? locale.value.rating)
 const valueText = computed(() => formatLocale(locale.value.star, { value: props.modelValue ?? 0 }))
 const starList = computed(() => Array.from({ length: Math.max(1, props.stars) }, (_, index) => index + 1))

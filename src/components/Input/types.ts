@@ -29,8 +29,6 @@ export interface InputProps extends MNativeInputProps {
   disabled?: boolean
   readonly?: boolean
   clearable?: boolean
-  /** Alias of `clearable` . `clearable` wins. */
-  allowClear?: boolean
   /** Native maxlength. */
   maxlength?: number
   /** Show character count (with maxlength when set). */

@@ -42,7 +42,6 @@ import { MMentions } from 'morya-ui'
 | `size` / `variant` / `fluid` | — | — | Same ideas as Textarea |
 | `emptyMessage` | `string` | locale empty | Copy when nothing matches |
 | `clearable` | `boolean` | `false` | Show clear control |
-| `allowClear` | `boolean` | — | Alias of `clearable`  |
 | `loading` | `boolean` | `false` | Spinner in suggestion panel |
 | `id` | `string` | — | Control id |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) | — | Field pass-through |

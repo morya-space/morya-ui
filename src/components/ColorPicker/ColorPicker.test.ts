@@ -32,7 +32,7 @@ describe('MColorPicker', () => {
 
   it('emits clear when clear button is clicked', async () => {
     const wrapper = mount(MColorPicker, {
-      props: { modelValue: '#ff0000', allowClear: true, teleport: false },
+      props: { modelValue: '#ff0000', clearable: true, teleport: false },
     })
     await wrapper.find('.m-colorpicker__clear').trigger('click')
     expect(wrapper.emitted('clear')).toBeTruthy()

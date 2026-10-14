@@ -55,7 +55,7 @@ import { MColorPicker } from "morya-ui";
 | `gradient` | `boolean` | `false` | 启用渐变色模式。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `disabledAlpha` | `boolean` | `false` | 禁用透明度调节。 |
-| `allowClear` | `boolean` | `false` | 显示清空按钮。 |
+| `clearable` | `boolean` | `false` | 显示清空按钮。 |
 | `format` | `'hex' \| 'rgb' \| 'hsb'` | `'hex'` | 显示格式。 |
 | `presets` | `ColorPickerPreset[]` | — | 预设色板。 |
 | `showText` | `boolean` | `false` | 在触发器中显示颜色文本。 |

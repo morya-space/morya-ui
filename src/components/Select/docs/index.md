@@ -1,7 +1,7 @@
 ---
 title: Select
 category: 02 / FORM
-description: 表单选择器：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、allowClear、optionRender、popupRender。
+description: 表单选择器：mode="multiple" | "tags"、labelInValue、fieldNames、showSearch、clearable、optionRender、popupRender。
 ---
 
 # Select
@@ -23,7 +23,7 @@ import { MSelect } from 'morya-ui'
 
 ## Clearable
 
-`allowClear` 在已选值时显示清除按钮。
+`clearable` 在已选值时显示清除按钮。
 
 ```vue preview src="./demos/Clearable.vue"
 ```
@@ -149,7 +149,7 @@ import { MSelect } from 'morya-ui'
 | `loading` | `boolean` | `false` | 异步加载中。 |
 | `maxTagCount` | `number` | — | 多选时最多展示的标签数，其余折叠。 |
 | `maxTagPlaceholder` | `(omitted) => MRenderable` | locale `moreTags` | 折叠标签摘要。 |
-| `allowClear` | `boolean` | `false` | 有值时显示清除按钮。 |
+| `clearable` | `boolean` | `false` | 有值时显示清除按钮。 |
 | `notFoundContent` | `MRenderable` | locale `emptyOptions` | 空选项 / 无匹配文案。 |
 | `showSearch` | `boolean` | `false` | 浮层中显示搜索输入。 |
 | `optionFilterProp` | `string` | `'label'` | 本地匹配读取的选项字段。 |

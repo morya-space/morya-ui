@@ -6,5 +6,5 @@ const color = ref('#1677ff')
 </script>
 
 <template>
-  <MColorPicker v-model="color" show-text allow-clear />
+  <MColorPicker v-model="color" show-text clearable />
 </template>

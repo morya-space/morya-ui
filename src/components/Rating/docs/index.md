@@ -26,7 +26,7 @@ import { MRating } from 'morya-ui'
 
 ## Half
 
-`allowHalf` 支持 0.5 步进。`allowClear` 是 `cancel` 的别名，传入时优先。
+`allowHalf` 支持 0.5 步进。`clearable` 是 `cancel` 的别名，传入时优先。
 
 ```vue preview src="./demos/Half.vue"
 ```
@@ -38,7 +38,7 @@ import { MRating } from 'morya-ui'
 | `modelValue` | `number` | `0` | 当前评分。 |
 | `stars` | `number` | `5` | 星星数量。 |
 | `cancel` | `boolean` | `true` | 显示清除按钮。 |
-| `allowClear` | `boolean \| null` | `null` | `cancel` 的别名；传入时优先。 |
+| `clearable` | `boolean \| null` | `null` | `cancel` 的别名；传入时优先。 |
 | `allowHalf` | `boolean` | `false` | 允许半星。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `disabled` | `boolean` | `false` | 禁用。 |

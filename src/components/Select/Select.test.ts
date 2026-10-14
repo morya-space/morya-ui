@@ -81,9 +81,9 @@ describe('muSelect', () => {
     wrapper.unmount()
   })
 
-  it('clears the value when allowClear is enabled', async () => {
+  it('clears the value when clearable is enabled', async () => {
     const wrapper = mount(MSelect, {
-      props: { options, modelValue: 'sm', allowClear: true, teleport: false },
+      props: { options, modelValue: 'sm', clearable: true, teleport: false },
     })
     await wrapper.get('.m-select__control').trigger('mouseenter')
     await wrapper.get('.m-select__clear').trigger('click')
@@ -190,7 +190,7 @@ describe('muSelect', () => {
         options,
         mode: 'multiple',
         modelValue: ['sm', 2],
-        allowClear: true,
+        clearable: true,
         teleport: false,
       },
     })

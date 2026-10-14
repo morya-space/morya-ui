@@ -31,8 +31,6 @@ export interface InputPasswordProps extends MNativeInputProps {
    */
   showPasswordOn?: MShowPasswordOn
   clearable?: boolean
-  /** Alias of `clearable` . `clearable` wins. */
-  allowClear?: boolean
   maxlength?: number
   showCount?: boolean
   /** Icon when the value is masked (click to reveal). Built-in `MIcon` name or a Vue component. */

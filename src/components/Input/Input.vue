@@ -16,7 +16,6 @@ const props = withDefaults(defineProps<InputProps>(), {
   readonly: false,
   invalid: false,
   clearable: undefined,
-  allowClear: undefined,
   showCount: undefined,
   fluid: undefined,
 })
@@ -45,9 +44,7 @@ const resolvedVariant = useConfiguredVariant('Input', () => props.variant)
 const resolvedClearable = computed(
   () =>
     props.clearable
-    ?? props.allowClear
     ?? (defaults.value.clearable as boolean | undefined)
-    ?? (defaults.value.allowClear as boolean | undefined)
     ?? false,
 )
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)

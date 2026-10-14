@@ -30,8 +30,6 @@ export interface MentionsProps {
   fluid?: boolean
   emptyMessage?: string
   clearable?: boolean
-  /** Alias of `clearable` . `clearable` wins. */
-  allowClear?: boolean
   /** Shows a spinner in the suggestion panel while options load. */
   loading?: boolean
 }

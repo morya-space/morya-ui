@@ -22,7 +22,6 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   readonly: false,
   invalid: false,
   clearable: undefined,
-  allowClear: undefined,
   showCount: undefined,
   fluid: undefined,
   autosize: undefined,
@@ -52,9 +51,7 @@ const resolvedFluid = computed(() => props.fluid ?? (defaults.value.fluid as boo
 const resolvedClearable = computed(
   () =>
     props.clearable
-    ?? props.allowClear
     ?? (defaults.value.clearable as boolean | undefined)
-    ?? (defaults.value.allowClear as boolean | undefined)
     ?? false,
 )
 const resolvedShowCount = computed(() => props.showCount ?? (defaults.value.showCount as boolean | undefined) ?? false)

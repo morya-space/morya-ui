@@ -90,8 +90,8 @@ describe('muInput', () => {
     expect(selectSpy).toHaveBeenCalled()
   })
 
-  it('supports allowClear alias and warning status', async () => {
-    const clearable = mount(MInput, { props: { modelValue: 'Draft', allowClear: true } })
+  it('supports clearable and warning status', async () => {
+    const clearable = mount(MInput, { props: { modelValue: 'Draft', clearable: true } })
     expect(clearable.find('.m-input__clear').exists()).toBe(true)
     await clearable.get('.m-input__clear').trigger('click')
     expect(clearable.emitted('update:modelValue')).toEqual([['']])

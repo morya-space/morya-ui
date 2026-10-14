@@ -56,7 +56,6 @@ import { MTextarea } from 'morya-ui'
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `readonly` | `boolean` | `false` | 只读。 |
 | `clearable` | `boolean` | `false` | 显示清除按钮。 |
-| `allowClear` | `boolean` | — | `clearable` 的别名。 |
 | `maxlength` | `number` | — | 原生 maxlength。 |
 | `showCount` | `boolean` | `false` | 显示字数统计。 |
 | `placeholder` | `string` | — | 占位符。 |

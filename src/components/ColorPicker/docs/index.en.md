@@ -55,7 +55,7 @@ Enable `gradient` for linear/radial gradient editing with draggable color stops.
 | `gradient` | `boolean` | `false` | Enable gradient mode. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `disabledAlpha` | `boolean` | `false` | Disable alpha channel. |
-| `allowClear` | `boolean` | `false` | Show clear button. |
+| `clearable` | `boolean` | `false` | Show clear button. |
 | `format` | `'hex' \| 'rgb' \| 'hsb'` | `'hex'` | Display format. |
 | `presets` | `ColorPickerPreset[]` | — | Preset color palettes. |
 | `showText` | `boolean` | `false` | Show color text in trigger. |

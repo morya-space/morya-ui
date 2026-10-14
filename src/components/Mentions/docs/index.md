@@ -42,7 +42,6 @@ import { MMentions } from 'morya-ui'
 | `size` / `variant` / `fluid` | — | — | 与 Textarea 一致 |
 | `emptyMessage` | `string` | locale 空态 | 无匹配文案 |
 | `clearable` | `boolean` | `false` | 显示清除按钮 |
-| `allowClear` | `boolean` | — | `clearable` 的别名 |
 | `loading` | `boolean` | `false` | 建议面板内显示加载中 |
 | `id` | `string` | — | 控件 id |
 | `pt` | [FieldPassThrough](/docs/types#FieldPassThrough) | — | 字段透传 |
