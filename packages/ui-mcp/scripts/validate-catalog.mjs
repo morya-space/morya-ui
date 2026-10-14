@@ -8,6 +8,7 @@ const repoRoot = join(pkgRoot, '../..')
 const catalogPath = join(pkgRoot, 'data/catalog.json')
 const componentsDir = join(repoRoot, 'src/components')
 const patternsPath = join(pkgRoot, 'src/patterns.ts')
+const pageSnippetsPath = join(pkgRoot, 'src/page-snippets.ts')
 
 const catalog = JSON.parse(readFileSync(catalogPath, 'utf8'))
 const errors = []
@@ -287,6 +288,30 @@ for (const component of catalog.components) {
     )
     if (missing.length) {
       error(`API drift: ${component.id}.${kind} missing from docs: ${missing.join(', ')}`)
+    }
+  }
+}
+
+// —— Page snippet composition relations ——
+// `excludes` must be symmetric and reference existing snippet ids. `pairsWith`
+// only needs to reference existing ids (it is a weak pointer).
+{
+  const source = readFileSync(pageSnippetsPath, 'utf8')
+  const ids = new Set([...source.matchAll(/^\s*id:\s*'([^']+)'/gm)].map((m) => m[1]))
+  const relOf = new Map()
+  for (const match of source.matchAll(/id:\s*'([^']+)',\s*\n\s*excludes:\s*\[([^\]]*)\](?:,\s*\n\s*pairsWith:\s*\[([^\]]*)\])?/g)) {
+    const parse = (raw) => (raw ? [...raw.matchAll(/'([^']+)'/g)].map((m) => m[1]) : [])
+    relOf.set(match[1], { excludes: parse(match[2]), pairsWith: parse(match[3]) })
+  }
+  for (const [id, rel] of relOf) {
+    for (const target of [...rel.excludes, ...rel.pairsWith]) {
+      if (!ids.has(target)) error(`Snippet ${id} references unknown relation target: ${target}`)
+    }
+    for (const target of rel.excludes) {
+      const back = relOf.get(target)
+      if (!back || !back.excludes.includes(id)) {
+        error(`Snippet excludes not symmetric: ${id} excludes ${target}, but ${target} does not exclude ${id}`)
+      }
     }
   }
 }

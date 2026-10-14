@@ -15,11 +15,16 @@ export interface PageSnippet {
   rulesEn: string[]
   avoid: string[]
   avoidEn: string[]
+  /** Mutually exclusive sibling snippets (pick one for the same block). */
+  excludes?: string[]
+  /** Snippets commonly composed together (weak pointer for polish/validate). */
+  pairsWith?: string[]
 }
 
 export const pageSnippets: PageSnippet[] = [
   {
     id: 'list-filters',
+    excludes: ['list-filters-collapsible', 'list-filters-stack', 'list-filters-dense'],
     title: '列表页基础筛选栏',
     titleEn: 'Basic list filter bar',
     description:
@@ -82,6 +87,7 @@ function resetFilters() {
   },
   {
     id: 'list-filters-collapsible',
+    excludes: ['list-filters', 'list-filters-stack', 'list-filters-dense'],
     title: '列表页折叠高级筛选',
     titleEn: 'Collapsible advanced list filters',
     description:
@@ -240,6 +246,8 @@ function clearFilter(key: string) {
   },
   {
     id: 'list-filters-stack',
+    excludes: ['list-filters', 'list-filters-collapsible', 'list-filters-dense'],
+    pairsWith: ['list-filter-chips'],
     title: '列表筛选完整栈（折叠 + 已选）',
     titleEn: 'Full list filter stack (collapsible + chips)',
     description:
@@ -379,6 +387,7 @@ function resetFilters() {
   },
   {
     id: 'list-filters-dense',
+    excludes: ['list-filters', 'list-filters-collapsible', 'list-filters-stack'],
     title: '列表页紧凑筛选栏',
     titleEn: 'Dense list filter bar',
     description:
