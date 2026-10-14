@@ -59,7 +59,7 @@ const activityRows = [
         <MPageContent>
           <MPageHeader
             :title="profile.name"
-            description="查看账号摘要、属性与近期活动。编辑走同页弹窗或独立表单页，勿做成营销落地。"
+            description="{{详情页说明}}"
           >
             <template #actions>
               <MSpace>
@@ -90,7 +90,8 @@ const activityRows = [
             </p>
           </MPageSection>
 
-          <MDescriptions title="基本信息" bordered :column="2">
+          <!-- bordered 跟密度，非默认 -->
+          <MDescriptions title="{{信息分组标题}}" :column="2">
             <MDescriptionsItem label="姓名">
               {{ profile.name }}
             </MDescriptionsItem>

@@ -89,8 +89,8 @@ async function finish() {
       <MLayoutContent>
         <MPageContent width="narrow">
           <MPageHeader
-            title="创建工作空间"
-            description="三步完成；每步只做一件事。Stepper 使用 steps（不是 items）。"
+            title="{{向导标题}}"
+            description="{{向导说明}}"
           />
 
           <MStepper v-model="activeStep" :steps="steps" linear />

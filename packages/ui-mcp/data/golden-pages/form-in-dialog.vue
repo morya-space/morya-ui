@@ -101,21 +101,20 @@ async function onSave() {
 
       <MLayoutContent>
         <MPageContent>
-          <MPageHeader title="用户管理" description="短表单留在列表内弹窗；字段多时再走独立表单页。">
+          <MPageHeader title="{{页面标题}}" description="{{页面说明}}">
             <template #actions>
               <MButton @click="openCreate" type="primary">
-                新建用户
+                {{新建操作}}
               </MButton>
             </template>
           </MPageHeader>
 
+          <!-- 列表内弹窗演示：striped/bordered 跟密度，非默认 -->
           <MTable
             :columns="columns"
             :rows="rows"
             row-key="id"
-            striped
-            bordered
-            aria-label="用户列表"
+            aria-label="{{列表}}"
           >
             <template #cell-status="{ value }">
               <MStatus

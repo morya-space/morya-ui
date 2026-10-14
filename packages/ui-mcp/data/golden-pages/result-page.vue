@@ -34,20 +34,21 @@ import {
 
       <MLayoutContent>
         <MPageContent>
+          <!-- 结果壳：视觉（渐变/虚线边框）跟 styleDirection；此处保留 token-only 极简壳 -->
           <div class="result-shell">
             <MResult
               status="403"
-              title="没有权限查看该项目"
-              description="当前账号无权访问「青禾书房」工作区。可返回上一页，或联系管理员开通权限。"
+              title="{{结果标题}}"
+              description="{{结果说明}}"
               size="large"
             >
               <template #footer>
                 <MSpace>
                   <MButton type="primary">
-                    返回上一页
+                    {{主操作}}
                   </MButton>
                   <MButton type="text">
-                    联系管理员
+                    {{次操作}}
                   </MButton>
                 </MSpace>
               </template>
@@ -66,19 +67,7 @@ import {
   min-height: min(28rem, 70vh);
   padding: var(--m-space-8) var(--m-space-4);
   border-radius: var(--m-radius-lg);
-  background:
-    radial-gradient(
-      70% 55% at 50% 0%,
-      color-mix(in srgb, var(--m-color-primary) 10%, transparent),
-      transparent 60%
-    ),
-    var(--m-color-surface);
-  border: 1px dashed color-mix(in srgb, var(--m-color-border) 80%, transparent);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .result-shell {
-    background: var(--m-color-surface);
-  }
+  background: var(--m-color-surface);
+  border: 1px solid var(--m-color-border);
 }
 </style>

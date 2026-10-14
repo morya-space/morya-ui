@@ -2,7 +2,9 @@
 /**
  * 黄金样例：列表页 · dense（高密度工具台）
  * structure: list · style: dense
- * 镜像区块顺序；气质跟 styleDirection / 参考走，不要把本文件当唯一审美。
+ * 结构与 list-page.vue 完全相同；差异只在「密度」一处，通过一组联动 craft 表达：
+ *   MPageContent density="compact" · 控件 size="small" · MTable size="small" · 筛选 variant="plain"。
+ * 气质跟 styleDirection / 参考走，不要把本文件当唯一审美。
  * @see list-page.vue · style-presets.md · page-layouts.md
  */
 import {
@@ -59,11 +61,6 @@ const rows = [
   { id: '1', name: '示例项目 A', status: 'active', updatedAt: '09-01' },
   { id: '2', name: '示例项目 B', status: 'inactive', updatedAt: '08-28' },
   { id: '3', name: '示例项目 C', status: 'active', updatedAt: '08-25' },
-  { id: '4', name: '示例项目 D', status: 'active', updatedAt: '08-20' },
-  { id: '5', name: '示例项目 E', status: 'inactive', updatedAt: '08-15' },
-  { id: '6', name: '示例项目 F', status: 'active', updatedAt: '08-12' },
-  { id: '7', name: '示例项目 G', status: 'inactive', updatedAt: '08-10' },
-  { id: '8', name: '示例项目 H', status: 'active', updatedAt: '08-08' },
 ]
 </script>
 
@@ -85,15 +82,17 @@ const rows = [
         </MLayoutHeader>
 
         <MLayoutContent>
+          <!-- dense 关键：整页 density="compact" -->
           <MPageContent fill density="compact">
-            <MPageHeader title="用户管理">
+            <MPageHeader title="{{页面标题}}">
               <template #actions>
                 <MButton size="small" type="primary">
-                  新建
+                  {{主操作}}
                 </MButton>
               </template>
             </MPageHeader>
 
+            <!-- dense 关键：筛选 variant="plain" + 控件 size="small" -->
             <MPageFilters aria-label="筛选" variant="plain">
               <MSpace wrap>
                 <MInput
@@ -122,6 +121,7 @@ const rows = [
               </template>
             </MPageFilters>
 
+            <!-- dense 关键：MTable size="small" -->
             <MTable
               :columns="columns"
               :rows="rows"
@@ -129,10 +129,8 @@ const rows = [
               fill
               paginator
               size="small"
-              striped
-              bordered
               row-key="id"
-              aria-label="用户列表"
+              aria-label="{{列表}}"
             >
               <template #cell-status="{ value }">
                 <MStatus
@@ -151,10 +149,10 @@ const rows = [
                 </MSpace>
               </template>
               <template #empty>
-                <MEmpty title="暂无数据" description="创建后在此浏览。" icon="user">
+                <MEmpty title="{{空态标题}}" description="{{空态说明}}" icon="user">
                   <template #extra>
                     <MButton size="small" type="primary">
-                      新建
+                      {{空态主操作}}
                     </MButton>
                   </template>
                 </MEmpty>

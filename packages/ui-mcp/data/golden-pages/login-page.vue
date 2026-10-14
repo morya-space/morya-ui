@@ -25,9 +25,9 @@ const model = reactive({
   password: '',
 })
 
-/** Brand seed for Account surfaces — prefer themeConfig over page-level hex. */
+/** Brand seed for Account surfaces — prefer themeConfig over page-level hex. 品牌色改主题覆盖，不写页面 hex。 */
 const themeConfig = {
-  seed: { colorPrimary: '#0b6e4f' },
+  seed: { colorPrimary: '#0b6e4f' }, // 演示：实际项目用 --m-color-primary 主题覆盖
 }
 
 async function onSubmit() {
@@ -51,12 +51,13 @@ async function onSubmit() {
     input-variant="filled"
     :theme-config="themeConfig"
   >
+    <!-- 品牌区渐变/氛围跟 styleDirection；结构：品牌区 + 表单面板 -->
     <div class="login-shell">
       <aside class="login-brand" aria-label="品牌">
-        <p class="login-brand__mark">青禾书房</p>
-        <h1 class="login-brand__title">把好书留在手边</h1>
+        <p class="login-brand__mark">{{品牌名}}</p>
+        <h1 class="login-brand__title">{{品牌主张}}</h1>
         <p class="login-brand__lead">
-          店员与会员共用同一套账户。登录后继续进货、上架与会员服务。
+          {{品牌导语}}
         </p>
       </aside>
 
@@ -64,10 +65,10 @@ async function onSubmit() {
         <div class="login-panel">
           <header class="login-panel__header">
             <MTitle :level="3">
-              登录
+              {{登录标题}}
             </MTitle>
             <MParagraph type="secondary">
-              使用工作邮箱进入后台。
+              {{登录说明}}
             </MParagraph>
           </header>
 
@@ -123,29 +124,9 @@ async function onSubmit() {
   gap: var(--m-space-4);
   padding: clamp(2rem, 6vw, 4.5rem);
   overflow: hidden;
-  background:
-    radial-gradient(
-      80% 60% at 10% 20%,
-      color-mix(in srgb, var(--m-color-primary) 22%, transparent),
-      transparent 55%
-    ),
-    linear-gradient(
-      165deg,
-      color-mix(in srgb, var(--m-color-primary) 16%, var(--m-color-surface)) 0%,
-      var(--m-color-surface) 55%,
-      color-mix(in srgb, var(--m-color-border) 35%, var(--m-color-surface)) 100%
-    );
+  /* 品牌氛围（渐变/插画）跟 styleDirection；默认 token-only 平壳 */
+  background: var(--m-color-surface);
   border-right: 1px solid var(--m-color-border);
-}
-
-.login-brand::after {
-  content: '';
-  position: absolute;
-  inset: auto -10% -20% 40%;
-  height: 55%;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--m-color-primary) 12%, transparent);
-  pointer-events: none;
 }
 
 .login-brand__mark,

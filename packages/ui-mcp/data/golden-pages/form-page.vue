@@ -60,7 +60,7 @@ async function onSubmit() {
 
       <MLayoutContent>
         <MPageContent width="narrow">
-          <MPageHeader title="新建用户" description="填写基本信息并分配角色。" />
+          <MPageHeader title="{{表单标题}}" description="{{表单说明}}" />
 
           <MPageSection variant="form">
             <MForm @submit="onSubmit">

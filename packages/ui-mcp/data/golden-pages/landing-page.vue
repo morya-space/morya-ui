@@ -34,13 +34,14 @@ const faqTabs = [
         <MButton label="免费试用" size="small" />
       </header>
 
+      <!-- 首屏单一任务；品牌/氛围跟 styleDirection，不默认渐变/发光 -->
       <section class="landing-hero" aria-labelledby="hero-title">
-        <p class="landing-hero__brand">流水线 CI</p>
+        <p class="landing-hero__brand">{{品牌名}}</p>
         <MTitle id="hero-title" class="landing-hero__title">
-          把每次提交变成可回放的交付
+          {{首屏主张}}
         </MTitle>
         <MParagraph class="landing-hero__lead" type="secondary">
-          为工程团队准备的构建与发布编排。少点配置，多看结果。
+          {{首屏导语}}
         </MParagraph>
         <div class="landing-hero__cta">
           <MButton label="开始使用" />
@@ -228,12 +229,8 @@ const faqTabs = [
   padding: var(--m-space-5);
   border: 1px solid var(--m-color-border);
   border-radius: var(--m-radius-md);
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface)),
-      var(--m-color-surface) 60%
-    );
+  /* hero 氛围跟 styleDirection；默认 token-only 平壳 */
+  background: var(--m-color-surface);
 }
 
 .landing-hero__track {
@@ -245,39 +242,9 @@ const faqTabs = [
 .landing-hero__track span {
   padding: var(--m-space-3) var(--m-space-4);
   border-left: 3px solid var(--m-color-primary);
-  background: color-mix(in srgb, var(--m-color-surface) 80%, transparent);
+  background: var(--m-color-surface);
   font-size: 0.875rem;
   font-weight: 600;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .landing-hero__track span {
-    animation: landing-fade-up 480ms ease both;
-  }
-
-  .landing-hero__track span:nth-child(2) {
-    animation-delay: 60ms;
-  }
-
-  .landing-hero__track span:nth-child(3) {
-    animation-delay: 120ms;
-  }
-
-  .landing-hero__track span:nth-child(4) {
-    animation-delay: 180ms;
-  }
-}
-
-@keyframes landing-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(0.4rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .landing-section {
@@ -287,7 +254,7 @@ const faqTabs = [
 
 .landing-section--alt {
   border-block: 1px solid var(--m-color-border);
-  background: color-mix(in srgb, var(--m-color-border) 18%, var(--m-color-surface));
+  background: var(--m-color-surface);
   max-width: none;
 }
 

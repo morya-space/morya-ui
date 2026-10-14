@@ -82,8 +82,8 @@ async function saveNotify() {
       <MLayoutContent>
         <MPageContent width="narrow">
           <MPageHeader
-            title="系统设置"
-            description="按域分组配置；切换 Tab 时保留未保存输入，保存成功用 message 一句话回执。"
+            title="{{设置页标题}}"
+            description="{{设置页说明}}"
           />
 
           <MTabs v-model="activeTab" :tabs="tabs">

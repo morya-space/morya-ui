@@ -116,7 +116,7 @@ const rows = [
 
         <MLayoutContent>
           <MPageContent fill>
-            <MPageHeader title="用户管理" description="维护账号、角色与权限。">
+            <MPageHeader title="{{页面标题}}" description="{{页面说明}}">
               <template #actions>
                 <MButton type="primary">
                   新建用户
@@ -124,13 +124,14 @@ const rows = [
               </template>
             </MPageHeader>
 
+            <!-- 筛选区：四选一（list-filters / collapsible / stack / dense）。variant 跟密度，不默认 filled。 -->
             <MPageFilters
               v-model:expanded="filtersExpanded"
               aria-label="筛选"
-              variant="filled"
               collapsible
             >
               <MSpace wrap>
+                <!-- 控件宽度可局部 inline；其余视觉跟 styleDirection -->
                 <MInput v-model="keyword" placeholder="搜索名称" clearable style="width: 14rem" />
                 <MSelect
                   v-model="status"
@@ -161,6 +162,7 @@ const rows = [
               </template>
             </MPageFilters>
 
+            <!-- 用折叠筛选栈时通常不再叠加独立 chips；以下为演示已选摘要的独立用法 -->
             <MPageFilterChips v-if="activeFilters.length" label="已选" aria-label="已选筛选">
               <MTag
                 v-for="item in activeFilters"
@@ -173,14 +175,13 @@ const rows = [
               />
             </MPageFilterChips>
 
+            <!-- 全视口主列表：fill + paginator 成对；striped/bordered 跟密度，非默认 -->
             <MTable
               :columns="columns"
               :rows="rows"
               :rows-per-page="5"
               fill
               paginator
-              striped
-              bordered
               row-key="id"
               aria-label="用户列表"
             >
@@ -201,14 +202,15 @@ const rows = [
                 </MSpace>
               </template>
               <template #empty>
+                <!-- 空态说明"接下来做什么" + 唯一主操作 -->
                 <MEmpty
-                  title="还没有用户"
-                  description="创建第一个用户后，即可分配角色与权限。"
+                  title="{{空态标题}}"
+                  description="{{空态说明}}"
                   icon="user"
                 >
                   <template #extra>
                     <MButton type="primary">
-                      新建用户
+                      {{空态主操作}}
                     </MButton>
                   </template>
                 </MEmpty>

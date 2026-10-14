@@ -27,25 +27,26 @@ import {
 
       <MLayoutContent>
         <MPageContent>
-          <MPageHeader title="课程" description="管理目录与可见性。">
+          <MPageHeader title="{{页面标题}}" description="{{页面说明}}">
             <template #actions>
               <MButton type="primary">
-                新建课程
+                {{主操作}}
               </MButton>
             </template>
           </MPageHeader>
 
+          <!-- 空态说明"接下来做什么"；illustration 跟 styleDirection -->
           <MEmpty
-            title="还没有课程"
-            description="创建第一门课程后，学员就能在目录里看到它。也可以稍后从模板导入。"
+            title="{{空态标题}}"
+            description="{{空态说明}}"
             illustration="no-content"
           >
             <template #extra>
               <MButton type="primary">
-                创建第一门课程
+                {{空态主操作}}
               </MButton>
               <MButton type="text">
-                从模板导入
+                {{空态次操作}}
               </MButton>
             </template>
           </MEmpty>

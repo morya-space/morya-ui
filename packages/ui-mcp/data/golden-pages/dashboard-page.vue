@@ -1,6 +1,8 @@
 <script setup lang="ts">
 /**
- * 黄金样例：仪表盘页
+ * 黄金样例：仪表盘页（结构母版）
+ * 结构骨架：面包屑 → 页头 → 可选告警 → KPI 网格 → 主区两栏。
+ * 视觉（密度/阴影/插画/文案）跟 styleDirection / 参考走，本样例仅镜像块顺序，不是唯一正确答案。
  * @see DESIGN.md · morya-ui-pages references/page-layouts.md · visual-craft § Ops polish
  */
 import {
@@ -77,16 +79,19 @@ function statusType(s: string) {
       </MLayoutHeader>
 
       <MLayoutContent>
-        <MPageContent density="spacious">
+        <!-- density 跟 styleDirection；仪表盘常用 spacious，但不强制 -->
+        <MPageContent>
+          <!-- 标题/描述用领域真实文案替换 -->
           <MPageHeader
-            title="运营概览"
-            description="关注今日活跃与待处理工单，异常优先下钻。"
+            title="{{页面标题}}"
+            description="{{页面说明}}"
           />
 
+          <!-- 可选告警：有实时性/延迟等提示时用 -->
           <MAlert
             type="info"
-            title="报表管道延迟约 15 分钟"
-            description="实时告警仍可用；看板数字以管道落库为准。"
+            title="{{可选告警标题}}"
+            description="{{可选告警说明}}"
             closable
           />
 
@@ -106,28 +111,29 @@ function statusType(s: string) {
 
           <MGrid :cols="2" :x-gap="16" :y-gap="16" responsive="screen">
             <MGridItem :span="1">
-              <MCard title="趋势概览" shadow="always">
+              <!-- shadow / 是否用 MCard 包图表区跟 styleDirection -->
+              <MCard title="{{主图表区标题}}">
                 <MEmpty
-                  title="还没有趋势数据"
-                  description="接入图表后将展示近 7 日活跃与转化。"
+                  title="{{图表空态标题}}"
+                  description="{{图表空态说明}}"
                   illustration="activity-low"
                 />
               </MCard>
             </MGridItem>
             <MGridItem :span="1">
-              <MCard title="最近工单" shadow="always">
+              <MCard title="{{最近列表区标题}}">
                 <div class="dashboard-plain-stats">
-                  <MStatistic title="本周新建" :value="128" />
-                  <MStatistic title="平均处理时长" :value="2.4" suffix="h" :precision="1" />
+                  <MStatistic title="{{统计1}}" :value="128" />
+                  <MStatistic title="{{统计2}}" :value="2.4" suffix="h" :precision="1" />
                 </div>
+                <!-- 嵌入式次要表格：不用 fill/paginator；bordered/size 跟密度 -->
                 <MTable
                   :columns="recentColumns"
                   :rows="recentRows"
                   size="small"
                   :paginator="false"
-                  bordered
                   row-key="id"
-                  aria-label="最近工单"
+                  aria-label="{{最近列表}}"
                 >
                   <template #cell-priority="{ value }">
                     <MTag
