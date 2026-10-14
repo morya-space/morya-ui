@@ -22,6 +22,7 @@
 - [ ] Lane craft from [visual-craft.md](visual-craft.md) applied
 - [ ] If companions ran: still only `M*` + `--m-*`; no second kit ([optional-companions.md](optional-companions.md))
 - [ ] At most one primary filled button in the main viewport
+- [ ] Composition relations hold: one filter region per list view (list-filters / collapsible / stack / dense — pick one); collapsible stack not stacked with standalone `MPageFilterChips`; density consistent (no compact + spacious mix)
 - [ ] Copy is domain-real; empty / error states say what to do next
 - [ ] Numeric table columns use `align: 'end'` + tabular nums when amounts/counts are shown
 - [ ] No **unearned** AI-default look clusters (reference-visible atmosphere is allowed — see [style-presets.md](style-presets.md))

@@ -68,7 +68,7 @@ State explicitly (even briefly in thinking):
   3. **Uncertain** → **ask once** for a description or reference; do not invent the full look first
   4. User says “直接写 / 你看着办” with still no cues → quiet flat on-token admin face, **say so**; never default glass/neon/aurora
 
-Golden pages (when used) lock **block order**, not aesthetics. Blindly cloning golden visuals makes pages feel stiff — prefer composing snippets.
+Golden pages (when used) mirror a **block spine + composition constraints**, not aesthetics — and the spine itself is composable (skip blocks the brief doesn't need). Blindly cloning golden visuals *or* its exact block sequence makes pages feel stiff — prefer composing snippets.
 
 For Express / branded Account moments, also draft a tiny **design plan** (see [visual-craft.md](references/visual-craft.md)): palette roles mapped to `--m-*` (extend only if the project already customizes theme), type roles, layout concept, one signature element. For Ops, Ops polish + the resolved direction is enough unless the user asks for a redesign.
 
@@ -91,7 +91,7 @@ For Express / branded Account moments, also draft a tiny **design plan** (see [v
 
 ### 3. Compose
 
-**Ops:** follow [page-layouts.md](references/page-layouts.md) **block-order checklist**; fill each block with **`get_page_snippet`** / `suggestedSnippets` (filters, table, header actions, form-in-dialog, confirm-delete, …). Apply the resolved **style direction** for density/chrome/copy; prefer `MPage*` over custom chrome. Do not freeze every Ops page into identical chrome. List density/sider cues (`dense` / `rail`) inform craft — do not invent new golden-page variants.
+**Ops:** use [page-layouts.md](references/page-layouts.md) **composition constraints** — the block order is a *spine* you compose from, not a checklist to fill top-to-bottom; skip or merge blocks the brief doesn't need (e.g. no `MPageToolbar` when there's no batch action, no `MPageFilterChips` when the stack already shows them). Fill each needed block with **`get_page_snippet`** / `suggestedSnippets` (filters, table, header actions, form-in-dialog, confirm-delete, …). Apply the resolved **style direction** for density/chrome/copy; prefer `MPage*` over custom chrome. Do not freeze every Ops page into identical chrome. List density/sider cues (`dense` / `rail`) inform craft — do not invent new golden-page variants.
 
 **Account / Flow / System:** centered or split shells with `MCard` / `MForm` / `MEmpty` / `MResult` (see surfaces + snippets); keep controls as `M*`. Persistent form errors use field `errorMessage` or a token-styled `role="alert"` — `<MMessage>` is the `message` host, not an inline alert.
 
@@ -152,7 +152,7 @@ Do not deliver with unresolved `unknown-prop` / `unknown-event` or `validate_pag
 - No invented props / events / slots.
 - No defaulting every success to `toast`.
 - No substituting a generated scaffold for a real golden sample when the user asked to mirror one — but default path composes snippets, not full-page clones.
-- Ops surfaces follow page-layout **block order** — do not replace them with marketing heroes.
+- Ops surfaces keep the page-layout **block spine** (shell → crumb → header → filters → table) — compose/skip blocks per the brief, but do not replace the spine with marketing heroes.
 - Express surfaces still use `M*` for controls and `--m-*` for color/space; do not introduce shadcn/Element/etc. stacks suggested by generic design skills.
 - Soft-load companions only; never require Impeccable / UI-UX-Pro-Max / Frontend Design to be installed.
 - **Restrained by default:** do **not** invent decorative glass / neon / aurora / neumorph / full-page gradients when there is no reference/description asking for them.

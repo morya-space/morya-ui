@@ -25,19 +25,37 @@ alwaysApply: false
 
 后台 CRUD **优先**：列表页 + `MDialog`（或 `MDrawer`）内 `MForm`（snippets `form-in-dialog` / `form-in-drawer`），不要把「新建用户 / 编辑角色」做成单独路由，除非字段很多或多步骤。
 
-## 列表页区块顺序
+## 列表页组合约束
 
-1. `MLayout fillViewport` + 可选 `MLayoutSider bordered`
-2. 侧栏 `MMenu`
-3. `MLayoutHeader` → `MBreadcrumb`
-4. `MLayoutContent` → `MPageContent`（**仅在下方高度规则适用时**再加 `fill`）
-5. `MPageHeader`（页面标题 + `#actions` 主操作；视口内 **唯一** filled primary）→ `page-header-actions`
-6. `MPageFilters`（默认 **`list-filters-stack`**：折叠高级 + FilterChips；查询/重置 secondary；dense → `list-filters-dense`）
-7. 可选独立 `MPageFilterChips`（若未用 stack）
-8. 可选 `MPageToolbar`（仅批量操作，**不要**页面标题）
-9. `MTable`（直接放置；`#empty` → `MEmpty`）
-10. 分页由 `MTable paginator` 或同级 `MPagination`
-11. 短新建/编辑：同页 `MDialog` + `MForm`；删除：`MConfirmDialog`（`confirm-delete`）
+列表页不是逐条照做的线性清单，而是**按需组合**的块。组装时按下面四类约束取舍；只有"顺序约束"是骨架，其余是取舍规则。
+
+**顺序约束（骨架）**：壳 → 面包屑 → 页头 → 筛选 → 已选摘要 → 批量工具 → 表格/分页。
+
+```
+MLayout fillViewport (+ MLayoutSider bordered / MMenu)
+└─ MLayoutHeader → MBreadcrumb
+   └─ MLayoutContent → MPageContent（fill 见下方高度规则）
+      ├─ MPageHeader → page-header-actions
+      ├─ MPageFilters → list-filters-*
+      ├─ MPageFilterChips（可选）
+      ├─ MPageToolbar（可选）
+      └─ MTable（paginator / MPagination）
+```
+
+**互斥（同块二选一，不要重复）**：
+- 筛选区：`list-filters` / `list-filters-collapsible` / `list-filters-stack` / `list-filters-dense` **四选一**；条件少→`list-filters`，含次要字段→`collapsible`，默认（折叠高级+已选摘要）→`stack`，紧凑密度→`dense`。
+- 已选摘要：用了 `list-filters-stack`（自带 chips）就**不要**再叠独立 `MPageFilterChips`。
+- 批量操作：有 `MPageToolbar` 时，`MPageHeader` **不要**再重复批量按钮；`MPageToolbar` 只放批量操作，**不要**放页面标题。
+
+**成对（出现一个，另一个通常要跟上）**：
+- 短新建/编辑 ↔ 同页 `MDialog` + `MForm`（`form-in-dialog`）；删除 ↔ `MConfirmDialog`（`confirm-delete`）。
+- 表格 `#empty` ↔ `MEmpty`（不要在表格里塞裸文本空态）。
+- 高度规则适用时：`MPageContent fill` ↔ `MTable fill paginator`（成对出现，不单用）。
+
+**唯一性 / 一致性**：
+- 视口内 filled `type="primary"` **唯一**，且通常只在 `MPageHeader #actions`；筛选的查询/重置用 secondary/text。
+- 密度全页一致：dense 列表（`list-filters-dense` + `MTable density="compact"`）不要混入 spacious 区块。
+- `MTable` 直接放 `MPageContent`，不要再用 `MCard` 包一层。
 
 ### 列表高度 — 先判断，再决定是否 fill
 
