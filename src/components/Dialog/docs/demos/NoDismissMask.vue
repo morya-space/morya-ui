@@ -7,10 +7,10 @@ const open = ref(false)
 
 <template>
   <div>
-    <MButton label="No Mask Dismiss" @click="open = true"/>
-    <MDialog v-model="open" header="Stay open" :dismissable-mask="false">
+    <MButton label="Mask Closable" @click="open = true" />
+    <MDialog v-model="open" header="Mask closable" dismissable-mask>
       <p style="margin:0">
-        Click the mask — the dialog stays open. Use the close button or Esc.
+        Click the mask — the dialog closes. Without `dismissable-mask` it stays open.
       </p>
     </MDialog>
   </div>

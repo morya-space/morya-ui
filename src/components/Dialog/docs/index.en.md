@@ -31,9 +31,9 @@ Supports `center` / `top` / `bottom` / `left` / `right` and the four corner posi
 ```vue preview src="./demos/FooterActions.vue"
 ```
 
-## No dismiss mask
+## Mask click
 
-With `dismissableMask={false}` (or `closeOnOutsideClick={false}` / `maskClosable={false}`), clicking the mask does not close the dialog.
+Clicking the mask does not close the dialog by default; set `dismissableMask` (or `closeOnOutsideClick` / `maskClosable`) to enable it.
 
 ```vue preview src="./demos/NoDismissMask.vue"
 ```
@@ -61,7 +61,7 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}` / `maskClosable
 | `header` | `string` | — | Alias of `title`. |
 | `closeOnEsc` | `boolean` | `true` | Close on Esc. |
 | `blockScroll` | `boolean` | `true` | Lock page scroll while open (when `modal` is true). |
-| `closeOnOutsideClick` | `boolean` | `true` | Close when clicking the mask. |
+| `closeOnOutsideClick` | `boolean` | `false` | Close when clicking the mask. |
 | `dismissableMask` | `boolean` | — | Alias of `closeOnOutsideClick`. |
 | `maskClosable` | `boolean` | — | Alias of `closeOnOutsideClick` . |
 | `closable` | `boolean` | `true` | Show the close button. |

@@ -31,9 +31,9 @@ import { MButton, MDialog } from 'morya-ui'
 ```vue preview src="./demos/FooterActions.vue"
 ```
 
-## No dismiss mask
+## 遮罩点击
 
-`dismissableMask={false}`（或 `closeOnOutsideClick={false}` / `maskClosable={false}`）时点击遮罩不关闭。
+默认点击遮罩不关闭弹窗；设置 `dismissableMask`（或 `closeOnOutsideClick` / `maskClosable`）后点击遮罩关闭。
 
 ```vue preview src="./demos/NoDismissMask.vue"
 ```
@@ -61,7 +61,7 @@ import { MButton, MDialog } from 'morya-ui'
 | `header` | `string` | — | `title` 的别名。 |
 | `closeOnEsc` | `boolean` | `true` | 按 Esc 关闭。 |
 | `blockScroll` | `boolean` | `true` | 打开时锁定页面滚动（`modal` 时生效）。 |
-| `closeOnOutsideClick` | `boolean` | `true` | 点击遮罩关闭。 |
+| `closeOnOutsideClick` | `boolean` | `false` | 点击遮罩关闭。 |
 | `dismissableMask` | `boolean` | — | `closeOnOutsideClick` 的别名。 |
 | `maskClosable` | `boolean` | — | `closeOnOutsideClick` 的别名。 |
 | `closable` | `boolean` | `true` | 显示关闭按钮。 |

@@ -143,7 +143,7 @@ const isDismissableMask = computed(() => {
   if (props.maskClosable !== undefined) return props.maskClosable
   if (props.dismissableMask !== undefined) return props.dismissableMask
   if (props.closeOnOutsideClick !== undefined) return props.closeOnOutsideClick
-  return true
+  return false
 })
 
 function finishClose() {

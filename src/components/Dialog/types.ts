@@ -35,7 +35,7 @@ export interface DialogProps {
   /** Alias for `title`. */
   header?: string
   closeOnEsc?: boolean
-  /** Close when clicking the mask. Alias of `dismissableMask`. */
+  /** Close when clicking the mask. Defaults to `false`. Alias of `dismissableMask`. */
   closeOnOutsideClick?: boolean
   /** Alias for `closeOnOutsideClick`. */
   dismissableMask?: boolean

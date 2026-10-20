@@ -58,6 +58,30 @@ describe('muDialog', () => {
     expect(mask.emitted('close')).toBeUndefined()
     mask.unmount()
 
+    // Default: clicking the mask does not close the dialog.
+    const defaultMask = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Default mask' },
+    })
+    await nextTick()
+    document.body.querySelector('.m-dialog-backdrop')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(defaultMask.emitted('close')).toBeUndefined()
+    defaultMask.unmount()
+
+    // Opt-in: maskClosable closes on mask click. The handler is bound with
+    // `@click.self` on `.m-dialog-zoom`, so click the zoom element itself.
+    const closableMask = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Closable mask', maskClosable: true },
+    })
+    await nextTick()
+    document.body.querySelector('.m-dialog-zoom')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(closableMask.emitted('update:modelValue')).toEqual([[false]])
+    expect(closableMask.emitted('close')).toHaveLength(1)
+    closableMask.unmount()
+
     const centered = mount(MDialog, {
       attachTo: document.body,
       props: { modelValue: true, title: 'Centered', centered: true },
