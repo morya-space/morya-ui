@@ -9,7 +9,9 @@
     --m-segmented-disabled-text-color: var(--m-color-text-disabled);
     --m-segmented-radius: var(--m-radius-control);
     --m-segmented-thumb-radius: calc(var(--m-segmented-radius) - var(--m-segmented-track-padding));
-    --m-segmented-motion-duration: var(--m-motion-fast);
+    /* Slide duration: a visible 250ms glide rather than the 150ms
+       micro-feedback snap used by hover states. Overridable per theme. */
+    --m-segmented-motion-duration: var(--m-motion-normal);
     --m-segmented-motion-easing: var(--m-motion-ease);
     background: var(--m-segmented-track-background);
     border-radius: var(--m-segmented-radius);
@@ -63,16 +65,18 @@
     background: var(--m-segmented-thumb-background);
     border-radius: var(--m-segmented-thumb-radius);
     box-shadow: var(--m-segmented-thumb-shadow);
+    box-sizing: border-box;
     left: 0;
     pointer-events: none;
     position: absolute;
     top: 0;
     transition:
         height var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
+        left var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
         opacity var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
-        transform var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
+        top var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
         width var(--m-segmented-motion-duration) var(--m-segmented-motion-easing);
-    will-change: height, transform, width;
+    will-change: height, left, top, width;
 }
 
 .m-segmented__label {
@@ -142,9 +146,3 @@
     padding: 0 var(--m-space-4);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .m-segmented__thumb,
-    .m-segmented__label {
-        transition-duration: 0ms;
-    }
-}

@@ -33,6 +33,15 @@ describe('m-segmented', () => {
     expect(wrapper.find('.m-segmented__item--checked').exists()).toBe(true)
   })
 
+  it('repositions the thumb when the selection changes', async () => {
+    const wrapper = mount(MSegmented, { props: { options: ['a', 'b'], modelValue: 'a' } })
+    const before = wrapper.find('.m-segmented__thumb').attributes('style')
+    await wrapper.setProps({ modelValue: 'b' })
+    const after = wrapper.find('.m-segmented__thumb').attributes('style')
+    expect(after).not.toBe(before)
+    expect(after).toContain('opacity: 1')
+  })
+
   it('ignores disabled options', async () => {
     const wrapper = mount(MSegmented, { props: { options, modelValue: 'weekly' } })
     await wrapper.findAll('.m-segmented__item')[2]!.find('input').setValue(true)

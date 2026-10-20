@@ -58,19 +58,20 @@ const thumbStyle = ref<Record<string, string>>({ opacity: '0' })
 
 function updateThumb() {
   const rootElement = root.value
-  const activeLabel = rootElement?.querySelector<HTMLElement>('.m-segmented__item--checked .m-segmented__label')
-  if (!rootElement || !activeLabel) {
+  const activeItem = rootElement?.querySelector<HTMLElement>('.m-segmented__item--checked')
+  if (!rootElement || !activeItem) {
     thumbStyle.value = { opacity: '0' }
     return
   }
 
-  const rootRect = rootElement.getBoundingClientRect()
-  const labelRect = activeLabel.getBoundingClientRect()
+  // offset* values are layout integers, so the thumb never jitters on
+  // sub-pixel rect rounding while the slide transition is running.
   thumbStyle.value = {
     opacity: '1',
-    transform: `translate(${labelRect.left - rootRect.left}px, ${labelRect.top - rootRect.top}px)`,
-    width: `${labelRect.width}px`,
-    height: `${labelRect.height}px`,
+    left: `${activeItem.offsetLeft}px`,
+    top: `${activeItem.offsetTop}px`,
+    width: `${activeItem.offsetWidth}px`,
+    height: `${activeItem.offsetHeight}px`,
   }
 }
 
@@ -89,7 +90,10 @@ onMounted(() => {
 
 onBeforeUnmount(() => resizeObserver?.disconnect())
 
-watch([() => props.modelValue, normalizedOptions], scheduleThumbUpdate, { flush: 'post' })
+watch([() => props.modelValue, normalizedOptions], scheduleThumbUpdate, {
+  flush: 'post',
+  immediate: true,
+})
 
 const keyboard = useMenuKeyboard({
   itemCount: () => normalizedOptions.value.length,
