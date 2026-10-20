@@ -18,6 +18,10 @@ const definition = computed(() => {
 const useSlot = computed(() => Boolean(slots.default))
 const hasContent = computed(() => useSlot.value || Boolean(definition.value))
 const isSpinning = computed(() => Boolean(definition.value?.spin))
+/** Filled registries (Material) paint with fill; stroke registries with stroke. */
+const isFilled = computed(
+  () => definition.value?.primitives.some((p) => 'fill' in p && p.fill === 'currentColor') ?? false,
+)
 const { pauseAttrs } = usePauseOffscreen(rootRef, isSpinning)
 
 const rootClass = computed(() => [
@@ -41,9 +45,9 @@ const rootClass = computed(() => [
     <svg
       v-else-if="definition"
       :viewBox="definition.viewBox ?? '0 0 24 24'"
-      fill="none"
-      stroke="currentColor"
-      :stroke-width="definition.strokeWidth ?? 2"
+      :fill="isFilled ? 'currentColor' : 'none'"
+      :stroke="isFilled ? 'none' : 'currentColor'"
+      :stroke-width="isFilled ? undefined : (definition.strokeWidth ?? 2)"
       stroke-linecap="round"
       stroke-linejoin="round"
     >
@@ -51,15 +55,16 @@ const rootClass = computed(() => [
         <path
           v-if="node.tag === 'path'"
           :d="node.d"
-          :fill="node.fill ?? 'none'"
-          :stroke="node.stroke"
+          :fill="node.fill ?? (isFilled ? 'currentColor' : 'none')"
+          :stroke="node.stroke ?? (isFilled ? 'none' : undefined)"
         />
         <circle
           v-else-if="node.tag === 'circle'"
           :cx="node.cx"
           :cy="node.cy"
           :r="node.r"
-          :fill="node.fill ?? 'none'"
+          :fill="node.fill ?? (isFilled ? 'currentColor' : 'none')"
+          :stroke="isFilled ? 'none' : undefined"
         />
         <line
           v-else-if="node.tag === 'line'"

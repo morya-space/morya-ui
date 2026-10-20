@@ -1,12 +1,12 @@
 ---
 title: Icon
 category: 01 / BASIC
-description: 系统线框图标注册表。业务图标用默认插槽接入 Lucide 等库。
+description: 系统填充图标注册表。业务图标用默认插槽接入 Lucide 等库。
 ---
 
 # Icon
 
-`MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，统一为 Tabler 24×24 线框风格，由 `scripts/generate-system-icons.mjs` 生成）。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
+`MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，统一为 Google Material Icons 24×24 填充风格，由 `scripts/generate-system-icons.mjs` 生成）。填充形状在 14–16px 小尺寸下依然清晰，不会像描边图标那样发虚断裂。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
 
 ## 引入
 
@@ -55,7 +55,7 @@ import { MButton, MIcon, MIconField, MInput } from 'morya-ui'
 </template>
 ```
 
-安装示例：`pnpm add lucide-vue-next`。线宽建议 `2`，与系统图标（Tabler outline）一致。
+安装示例：`pnpm add lucide-vue-next`。系统图标为填充风格；插槽接入的描边图标（如 Lucide）线宽建议 `2`。
 
 有默认插槽时**优先渲染插槽**，忽略 `name`。
 

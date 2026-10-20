@@ -1,8 +1,10 @@
 /**
  * Generates the built-in system icon registry for MIcon.
  *
- * All icons are sourced from Tabler (outline 24×24, stroke 2; a few filled
- * variants) via the Iconify API — the same backend the icons MCP uses.
+ * All icons are filled (Google Material Icons baseline, 24×24,
+ * fill="currentColor") sourced via the Iconify API — the same backend the
+ * icons MCP uses. Filled shapes stay crisp at small sizes where stroke
+ * icons (Tabler/Lucide at 14–16px ≈ 1.2px stroke) turn fuzzy and break.
  *
  * Usage:
  *   node scripts/generate-system-icons.mjs
@@ -23,11 +25,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 /**
  * Spec entry:
- *   ['name']                          → Tabler id = name
- *   ['name', 'tabler-id']             → renamed source
- *   ['name', { id, filled: true }]    → filled variant (fill currentColor, no stroke)
- *   ['name', { id, spin: true }]      → spinning icon (loader)
- *   ['name', { alias: 'other-name' }] → duplicate of another registry entry
+ *   ['name']                        → Material id resolved via IC_ID below
+ *   ['name', 'material-id']         → explicit Material id (overrides IC_ID)
+ *   ['name', { id, spin: true }]    → spinning icon (loader)
+ *   ['name', { alias: 'other' }]    → duplicate of another registry entry
+ *
+ * Registry names keep the historical Tabler-style naming (public API);
+ * IC_ID maps each name to its Material Icons source id.
  */
 const GROUPS = [
   ['arrows', [
@@ -40,8 +44,8 @@ const GROUPS = [
     ['chevrons-left'],
     ['chevrons-right'],
     ['selector'],
-    ['triangle-up', { id: 'caret-up-filled', filled: true }],
-    ['triangle-down', { id: 'caret-down-filled', filled: true }],
+    ['triangle-up'],
+    ['triangle-down'],
     ['arrow-up'],
     ['arrow-down'],
     ['arrow-left'],
@@ -64,23 +68,23 @@ const GROUPS = [
     ['rotate-clockwise'],
     ['rotate-2'],
     ['switch-horizontal'],
-    ['sort', 'arrows-sort'],
+    ['sort'],
     ['sort-ascending'],
     ['sort-descending'],
   ]],
   ['status', [
     ['check'],
-    ['check-circle', 'circle-check'],
-    ['close', 'x'],
-    ['x-circle', 'circle-x'],
-    ['info', 'info-circle'],
+    ['check-circle'],
+    ['close'],
+    ['x-circle'],
+    ['info'],
     ['info-circle'],
-    ['warning', 'alert-triangle'],
+    ['warning'],
     ['alert-circle'],
     ['help-circle'],
     ['ban'],
     ['circle-dashed'],
-    ['loader', { id: 'loader-2', spin: true }],
+    ['loader', { id: 'autorenew', spin: true }],
     ['star'],
     ['heart'],
     ['sparkles'],
@@ -108,21 +112,21 @@ const GROUPS = [
     ['upload'],
     ['filter'],
     ['filter-off'],
-    ['more', 'dots'],
-    ['more-vertical', 'dots-vertical'],
-    ['menu', 'menu-2'],
-    ['grip', 'grip-vertical'],
-    ['maximize', 'window-maximize'],
-    ['restore', 'window-minimize'],
+    ['more'],
+    ['more-vertical'],
+    ['menu'],
+    ['grip'],
+    ['maximize'],
+    ['restore'],
     ['zoom-in'],
     ['zoom-out'],
-    ['save', { alias: 'device-floppy' }],
+    ['save'],
     ['device-floppy'],
-    ['cut', { alias: 'scissors' }],
+    ['cut'],
     ['scissors'],
     ['printer'],
-    ['play', { alias: 'player-play' }],
-    ['pause', { alias: 'player-pause' }],
+    ['play'],
+    ['pause'],
     ['player-play'],
     ['player-pause'],
     ['clipboard'],
@@ -164,11 +168,11 @@ const GROUPS = [
     ['list'],
     ['list-details'],
     ['table'],
-    ['layers', 'stack-2'],
+    ['layers'],
     ['stack'],
     ['sitemap'],
     ['settings'],
-    ['sliders', { alias: 'adjustments-horizontal' }],
+    ['sliders'],
     ['adjustments-horizontal'],
     ['components'],
     ['puzzle'],
@@ -286,7 +290,7 @@ const GROUPS = [
   ]],
   ['communication', [
     ['mail'],
-    ['mail-open', 'mail-opened'],
+    ['mail-open'],
     ['inbox'],
     ['message'],
     ['message-2'],
@@ -299,7 +303,7 @@ const GROUPS = [
   ]],
   ['security', [
     ['lock'],
-    ['unlock', 'lock-open'],
+    ['unlock'],
     ['lock-off'],
     ['link'],
     ['shield'],
@@ -326,6 +330,218 @@ const GROUPS = [
   ]],
 ]
 
+/**
+ * Registry name → Material Icons (`ic:baseline-*`) source id.
+ * Names identical in both sets are omitted (identity mapping).
+ */
+const IC_ID = {
+  // arrows
+  'chevron-up': 'keyboard-arrow-up',
+  'chevron-down': 'keyboard-arrow-down',
+  'chevrons-up': 'keyboard-double-arrow-up',
+  'chevrons-down': 'keyboard-double-arrow-down',
+  'chevrons-left': 'first-page',
+  'chevrons-right': 'last-page',
+  selector: 'unfold-more',
+  'triangle-up': 'arrow-drop-up',
+  'triangle-down': 'arrow-drop-down',
+  'arrow-up': 'arrow-upward',
+  'arrow-down': 'arrow-downward',
+  'arrow-left': 'arrow-back',
+  'arrow-right': 'arrow-forward',
+  'arrow-narrow-up': 'arrow-upward',
+  'arrow-narrow-down': 'arrow-downward',
+  'arrow-up-right': 'north-east',
+  'arrow-back-up': 'undo',
+  'arrow-forward-up': 'redo',
+  'corner-up-left': 'turn-left',
+  'corner-up-right': 'turn-right',
+  'external-link': 'open-in-new',
+  logout: 'logout',
+  login: 'login',
+  'rotate-clockwise': 'rotate-right',
+  'rotate-2': 'rotate-left',
+  'switch-horizontal': 'swap-horiz',
+  'sort-ascending': 'arrow-drop-up',
+  'sort-descending': 'arrow-drop-down',
+  // status
+  'check-circle': 'check-circle',
+  close: 'close',
+  'x-circle': 'cancel',
+  'info-circle': 'info',
+  warning: 'warning',
+  'alert-circle': 'error',
+  'help-circle': 'help',
+  ban: 'block',
+  'circle-dashed': 'adjust',
+  'circle-plus': 'add-circle',
+  heart: 'favorite',
+  sparkles: 'auto-awesome',
+  'mood-smile': 'mood',
+  bulb: 'lightbulb',
+  trophy: 'emoji-events',
+  flame: 'local-fire-department',
+  crown: 'workspace-premium',
+  // actions
+  plus: 'add',
+  pencil: 'create',
+  trash: 'delete',
+  copy: 'content-copy',
+  'filter-off': 'filter-alt-off',
+  more: 'more-horiz',
+  'more-vertical': 'more-vert',
+  grip: 'drag-indicator',
+  maximize: 'fullscreen',
+  restore: 'fullscreen-exit',
+  save: 'save',
+  'device-floppy': 'save',
+  cut: 'content-cut',
+  scissors: 'content-cut',
+  printer: 'print',
+  play: 'play-arrow',
+  'player-play': 'play-arrow',
+  'player-pause': 'pause',
+  clipboard: 'assignment',
+  'clipboard-check': 'assignment-turned-in',
+  'clipboard-list': 'assignment',
+  paperclip: 'attach-file',
+  'drag-drop': 'open-with',
+  wand: 'auto-fix-high',
+  eraser: 'auto-fix-normal',
+  tags: 'sell',
+  'list-check': 'fact-check',
+  scan: 'document-scanner',
+  bold: 'format-bold',
+  italic: 'format-italic',
+  underline: 'format-underlined',
+  'align-left': 'format-align-left',
+  'align-center': 'format-align-center',
+  'align-right': 'format-align-right',
+  // navigation
+  'layout-dashboard': 'dashboard',
+  'layout-grid': 'grid-view',
+  'layout-list': 'view-list',
+  'layout-cards': 'view-agenda',
+  'layout-columns': 'view-column',
+  'layout-kanban': 'view-kanban',
+  'layout-sidebar-left-collapse': 'first-page',
+  'layout-sidebar-right-collapse': 'last-page',
+  'list-details': 'view-list',
+  table: 'table-chart',
+  layers: 'layers',
+  stack: 'layers',
+  sitemap: 'account-tree',
+  sliders: 'tune',
+  'adjustments-horizontal': 'tune',
+  components: 'widgets',
+  puzzle: 'extension',
+  // people
+  user: 'person',
+  users: 'people',
+  'user-plus': 'person-add',
+  'user-circle': 'account-circle',
+  'user-check': 'how-to-reg',
+  'user-x': 'person-off',
+  'user-minus': 'person-remove',
+  'user-search': 'person-search',
+  'user-cog': 'manage-accounts',
+  'users-group': 'groups',
+  id: 'badge',
+  // files
+  'folder-plus': 'create-new-folder',
+  'folder-check': 'folder-shared',
+  'folder-search': 'folder-shared',
+  folders: 'folder-copy',
+  file: 'insert-drive-file',
+  'file-text': 'description',
+  'file-plus': 'note-add',
+  'file-check': 'task',
+  'file-search': 'find-in-page',
+  'file-export': 'file-upload',
+  'file-import': 'file-download',
+  'file-analytics': 'assessment',
+  'file-invoice': 'receipt-long',
+  'file-code': 'code',
+  'file-zip': 'folder-zip',
+  'file-type-pdf': 'picture-as-pdf',
+  'file-type-xls': 'grid-on',
+  'file-type-csv': 'grid-on',
+  files: 'file-copy',
+  notebook: 'menu-book',
+  'report-search': 'find-in-page',
+  database: 'storage',
+  box: 'inventory-2',
+  package: 'inventory-2',
+  // media
+  photo: 'image',
+  'photo-plus': 'add-photo-alternate',
+  'photo-search': 'image-search',
+  video: 'videocam',
+  'video-off': 'videocam-off',
+  microphone: 'mic',
+  'microphone-off': 'mic-off',
+  music: 'music-note',
+  volume: 'volume-up',
+  eye: 'visibility',
+  'eye-off': 'visibility-off',
+  // devices
+  'device-desktop': 'desktop-windows',
+  'device-laptop': 'laptop',
+  'device-tablet': 'tablet',
+  'device-mobile': 'smartphone',
+  cpu: 'memory',
+  'battery-charging': 'battery-charging-full',
+  server: 'dns',
+  // commerce
+  'shopping-cart-plus': 'add-shopping-cart',
+  'currency-dollar': 'attach-money',
+  calculator: 'calculate',
+  briefcase: 'work',
+  building: 'apartment',
+  'building-bank': 'account-balance',
+  'building-store': 'storefront',
+  'truck-delivery': 'local-shipping',
+  packages: 'inventory-2',
+  'map-pin': 'place',
+  world: 'public',
+  // charts
+  'chart-bar': 'bar-chart',
+  'chart-line': 'show-chart',
+  'chart-pie': 'pie-chart',
+  'chart-area': 'area-chart',
+  'chart-donut': 'donut-large',
+  'chart-histogram': 'bar-chart',
+  'chart-candle': 'candlestick-chart',
+  activity: 'monitor-heart',
+  // communication
+  'mail-open': 'drafts',
+  message: 'message',
+  'message-2': 'chat-bubble',
+  'message-circle': 'chat-bubble',
+  messages: 'forum',
+  bell: 'notifications',
+  'bell-off': 'notifications-off',
+  'bell-ringing': 'notification-important',
+  'phone-call': 'call',
+  // security
+  unlock: 'lock-open',
+  'lock-off': 'no-encryption',
+  'shield-check': 'verified-user',
+  'shield-x': 'gpp-bad',
+  'shield-lock': 'lock',
+  certificate: 'verified',
+  // weather / time
+  sun: 'light-mode',
+  moon: 'dark-mode',
+  'moon-stars': 'nights-stay',
+  calendar: 'calendar-today',
+  'calendar-plus': 'event',
+  'calendar-check': 'event-available',
+  'calendar-time': 'schedule',
+  clock: 'access-time',
+  hourglass: 'hourglass-empty',
+}
+
 // --- Resolve spec → flat entries ------------------------------------------
 const byName = new Map()
 const entries = []
@@ -334,14 +550,13 @@ for (const [group, icons] of GROUPS) {
     if (byName.has(name)) throw new Error(`Duplicate registry name: ${name}`)
     const entry = { group, name }
     if (source == null) {
-      entry.id = name
+      entry.id = IC_ID[name] ?? name
     } else if (typeof source === 'string') {
       entry.id = source
     } else if (source.alias) {
       entry.alias = source.alias
     } else {
-      entry.id = source.id ?? name
-      entry.filled = Boolean(source.filled)
+      entry.id = source.id ?? IC_ID[name] ?? name
       entry.spin = Boolean(source.spin)
     }
     byName.set(name, entry)
@@ -354,50 +569,54 @@ for (const entry of entries) {
   if (!target) throw new Error(`Alias ${entry.name} → unknown target ${entry.alias}`)
   if (target.alias) throw new Error(`Alias ${entry.name} → ${entry.alias} is itself an alias`)
   entry.id = target.id
-  entry.filled = target.filled
 }
 
 // --- Fetch icon bodies from Iconify ----------------------------------------
 const uniqueIds = [...new Set(entries.map((e) => e.id))]
-console.log(`Fetching ${uniqueIds.length} Tabler icons for ${entries.length} registry entries…`)
+console.log(`Fetching ${uniqueIds.length} Material Icons for ${entries.length} registry entries…`)
 
 const bodies = new Map()
 const CHUNK = 60
 for (let i = 0; i < uniqueIds.length; i += CHUNK) {
   const chunk = uniqueIds.slice(i, i + CHUNK)
-  const url = `https://api.iconify.design/tabler.json?icons=${chunk.join(',')}`
+  // Query with the `baseline-` (filled) style prefix — the ic set exposes
+  // every icon under style-prefixed names and does not resolve bare aliases.
+  const url = `https://api.iconify.design/ic.json?icons=${chunk.map((id) => `baseline-${id}`).join(',')}`
   const res = await fetch(url)
   if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${chunk[0]}…`)
   const json = await res.json()
-  if (json.not_found?.length) throw new Error(`Unknown Tabler icons: ${json.not_found.join(', ')}`)
-  for (const [id, icon] of Object.entries(json.icons)) bodies.set(id, icon.body)
+  if (json.not_found?.length) throw new Error(`Unknown Material icons: ${json.not_found.join(', ')}`)
+  for (const id of chunk) {
+    const body = json.icons[`baseline-${id}`]?.body
+    if (!body) throw new Error(`No body returned for icon: baseline-${id}`)
+    bodies.set(id, body)
+  }
 }
 
-// --- Parse bodies → path data ----------------------------------------------
+// --- Parse bodies → primitives ---------------------------------------------
 const PATH_RE = /<path[^>]*?\sd="([^"]+)"/g
-const FILL_RE = /<path[^>]*?\sfill="currentColor"/
+const CIRCLE_RE = /<circle\s+cx="([\d.]+)"\s+cy="([\d.]+)"\s+r="([\d.]+)"[^>]*>/g
 
 function parseBody(id, body) {
-  if (/<(circle|rect|line|polyline|polygon|ellipse)\b/.test(body)) {
+  if (/<(rect|line|polyline|polygon|ellipse)\b/.test(body)) {
     throw new Error(`${id}: unexpected non-path element in body`)
   }
   if (/transform=/.test(body)) throw new Error(`${id}: transform attribute not supported`)
   const paths = [...body.matchAll(PATH_RE)].map((m) => m[1])
-  if (!paths.length) throw new Error(`${id}: no <path> found`)
-  return { paths, filled: FILL_RE.test(body) }
+  const circles = [...body.matchAll(CIRCLE_RE)].map((m) => ({
+    cx: Number(m[1]),
+    cy: Number(m[2]),
+    r: Number(m[3]),
+  }))
+  // ensure every circle matched the strict attr order
+  const circleCount = (body.match(/<circle\b/g) ?? []).length
+  if (circles.length !== circleCount) throw new Error(`${id}: unparsed <circle> attrs`)
+  if (!paths.length && !circles.length) throw new Error(`${id}: no <path>/<circle> found`)
+  return { paths, circles }
 }
 
 const parsed = new Map()
 for (const [id, body] of bodies) parsed.set(id, parseBody(id, body))
-
-for (const entry of entries) {
-  const { filled } = parsed.get(entry.id)
-  if (Boolean(entry.filled) !== filled) {
-    throw new Error(
-      `${entry.name} (tabler:${entry.id}): filled flag mismatch — spec says ${Boolean(entry.filled)}, source says ${filled}`,
-    )
-  }
-}
 
 // --- Emit icons.ts -----------------------------------------------------------
 function escapePath(d) {
@@ -409,46 +628,45 @@ function keyOf(name) {
 }
 
 function formatEntry(entry) {
-  const { paths } = parsed.get(entry.id)
-  const helper = entry.spin ? 'spinIcon' : entry.filled ? 'tf' : 't'
-  if (paths.length === 1) return `  ${keyOf(entry.name)}: ${helper}('${escapePath(paths[0])}'),`
-  const body = paths.map((d) => `    '${escapePath(d)}',`).join('\n')
+  const { paths, circles } = parsed.get(entry.id)
+  const helper = entry.spin ? 'spinIcon' : 'f'
+  const parts = [
+    ...paths.map((d) => `'${escapePath(d)}'`),
+    ...circles.map((c) => `{ cx: ${c.cx}, cy: ${c.cy}, r: ${c.r} }`),
+  ]
+  if (parts.length === 1) return `  ${keyOf(entry.name)}: ${helper}(${parts[0]}),`
+  const body = parts.map((p) => `    ${p},`).join('\n')
   return `  ${keyOf(entry.name)}: ${helper}(\n${body}\n  ),`
 }
 
 const header = `/**
- * Built-in system icons — all Tabler (outline 24×24, stroke 2; a few filled).
+ * Built-in system icons — filled (Google Material Icons baseline, 24×24).
  * GENERATED by scripts/generate-system-icons.mjs — do not edit by hand.
+ * Filled shapes stay crisp at small sizes (14–16px), unlike stroke icons.
  * App-specific icons → default slot (Lucide etc.), see docs.
  */
 import type { IconDefinition, IconPrimitive } from './icons-types'
 
 export type { IconDefinition, IconPrimitive } from './icons-types'
 
-/** Tabler outline icon (24×24, stroke 2). */
-function t(...paths: string[]): IconDefinition {
+type IconPart = string | { cx: number, cy: number, r: number }
+
+function toPrimitive(part: IconPart): IconPrimitive {
+  if (typeof part === 'string') return { tag: 'path', d: part, fill: 'currentColor', stroke: 'none' }
+  return { tag: 'circle', cx: part.cx, cy: part.cy, r: part.r, fill: 'currentColor' }
+}
+
+/** Filled icon (24×24, fill currentColor, no stroke). */
+function f(...parts: IconPart[]): IconDefinition {
   return {
     viewBox: '0 0 24 24',
-    strokeWidth: 2,
-    primitives: paths.map(
-      (d): IconPrimitive => ({ tag: 'path', d }),
-    ),
+    primitives: parts.map(toPrimitive),
   }
 }
 
-/** Tabler filled icon (24×24, fill currentColor, no stroke). */
-function tf(...paths: string[]): IconDefinition {
-  return {
-    viewBox: '0 0 24 24',
-    primitives: paths.map(
-      (d): IconPrimitive => ({ tag: 'path', d, fill: 'currentColor', stroke: 'none' }),
-    ),
-  }
-}
-
-/** Spinning outline icon (loader). */
-function spinIcon(...paths: string[]): IconDefinition {
-  return { ...t(...paths), spin: true }
+/** Spinning filled icon (loader). */
+function spinIcon(...parts: IconPart[]): IconDefinition {
+  return { ...f(...parts), spin: true }
 }
 
 export const iconRegistry = {`

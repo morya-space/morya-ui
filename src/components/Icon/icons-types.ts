@@ -9,8 +9,8 @@ export interface IconDefinition {
   primitives: readonly IconPrimitive[]
   /** Optional CSS modifier on the host (e.g. spin for loader). */
   spin?: boolean
-  /** SVG viewBox. Defaults to `0 0 24 24` (Tabler grid). */
+  /** SVG viewBox. Defaults to `0 0 24 24`. */
   viewBox?: string
-  /** Stroke width matching the viewBox scale. Defaults to `2`. */
+  /** Stroke width for stroke-based definitions. Unused by filled icons. */
   strokeWidth?: number
 }
