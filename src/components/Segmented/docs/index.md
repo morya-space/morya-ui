@@ -48,6 +48,37 @@ import { MSegmented } from 'morya-ui'
 | --- | --- | --- |
 | `update:modelValue` | 同 `modelValue` | 选中变化 |
 
+## 样式定制
+
+定制 Segmented 时，优先在组件根节点覆盖 CSS 变量，不要依赖内部 DOM 结构或通过深层选择器覆盖样式。滑块会自动跟随选中项的位置和尺寸。
+
+```vue
+<MSegmented
+  v-model="value"
+  :options="options"
+  style="
+    --m-segmented-track-background: var(--m-color-primary-subtle);
+    --m-segmented-thumb-background: var(--m-color-primary);
+    --m-segmented-active-text-color: var(--m-color-text-on-primary);
+    --m-segmented-radius: var(--m-radius-pill);
+  "
+/>
+```
+
+| 变量 | 默认值 | 用途 |
+| --- | --- | --- |
+| `--m-segmented-track-padding` | `var(--m-space-1)` | 轨道内边距和滑块与轨道的间距。 |
+| `--m-segmented-track-background` | 淡化文本色与表面的混合色 | 整个轨道的背景。 |
+| `--m-segmented-thumb-background` | `var(--m-color-surface)` | 选中滑块的背景。 |
+| `--m-segmented-thumb-shadow` | `var(--m-shadow-sm)` | 选中滑块的阴影。 |
+| `--m-segmented-text-color` | `var(--m-color-text-muted)` | 未选中项文字和图标颜色。 |
+| `--m-segmented-active-text-color` | `var(--m-color-text)` | 选中项和 hover 项文字、图标颜色。 |
+| `--m-segmented-disabled-text-color` | `var(--m-color-text-disabled)` | 禁用项文字和图标颜色。 |
+| `--m-segmented-radius` | `var(--m-radius-control)` | 轨道圆角。`shape="round"` 会覆盖为胶囊圆角。 |
+| `--m-segmented-thumb-radius` | 根据轨道圆角和内边距计算 | 滑块及选项内容的圆角；需独立控制时覆盖此变量。 |
+| `--m-segmented-motion-duration` | `var(--m-motion-fast)` | 滑块移动和文字颜色变化的时长。 |
+| `--m-segmented-motion-easing` | `var(--m-motion-ease)` | 滑块移动和文字颜色变化的缓动函数。 |
+
 ## 与 SelectButton
 
 | | Segmented | SelectButton |

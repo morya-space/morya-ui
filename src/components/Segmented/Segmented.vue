@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { SegmentedOption, SegmentedProps, SegmentedRawOption, SegmentedValue } from './types'
-import { computed, ref, useAttrs, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { useConfiguredSize } from '../../shared/config'
 import { useRootParts } from '../../shared/useComponentAttrs'
-import { useMId } from '../../shared/useMId'
 import { useMenuKeyboard } from '../../shared/useMenuKeyboard'
+import { useMId } from '../../shared/useMId'
 import MIcon from '../Icon/Icon.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -54,6 +54,42 @@ function select(option: SegmentedOption) {
 }
 
 const root = ref<HTMLElement | null>(null)
+const thumbStyle = ref<Record<string, string>>({ opacity: '0' })
+
+function updateThumb() {
+  const rootElement = root.value
+  const activeLabel = rootElement?.querySelector<HTMLElement>('.m-segmented__item--checked .m-segmented__label')
+  if (!rootElement || !activeLabel) {
+    thumbStyle.value = { opacity: '0' }
+    return
+  }
+
+  const rootRect = rootElement.getBoundingClientRect()
+  const labelRect = activeLabel.getBoundingClientRect()
+  thumbStyle.value = {
+    opacity: '1',
+    transform: `translate(${labelRect.left - rootRect.left}px, ${labelRect.top - rootRect.top}px)`,
+    width: `${labelRect.width}px`,
+    height: `${labelRect.height}px`,
+  }
+}
+
+function scheduleThumbUpdate() {
+  void nextTick(updateThumb)
+}
+
+let resizeObserver: ResizeObserver | undefined
+
+onMounted(() => {
+  scheduleThumbUpdate()
+  if (typeof ResizeObserver === 'undefined' || !root.value) return
+  resizeObserver = new ResizeObserver(scheduleThumbUpdate)
+  resizeObserver.observe(root.value)
+})
+
+onBeforeUnmount(() => resizeObserver?.disconnect())
+
+watch([() => props.modelValue, normalizedOptions], scheduleThumbUpdate, { flush: 'post' })
 
 const keyboard = useMenuKeyboard({
   itemCount: () => normalizedOptions.value.length,
@@ -96,6 +132,7 @@ watch(keyboard.activeIndex, (index) => {
     :aria-label="label"
     @keydown="onKeydown"
   >
+    <span class="m-segmented__thumb" :style="thumbStyle" aria-hidden="true" />
     <label
       v-for="(option, index) in normalizedOptions"
       :key="String(option.value)"

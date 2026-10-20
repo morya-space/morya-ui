@@ -1,6 +1,6 @@
 import type { AsyncGuard } from '../../shared/asyncGuard'
 import type { MAppendTo } from '../../shared/overlay'
-import type { RootPassThrough } from '../../shared/passThrough'
+import type { PassThroughPart } from '../../shared/passThrough'
 import type { MotionPresetId } from '../../theme/motionPresets'
 import type { ButtonColor } from '../Button/types'
 
@@ -8,6 +8,11 @@ export type DialogType = 'info' | 'success' | 'warning' | 'danger'
 
 export type DialogCloseGuard = AsyncGuard
 export type DialogClickGuard = AsyncGuard<[MouseEvent]>
+
+/** Attributes for Dialog DOM parts. Useful for Teleport-safe customization. */
+export type DialogPassThrough = Partial<
+  Record<'root' | 'zoom' | 'panel' | 'header' | 'body' | 'footer', PassThroughPart>
+>
 
 export type DialogPosition =
   | 'center'
@@ -21,7 +26,8 @@ export type DialogPosition =
   | 'bottomright'
 
 export interface DialogProps {
-  pt?: RootPassThrough
+  /** Attributes for named Dialog DOM parts. */
+  pt?: DialogPassThrough
   /** Visibility. Use with `v-model`. */
   modelValue?: boolean
   /** Dialog title text. Alias of `header`. */

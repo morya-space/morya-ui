@@ -8,7 +8,7 @@ import { allowAfterGuard } from '../../shared/asyncGuard'
 import { useMConfig } from '../../shared/config'
 import { getLastPointer } from '../../shared/lastPointer'
 import { resolveOverlayTeleport } from '../../shared/overlay'
-import { useRootParts } from '../../shared/useComponentAttrs'
+import { mergePtPart, useRootParts } from '../../shared/useComponentAttrs'
 import { useModalOverlay } from '../../shared/useModalOverlay'
 import { useMotionTransition } from '../../theme/useMotionTransition'
 import MButton from '../Button/Button.vue'
@@ -58,7 +58,7 @@ const rootAttrs = computed(() => {
   if (!style || !fallthroughPanelWidth.value) return next
   if (typeof style === 'string') {
     const rest = style
-      .replace(/(?:^|;)\s*width\s*:\s*[^;]+/i, '')
+      .replace(/(?:^|;)\s*width\s*:[^;]+/i, '')
       .replace(/^;|;$/g, '')
       .trim()
     if (rest) next.style = rest
@@ -134,6 +134,11 @@ const panelStyle = computed(() => {
   const width = props.width ?? fallthroughPanelWidth.value
   return width ? { width } : undefined
 })
+const zoomAttrs = computed(() => mergePtPart(props.pt?.zoom))
+const panelAttrs = computed(() => mergePtPart(props.pt?.panel))
+const headerAttrs = computed(() => mergePtPart(props.pt?.header))
+const bodyAttrs = computed(() => mergePtPart(props.pt?.body))
+const footerAttrs = computed(() => mergePtPart(props.pt?.footer))
 const isDismissableMask = computed(() => {
   if (props.maskClosable !== undefined) return props.maskClosable
   if (props.dismissableMask !== undefined) return props.dismissableMask
@@ -238,8 +243,9 @@ defineExpose({
         :class="backdropClass"
         :style="backdropStyle"
       >
-        <div class="m-dialog-zoom" @click.self="onOutsideClick">
+        <div v-bind="zoomAttrs" class="m-dialog-zoom" @click.self="onOutsideClick">
           <section
+            v-bind="panelAttrs"
             ref="dialogElement"
             class="m-dialog"
             :class="{
@@ -252,7 +258,11 @@ defineExpose({
             :aria-label="dialogAriaLabel"
             tabindex="-1"
           >
-            <header v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable" class="m-dialog__header">
+            <header
+              v-if="$slots.header || dialogTitle || typeIcon || closable || maximizable"
+              v-bind="headerAttrs"
+              class="m-dialog__header"
+            >
               <div class="m-dialog__heading">
                 <span v-if="typeIcon" class="m-dialog__type-icon" aria-hidden="true">
                   <MIcon :name="typeIcon" size="sm" />
@@ -286,11 +296,12 @@ defineExpose({
                 </button>
               </div>
             </header>
-            <div class="m-dialog__body">
+            <div v-bind="bodyAttrs" class="m-dialog__body">
               <slot />
             </div>
             <footer
               v-if="showFooter"
+              v-bind="footerAttrs"
               class="m-dialog__footer"
               :class="{ 'm-dialog__footer--preset': showPresetFooter }"
             >

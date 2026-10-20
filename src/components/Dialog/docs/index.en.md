@@ -79,11 +79,33 @@ With `dismissableMask={false}` (or `closeOnOutsideClick={false}` / `maskClosable
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | Runs before X / Esc / mask dismiss; return `false` to keep open |
 | `ariaLabel` | `string` | — | Accessible dialog name. |
 | `transition` | `string \| false` | `'zoom'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Backdrop pass-through; key `root`. |
+| `pt` | [DialogPassThrough](/docs/types#DialogPassThrough) | — | Attributes for named Dialog DOM parts. |
 
 ## Styling & attrs
 
-After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `title`, …) land on the **backdrop** (`.m-dialog-backdrop`), not the inner `.m-dialog` panel. Use the `width` prop for panel width; use `pt` for inner DOM. See [Styling & attrs](/docs/attrs).
+After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `title`, …) land on the **backdrop** (`.m-dialog-backdrop`), not the inner `.m-dialog` panel. Use the `width` prop for panel width and `pt` for inner DOM. Do not depend on page-level scoped CSS ancestor selectors: after Teleport, the page container is no longer a DOM ancestor of the dialog.
+
+`pt` targets `class`, `style`, `data-*`, and native attrs at a named part, remaining stable with Teleport and scoped styles:
+
+```vue
+<MDialog
+  v-model="visible"
+  width="48rem"
+  :pt="{
+    panel: { class: 'account-dialog', style: { '--m-dialog-radius': '1rem' } },
+    body: { class: 'account-dialog__body' },
+  }"
+/>
+```
+
+| `pt` key | Target element | Purpose |
+| --- | --- | --- |
+| `root` | `.m-dialog-backdrop` | Full-screen mask and overlay root. |
+| `zoom` | `.m-dialog-zoom` | Positioning container responsible for enter/leave transforms. |
+| `panel` | `.m-dialog` | Dialog panel; use for local CSS variables, classes, and data attributes. |
+| `header` | `.m-dialog__header` | Header, rendered only when it has title, icon, or actions. |
+| `body` | `.m-dialog__body` | Content area. |
+| `footer` | `.m-dialog__footer` | Footer, rendered only for the `footer` slot or preset actions. |
 
 ## Events
 

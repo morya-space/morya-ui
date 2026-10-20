@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T07:41:31.707Z",
+  "generatedAt": "2026-10-20T00:52:43.143Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -3338,16 +3338,6 @@
       }
     },
     {
-      "name": "--m-overlay-menu-min-width",
-      "category": "menu",
-      "source": "src/styles/base.css",
-      "default": "12rem",
-      "description": {
-        "zh-CN": "菜单相关变量：Menu Min Width",
-        "en-US": "Menu token: Menu Min Width"
-      }
-    },
-    {
       "name": "--m-menu-popup-max-height",
       "category": "menu",
       "source": "src/components/Menu/styles.css",
@@ -3765,6 +3755,16 @@
       "description": {
         "zh-CN": "部分控件禁用态后备不透明度；优先使用 text/bg disabled 色。",
         "en-US": "Fallback opacity for disabled controls; prefer text/bg disabled colors."
+      }
+    },
+    {
+      "name": "--m-overlay-menu-min-width",
+      "category": "overlay",
+      "source": "src/styles/base.css",
+      "default": "12rem",
+      "description": {
+        "zh-CN": "浮层相关变量：Overlay Menu Min Width",
+        "en-US": "Overlay token: Overlay Menu Min Width"
       }
     },
     {

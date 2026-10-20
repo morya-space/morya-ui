@@ -79,11 +79,33 @@ import { MButton, MDialog } from 'morya-ui'
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
 | `ariaLabel` | `string` | — | 对话框可访问名称。 |
 | `transition` | `string \| false` | `'zoom'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
-| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | 遮罩层（backdrop）透传，键名 `root`。 |
+| `pt` | [DialogPassThrough](/docs/types#DialogPassThrough) | — | 指定 Dialog 内部部件的透传 attrs。 |
 
 ## 样式与 attrs
 
-Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`class`、`style`、`data-*`、`title` 等）落在**遮罩层**（`.m-dialog-backdrop`），不是内层 `.m-dialog` 面板。面板宽度用 `width` prop；内层 DOM 用 `pt`。详见 [样式与 attrs](/docs/attrs)。
+Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`class`、`style`、`data-*`、`title` 等）落在**遮罩层**（`.m-dialog-backdrop`），不是内层 `.m-dialog` 面板。面板宽度用 `width` prop；内层 DOM 用 `pt`。不要依赖页面 scoped CSS 的祖先选择器，因为 Teleport 后页面容器不再是弹窗的 DOM 祖先。
+
+`pt` 可将 `class`、`style`、`data-*` 和原生 attrs 定向到指定部件，在 Teleport 和 scoped 模式下保持稳定：
+
+```vue
+<MDialog
+  v-model="visible"
+  width="48rem"
+  :pt="{
+    panel: { class: 'account-dialog', style: { '--m-dialog-radius': '1rem' } },
+    body: { class: 'account-dialog__body' },
+  }"
+/>
+```
+
+| `pt` 键名 | 目标元素 | 用途 |
+| --- | --- | --- |
+| `root` | `.m-dialog-backdrop` | 全屏遮罩和浮层根节点。 |
+| `zoom` | `.m-dialog-zoom` | 负责进出场缩放的定位容器。 |
+| `panel` | `.m-dialog` | 对话框面板，适合局部 CSS 变量、class 和 data 属性。 |
+| `header` | `.m-dialog__header` | 标题栏，仅在存在标题、图标或操作按钮时渲染。 |
+| `body` | `.m-dialog__body` | 内容区。 |
+| `footer` | `.m-dialog__footer` | 页脚，仅在 `footer` 插槽或预设操作按钮存在时渲染。 |
 
 ## Events
 

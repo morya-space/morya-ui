@@ -85,6 +85,15 @@ export type { ButtonEmits, ButtonProps, ButtonInstance } from "./types";
 
 ## 设计令牌和主题
 
+### 消费方样式定制
+
+当 Agent 在使用组件库的项目中需要调整某个组件的视觉样式时，必须先查询该组件文档或 MCP catalog 的“样式定制 / Style customization”章节，并优先覆盖该组件公开的 CSS 变量。不要以深层选择器、DOM 顺序、内部元素 class 或 `!important` 作为常规定制手段。
+
+- 公开组件变量是稳定的样式 API；文档必须说明变量名、默认值和视觉用途。
+- 按需只覆盖与目标相关的变量，例如背景、文字、边框、圆角、间距、阴影和 motion；避免复制整段组件 CSS。
+- 若现有公开变量无法表达合理的定制需求，应新增语义明确的组件变量，并同步组件中英文文档和 MCP catalog；不要暴露与内部 DOM 结构绑定的变量。
+- MCP catalog 由组件文档生成。修改组件文档后运行 `pnpm mcp:generate`，使 Agent 能通过 MCP 获取变量说明。
+
 ### 三层 token 模型
 
 用 token 将品牌选择与组件实现解耦：

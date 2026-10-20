@@ -1,8 +1,18 @@
 /* —— Form: Segmented —— */
 .m-segmented {
     --m-segmented-track-padding: var(--m-space-1);
-    background: color-mix(in srgb, var(--m-color-text-muted) 8%, var(--m-color-surface));
-    border-radius: var(--m-radius-control);
+    --m-segmented-track-background: color-mix(in srgb, var(--m-color-text-muted) 8%, var(--m-color-surface));
+    --m-segmented-thumb-background: var(--m-color-surface);
+    --m-segmented-thumb-shadow: var(--m-shadow-sm);
+    --m-segmented-text-color: var(--m-color-text-muted);
+    --m-segmented-active-text-color: var(--m-color-text);
+    --m-segmented-disabled-text-color: var(--m-color-text-disabled);
+    --m-segmented-radius: var(--m-radius-control);
+    --m-segmented-thumb-radius: calc(var(--m-segmented-radius) - var(--m-segmented-track-padding));
+    --m-segmented-motion-duration: var(--m-motion-fast);
+    --m-segmented-motion-easing: var(--m-motion-ease);
+    background: var(--m-segmented-track-background);
+    border-radius: var(--m-segmented-radius);
     display: inline-flex;
     gap: 0;
     padding: var(--m-segmented-track-padding);
@@ -15,7 +25,8 @@
 }
 
 .m-segmented--round {
-    border-radius: var(--m-radius-pill);
+    --m-segmented-radius: var(--m-radius-pill);
+    --m-segmented-thumb-radius: var(--m-radius-pill);
 }
 
 .m-segmented--disabled {
@@ -30,6 +41,7 @@
     margin: 0;
     min-width: 0;
     position: relative;
+    z-index: 1;
 }
 
 .m-segmented--block .m-segmented__item {
@@ -47,10 +59,26 @@
     clip: rect(0, 0, 0, 0);
 }
 
+.m-segmented__thumb {
+    background: var(--m-segmented-thumb-background);
+    border-radius: var(--m-segmented-thumb-radius);
+    box-shadow: var(--m-segmented-thumb-shadow);
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition:
+        height var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
+        opacity var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
+        transform var(--m-segmented-motion-duration) var(--m-segmented-motion-easing),
+        width var(--m-segmented-motion-duration) var(--m-segmented-motion-easing);
+    will-change: height, transform, width;
+}
+
 .m-segmented__label {
     align-items: center;
-    border-radius: calc(var(--m-radius-control) - var(--m-space-1));
-    color: var(--m-color-text-muted);
+    border-radius: var(--m-segmented-thumb-radius);
+    color: var(--m-segmented-text-color);
     display: inline-flex;
     font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
@@ -61,26 +89,22 @@
     min-height: calc(var(--m-control-height-medium) - var(--m-segmented-track-padding) * 2);
     padding: 0 var(--m-space-3);
     transition:
-        background-color var(--m-motion-fast) var(--m-motion-ease),
-        box-shadow var(--m-motion-fast) var(--m-motion-ease),
-        color var(--m-motion-fast) var(--m-motion-ease);
+        color var(--m-segmented-motion-duration) var(--m-segmented-motion-easing);
     user-select: none;
     white-space: nowrap;
     width: 100%;
 }
 
 .m-segmented--round .m-segmented__label {
-    border-radius: var(--m-radius-pill);
+    border-radius: var(--m-segmented-thumb-radius);
 }
 
 .m-segmented__item--checked .m-segmented__label {
-    background: var(--m-color-surface);
-    box-shadow: var(--m-shadow-sm);
-    color: var(--m-color-text);
+    color: var(--m-segmented-active-text-color);
 }
 
 .m-segmented__item:not(.m-segmented__item--disabled):hover .m-segmented__label {
-    color: var(--m-color-text);
+    color: var(--m-segmented-active-text-color);
 }
 
 .m-segmented__item--disabled {
@@ -88,7 +112,7 @@
 }
 
 .m-segmented__item--disabled .m-segmented__label {
-    color: var(--m-color-text-disabled);
+    color: var(--m-segmented-disabled-text-color);
 }
 
 .m-segmented__input:focus-visible + .m-segmented__label {
@@ -116,4 +140,11 @@
     font-size: var(--m-control-font-large);
     min-height: calc(var(--m-control-height-large) - var(--m-segmented-track-padding) * 2);
     padding: 0 var(--m-space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .m-segmented__thumb,
+    .m-segmented__label {
+        transition-duration: 0ms;
+    }
 }

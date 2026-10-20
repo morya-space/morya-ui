@@ -8,7 +8,7 @@ const options = [
   { label: 'Monthly', value: 'monthly', disabled: true },
 ]
 
-describe('MSegmented', () => {
+describe('m-segmented', () => {
   it('emits selection and exposes radiogroup', async () => {
     const wrapper = mount(MSegmented, { props: { options, modelValue: 'Daily' } })
     expect(wrapper.attributes('role')).toBe('radiogroup')
@@ -25,6 +25,12 @@ describe('MSegmented', () => {
     expect(wrapper.classes()).toEqual(
       expect.arrayContaining(['m-segmented--block', 'm-segmented--round', 'm-segmented--large']),
     )
+  })
+
+  it('renders a sliding thumb beneath the selected option', () => {
+    const wrapper = mount(MSegmented, { props: { options: ['a', 'b'], modelValue: 'a' } })
+    expect(wrapper.find('.m-segmented__thumb').attributes('aria-hidden')).toBe('true')
+    expect(wrapper.find('.m-segmented__item--checked').exists()).toBe(true)
   })
 
   it('ignores disabled options', async () => {

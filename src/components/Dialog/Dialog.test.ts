@@ -216,6 +216,32 @@ describe('muDialog', () => {
     wrapper.unmount()
   })
 
+  it('applies pass-through attributes to Teleport-safe dialog parts', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: {
+        modelValue: true,
+        header: 'Customizable',
+        pt: {
+          root: { class: 'custom-backdrop' },
+          zoom: { class: 'custom-zoom' },
+          panel: { class: 'custom-panel', style: { backgroundColor: 'rgb(1, 2, 3)' } },
+          header: { class: 'custom-header' },
+          body: { class: 'custom-body', 'data-testid': 'dialog-body' },
+        },
+      },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop')?.classList.contains('custom-backdrop')).toBe(true)
+    expect(document.body.querySelector('.m-dialog-zoom')?.classList.contains('custom-zoom')).toBe(true)
+    const panel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(panel.classList.contains('custom-panel')).toBe(true)
+    expect(panel.style.backgroundColor).toBe('rgb(1, 2, 3)')
+    expect(document.body.querySelector('.m-dialog__header')?.classList.contains('custom-header')).toBe(true)
+    expect(document.body.querySelector('[data-testid="dialog-body"]')?.classList.contains('custom-body')).toBe(true)
+    wrapper.unmount()
+  })
+
   it('keeps default dialog preset when transition prop is omitted', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
