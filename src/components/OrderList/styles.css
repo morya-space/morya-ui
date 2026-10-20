@@ -133,10 +133,3 @@
 .m-order-list-leave-to {
     opacity: 0;
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .m-order-list-move,
-    .m-order-list-leave-active {
-        transition: none;
-    }
-}

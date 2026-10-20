@@ -634,17 +634,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .m-button {
-        --m-button-ripple-duration: 0ms;
-        transition-duration: 0ms;
-    }
-
-    .m-button__spinner {
-        animation-duration: 0ms;
-    }
-}
-
 :root[data-m-motion='reduced'] .m-button {
     --m-button-ripple-duration: 280ms;
     --m-button-press-duration: 120ms;
