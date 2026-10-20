@@ -54,10 +54,8 @@ import MIconField from "./components/IconField/IconField.vue";
 import MImage from "./components/Image/Image.vue";
 import MImagePreviewGroup from "./components/Image/ImagePreviewGroup.vue";
 import MInplace from "./components/Inplace/Inplace.vue";
-import MInput from "./components/Input/Input.vue";
 import MColorPicker from "./components/ColorPicker/ColorPicker.vue";
-import MInputGroup from "./components/InputGroup/InputGroup.vue";
-import MInputGroupAddon from "./components/InputGroup/InputGroupAddon.vue";
+import MInput from "./components/Input/Input.vue";
 import MInputNumber from "./components/InputNumber/InputNumber.vue";
 import MInputOtp from "./components/InputOtp/InputOtp.vue";
 import MInputPassword from "./components/InputPassword/InputPassword.vue";
@@ -193,8 +191,7 @@ export const mComponents: Record<string, Component> = {
   MInplace,
   MInput,
   MColorPicker,
-  MInputGroup,
-  MInputGroupAddon,
+
   MInputNumber,
   MInputOtp,
   MInputPassword,

@@ -389,12 +389,7 @@ export type {
   GradientType,
   GradientValue,
 } from "./components/ColorPicker/types";
-export { default as MInputGroup } from "./components/InputGroup/InputGroup.vue";
-export { default as MInputGroupAddon } from "./components/InputGroup/InputGroupAddon.vue";
-export type {
-  InputGroupAddonProps,
-  InputGroupProps,
-} from "./components/InputGroup/types";
+
 export { default as MInputNumber } from "./components/InputNumber/InputNumber.vue";
 export type {
   InputNumberButtonPlacement,

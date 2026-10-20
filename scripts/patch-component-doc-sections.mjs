@@ -118,10 +118,6 @@ const DOC_SECTIONS = {
     slots: '| 插槽名 | 说明 |\n| --- | --- |\n| `trigger` | 自定义颜色触发器。 |',
     slotsEn: '| Slot | Description |\n| --- | --- |\n| `trigger` | Custom color trigger. |',
   },
-  InputGroup: {
-    events: '无自定义事件。',
-    eventsEn: 'No custom events.',
-  },
   InputNumber: {
     slots: '| 插槽名 | 说明 |\n| --- | --- |\n| `prefix` | 前缀。 |\n| `suffix` | 后缀。 |',
     slotsEn: '| Slot | Description |\n| --- | --- |\n| `prefix` | Prefix. |\n| `suffix` | Suffix. |',

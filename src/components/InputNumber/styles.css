@@ -308,23 +308,6 @@
     padding: 0 var(--m-input-number-stack-button-padding-x);
 }
 
-/* Inside an InputGroup, the outer frame corners are squared by group position,
-   so the flush buttons/stack follow suit. */
-.m-input-group .m-input-number__button,
-.m-input-group .m-input-number__stack {
-    border-radius: 0;
-}
-
-.m-input-group > :first-child .m-input-number__button--decrement {
-    border-radius: calc(var(--m-radius-control) - var(--m-border-width)) 0 0
-        calc(var(--m-radius-control) - var(--m-border-width));
-}
-
-.m-input-group > :last-child .m-input-number__button--increment,
-.m-input-group > :last-child .m-input-number__stack {
-    border-radius: 0 calc(var(--m-radius-control) - var(--m-border-width))
-        calc(var(--m-radius-control) - var(--m-border-width)) 0;
-}
 
 .m-input-number__stack .m-input-number__button + .m-input-number__button {
     border-top: var(--m-border-width) solid var(--m-color-border);

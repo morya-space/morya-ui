@@ -1641,8 +1641,8 @@ export const componentDecisions: ComponentDecision[] = [
     id: 'input-addon-choice',
     title: '输入框前后缀如何选择',
     titleEn: 'Choosing input prefix / suffix',
-    question: '输入框需要带图标、文字前缀或多个控件合并时，用 MIconField 还是 MInputGroup？',
-    questionEn: 'When an input needs an icon, a text prefix, or merged controls, should it use MIconField or MInputGroup?',
+    question: '输入框需要带图标、文字前缀时，用 MIconField 还是 MInput 插槽？',
+    questionEn: 'When an input needs an icon or a text prefix, should it use MIconField or MInput slots?',
     keywords: [
       '输入框图标',
       '前缀',
@@ -1651,7 +1651,6 @@ export const componentDecisions: ComponentDecision[] = [
       'prefix',
       'suffix',
       'addon',
-      'input group',
       'iconfield',
     ],
     options: [
@@ -1675,25 +1674,28 @@ export const componentDecisions: ComponentDecision[] = [
         ),
         ...anti([
           ['手写 absolute 定位图标 → MIconField', 'Hand-written absolute icon → MIconField'],
-          ['文字前缀用 MIconField → MInputGroup + MInputGroupAddon', 'Text prefix via MIconField → MInputGroup + MInputGroupAddon'],
+          ['文字前缀用 MIconField → MInput #prefix / #suffix 插槽', 'Text prefix via MIconField → MInput #prefix / #suffix slots'],
         ]),
       },
       {
-        component: 'MInputGroup',
-        when: ['输入框需要文字前缀 / 后缀（如 https://、$、单位）', '输入框 + 按钮 / 下拉合并成一个整体'],
-        whenEn: ['Input needs a text prefix / suffix (https://, $, units)', 'Input merged with a button or select into one control'],
+        component: 'MInput #prefix / #suffix',
+        when: ['输入框需要文字前缀 / 后缀（如 https://、$、单位）'],
+        whenEn: ['Input needs a text prefix / suffix (https://, $, units)'],
         avoidWhen: ['只是输入框内放一个图标'],
         avoidWhenEn: ['Only a single icon inside the input'],
         recipe: recipe(
           [
-            ['MInputGroup 包裹 MInput + MInputGroupAddon', 'MInputGroup wraps MInput + MInputGroupAddon'],
-            ['MInputGroupAddon 放文字前缀 / 后缀', 'MInputGroupAddon holds the text prefix / suffix'],
-            ['可混合 MButton 作为后置操作', 'MButton can mix in as a trailing action'],
+            ['#prefix 放文字前缀（https://、$）', '#prefix holds the text prefix (https://, $)'],
+            ['#suffix 放文字后缀（单位、.00）', '#suffix holds the text suffix (units, .00)'],
+            ['前后缀随输入框状态（disabled / invalid / size）自动对齐', 'Affixes follow input state (disabled / invalid / size) automatically'],
+          ],
+          [
+            ['#prefix 前缀内容', '#prefix for prefix content'],
+            ['#suffix 后缀内容', '#suffix for suffix content'],
           ],
         ),
         ...anti([
-          ['输入框内单图标用 MInputGroup → MIconField', 'Single in-input icon via MInputGroup → MIconField'],
-          ['手写 flex 拼输入框和按钮 → MInputGroup', 'Hand-flexed input + button → MInputGroup'],
+          ['输入框内单图标用 #prefix → MIconField', 'Single in-input icon via #prefix → MIconField'],
         ]),
       },
     ],

@@ -1593,33 +1593,6 @@
       }
     },
     {
-      "id": "InputGroup",
-      "exportName": "MInputGroup",
-      "examples": 4,
-      "props": {
-        "total": 1,
-        "covered": 0,
-        "missing": [
-          "pt"
-        ]
-      },
-      "events": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
-      },
-      "slots": {
-        "total": 1,
-        "covered": 1,
-        "missing": []
-      },
-      "methods": {
-        "total": 0,
-        "covered": 0,
-        "missing": []
-      }
-    },
-    {
       "id": "InputNumber",
       "exportName": "MInputNumber",
       "examples": 8,

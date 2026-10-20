@@ -63,7 +63,6 @@
     "**/image/index.js",
     "**/inplace/index.js",
     "**/input/index.js",
-    "**/input-group/index.js",
     "**/input-number/index.js",
     "**/input-otp/index.js",
     "**/input-password/index.js",
@@ -401,12 +400,6 @@
     },
     "./input/style": "./dist/input/style.js",
     "./input/style.css": "./dist/input/style.css",
-    "./input-group": {
-      "types": "./dist/components/InputGroup/index.d.ts",
-      "import": "./dist/input-group/index.js"
-    },
-    "./input-group/style": "./dist/input-group/style.js",
-    "./input-group/style.css": "./dist/input-group/style.css",
     "./input-number": {
       "types": "./dist/components/InputNumber/index.d.ts",
       "import": "./dist/input-number/index.js"
