@@ -22,7 +22,7 @@ Full API: docs site `/components` or MCP (`get_component`, `search`, `validate_u
 
 ## Forms · inputs
 
-`MForm` / `MFormItem` / `MFormList`, `MInput`, `MInputPassword`, `MInputNumber`, `MTextarea`, `MInputOtp`, `MColorPicker`, `MInputGroup`, `MInputTags`, `MMentions`, `MSelect`, `MTreeSelect`, `MCascadeSelect`, `MListbox`, `MSelectButton`, `MDatePicker`, `MTimePicker`, `MCalendar`, `MAutoComplete`, `MCheckbox` / `MCheckboxGroup`, `MRadio` / `MRadioGroup`, `MSwitch`, `MToggleButton`, `MSlider`, `MRating`, `MKnob`, `MFileUpload`, `MFloatLabel`, `MIconField`, `MLabel`
+`MForm` / `MFormItem` / `MFormList`, `MInput`, `MInputPassword`, `MInputNumber`, `MTextarea`, `MInputOtp`, `MColorPicker`, `MInputTags`, `MMentions`, `MSelect`, `MTreeSelect`, `MCascadeSelect`, `MListbox`, `MSelectButton`, `MDatePicker`, `MTimePicker`, `MCalendar`, `MAutoComplete`, `MCheckbox` / `MCheckboxGroup`, `MRadio` / `MRadioGroup`, `MSwitch`, `MToggleButton`, `MSlider`, `MRating`, `MKnob`, `MFileUpload`, `MFloatLabel`, `MIconField`, `MLabel`
 
 ## Layout helpers
 
@@ -70,7 +70,7 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | Card vs Panel vs Fieldset | `surface-choice` |
 | PageContent vs Flex vs Space vs Grid | `layout-spacing-choice` |
 | Button 图标（icon prop / #icon slot / iconOnly） | `button-icon-choice` |
-| 输入框前后缀（MIconField / MInputGroup） | `input-addon-choice` |
+| 输入框前后缀（MIconField / MInput 插槽） | `input-addon-choice` |
 | Switch / Checkbox / Slider / InputTags | `toggle-input-choice` |
 | Avatar / Image / Tag / Status | `status-display-choice` |
 | Anchor / Affix / Tabs / Stepper / Breadcrumb | `nav-pattern-choice` |
@@ -116,7 +116,7 @@ Open MCP `recommend_component({ decision })` or the matching section in [decisio
 | `MButton` 图标手写 `<MIcon />` 放默认插槽 | `icon="…"` prop 或 `#icon` 插槽（`button-icon-choice`） |
 | `iconOnly` 按钮把图标放默认插槽 / 不写 `aria-label` | `icon="…"` + `aria-label`（`button-icon-choice`） |
 | 输入框内手写 absolute 定位图标 | `MIconField`（`input-addon-choice`） |
-| 输入框 + 文字前缀 / 按钮手写 flex 拼接 | `MInputGroup` + `MInputGroupAddon`（`input-addon-choice`） |
+| 输入框文字前缀 / 后缀 | `MInput` 的 `#prefix` / `#suffix` 插槽（`input-addon-choice`） |
 | `MButton badge` / `badgeColor` | Wrap with `MBadge` (`status-label-choice`) |
 | Hand `<table>` | `MTable` |
 | Hand modal div | `MDialog` / `MConfirmDialog` |

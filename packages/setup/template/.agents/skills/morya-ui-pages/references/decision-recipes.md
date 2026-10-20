@@ -1726,7 +1726,7 @@ This file is the **offline** mirror for agents without MCP.
 
 ## `input-addon-choice` — 输入框前后缀如何选择
 
-> 输入框需要带图标、文字前缀或多个控件合并时，用 MIconField 还是 MInputGroup？
+> 输入框需要带图标或文字前缀时，用 MIconField 还是 MInput 插槽？
 
 ### MIconField
 
@@ -1754,30 +1754,28 @@ This file is the **offline** mirror for agents without MCP.
 **Anti-patterns**
 
 - 手写 absolute 定位图标 → MIconField
-- 文字前缀用 MIconField → MInputGroup + MInputGroupAddon
+- 文字前缀用 MIconField → MInput 的 #prefix / #suffix 插槽
 
 
-### MInputGroup
+### MInput #prefix / #suffix
 
 **When**
 
 - 输入框需要文字前缀 / 后缀（如 https://、$、单位）
-- 输入框 + 按钮 / 下拉合并成一个整体
 
 **Avoid when**
 
 - 只是输入框内放一个图标
 
-**Recipe · props**
+**Recipe · slots**
 
-- MInputGroup 包裹 MInput + MInputGroupAddon
-- MInputGroupAddon 放文字前缀 / 后缀
-- 可混合 MButton 作为后置操作
+- #prefix 放文字前缀（https://、$）
+- #suffix 放文字后缀（单位、.00）
+- 前后缀随输入框状态（disabled / invalid / size）自动对齐
 
 **Anti-patterns**
 
-- 输入框内单图标用 MInputGroup → MIconField
-- 手写 flex 拼输入框和按钮 → MInputGroup
+- 输入框内单图标用 #prefix → MIconField
 
 
 ---
