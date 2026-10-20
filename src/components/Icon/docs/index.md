@@ -6,7 +6,7 @@ description: 系统填充图标注册表。业务图标用默认插槽接入 Luc
 
 # Icon
 
-`MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，统一为 Google Material Icons 24×24 填充风格，由 `scripts/generate-system-icons.mjs` 生成）。填充形状在 14–16px 小尺寸下依然清晰，不会像描边图标那样发虚断裂。每个图标的 viewBox 经过归一化，油墨视觉尺寸统一（约占盒子 20/24），不同形状之间不会出现大小漂移。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
+`MIcon` 维护**组件库系统图标**（关闭、箭头、状态、导航、业务常用等，统一为 Google Material Icons 24×24 填充风格，由 `scripts/generate-system-icons.mjs` 生成）。填充形状在 14–16px 小尺寸下依然清晰，不会像描边图标那样发虚断裂。每个图标的 viewBox 经过归一化：完整图标油墨约占盒子 20/24，紧凑符号（chevron、×、+/−）统一为 18/24，不同形状之间不会出现大小漂移。完整海量图标请用默认插槽接入 [Lucide](https://lucide.dev) 等库。
 
 ## 引入
 
