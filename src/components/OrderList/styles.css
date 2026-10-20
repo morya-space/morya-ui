@@ -2,43 +2,43 @@
  * Shared list/item/scrollbar visuals live in styles/base.css (with PickList).
  * Only OrderList-specific layout, drag affordance, and motion live here.
  */
-.m-orderlist {
+.m-order-list {
     display: flex;
     gap: var(--m-space-2);
 }
 
-.m-orderlist__controls {
+.m-order-list__controls {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-1);
     justify-content: center;
 }
 
-.m-orderlist__btn:disabled {
+.m-order-list__btn:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-orderlist__item {
+.m-order-list__item {
     align-items: center;
     display: flex;
     gap: var(--m-space-2);
 }
 
-.m-orderlist__item--disabled {
+.m-order-list__item--disabled {
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
 }
 
-.m-orderlist__item--disabled:hover {
+.m-order-list__item--disabled:hover {
     background: transparent;
 }
 
-.m-orderlist--disabled .m-orderlist__handle {
+.m-order-list--disabled .m-order-list__handle {
     cursor: not-allowed;
 }
 
-.m-orderlist__handle {
+.m-order-list__handle {
     align-items: center;
     background: transparent;
     border: 0;
@@ -49,32 +49,32 @@
     padding: 0;
 }
 
-.m-orderlist__handle:disabled {
+.m-order-list__handle:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-orderlist__handle:not(:disabled):active {
+.m-order-list__handle:not(:disabled):active {
     cursor: grabbing;
 }
 
-.m-orderlist__label {
+.m-order-list__label {
     flex: 1 1 auto;
     min-width: 0;
 }
 
 /* Drag source: dimmed placeholder left in the list. */
-.m-orderlist__ghost {
+.m-order-list__ghost {
     background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
     opacity: var(--m-opacity-disabled);
 }
 
 /* Insertion indicator: a line above (moving up) or below (moving down) the target. */
-.m-orderlist__drop-target {
+.m-order-list__drop-target {
     position: relative;
 }
 
-.m-orderlist__drop-target::after {
+.m-order-list__drop-target::after {
     background: var(--m-color-primary);
     border-radius: 1px;
     content: '';
@@ -84,16 +84,16 @@
     right: var(--m-space-1);
 }
 
-.m-orderlist__drop-before::after {
+.m-order-list__drop-before::after {
     top: 0;
 }
 
-.m-orderlist__drop-after::after {
+.m-order-list__drop-after::after {
     bottom: 0;
 }
 
 /* Drag preview that follows the pointer (cloned from the source row). */
-.m-orderlist__drag-preview {
+.m-order-list__drag-preview {
     background: var(--m-color-surface);
     border-radius: var(--m-radius-sm);
     box-shadow: var(--m-shadow-md);
@@ -105,7 +105,7 @@
     z-index: var(--m-z-tooltip);
 }
 
-.m-orderlist__message {
+.m-order-list__message {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,7 +114,7 @@
     padding: var(--m-space-3);
 }
 
-.m-orderlist__empty-text {
+.m-order-list__empty-text {
     margin: 0;
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
@@ -122,21 +122,21 @@
 }
 
 /* Reorder FLIP animation (TransitionGroup move). Respects reduced motion. */
-.m-orderlist-move {
+.m-order-list-move {
     transition: transform var(--m-motion-normal) var(--m-motion-ease);
 }
 
-.m-orderlist-leave-active {
+.m-order-list-leave-active {
     transition: opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-orderlist-leave-to {
+.m-order-list-leave-to {
     opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .m-orderlist-move,
-    .m-orderlist-leave-active {
+    .m-order-list-move,
+    .m-order-list-leave-active {
         transition: none;
     }
 }

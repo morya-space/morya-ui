@@ -75,19 +75,19 @@ defineExpose({ scrollToIndex })
   <ScrollBody
     ref="scrollBody"
     v-bind="rootAttrs"
-    root-class="m-virtualscroller m-virtualscroller__scrollbar"
-    wrap-class="m-virtualscroller__scroll"
+    root-class="m-virtual-scroller m-virtual-scroller__scrollbar"
+    wrap-class="m-virtual-scroller__scroll"
     :wrap-style="rootStyle"
     :role="role"
     :aria-label="ariaLabel"
     @scroll="onScroll"
   >
-    <div class="m-virtualscroller__spacer" :style="{ height: `${totalHeight}px` }">
-      <div class="m-virtualscroller__content" :style="{ transform: `translateY(${offsetY}px)` }">
+    <div class="m-virtual-scroller__spacer" :style="{ height: `${totalHeight}px` }">
+      <div class="m-virtual-scroller__content" :style="{ transform: `translateY(${offsetY}px)` }">
         <div
           v-for="entry in visibleItems"
           :key="entry.index"
-          class="m-virtualscroller__item"
+          class="m-virtual-scroller__item"
           :style="{ height: `${itemSize}px` }"
           :data-index="entry.index"
         >

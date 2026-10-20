@@ -182,7 +182,7 @@
     font-style: italic;
 }
 
-.m-select__list--virtual .m-virtualscroller__item {
+.m-select__list--virtual .m-virtual-scroller__item {
     display: flex;
 }
 

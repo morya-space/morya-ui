@@ -48,8 +48,8 @@ const resolvedEmptyMessage = computed(
 )
 
 const rootClass = computed(() => [
-  'm-dataview',
-  `m-dataview--${props.layout}`,
+  'm-data-view',
+  `m-data-view--${props.layout}`,
 ])
 
 watch(
@@ -71,29 +71,29 @@ watch(
 
 <template>
   <div v-bind="rootAttrs" :class="rootClass">
-    <div v-if="slots.header" class="m-dataview__header">
+    <div v-if="slots.header" class="m-data-view__header">
       <slot name="header" />
     </div>
     <MLoading :loading="loading" size="sm">
-      <div class="m-dataview__content">
+      <div class="m-data-view__content">
         <slot v-if="layout === 'list'" name="list" :items="pagedValue">
-          <ul v-if="pagedValue.length" class="m-dataview__list">
-            <li v-for="(item, index) in pagedValue" :key="index" class="m-dataview__list-item">
+          <ul v-if="pagedValue.length" class="m-data-view__list">
+            <li v-for="(item, index) in pagedValue" :key="index" class="m-data-view__list-item">
               {{ item }}
             </li>
           </ul>
         </slot>
         <slot v-else name="grid" :items="pagedValue">
-          <div v-if="pagedValue.length" class="m-dataview__grid">
-            <div v-for="(item, index) in pagedValue" :key="index" class="m-dataview__grid-item">
+          <div v-if="pagedValue.length" class="m-data-view__grid">
+            <div v-for="(item, index) in pagedValue" :key="index" class="m-data-view__grid-item">
               {{ item }}
             </div>
           </div>
         </slot>
 
-        <div v-if="isEmpty && !loading" class="m-dataview__message" role="status">
+        <div v-if="isEmpty && !loading" class="m-data-view__message" role="status">
           <slot name="empty">
-            <p class="m-dataview__empty-text">
+            <p class="m-data-view__empty-text">
               {{ resolvedEmptyMessage }}
             </p>
           </slot>
@@ -106,7 +106,7 @@ watch(
     <MPagination
       v-if="paginator"
       v-model="page"
-      class="m-dataview__paginator"
+      class="m-data-view__paginator"
       :total-records="value.length"
       :rows="rows"
       :disabled="disabled"

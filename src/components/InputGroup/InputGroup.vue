@@ -11,7 +11,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-inputgroup">
+  <div v-bind="rootAttrs" class="m-input-group">
     <slot />
   </div>
 </template>

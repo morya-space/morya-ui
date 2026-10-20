@@ -29,27 +29,27 @@ const segments = computed(() =>
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-metergroup">
-    <div class="m-metergroup__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax" :aria-valuenow="totalValue">
+  <div v-bind="rootAttrs" class="m-meter-group">
+    <div class="m-meter-group__meter" role="meter" :aria-valuemin="0" :aria-valuemax="totalMax" :aria-valuenow="totalValue">
       <div
         v-for="(segment, index) in segments"
         :key="`${segment.label}-${index}`"
-        class="m-metergroup__segment"
+        class="m-meter-group__segment"
         :style="{ width: segment.width, background: segment.color }"
         :title="`${segment.label}: ${segment.value}`"
       />
     </div>
-    <ul class="m-metergroup__legend">
-      <li v-for="(item, index) in value" :key="`${item.label}-${index}`" class="m-metergroup__legend-item">
+    <ul class="m-meter-group__legend">
+      <li v-for="(item, index) in value" :key="`${item.label}-${index}`" class="m-meter-group__legend-item">
         <span
-          class="m-metergroup__swatch"
+          class="m-meter-group__swatch"
           :style="{ background: item.color ?? 'var(--m-color-primary)' }"
           aria-hidden="true"
         />
         <slot name="label" :item="item" :index="index">
           <span>{{ item.label }}</span>
         </slot>
-        <span class="m-metergroup__value">{{ item.value }}</span>
+        <span class="m-meter-group__value">{{ item.value }}</span>
       </li>
     </ul>
   </div>

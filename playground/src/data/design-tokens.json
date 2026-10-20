@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T00:52:43.143Z",
+  "generatedAt": "2026-10-20T07:45:27.079Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -292,7 +292,7 @@
       }
     }
   ],
-  "tokenCount": 485,
+  "tokenCount": 495,
   "tokens": [
     {
       "name": "--m-affix-icon-size",
@@ -425,33 +425,33 @@
       }
     },
     {
-      "name": "--m-autocomplete-dropdown-max-height",
+      "name": "--m-auto-complete-dropdown-max-height",
       "category": "component",
       "source": "src/components/AutoComplete/styles.css",
       "default": "min(18rem, 45vh)",
       "description": {
-        "zh-CN": "组件专用相关变量：Autocomplete Dropdown Max Height",
-        "en-US": "Component-specific token: Autocomplete Dropdown Max Height"
+        "zh-CN": "组件专用相关变量：Auto Complete Dropdown Max Height",
+        "en-US": "Component-specific token: Auto Complete Dropdown Max Height"
       }
     },
     {
-      "name": "--m-autocomplete-min-width",
+      "name": "--m-auto-complete-min-width",
       "category": "component",
       "source": "src/components/AutoComplete/styles.css",
       "default": "14rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Autocomplete Min Width",
-        "en-US": "Component-specific token: Autocomplete Min Width"
+        "zh-CN": "组件专用相关变量：Auto Complete Min Width",
+        "en-US": "Component-specific token: Auto Complete Min Width"
       }
     },
     {
-      "name": "--m-autocomplete-spinner-size",
+      "name": "--m-auto-complete-spinner-size",
       "category": "component",
       "source": "src/components/AutoComplete/styles.css",
       "default": "0.85rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Autocomplete Spinner Size",
-        "en-US": "Component-specific token: Autocomplete Spinner Size"
+        "zh-CN": "组件专用相关变量：Auto Complete Spinner Size",
+        "en-US": "Component-specific token: Auto Complete Spinner Size"
       }
     },
     {
@@ -675,13 +675,13 @@
       }
     },
     {
-      "name": "--m-blockui-z-index",
+      "name": "--m-block-ui-z-index",
       "category": "component",
       "source": "src/components/BlockUI/styles.css",
       "default": "10",
       "description": {
-        "zh-CN": "组件专用相关变量：Blockui Z Index",
-        "en-US": "Component-specific token: Blockui Z Index"
+        "zh-CN": "组件专用相关变量：Block Ui Z Index",
+        "en-US": "Component-specific token: Block Ui Z Index"
       }
     },
     {
@@ -1383,33 +1383,33 @@
       }
     },
     {
-      "name": "--m-cascadeselect-column-max-height",
+      "name": "--m-cascade-select-column-max-height",
       "category": "component",
       "source": "src/components/CascadeSelect/styles.css",
       "default": "min(18rem, 45vh)",
       "description": {
-        "zh-CN": "组件专用相关变量：Cascadeselect Column Max Height",
-        "en-US": "Component-specific token: Cascadeselect Column Max Height"
+        "zh-CN": "组件专用相关变量：Cascade Select Column Max Height",
+        "en-US": "Component-specific token: Cascade Select Column Max Height"
       }
     },
     {
-      "name": "--m-cascadeselect-column-min-width",
+      "name": "--m-cascade-select-column-min-width",
       "category": "component",
       "source": "src/components/CascadeSelect/styles.css",
       "default": "10rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Cascadeselect Column Min Width",
-        "en-US": "Component-specific token: Cascadeselect Column Min Width"
+        "zh-CN": "组件专用相关变量：Cascade Select Column Min Width",
+        "en-US": "Component-specific token: Cascade Select Column Min Width"
       }
     },
     {
-      "name": "--m-cascadeselect-min-width",
+      "name": "--m-cascade-select-min-width",
       "category": "component",
       "source": "src/components/CascadeSelect/styles.css",
       "default": "12rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Cascadeselect Min Width",
-        "en-US": "Component-specific token: Cascadeselect Min Width"
+        "zh-CN": "组件专用相关变量：Cascade Select Min Width",
+        "en-US": "Component-specific token: Cascade Select Min Width"
       }
     },
     {
@@ -1748,83 +1748,83 @@
       }
     },
     {
-      "name": "--m-commandmenu-list-max-height",
+      "name": "--m-command-menu-list-max-height",
       "category": "menu",
       "source": "src/components/CommandMenu/styles.css",
       "default": "18rem",
       "description": {
-        "zh-CN": "菜单相关变量：Commandmenu List Max Height",
-        "en-US": "Menu token: Commandmenu List Max Height"
+        "zh-CN": "菜单相关变量：Command Menu List Max Height",
+        "en-US": "Menu token: Command Menu List Max Height"
       }
     },
     {
-      "name": "--m-commandmenu-width",
+      "name": "--m-command-menu-width",
       "category": "menu",
       "source": "src/components/CommandMenu/styles.css",
       "default": "32rem",
       "description": {
-        "zh-CN": "菜单相关变量：Commandmenu Width",
-        "en-US": "Menu token: Commandmenu Width"
+        "zh-CN": "菜单相关变量：Command Menu Width",
+        "en-US": "Menu token: Command Menu Width"
       }
     },
     {
-      "name": "--m-confirmdialog-width",
+      "name": "--m-confirm-dialog-width",
       "category": "component",
       "source": "src/components/ConfirmDialog/styles.css",
       "default": "28rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Confirmdialog Width",
-        "en-US": "Component-specific token: Confirmdialog Width"
+        "zh-CN": "组件专用相关变量：Confirm Dialog Width",
+        "en-US": "Component-specific token: Confirm Dialog Width"
       }
     },
     {
-      "name": "--m-confirmpopup-width",
+      "name": "--m-confirm-popup-width",
       "category": "component",
       "source": "src/components/ConfirmPopup/styles.css",
       "default": "20rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Confirmpopup Width",
-        "en-US": "Component-specific token: Confirmpopup Width"
+        "zh-CN": "组件专用相关变量：Confirm Popup Width",
+        "en-US": "Component-specific token: Confirm Popup Width"
       }
     },
     {
-      "name": "--m-contextmenu-item-gap",
+      "name": "--m-context-menu-item-gap",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
       "default": "var(--m-space-1)",
       "description": {
-        "zh-CN": "菜单相关变量：Contextmenu Item Gap",
-        "en-US": "Menu token: Contextmenu Item Gap"
+        "zh-CN": "菜单相关变量：Context Menu Item Gap",
+        "en-US": "Menu token: Context Menu Item Gap"
       }
     },
     {
-      "name": "--m-contextmenu-max-height",
+      "name": "--m-context-menu-max-height",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
       "default": "min(18rem, 45vh)",
       "description": {
-        "zh-CN": "菜单相关变量：Contextmenu Max Height",
-        "en-US": "Menu token: Contextmenu Max Height"
+        "zh-CN": "菜单相关变量：Context Menu Max Height",
+        "en-US": "Menu token: Context Menu Max Height"
       }
     },
     {
-      "name": "--m-contextmenu-min-width",
+      "name": "--m-context-menu-min-width",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
       "default": "var(--m-overlay-menu-min-width, 10rem)",
       "description": {
-        "zh-CN": "菜单相关变量：Contextmenu Min Width",
-        "en-US": "Menu token: Contextmenu Min Width"
+        "zh-CN": "菜单相关变量：Context Menu Min Width",
+        "en-US": "Menu token: Context Menu Min Width"
       }
     },
     {
-      "name": "--m-contextmenu-submenu-max-height",
+      "name": "--m-context-menu-submenu-max-height",
       "category": "menu",
       "source": "src/components/ContextMenu/styles.css",
       "default": "min(18rem, 45vh)",
       "description": {
-        "zh-CN": "菜单相关变量：Contextmenu Submenu Max Height",
-        "en-US": "Menu token: Contextmenu Submenu Max Height"
+        "zh-CN": "菜单相关变量：Context Menu Submenu Max Height",
+        "en-US": "Menu token: Context Menu Submenu Max Height"
       }
     },
     {
@@ -2002,103 +2002,103 @@
       }
     },
     {
-      "name": "--m-dataview-grid-min",
-      "category": "dataview",
+      "name": "--m-data-view-grid-min",
+      "category": "component",
       "source": "src/theme/styles.css",
       "default": "10rem",
       "description": {
-        "zh-CN": "数据视图相关变量：Dataview Grid Min",
-        "en-US": "DataView token: Dataview Grid Min"
+        "zh-CN": "组件专用相关变量：Data View Grid Min",
+        "en-US": "Component-specific token: Data View Grid Min"
       }
     },
     {
-      "name": "--m-datepicker-affix-size",
+      "name": "--m-date-picker-affix-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "calc( var(--m-control-height-large) - 2 * var(--m-border-width) )",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Affix Size",
-        "en-US": "Component-specific token: Datepicker Affix Size"
+        "zh-CN": "组件专用相关变量：Date Picker Affix Size",
+        "en-US": "Component-specific token: Date Picker Affix Size"
       }
     },
     {
-      "name": "--m-datepicker-calendar-cell-size",
+      "name": "--m-date-picker-calendar-cell-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "1.75rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Calendar Cell Size",
-        "en-US": "Component-specific token: Datepicker Calendar Cell Size"
+        "zh-CN": "组件专用相关变量：Date Picker Calendar Cell Size",
+        "en-US": "Component-specific token: Date Picker Calendar Cell Size"
       }
     },
     {
-      "name": "--m-datepicker-control-height",
+      "name": "--m-date-picker-control-height",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "var(--m-control-height-large)",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Control Height",
-        "en-US": "Component-specific token: Datepicker Control Height"
+        "zh-CN": "组件专用相关变量：Date Picker Control Height",
+        "en-US": "Component-specific token: Date Picker Control Height"
       }
     },
     {
-      "name": "--m-datepicker-day-size",
+      "name": "--m-date-picker-day-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
-      "default": "var(--m-datepicker-calendar-cell-size)",
+      "default": "var(--m-date-picker-calendar-cell-size)",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Day Size",
-        "en-US": "Component-specific token: Datepicker Day Size"
+        "zh-CN": "组件专用相关变量：Date Picker Day Size",
+        "en-US": "Component-specific token: Date Picker Day Size"
       }
     },
     {
-      "name": "--m-datepicker-font-size",
+      "name": "--m-date-picker-font-size",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "var(--m-control-font-large)",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Font Size",
-        "en-US": "Component-specific token: Datepicker Font Size"
+        "zh-CN": "组件专用相关变量：Date Picker Font Size",
+        "en-US": "Component-specific token: Date Picker Font Size"
       }
     },
     {
-      "name": "--m-datepicker-grid-gap",
+      "name": "--m-date-picker-grid-gap",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "0.125rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Grid Gap",
-        "en-US": "Component-specific token: Datepicker Grid Gap"
+        "zh-CN": "组件专用相关变量：Date Picker Grid Gap",
+        "en-US": "Component-specific token: Date Picker Grid Gap"
       }
     },
     {
-      "name": "--m-datepicker-padding-x",
+      "name": "--m-date-picker-padding-x",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "var(--m-control-padding-x-large)",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Padding X",
-        "en-US": "Component-specific token: Datepicker Padding X"
+        "zh-CN": "组件专用相关变量：Date Picker Padding X",
+        "en-US": "Component-specific token: Date Picker Padding X"
       }
     },
     {
-      "name": "--m-datepicker-panel-min-width",
+      "name": "--m-date-picker-panel-min-width",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "calc( 3 * 4rem + 2 * var(--m-space-1) + 2 * var(--m-space-3) )",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Panel Min Width",
-        "en-US": "Component-specific token: Datepicker Panel Min Width"
+        "zh-CN": "组件专用相关变量：Date Picker Panel Min Width",
+        "en-US": "Component-specific token: Date Picker Panel Min Width"
       }
     },
     {
-      "name": "--m-datepicker-shortcuts-width",
+      "name": "--m-date-picker-shortcuts-width",
       "category": "component",
       "source": "src/components/DatePicker/styles.css",
       "default": "6rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Datepicker Shortcuts Width",
-        "en-US": "Component-specific token: Datepicker Shortcuts Width"
+        "zh-CN": "组件专用相关变量：Date Picker Shortcuts Width",
+        "en-US": "Component-specific token: Date Picker Shortcuts Width"
       }
     },
     {
@@ -2335,53 +2335,53 @@
       }
     },
     {
-      "name": "--m-fileupload-card-size",
+      "name": "--m-file-upload-card-size",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "7.5rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Fileupload Card Size",
-        "en-US": "Component-specific token: Fileupload Card Size"
+        "zh-CN": "组件专用相关变量：File Upload Card Size",
+        "en-US": "Component-specific token: File Upload Card Size"
       }
     },
     {
-      "name": "--m-fileupload-dropzone-min-height",
+      "name": "--m-file-upload-dropzone-min-height",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "10rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Fileupload Dropzone Min Height",
-        "en-US": "Component-specific token: Fileupload Dropzone Min Height"
+        "zh-CN": "组件专用相关变量：File Upload Dropzone Min Height",
+        "en-US": "Component-specific token: File Upload Dropzone Min Height"
       }
     },
     {
-      "name": "--m-fileupload-icon-size",
+      "name": "--m-file-upload-icon-size",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "2.5rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Fileupload Icon Size",
-        "en-US": "Component-specific token: Fileupload Icon Size"
+        "zh-CN": "组件专用相关变量：File Upload Icon Size",
+        "en-US": "Component-specific token: File Upload Icon Size"
       }
     },
     {
-      "name": "--m-fileupload-progress-height",
+      "name": "--m-file-upload-progress-height",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "0.25rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Fileupload Progress Height",
-        "en-US": "Component-specific token: Fileupload Progress Height"
+        "zh-CN": "组件专用相关变量：File Upload Progress Height",
+        "en-US": "Component-specific token: File Upload Progress Height"
       }
     },
     {
-      "name": "--m-fileupload-thumb-size",
+      "name": "--m-file-upload-thumb-size",
       "category": "component",
       "source": "src/components/FileUpload/styles.css",
       "default": "2.5rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Fileupload Thumb Size",
-        "en-US": "Component-specific token: Fileupload Thumb Size"
+        "zh-CN": "组件专用相关变量：File Upload Thumb Size",
+        "en-US": "Component-specific token: File Upload Thumb Size"
       }
     },
     {
@@ -2595,63 +2595,73 @@
       }
     },
     {
-      "name": "--m-inputnumber-stack-button-padding-x",
+      "name": "--m-input-number-stack-button-padding-x",
       "category": "component",
       "source": "src/components/InputNumber/styles.css",
       "default": "var(--m-space-2)",
       "description": {
-        "zh-CN": "组件专用相关变量：Inputnumber Stack Button Padding X",
-        "en-US": "Component-specific token: Inputnumber Stack Button Padding X"
+        "zh-CN": "组件专用相关变量：Input Number Stack Button Padding X",
+        "en-US": "Component-specific token: Input Number Stack Button Padding X"
       }
     },
     {
-      "name": "--m-inputnumber-width",
+      "name": "--m-input-number-width",
       "category": "component",
       "source": "src/components/InputNumber/styles.css",
       "default": "8rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Inputnumber Width",
-        "en-US": "Component-specific token: Inputnumber Width"
+        "zh-CN": "组件专用相关变量：Input Number Width",
+        "en-US": "Component-specific token: Input Number Width"
       }
     },
     {
-      "name": "--m-inputotp-gap",
+      "name": "--m-input-otp-gap",
       "category": "component",
       "source": "src/components/InputOtp/styles.css",
       "default": "var(--m-space-2)",
       "description": {
-        "zh-CN": "组件专用相关变量：Inputotp Gap",
-        "en-US": "Component-specific token: Inputotp Gap"
+        "zh-CN": "组件专用相关变量：Input Otp Gap",
+        "en-US": "Component-specific token: Input Otp Gap"
       }
     },
     {
-      "name": "--m-inputtags-chip-padding-x",
+      "name": "--m-input-password-toggle-size",
+      "category": "component",
+      "source": "src/components/InputPassword/styles.css",
+      "default": "var(--m-control-affix-size)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Input Password Toggle Size",
+        "en-US": "Component-specific token: Input Password Toggle Size"
+      }
+    },
+    {
+      "name": "--m-input-tags-chip-padding-x",
       "category": "component",
       "source": "src/components/InputTags/styles.css",
       "default": "var(--m-space-2)",
       "description": {
-        "zh-CN": "组件专用相关变量：Inputtags Chip Padding X",
-        "en-US": "Component-specific token: Inputtags Chip Padding X"
+        "zh-CN": "组件专用相关变量：Input Tags Chip Padding X",
+        "en-US": "Component-specific token: Input Tags Chip Padding X"
       }
     },
     {
-      "name": "--m-inputtags-chip-padding-y",
+      "name": "--m-input-tags-chip-padding-y",
       "category": "component",
       "source": "src/components/InputTags/styles.css",
       "default": "var(--m-space-1)",
       "description": {
-        "zh-CN": "组件专用相关变量：Inputtags Chip Padding Y",
-        "en-US": "Component-specific token: Inputtags Chip Padding Y"
+        "zh-CN": "组件专用相关变量：Input Tags Chip Padding Y",
+        "en-US": "Component-specific token: Input Tags Chip Padding Y"
       }
     },
     {
-      "name": "--m-inputtags-input-min-width",
+      "name": "--m-input-tags-input-min-width",
       "category": "component",
       "source": "src/components/InputTags/styles.css",
       "default": "6rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Inputtags Input Min Width",
-        "en-US": "Component-specific token: Inputtags Input Min Width"
+        "zh-CN": "组件专用相关变量：Input Tags Input Min Width",
+        "en-US": "Component-specific token: Input Tags Input Min Width"
       }
     },
     {
@@ -3133,23 +3143,23 @@
       }
     },
     {
-      "name": "--m-megamenu-column-min-width",
+      "name": "--m-mega-menu-column-min-width",
       "category": "menu",
       "source": "src/components/MegaMenu/styles.css",
       "default": "8rem",
       "description": {
-        "zh-CN": "菜单相关变量：Megamenu Column Min Width",
-        "en-US": "Menu token: Megamenu Column Min Width"
+        "zh-CN": "菜单相关变量：Mega Menu Column Min Width",
+        "en-US": "Menu token: Mega Menu Column Min Width"
       }
     },
     {
-      "name": "--m-megamenu-panel-gap",
+      "name": "--m-mega-menu-panel-gap",
       "category": "menu",
       "source": "src/components/MegaMenu/styles.css",
       "default": "var(--m-space-4)",
       "description": {
-        "zh-CN": "菜单相关变量：Megamenu Panel Gap",
-        "en-US": "Menu token: Megamenu Panel Gap"
+        "zh-CN": "菜单相关变量：Mega Menu Panel Gap",
+        "en-US": "Menu token: Mega Menu Panel Gap"
       }
     },
     {
@@ -3428,6 +3438,26 @@
       }
     },
     {
+      "name": "--m-meter-group-meter-height",
+      "category": "component",
+      "source": "src/components/MeterGroup/styles.css",
+      "default": "var(--m-meter-track-height)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Meter Group Meter Height",
+        "en-US": "Component-specific token: Meter Group Meter Height"
+      }
+    },
+    {
+      "name": "--m-meter-group-swatch-size",
+      "category": "component",
+      "source": "src/components/MeterGroup/styles.css",
+      "default": "var(--m-space-3)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Meter Group Swatch Size",
+        "en-US": "Component-specific token: Meter Group Swatch Size"
+      }
+    },
+    {
       "name": "--m-meter-track-height",
       "category": "component",
       "source": "src/theme/styles.css",
@@ -3435,26 +3465,6 @@
       "description": {
         "zh-CN": "组件专用相关变量：Meter Track Height",
         "en-US": "Component-specific token: Meter Track Height"
-      }
-    },
-    {
-      "name": "--m-metergroup-meter-height",
-      "category": "component",
-      "source": "src/components/MeterGroup/styles.css",
-      "default": "var(--m-meter-track-height)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Metergroup Meter Height",
-        "en-US": "Component-specific token: Metergroup Meter Height"
-      }
-    },
-    {
-      "name": "--m-metergroup-swatch-size",
-      "category": "component",
-      "source": "src/components/MeterGroup/styles.css",
-      "default": "var(--m-space-3)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Metergroup Swatch Size",
-        "en-US": "Component-specific token: Metergroup Swatch Size"
       }
     },
     {
@@ -3878,16 +3888,6 @@
       }
     },
     {
-      "name": "--m-password-toggle-size",
-      "category": "component",
-      "source": "src/components/InputPassword/styles.css",
-      "default": "var(--m-control-affix-size)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Password Toggle Size",
-        "en-US": "Component-specific token: Password Toggle Size"
-      }
-    },
-    {
       "name": "--m-popover-min-width",
       "category": "component",
       "source": "src/components/Popover/styles.css",
@@ -3895,6 +3895,46 @@
       "description": {
         "zh-CN": "组件专用相关变量：Popover Min Width",
         "en-US": "Component-specific token: Popover Min Width"
+      }
+    },
+    {
+      "name": "--m-progress-bar-fill",
+      "category": "component",
+      "source": "src/components/ProgressBar/styles.css",
+      "default": "var(--m-color-danger)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Progress Bar Fill",
+        "en-US": "Component-specific token: Progress Bar Fill"
+      }
+    },
+    {
+      "name": "--m-progress-bar-height",
+      "category": "component",
+      "source": "src/components/ProgressBar/styles.css",
+      "default": "var(--m-meter-track-height)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Progress Bar Height",
+        "en-US": "Component-specific token: Progress Bar Height"
+      }
+    },
+    {
+      "name": "--m-progress-bar-size",
+      "category": "component",
+      "source": "src/components/ProgressBar/styles.css",
+      "default": "5.5rem",
+      "description": {
+        "zh-CN": "组件专用相关变量：Progress Bar Size",
+        "en-US": "Component-specific token: Progress Bar Size"
+      }
+    },
+    {
+      "name": "--m-progress-bar-track",
+      "category": "component",
+      "source": "src/components/ProgressBar/styles.css",
+      "default": "color-mix(in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface))",
+      "description": {
+        "zh-CN": "组件专用相关变量：Progress Bar Track",
+        "en-US": "Component-specific token: Progress Bar Track"
       }
     },
     {
@@ -3915,46 +3955,6 @@
       "description": {
         "zh-CN": "组件专用相关变量：Progress Spinner Size",
         "en-US": "Component-specific token: Progress Spinner Size"
-      }
-    },
-    {
-      "name": "--m-progressbar-fill",
-      "category": "component",
-      "source": "src/components/ProgressBar/styles.css",
-      "default": "var(--m-color-danger)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Progressbar Fill",
-        "en-US": "Component-specific token: Progressbar Fill"
-      }
-    },
-    {
-      "name": "--m-progressbar-height",
-      "category": "component",
-      "source": "src/components/ProgressBar/styles.css",
-      "default": "var(--m-meter-track-height)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Progressbar Height",
-        "en-US": "Component-specific token: Progressbar Height"
-      }
-    },
-    {
-      "name": "--m-progressbar-size",
-      "category": "component",
-      "source": "src/components/ProgressBar/styles.css",
-      "default": "5.5rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Progressbar Size",
-        "en-US": "Component-specific token: Progressbar Size"
-      }
-    },
-    {
-      "name": "--m-progressbar-track",
-      "category": "component",
-      "source": "src/components/ProgressBar/styles.css",
-      "default": "color-mix(in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface))",
-      "description": {
-        "zh-CN": "组件专用相关变量：Progressbar Track",
-        "en-US": "Component-specific token: Progressbar Track"
       }
     },
     {
@@ -4215,6 +4215,106 @@
       "description": {
         "zh-CN": "组件专用相关变量：Scrollbar Track Size",
         "en-US": "Component-specific token: Scrollbar Track Size"
+      }
+    },
+    {
+      "name": "--m-segmented-active-text-color",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-color-text)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Active Text Color",
+        "en-US": "Component-specific token: Segmented Active Text Color"
+      }
+    },
+    {
+      "name": "--m-segmented-disabled-text-color",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-color-text-disabled)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Disabled Text Color",
+        "en-US": "Component-specific token: Segmented Disabled Text Color"
+      }
+    },
+    {
+      "name": "--m-segmented-motion-duration",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-motion-fast)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Motion Duration",
+        "en-US": "Component-specific token: Segmented Motion Duration"
+      }
+    },
+    {
+      "name": "--m-segmented-motion-easing",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-motion-ease)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Motion Easing",
+        "en-US": "Component-specific token: Segmented Motion Easing"
+      }
+    },
+    {
+      "name": "--m-segmented-radius",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-radius-pill)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Radius",
+        "en-US": "Component-specific token: Segmented Radius"
+      }
+    },
+    {
+      "name": "--m-segmented-text-color",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-color-text-muted)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Text Color",
+        "en-US": "Component-specific token: Segmented Text Color"
+      }
+    },
+    {
+      "name": "--m-segmented-thumb-background",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-color-surface)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Thumb Background",
+        "en-US": "Component-specific token: Segmented Thumb Background"
+      }
+    },
+    {
+      "name": "--m-segmented-thumb-radius",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-radius-pill)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Thumb Radius",
+        "en-US": "Component-specific token: Segmented Thumb Radius"
+      }
+    },
+    {
+      "name": "--m-segmented-thumb-shadow",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "var(--m-shadow-sm)",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Thumb Shadow",
+        "en-US": "Component-specific token: Segmented Thumb Shadow"
+      }
+    },
+    {
+      "name": "--m-segmented-track-background",
+      "category": "component",
+      "source": "src/components/Segmented/styles.css",
+      "default": "color-mix(in srgb, var(--m-color-text-muted) 8%, var(--m-color-surface))",
+      "description": {
+        "zh-CN": "组件专用相关变量：Segmented Track Background",
+        "en-US": "Component-specific token: Segmented Track Background"
       }
     },
     {
@@ -4576,13 +4676,13 @@
       }
     },
     {
-      "name": "--m-splitbutton-icon-size",
+      "name": "--m-split-button-icon-size",
       "category": "component",
       "source": "src/components/SplitButton/styles.css",
       "default": "1.125rem",
       "description": {
-        "zh-CN": "组件专用相关变量：Splitbutton Icon Size",
-        "en-US": "Component-specific token: Splitbutton Icon Size"
+        "zh-CN": "组件专用相关变量：Split Button Icon Size",
+        "en-US": "Component-specific token: Split Button Icon Size"
       }
     },
     {
@@ -5102,53 +5202,53 @@
       }
     },
     {
-      "name": "--m-tieredmenu-item-gap",
+      "name": "--m-tiered-menu-item-gap",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "var(--m-space-1)",
       "description": {
-        "zh-CN": "菜单相关变量：Tieredmenu Item Gap",
-        "en-US": "Menu token: Tieredmenu Item Gap"
+        "zh-CN": "菜单相关变量：Tiered Menu Item Gap",
+        "en-US": "Menu token: Tiered Menu Item Gap"
       }
     },
     {
-      "name": "--m-tieredmenu-max-height",
+      "name": "--m-tiered-menu-max-height",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "min(18rem, 45vh)",
       "description": {
-        "zh-CN": "菜单相关变量：Tieredmenu Max Height",
-        "en-US": "Menu token: Tieredmenu Max Height"
+        "zh-CN": "菜单相关变量：Tiered Menu Max Height",
+        "en-US": "Menu token: Tiered Menu Max Height"
       }
     },
     {
-      "name": "--m-tieredmenu-min-width",
+      "name": "--m-tiered-menu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "var(--m-overlay-menu-min-width)",
       "description": {
-        "zh-CN": "菜单相关变量：Tieredmenu Min Width",
-        "en-US": "Menu token: Tieredmenu Min Width"
+        "zh-CN": "菜单相关变量：Tiered Menu Min Width",
+        "en-US": "Menu token: Tiered Menu Min Width"
       }
     },
     {
-      "name": "--m-tieredmenu-submenu-max-height",
+      "name": "--m-tiered-menu-submenu-max-height",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "min(18rem, 45vh)",
       "description": {
-        "zh-CN": "菜单相关变量：Tieredmenu Submenu Max Height",
-        "en-US": "Menu token: Tieredmenu Submenu Max Height"
+        "zh-CN": "菜单相关变量：Tiered Menu Submenu Max Height",
+        "en-US": "Menu token: Tiered Menu Submenu Max Height"
       }
     },
     {
-      "name": "--m-tieredmenu-submenu-min-width",
+      "name": "--m-tiered-menu-submenu-min-width",
       "category": "menu",
       "source": "src/components/TieredMenu/styles.css",
       "default": "var(--m-overlay-menu-min-width, 10rem)",
       "description": {
-        "zh-CN": "菜单相关变量：Tieredmenu Submenu Min Width",
-        "en-US": "Menu token: Tieredmenu Submenu Min Width"
+        "zh-CN": "菜单相关变量：Tiered Menu Submenu Min Width",
+        "en-US": "Menu token: Tiered Menu Submenu Min Width"
       }
     },
     {
@@ -5202,6 +5302,46 @@
       }
     },
     {
+      "name": "--m-tree-select-list-max-height",
+      "category": "tree",
+      "source": "src/components/TreeSelect/styles.css",
+      "default": "calc( var(--m-tree-select-panel-max-height) - var(--m-control-height-small) - var(--m-space-6) )",
+      "description": {
+        "zh-CN": "树形相关变量：Tree Select List Max Height",
+        "en-US": "Tree token: Tree Select List Max Height"
+      }
+    },
+    {
+      "name": "--m-tree-select-min-width",
+      "category": "tree",
+      "source": "src/components/TreeSelect/styles.css",
+      "default": "12rem",
+      "description": {
+        "zh-CN": "树形相关变量：Tree Select Min Width",
+        "en-US": "Tree token: Tree Select Min Width"
+      }
+    },
+    {
+      "name": "--m-tree-select-panel-max-height",
+      "category": "tree",
+      "source": "src/components/TreeSelect/styles.css",
+      "default": "min(18rem, 45vh)",
+      "description": {
+        "zh-CN": "树形相关变量：Tree Select Panel Max Height",
+        "en-US": "Tree token: Tree Select Panel Max Height"
+      }
+    },
+    {
+      "name": "--m-tree-select-toggler-size",
+      "category": "tree",
+      "source": "src/components/TreeSelect/styles.css",
+      "default": "1.25rem",
+      "description": {
+        "zh-CN": "树形相关变量：Tree Select Toggler Size",
+        "en-US": "Tree token: Tree Select Toggler Size"
+      }
+    },
+    {
       "name": "--m-tree-toggler-size",
       "category": "tree",
       "source": "src/theme/styles.css",
@@ -5209,46 +5349,6 @@
       "description": {
         "zh-CN": "树形相关变量：Tree Toggler Size",
         "en-US": "Tree token: Tree Toggler Size"
-      }
-    },
-    {
-      "name": "--m-treeselect-list-max-height",
-      "category": "component",
-      "source": "src/components/TreeSelect/styles.css",
-      "default": "calc( var(--m-treeselect-panel-max-height) - var(--m-control-height-small) - var(--m-space-6) )",
-      "description": {
-        "zh-CN": "组件专用相关变量：Treeselect List Max Height",
-        "en-US": "Component-specific token: Treeselect List Max Height"
-      }
-    },
-    {
-      "name": "--m-treeselect-min-width",
-      "category": "component",
-      "source": "src/components/TreeSelect/styles.css",
-      "default": "12rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Treeselect Min Width",
-        "en-US": "Component-specific token: Treeselect Min Width"
-      }
-    },
-    {
-      "name": "--m-treeselect-panel-max-height",
-      "category": "component",
-      "source": "src/components/TreeSelect/styles.css",
-      "default": "min(18rem, 45vh)",
-      "description": {
-        "zh-CN": "组件专用相关变量：Treeselect Panel Max Height",
-        "en-US": "Component-specific token: Treeselect Panel Max Height"
-      }
-    },
-    {
-      "name": "--m-treeselect-toggler-size",
-      "category": "component",
-      "source": "src/components/TreeSelect/styles.css",
-      "default": "1.25rem",
-      "description": {
-        "zh-CN": "组件专用相关变量：Treeselect Toggler Size",
-        "en-US": "Component-specific token: Treeselect Toggler Size"
       }
     },
     {

@@ -53,10 +53,10 @@
 .m-icon-field--anchored :is(
     .m-input-field__control,
     .m-textarea-field__control,
-    .m-password,
-    .m-inputnumber__input-wrap,
-    .m-autocomplete__control,
-    .m-datepicker__control
+    .m-input-password,
+    .m-input-number__input-wrap,
+    .m-auto-complete__control,
+    .m-date-picker__control
 ) {
     align-items: center;
     display: flex;
@@ -79,14 +79,14 @@
 
 .m-icon-field--right.m-icon-field--anchored :is(
     .m-input__clear,
-    .m-password__clear,
+    .m-input-password__clear,
     .m-textarea__clear,
-    .m-inputnumber__clear,
-    .m-autocomplete__clear,
-    .m-autocomplete__spinner,
-    .m-autocomplete__dropdown,
-    .m-datepicker__clear,
-    .m-password__toggle
+    .m-input-number__clear,
+    .m-auto-complete__clear,
+    .m-auto-complete__spinner,
+    .m-auto-complete__dropdown,
+    .m-date-picker__clear,
+    .m-input-password__toggle
 ) {
     order: 2;
 }
@@ -231,10 +231,10 @@
 .m-icon-field--left.m-icon-field--anchored :is(
     .m-input,
     .m-textarea,
-    .m-password__input,
-    .m-inputnumber__input,
-    .m-autocomplete__input,
-    .m-datepicker__input
+    .m-input-password__input,
+    .m-input-number__input,
+    .m-auto-complete__input,
+    .m-date-picker__input
 ) {
     padding-left: 0;
 }
@@ -242,10 +242,10 @@
 .m-icon-field--right.m-icon-field--anchored :is(
     .m-input,
     .m-textarea,
-    .m-password__input,
-    .m-inputnumber__input,
-    .m-autocomplete__input,
-    .m-datepicker__input
+    .m-input-password__input,
+    .m-input-number__input,
+    .m-auto-complete__input,
+    .m-date-picker__input
 ) {
     padding-right: 0;
 }
@@ -254,10 +254,10 @@
 .m-icon-field--anchored:has(
         .m-input--small,
         .m-textarea--small,
-        .m-password--small,
-        .m-inputnumber--small,
-        .m-autocomplete--small,
-        .m-datepicker--small,
+        .m-input-password--small,
+        .m-input-number--small,
+        .m-auto-complete--small,
+        .m-date-picker--small,
         .m-input--sm,
         .m-textarea--sm
     )
@@ -268,10 +268,10 @@
 .m-icon-field--anchored:has(
         .m-input--large,
         .m-textarea--large,
-        .m-password--large,
-        .m-inputnumber--large,
-        .m-autocomplete--large,
-        .m-datepicker--large,
+        .m-input-password--large,
+        .m-input-number--large,
+        .m-auto-complete--large,
+        .m-date-picker--large,
         .m-input--lg,
         .m-textarea--lg
     )
@@ -282,10 +282,10 @@
 .m-icon-field--anchored:has(
         .m-input--small,
         .m-textarea--small,
-        .m-password--small,
-        .m-inputnumber--small,
-        .m-autocomplete--small,
-        .m-datepicker--small,
+        .m-input-password--small,
+        .m-input-number--small,
+        .m-auto-complete--small,
+        .m-date-picker--small,
         .m-input--sm,
         .m-textarea--sm
     )
@@ -299,10 +299,10 @@
 
 .m-icon-field--anchored:has(
         .m-input--small,
-        .m-inputnumber--small,
-        .m-autocomplete--small,
-        .m-datepicker--small,
-        .m-password--small,
+        .m-input-number--small,
+        .m-auto-complete--small,
+        .m-date-picker--small,
+        .m-input-password--small,
         .m-input--sm
     )
     .m-input-field__control:not(
@@ -317,10 +317,10 @@
 
 .m-icon-field--anchored:has(
         .m-input--large,
-        .m-password--large,
-        .m-inputnumber--large,
-        .m-autocomplete--large,
-        .m-datepicker--large,
+        .m-input-password--large,
+        .m-input-number--large,
+        .m-auto-complete--large,
+        .m-date-picker--large,
         .m-input--lg
     )
     .m-input-field__control:not(
@@ -333,10 +333,10 @@
 
 .m-icon-field--anchored:has(
         .m-input--large,
-        .m-password--large,
-        .m-inputnumber--large,
-        .m-autocomplete--large,
-        .m-datepicker--large,
+        .m-input-password--large,
+        .m-input-number--large,
+        .m-auto-complete--large,
+        .m-date-picker--large,
         .m-input--lg
     )
     .m-input-field__control:not(

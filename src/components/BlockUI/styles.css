@@ -1,41 +1,41 @@
 /* —— Feedback: BlockUI —— */
-.m-blockui {
-    --m-blockui-z-index: 10;
+.m-block-ui {
+    --m-block-ui-z-index: 10;
     position: relative;
 }
 
-.m-blockui__content {
+.m-block-ui__content {
     position: relative;
 }
 
-.m-blockui--blocked .m-blockui__content {
+.m-block-ui--blocked .m-block-ui__content {
     pointer-events: none;
     user-select: none;
 }
 
-.m-blockui__overlay {
+.m-block-ui__overlay {
     background: color-mix(in srgb, var(--m-overlay-scrim) 72%, transparent);
     inset: 0;
     position: absolute;
-    z-index: var(--m-blockui-z-index);
+    z-index: var(--m-block-ui-z-index);
 }
 
-.m-blockui-enter-active {
+.m-block-ui-enter-active {
     transition: opacity var(--m-motion-enter) var(--m-motion-ease);
 }
 
-.m-blockui-leave-active {
+.m-block-ui-leave-active {
     transition: opacity var(--m-motion-exit) var(--m-motion-ease);
 }
 
-.m-blockui-enter-from,
-.m-blockui-leave-to {
+.m-block-ui-enter-from,
+.m-block-ui-leave-to {
     opacity: 0;
 }
 
-[data-m-motion="reduced"] .m-blockui-enter-active,
-[data-m-motion="reduced"] .m-blockui-leave-active,
-[data-m-motion="none"] .m-blockui-enter-active,
-[data-m-motion="none"] .m-blockui-leave-active {
+[data-m-motion="reduced"] .m-block-ui-enter-active,
+[data-m-motion="reduced"] .m-block-ui-leave-active,
+[data-m-motion="none"] .m-block-ui-enter-active,
+[data-m-motion="none"] .m-block-ui-leave-active {
     transition: none;
 }

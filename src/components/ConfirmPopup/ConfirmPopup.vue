@@ -159,17 +159,17 @@ const acceptButtonProps = computed(() => {
         v-if="visible"
         ref="panel"
         v-bind="rootAttrs"
-        class="m-confirmpopup"
-        :class="{ 'm-confirmpopup--teleported': teleported }"
+        class="m-confirm-popup"
+        :class="{ 'm-confirm-popup--teleported': teleported }"
         role="alertdialog"
         tabindex="-1"
         :style="panelStyle"
       >
-        <div class="m-confirmpopup__message">
-          <MIcon v-if="icon" class="m-confirmpopup__icon" :name="icon" size="sm" />
+        <div class="m-confirm-popup__message">
+          <MIcon v-if="icon" class="m-confirm-popup__icon" :name="icon" size="sm" />
           <slot>{{ message }}</slot>
         </div>
-        <div class="m-confirmpopup__footer">
+        <div class="m-confirm-popup__footer">
           <MButton :label="rejectText" size="small" @click="reject" />
           <MButton
             v-bind="acceptButtonProps"

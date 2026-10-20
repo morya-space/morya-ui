@@ -83,18 +83,18 @@ function moveAllToSource() {
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-picklist">
-    <div class="m-picklist__listbox">
-      <div class="m-picklist__header">
+  <div v-bind="rootAttrs" class="m-pick-list">
+    <div class="m-pick-list__listbox">
+      <div class="m-pick-list__header">
         {{ sourceTitle }}
       </div>
-      <ScrollBody root-class="m-picklist__scrollbar" wrap-class="m-picklist__list">
-        <ul class="m-picklist__options" role="listbox" aria-multiselectable="true" tabindex="0">
+      <ScrollBody root-class="m-pick-list__scrollbar" wrap-class="m-pick-list__list">
+        <ul class="m-pick-list__options" role="listbox" aria-multiselectable="true" tabindex="0">
           <li
             v-for="(item, index) in source"
             :key="itemKey(item, index)"
-            class="m-picklist__item"
-            :class="{ 'm-picklist__item--selected': isSelected('source', item, index) }"
+            class="m-pick-list__item"
+            :class="{ 'm-pick-list__item--selected': isSelected('source', item, index) }"
             role="option"
             :aria-selected="isSelected('source', item, index)"
             tabindex="0"
@@ -106,7 +106,7 @@ function moveAllToSource() {
               {{ item }}
             </slot>
           </li>
-          <li v-if="!source.length" class="m-picklist__empty" role="status">
+          <li v-if="!source.length" class="m-pick-list__empty" role="status">
             <slot name="empty">
               {{ resolvedEmptyMessage }}
             </slot>
@@ -114,33 +114,33 @@ function moveAllToSource() {
         </ul>
       </ScrollBody>
     </div>
-    <div class="m-picklist__controls">
-      <button type="button" class="m-picklist__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
+    <div class="m-pick-list__controls">
+      <button type="button" class="m-pick-list__btn" :aria-label="locale.moveAllToTarget" :disabled="!source.length" @click="moveAllToTarget">
         <MIcon name="chevron-right" size="sm" />
         <MIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="m-picklist__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
+      <button type="button" class="m-pick-list__btn" :aria-label="locale.moveToTarget" :disabled="!selectedSource.length" @click="moveToTarget">
         <MIcon name="chevron-right" size="sm" />
       </button>
-      <button type="button" class="m-picklist__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
+      <button type="button" class="m-pick-list__btn" :aria-label="locale.moveToSource" :disabled="!selectedTarget.length" @click="moveToSource">
         <MIcon name="chevron-left" size="sm" />
       </button>
-      <button type="button" class="m-picklist__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
+      <button type="button" class="m-pick-list__btn" :aria-label="locale.moveAllToSource" :disabled="!target.length" @click="moveAllToSource">
         <MIcon name="chevron-left" size="sm" />
         <MIcon name="chevron-left" size="sm" />
       </button>
     </div>
-    <div class="m-picklist__listbox">
-      <div class="m-picklist__header">
+    <div class="m-pick-list__listbox">
+      <div class="m-pick-list__header">
         {{ targetTitle }}
       </div>
-      <ScrollBody root-class="m-picklist__scrollbar" wrap-class="m-picklist__list">
-        <ul class="m-picklist__options" role="listbox" aria-multiselectable="true" tabindex="0">
+      <ScrollBody root-class="m-pick-list__scrollbar" wrap-class="m-pick-list__list">
+        <ul class="m-pick-list__options" role="listbox" aria-multiselectable="true" tabindex="0">
           <li
             v-for="(item, index) in target"
             :key="itemKey(item, index)"
-            class="m-picklist__item"
-            :class="{ 'm-picklist__item--selected': isSelected('target', item, index) }"
+            class="m-pick-list__item"
+            :class="{ 'm-pick-list__item--selected': isSelected('target', item, index) }"
             role="option"
             :aria-selected="isSelected('target', item, index)"
             tabindex="0"
@@ -152,7 +152,7 @@ function moveAllToSource() {
               {{ item }}
             </slot>
           </li>
-          <li v-if="!target.length" class="m-picklist__empty" role="status">
+          <li v-if="!target.length" class="m-pick-list__empty" role="status">
             <slot name="empty">
               {{ resolvedEmptyMessage }}
             </slot>

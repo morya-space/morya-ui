@@ -7,7 +7,7 @@ describe('contextMenuNodes', () => {
     const wrapper = mount(ContextMenuNodes, {
       props: { items: [{ label: 'Copy' }, { label: 'Paste' }] },
     })
-    await wrapper.findAll('.m-contextmenu__item')[1]!.trigger('click')
+    await wrapper.findAll('.m-context-menu__item')[1]!.trigger('click')
     expect(wrapper.emitted('activate')?.[0]?.[0]).toMatchObject({ label: 'Paste' })
   })
 
@@ -18,8 +18,8 @@ describe('contextMenuNodes', () => {
       },
       attachTo: document.body,
     })
-    await wrapper.get('.m-contextmenu__submenu-wrap').trigger('mouseenter')
-    expect(document.body.querySelector('.m-contextmenu__submenu--teleported')).toBeTruthy()
+    await wrapper.get('.m-context-menu__submenu-wrap').trigger('mouseenter')
+    expect(document.body.querySelector('.m-context-menu__submenu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 })

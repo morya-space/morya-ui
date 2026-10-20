@@ -8,7 +8,7 @@ describe('muSpeedDial', () => {
     const wrapper = mount(MSpeedDial, {
       props: { modelValue: false, model: [{ label: 'Edit', icon: '✎' }] },
     })
-    await wrapper.find('.m-speeddial__button').trigger('click')
+    await wrapper.find('.m-speed-dial__button').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([true])
   })
 
@@ -21,7 +21,7 @@ describe('muSpeedDial', () => {
         teleport: false,
       },
     })
-    await wrapper.find('.m-speeddial__action').trigger('click')
+    await wrapper.find('.m-speed-dial__action').trigger('click')
     expect(command).toHaveBeenCalled()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
   })
@@ -35,7 +35,7 @@ describe('muSpeedDial', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-speeddial__list--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-speed-dial__list--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -50,13 +50,13 @@ describe('muSpeedDial', () => {
         'onUpdate:modelValue': (value: boolean) => wrapper.setProps({ modelValue: value }),
       },
     })
-    const buttonEl = wrapper.get('.m-speeddial__button')
+    const buttonEl = wrapper.get('.m-speed-dial__button')
     await buttonEl.trigger('keydown', { key: 'ArrowUp' })
     await nextTick()
     await nextTick()
-    const list = wrapper.get('.m-speeddial__list')
+    const list = wrapper.get('.m-speed-dial__list')
     expect(buttonEl.attributes('aria-controls')).toBe(list.attributes('id'))
-    const actions = () => wrapper.findAll('.m-speeddial__action')
+    const actions = () => wrapper.findAll('.m-speed-dial__action')
     expect(document.activeElement).toBe(actions()[0]!.element)
 
     // direction="up": ArrowUp moves outward, i.e. to the next action

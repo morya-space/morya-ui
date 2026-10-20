@@ -113,10 +113,10 @@ watch(filtered, () => {
 <template>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
     <Transition :name="transitionName" :css="transitionCss">
-      <div v-if="modelValue" v-bind="rootAttrs" class="m-commandmenu-backdrop" @click.self="close">
+      <div v-if="modelValue" v-bind="rootAttrs" class="m-command-menu-backdrop" @click.self="close">
         <div
           ref="panelRef"
-          class="m-commandmenu"
+          class="m-command-menu"
           role="dialog"
           aria-modal="true"
           :aria-label="locale.commandPalette"
@@ -126,7 +126,7 @@ watch(filtered, () => {
           <input
             ref="inputRef"
             v-model="query"
-            class="m-commandmenu__input"
+            class="m-command-menu__input"
             type="search"
             :placeholder="searchPlaceholder"
             :aria-label="locale.searchCommands"
@@ -134,30 +134,30 @@ watch(filtered, () => {
           <MScrollbar
             tag="ul"
             role="listbox"
-            class="m-commandmenu__list"
+            class="m-command-menu__list"
             fit-content
-            view-class="m-commandmenu__list-view"
+            view-class="m-command-menu__list-view"
           >
             <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
               <button
                 type="button"
-                class="m-commandmenu__item"
+                class="m-command-menu__item"
                 role="option"
-                :class="{ 'm-commandmenu__item--active': index === activeIndex }"
+                :class="{ 'm-command-menu__item--active': index === activeIndex }"
                 :aria-selected="index === activeIndex"
                 :disabled="item.disabled"
                 @click="activate(item)"
                 @mouseenter="activeIndex = index"
               >
-                <span v-if="hasIcon(item)" class="m-commandmenu__icon" aria-hidden="true">
+                <span v-if="hasIcon(item)" class="m-command-menu__icon" aria-hidden="true">
                   <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
                   <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
                 </span>
-                <span class="m-commandmenu__label">{{ item.label }}</span>
-                <span v-if="item.shortcut" class="m-commandmenu__shortcut">{{ item.shortcut }}</span>
+                <span class="m-command-menu__label">{{ item.label }}</span>
+                <span v-if="item.shortcut" class="m-command-menu__shortcut">{{ item.shortcut }}</span>
               </button>
             </li>
-            <li v-if="!filtered.length" class="m-commandmenu__empty">
+            <li v-if="!filtered.length" class="m-command-menu__empty">
               {{ locale.noMatch }}
             </li>
           </MScrollbar>

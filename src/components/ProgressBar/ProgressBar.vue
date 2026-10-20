@@ -26,24 +26,24 @@ const statusTone = computed(() => {
 })
 
 const progressClass = computed(() => [
-  'm-progressbar',
+  'm-progress-bar',
   {
-    'm-progressbar--indeterminate': isIndeterminate.value,
-    'm-progressbar--circle': isCircle.value,
-    [`m-progressbar--${statusTone.value}`]: Boolean(statusTone.value),
-    'm-progressbar--active': isActive.value,
-    'm-progressbar--custom': Boolean(props.color),
+    'm-progress-bar--indeterminate': isIndeterminate.value,
+    'm-progress-bar--circle': isCircle.value,
+    [`m-progress-bar--${statusTone.value}`]: Boolean(statusTone.value),
+    'm-progress-bar--active': isActive.value,
+    'm-progress-bar--custom': Boolean(props.color),
   },
 ])
 
 const progressStyle = computed(() =>
-  props.color ? { '--m-progressbar-fill': props.color } : undefined,
+  props.color ? { '--m-progress-bar-fill': props.color } : undefined,
 )
 
 const valueStyle = computed(() =>
   isIndeterminate.value || isCircle.value
     ? undefined
-    : ({ '--m-progressbar-scale': String(clampedValue.value / 100) } as Record<string, string>),
+    : ({ '--m-progress-bar-scale': String(clampedValue.value / 100) } as Record<string, string>),
 )
 
 const circleDash = computed(() => {
@@ -66,10 +66,10 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
     :aria-valuemax="isIndeterminate ? undefined : 100"
     :aria-valuenow="isIndeterminate ? undefined : clampedValue"
   >
-    <svg v-if="isCircle" class="m-progressbar__circle" viewBox="0 0 100 100" aria-hidden="true">
-      <circle class="m-progressbar__circle-track" cx="50" cy="50" r="42" fill="none" />
+    <svg v-if="isCircle" class="m-progress-bar__circle" viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="m-progress-bar__circle-track" cx="50" cy="50" r="42" fill="none" />
       <circle
-        class="m-progressbar__circle-value"
+        class="m-progress-bar__circle-value"
         cx="50"
         cy="50"
         r="42"
@@ -78,10 +78,10 @@ const labelText = computed(() => `${Math.round(clampedValue.value)}%`)
         :stroke-dashoffset="isIndeterminate ? undefined : circleDash.offset"
       />
     </svg>
-    <div v-else class="m-progressbar__value" :style="valueStyle">
-      <div class="m-progressbar__fill" aria-hidden="true" />
-      <span v-if="showValue && !isIndeterminate" class="m-progressbar__label">{{ labelText }}</span>
+    <div v-else class="m-progress-bar__value" :style="valueStyle">
+      <div class="m-progress-bar__fill" aria-hidden="true" />
+      <span v-if="showValue && !isIndeterminate" class="m-progress-bar__label">{{ labelText }}</span>
     </div>
-    <span v-if="isCircle && showValue && !isIndeterminate" class="m-progressbar__circle-label">{{ labelText }}</span>
+    <span v-if="isCircle && showValue && !isIndeterminate" class="m-progress-bar__circle-label">{{ labelText }}</span>
   </div>
 </template>

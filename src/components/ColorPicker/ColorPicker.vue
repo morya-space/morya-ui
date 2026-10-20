@@ -64,7 +64,7 @@ const { rootAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const config = useMConfig()
 const sizeClass = useConfiguredSize('ColorPicker', () => props.size)
-const autoFieldId = useMId('m-colorpicker')
+const autoFieldId = useMId('m-color-picker')
 const fieldId = computed(() => autoFieldId)
 
 const { transitionName, transitionCss } = useMotionTransition({
@@ -204,12 +204,12 @@ const alphaGradient = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'm-colorpicker',
-  `m-colorpicker--${sizeClass.value}`,
+  'm-color-picker',
+  `m-color-picker--${sizeClass.value}`,
   {
-    'm-colorpicker--disabled': props.disabled,
-    'm-colorpicker--open': open.value,
-    'm-colorpicker--gradient': isGradientMode.value,
+    'm-color-picker--disabled': props.disabled,
+    'm-color-picker--open': open.value,
+    'm-color-picker--gradient': isGradientMode.value,
   },
 ])
 
@@ -571,17 +571,17 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
     <button
       ref="triggerRef"
       type="button"
-      class="m-colorpicker__trigger"
+      class="m-color-picker__trigger"
       :disabled="disabled"
       :aria-expanded="open"
       :aria-haspopup="true"
       :aria-label="locale.selectColor"
       @click="togglePanel"
     >
-      <span class="m-colorpicker__trigger-swatch" :style="{ background: triggerBackground }" />
-      <span v-if="showText" class="m-colorpicker__trigger-text">{{ displayValue }}</span>
-      <MIcon v-if="clearable && modelValue" name="close" size="sm" class="m-colorpicker__clear" @click.stop="onClear" />
-      <MIcon v-else name="chevron-down" size="sm" class="m-colorpicker__arrow" />
+      <span class="m-color-picker__trigger-swatch" :style="{ background: triggerBackground }" />
+      <span v-if="showText" class="m-color-picker__trigger-text">{{ displayValue }}</span>
+      <MIcon v-if="clearable && modelValue" name="close" size="sm" class="m-color-picker__clear" @click.stop="onClear" />
+      <MIcon v-else name="chevron-down" size="sm" class="m-color-picker__arrow" />
     </button>
 
     <!-- Panel -->
@@ -590,14 +590,14 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
         <div
           v-if="open"
           ref="panelRef"
-          class="m-colorpicker__panel"
+          class="m-color-picker__panel"
           :style="panelStyle"
           role="dialog"
           :aria-label="locale.selectColor"
         >
-          <div class="m-colorpicker__panel-inner">
+          <div class="m-color-picker__panel-inner">
             <!-- Mode Switch -->
-            <div v-if="gradient" class="m-colorpicker__mode-switch">
+            <div v-if="gradient" class="m-color-picker__mode-switch">
               <MSegmented
                 :model-value="mode"
                 block
@@ -614,37 +614,37 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
             <!-- Gradient Controls -->
             <template v-if="isGradientMode">
               <!-- Gradient Bar -->
-              <div class="m-colorpicker__gradient-section">
+              <div class="m-color-picker__gradient-section">
                 <div
                   ref="gradientBarRef"
-                  class="m-colorpicker__gradient-bar"
+                  class="m-color-picker__gradient-bar"
                   :style="{ background: gradientPreview }"
                   @pointerdown="onGradientBarPointerDown"
                 >
                   <div
                     v-for="stop in gradientValue.stops"
                     :key="stop.id"
-                    class="m-colorpicker__gradient-stop"
-                    :class="{ 'm-colorpicker__gradient-stop--active': stop.id === activeStopId }"
+                    class="m-color-picker__gradient-stop"
+                    :class="{ 'm-color-picker__gradient-stop--active': stop.id === activeStopId }"
                     :style="{ left: `${stop.position}%`, background: stop.color }"
                     @click.stop="onStopSelect(stop)"
                     @pointerdown.stop="onStopPointerDown($event, stop)"
                   />
                 </div>
-                <div class="m-colorpicker__gradient-stops-list">
+                <div class="m-color-picker__gradient-stops-list">
                   <div
                     v-for="stop in gradientValue.stops"
                     :key="stop.id"
-                    class="m-colorpicker__gradient-stop-item"
-                    :class="{ 'm-colorpicker__gradient-stop-item--active': stop.id === activeStopId }"
+                    class="m-color-picker__gradient-stop-item"
+                    :class="{ 'm-color-picker__gradient-stop-item--active': stop.id === activeStopId }"
                     @click="onStopSelect(stop)"
                   >
-                    <span class="m-colorpicker__gradient-stop-color" :style="{ background: stop.color }" />
-                    <span class="m-colorpicker__gradient-stop-pos">{{ Math.round(stop.position) }}%</span>
+                    <span class="m-color-picker__gradient-stop-color" :style="{ background: stop.color }" />
+                    <span class="m-color-picker__gradient-stop-pos">{{ Math.round(stop.position) }}%</span>
                     <button
                       v-if="gradientValue.stops.length > 2"
                       type="button"
-                      class="m-colorpicker__gradient-stop-delete"
+                      class="m-color-picker__gradient-stop-delete"
                       :disabled="disabled"
                       @click.stop="onStopDelete(stop.id)"
                     >
@@ -655,7 +655,7 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
               </div>
 
               <!-- Gradient Type & Angle -->
-              <div class="m-colorpicker__gradient-options">
+              <div class="m-color-picker__gradient-options">
                 <MSelect
                   :model-value="gradientValue.type"
                   :options="[
@@ -675,45 +675,45 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
                   :disabled="disabled"
                   @update:model-value="onAngleChange"
                 />
-                <span v-if="gradientValue.type === 'linear'" class="m-colorpicker__gradient-angle-unit">deg</span>
+                <span v-if="gradientValue.type === 'linear'" class="m-color-picker__gradient-angle-unit">deg</span>
               </div>
             </template>
 
             <!-- Saturation / Brightness -->
             <div
               ref="saturationRef"
-              class="m-colorpicker__saturation"
+              class="m-color-picker__saturation"
               :style="{ background: saturationBackground }"
               @pointerdown="onSaturationPointerDown"
             >
-              <div class="m-colorpicker__saturation-white" />
-              <div class="m-colorpicker__saturation-black" />
-              <div class="m-colorpicker__saturation-handle" :style="saturationHandleStyle" />
+              <div class="m-color-picker__saturation-white" />
+              <div class="m-color-picker__saturation-black" />
+              <div class="m-color-picker__saturation-handle" :style="saturationHandleStyle" />
             </div>
 
             <!-- Sliders -->
-            <div class="m-colorpicker__sliders">
+            <div class="m-color-picker__sliders">
               <div
                 ref="hueRef"
-                class="m-colorpicker__hue"
+                class="m-color-picker__hue"
                 @pointerdown="onHuePointerDown"
               >
-                <div class="m-colorpicker__hue-track" />
-                <div class="m-colorpicker__hue-handle" :style="hueHandleStyle" />
+                <div class="m-color-picker__hue-track" />
+                <div class="m-color-picker__hue-handle" :style="hueHandleStyle" />
               </div>
               <div
                 v-if="!disabledAlpha"
                 ref="alphaRef"
-                class="m-colorpicker__alpha"
+                class="m-color-picker__alpha"
                 @pointerdown="onAlphaPointerDown"
               >
-                <div class="m-colorpicker__alpha-track" :style="{ background: alphaGradient }" />
-                <div class="m-colorpicker__alpha-handle" :style="alphaHandleStyle" />
+                <div class="m-color-picker__alpha-track" :style="{ background: alphaGradient }" />
+                <div class="m-color-picker__alpha-handle" :style="alphaHandleStyle" />
               </div>
             </div>
 
             <!-- Input -->
-            <div class="m-colorpicker__input-row">
+            <div class="m-color-picker__input-row">
               <MInput
                 :id="fieldId"
                 v-model="inputValue"
@@ -726,18 +726,18 @@ defineExpose({ open: openPanel, close: closePanel, toggle: togglePanel })
             </div>
 
             <!-- Presets -->
-            <div v-if="presets?.length" class="m-colorpicker__presets">
-              <div v-for="(preset, i) in presets" :key="i" class="m-colorpicker__preset-group">
-                <div v-if="preset.label" class="m-colorpicker__preset-label">
+            <div v-if="presets?.length" class="m-color-picker__presets">
+              <div v-for="(preset, i) in presets" :key="i" class="m-color-picker__preset-group">
+                <div v-if="preset.label" class="m-color-picker__preset-label">
                   {{ preset.label }}
                 </div>
-                <div class="m-colorpicker__preset-colors">
+                <div class="m-color-picker__preset-colors">
                   <button
                     v-for="color in preset.colors"
                     :key="color"
                     type="button"
-                    class="m-colorpicker__preset-swatch"
-                    :class="{ 'm-colorpicker__preset-swatch--active': normalizeHex(color) === currentHex }"
+                    class="m-color-picker__preset-swatch"
+                    :class="{ 'm-color-picker__preset-swatch--active': normalizeHex(color) === currentHex }"
                     :style="{ background: color }"
                     :disabled="disabled"
                     :aria-label="color"

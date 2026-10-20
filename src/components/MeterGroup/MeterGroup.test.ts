@@ -13,9 +13,9 @@ describe('muMeterGroup', () => {
         max: 100,
       },
     })
-    expect(wrapper.findAll('.m-metergroup__segment')).toHaveLength(2)
+    expect(wrapper.findAll('.m-meter-group__segment')).toHaveLength(2)
     expect(wrapper.text()).toContain('Apps')
-    expect(wrapper.find('.m-metergroup__segment').attributes('style')).toContain('40%')
+    expect(wrapper.find('.m-meter-group__segment').attributes('style')).toContain('40%')
   })
 
   it('exposes aria-valuenow on the meter', () => {

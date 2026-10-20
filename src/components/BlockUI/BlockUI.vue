@@ -21,20 +21,20 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
 const rootClass = computed(() => [
-  'm-blockui',
-  { 'm-blockui--blocked': props.blocked },
+  'm-block-ui',
+  { 'm-block-ui--blocked': props.blocked },
 ])
 </script>
 
 <template>
   <div v-bind="rootAttrs" :class="rootClass">
-    <div class="m-blockui__content" :aria-busy="blocked || undefined" :inert="blocked">
+    <div class="m-block-ui__content" :aria-busy="blocked || undefined" :inert="blocked">
       <slot />
     </div>
     <Transition :name="transitionName" :css="transitionCss">
       <div
         v-if="blocked"
-        class="m-blockui__overlay"
+        class="m-block-ui__overlay"
         role="presentation"
         aria-hidden="true"
       />

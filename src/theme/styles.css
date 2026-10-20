@@ -140,7 +140,7 @@
     --m-motion-loading-pulse: 1.8s;
     --m-motion-loading-stardust: 1.6s;
     --m-motion-loading-circular-rotate: 2s;
-    --m-dataview-grid-min: 10rem;
+    --m-data-view-grid-min: 10rem;
     --m-tree-indent: 0.7rem;
     --m-tree-indent-padding: var(--m-space-3);
     --m-layout-trigger-bar-height: 4.5rem;

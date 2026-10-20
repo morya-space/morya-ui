@@ -3,84 +3,84 @@
  * - small  : 24px input, 24px calendar cells, 14px font
  * - medium : 32px input, 24px calendar cells, 14px font (default)
  * - large  : 40px input, 28px calendar cells, 16px font
- * Override `--m-datepicker-*` tokens to customize per-size appearance.
+ * Override `--m-date-picker-*` tokens to customize per-size appearance.
  */
-.m-datepicker,
-.m-datepicker__panel {
-    --m-datepicker-calendar-cell-size: 1.5rem;
-    --m-datepicker-day-size: var(--m-datepicker-calendar-cell-size);
-    --m-datepicker-grid-gap: 0.125rem;
-    --m-datepicker-control-height: var(--m-control-height-medium);
-    --m-datepicker-font-size: var(--m-control-font-medium);
-    --m-datepicker-padding-x: var(--m-control-padding-x-medium);
-    --m-datepicker-affix-size: var(--m-control-affix-size);
-    --m-datepicker-panel-min-width: calc(
-        7 * var(--m-datepicker-calendar-cell-size) + 6 *
-            var(--m-datepicker-grid-gap) + 2 * var(--m-space-3)
+.m-date-picker,
+.m-date-picker__panel {
+    --m-date-picker-calendar-cell-size: 1.5rem;
+    --m-date-picker-day-size: var(--m-date-picker-calendar-cell-size);
+    --m-date-picker-grid-gap: 0.125rem;
+    --m-date-picker-control-height: var(--m-control-height-medium);
+    --m-date-picker-font-size: var(--m-control-font-medium);
+    --m-date-picker-padding-x: var(--m-control-padding-x-medium);
+    --m-date-picker-affix-size: var(--m-control-affix-size);
+    --m-date-picker-panel-min-width: calc(
+        7 * var(--m-date-picker-calendar-cell-size) + 6 *
+            var(--m-date-picker-grid-gap) + 2 * var(--m-space-3)
     );
-    --m-datepicker-shortcuts-width: 6rem;
+    --m-date-picker-shortcuts-width: 6rem;
 }
 
 /* Size variants: scale input height, font, padding, calendar cell, affix.
- * Panel gets its own class (m-datepicker__panel--{size}) because it can be
+ * Panel gets its own class (m-date-picker__panel--{size}) because it can be
  * teleported outside the root element. */
-.m-datepicker--small,
-.m-datepicker__panel--small {
-    --m-datepicker-calendar-cell-size: 1.375rem;
-    --m-datepicker-control-height: var(--m-control-height-small);
-    --m-datepicker-font-size: var(--m-control-font-small);
-    --m-datepicker-padding-x: var(--m-control-padding-x-small);
-    --m-datepicker-affix-size: calc(
+.m-date-picker--small,
+.m-date-picker__panel--small {
+    --m-date-picker-calendar-cell-size: 1.375rem;
+    --m-date-picker-control-height: var(--m-control-height-small);
+    --m-date-picker-font-size: var(--m-control-font-small);
+    --m-date-picker-padding-x: var(--m-control-padding-x-small);
+    --m-date-picker-affix-size: calc(
         var(--m-control-height-small) - 2 * var(--m-border-width)
     );
 }
 
-.m-datepicker--large,
-.m-datepicker__panel--large {
+.m-date-picker--large,
+.m-date-picker__panel--large {
     /* antd large: slightly bigger calendar cells */
-    --m-datepicker-calendar-cell-size: 1.75rem;
-    --m-datepicker-control-height: var(--m-control-height-large);
-    --m-datepicker-font-size: var(--m-control-font-large);
-    --m-datepicker-padding-x: var(--m-control-padding-x-large);
-    --m-datepicker-affix-size: calc(
+    --m-date-picker-calendar-cell-size: 1.75rem;
+    --m-date-picker-control-height: var(--m-control-height-large);
+    --m-date-picker-font-size: var(--m-control-font-large);
+    --m-date-picker-padding-x: var(--m-control-padding-x-large);
+    --m-date-picker-affix-size: calc(
         var(--m-control-height-large) - 2 * var(--m-border-width)
     );
 }
 
-.m-datepicker {
+.m-date-picker {
     display: inline-flex;
     flex-direction: column;
     gap: var(--m-space-2);
     position: relative;
 }
 
-.m-datepicker--fluid {
+.m-date-picker--fluid {
     display: flex;
     width: 100%;
 }
 
-.m-datepicker__label {
+.m-date-picker__label {
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 500;
 }
 
-.m-datepicker__help {
+.m-date-picker__help {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
     margin: 0;
 }
 
-.m-datepicker__help--invalid {
+.m-date-picker__help--invalid {
     color: var(--m-color-danger);
 }
 
-.m-datepicker__control {
+.m-date-picker__control {
     position: relative;
 }
 
-.m-datepicker__control:has(.m-datepicker__input) {
+.m-date-picker__control:has(.m-date-picker__input) {
     align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -88,49 +88,49 @@
     box-sizing: border-box;
     display: flex;
     max-width: 100%;
-    min-height: var(--m-datepicker-control-height);
+    min-height: var(--m-date-picker-control-height);
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
         box-shadow var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-datepicker__control:has(.m-datepicker__input):hover:not(:focus-within) {
+.m-date-picker__control:has(.m-date-picker__input):hover:not(:focus-within) {
     border-color: var(--m-color-primary-hover);
 }
 
-.m-datepicker__control:has(.m-datepicker__input):focus-within,
-.m-datepicker--open .m-datepicker__control:has(.m-datepicker__input) {
+.m-date-picker__control:has(.m-date-picker__input):focus-within,
+.m-date-picker--open .m-date-picker__control:has(.m-date-picker__input) {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 
-.m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input),
-.m-datepicker--error .m-datepicker__control:has(.m-datepicker__input) {
+.m-date-picker--invalid .m-date-picker__control:has(.m-date-picker__input),
+.m-date-picker--error .m-date-picker__control:has(.m-date-picker__input) {
     border-color: var(--m-color-danger);
 }
 
-.m-datepicker--warning .m-datepicker__control:has(.m-datepicker__input) {
+.m-date-picker--warning .m-date-picker__control:has(.m-date-picker__input) {
     border-color: var(--m-color-warning);
 }
 
-.m-datepicker--invalid .m-datepicker__control:has(.m-datepicker__input):focus-within,
-.m-datepicker--invalid.m-datepicker--open
-    .m-datepicker__control:has(.m-datepicker__input),
-.m-datepicker--error .m-datepicker__control:has(.m-datepicker__input):focus-within,
-.m-datepicker--error.m-datepicker--open
-    .m-datepicker__control:has(.m-datepicker__input) {
+.m-date-picker--invalid .m-date-picker__control:has(.m-date-picker__input):focus-within,
+.m-date-picker--invalid.m-date-picker--open
+    .m-date-picker__control:has(.m-date-picker__input),
+.m-date-picker--error .m-date-picker__control:has(.m-date-picker__input):focus-within,
+.m-date-picker--error.m-date-picker--open
+    .m-date-picker__control:has(.m-date-picker__input) {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 
-.m-datepicker--warning .m-datepicker__control:has(.m-datepicker__input):focus-within,
-.m-datepicker--warning.m-datepicker--open
-    .m-datepicker__control:has(.m-datepicker__input) {
+.m-date-picker--warning .m-date-picker__control:has(.m-date-picker__input):focus-within,
+.m-date-picker--warning.m-date-picker--open
+    .m-date-picker__control:has(.m-date-picker__input) {
     border-color: var(--m-color-warning);
     box-shadow: var(--m-focus-shadow-warning, 0 0 0 3px color-mix(in srgb, var(--m-color-warning) 20%, transparent));
 }
 
-.m-datepicker__input {
+.m-date-picker__input {
     background: transparent;
     border: 0;
     border-radius: 0;
@@ -139,22 +139,22 @@
     cursor: pointer;
     flex: 1 1 auto;
     font-family: var(--m-font-sans);
-    font-size: var(--m-datepicker-font-size);
-    height: calc(var(--m-datepicker-control-height) - 2 * var(--m-border-width));
-    line-height: calc(var(--m-datepicker-control-height) - 2 * var(--m-border-width));
+    font-size: var(--m-date-picker-font-size);
+    height: calc(var(--m-date-picker-control-height) - 2 * var(--m-border-width));
+    line-height: calc(var(--m-date-picker-control-height) - 2 * var(--m-border-width));
     min-height: 0;
     min-width: 0;
-    padding: 0 var(--m-datepicker-padding-x);
+    padding: 0 var(--m-date-picker-padding-x);
     width: 100%;
 }
 
-.m-datepicker__input:focus,
-.m-datepicker__input:focus-visible {
+.m-date-picker__input:focus,
+.m-date-picker__input:focus-visible {
     box-shadow: none;
     outline: none;
 }
 
-.m-datepicker--disabled {
+.m-date-picker--disabled {
     background-color: var(--m-color-bg-disabled);
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
@@ -162,7 +162,7 @@
     pointer-events: none;
 }
 
-.m-datepicker__clear {
+.m-date-picker__clear {
     align-items: center;
     align-self: center;
     background: transparent;
@@ -173,29 +173,29 @@
     display: inline-flex;
     flex: 0 0 auto;
     font: inherit;
-    height: var(--m-datepicker-affix-size);
+    height: var(--m-date-picker-affix-size);
     justify-content: center;
     padding: 0;
-    width: var(--m-datepicker-affix-size);
+    width: var(--m-date-picker-affix-size);
 }
 
-.m-datepicker__clear:hover:not(:disabled) {
+.m-date-picker__clear:hover:not(:disabled) {
     color: var(--m-color-text);
 }
 
-.m-datepicker__clear:focus-visible {
+.m-date-picker__clear:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__panel {
+.m-date-picker__panel {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
-    font-size: var(--m-datepicker-font-size);
+    font-size: var(--m-date-picker-font-size);
     margin-top: var(--m-space-1);
-    min-width: max(100%, var(--m-datepicker-panel-min-width));
+    min-width: max(100%, var(--m-date-picker-panel-min-width));
     padding: var(--m-space-3);
     position: absolute;
     top: 100%;
@@ -203,32 +203,32 @@
     z-index: var(--m-z-popper);
 }
 
-.m-datepicker__panel--teleported {
+.m-date-picker__panel--teleported {
     margin-top: 0;
-    min-width: var(--m-datepicker-panel-min-width);
+    min-width: var(--m-date-picker-panel-min-width);
     position: fixed;
     top: auto;
     z-index: var(--m-z-dropdown);
 }
 
-.m-datepicker__calendar {
+.m-date-picker__calendar {
     flex: 0 0 auto;
 }
 
-.m-datepicker__header {
+.m-date-picker__header {
     align-items: center;
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--m-space-2);
 }
 
-.m-datepicker__month {
-    font-size: var(--m-datepicker-font-size);
+.m-date-picker__month {
+    font-size: var(--m-date-picker-font-size);
     font-weight: 500;
 }
 
 /* Header label as a clickable switch between days / months / years sub-panels. */
-button.m-datepicker__month--switch {
+button.m-date-picker__month--switch {
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
@@ -242,7 +242,7 @@ button.m-datepicker__month--switch {
         color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-button.m-datepicker__month--switch:hover {
+button.m-date-picker__month--switch:hover {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 10%,
@@ -251,12 +251,12 @@ button.m-datepicker__month--switch:hover {
     color: var(--m-color-primary);
 }
 
-button.m-datepicker__month--switch:focus-visible {
+button.m-date-picker__month--switch:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__nav {
+.m-date-picker__nav {
     align-items: center;
     background: transparent;
     border: 0;
@@ -270,7 +270,7 @@ button.m-datepicker__month--switch:focus-visible {
     padding: var(--m-space-1) var(--m-space-2);
 }
 
-.m-datepicker__nav:hover {
+.m-date-picker__nav:hover {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 10%,
@@ -278,37 +278,37 @@ button.m-datepicker__month--switch:focus-visible {
     );
 }
 
-.m-datepicker__nav:focus-visible {
+.m-date-picker__nav:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__weekdays,
-.m-datepicker__grid {
+.m-date-picker__weekdays,
+.m-date-picker__grid {
     display: grid;
-    gap: var(--m-datepicker-grid-gap);
+    gap: var(--m-date-picker-grid-gap);
     /* Cells fill the available panel width (e.g. fluid trigger) while keeping
        a minimum of the size-aware cell size. */
     grid-template-columns: repeat(
         7,
-        minmax(var(--m-datepicker-calendar-cell-size), 1fr)
+        minmax(var(--m-date-picker-calendar-cell-size), 1fr)
     );
     place-items: center;
 }
 
-.m-datepicker__weekdays {
+.m-date-picker__weekdays {
     color: var(--m-color-text-muted);
-    font-size: calc(var(--m-datepicker-font-size) - 2px);
+    font-size: calc(var(--m-date-picker-font-size) - 2px);
     margin-bottom: var(--m-space-1);
     text-align: center;
 }
 
-.m-datepicker__weekdays > span {
+.m-date-picker__weekdays > span {
     /* Match the stretched day cells so headers align with columns. */
     width: 100%;
 }
 
-.m-datepicker__day {
+.m-date-picker__day {
     align-items: center;
     background: transparent;
     border: 0;
@@ -317,8 +317,8 @@ button.m-datepicker__month--switch:focus-visible {
     cursor: pointer;
     display: inline-flex;
     font-family: var(--m-font-sans);
-    font-size: var(--m-datepicker-font-size);
-    height: var(--m-datepicker-day-size);
+    font-size: var(--m-date-picker-font-size);
+    height: var(--m-date-picker-day-size);
     justify-content: center;
     /* Reset UA button padding so the label centers in the cell. */
     padding: 0;
@@ -329,24 +329,24 @@ button.m-datepicker__month--switch:focus-visible {
     width: 100%;
 }
 
-.m-datepicker__day--other {
+.m-date-picker__day--other {
     color: var(--m-color-text-muted);
     opacity: var(--m-opacity-disabled);
 }
 
-.m-datepicker__day--selected {
+.m-date-picker__day--selected {
     background: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
 }
 
 /* Today's ring: 1px inner border in primary, suppressed once selected. */
-.m-datepicker__day--today:not(.m-datepicker__day--selected) {
+.m-date-picker__day--today:not(.m-date-picker__day--selected) {
     box-shadow: inset 0 0 0 1px var(--m-color-primary);
     color: var(--m-color-primary);
     font-weight: 500;
 }
 
-.m-datepicker__day:hover:not(:disabled):not(.m-datepicker__day--selected) {
+.m-date-picker__day:hover:not(:disabled):not(.m-date-picker__day--selected) {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 12%,
@@ -354,30 +354,30 @@ button.m-datepicker__month--switch:focus-visible {
     );
 }
 
-.m-datepicker__day:disabled {
+.m-date-picker__day:disabled {
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
     opacity: 1;
 }
 
-.m-datepicker__day:focus-visible {
+.m-date-picker__day:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__panel--with-shortcuts {
+.m-date-picker__panel--with-shortcuts {
     display: flex;
     gap: var(--m-space-3);
 }
 
-.m-datepicker__shortcuts {
+.m-date-picker__shortcuts {
     display: grid;
     gap: var(--m-space-1);
-    min-width: var(--m-datepicker-shortcuts-width);
+    min-width: var(--m-date-picker-shortcuts-width);
 }
 
 /* Extra footer (slot): typical "Now / Today / Clear" actions. */
-.m-datepicker__footer {
+.m-date-picker__footer {
     align-items: center;
     border-top: var(--m-border-width) solid var(--m-color-border);
     display: flex;
@@ -386,14 +386,14 @@ button.m-datepicker__month--switch:focus-visible {
     padding: var(--m-space-2) var(--m-space-3);
 }
 
-.m-datepicker__footer-btn {
+.m-date-picker__footer-btn {
     background: transparent;
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
     color: var(--m-color-text);
     cursor: pointer;
     font-family: var(--m-font-sans);
-    font-size: var(--m-datepicker-font-size);
+    font-size: var(--m-date-picker-font-size);
     height: var(--m-control-height-sm, 1.75rem);
     padding: 0 var(--m-space-3);
     transition:
@@ -402,48 +402,48 @@ button.m-datepicker__month--switch:focus-visible {
         color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-datepicker__footer-btn:hover:not(:disabled) {
+.m-date-picker__footer-btn:hover:not(:disabled) {
     border-color: var(--m-color-primary-hover);
     color: var(--m-color-primary);
 }
 
-.m-datepicker__footer-btn:focus-visible {
+.m-date-picker__footer-btn:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__footer-btn:disabled {
+.m-date-picker__footer-btn:disabled {
     cursor: not-allowed;
     opacity: 0.6;
 }
 
-.m-datepicker__footer-btn--primary {
+.m-date-picker__footer-btn--primary {
     background: var(--m-color-primary);
     border-color: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
 }
 
-.m-datepicker__footer-btn--primary:hover:not(:disabled) {
+.m-date-picker__footer-btn--primary:hover:not(:disabled) {
     background: var(--m-color-primary-hover);
     border-color: var(--m-color-primary-hover);
     color: var(--m-color-on-emphasis);
 }
 
-.m-datepicker__shortcut {
+.m-date-picker__shortcut {
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
     color: var(--m-color-text);
     cursor: pointer;
     font-family: var(--m-font-sans);
-    font-size: var(--m-datepicker-font-size);
+    font-size: var(--m-date-picker-font-size);
     padding: var(--m-space-1) var(--m-space-2);
     text-align: left;
     transition: background-color var(--m-motion-fast) var(--m-motion-ease),
         color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-datepicker__shortcut:hover {
+.m-date-picker__shortcut:hover {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 10%,
@@ -452,12 +452,12 @@ button.m-datepicker__month--switch:focus-visible {
     color: var(--m-color-primary);
 }
 
-.m-datepicker__shortcut:focus-visible {
+.m-date-picker__shortcut:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__shortcut--active {
+.m-date-picker__shortcut--active {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 12%,
@@ -467,7 +467,7 @@ button.m-datepicker__month--switch:focus-visible {
     font-weight: 500;
 }
 
-.m-datepicker__day--in-range {
+.m-date-picker__day--in-range {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 16%,
@@ -476,34 +476,34 @@ button.m-datepicker__month--switch:focus-visible {
     border-radius: 0;
 }
 
-.m-datepicker__day--range-start {
+.m-date-picker__day--range-start {
     border-radius: var(--m-radius-sm) 0 0 var(--m-radius-sm);
 }
 
-.m-datepicker__day--range-end {
+.m-date-picker__day--range-end {
     border-radius: 0 var(--m-radius-sm) var(--m-radius-sm) 0;
 }
 
-.m-datepicker__body {
+.m-date-picker__body {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-3);
 }
 
-.m-datepicker__panel--with-time .m-datepicker__body {
+.m-date-picker__panel--with-time .m-date-picker__body {
     flex-direction: row;
     align-items: stretch;
 }
 
-.m-datepicker__month-grid,
-.m-datepicker__year-grid {
+.m-date-picker__month-grid,
+.m-date-picker__year-grid {
     display: grid;
-    gap: var(--m-datepicker-grid-gap);
+    gap: var(--m-date-picker-grid-gap);
     grid-template-columns: repeat(3, minmax(4.5rem, 1fr));
     place-items: stretch;
 }
 
-.m-datepicker__cell {
+.m-date-picker__cell {
     align-items: center;
     background: transparent;
     border: 0;
@@ -512,26 +512,26 @@ button.m-datepicker__month--switch:focus-visible {
     cursor: pointer;
     display: inline-flex;
     font-family: var(--m-font-sans);
-    font-size: var(--m-datepicker-font-size);
+    font-size: var(--m-date-picker-font-size);
     justify-content: center;
-    min-height: var(--m-datepicker-day-size);
+    min-height: var(--m-date-picker-day-size);
     padding: var(--m-space-2) var(--m-space-1);
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
         color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-datepicker__cell--selected {
+.m-date-picker__cell--selected {
     background: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
 }
 
-.m-datepicker__cell--other {
+.m-date-picker__cell--other {
     color: var(--m-color-text-muted);
     opacity: 0.6;
 }
 
-.m-datepicker__cell:hover:not(.m-datepicker__cell--selected) {
+.m-date-picker__cell:hover:not(.m-date-picker__cell--selected) {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 12%,
@@ -539,59 +539,59 @@ button.m-datepicker__month--switch:focus-visible {
     );
 }
 
-.m-datepicker__cell:focus-visible {
+.m-date-picker__cell:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-datepicker__time {
+.m-date-picker__time {
     display: flex;
     gap: var(--m-space-1);
     /* Fixed height so nested MScrollbar can resolve height: 100%. Time lists are
        always longer than this, so the container is effectively always full. */
     height: calc(
-        6 * var(--m-datepicker-day-size) + 5 * var(--m-datepicker-grid-gap) +
+        6 * var(--m-date-picker-day-size) + 5 * var(--m-date-picker-grid-gap) +
             2.5rem
     );
     min-width: 0;
 }
 
 /* Each time column: header label on top + scrollable list below. */
-.m-datepicker__time-col {
+.m-date-picker__time-col {
     display: flex;
     flex-direction: column;
     height: 100%;
     min-width: 2.5rem;
 }
 
-.m-datepicker__time-header {
+.m-date-picker__time-header {
     color: var(--m-color-text);
     flex: 0 0 auto;
-    font-size: var(--m-datepicker-font-size);
+    font-size: var(--m-date-picker-font-size);
     line-height: 1;
     padding: var(--m-space-1) 0 var(--m-space-2);
     text-align: center;
 }
 
 /* Scrollable list region below the header. */
-.m-datepicker__time-scroll {
+.m-date-picker__time-scroll {
     flex: 1 1 auto;
     min-height: 0;
 }
 
-.m-datepicker__time-scroll .m-datepicker__time-col-wrap {
+.m-date-picker__time-scroll .m-date-picker__time-col-wrap {
     height: 100%;
     overscroll-behavior: contain;
 }
 
-.m-datepicker__time-scroll .m-datepicker__time-col-view {
+.m-date-picker__time-scroll .m-date-picker__time-col-view {
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
     min-width: 100%;
 }
 
-.m-datepicker__time-item {
+.m-date-picker__time-item {
     align-items: center;
     background: transparent;
     border: 0;
@@ -601,21 +601,21 @@ button.m-datepicker__month--switch:focus-visible {
     display: inline-flex;
     flex: 0 0 auto;
     font-family: var(--m-font-sans);
-    font-size: var(--m-datepicker-font-size);
+    font-size: var(--m-date-picker-font-size);
     font-variant-numeric: tabular-nums;
-    height: var(--m-datepicker-day-size);
+    height: var(--m-date-picker-day-size);
     justify-content: center;
     padding: 0;
     text-align: center;
     width: 100%;
 }
 
-.m-datepicker__time-item--selected {
+.m-date-picker__time-item--selected {
     background: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
 }
 
-.m-datepicker__time-item:hover:not(.m-datepicker__time-item--selected) {
+.m-date-picker__time-item:hover:not(.m-date-picker__time-item--selected) {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 12%,
@@ -623,31 +623,31 @@ button.m-datepicker__month--switch:focus-visible {
     );
 }
 
-.m-datepicker__time-item:focus-visible {
+.m-date-picker__time-item:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
 /* Time-only panel: stack columns without calendar; use a compact width
    derived from time columns instead of the wider 7-day calendar grid. */
-.m-datepicker__panel--time-only {
-    --m-datepicker-panel-min-width: calc(
+.m-date-picker__panel--time-only {
+    --m-date-picker-panel-min-width: calc(
         3 * 4rem + 2 * var(--m-space-1) + 2 * var(--m-space-3)
     );
 }
 
-.m-datepicker__panel--time-only .m-datepicker__body {
+.m-date-picker__panel--time-only .m-date-picker__body {
     flex-direction: row;
     width: 100%;
 }
 
-.m-datepicker__panel--time-only .m-datepicker__time {
+.m-date-picker__panel--time-only .m-date-picker__time {
     flex: 1 1 auto;
     height: 14rem;
     width: 100%;
 }
 
-.m-datepicker__panel--time-only .m-datepicker__time-col {
+.m-date-picker__panel--time-only .m-date-picker__time-col {
     flex: 1 1 0;
     min-width: 0;
 }

@@ -6,11 +6,11 @@ import MDatePicker from './DatePicker.vue'
 describe('muDatePicker', () => {
   it('opens calendar and emits ISO date', async () => {
     const wrapper = mount(MDatePicker, { props: { modelValue: '2024-01-15' }, attachTo: document.body })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    const panel = document.body.querySelector('.m-datepicker__panel')
+    const panel = document.body.querySelector('.m-date-picker__panel')
     expect(panel).toBeTruthy()
-    const days = panel!.querySelectorAll('.m-datepicker__day:not(.m-datepicker__day--other)')
+    const days = panel!.querySelectorAll('.m-date-picker__day:not(.m-date-picker__day--other)')
     ;(days[0] as HTMLButtonElement).click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toMatch(/^\d{4}-\d{2}-\d{2}$/)
@@ -19,17 +19,17 @@ describe('muDatePicker', () => {
 
   it('clears value and maps invalid class', async () => {
     const wrapper = mount(MDatePicker, { props: { modelValue: '2024-06-01', invalid: true } })
-    expect(wrapper.classes()).toContain('m-datepicker--invalid')
-    await wrapper.find('.m-datepicker__clear').trigger('click')
+    expect(wrapper.classes()).toContain('m-date-picker--invalid')
+    await wrapper.find('.m-date-picker__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([[null]])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
 
   it('teleports the panel to body by default', async () => {
     const wrapper = mount(MDatePicker, { props: { modelValue: '2024-01-15' }, attachTo: document.body })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    expect(document.body.querySelector('.m-datepicker__panel--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-date-picker__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -38,10 +38,10 @@ describe('muDatePicker', () => {
       props: { type: 'daterange', modelValue: null },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    const panel = document.body.querySelector('.m-datepicker__panel')
-    const days = panel!.querySelectorAll('.m-datepicker__day:not(.m-datepicker__day--other)')
+    const panel = document.body.querySelector('.m-date-picker__panel')
+    const days = panel!.querySelectorAll('.m-date-picker__day:not(.m-date-picker__day--other)')
     ;(days[0] as HTMLButtonElement).click()
     ;(days[2] as HTMLButtonElement).click()
     await nextTick()
@@ -60,9 +60,9 @@ describe('muDatePicker', () => {
       },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    ;(document.body.querySelector('.m-datepicker__shortcut') as HTMLButtonElement).click()
+    ;(document.body.querySelector('.m-date-picker__shortcut') as HTMLButtonElement).click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['2024-02-01'])
     wrapper.unmount()
@@ -70,8 +70,8 @@ describe('muDatePicker', () => {
 
   it('associates label with input via for/id', () => {
     const wrapper = mount(MDatePicker, { props: { label: '开始日期', modelValue: null } })
-    const label = wrapper.get('.m-datepicker__label')
-    const input = wrapper.get('.m-datepicker__input')
+    const label = wrapper.get('.m-date-picker__label')
+    const input = wrapper.get('.m-date-picker__input')
     expect(label.attributes('for')).toBe(input.attributes('id'))
   })
 
@@ -79,10 +79,10 @@ describe('muDatePicker', () => {
     const wrapper = mount(MDatePicker, {
       props: { modelValue: null, errorMessage: '日期无效' },
     })
-    const help = wrapper.get('.m-datepicker__help')
+    const help = wrapper.get('.m-date-picker__help')
     expect(help.text()).toBe('日期无效')
-    expect(help.classes()).toContain('m-datepicker__help--invalid')
-    expect(wrapper.get('.m-datepicker__input').attributes('aria-describedby')).toBe(help.attributes('id'))
+    expect(help.classes()).toContain('m-date-picker__help--invalid')
+    expect(wrapper.get('.m-date-picker__input').attributes('aria-describedby')).toBe(help.attributes('id'))
   })
 
   it('supports full keyboard date selection in the grid', async () => {
@@ -90,13 +90,13 @@ describe('muDatePicker', () => {
       props: { modelValue: '2024-01-15' },
       attachTo: document.body,
     })
-    const input = wrapper.get('.m-datepicker__input')
+    const input = wrapper.get('.m-date-picker__input')
     await input.trigger('click')
     await nextTick()
     await nextTick()
 
     expect(wrapper.emitted('show')).toHaveLength(1)
-    const grid = document.body.querySelector('.m-datepicker__grid') as HTMLElement
+    const grid = document.body.querySelector('.m-date-picker__grid') as HTMLElement
     expect(grid.getAttribute('role')).toBe('grid')
     const day15 = document.body.querySelector('[data-m-date="2024-01-15"]') as HTMLButtonElement
     expect(day15.getAttribute('role')).toBe('gridcell')
@@ -115,7 +115,7 @@ describe('muDatePicker', () => {
     await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['2024-01-16'])
     expect(wrapper.emitted('change')?.at(-1)).toEqual(['2024-01-16'])
-    expect(document.body.querySelector('.m-datepicker__panel')).toBeNull()
+    expect(document.body.querySelector('.m-date-picker__panel')).toBeNull()
     expect(document.activeElement).toBe(input.element)
     expect(wrapper.emitted('hide')).toHaveLength(1)
     wrapper.unmount()
@@ -126,12 +126,12 @@ describe('muDatePicker', () => {
       props: { modelValue: '2024-01-15' },
       attachTo: document.body,
     })
-    const input = wrapper.get('.m-datepicker__input')
+    const input = wrapper.get('.m-date-picker__input')
     await input.trigger('click')
     await nextTick()
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
     await nextTick()
-    expect(document.body.querySelector('.m-datepicker__panel')).toBeNull()
+    expect(document.body.querySelector('.m-date-picker__panel')).toBeNull()
     expect(document.activeElement).toBe(input.element)
     wrapper.unmount()
   })
@@ -141,13 +141,13 @@ describe('muDatePicker', () => {
       props: { modelValue: '2024-01-15', invalid: true, errorMessage: 'Required' },
       attachTo: document.body,
     })
-    const input = wrapper.get('.m-datepicker__input')
+    const input = wrapper.get('.m-date-picker__input')
     expect(input.attributes('role')).toBe('combobox')
     expect(input.attributes('aria-invalid')).toBe('true')
-    expect(wrapper.get('.m-datepicker__help').text()).toBe('Required')
+    expect(wrapper.get('.m-date-picker__help').text()).toBe('Required')
     await input.trigger('click')
     await nextTick()
-    const panel = document.body.querySelector('.m-datepicker__panel') as HTMLElement
+    const panel = document.body.querySelector('.m-date-picker__panel') as HTMLElement
     expect(input.attributes('aria-controls')).toBe(panel.id)
     expect(input.attributes('aria-expanded')).toBe('true')
     wrapper.unmount()
@@ -158,9 +158,9 @@ describe('muDatePicker', () => {
       props: { type: 'month', modelValue: '2024-01' },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    const cells = document.body.querySelectorAll('.m-datepicker__month-grid .m-datepicker__cell')
+    const cells = document.body.querySelectorAll('.m-date-picker__month-grid .m-date-picker__cell')
     ;(cells[5] as HTMLButtonElement).click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe('2024-06')
@@ -172,9 +172,9 @@ describe('muDatePicker', () => {
       props: { type: 'year', modelValue: '2024' },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    const cells = document.body.querySelectorAll('.m-datepicker__year-grid .m-datepicker__cell')
+    const cells = document.body.querySelectorAll('.m-date-picker__year-grid .m-date-picker__cell')
     const target = Array.from(cells).find((el) => el.textContent?.trim() === '2025') as HTMLButtonElement
     target.click()
     await nextTick()
@@ -187,11 +187,11 @@ describe('muDatePicker', () => {
       props: { type: 'time', modelValue: '08:00' },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
-    const cols = document.body.querySelectorAll('.m-datepicker__time-col')
-    const hourBtn = cols[0]!.querySelectorAll('.m-datepicker__time-item')[14] as HTMLButtonElement
-    const minuteBtn = cols[1]!.querySelectorAll('.m-datepicker__time-item')[30] as HTMLButtonElement
+    const cols = document.body.querySelectorAll('.m-date-picker__time-col')
+    const hourBtn = cols[0]!.querySelectorAll('.m-date-picker__time-item')[14] as HTMLButtonElement
+    const minuteBtn = cols[1]!.querySelectorAll('.m-date-picker__time-item')[30] as HTMLButtonElement
     hourBtn.click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
@@ -206,14 +206,14 @@ describe('muDatePicker', () => {
       props: { type: 'datetime', modelValue: '2024-01-15 09:00' },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
     const day = document.body.querySelector('[data-m-date="2024-01-16"]') as HTMLButtonElement
     day.click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-    const cols = document.body.querySelectorAll('.m-datepicker__time-col')
-    const minuteBtn = cols[1]!.querySelectorAll('.m-datepicker__time-item')[45] as HTMLButtonElement
+    const cols = document.body.querySelectorAll('.m-date-picker__time-col')
+    const minuteBtn = cols[1]!.querySelectorAll('.m-date-picker__time-item')[45] as HTMLButtonElement
     minuteBtn.click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBe('2024-01-16 09:45')

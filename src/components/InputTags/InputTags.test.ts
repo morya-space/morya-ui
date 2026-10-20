@@ -5,7 +5,7 @@ import MInputTags from './InputTags.vue'
 describe('muInputTags', () => {
   it('adds a tag on Enter', async () => {
     const wrapper = mount(MInputTags, { props: { modelValue: [] } })
-    const input = wrapper.find('.m-inputtags__input')
+    const input = wrapper.find('.m-input-tags__input')
     await input.setValue('vue')
     await input.trigger('keydown', { key: 'Enter' })
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['vue']])
@@ -13,13 +13,13 @@ describe('muInputTags', () => {
 
   it('removes a tag', async () => {
     const wrapper = mount(MInputTags, { props: { modelValue: ['a', 'b'] } })
-    await wrapper.findAll('.m-inputtags__remove')[0]!.trigger('click')
+    await wrapper.findAll('.m-input-tags__remove')[0]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['b']])
   })
 
   it('splits on separator and respects max', async () => {
     const wrapper = mount(MInputTags, { props: { modelValue: ['a'], max: 2, separator: ',' } })
-    const input = wrapper.find('.m-inputtags__input')
+    const input = wrapper.find('.m-input-tags__input')
     await input.setValue('b,c')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['a', 'b']])
     expect((wrapper.get('input').element as HTMLInputElement).disabled).toBe(false)

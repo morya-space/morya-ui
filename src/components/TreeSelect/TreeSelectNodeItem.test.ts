@@ -15,7 +15,7 @@ describe('treeSelectNodeItem', () => {
         activeKey: null,
       },
     })
-    await wrapper.get('.m-treeselect__option').trigger('click')
+    await wrapper.get('.m-tree-select__option').trigger('click')
     expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ key: 'a' })
   })
 
@@ -31,7 +31,7 @@ describe('treeSelectNodeItem', () => {
         activeKey: null,
       },
     })
-    await wrapper.get('.m-treeselect__toggler').trigger('click')
+    await wrapper.get('.m-tree-select__toggler').trigger('click')
     expect(wrapper.emitted('toggle')?.[0]).toEqual(['p'])
   })
 

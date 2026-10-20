@@ -25,7 +25,7 @@ const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const draft = ref('')
 const sizeClass = useConfiguredSize('InputTags', () => props.size)
-const autoFieldId = useMId('m-inputtags')
+const autoFieldId = useMId('m-input-tags')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const addPlaceholder = computed(() => props.placeholder ?? locale.value.addTag)
 const separators = computed(() => {
@@ -35,11 +35,11 @@ const separators = computed(() => {
 const atMax = computed(() => props.max != null && props.modelValue.length >= props.max)
 
 const rootClass = computed(() => [
-  'm-inputtags',
-  `m-inputtags--${sizeClass.value}`,
+  'm-input-tags',
+  `m-input-tags--${sizeClass.value}`,
   {
-    'm-inputtags--disabled': props.disabled,
-    'm-inputtags--invalid': props.invalid,
+    'm-input-tags--disabled': props.disabled,
+    'm-input-tags--invalid': props.invalid,
   },
 ])
 
@@ -108,18 +108,18 @@ function onBlur() {
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-inputtags-field">
-    <label v-if="label" class="m-inputtags-field__label" :for="fieldId">{{ label }}</label>
+  <div v-bind="rootAttrs" class="m-input-tags-field">
+    <label v-if="label" class="m-input-tags-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
       <span
         v-for="(tag, index) in modelValue"
         :key="`${tag}-${index}`"
-        class="m-inputtags__chip"
+        class="m-input-tags__chip"
       >
         <slot name="tag" :tag="tag" :index="index">{{ tag }}</slot>
         <button
           type="button"
-          class="m-inputtags__remove"
+          class="m-input-tags__remove"
           :disabled="disabled"
           :aria-label="locale.removeTag"
           @click="removeTag(index)"
@@ -131,7 +131,7 @@ function onBlur() {
         v-bind="controlAttrs"
         :id="fieldId"
         :value="draft"
-        class="m-inputtags__input"
+        class="m-input-tags__input"
         type="text"
         :placeholder="modelValue.length ? '' : (placeholder ?? addPlaceholder)"
         :name="name"

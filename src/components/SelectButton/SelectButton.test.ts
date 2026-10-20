@@ -11,17 +11,17 @@ const options = [
 describe('muSelectButton', () => {
   it('emits single selection', async () => {
     const wrapper = mount(MSelectButton, { props: { options, modelValue: 'left' } })
-    const buttons = wrapper.findAll('.m-selectbutton__button')
+    const buttons = wrapper.findAll('.m-select-button__button')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toEqual([['center']])
-    expect(buttons[0]!.classes()).toContain('m-selectbutton__button--active')
+    expect(buttons[0]!.classes()).toContain('m-select-button__button--active')
   })
 
   it('supports multiple selection and ignores disabled options', async () => {
     const wrapper = mount(MSelectButton, {
       props: { options, multiple: true, modelValue: ['left'] },
     })
-    const buttons = wrapper.findAll('.m-selectbutton__button')
+    const buttons = wrapper.findAll('.m-select-button__button')
     await buttons[1]!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['left', 'center']])
     await buttons[2]!.trigger('click')
@@ -33,7 +33,7 @@ describe('muSelectButton', () => {
       props: { options, size: 'large', invalid: true },
     })
     expect(wrapper.classes()).toEqual(
-      expect.arrayContaining(['m-selectbutton--large', 'm-selectbutton--invalid']),
+      expect.arrayContaining(['m-select-button--large', 'm-select-button--invalid']),
     )
   })
 
@@ -42,11 +42,11 @@ describe('muSelectButton', () => {
       props: { options, modelValue: 'left' },
       attachTo: document.body,
     })
-    const buttons = () => wrapper.findAll('.m-selectbutton__button')
+    const buttons = () => wrapper.findAll('.m-select-button__button')
     expect(buttons()[0]!.attributes('tabindex')).toBe('0')
     expect(buttons()[1]!.attributes('tabindex')).toBe('-1')
 
-    const group = wrapper.get('.m-selectbutton')
+    const group = wrapper.get('.m-select-button')
     await group.trigger('keydown', { key: 'ArrowRight' })
     expect(document.activeElement).toBe(buttons()[0]!.element)
 

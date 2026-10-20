@@ -83,7 +83,7 @@ function isScrollInsideMenu(event?: Event) {
   if (!(target instanceof Node)) return false
   if (root.value?.contains(target)) return true
   if (target instanceof Element) {
-    return Boolean(target.closest('.m-contextmenu, .m-contextmenu__submenu'))
+    return Boolean(target.closest('.m-context-menu, .m-context-menu__submenu'))
   }
   return false
 }
@@ -129,7 +129,7 @@ defineExpose({ show, hide })
 </script>
 
 <template>
-  <div v-bind="rootAttrs" class="m-contextmenu-anchor" @contextmenu="onContextMenu">
+  <div v-bind="rootAttrs" class="m-context-menu-anchor" @contextmenu="onContextMenu">
     <slot />
   </div>
   <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
@@ -137,17 +137,17 @@ defineExpose({ show, hide })
       <div
         v-if="modelValue"
         ref="root"
-        class="m-contextmenu"
-        :class="{ 'm-contextmenu--teleported': teleported }"
+        class="m-context-menu"
+        :class="{ 'm-context-menu--teleported': teleported }"
         role="menu"
         :style="menuStyle"
         @click.stop
       >
         <MScrollbar
-          class="m-contextmenu__scroll"
+          class="m-context-menu__scroll"
           fit-content
-          wrap-class="m-contextmenu__scroll-wrap"
-          view-class="m-contextmenu__scroll-view"
+          wrap-class="m-context-menu__scroll-wrap"
+          view-class="m-context-menu__scroll-view"
         >
           <ContextMenuNodes :items="model" @activate="activate" />
         </MScrollbar>

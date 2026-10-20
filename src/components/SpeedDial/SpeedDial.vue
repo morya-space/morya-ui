@@ -47,18 +47,18 @@ const root = ref<HTMLElement | null>(null)
 const button = ref<HTMLElement | null>(null)
 const list = ref<HTMLElement | null>(null)
 const listStyle = ref<Record<string, string>>({})
-const listId = useMId('m-speeddial-list')
+const listId = useMId('m-speed-dial-list')
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 const rootClass = computed(() => [
-  'm-speeddial',
-  `m-speeddial--${props.direction}`,
-  `m-speeddial--${props.shape}`,
-  `m-speeddial--${props.type}`,
+  'm-speed-dial',
+  `m-speed-dial--${props.direction}`,
+  `m-speed-dial--${props.shape}`,
+  `m-speed-dial--${props.type}`,
   {
-    'm-speeddial--open': props.modelValue,
-    'm-speeddial--disabled': props.disabled,
+    'm-speed-dial--open': props.modelValue,
+    'm-speed-dial--disabled': props.disabled,
   },
 ])
 
@@ -90,7 +90,7 @@ function close(restoreFocus = false) {
 function focusActiveAction() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  list.value?.querySelectorAll<HTMLElement>('.m-speeddial__action')[index]?.focus({ preventScroll: true })
+  list.value?.querySelectorAll<HTMLElement>('.m-speed-dial__action')[index]?.focus({ preventScroll: true })
 }
 
 function arrowDelta(key: string): number | null {
@@ -235,8 +235,8 @@ onBeforeUnmount(() => {
           v-if="modelValue"
           :id="listId"
           ref="list"
-          class="m-speeddial__list"
-          :class="{ 'm-speeddial__list--teleported': teleported }"
+          class="m-speed-dial__list"
+          :class="{ 'm-speed-dial__list--teleported': teleported }"
           :style="teleported ? listStyle : undefined"
           role="menu"
           @keydown="onListKeydown"
@@ -244,7 +244,7 @@ onBeforeUnmount(() => {
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="none">
             <button
               type="button"
-              class="m-speeddial__action"
+              class="m-speed-dial__action"
               role="menuitem"
               :title="item.label"
               :aria-label="item.label"
@@ -257,7 +257,7 @@ onBeforeUnmount(() => {
                   <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
                   <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
                 </span>
-                <span class="m-speeddial__action-label">{{ item.label }}</span>
+                <span class="m-speed-dial__action-label">{{ item.label }}</span>
               </slot>
             </button>
           </li>
@@ -268,7 +268,7 @@ onBeforeUnmount(() => {
       <button
         ref="button"
         type="button"
-        class="m-speeddial__button"
+        class="m-speed-dial__button"
         :aria-label="speedDialLabel"
         :aria-expanded="modelValue"
         :aria-controls="modelValue ? listId : undefined"

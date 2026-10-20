@@ -9,15 +9,15 @@ describe('MTimePicker', () => {
       props: { modelValue: '08:00' },
       attachTo: document.body,
     })
-    await wrapper.find('.m-datepicker__input').trigger('click')
+    await wrapper.find('.m-date-picker__input').trigger('click')
     await nextTick()
 
-    const panel = document.body.querySelector('.m-datepicker__panel--time-only')
+    const panel = document.body.querySelector('.m-date-picker__panel--time-only')
     expect(panel).toBeTruthy()
 
-    const cols = document.body.querySelectorAll('.m-datepicker__time-col')
-    const hourBtn = cols[0]!.querySelectorAll('.m-datepicker__time-item')[14] as HTMLButtonElement
-    const minuteBtn = cols[1]!.querySelectorAll('.m-datepicker__time-item')[30] as HTMLButtonElement
+    const cols = document.body.querySelectorAll('.m-date-picker__time-col')
+    const hourBtn = cols[0]!.querySelectorAll('.m-date-picker__time-item')[14] as HTMLButtonElement
+    const minuteBtn = cols[1]!.querySelectorAll('.m-date-picker__time-item')[30] as HTMLButtonElement
     hourBtn.click()
     await nextTick()
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()

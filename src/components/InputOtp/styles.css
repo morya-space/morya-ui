@@ -1,17 +1,17 @@
 /* —— Form: InputOtp —— */
-.m-inputotp {
-    --m-inputotp-gap: var(--m-space-2);
+.m-input-otp {
+    --m-input-otp-gap: var(--m-space-2);
     display: inline-flex;
-    gap: var(--m-inputotp-gap);
+    gap: var(--m-input-otp-gap);
 }
 
-.m-inputotp--disabled {
+.m-input-otp--disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
 
-.m-inputotp__input {
+.m-input-otp__input {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
@@ -28,31 +28,31 @@
     width: var(--m-control-height-medium);
 }
 
-.m-inputotp--small .m-inputotp__input {
+.m-input-otp--small .m-input-otp__input {
     font-size: var(--m-control-font-small);
     height: var(--m-control-height-small);
     width: var(--m-control-height-small);
 }
 
-.m-inputotp--large .m-inputotp__input {
+.m-input-otp--large .m-input-otp__input {
     font-size: var(--m-control-font-large);
     height: var(--m-control-height-large);
     width: var(--m-control-height-large);
 }
 
-.m-inputotp--invalid .m-inputotp__input {
+.m-input-otp--invalid .m-input-otp__input {
     border-color: var(--m-color-danger);
 }
 
-.m-inputotp__input:focus,
-.m-inputotp__input:focus-visible {
+.m-input-otp__input:focus,
+.m-input-otp__input:focus-visible {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-inputotp--invalid .m-inputotp__input:focus,
-.m-inputotp--invalid .m-inputotp__input:focus-visible {
+.m-input-otp--invalid .m-input-otp__input:focus,
+.m-input-otp--invalid .m-input-otp__input:focus-visible {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }

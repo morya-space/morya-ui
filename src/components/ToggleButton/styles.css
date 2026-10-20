@@ -1,5 +1,5 @@
 /* --- Form: ToggleButton --- */
-.m-togglebutton {
+.m-toggle-button {
     --m-button-padding-x-small: var(--m-control-padding-x-small);
     --m-button-padding-x-medium: calc(
         var(--m-control-padding-x-medium) + var(--m-space-1)
@@ -28,43 +28,43 @@
         opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-togglebutton--small {
+.m-toggle-button--small {
     font-size: var(--m-control-font-small);
     min-height: var(--m-control-height-small);
     padding: 0 var(--m-button-padding-x-small);
 }
 
-.m-togglebutton--large {
+.m-toggle-button--large {
     font-size: var(--m-control-font-large);
     min-height: var(--m-control-height-large);
     padding: 0 var(--m-button-padding-x-large);
 }
 
-.m-togglebutton:hover:not(:disabled):not(.m-togglebutton--disabled):not(
-        .m-togglebutton--checked
+.m-toggle-button:hover:not(:disabled):not(.m-toggle-button--disabled):not(
+        .m-toggle-button--checked
     ):not(:focus-visible) {
     background: color-mix(in srgb, var(--m-color-text-muted) 22%, var(--m-color-surface));
     border-color: var(--m-color-primary-hover);
 }
 
-.m-togglebutton--checked {
+.m-toggle-button--checked {
     background: var(--m-color-primary);
     border-color: var(--m-color-primary);
     color: var(--m-color-on-emphasis);
 }
 
-.m-togglebutton--checked:hover:not(:disabled):not(.m-togglebutton--disabled) {
+.m-toggle-button--checked:hover:not(:disabled):not(.m-toggle-button--disabled) {
     background: var(--m-color-primary-hover);
     border-color: var(--m-color-primary-hover);
 }
 
-.m-togglebutton:disabled,
-.m-togglebutton--disabled {
+.m-toggle-button:disabled,
+.m-toggle-button--disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-togglebutton:focus-visible {
+.m-toggle-button:focus-visible {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;

@@ -1,16 +1,16 @@
 /* —— Feedback: ConfirmDialog —— */
-.m-confirmdialog {
-    --m-confirmdialog-width: 28rem;
-    max-width: min(var(--m-confirmdialog-width), calc(100vw - 2 * var(--m-space-4)));
+.m-confirm-dialog {
+    --m-confirm-dialog-width: 28rem;
+    max-width: min(var(--m-confirm-dialog-width), calc(100vw - 2 * var(--m-space-4)));
 }
 
-.m-confirmdialog__footer {
+.m-confirm-dialog__footer {
     display: flex;
     gap: var(--m-space-2);
     justify-content: flex-end;
 }
 
-.m-confirmdialog__message {
+.m-confirm-dialog__message {
     align-items: flex-start;
     color: var(--m-color-text);
     display: flex;
@@ -18,7 +18,7 @@
     line-height: 1.5;
 }
 
-.m-confirmdialog__copy {
+.m-confirm-dialog__copy {
     flex: 1 1 auto;
     min-width: 0;
 }

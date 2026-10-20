@@ -1,15 +1,15 @@
 /* --- Form: ColorPicker --- */
-.m-colorpicker {
+.m-color-picker {
     display: inline-block;
     position: relative;
 }
 
-.m-colorpicker--disabled {
+.m-color-picker--disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-colorpicker__trigger {
+.m-color-picker__trigger {
     align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -29,26 +29,26 @@
         box-shadow var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-colorpicker__trigger:hover:not(:disabled) {
+.m-color-picker__trigger:hover:not(:disabled) {
     border-color: var(--m-color-primary-hover);
 }
 
-.m-colorpicker__trigger:focus-visible {
+.m-color-picker__trigger:focus-visible {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-colorpicker__trigger:disabled {
+.m-color-picker__trigger:disabled {
     cursor: not-allowed;
 }
 
-.m-colorpicker--open .m-colorpicker__trigger {
+.m-color-picker--open .m-color-picker__trigger {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 
-.m-colorpicker__trigger-swatch {
+.m-color-picker__trigger-swatch {
     border: 1px solid rgb(0 0 0 / 10%);
     border-radius: var(--m-radius-sm);
     display: inline-block;
@@ -57,53 +57,53 @@
     width: calc(var(--m-control-height-medium) - 2 * var(--m-space-2));
 }
 
-.m-colorpicker--small .m-colorpicker__trigger {
+.m-color-picker--small .m-color-picker__trigger {
     font-size: var(--m-control-font-small);
     height: var(--m-control-height-small);
     padding: 0 var(--m-space-1);
 }
 
-.m-colorpicker--small .m-colorpicker__trigger-swatch {
+.m-color-picker--small .m-color-picker__trigger-swatch {
     height: calc(var(--m-control-height-small) - 2 * var(--m-space-1));
     width: calc(var(--m-control-height-small) - 2 * var(--m-space-1));
 }
 
-.m-colorpicker--large .m-colorpicker__trigger {
+.m-color-picker--large .m-color-picker__trigger {
     font-size: var(--m-control-font-large);
     height: var(--m-control-height-large);
     padding: 0 var(--m-space-3);
 }
 
-.m-colorpicker--large .m-colorpicker__trigger-swatch {
+.m-color-picker--large .m-color-picker__trigger-swatch {
     height: calc(var(--m-control-height-large) - 2 * var(--m-space-3));
     width: calc(var(--m-control-height-large) - 2 * var(--m-space-3));
 }
 
-.m-colorpicker__trigger-text {
+.m-color-picker__trigger-text {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
-.m-colorpicker__arrow {
+.m-color-picker__arrow {
     color: var(--m-color-text-muted);
     transition: transform var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-colorpicker--open .m-colorpicker__arrow {
+.m-color-picker--open .m-color-picker__arrow {
     transform: rotate(180deg);
 }
 
-.m-colorpicker__clear {
+.m-color-picker__clear {
     color: var(--m-color-text-muted);
     cursor: pointer;
 }
 
-.m-colorpicker__clear:hover {
+.m-color-picker__clear:hover {
     color: var(--m-color-text);
 }
 
 /* Panel */
-.m-colorpicker__panel {
+.m-color-picker__panel {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-control);
@@ -115,14 +115,14 @@
     z-index: var(--m-z-overlay, 1000);
 }
 
-.m-colorpicker__panel-inner {
+.m-color-picker__panel-inner {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-3);
 }
 
 /* Saturation / Brightness area */
-.m-colorpicker__saturation {
+.m-color-picker__saturation {
     border-radius: var(--m-radius-sm);
     cursor: pointer;
     height: 160px;
@@ -133,19 +133,19 @@
     width: 100%;
 }
 
-.m-colorpicker__saturation-white {
+.m-color-picker__saturation-white {
     background: linear-gradient(to right, #fff, rgb(255 255 255 / 0));
     inset: 0;
     position: absolute;
 }
 
-.m-colorpicker__saturation-black {
+.m-color-picker__saturation-black {
     background: linear-gradient(to top, #000, rgb(0 0 0 / 0));
     inset: 0;
     position: absolute;
 }
 
-.m-colorpicker__saturation-handle {
+.m-color-picker__saturation-handle {
     border: 2px solid #fff;
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 20%), inset 0 0 0 1px rgb(0 0 0 / 10%);
@@ -157,14 +157,14 @@
 }
 
 /* Sliders */
-.m-colorpicker__sliders {
+.m-color-picker__sliders {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-2);
 }
 
-.m-colorpicker__hue,
-.m-colorpicker__alpha {
+.m-color-picker__hue,
+.m-color-picker__alpha {
     border-radius: var(--m-radius-sm);
     cursor: pointer;
     height: 12px;
@@ -173,7 +173,7 @@
     user-select: none;
 }
 
-.m-colorpicker__hue-track {
+.m-color-picker__hue-track {
     background: linear-gradient(
         to right,
         #f00 0%,
@@ -189,14 +189,14 @@
     position: absolute;
 }
 
-.m-colorpicker__alpha-track {
+.m-color-picker__alpha-track {
     border-radius: inherit;
     inset: 0;
     position: absolute;
 }
 
-.m-colorpicker__hue-handle,
-.m-colorpicker__alpha-handle {
+.m-color-picker__hue-handle,
+.m-color-picker__alpha-handle {
     border: 2px solid #fff;
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
@@ -209,13 +209,13 @@
 }
 
 /* Input */
-.m-colorpicker__input-row {
+.m-color-picker__input-row {
     display: flex;
     gap: var(--m-space-2);
 }
 
 /* Presets */
-.m-colorpicker__presets {
+.m-color-picker__presets {
     border-top: var(--m-border-width) solid var(--m-color-border);
     display: flex;
     flex-direction: column;
@@ -223,24 +223,24 @@
     padding-top: var(--m-space-2);
 }
 
-.m-colorpicker__preset-group {
+.m-color-picker__preset-group {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-1);
 }
 
-.m-colorpicker__preset-label {
+.m-color-picker__preset-label {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
 }
 
-.m-colorpicker__preset-colors {
+.m-color-picker__preset-colors {
     display: flex;
     flex-wrap: wrap;
     gap: var(--m-space-1);
 }
 
-.m-colorpicker__preset-swatch {
+.m-color-picker__preset-swatch {
     border: var(--m-border-width) solid rgb(0 0 0 / 10%);
     border-radius: var(--m-radius-sm);
     cursor: pointer;
@@ -252,32 +252,32 @@
     width: 20px;
 }
 
-.m-colorpicker__preset-swatch:hover:not(:disabled) {
+.m-color-picker__preset-swatch:hover:not(:disabled) {
     transform: scale(1.1);
 }
 
-.m-colorpicker__preset-swatch--active {
+.m-color-picker__preset-swatch--active {
     box-shadow: 0 0 0 2px var(--m-color-primary);
 }
 
-.m-colorpicker__preset-swatch:disabled {
+.m-color-picker__preset-swatch:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
 /* Mode Switch */
-.m-colorpicker__mode-switch {
+.m-color-picker__mode-switch {
     margin-bottom: var(--m-space-1);
 }
 
 /* Gradient Bar */
-.m-colorpicker__gradient-section {
+.m-color-picker__gradient-section {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-2);
 }
 
-.m-colorpicker__gradient-bar {
+.m-color-picker__gradient-bar {
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-sm);
     cursor: pointer;
@@ -287,7 +287,7 @@
     user-select: none;
 }
 
-.m-colorpicker__gradient-stop {
+.m-color-picker__gradient-stop {
     border: 2px solid #fff;
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgb(0 0 0 / 20%), 0 2px 4px rgb(0 0 0 / 20%);
@@ -300,16 +300,16 @@
     width: 16px;
 }
 
-.m-colorpicker__gradient-stop:active {
+.m-color-picker__gradient-stop:active {
     cursor: grabbing;
 }
 
-.m-colorpicker__gradient-stop--active {
+.m-color-picker__gradient-stop--active {
     box-shadow: 0 0 0 2px var(--m-color-primary), 0 2px 4px rgb(0 0 0 / 20%);
     z-index: 1;
 }
 
-.m-colorpicker__gradient-stops-list {
+.m-color-picker__gradient-stops-list {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-1);
@@ -317,7 +317,7 @@
     overflow-y: auto;
 }
 
-.m-colorpicker__gradient-stop-item {
+.m-color-picker__gradient-stop-item {
     align-items: center;
     border: var(--m-border-width) solid transparent;
     border-radius: var(--m-radius-sm);
@@ -328,16 +328,16 @@
     transition: all var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-colorpicker__gradient-stop-item:hover {
+.m-color-picker__gradient-stop-item:hover {
     background: var(--m-color-surface-secondary, rgb(0 0 0 / 4%));
 }
 
-.m-colorpicker__gradient-stop-item--active {
+.m-color-picker__gradient-stop-item--active {
     background: var(--m-color-primary-light, rgb(22 119 255 / 10%));
     border-color: var(--m-color-primary);
 }
 
-.m-colorpicker__gradient-stop-color {
+.m-color-picker__gradient-stop-color {
     border: 1px solid rgb(0 0 0 / 10%);
     border-radius: var(--m-radius-sm);
     display: inline-block;
@@ -345,14 +345,14 @@
     width: 16px;
 }
 
-.m-colorpicker__gradient-stop-pos {
+.m-color-picker__gradient-stop-pos {
     color: var(--m-color-text-muted);
     flex: 1;
     font-size: var(--m-font-size-xs);
     font-variant-numeric: tabular-nums;
 }
 
-.m-colorpicker__gradient-stop-delete {
+.m-color-picker__gradient-stop-delete {
     align-items: center;
     background: transparent;
     border: 0;
@@ -366,40 +366,40 @@
     width: 20px;
 }
 
-.m-colorpicker__gradient-stop-delete:hover:not(:disabled) {
+.m-color-picker__gradient-stop-delete:hover:not(:disabled) {
     background: rgb(0 0 0 / 8%);
     color: var(--m-color-danger);
 }
 
-.m-colorpicker__gradient-stop-delete:disabled {
+.m-color-picker__gradient-stop-delete:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
 /* Gradient Options */
-.m-colorpicker__gradient-options {
+.m-color-picker__gradient-options {
     align-items: center;
     display: flex;
     gap: var(--m-space-2);
 }
 
-.m-colorpicker__gradient-options > * {
+.m-color-picker__gradient-options > * {
     flex: 0 0 auto;
 }
 
-.m-colorpicker__gradient-options .m-select__control {
+.m-color-picker__gradient-options .m-select__control {
     width: 90px;
 }
 
-.m-colorpicker__gradient-options .m-inputnumber {
+.m-color-picker__gradient-options .m-input-number {
     width: 70px;
 }
 
-.m-colorpicker__gradient-options .m-inputnumber .m-inputnumber__input-wrap {
+.m-color-picker__gradient-options .m-input-number .m-input-number__input-wrap {
     width: 100%;
 }
 
-.m-colorpicker__gradient-angle-unit {
+.m-color-picker__gradient-angle-unit {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
 }

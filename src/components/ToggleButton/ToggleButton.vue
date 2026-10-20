@@ -19,11 +19,11 @@ const emit = defineEmits<{
 const sizeClass = useConfiguredSize('ToggleButton', () => props.size)
 
 const rootClass = computed(() => [
-  'm-togglebutton',
-  `m-togglebutton--${sizeClass.value}`,
+  'm-toggle-button',
+  `m-toggle-button--${sizeClass.value}`,
   {
-    'm-togglebutton--checked': props.modelValue,
-    'm-togglebutton--disabled': props.disabled,
+    'm-toggle-button--checked': props.modelValue,
+    'm-toggle-button--disabled': props.disabled,
   },
 ])
 
@@ -45,11 +45,11 @@ function toggle() {
     :aria-pressed="modelValue"
     @click="toggle"
   >
-    <span v-if="resolvedIcon" class="m-togglebutton__icon" aria-hidden="true">
+    <span v-if="resolvedIcon" class="m-toggle-button__icon" aria-hidden="true">
       <MIcon :name="resolvedIcon" size="sm" />
     </span>
     <slot>
-      <span class="m-togglebutton__label">{{ label }}</span>
+      <span class="m-toggle-button__label">{{ label }}</span>
     </slot>
   </button>
 </template>

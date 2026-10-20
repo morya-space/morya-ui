@@ -85,8 +85,8 @@
 
 .m-select__control:has(.m-select--small) .m-select__suffix,
 .m-select__control:has(.m-select--sm) .m-select__suffix,
-.m-select__control:has(.m-treeselect--small) .m-select__suffix,
-.m-select__control:has(.m-cascadeselect--small) .m-select__suffix {
+.m-select__control:has(.m-tree-select--small) .m-select__suffix,
+.m-select__control:has(.m-cascade-select--small) .m-select__suffix {
     --m-affix-icon-size: 0.875rem;
     height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     width: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
@@ -94,8 +94,8 @@
 
 .m-select__control:has(.m-select--large) .m-select__suffix,
 .m-select__control:has(.m-select--lg) .m-select__suffix,
-.m-select__control:has(.m-treeselect--large) .m-select__suffix,
-.m-select__control:has(.m-cascadeselect--large) .m-select__suffix {
+.m-select__control:has(.m-tree-select--large) .m-select__suffix,
+.m-select__control:has(.m-cascade-select--large) .m-select__suffix {
     --m-affix-icon-size: 1.125rem;
     height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     width: calc(var(--m-control-height-large) - 2 * var(--m-border-width));

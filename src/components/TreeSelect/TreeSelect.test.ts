@@ -19,15 +19,15 @@ describe('muTreeSelect', () => {
     const wrapper = mount(MTreeSelect, {
       props: { options, modelValue: null, teleport: false },
     })
-    await wrapper.find('.m-treeselect__trigger').trigger('click')
-    await wrapper.find('.m-treeselect__toggler').trigger('click')
-    await wrapper.findAll('.m-treeselect__option').find((n) => n.text() === 'Resume')!.trigger('click')
+    await wrapper.find('.m-tree-select__trigger').trigger('click')
+    await wrapper.find('.m-tree-select__toggler').trigger('click')
+    await wrapper.findAll('.m-tree-select__option').find((n) => n.text() === 'Resume')!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['resume'])
   })
 
   it('shows selected label', () => {
     const wrapper = mount(MTreeSelect, { props: { options, modelValue: 'home' } })
-    expect(wrapper.find('.m-treeselect__label').text()).toBe('Home')
+    expect(wrapper.find('.m-tree-select__label').text()).toBe('Home')
   })
 
   it('teleports the panel to body by default', async () => {
@@ -35,9 +35,9 @@ describe('muTreeSelect', () => {
       props: { options, modelValue: null },
       attachTo: document.body,
     })
-    await wrapper.find('.m-treeselect__trigger').trigger('click')
+    await wrapper.find('.m-tree-select__trigger').trigger('click')
     await nextTick()
-    expect(document.body.querySelector('.m-treeselect__panel--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-tree-select__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -45,10 +45,10 @@ describe('muTreeSelect', () => {
     const wrapper = mount(MTreeSelect, {
       props: { options, modelValue: [], multiple: true, filterable: true, teleport: false },
     })
-    await wrapper.find('.m-treeselect__trigger').trigger('click')
-    await wrapper.find('.m-treeselect__filter').setValue('Resume')
-    await wrapper.find('.m-treeselect__toggler').trigger('click')
-    await wrapper.findAll('.m-treeselect__option').find((n) => n.text() === 'Resume')!.trigger('click')
+    await wrapper.find('.m-tree-select__trigger').trigger('click')
+    await wrapper.find('.m-tree-select__filter').setValue('Resume')
+    await wrapper.find('.m-tree-select__toggler').trigger('click')
+    await wrapper.findAll('.m-tree-select__option').find((n) => n.text() === 'Resume')!.trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['resume']])
   })
 
@@ -56,7 +56,7 @@ describe('muTreeSelect', () => {
     const wrapper = mount(MTreeSelect, {
       props: { options, modelValue: 'home', clearable: true, teleport: false },
     })
-    await wrapper.find('.m-treeselect__control').trigger('mouseenter')
+    await wrapper.find('.m-tree-select__control').trigger('mouseenter')
     await wrapper.find('.m-select__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
     expect(wrapper.emitted('clear')).toHaveLength(1)
@@ -67,23 +67,23 @@ describe('muTreeSelect', () => {
       props: { options, modelValue: null, teleport: false },
       attachTo: document.body,
     })
-    const triggerEl = wrapper.get('.m-treeselect__trigger')
+    const triggerEl = wrapper.get('.m-tree-select__trigger')
     await triggerEl.trigger('keydown', { key: 'ArrowDown' })
     await nextTick()
-    const panel = wrapper.get('.m-treeselect__panel')
+    const panel = wrapper.get('.m-tree-select__panel')
     expect(triggerEl.attributes('aria-controls')).toBe(panel.attributes('id'))
 
     const docsOption = () =>
-      wrapper.findAll('.m-treeselect__option').find((n) => n.text() === 'Documents')!
+      wrapper.findAll('.m-tree-select__option').find((n) => n.text() === 'Documents')!
     expect(document.activeElement).toBe(docsOption().element)
 
     await panel.trigger('keydown', { key: 'ArrowRight' })
     await nextTick()
-    expect(wrapper.find('.m-treeselect__node').attributes('aria-expanded')).toBe('true')
+    expect(wrapper.find('.m-tree-select__node').attributes('aria-expanded')).toBe('true')
 
     await panel.trigger('keydown', { key: 'ArrowRight' })
     await nextTick()
-    const resume = wrapper.findAll('.m-treeselect__option').find((n) => n.text() === 'Resume')!
+    const resume = wrapper.findAll('.m-tree-select__option').find((n) => n.text() === 'Resume')!
     expect(document.activeElement).toBe(resume.element)
     expect(resume.attributes('tabindex')).toBe('0')
     expect(docsOption().attributes('tabindex')).toBe('-1')
@@ -97,7 +97,7 @@ describe('muTreeSelect', () => {
     await panel.trigger('keydown', { key: 'Enter' })
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['resume'])
     await nextTick()
-    expect(wrapper.find('.m-treeselect__panel').exists()).toBe(false)
+    expect(wrapper.find('.m-tree-select__panel').exists()).toBe(false)
     expect(document.activeElement).toBe(triggerEl.element)
     wrapper.unmount()
   })
@@ -107,12 +107,12 @@ describe('muTreeSelect', () => {
       props: { options, modelValue: null, teleport: false },
       attachTo: document.body,
     })
-    const triggerEl = wrapper.get('.m-treeselect__trigger')
+    const triggerEl = wrapper.get('.m-tree-select__trigger')
     await triggerEl.trigger('click')
     await nextTick()
-    await wrapper.get('.m-treeselect__panel').trigger('keydown', { key: 'Escape' })
+    await wrapper.get('.m-tree-select__panel').trigger('keydown', { key: 'Escape' })
     await nextTick()
-    expect(wrapper.find('.m-treeselect__panel').exists()).toBe(false)
+    expect(wrapper.find('.m-tree-select__panel').exists()).toBe(false)
     expect(document.activeElement).toBe(triggerEl.element)
     wrapper.unmount()
   })
@@ -121,13 +121,13 @@ describe('muTreeSelect', () => {
     const wrapper = mount(MTreeSelect, {
       props: { options, modelValue: 'home', teleport: false },
     })
-    await wrapper.find('.m-treeselect__trigger').trigger('click')
-    await wrapper.find('.m-treeselect__toggler').trigger('click')
-    const items = wrapper.findAll('.m-treeselect__node')
+    await wrapper.find('.m-tree-select__trigger').trigger('click')
+    await wrapper.find('.m-tree-select__toggler').trigger('click')
+    const items = wrapper.findAll('.m-tree-select__node')
     expect(items[0]!.attributes('aria-level')).toBe('1')
     const home = items.find(
       (n) =>
-        (n.element as HTMLElement).querySelector(':scope > .m-treeselect__row .m-treeselect__option')
+        (n.element as HTMLElement).querySelector(':scope > .m-tree-select__row .m-tree-select__option')
           ?.textContent === 'Home',
     )!
     expect(home.attributes('aria-selected')).toBe('true')
@@ -144,7 +144,7 @@ describe('muTreeSelect', () => {
     })
     expect(wrapper.get('.m-select-field__label').text()).toBe('Folder')
     expect(wrapper.get('.m-select-field__help').text()).toBe('Required')
-    expect(wrapper.get('.m-treeselect').classes()).toContain('m-treeselect--invalid')
-    expect(wrapper.get('.m-treeselect__trigger').attributes('aria-invalid')).toBe('true')
+    expect(wrapper.get('.m-tree-select').classes()).toContain('m-tree-select--invalid')
+    expect(wrapper.get('.m-tree-select__trigger').attributes('aria-invalid')).toBe('true')
   })
 })

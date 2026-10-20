@@ -1,21 +1,21 @@
 /* —— Data: DataView —— */
-.m-dataview {
+.m-data-view {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-3);
 }
 
-.m-dataview__content {
+.m-data-view__content {
     position: relative;
 }
 
-.m-dataview__header {
+.m-data-view__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.m-dataview__list {
+.m-data-view__list {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-2);
@@ -24,26 +24,26 @@
     padding: 0;
 }
 
-.m-dataview__list-item,
-.m-dataview__grid-item {
+.m-data-view__list-item,
+.m-data-view__grid-item {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     padding: var(--m-space-3);
 }
 
-.m-dataview__grid {
-    --m-dataview-grid-min: 10rem;
+.m-data-view__grid {
+    --m-data-view-grid-min: 10rem;
     display: grid;
     gap: var(--m-space-3);
-    grid-template-columns: repeat(auto-fill, minmax(var(--m-dataview-grid-min), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--m-data-view-grid-min), 1fr));
 }
 
-.m-dataview__paginator {
+.m-data-view__paginator {
     align-self: center;
 }
 
-.m-dataview__message {
+.m-data-view__message {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +51,7 @@
     padding: var(--m-space-5);
 }
 
-.m-dataview__empty-text {
+.m-data-view__empty-text {
     margin: 0;
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);

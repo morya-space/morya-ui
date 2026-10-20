@@ -1,9 +1,9 @@
 /* Shared floating option-list chrome for form select-likes. */
 
 .m-select__menu,
-.m-autocomplete__panel,
-.m-cascadeselect__panel,
-.m-treeselect__panel {
+.m-auto-complete__panel,
+.m-cascade-select__panel,
+.m-tree-select__panel {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
@@ -14,24 +14,24 @@
 }
 
 .m-select__menu--teleported,
-.m-autocomplete__panel--teleported,
-.m-cascadeselect__panel--teleported,
-.m-treeselect__panel--teleported {
+.m-auto-complete__panel--teleported,
+.m-cascade-select__panel--teleported,
+.m-tree-select__panel--teleported {
     margin-top: 0;
     position: fixed;
     z-index: var(--m-z-dropdown);
 }
 
 .m-select__list-view,
-.m-autocomplete__panel-list,
-.m-cascadeselect__column-list {
+.m-auto-complete__panel-list,
+.m-cascade-select__column-list {
     display: grid;
     gap: var(--m-space-1);
 }
 
 .m-select__option,
-.m-autocomplete__item,
-.m-cascadeselect__option {
+.m-auto-complete__item,
+.m-cascade-select__option {
     align-items: center;
     background: transparent;
     border: 0;
@@ -54,47 +54,47 @@
 
 .m-select__option:hover:not(:disabled),
 .m-select__option--highlighted:not(:disabled),
-.m-autocomplete__item:hover,
-.m-autocomplete__item--active,
-.m-cascadeselect__option:hover:not(:disabled),
-.m-cascadeselect__option--highlighted:not(:disabled) {
+.m-auto-complete__item:hover,
+.m-auto-complete__item--active,
+.m-cascade-select__option:hover:not(:disabled),
+.m-cascade-select__option--highlighted:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     color: var(--m-color-primary);
 }
 
 .m-select__option--selected,
-.m-cascadeselect__option--selected {
+.m-cascade-select__option--selected {
     color: var(--m-color-primary);
     font-weight: 500;
 }
 
-.m-cascadeselect__option--in-path {
+.m-cascade-select__option--in-path {
     font-weight: 500;
 }
 
 .m-select__check,
-.m-cascadeselect__check {
+.m-cascade-select__check {
     color: var(--m-color-primary);
     flex: 0 0 auto;
 }
 
 .m-select__option:disabled,
-.m-cascadeselect__option:disabled {
+.m-cascade-select__option:disabled {
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
     opacity: 1;
 }
 
 .m-select__option:focus-visible,
-.m-autocomplete__item:focus-visible,
-.m-cascadeselect__option:focus-visible {
+.m-auto-complete__item:focus-visible,
+.m-cascade-select__option:focus-visible {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     box-shadow: none;
     outline: none;
 }
 
 .m-select__empty,
-.m-autocomplete__status {
+.m-auto-complete__status {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-md);
     list-style: none;
@@ -103,7 +103,7 @@
 }
 
 /* TreeSelect options share interaction chrome; row layout keeps the expand toggler. */
-.m-treeselect__option {
+.m-tree-select__option {
     align-items: center;
     background: transparent;
     border: 0;
@@ -122,31 +122,31 @@
         color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-treeselect__option:hover:not(:disabled),
-.m-treeselect__node--active > .m-treeselect__row .m-treeselect__option:not(:disabled) {
+.m-tree-select__option:hover:not(:disabled),
+.m-tree-select__node--active > .m-tree-select__row .m-tree-select__option:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     color: var(--m-color-primary);
 }
 
-.m-treeselect__option--selected {
+.m-tree-select__option--selected {
     color: var(--m-color-primary);
     font-weight: 500;
 }
 
-.m-treeselect__option:focus-visible {
+.m-tree-select__option:focus-visible {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     box-shadow: none;
     outline: none;
 }
 
-.m-treeselect__option:disabled {
+.m-tree-select__option:disabled {
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
     opacity: 1;
 }
 
 .m-select__filter,
-.m-treeselect__filter {
+.m-tree-select__filter {
     /* size="1" + min-width:0 keep intrinsic width from inflating width:max-content menus */
     align-self: stretch;
     background: var(--m-color-surface);
@@ -169,8 +169,8 @@
 
 .m-select__filter:focus,
 .m-select__filter:focus-visible,
-.m-treeselect__filter:focus,
-.m-treeselect__filter:focus-visible {
+.m-tree-select__filter:focus,
+.m-tree-select__filter:focus-visible {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;

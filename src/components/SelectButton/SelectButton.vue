@@ -21,11 +21,11 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const sizeClass = useConfiguredSize('SelectButton', () => props.size)
 
 const rootClass = computed(() => [
-  'm-selectbutton',
-  `m-selectbutton--${sizeClass.value}`,
+  'm-select-button',
+  `m-select-button--${sizeClass.value}`,
   {
-    'm-selectbutton--disabled': props.disabled,
-    'm-selectbutton--invalid': props.invalid,
+    'm-select-button--disabled': props.disabled,
+    'm-select-button--invalid': props.invalid,
   },
 ])
 
@@ -75,7 +75,7 @@ function onKeydown(event: KeyboardEvent) {
 
 watch(keyboard.activeIndex, (index) => {
   if (index < 0) return
-  const buttons = root.value?.querySelectorAll<HTMLElement>('.m-selectbutton__button')
+  const buttons = root.value?.querySelectorAll<HTMLElement>('.m-select-button__button')
   buttons?.[index]?.focus({ preventScroll: true })
 })
 </script>
@@ -86,8 +86,8 @@ watch(keyboard.activeIndex, (index) => {
       v-for="(option, index) in options"
       :key="String(option.value)"
       type="button"
-      class="m-selectbutton__button"
-      :class="{ 'm-selectbutton__button--active': isActive(option) }"
+      class="m-select-button__button"
+      :class="{ 'm-select-button__button--active': isActive(option) }"
       :disabled="disabled || option.disabled"
       :aria-pressed="isActive(option)"
       :tabindex="buttonTabindex(index)"

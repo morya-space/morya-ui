@@ -1,17 +1,17 @@
 /* —— Navigation: ContextMenu —— */
-.m-contextmenu {
-    --m-contextmenu-min-width: var(--m-overlay-menu-min-width, 10rem);
-    --m-contextmenu-item-gap: var(--m-space-1);
-    --m-contextmenu-max-height: min(18rem, 45vh);
+.m-context-menu {
+    --m-context-menu-min-width: var(--m-overlay-menu-min-width, 10rem);
+    --m-context-menu-item-gap: var(--m-space-1);
+    --m-context-menu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
     display: flex;
     flex-direction: column;
-    gap: var(--m-contextmenu-item-gap);
-    max-height: var(--m-contextmenu-max-height);
-    min-width: var(--m-contextmenu-min-width);
+    gap: var(--m-context-menu-item-gap);
+    max-height: var(--m-context-menu-max-height);
+    min-width: var(--m-context-menu-min-width);
     overflow: hidden;
     padding: var(--m-space-1);
     position: fixed;
@@ -19,21 +19,21 @@
     z-index: var(--m-z-popper);
 }
 
-.m-contextmenu__scroll {
+.m-context-menu__scroll {
     max-height: 100%;
     min-height: 0;
 }
 
-.m-contextmenu__scroll-view {
+.m-context-menu__scroll-view {
     display: grid;
-    gap: var(--m-contextmenu-item-gap);
+    gap: var(--m-context-menu-item-gap);
 }
 
-.m-contextmenu--teleported {
+.m-context-menu--teleported {
     z-index: var(--m-z-dropdown);
 }
 
-.m-contextmenu__item {
+.m-context-menu__item {
     align-items: center;
     background: transparent;
     border: 0;
@@ -55,84 +55,84 @@
     width: 100%;
 }
 
-.m-contextmenu__item:hover:not(:disabled) {
+.m-context-menu__item:hover:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     color: var(--m-color-primary);
 }
 
-.m-contextmenu__item:disabled {
+.m-context-menu__item:disabled {
     color: var(--m-color-text-muted);
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-contextmenu__item:focus-visible {
+.m-context-menu__item:focus-visible {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
     box-shadow: none;
     outline: none;
 }
 
-.m-contextmenu__separator {
+.m-context-menu__separator {
     background: var(--m-color-border);
     height: var(--m-border-width);
     margin: var(--m-space-1) 0;
 }
 
-.m-contextmenu__label {
+.m-context-menu__label {
     flex: 1;
 }
 
-.m-contextmenu__shortcut {
+.m-context-menu__shortcut {
     color: var(--m-color-text-muted);
     flex: 0 0 auto;
     font-size: var(--m-font-size-xs);
     margin-left: auto;
 }
 
-.m-contextmenu__item--parent {
+.m-context-menu__item--parent {
     align-items: center;
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.m-contextmenu__icon,
-.m-contextmenu__caret {
+.m-context-menu__icon,
+.m-context-menu__caret {
     flex-shrink: 0;
 }
 
-.m-contextmenu__caret {
+.m-context-menu__caret {
     margin-left: auto;
 }
 
-.m-contextmenu__submenu-wrap {
+.m-context-menu__submenu-wrap {
     position: relative;
 }
 
-.m-contextmenu__submenu {
-    --m-contextmenu-submenu-max-height: min(18rem, 45vh);
+.m-context-menu__submenu {
+    --m-context-menu-submenu-max-height: min(18rem, 45vh);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
-    max-height: var(--m-contextmenu-submenu-max-height);
-    min-width: var(--m-contextmenu-min-width);
+    max-height: var(--m-context-menu-submenu-max-height);
+    min-width: var(--m-context-menu-min-width);
     overflow: hidden;
     padding: var(--m-space-1);
     width: max-content;
 }
 
-.m-contextmenu__submenu--teleported {
+.m-context-menu__submenu--teleported {
     position: fixed;
     z-index: var(--m-z-dropdown);
 }
 
-.m-contextmenu__submenu-scroll {
-    max-height: calc(var(--m-contextmenu-submenu-max-height) - var(--m-space-2));
+.m-context-menu__submenu-scroll {
+    max-height: calc(var(--m-context-menu-submenu-max-height) - var(--m-space-2));
     min-height: 0;
 }
 
-.m-contextmenu__submenu-view {
+.m-context-menu__submenu-view {
     display: grid;
-    gap: var(--m-contextmenu-item-gap);
+    gap: var(--m-context-menu-item-gap);
 }

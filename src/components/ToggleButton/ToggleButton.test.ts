@@ -16,11 +16,11 @@ describe('muToggleButton', () => {
     const wrapper = mount(MToggleButton, { props: { modelValue: true, disabled: true } })
     await wrapper.trigger('click')
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-    expect(wrapper.classes()).toContain('m-togglebutton--disabled')
+    expect(wrapper.classes()).toContain('m-toggle-button--disabled')
   })
 
   it('applies size classes', () => {
-    expect(mount(MToggleButton, { props: { size: 'small' } }).classes()).toContain('m-togglebutton--small')
-    expect(mount(MToggleButton, { props: { size: 'lg' } }).classes()).toContain('m-togglebutton--large')
+    expect(mount(MToggleButton, { props: { size: 'small' } }).classes()).toContain('m-toggle-button--small')
+    expect(mount(MToggleButton, { props: { size: 'lg' } }).classes()).toContain('m-toggle-button--large')
   })
 })

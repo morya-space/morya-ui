@@ -9,11 +9,11 @@ describe('muAutoComplete', () => {
       props: { modelValue: '', suggestions: ['Apple', 'Apricot', 'Banana'] },
       attachTo: document.body,
     })
-    await wrapper.find('.m-autocomplete__input').setValue('Ap')
+    await wrapper.find('.m-auto-complete__input').setValue('Ap')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['Ap'])
     expect(wrapper.emitted('complete')?.at(-1)).toEqual(['Ap'])
     await nextTick()
-    const items = document.body.querySelectorAll('.m-autocomplete__item')
+    const items = document.body.querySelectorAll('.m-auto-complete__item')
     expect(items.length).toBeGreaterThan(0)
     items[0]!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
     await nextTick()
@@ -25,8 +25,8 @@ describe('muAutoComplete', () => {
     const wrapper = mount(MAutoComplete, {
       props: { dropdown: true, suggestions: ['One', 'Two'], modelValue: '', teleport: false },
     })
-    await wrapper.find('.m-autocomplete__dropdown').trigger('click')
-    expect(wrapper.findAll('.m-autocomplete__item')).toHaveLength(2)
+    await wrapper.find('.m-auto-complete__dropdown').trigger('click')
+    expect(wrapper.findAll('.m-auto-complete__item')).toHaveLength(2)
   })
 
   it('teleports the panel to body by default', async () => {
@@ -34,9 +34,9 @@ describe('muAutoComplete', () => {
       props: { suggestions: ['One', 'Two'], modelValue: '' },
       attachTo: document.body,
     })
-    await wrapper.find('.m-autocomplete__input').trigger('focus')
+    await wrapper.find('.m-auto-complete__input').trigger('focus')
     await nextTick()
-    expect(document.body.querySelector('.m-autocomplete__panel--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-auto-complete__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -49,12 +49,12 @@ describe('muAutoComplete', () => {
         teleport: false,
       },
     })
-    await wrapper.find('.m-autocomplete__input').trigger('focus')
+    await wrapper.find('.m-auto-complete__input').trigger('focus')
     await nextTick()
-    await wrapper.get('.m-autocomplete__item').trigger('mousedown')
+    await wrapper.get('.m-auto-complete__item').trigger('mousedown')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual(['apple'])
     await wrapper.setProps({ modelValue: 'apple' })
-    await wrapper.get('.m-autocomplete__clear').trigger('click')
+    await wrapper.get('.m-auto-complete__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([''])
     expect(wrapper.emitted('clear')).toHaveLength(1)
   })
@@ -67,7 +67,7 @@ describe('muAutoComplete', () => {
         empty: `<template #default><span class="custom-empty">Nothing here</span></template>`,
       },
     })
-    await wrapper.find('.m-autocomplete__input').trigger('focus')
+    await wrapper.find('.m-auto-complete__input').trigger('focus')
     await nextTick()
     expect(wrapper.find('.custom-item').text()).toBe('Apple!')
 

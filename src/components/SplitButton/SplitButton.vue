@@ -43,7 +43,7 @@ const root = ref<HTMLElement | null>(null)
 const trigger = ref<HTMLElement | null>(null)
 const menu = ref<HTMLElement | null>(null)
 const menuStyle = ref<Record<string, string>>({})
-const menuId = useMId('m-splitbutton-menu')
+const menuId = useMId('m-split-button-menu')
 const sizeClass = useConfiguredSize('SplitButton', () => props.size)
 const iconSize = computed(() => resolveIconSizeFromClass(sizeClass.value))
 const iconName = computed(() => (props.icon && isIconName(props.icon) ? props.icon : undefined))
@@ -52,14 +52,14 @@ const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
 
 const rootClass = computed(() => [
-  'm-splitbutton',
-  `m-splitbutton--${sizeClass.value}`,
+  'm-split-button',
+  `m-split-button--${sizeClass.value}`,
   {
-    'm-splitbutton--disabled': props.disabled,
-    'm-splitbutton--outlined': props.variant === 'outlined',
-    [`m-splitbutton--${props.color === 'default' ? 'secondary' : props.color}`]:
+    'm-split-button--disabled': props.disabled,
+    'm-split-button--outlined': props.variant === 'outlined',
+    [`m-split-button--${props.color === 'default' ? 'secondary' : props.color}`]:
       Boolean(props.color && props.color !== 'primary' && props.color !== 'link'),
-    'm-splitbutton--open': open.value,
+    'm-split-button--open': open.value,
   },
 ])
 
@@ -93,7 +93,7 @@ const keyboard = useMenuKeyboard({
 function focusActiveItem() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  menu.value?.querySelectorAll<HTMLElement>('.m-splitbutton__item')[index]?.focus({ preventScroll: true })
+  menu.value?.querySelectorAll<HTMLElement>('.m-split-button__item')[index]?.focus({ preventScroll: true })
 }
 
 function onMainClick(event: MouseEvent) {
@@ -186,12 +186,12 @@ onBeforeUnmount(() => {
   <div v-bind="rootAttrs" ref="root" :class="rootClass">
     <button
       type="button"
-      class="m-splitbutton__main"
+      class="m-split-button__main"
       :disabled="disabled"
       @click="onMainClick"
     >
       <slot>
-        <span v-if="iconName || iconGlyph" class="m-splitbutton__icon" aria-hidden="true">
+        <span v-if="iconName || iconGlyph" class="m-split-button__icon" aria-hidden="true">
           <MIcon v-if="iconName" :name="iconName" :size="iconSize" />
           <template v-else>{{ iconGlyph }}</template>
         </span>
@@ -201,7 +201,7 @@ onBeforeUnmount(() => {
     <button
       ref="trigger"
       type="button"
-      class="m-splitbutton__trigger"
+      class="m-split-button__trigger"
       :aria-label="locale.moreActions"
       :aria-expanded="open"
       :aria-controls="open ? menuId : undefined"
@@ -218,8 +218,8 @@ onBeforeUnmount(() => {
           v-if="open"
           :id="menuId"
           ref="menu"
-          class="m-splitbutton__menu"
-          :class="{ 'm-splitbutton__menu--teleported': teleported }"
+          class="m-split-button__menu"
+          :class="{ 'm-split-button__menu--teleported': teleported }"
           :style="teleported ? menuStyle : undefined"
           role="menu"
           @keydown="keyboard.onKeydown"
@@ -227,7 +227,7 @@ onBeforeUnmount(() => {
           <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="presentation">
             <button
               type="button"
-              class="m-splitbutton__item"
+              class="m-split-button__item"
               role="menuitem"
               :disabled="item.disabled"
               :tabindex="keyboard.tabindexFor(index)"

@@ -15,9 +15,9 @@ describe('muTieredMenu', () => {
       },
       attachTo: document.body,
     })
-    await wrapper.get('.m-tieredmenu__row').trigger('mouseenter')
-    expect(document.body.querySelector('.m-tieredmenu__submenu--teleported')).toBeTruthy()
-    ;(document.body.querySelector('.m-tieredmenu__submenu--teleported .m-tieredmenu__item') as HTMLButtonElement).click()
+    await wrapper.get('.m-tiered-menu__row').trigger('mouseenter')
+    expect(document.body.querySelector('.m-tiered-menu__submenu--teleported')).toBeTruthy()
+    ;(document.body.querySelector('.m-tiered-menu__submenu--teleported .m-tiered-menu__item') as HTMLButtonElement).click()
     expect(command).toHaveBeenCalledOnce()
     wrapper.unmount()
   })
@@ -32,7 +32,7 @@ describe('muTieredMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-tieredmenu--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-tiered-menu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 })

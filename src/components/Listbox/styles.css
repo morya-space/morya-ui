@@ -119,7 +119,7 @@
     box-shadow: var(--m-focus-shadow-danger);
 }
 
-.m-listbox__list--virtual .m-virtualscroller__item {
+.m-listbox__list--virtual .m-virtual-scroller__item {
     display: flex;
 }
 

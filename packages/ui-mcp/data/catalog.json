@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T01:30:54.590Z",
+  "generatedAt": "2026-10-20T07:03:20.330Z",
   "library": {
     "name": "morya-ui",
     "version": "0.5.1"
@@ -13610,7 +13610,7 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# InputGroup\n\n组合输入与前后缀。附加内容使用 `MInputGroupAddon`，或手动添加 `m-inputgroup-addon` class。"
+              "body": "# InputGroup\n\n组合输入与前后缀。附加内容使用 `MInputGroupAddon`，或手动添加 `m-input-group-addon` class。"
             },
             {
               "id": "引入",
@@ -13630,7 +13630,7 @@
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| 名称 | 说明 |\n| --- | --- |\n| `default` | 附加项与输入控件。 |\n\nAddon 组件仅提供默认插槽，根元素 class 为 `m-inputgroup-addon`。"
+              "body": "| 名称 | 说明 |\n| --- | --- |\n| `default` | 附加项与输入控件。 |\n\nAddon 组件仅提供默认插槽，根元素 class 为 `m-input-group-addon`。"
             },
             {
               "id": "events",
@@ -13638,7 +13638,7 @@
               "body": "无自定义事件。"
             }
           ],
-          "markdown": "---\ntitle: InputGroup\ncategory: 02 / FORM\ndescription: 将输入框与前后缀附加内容组合为同一控件组。\n---\n\n# InputGroup\n\n组合输入与前后缀。附加内容使用 `MInputGroupAddon`，或手动添加 `m-inputgroup-addon` class。\n\n## 引入\n\n```ts\nimport { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n## Slots\n\n| 名称 | 说明 |\n| --- | --- |\n| `default` | 附加项与输入控件。 |\n\nAddon 组件仅提供默认插槽，根元素 class 为 `m-inputgroup-addon`。\n\n## Events\n\n无自定义事件。\n"
+          "markdown": "---\ntitle: InputGroup\ncategory: 02 / FORM\ndescription: 将输入框与前后缀附加内容组合为同一控件组。\n---\n\n# InputGroup\n\n组合输入与前后缀。附加内容使用 `MInputGroupAddon`，或手动添加 `m-input-group-addon` class。\n\n## 引入\n\n```ts\nimport { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'\n```\n\n## 基础用法\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Props\n\n| 参数 | 类型 | 默认值 | 说明 |\n| --- | --- | --- | --- |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |\n\n## Slots\n\n| 名称 | 说明 |\n| --- | --- |\n| `default` | 附加项与输入控件。 |\n\nAddon 组件仅提供默认插槽，根元素 class 为 `m-input-group-addon`。\n\n## Events\n\n无自定义事件。\n"
         },
         "en-US": {
           "title": "InputGroup",
@@ -13647,7 +13647,7 @@
             {
               "id": "overview",
               "title": "",
-              "body": "# InputGroup\n\nCombine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-inputgroup-addon` class manually."
+              "body": "# InputGroup\n\nCombine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-input-group-addon` class manually."
             },
             {
               "id": "import",
@@ -13667,7 +13667,7 @@
             {
               "id": "slots",
               "title": "Slots",
-              "body": "| Slot | Description |\n| --- | --- |\n| `default` | Addons and input controls. |\n\nThe addon component only provides a default slot; its root element class is `m-inputgroup-addon`."
+              "body": "| Slot | Description |\n| --- | --- |\n| `default` | Addons and input controls. |\n\nThe addon component only provides a default slot; its root element class is `m-input-group-addon`."
             },
             {
               "id": "events",
@@ -13675,7 +13675,7 @@
               "body": "No custom events."
             }
           ],
-          "markdown": "---\ntitle: InputGroup\ncategory: 02 / FORM\ndescription: Combine an input with prefix and suffix addons into one control group.\n---\n\n# InputGroup\n\nCombine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-inputgroup-addon` class manually.\n\n## Import\n\n```ts\nimport { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Addons and input controls. |\n\nThe addon component only provides a default slot; its root element class is `m-inputgroup-addon`.\n\n## Events\n\nNo custom events.\n"
+          "markdown": "---\ntitle: InputGroup\ncategory: 02 / FORM\ndescription: Combine an input with prefix and suffix addons into one control group.\n---\n\n# InputGroup\n\nCombine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-input-group-addon` class manually.\n\n## Import\n\n```ts\nimport { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'\n```\n\n## Basic\n\n```vue preview src=\"./demos/Basic.vue\"\n```\n\n## Props\n\n| Prop | Type | Default | Description |\n| --- | --- | --- | --- |\n| `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |\n\n## Slots\n\n| Slot | Description |\n| --- | --- |\n| `default` | Addons and input controls. |\n\nThe addon component only provides a default slot; its root element class is `m-input-group-addon`.\n\n## Events\n\nNo custom events.\n"
         }
       }
     },

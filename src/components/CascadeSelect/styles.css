@@ -1,23 +1,23 @@
 /* —— Form: CascadeSelect —— */
-.m-cascadeselect {
-    --m-cascadeselect-min-width: 12rem;
+.m-cascade-select {
+    --m-cascade-select-min-width: 12rem;
     display: inline-block;
     max-width: 100%;
     position: relative;
 }
 
-.m-cascadeselect__control {
+.m-cascade-select__control {
     display: inline-block;
     max-width: 100%;
-    min-width: var(--m-cascadeselect-min-width);
+    min-width: var(--m-cascade-select-min-width);
 }
 
-.m-select-field--fluid .m-cascadeselect__control {
+.m-select-field--fluid .m-cascade-select__control {
     min-width: 0;
     width: 100%;
 }
 
-.m-cascadeselect__trigger {
+.m-cascade-select__trigger {
     align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -38,50 +38,50 @@
     width: 100%;
 }
 
-.m-cascadeselect--small .m-cascadeselect__trigger {
+.m-cascade-select--small .m-cascade-select__trigger {
     font-size: var(--m-control-font-small);
     min-height: var(--m-control-height-small);
     padding-left: var(--m-control-padding-x-small);
     padding-right: var(--m-control-end-padding);
 }
 
-.m-cascadeselect--large .m-cascadeselect__trigger {
+.m-cascade-select--large .m-cascade-select__trigger {
     font-size: var(--m-control-font-large);
     min-height: var(--m-control-height-large);
     padding-left: var(--m-control-padding-x-large);
     padding-right: var(--m-control-end-padding);
 }
 
-.m-cascadeselect:not(.m-cascadeselect--disabled):not(.m-cascadeselect--open)
-    .m-cascadeselect__trigger:hover:not(:focus):not(:focus-visible) {
+.m-cascade-select:not(.m-cascade-select--disabled):not(.m-cascade-select--open)
+    .m-cascade-select__trigger:hover:not(:focus):not(:focus-visible) {
     border-color: var(--m-color-primary-hover);
 }
 
-.m-cascadeselect--open .m-cascadeselect__trigger,
-.m-cascadeselect__trigger:focus,
-.m-cascadeselect__trigger:focus-visible {
+.m-cascade-select--open .m-cascade-select__trigger,
+.m-cascade-select__trigger:focus,
+.m-cascade-select__trigger:focus-visible {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-cascadeselect__trigger--invalid {
+.m-cascade-select__trigger--invalid {
     border-color: var(--m-color-danger);
 }
 
-.m-cascadeselect__trigger--invalid:focus,
-.m-cascadeselect__trigger--invalid:focus-visible,
-.m-cascadeselect--open .m-cascadeselect__trigger--invalid {
+.m-cascade-select__trigger--invalid:focus,
+.m-cascade-select__trigger--invalid:focus-visible,
+.m-cascade-select--open .m-cascade-select__trigger--invalid {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 
-.m-cascadeselect--disabled .m-cascadeselect__trigger {
+.m-cascade-select--disabled .m-cascade-select__trigger {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-cascadeselect__label {
+.m-cascade-select__label {
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
@@ -90,13 +90,13 @@
     white-space: nowrap;
 }
 
-.m-cascadeselect__trigger--placeholder .m-cascadeselect__label {
+.m-cascade-select__trigger--placeholder .m-cascade-select__label {
     color: var(--m-color-text-muted);
 }
 
-.m-cascadeselect__panel {
-    --m-cascadeselect-column-min-width: 10rem;
-    --m-cascadeselect-column-max-height: min(18rem, 45vh);
+.m-cascade-select__panel {
+    --m-cascade-select-column-min-width: 10rem;
+    --m-cascade-select-column-max-height: min(18rem, 45vh);
     box-sizing: border-box;
     display: flex;
     left: 0;
@@ -105,11 +105,11 @@
     width: max-content;
 }
 
-.m-cascadeselect__panel--teleported {
+.m-cascade-select__panel--teleported {
     top: auto;
 }
 
-.m-cascadeselect__column {
+.m-cascade-select__column {
     box-sizing: border-box;
     flex: 0 0 auto;
     margin: 0;
@@ -120,49 +120,49 @@
  * First column keeps the trigger-width floor (panel min-width from JS).
  * Later columns only add width — they must not redistribute/shrink the first.
  */
-.m-cascadeselect__column:first-child {
+.m-cascade-select__column:first-child {
     min-width: inherit;
 }
 
-.m-cascadeselect__column:not(:first-child) {
-    min-width: var(--m-cascadeselect-column-min-width);
+.m-cascade-select__column:not(:first-child) {
+    min-width: var(--m-cascade-select-column-min-width);
 }
 
 /* Lone column still fills the panel edge-to-edge. */
-.m-cascadeselect__column:only-child {
+.m-cascade-select__column:only-child {
     width: auto;
     min-width: 100%;
 }
 
-.m-cascadeselect__column .m-scrollbar__wrap,
-.m-cascadeselect__column .m-scrollbar__view {
+.m-cascade-select__column .m-scrollbar__wrap,
+.m-cascade-select__column .m-scrollbar__view {
     box-sizing: border-box;
     width: 100%;
 }
 
-.m-cascadeselect__column-list {
+.m-cascade-select__column-list {
     list-style: none;
     margin: 0;
     padding: var(--m-space-1);
     width: 100%;
 }
 
-.m-cascadeselect__column-list > li {
+.m-cascade-select__column-list > li {
     width: 100%;
 }
 
-.m-cascadeselect__column + .m-cascadeselect__column {
+.m-cascade-select__column + .m-cascade-select__column {
     border-left: var(--m-border-width) solid var(--m-color-border);
 }
 
-.m-cascadeselect__option {
+.m-cascade-select__option {
     width: 100%;
 }
 
-.m-cascadeselect__option > span {
+.m-cascade-select__option > span {
     min-width: 0;
 }
 
-.m-cascadeselect__option .m-icon {
+.m-cascade-select__option .m-icon {
     flex-shrink: 0;
 }

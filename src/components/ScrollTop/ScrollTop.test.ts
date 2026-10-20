@@ -12,8 +12,8 @@ describe('muScrollTop', () => {
     const wrapper = mount(MScrollTop, { props: { threshold: 400 }, attachTo: document.body })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    const button = document.body.querySelector('.m-scrolltop') as HTMLButtonElement
-    expect(button.classList.contains('m-scrolltop--visible')).toBe(true)
+    const button = document.body.querySelector('.m-scroll-top') as HTMLButtonElement
+    expect(button.classList.contains('m-scroll-top--visible')).toBe(true)
     button.click()
     expect(scrollTo).toHaveBeenCalled()
     wrapper.unmount()
@@ -25,8 +25,8 @@ describe('muScrollTop', () => {
     const wrapper = mount(MScrollTop, { props: { threshold: 400 }, attachTo: document.body })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    const button = document.body.querySelector('.m-scrolltop') as HTMLButtonElement
-    expect(button.classList.contains('m-scrolltop--visible')).toBe(false)
+    const button = document.body.querySelector('.m-scroll-top') as HTMLButtonElement
+    expect(button.classList.contains('m-scroll-top--visible')).toBe(false)
     wrapper.unmount()
   })
 
@@ -35,8 +35,8 @@ describe('muScrollTop', () => {
     const wrapper = mount(MScrollTop, { props: { threshold: 400 }, attachTo: document.body })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    expect(document.body.querySelector('.m-scrolltop--teleported')).toBeTruthy()
-    expect(wrapper.find('.m-scrolltop').exists()).toBe(false)
+    expect(document.body.querySelector('.m-scroll-top--teleported')).toBeTruthy()
+    expect(wrapper.find('.m-scroll-top').exists()).toBe(false)
     wrapper.unmount()
   })
 
@@ -57,7 +57,7 @@ describe('muScrollTop', () => {
     Object.defineProperty(wrap, 'scrollTop', { configurable: true, value: 80, writable: true })
     wrap.dispatchEvent(new Event('scroll'))
     await nextTick()
-    expect(wrapper.find('.m-scrolltop--visible').exists()).toBe(true)
+    expect(wrapper.find('.m-scroll-top--visible').exists()).toBe(true)
     wrapper.unmount()
   })
 
@@ -69,7 +69,7 @@ describe('muScrollTop', () => {
     })
     window.dispatchEvent(new Event('scroll'))
     await nextTick()
-    const button = document.body.querySelector('.m-scrolltop') as HTMLButtonElement
+    const button = document.body.querySelector('.m-scroll-top') as HTMLButtonElement
     expect(button.style.right).toBe('24px')
     expect(button.style.bottom).toBe('32px')
     wrapper.unmount()

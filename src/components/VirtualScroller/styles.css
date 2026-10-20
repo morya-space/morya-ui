@@ -1,27 +1,27 @@
 /* —— Data: VirtualScroller —— */
-.m-virtualscroller {
+.m-virtual-scroller {
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     position: relative;
     width: 100%;
 }
 
-.m-virtualscroller__scrollbar {
+.m-virtual-scroller__scrollbar {
     overflow: hidden;
 }
 
-.m-virtualscroller__spacer {
+.m-virtual-scroller__spacer {
     position: relative;
     width: 100%;
 }
 
-.m-virtualscroller__content {
+.m-virtual-scroller__content {
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
 }
 
-.m-virtualscroller__item {
+.m-virtual-scroller__item {
     box-sizing: border-box;
 }

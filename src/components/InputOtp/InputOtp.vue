@@ -32,19 +32,19 @@ const chars = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'm-inputotp',
-  `m-inputotp--${sizeClass.value}`,
+  'm-input-otp',
+  `m-input-otp--${sizeClass.value}`,
   {
-    'm-inputotp--disabled': props.disabled,
-    'm-inputotp--mask': props.mask,
-    'm-inputotp--invalid': props.invalid,
+    'm-input-otp--disabled': props.disabled,
+    'm-input-otp--mask': props.mask,
+    'm-input-otp--invalid': props.invalid,
   },
 ])
 
 const rootStyle = computed(() => {
   if (props.gap == null) return undefined
   const gap = typeof props.gap === 'number' ? `${props.gap}px` : props.gap
-  return { '--m-inputotp-gap': gap }
+  return { '--m-input-otp-gap': gap }
 })
 
 function setInputRef(el: unknown, index: number) {
@@ -130,7 +130,7 @@ watch(
       v-for="(char, index) in chars"
       :key="index"
       :ref="(el) => setInputRef(el, index)"
-      class="m-inputotp__input"
+      class="m-input-otp__input"
       :type="mask ? 'password' : 'text'"
       inputmode="text"
       maxlength="1"

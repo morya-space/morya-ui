@@ -6,7 +6,7 @@ description: Combine an input with prefix and suffix addons into one control gro
 
 # InputGroup
 
-Combine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-inputgroup-addon` class manually.
+Combine an input with prefix and suffix addons. Use `MInputGroupAddon` for addons, or add the `m-input-group-addon` class manually.
 
 ## Import
 
@@ -31,7 +31,7 @@ import { MInput, MInputGroup, MInputGroupAddon } from 'morya-ui'
 | --- | --- |
 | `default` | Addons and input controls. |
 
-The addon component only provides a default slot; its root element class is `m-inputgroup-addon`.
+The addon component only provides a default slot; its root element class is `m-input-group-addon`.
 
 ## Events
 

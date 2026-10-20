@@ -51,7 +51,7 @@ const { transitionName, transitionCss } = useMotionTransition({
 })
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('AutoComplete', () => props.size)
-const autoFieldId = useMId('m-autocomplete')
+const autoFieldId = useMId('m-auto-complete')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const resolvedEmptyMessage = computed(() => props.emptyMessage ?? locale.value.emptyOptions)
@@ -95,13 +95,13 @@ function suggestionAt(item: unknown): AutoCompleteOption {
 const showClear = computed(() => props.clearable && Boolean(props.modelValue) && !props.disabled)
 
 const rootClass = computed(() => [
-  'm-autocomplete',
-  `m-autocomplete--${sizeClass.value}`,
+  'm-auto-complete',
+  `m-auto-complete--${sizeClass.value}`,
   {
-    'm-autocomplete--disabled': props.disabled,
-    'm-autocomplete--open': open.value,
-    'm-autocomplete--loading': props.loading,
-    'm-autocomplete--invalid': isInvalid.value,
+    'm-auto-complete--disabled': props.disabled,
+    'm-auto-complete--open': open.value,
+    'm-auto-complete--loading': props.loading,
+    'm-auto-complete--invalid': isInvalid.value,
   },
 ])
 
@@ -222,11 +222,11 @@ const panelOpen = computed(() => open.value)
   <div ref="root" v-bind="rootAttrs" class="m-select-field">
     <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div :class="rootClass">
-      <div ref="trigger" class="m-autocomplete__control">
+      <div ref="trigger" class="m-auto-complete__control">
         <input
           v-bind="controlAttrs"
           :id="fieldId"
-          class="m-autocomplete__input"
+          class="m-auto-complete__input"
           type="text"
           role="combobox"
           :value="modelValue"
@@ -244,11 +244,11 @@ const panelOpen = computed(() => open.value)
           @keydown="onKeydown"
           @focus="requestComplete(modelValue ?? '')"
         >
-        <span v-if="loading" class="m-autocomplete__spinner" aria-hidden="true" />
+        <span v-if="loading" class="m-auto-complete__spinner" aria-hidden="true" />
         <button
           v-else-if="showClear"
           type="button"
-          class="m-autocomplete__clear"
+          class="m-auto-complete__clear"
           :aria-label="locale.clearInput"
           @click="clear"
         >
@@ -257,7 +257,7 @@ const panelOpen = computed(() => open.value)
         <button
           v-if="dropdown"
           type="button"
-          class="m-autocomplete__dropdown"
+          class="m-auto-complete__dropdown"
           :aria-label="locale.showSuggestions"
           :disabled="disabled"
           @click="toggleDropdown"
@@ -270,14 +270,14 @@ const panelOpen = computed(() => open.value)
           <div
             v-if="panelOpen"
             ref="panel"
-            class="m-autocomplete__panel"
-            :class="{ 'm-autocomplete__panel--teleported': teleported }"
+            class="m-auto-complete__panel"
+            :class="{ 'm-auto-complete__panel--teleported': teleported }"
             :style="teleported ? panelStyle : undefined"
           >
             <MVirtualScroller
               v-if="useVirtualMenu && filtered.length && !loading"
               ref="virtualList"
-              class="m-autocomplete__panel-scroll m-autocomplete__panel-scroll--virtual"
+              class="m-auto-complete__panel-scroll m-auto-complete__panel-scroll--virtual"
               role="listbox"
               :items="filtered"
               :item-size="optionItemSize"
@@ -286,9 +286,9 @@ const panelOpen = computed(() => open.value)
             >
               <template #item="{ item, index }">
                 <div
-                  class="m-autocomplete__item"
+                  class="m-auto-complete__item"
                   role="option"
-                  :class="{ 'm-autocomplete__item--active': index === highlight }"
+                  :class="{ 'm-auto-complete__item--active': index === highlight }"
                   :aria-selected="index === highlight"
                   @mouseenter="highlight = index"
                   @mousedown.prevent="select(suggestionAt(item))"
@@ -303,14 +303,14 @@ const panelOpen = computed(() => open.value)
               v-else
               tag="ul"
               role="listbox"
-              class="m-autocomplete__panel-scroll"
+              class="m-auto-complete__panel-scroll"
               fit-content
-              view-class="m-autocomplete__panel-list"
+              view-class="m-auto-complete__panel-list"
             >
-              <li v-if="loading && !filtered.length" class="m-autocomplete__status">
+              <li v-if="loading && !filtered.length" class="m-auto-complete__status">
                 {{ locale.loading }}
               </li>
-              <li v-else-if="!filtered.length" class="m-autocomplete__status">
+              <li v-else-if="!filtered.length" class="m-auto-complete__status">
                 <slot name="empty">
                   {{ resolvedEmptyMessage }}
                 </slot>
@@ -318,9 +318,9 @@ const panelOpen = computed(() => open.value)
               <li
                 v-for="(item, index) in filtered"
                 :key="`${item.value}-${index}`"
-                class="m-autocomplete__item"
+                class="m-auto-complete__item"
                 role="option"
-                :class="{ 'm-autocomplete__item--active': index === highlight }"
+                :class="{ 'm-auto-complete__item--active': index === highlight }"
                 :aria-selected="index === highlight"
                 @mouseenter="highlight = index"
                 @mousedown.prevent="select(item)"

@@ -10,8 +10,8 @@ describe('muConfirmPopup', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-confirmpopup__message')?.textContent).toContain('Delete?')
-    const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
+    expect(document.body.querySelector('.m-confirm-popup__message')?.textContent).toContain('Delete?')
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirm-popup .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
     expect(accept).toBeTruthy()
     accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -27,7 +27,7 @@ describe('muConfirmPopup', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirm-popup .m-button'))
     const reject = buttons.find((btn) => btn.textContent?.replace(/\s/g, '').includes('取消'))
     expect(reject).toBeTruthy()
     reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -42,7 +42,7 @@ describe('muConfirmPopup', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-confirmpopup--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-confirm-popup--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -55,7 +55,7 @@ describe('muConfirmPopup', () => {
     await nextTick()
     expect(wrapper.emitted('accept')).toBeUndefined()
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-    expect(wrapper.find('.m-confirmpopup').exists()).toBe(true)
+    expect(wrapper.find('.m-confirm-popup').exists()).toBe(true)
   })
 
   it('uses non-modal semantics without aria-modal', async () => {
@@ -64,7 +64,7 @@ describe('muConfirmPopup', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const panel = document.body.querySelector('.m-confirmpopup')
+    const panel = document.body.querySelector('.m-confirm-popup')
     expect(panel?.getAttribute('role')).toBe('alertdialog')
     expect(panel?.getAttribute('aria-modal')).toBeNull()
     wrapper.unmount()
@@ -79,7 +79,7 @@ describe('muConfirmPopup', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.activeElement?.classList.contains('m-confirmpopup')).toBe(true)
+    expect(document.activeElement?.classList.contains('m-confirm-popup')).toBe(true)
     await wrapper.setProps({ modelValue: false })
     await nextTick()
     expect(document.activeElement).toBe(target)
@@ -93,7 +93,7 @@ describe('muConfirmPopup', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.m-confirmpopup .m-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirm-popup .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
     expect(accept?.classList.contains('m-button--color-danger')).toBe(true)
     wrapper.unmount()

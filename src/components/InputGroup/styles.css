@@ -1,5 +1,5 @@
 /* —— Form: InputGroup —— */
-.m-inputgroup {
+.m-input-group {
     align-items: stretch;
     display: flex;
     flex-wrap: nowrap;
@@ -7,7 +7,7 @@
     width: 100%;
 }
 
-.m-inputgroup-addon {
+.m-input-group-addon {
     align-items: center;
     background: color-mix(in srgb, var(--m-color-text-muted) 10%, var(--m-color-surface));
     border: var(--m-border-width) solid var(--m-color-border);

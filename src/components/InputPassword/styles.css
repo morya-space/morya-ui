@@ -1,22 +1,22 @@
 /* --- Form: InputPassword --- */
-.m-password-field {
+.m-input-password-field {
     display: grid;
     gap: var(--m-space-2);
 }
 
-.m-password-field--fluid {
+.m-input-password-field--fluid {
     width: 100%;
 }
 
-.m-password-field__label {
+.m-input-password-field__label {
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 500;
 }
 
-.m-password {
-    --m-password-toggle-size: var(--m-control-affix-size);
+.m-input-password {
+    --m-input-password-toggle-size: var(--m-control-affix-size);
     align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -32,20 +32,20 @@
         opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-password--fluid {
+.m-input-password--fluid {
     display: flex;
     width: 100%;
 }
 
-.m-password--small {
+.m-input-password--small {
     min-height: var(--m-control-height-small);
 }
 
-.m-password--large {
+.m-input-password--large {
     min-height: var(--m-control-height-large);
 }
 
-.m-password--filled {
+.m-input-password--filled {
     background: color-mix(
         in srgb,
         var(--m-color-text-muted) 12%,
@@ -54,41 +54,41 @@
     border-color: transparent;
 }
 
-.m-password--invalid {
+.m-input-password--invalid {
     border-color: var(--m-color-danger);
 }
 
-.m-password--warning {
+.m-input-password--warning {
     border-color: var(--m-color-warning);
 }
 
-.m-password:hover:not(.m-password--disabled):not(:focus-within) {
+.m-input-password:hover:not(.m-input-password--disabled):not(:focus-within) {
     border-color: var(--m-color-primary-hover);
 }
 
-.m-password:focus-within {
+.m-input-password:focus-within {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 
-.m-password--invalid:focus-within {
+.m-input-password--invalid:focus-within {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 
-.m-password--warning:focus-within {
+.m-input-password--warning:focus-within {
     border-color: var(--m-color-warning);
     box-shadow: var(--m-focus-shadow-warning);
 }
 
-.m-password--disabled {
+.m-input-password--disabled {
     background-color: var(--m-color-bg-disabled);
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
     opacity: 1;
 }
 
-.m-password__input {
+.m-input-password__input {
     background: transparent;
     border: 0;
     border-radius: 0;
@@ -105,28 +105,28 @@
     width: 100%;
 }
 
-.m-password--small .m-password__input {
+.m-input-password--small .m-input-password__input {
     font-size: var(--m-control-font-small);
     height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     padding: 0 var(--m-control-padding-x-small);
 }
 
-.m-password--large .m-password__input {
+.m-input-password--large .m-input-password__input {
     font-size: var(--m-control-font-large);
     height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     padding: 0 var(--m-control-padding-x-large);
 }
 
-.m-password__input:focus,
-.m-password__input:focus-visible {
+.m-input-password__input:focus,
+.m-input-password__input:focus-visible {
     box-shadow: none;
     outline: none;
 }
 
-.m-password__clear,
-.m-password__toggle {
+.m-input-password__clear,
+.m-input-password__toggle {
     align-items: center;
     align-self: center;
     background: transparent;
@@ -140,50 +140,50 @@
     padding: 0;
 }
 
-.m-password__clear {
+.m-input-password__clear {
     font-size: var(--m-font-size-lg);
     height: var(--m-control-affix-size);
     width: var(--m-control-affix-size);
 }
 
-.m-password--toggle .m-password__clear {
+.m-input-password--toggle .m-input-password__clear {
     margin-right: 0;
 }
 
-.m-password__toggle {
-    min-height: var(--m-password-toggle-size);
-    min-width: var(--m-password-toggle-size);
+.m-input-password__toggle {
+    min-height: var(--m-input-password-toggle-size);
+    min-width: var(--m-input-password-toggle-size);
 }
 
-.m-password__clear:hover:not(:disabled),
-.m-password__toggle:hover:not(:disabled) {
+.m-input-password__clear:hover:not(:disabled),
+.m-input-password__toggle:hover:not(:disabled) {
     color: var(--m-color-text);
 }
 
-.m-password__clear:focus-visible,
-.m-password__toggle:focus-visible {
+.m-input-password__clear:focus-visible,
+.m-input-password__toggle:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-password__clear:disabled,
-.m-password__toggle:disabled {
+.m-input-password__clear:disabled,
+.m-input-password__toggle:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-password__feedback {
+.m-input-password__feedback {
     font-size: var(--m-font-size-xs);
 }
 
-.m-password__feedback--weak {
+.m-input-password__feedback--weak {
     color: var(--m-color-danger);
 }
 
-.m-password__feedback--medium {
+.m-input-password__feedback--medium {
     color: var(--m-color-warn);
 }
 
-.m-password__feedback--strong {
+.m-input-password__feedback--strong {
     color: var(--m-color-success);
 }

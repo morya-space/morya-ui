@@ -14,7 +14,7 @@ describe('muBlockUI', () => {
   it('renders default slot without overlay when not blocked', () => {
     const wrapper = mount(MBlockUI, { slots: { default: '<p>Content</p>' } })
     expect(wrapper.text()).toContain('Content')
-    expect(wrapper.find('.m-blockui__overlay').exists()).toBe(false)
+    expect(wrapper.find('.m-block-ui__overlay').exists()).toBe(false)
   })
 
   it('shows overlay when blocked', () => {
@@ -22,8 +22,8 @@ describe('muBlockUI', () => {
       props: { blocked: true },
       slots: { default: '<p>Content</p>' },
     })
-    expect(wrapper.classes()).toContain('m-blockui--blocked')
-    expect(wrapper.find('.m-blockui__overlay').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('m-block-ui--blocked')
+    expect(wrapper.find('.m-block-ui__overlay').exists()).toBe(true)
   })
 
   it('marks content inert and busy when blocked', () => {
@@ -31,13 +31,13 @@ describe('muBlockUI', () => {
       props: { blocked: true },
       slots: { default: '<button type="button">Action</button>' },
     })
-    const content = wrapper.find('.m-blockui__content')
+    const content = wrapper.find('.m-block-ui__content')
     expect(content.attributes('inert')).toBeDefined()
     expect(content.attributes('aria-busy')).toBe('true')
   })
 
   it('uses component z-index token on overlay', () => {
-    expect(blockUiStyles).toContain('--m-blockui-z-index')
-    expect(blockUiStyles).toMatch(/z-index:\s*var\(--m-blockui-z-index\)/)
+    expect(blockUiStyles).toContain('--m-block-ui-z-index')
+    expect(blockUiStyles).toMatch(/z-index:\s*var\(--m-block-ui-z-index\)/)
   })
 })

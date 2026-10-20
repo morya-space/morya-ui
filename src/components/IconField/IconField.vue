@@ -18,11 +18,11 @@ let observer: MutationObserver | null = null
 
 const CONTROL_SELECTOR = [
   '.m-input-field__control',
-  '.m-password',
+  '.m-input-password',
   '.m-textarea-field__control',
-  '.m-inputnumber__input-wrap',
-  '.m-autocomplete__control',
-  '.m-datepicker__control',
+  '.m-input-number__input-wrap',
+  '.m-auto-complete__control',
+  '.m-date-picker__control',
 ].join(', ')
 
 const rootClass = computed(() => [

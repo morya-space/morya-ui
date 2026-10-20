@@ -62,12 +62,12 @@ const showSubmit = computed(
 const showToolbar = computed(() => items.value.length > 0 && props.showFileList)
 
 const rootClass = computed(() => [
-  'm-fileupload',
-  `m-fileupload--${props.mode}`,
-  `m-fileupload--${props.listType}`,
+  'm-file-upload',
+  `m-file-upload--${props.mode}`,
+  `m-file-upload--${props.listType}`,
   {
-    'm-fileupload--disabled': props.disabled,
-    'm-fileupload--drag': props.drag,
+    'm-file-upload--disabled': props.disabled,
+    'm-file-upload--drag': props.drag,
   },
 ])
 
@@ -323,7 +323,7 @@ defineExpose({
   <div v-bind="rootAttrs" :class="rootClass">
     <input
       ref="inputRef"
-      class="m-fileupload__input"
+      class="m-file-upload__input"
       type="file"
       :multiple="multiple || directory"
       :accept="accept"
@@ -335,8 +335,8 @@ defineExpose({
 
     <div
       v-if="drag && showTrigger"
-      class="m-fileupload__dragger"
-      :class="{ 'm-fileupload__dragger--over': dragOver }"
+      class="m-file-upload__dragger"
+      :class="{ 'm-file-upload__dragger--over': dragOver }"
       role="button"
       tabindex="0"
       :aria-disabled="disabled || undefined"
@@ -349,8 +349,8 @@ defineExpose({
       @drop="onDrop"
     >
       <slot>
-        <MIcon class="m-fileupload__icon" name="upload" />
-        <p class="m-fileupload__text">
+        <MIcon class="m-file-upload__icon" name="upload" />
+        <p class="m-file-upload__text">
           {{ locale.dropFileHere }}
           <em>{{ locale.clickToUpload }}</em>
         </p>
@@ -360,7 +360,7 @@ defineExpose({
     <button
       v-else-if="showTrigger && $slots.trigger"
       type="button"
-      class="m-fileupload__choose m-fileupload__choose--slot"
+      class="m-file-upload__choose m-file-upload__choose--slot"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
@@ -369,41 +369,41 @@ defineExpose({
     <button
       v-else-if="showTrigger"
       type="button"
-      class="m-fileupload__choose"
+      class="m-file-upload__choose"
       :disabled="disabled || !canAdd"
       @click="openPicker"
     >
       {{ chooseText }}
     </button>
 
-    <div v-if="$slots.tip" class="m-fileupload__tip">
+    <div v-if="$slots.tip" class="m-file-upload__tip">
       <slot name="tip" />
     </div>
 
-    <ul v-if="showList && !isPictureCard" class="m-fileupload__list">
+    <ul v-if="showList && !isPictureCard" class="m-file-upload__list">
       <li
         v-for="file in items"
         :key="file.uid"
-        class="m-fileupload__file"
-        :class="[`m-fileupload__file--${file.status}`, { 'm-fileupload__file--picture': isPicture }]"
+        class="m-file-upload__file"
+        :class="[`m-file-upload__file--${file.status}`, { 'm-file-upload__file--picture': isPicture }]"
       >
         <slot name="file" :file="file">
-          <div class="m-fileupload__file-body">
+          <div class="m-file-upload__file-body">
             <img
               v-if="isPicture && file.url && isImageFile(file)"
-              class="m-fileupload__thumb"
+              class="m-file-upload__thumb"
               :src="file.url"
               :alt="file.name"
               @click="previewFile(file)"
             >
-            <span class="m-fileupload__name">{{ file.name }}</span>
-            <span v-if="file.size != null" class="m-fileupload__size">{{ formatSize(file.size) }}</span>
-            <span v-if="file.status === 'fail'" class="m-fileupload__status">{{ file.error || locale.uploadFailed }}</span>
-            <span class="m-fileupload__actions">
+            <span class="m-file-upload__name">{{ file.name }}</span>
+            <span v-if="file.size != null" class="m-file-upload__size">{{ formatSize(file.size) }}</span>
+            <span v-if="file.status === 'fail'" class="m-file-upload__status">{{ file.error || locale.uploadFailed }}</span>
+            <span class="m-file-upload__actions">
               <button
                 v-if="file.url && isImageFile(file)"
                 type="button"
-                class="m-fileupload__action"
+                class="m-file-upload__action"
                 :aria-label="locale.previewFile"
                 @click="previewFile(file)"
               >
@@ -412,7 +412,7 @@ defineExpose({
               <button
                 v-if="file.status === 'fail'"
                 type="button"
-                class="m-fileupload__action"
+                class="m-file-upload__action"
                 :aria-label="locale.retryUpload"
                 @click="uploadOne(file)"
               >
@@ -420,7 +420,7 @@ defineExpose({
               </button>
               <button
                 type="button"
-                class="m-fileupload__action"
+                class="m-file-upload__action"
                 :aria-label="locale.removeFile"
                 :disabled="disabled"
                 @click="removeFile(file)"
@@ -431,7 +431,7 @@ defineExpose({
           </div>
           <div
             v-if="file.status === 'uploading'"
-            class="m-fileupload__progress"
+            class="m-file-upload__progress"
             role="progressbar"
             :aria-valuemin="0"
             :aria-valuemax="100"
@@ -444,8 +444,8 @@ defineExpose({
 
     <div
       v-if="isPictureCard"
-      class="m-fileupload__cards"
-      :class="{ 'm-fileupload__cards--over': dragOver }"
+      class="m-file-upload__cards"
+      :class="{ 'm-file-upload__cards--over': dragOver }"
       @dragenter="onDragOver"
       @dragover="onDragOver"
       @dragleave="onDragLeave"
@@ -454,26 +454,26 @@ defineExpose({
       <div
         v-for="file in showFileList ? items : []"
         :key="file.uid"
-        class="m-fileupload__card"
-        :class="`m-fileupload__card--${file.status}`"
+        class="m-file-upload__card"
+        :class="`m-file-upload__card--${file.status}`"
       >
         <slot name="file" :file="file">
           <img
             v-if="file.url && isImageFile(file)"
-            class="m-fileupload__card-image"
+            class="m-file-upload__card-image"
             :src="file.url"
             :alt="file.name"
             @click="previewFile(file)"
           >
-          <span v-else class="m-fileupload__card-name">{{ file.name }}</span>
-          <div v-if="file.status === 'uploading'" class="m-fileupload__card-progress">
+          <span v-else class="m-file-upload__card-name">{{ file.name }}</span>
+          <div v-if="file.status === 'uploading'" class="m-file-upload__card-progress">
             {{ Math.round(file.percentage ?? 0) }}%
           </div>
-          <div v-else class="m-fileupload__card-mask">
+          <div v-else class="m-file-upload__card-mask">
             <button
               v-if="file.url && isImageFile(file)"
               type="button"
-              class="m-fileupload__action"
+              class="m-file-upload__action"
               :aria-label="locale.previewFile"
               @click="previewFile(file)"
             >
@@ -482,7 +482,7 @@ defineExpose({
             <button
               v-if="file.status === 'fail'"
               type="button"
-              class="m-fileupload__action"
+              class="m-file-upload__action"
               :aria-label="locale.retryUpload"
               @click="uploadOne(file)"
             >
@@ -490,7 +490,7 @@ defineExpose({
             </button>
             <button
               type="button"
-              class="m-fileupload__action"
+              class="m-file-upload__action"
               :aria-label="locale.removeFile"
               :disabled="disabled"
               @click="removeFile(file)"
@@ -503,7 +503,7 @@ defineExpose({
       <button
         v-if="canAdd"
         type="button"
-        class="m-fileupload__card m-fileupload__card--add"
+        class="m-file-upload__card m-file-upload__card--add"
         :aria-label="locale.addFile"
         @click="openPicker"
       >
@@ -511,11 +511,11 @@ defineExpose({
       </button>
     </div>
 
-    <div v-if="showToolbar" class="m-fileupload__toolbar">
-      <button v-if="showSubmit" type="button" class="m-fileupload__choose" @click="submit">
+    <div v-if="showToolbar" class="m-file-upload__toolbar">
+      <button v-if="showSubmit" type="button" class="m-file-upload__choose" @click="submit">
         {{ locale.uploadFile }}
       </button>
-      <button type="button" class="m-fileupload__clear" @click="clearFiles">
+      <button type="button" class="m-file-upload__clear" @click="clearFiles">
         {{ locale.clear }}
       </button>
     </div>

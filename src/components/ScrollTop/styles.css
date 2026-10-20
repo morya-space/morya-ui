@@ -1,9 +1,9 @@
 /* —— Navigation: ScrollTop —— */
-.m-scrolltop-anchor {
+.m-scroll-top-anchor {
     display: contents;
 }
 
-.m-scrolltop {
+.m-scroll-top {
     align-items: center;
     background: var(--m-color-primary);
     border: 0;
@@ -28,37 +28,37 @@
     z-index: var(--m-z-popper);
 }
 
-.m-scrolltop--teleported {
+.m-scroll-top--teleported {
     z-index: var(--m-z-dropdown);
 }
 
-.m-scrolltop--visible {
+.m-scroll-top--visible {
     display: inline-flex;
     opacity: 1;
     transform: translateY(0);
 }
 
-.m-scrolltop--square {
+.m-scroll-top--square {
     border-radius: var(--m-radius-control);
 }
 
-.m-scrolltop:hover:not(:disabled) {
+.m-scroll-top:hover:not(:disabled) {
     background: var(--m-color-primary-hover);
 }
 
-.m-scrolltop--parent {
+.m-scroll-top--parent {
     bottom: var(--m-space-3);
     position: absolute;
     right: var(--m-space-3);
 }
 
-.m-scrolltop:focus-visible {
+.m-scroll-top:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-[data-m-motion="reduced"] .m-scrolltop,
-[data-m-motion="none"] .m-scrolltop {
+[data-m-motion="reduced"] .m-scroll-top,
+[data-m-motion="none"] .m-scroll-top {
     transition: none;
     transform: none;
 }

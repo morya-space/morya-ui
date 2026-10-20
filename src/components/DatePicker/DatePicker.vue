@@ -89,7 +89,7 @@ const draftHour = ref(0)
 const draftMinute = ref(0)
 const draftSecond = ref(0)
 const rangeTimeFocus = ref<'start' | 'end'>('end')
-const autoFieldId = useMId('m-datepicker')
+const autoFieldId = useMId('m-date-picker')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const panelId = computed(() => `${fieldId.value}-panel`)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
@@ -338,16 +338,16 @@ const resolvedStatus = computed<'default' | 'warning' | 'error'>(() => {
 })
 
 const rootClass = computed(() => [
-  'm-datepicker',
-  `m-datepicker--${sizeClass.value}`,
+  'm-date-picker',
+  `m-date-picker--${sizeClass.value}`,
   {
-    'm-datepicker--fluid': props.fluid,
-    'm-datepicker--disabled': props.disabled,
-    'm-datepicker--invalid': props.invalid,
-    'm-datepicker--warning': resolvedStatus.value === 'warning',
-    'm-datepicker--error': resolvedStatus.value === 'error',
-    'm-datepicker--open': open.value,
-    'm-datepicker--range': isRange.value,
+    'm-date-picker--fluid': props.fluid,
+    'm-date-picker--disabled': props.disabled,
+    'm-date-picker--invalid': props.invalid,
+    'm-date-picker--warning': resolvedStatus.value === 'warning',
+    'm-date-picker--error': resolvedStatus.value === 'error',
+    'm-date-picker--open': open.value,
+    'm-date-picker--range': isRange.value,
   },
 ])
 
@@ -910,14 +910,14 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="root" v-bind="rootAttrs" :class="rootClass">
-    <label v-if="label" class="m-datepicker__label" :for="fieldId">{{ label }}</label>
-    <div ref="triggerEl" class="m-datepicker__control">
+    <label v-if="label" class="m-date-picker__label" :for="fieldId">{{ label }}</label>
+    <div ref="triggerEl" class="m-date-picker__control">
       <slot name="trigger" :value="displayValue" :open="open">
         <input
           v-bind="controlAttrs"
           :id="fieldId"
           ref="inputEl"
-          class="m-datepicker__input"
+          class="m-date-picker__input"
           type="text"
           role="combobox"
           :readonly="!maskEditable"
@@ -942,7 +942,7 @@ onBeforeUnmount(() => {
         <button
           v-if="clearable && displayValue"
           type="button"
-          class="m-datepicker__clear"
+          class="m-date-picker__clear"
           :aria-label="locale.clearDate"
           :disabled="disabled"
           @click.stop="clear"
@@ -954,8 +954,8 @@ onBeforeUnmount(() => {
     <p
       v-if="feedbackText"
       :id="`${fieldId}-help`"
-      class="m-datepicker__help"
-      :class="{ 'm-datepicker__help--invalid': feedbackIsError }"
+      class="m-date-picker__help"
+      :class="{ 'm-date-picker__help--invalid': feedbackIsError }"
     >
       {{ feedbackText }}
     </p>
@@ -965,57 +965,57 @@ onBeforeUnmount(() => {
           v-if="open"
           :id="panelId"
           ref="panel"
-          class="m-datepicker__panel"
+          class="m-date-picker__panel"
           :class="[
-            `m-datepicker__panel--${sizeClass}`,
+            `m-date-picker__panel--${sizeClass}`,
             {
-              'm-datepicker__panel--teleported': teleported,
-              'm-datepicker__panel--with-shortcuts': shortcuts.length,
-              'm-datepicker__panel--with-time': showsTime,
-              'm-datepicker__panel--time-only': type === 'time',
+              'm-date-picker__panel--teleported': teleported,
+              'm-date-picker__panel--with-shortcuts': shortcuts.length,
+              'm-date-picker__panel--with-time': showsTime,
+              'm-date-picker__panel--time-only': type === 'time',
             },
           ]"
           :style="teleported ? panelStyle : undefined"
           role="dialog"
           :aria-label="locale.datePicker"
         >
-          <div v-if="shortcuts.length" class="m-datepicker__shortcuts">
+          <div v-if="shortcuts.length" class="m-date-picker__shortcuts">
             <button
               v-for="shortcut in shortcuts"
               :key="shortcut.label"
               type="button"
-              class="m-datepicker__shortcut"
-              :class="{ 'm-datepicker__shortcut--active': isShortcutActive(shortcut) }"
+              class="m-date-picker__shortcut"
+              :class="{ 'm-date-picker__shortcut--active': isShortcutActive(shortcut) }"
               @click="applyShortcut(shortcut)"
             >
               {{ shortcut.label }}
             </button>
           </div>
-          <div class="m-datepicker__body">
+          <div class="m-date-picker__body">
             <!-- Day calendar (date / daterange / datetime / datetimerange) -->
-            <div v-if="showsCalendar" class="m-datepicker__calendar">
-              <div class="m-datepicker__header">
-                <button type="button" class="m-datepicker__nav" :aria-label="dayPanelMode === 'days' ? locale.prevMonth : dayPanelMode === 'months' ? locale.prevYear : locale.prevYear" @click="onHeaderNav(-1)">
+            <div v-if="showsCalendar" class="m-date-picker__calendar">
+              <div class="m-date-picker__header">
+                <button type="button" class="m-date-picker__nav" :aria-label="dayPanelMode === 'days' ? locale.prevMonth : dayPanelMode === 'months' ? locale.prevYear : locale.prevYear" @click="onHeaderNav(-1)">
                   <MIcon name="chevron-left" :size="iconSize" />
                 </button>
                 <button
                   type="button"
-                  class="m-datepicker__month m-datepicker__month--switch"
+                  class="m-date-picker__month m-date-picker__month--switch"
                   :aria-label="dayPanelMode === 'days' ? 'Switch to month picker' : dayPanelMode === 'months' ? 'Switch to year picker' : 'Switch back to day picker'"
                   @click="cyclePanelMode"
                 >
                   {{ headerLabel }}
                 </button>
-                <button type="button" class="m-datepicker__nav" :aria-label="dayPanelMode === 'days' ? locale.nextMonth : dayPanelMode === 'months' ? locale.nextYear : locale.nextYear" @click="onHeaderNav(1)">
+                <button type="button" class="m-date-picker__nav" :aria-label="dayPanelMode === 'days' ? locale.nextMonth : dayPanelMode === 'months' ? locale.nextYear : locale.nextYear" @click="onHeaderNav(1)">
                   <MIcon name="chevron-right" :size="iconSize" />
                 </button>
               </div>
-              <div v-if="dayPanelMode === 'days'" class="m-datepicker__weekdays" aria-hidden="true">
+              <div v-if="dayPanelMode === 'days'" class="m-date-picker__weekdays" aria-hidden="true">
                 <span v-for="day in locale.weekdays" :key="day">{{ day }}</span>
               </div>
               <div
                 v-if="dayPanelMode === 'days'"
-                class="m-datepicker__grid"
+                class="m-date-picker__grid"
                 role="grid"
                 :aria-label="monthLabel"
                 @keydown="onGridKeydown"
@@ -1024,14 +1024,14 @@ onBeforeUnmount(() => {
                   v-for="cell in calendarDays"
                   :key="cell.date.toISOString()"
                   type="button"
-                  class="m-datepicker__day"
+                  class="m-date-picker__day"
                   :class="{
-                    'm-datepicker__day--other': !cell.inMonth,
-                    'm-datepicker__day--selected': cell.selected,
-                    'm-datepicker__day--in-range': cell.inRange,
-                    'm-datepicker__day--range-start': cell.rangeStart,
-                    'm-datepicker__day--range-end': cell.rangeEnd,
-                    'm-datepicker__day--today': cell.isToday,
+                    'm-date-picker__day--other': !cell.inMonth,
+                    'm-date-picker__day--selected': cell.selected,
+                    'm-date-picker__day--in-range': cell.inRange,
+                    'm-date-picker__day--range-start': cell.rangeStart,
+                    'm-date-picker__day--range-end': cell.rangeEnd,
+                    'm-date-picker__day--today': cell.isToday,
                   }"
                   role="gridcell"
                   :aria-selected="cell.selected"
@@ -1060,7 +1060,7 @@ onBeforeUnmount(() => {
               <!-- Month-of-year picker (within day calendar) -->
               <div
                 v-else-if="dayPanelMode === 'months'"
-                class="m-datepicker__month-grid"
+                class="m-date-picker__month-grid"
                 role="grid"
                 :aria-label="String(viewYear)"
               >
@@ -1068,8 +1068,8 @@ onBeforeUnmount(() => {
                   v-for="monthLabelItem in locale.monthNames"
                   :key="monthLabelItem"
                   type="button"
-                  class="m-datepicker__cell"
-                  :class="{ 'm-datepicker__cell--selected': viewMonth === locale.monthNames.indexOf(monthLabelItem) }"
+                  class="m-date-picker__cell"
+                  :class="{ 'm-date-picker__cell--selected': viewMonth === locale.monthNames.indexOf(monthLabelItem) }"
                   role="gridcell"
                   @click="pickPanelMonth(locale.monthNames.indexOf(monthLabelItem))"
                 >
@@ -1080,7 +1080,7 @@ onBeforeUnmount(() => {
               <!-- Year-of-decade picker (within day calendar) -->
               <div
                 v-else-if="dayPanelMode === 'years'"
-                class="m-datepicker__year-grid"
+                class="m-date-picker__year-grid"
                 role="grid"
                 :aria-label="`${decadeStart(viewYear)} – ${decadeStart(viewYear) + 9}`"
               >
@@ -1088,10 +1088,10 @@ onBeforeUnmount(() => {
                   v-for="yearCell in decadeYears"
                   :key="yearCell.year"
                   type="button"
-                  class="m-datepicker__cell"
+                  class="m-date-picker__cell"
                   :class="{
-                    'm-datepicker__cell--other': yearCell.other,
-                    'm-datepicker__cell--selected': yearCell.year === viewYear,
+                    'm-date-picker__cell--other': yearCell.other,
+                    'm-date-picker__cell--selected': yearCell.year === viewYear,
                   }"
                   role="gridcell"
                   @click="pickPanelYear(yearCell.year)"
@@ -1102,23 +1102,23 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- Month panel -->
-            <div v-else-if="showsMonthPanel" class="m-datepicker__calendar">
-              <div class="m-datepicker__header">
-                <button type="button" class="m-datepicker__nav" :aria-label="locale.prevYear" @click="prevYear">
+            <div v-else-if="showsMonthPanel" class="m-date-picker__calendar">
+              <div class="m-date-picker__header">
+                <button type="button" class="m-date-picker__nav" :aria-label="locale.prevYear" @click="prevYear">
                   <MIcon name="chevron-left" :size="iconSize" />
                 </button>
-                <span class="m-datepicker__month">{{ viewYear }}</span>
-                <button type="button" class="m-datepicker__nav" :aria-label="locale.nextYear" @click="nextYear">
+                <span class="m-date-picker__month">{{ viewYear }}</span>
+                <button type="button" class="m-date-picker__nav" :aria-label="locale.nextYear" @click="nextYear">
                   <MIcon name="chevron-right" :size="iconSize" />
                 </button>
               </div>
-              <div class="m-datepicker__month-grid" role="grid" :aria-label="String(viewYear)">
+              <div class="m-date-picker__month-grid" role="grid" :aria-label="String(viewYear)">
                 <button
                   v-for="cell in monthCells"
                   :key="cell.index"
                   type="button"
-                  class="m-datepicker__cell"
-                  :class="{ 'm-datepicker__cell--selected': cell.selected }"
+                  class="m-date-picker__cell"
+                  :class="{ 'm-date-picker__cell--selected': cell.selected }"
                   role="gridcell"
                   :aria-selected="cell.selected"
                   @click="pickMonth(cell.index)"
@@ -1129,23 +1129,23 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- Year panel -->
-            <div v-else-if="showsYearPanel" class="m-datepicker__calendar">
-              <div class="m-datepicker__header">
-                <button type="button" class="m-datepicker__nav" :aria-label="locale.prevYear" @click="prevDecade">
+            <div v-else-if="showsYearPanel" class="m-date-picker__calendar">
+              <div class="m-date-picker__header">
+                <button type="button" class="m-date-picker__nav" :aria-label="locale.prevYear" @click="prevDecade">
                   <MIcon name="chevron-left" :size="iconSize" />
                 </button>
-                <span class="m-datepicker__month">{{ yearPanelLabel }}</span>
-                <button type="button" class="m-datepicker__nav" :aria-label="locale.nextYear" @click="nextDecade">
+                <span class="m-date-picker__month">{{ yearPanelLabel }}</span>
+                <button type="button" class="m-date-picker__nav" :aria-label="locale.nextYear" @click="nextDecade">
                   <MIcon name="chevron-right" :size="iconSize" />
                 </button>
               </div>
-              <div class="m-datepicker__year-grid" role="grid" :aria-label="yearPanelLabel">
+              <div class="m-date-picker__year-grid" role="grid" :aria-label="yearPanelLabel">
                 <button
                   v-for="cell in yearCells"
                   :key="cell.year"
                   type="button"
-                  class="m-datepicker__cell"
-                  :class="{ 'm-datepicker__cell--selected': cell.selected }"
+                  class="m-date-picker__cell"
+                  :class="{ 'm-date-picker__cell--selected': cell.selected }"
                   role="gridcell"
                   :aria-selected="cell.selected"
                   @click="pickYear(cell.year)"
@@ -1156,46 +1156,46 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- Time columns -->
-            <div v-if="showsTime" class="m-datepicker__time" role="group" :aria-label="locale.timePickerPlaceholder">
-              <div class="m-datepicker__time-col">
-                <div class="m-datepicker__time-header">{{ locale.hour }}</div>
-                <MScrollbar class="m-datepicker__time-scroll" wrap-class="m-datepicker__time-col-wrap" view-class="m-datepicker__time-col-view">
+            <div v-if="showsTime" class="m-date-picker__time" role="group" :aria-label="locale.timePickerPlaceholder">
+              <div class="m-date-picker__time-col">
+                <div class="m-date-picker__time-header">{{ locale.hour }}</div>
+                <MScrollbar class="m-date-picker__time-scroll" wrap-class="m-date-picker__time-col-wrap" view-class="m-date-picker__time-col-view">
                   <button
                     v-for="h in hours"
                     :key="`h-${h}`"
                     type="button"
-                    class="m-datepicker__time-item"
-                    :class="{ 'm-datepicker__time-item--selected': draftHour === h }"
+                    class="m-date-picker__time-item"
+                    :class="{ 'm-date-picker__time-item--selected': draftHour === h }"
                     @click="pickTimeUnit('hour', h)"
                   >
                     {{ String(h).padStart(2, '0') }}
                   </button>
                 </MScrollbar>
               </div>
-              <div class="m-datepicker__time-col">
-                <div class="m-datepicker__time-header">{{ locale.minute }}</div>
-                <MScrollbar class="m-datepicker__time-scroll" wrap-class="m-datepicker__time-col-wrap" view-class="m-datepicker__time-col-view">
+              <div class="m-date-picker__time-col">
+                <div class="m-date-picker__time-header">{{ locale.minute }}</div>
+                <MScrollbar class="m-date-picker__time-scroll" wrap-class="m-date-picker__time-col-wrap" view-class="m-date-picker__time-col-view">
                   <button
                     v-for="m in minutes"
                     :key="`m-${m}`"
                     type="button"
-                    class="m-datepicker__time-item"
-                    :class="{ 'm-datepicker__time-item--selected': draftMinute === m }"
+                    class="m-date-picker__time-item"
+                    :class="{ 'm-date-picker__time-item--selected': draftMinute === m }"
                     @click="pickTimeUnit('minute', m)"
                   >
                     {{ String(m).padStart(2, '0') }}
                   </button>
                 </MScrollbar>
               </div>
-              <div v-if="showSeconds" class="m-datepicker__time-col">
-                <div class="m-datepicker__time-header">{{ locale.second }}</div>
-                <MScrollbar class="m-datepicker__time-scroll" wrap-class="m-datepicker__time-col-wrap" view-class="m-datepicker__time-col-view">
+              <div v-if="showSeconds" class="m-date-picker__time-col">
+                <div class="m-date-picker__time-header">{{ locale.second }}</div>
+                <MScrollbar class="m-date-picker__time-scroll" wrap-class="m-date-picker__time-col-wrap" view-class="m-date-picker__time-col-view">
                   <button
                     v-for="s in seconds"
                     :key="`s-${s}`"
                     type="button"
-                    class="m-datepicker__time-item"
-                    :class="{ 'm-datepicker__time-item--selected': draftSecond === s }"
+                    class="m-date-picker__time-item"
+                    :class="{ 'm-date-picker__time-item--selected': draftSecond === s }"
                     @click="pickTimeUnit('second', s)"
                   >
                     {{ String(s).padStart(2, '0') }}
@@ -1204,20 +1204,20 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </div>
-          <div v-if="$slots.footer" class="m-datepicker__footer">
+          <div v-if="$slots.footer" class="m-date-picker__footer">
             <slot name="footer" :close="closePanel" />
           </div>
-          <div v-else-if="needConfirm" class="m-datepicker__footer m-datepicker__footer--confirm">
+          <div v-else-if="needConfirm" class="m-date-picker__footer m-date-picker__footer--confirm">
             <button
               type="button"
-              class="m-datepicker__footer-btn"
+              class="m-date-picker__footer-btn"
               @click="confirmCancel"
             >
               {{ locale.cancel }}
             </button>
             <button
               type="button"
-              class="m-datepicker__footer-btn m-datepicker__footer-btn--primary"
+              class="m-date-picker__footer-btn m-date-picker__footer-btn--primary"
               :disabled="!confirmDirty"
               @click="confirmOk"
             >

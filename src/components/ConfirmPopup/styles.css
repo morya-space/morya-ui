@@ -1,21 +1,21 @@
 /* —— Feedback: ConfirmPopup —— */
-.m-confirmpopup {
-    --m-confirmpopup-width: 20rem;
+.m-confirm-popup {
+    --m-confirm-popup-width: 20rem;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
-    max-width: min(var(--m-confirmpopup-width), calc(100vw - 2 * var(--m-space-4)));
+    max-width: min(var(--m-confirm-popup-width), calc(100vw - 2 * var(--m-space-4)));
     padding: var(--m-space-3);
     position: fixed;
     z-index: var(--m-z-popper);
 }
 
-.m-confirmpopup--teleported {
+.m-confirm-popup--teleported {
     z-index: var(--m-z-tooltip);
 }
 
-.m-confirmpopup__message {
+.m-confirm-popup__message {
     align-items: center;
     color: var(--m-color-text);
     display: flex;
@@ -24,12 +24,12 @@
     margin-bottom: var(--m-space-3);
 }
 
-.m-confirmpopup__footer {
+.m-confirm-popup__footer {
     display: flex;
     gap: var(--m-space-2);
     justify-content: flex-end;
 }
 
-.m-confirmpopup__icon {
+.m-confirm-popup__icon {
     flex-shrink: 0;
 }

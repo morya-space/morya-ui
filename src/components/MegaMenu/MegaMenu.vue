@@ -124,16 +124,16 @@ function focusTop(index: number) {
 }
 
 function openPanelEl(): HTMLElement | null {
-  const local = root.value?.querySelector<HTMLElement>('.m-megamenu__panel')
+  const local = root.value?.querySelector<HTMLElement>('.m-mega-menu__panel')
   if (local) return local
-  return document.querySelector<HTMLElement>('.m-megamenu__panel--teleported')
+  return document.querySelector<HTMLElement>('.m-mega-menu__panel--teleported')
 }
 
 function focusActiveLink() {
   const index = panelKeyboard.activeIndex.value
   if (index < 0) return
   openPanelEl()
-    ?.querySelectorAll<HTMLElement>('.m-megamenu__link')
+    ?.querySelectorAll<HTMLElement>('.m-mega-menu__link')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -230,7 +230,7 @@ watch(panelKeyboard.activeIndex, () => {
 function onDocumentClick(event: MouseEvent) {
   const target = event.target as Node
   if (root.value?.contains(target)) return
-  const panel = document.querySelector('.m-megamenu__panel--teleported')
+  const panel = document.querySelector('.m-mega-menu__panel--teleported')
   if (panel?.contains(target)) return
   closePanel()
 }
@@ -251,18 +251,18 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav v-bind="rootAttrs" ref="root" class="m-megamenu" :aria-label="locale.megaMenu" @keydown="onTopKeydown">
+  <nav v-bind="rootAttrs" ref="root" class="m-mega-menu" :aria-label="locale.megaMenu" @keydown="onTopKeydown">
     <div
       v-for="(item, index) in model"
       :key="`${item.label}-${index}`"
-      class="m-megamenu__item"
-      :class="{ 'm-megamenu__item--open': openIndex === index }"
+      class="m-mega-menu__item"
+      :class="{ 'm-mega-menu__item--open': openIndex === index }"
     >
       <button
         :ref="(el) => setTriggerRef(el, index)"
         type="button"
-        class="m-megamenu__trigger"
-        :class="{ 'm-megamenu__trigger--selected': isSelected(item) }"
+        class="m-mega-menu__trigger"
+        :class="{ 'm-mega-menu__trigger--selected': isSelected(item) }"
         :disabled="item.disabled"
         :tabindex="topKeyboard.tabindexFor(index)"
         :aria-expanded="item.items?.length ? openIndex === index : undefined"
@@ -270,7 +270,7 @@ onBeforeUnmount(() => {
         @click.stop="toggle(index, item)"
         @focus="topKeyboard.setActive(index)"
       >
-        <span v-if="hasIcon(item)" class="m-megamenu__icon" aria-hidden="true">
+        <span v-if="hasIcon(item)" class="m-mega-menu__icon" aria-hidden="true">
           <MIcon v-if="iconOf(item)" :name="iconOf(item)!" size="sm" />
           <component :is="iconComponentOf(item)" v-else-if="iconComponentOf(item)" />
         </span>
@@ -280,8 +280,8 @@ onBeforeUnmount(() => {
         <Transition :name="transitionName" :css="transitionCss">
           <div
             v-if="item.items?.length && openIndex === index"
-            class="m-megamenu__panel"
-            :class="{ 'm-megamenu__panel--teleported': teleported }"
+            class="m-mega-menu__panel"
+            :class="{ 'm-mega-menu__panel--teleported': teleported }"
             :style="teleported ? panelStyle : undefined"
             role="menu"
             @keydown="onPanelKeydown"
@@ -289,14 +289,14 @@ onBeforeUnmount(() => {
             <div
               v-for="(column, columnIndex) in item.items"
               :key="columnIndex"
-              class="m-megamenu__column"
+              class="m-mega-menu__column"
             >
               <button
                 v-for="(child, childIndex) in column"
                 :key="`${child.label}-${childIndex}`"
                 type="button"
-                class="m-megamenu__link"
-                :class="{ 'm-megamenu__link--selected': isSelected(child) }"
+                class="m-mega-menu__link"
+                :class="{ 'm-mega-menu__link--selected': isSelected(child) }"
                 role="menuitem"
                 :disabled="child.disabled"
                 :tabindex="panelLinkTabindex(columnIndex, childIndex)"

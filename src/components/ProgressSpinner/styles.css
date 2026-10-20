@@ -60,7 +60,7 @@
     inset: 0;
     justify-content: center;
     position: absolute;
-    z-index: var(--m-blockui-z-index, 10);
+    z-index: var(--m-block-ui-z-index, 10);
 }
 
 .m-progress-spinner__description {

@@ -85,9 +85,9 @@ function activateChild(item: TieredMenuItem) {
 function resolveSubmenuAnchor(event?: MouseEvent) {
   if (!(event?.currentTarget instanceof HTMLElement)) return null
   const current = event.currentTarget
-  return current.classList.contains('m-tieredmenu__item')
+  return current.classList.contains('m-tiered-menu__item')
     ? current
-    : current.querySelector<HTMLElement>('.m-tieredmenu__item')
+    : current.querySelector<HTMLElement>('.m-tiered-menu__item')
 }
 
 function openSubmenu(index: number, item: TieredMenuItem, event?: MouseEvent) {
@@ -103,7 +103,7 @@ function openSubmenu(index: number, item: TieredMenuItem, event?: MouseEvent) {
 function onOutsideClick(event: MouseEvent) {
   const target = event.target as Node
   if (root.value?.contains(target)) return
-  if (document.querySelector('.m-tieredmenu__submenu--teleported')?.contains(target)) return
+  if (document.querySelector('.m-tiered-menu__submenu--teleported')?.contains(target)) return
   openIndex.value = null
   submenuAnchor.value = null
   if (props.popup && props.modelValue) emit('update:modelValue', false)
@@ -142,26 +142,26 @@ onBeforeUnmount(() => {
     v-if="!popup"
     ref="root"
     v-bind="rootAttrs"
-    class="m-tieredmenu"
+    class="m-tiered-menu"
     role="menu"
   >
     <MScrollbar
-      class="m-tieredmenu__scroll"
+      class="m-tiered-menu__scroll"
       fit-content
-      wrap-class="m-tieredmenu__scroll-wrap"
-      view-class="m-tieredmenu__scroll-view"
+      wrap-class="m-tiered-menu__scroll-wrap"
+      view-class="m-tiered-menu__scroll-view"
     >
       <div
         v-for="(item, index) in model"
         :key="`${item.label ?? 'sep'}-${index}`"
-        class="m-tieredmenu__row"
+        class="m-tiered-menu__row"
         @mouseenter="openSubmenu(index, item, $event)"
       >
-        <div v-if="item.separator" class="m-tieredmenu__separator" role="separator" />
+        <div v-if="item.separator" class="m-tiered-menu__separator" role="separator" />
         <button
           v-else
           type="button"
-          class="m-tieredmenu__item"
+          class="m-tiered-menu__item"
           role="menuitem"
           :disabled="item.disabled"
           :aria-haspopup="item.items?.length ? 'menu' : undefined"
@@ -169,27 +169,27 @@ onBeforeUnmount(() => {
           @click="item.items?.length ? openSubmenu(index, item, $event) : activate(item)"
         >
           <span>{{ item.label }}</span>
-          <span v-if="item.items?.length" class="m-tieredmenu__caret" aria-hidden="true">
+          <span v-if="item.items?.length" class="m-tiered-menu__caret" aria-hidden="true">
             <MIcon name="chevron-right" size="sm" />
           </span>
         </button>
         <FlyoutSubmenu
           :open="openIndex === index && Boolean(item.items?.length)"
           :anchor="openIndex === index ? submenuAnchor : null"
-          panel-class="m-tieredmenu__submenu"
+          panel-class="m-tiered-menu__submenu"
         >
           <MScrollbar
-            class="m-tieredmenu__submenu-scroll"
+            class="m-tiered-menu__submenu-scroll"
             fit-content
-            wrap-class="m-tieredmenu__submenu-wrap-inner"
-            view-class="m-tieredmenu__submenu-view"
+            wrap-class="m-tiered-menu__submenu-wrap-inner"
+            view-class="m-tiered-menu__submenu-view"
           >
             <template v-for="(child, childIndex) in item.items" :key="`${child.label ?? 'sep'}-${childIndex}`">
-              <div v-if="child.separator" class="m-tieredmenu__separator" role="separator" />
+              <div v-if="child.separator" class="m-tiered-menu__separator" role="separator" />
               <button
                 v-else
                 type="button"
-                class="m-tieredmenu__item"
+                class="m-tiered-menu__item"
                 role="menuitem"
                 :disabled="child.disabled"
                 @click="activateChild(child)"
@@ -208,28 +208,28 @@ onBeforeUnmount(() => {
         v-if="modelValue"
         ref="root"
         v-bind="rootAttrs"
-        class="m-tieredmenu m-tieredmenu--popup"
-        :class="{ 'm-tieredmenu--teleported': teleported }"
+        class="m-tiered-menu m-tiered-menu--popup"
+        :class="{ 'm-tiered-menu--teleported': teleported }"
         :style="teleported ? popupStyle : undefined"
         role="menu"
       >
         <MScrollbar
-          class="m-tieredmenu__scroll"
+          class="m-tiered-menu__scroll"
           fit-content
-          wrap-class="m-tieredmenu__scroll-wrap"
-          view-class="m-tieredmenu__scroll-view"
+          wrap-class="m-tiered-menu__scroll-wrap"
+          view-class="m-tiered-menu__scroll-view"
         >
           <div
             v-for="(item, index) in model"
             :key="`${item.label ?? 'sep'}-${index}`"
-            class="m-tieredmenu__row"
+            class="m-tiered-menu__row"
             @mouseenter="openSubmenu(index, item, $event)"
           >
-            <div v-if="item.separator" class="m-tieredmenu__separator" role="separator" />
+            <div v-if="item.separator" class="m-tiered-menu__separator" role="separator" />
             <button
               v-else
               type="button"
-              class="m-tieredmenu__item"
+              class="m-tiered-menu__item"
               role="menuitem"
               :disabled="item.disabled"
               :aria-haspopup="item.items?.length ? 'menu' : undefined"
@@ -237,27 +237,27 @@ onBeforeUnmount(() => {
               @click="item.items?.length ? openSubmenu(index, item, $event) : activate(item)"
             >
               <span>{{ item.label }}</span>
-              <span v-if="item.items?.length" class="m-tieredmenu__caret" aria-hidden="true">
+              <span v-if="item.items?.length" class="m-tiered-menu__caret" aria-hidden="true">
                 <MIcon name="chevron-right" size="sm" />
               </span>
             </button>
             <FlyoutSubmenu
               :open="openIndex === index && Boolean(item.items?.length)"
               :anchor="openIndex === index ? submenuAnchor : null"
-              panel-class="m-tieredmenu__submenu"
+              panel-class="m-tiered-menu__submenu"
             >
               <MScrollbar
-                class="m-tieredmenu__submenu-scroll"
+                class="m-tiered-menu__submenu-scroll"
                 fit-content
-                wrap-class="m-tieredmenu__submenu-wrap-inner"
-                view-class="m-tieredmenu__submenu-view"
+                wrap-class="m-tiered-menu__submenu-wrap-inner"
+                view-class="m-tiered-menu__submenu-view"
               >
                 <template v-for="(child, childIndex) in item.items" :key="`${child.label ?? 'sep'}-${childIndex}`">
-                  <div v-if="child.separator" class="m-tieredmenu__separator" role="separator" />
+                  <div v-if="child.separator" class="m-tiered-menu__separator" role="separator" />
                   <button
                     v-else
                     type="button"
-                    class="m-tieredmenu__item"
+                    class="m-tiered-menu__item"
                     role="menuitem"
                     :disabled="child.disabled"
                     @click="activateChild(child)"

@@ -17,10 +17,10 @@ describe('muMegaMenu', () => {
         teleport: false,
       },
     })
-    await wrapper.find('.m-megamenu__trigger').trigger('click')
-    expect(wrapper.find('.m-megamenu__panel').exists()).toBe(true)
-    expect(wrapper.findAll('.m-megamenu__column')).toHaveLength(2)
-    await wrapper.findAll('.m-megamenu__link')[0]!.trigger('click')
+    await wrapper.find('.m-mega-menu__trigger').trigger('click')
+    expect(wrapper.find('.m-mega-menu__panel').exists()).toBe(true)
+    expect(wrapper.findAll('.m-mega-menu__column')).toHaveLength(2)
+    await wrapper.findAll('.m-mega-menu__link')[0]!.trigger('click')
     expect(command).toHaveBeenCalled()
   })
 
@@ -36,9 +36,9 @@ describe('muMegaMenu', () => {
       },
       attachTo: document.body,
     })
-    await wrapper.find('.m-megamenu__trigger').trigger('click')
+    await wrapper.find('.m-mega-menu__trigger').trigger('click')
     await nextTick()
-    expect(document.body.querySelector('.m-megamenu__panel--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-mega-menu__panel--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -51,15 +51,15 @@ describe('muMegaMenu', () => {
         ],
       },
     })
-    expect(wrapper.get('.m-megamenu').attributes('aria-label')).toBe('大型菜单')
-    expect(wrapper.get('.m-megamenu__trigger').attributes('aria-haspopup')).toBe('menu')
-    await wrapper.get('.m-megamenu__trigger').trigger('click')
-    await wrapper.get('.m-megamenu__link').trigger('click')
+    expect(wrapper.get('.m-mega-menu').attributes('aria-label')).toBe('大型菜单')
+    expect(wrapper.get('.m-mega-menu__trigger').attributes('aria-haspopup')).toBe('menu')
+    await wrapper.get('.m-mega-menu__trigger').trigger('click')
+    await wrapper.get('.m-mega-menu__link').trigger('click')
     expect(wrapper.emitted('select')?.[0]?.[0]).toMatchObject({ key: 'cloud' })
     expect(wrapper.emitted('update:selectedKey')?.at(-1)).toEqual(['cloud'])
     await wrapper.setProps({ selectedKey: 'cloud' })
-    await wrapper.get('.m-megamenu__trigger').trigger('click')
-    expect(wrapper.get('.m-megamenu__link').classes()).toContain('m-megamenu__link--selected')
+    await wrapper.get('.m-mega-menu__trigger').trigger('click')
+    expect(wrapper.get('.m-mega-menu__link').classes()).toContain('m-mega-menu__link--selected')
   })
 
   it('supports keyboard navigation across panel columns and Escape', async () => {
@@ -80,15 +80,15 @@ describe('muMegaMenu', () => {
         ],
       },
     })
-    const nav = wrapper.get('.m-megamenu')
-    const triggers = () => wrapper.findAll('.m-megamenu__trigger')
+    const nav = wrapper.get('.m-mega-menu')
+    const triggers = () => wrapper.findAll('.m-mega-menu__trigger')
     expect(triggers()[0]!.attributes('tabindex')).toBe('0')
     expect(triggers()[1]!.attributes('tabindex')).toBe('-1')
 
     await nav.trigger('keydown', { key: 'ArrowDown' })
     await nextTick()
-    const panel = () => wrapper.get('.m-megamenu__panel')
-    const links = () => wrapper.findAll('.m-megamenu__link')
+    const panel = () => wrapper.get('.m-mega-menu__panel')
+    const links = () => wrapper.findAll('.m-mega-menu__link')
     expect(document.activeElement).toBe(links()[0]!.element)
 
     // flat order: Cloud, Edge (disabled), IoT — ArrowDown skips Edge
@@ -98,14 +98,14 @@ describe('muMegaMenu', () => {
     await panel().trigger('keydown', { key: 'Enter' })
     expect(iot).toHaveBeenCalledOnce()
     await nextTick()
-    expect(wrapper.find('.m-megamenu__panel').exists()).toBe(false)
+    expect(wrapper.find('.m-mega-menu__panel').exists()).toBe(false)
     expect(document.activeElement).toBe(triggers()[0]!.element)
 
     await nav.trigger('keydown', { key: 'ArrowDown' })
     await nextTick()
     await panel().trigger('keydown', { key: 'Escape' })
     await nextTick()
-    expect(wrapper.find('.m-megamenu__panel').exists()).toBe(false)
+    expect(wrapper.find('.m-mega-menu__panel').exists()).toBe(false)
     expect(document.activeElement).toBe(triggers()[0]!.element)
     wrapper.unmount()
   })

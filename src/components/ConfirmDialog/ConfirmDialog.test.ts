@@ -16,7 +16,7 @@ describe('muConfirmDialog', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirm-dialog .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Yes'))
     expect(accept).toBeTruthy()
     accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -32,7 +32,7 @@ describe('muConfirmDialog', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirm-dialog .m-button'))
     const reject = buttons.find((btn) => btn.textContent?.replace(/\s/g, '').includes('取消'))
     expect(reject).toBeTruthy()
     reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -48,8 +48,8 @@ describe('muConfirmDialog', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-confirmdialog')).toBeTruthy()
-    expect(wrapper.find('.m-confirmdialog').exists()).toBe(false)
+    expect(document.body.querySelector('.m-confirm-dialog')).toBeTruthy()
+    expect(wrapper.find('.m-confirm-dialog').exists()).toBe(false)
     wrapper.unmount()
   })
 
@@ -66,7 +66,7 @@ describe('muConfirmDialog', () => {
     })
     await nextTick()
     expect(document.body.querySelector('.m-dialog--danger .m-dialog__type-icon')).toBeTruthy()
-    const accept = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button')).find((btn) =>
+    const accept = Array.from(document.body.querySelectorAll('.m-confirm-dialog .m-button')).find((btn) =>
       btn.textContent?.includes('Yes'),
     )
     accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -95,14 +95,14 @@ describe('useConfirm', () => {
     const confirm = useConfirm()
     const pending = confirm.require({ message: 'Proceed?', acceptLabel: 'Go', rejectLabel: 'Stop' })
     await nextTick()
-    const buttons = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button'))
+    const buttons = Array.from(document.body.querySelectorAll('.m-confirm-dialog .m-button'))
     const accept = buttons.find((btn) => btn.textContent?.includes('Go'))
     accept!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await expect(pending).resolves.toBe(true)
 
     const pendingReject = confirm.require({ message: 'Again?', rejectLabel: 'No' })
     await nextTick()
-    const reject = Array.from(document.body.querySelectorAll('.m-confirmdialog .m-button')).find((btn) =>
+    const reject = Array.from(document.body.querySelectorAll('.m-confirm-dialog .m-button')).find((btn) =>
       btn.textContent?.includes('No'),
     )
     reject!.dispatchEvent(new MouseEvent('click', { bubbles: true }))

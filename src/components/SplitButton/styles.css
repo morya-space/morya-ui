@@ -1,16 +1,16 @@
 /* --- Primitive: SplitButton --- */
-.m-splitbutton {
+.m-split-button {
     --m-button-padding-x-medium: calc(
         var(--m-control-padding-x-medium) + var(--m-space-1)
     );
-    --m-splitbutton-icon-size: 1rem;
+    --m-split-button-icon-size: 1rem;
     display: inline-flex;
     position: relative;
     vertical-align: middle;
 }
 
-.m-splitbutton__main,
-.m-splitbutton__trigger {
+.m-split-button__main,
+.m-split-button__trigger {
     align-items: center;
     background: var(--m-color-primary);
     border: var(--m-border-width) solid var(--m-color-primary);
@@ -31,12 +31,12 @@
         box-shadow var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-splitbutton__main {
+.m-split-button__main {
     border-bottom-left-radius: var(--m-radius-control);
     border-top-left-radius: var(--m-radius-control);
 }
 
-.m-splitbutton__trigger {
+.m-split-button__trigger {
     border-bottom-right-radius: var(--m-radius-control);
     border-left: var(--m-border-width) solid
         color-mix(
@@ -48,14 +48,14 @@
     padding: 0 var(--m-control-padding-x-medium);
 }
 
-.m-splitbutton__main:hover:not(:disabled),
-.m-splitbutton__trigger:hover:not(:disabled) {
+.m-split-button__main:hover:not(:disabled),
+.m-split-button__trigger:hover:not(:disabled) {
     background: var(--m-color-primary-hover);
     border-color: var(--m-color-primary-hover);
 }
 
-.m-splitbutton--outlined .m-splitbutton__main:hover:not(:disabled),
-.m-splitbutton--outlined .m-splitbutton__trigger:hover:not(:disabled) {
+.m-split-button--outlined .m-split-button__main:hover:not(:disabled),
+.m-split-button--outlined .m-split-button__trigger:hover:not(:disabled) {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 10%,
@@ -64,8 +64,8 @@
     border-color: var(--m-color-primary);
 }
 
-.m-splitbutton--secondary .m-splitbutton__main:hover:not(:disabled),
-.m-splitbutton--secondary .m-splitbutton__trigger:hover:not(:disabled) {
+.m-split-button--secondary .m-split-button__main:hover:not(:disabled),
+.m-split-button--secondary .m-split-button__trigger:hover:not(:disabled) {
     background: color-mix(
         in srgb,
         var(--m-color-text-muted) 24%,
@@ -74,30 +74,30 @@
     border-color: var(--m-color-border);
 }
 
-.m-splitbutton--danger .m-splitbutton__main:hover:not(:disabled),
-.m-splitbutton--danger .m-splitbutton__trigger:hover:not(:disabled) {
+.m-split-button--danger .m-split-button__main:hover:not(:disabled),
+.m-split-button--danger .m-split-button__trigger:hover:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-danger) 85%, black);
     border-color: color-mix(in srgb, var(--m-color-danger) 85%, black);
 }
 
-.m-splitbutton__main:focus-visible,
-.m-splitbutton__trigger:focus-visible {
+.m-split-button__main:focus-visible,
+.m-split-button__trigger:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-splitbutton--outlined .m-splitbutton__main,
-.m-splitbutton--outlined .m-splitbutton__trigger {
+.m-split-button--outlined .m-split-button__main,
+.m-split-button--outlined .m-split-button__trigger {
     background: transparent;
     color: var(--m-color-primary);
 }
 
-.m-splitbutton--outlined .m-splitbutton__trigger {
+.m-split-button--outlined .m-split-button__trigger {
     border-left-color: var(--m-color-primary);
 }
 
-.m-splitbutton--secondary .m-splitbutton__main,
-.m-splitbutton--secondary .m-splitbutton__trigger {
+.m-split-button--secondary .m-split-button__main,
+.m-split-button--secondary .m-split-button__trigger {
     background: color-mix(
         in srgb,
         var(--m-color-text-muted) 16%,
@@ -107,60 +107,60 @@
     color: var(--m-color-text);
 }
 
-.m-splitbutton--danger .m-splitbutton__main,
-.m-splitbutton--danger .m-splitbutton__trigger {
+.m-split-button--danger .m-split-button__main,
+.m-split-button--danger .m-split-button__trigger {
     background: var(--m-color-danger);
     border-color: var(--m-color-danger);
 }
 
-.m-splitbutton--small .m-splitbutton__main,
-.m-splitbutton--small .m-splitbutton__trigger {
-    --m-splitbutton-icon-size: 0.875rem;
+.m-split-button--small .m-split-button__main,
+.m-split-button--small .m-split-button__trigger {
+    --m-split-button-icon-size: 0.875rem;
     min-height: var(--m-control-height-small);
     font-size: var(--m-control-font-small);
 }
 
-.m-splitbutton--large .m-splitbutton__main,
-.m-splitbutton--large .m-splitbutton__trigger {
-    --m-splitbutton-icon-size: 1.125rem;
+.m-split-button--large .m-split-button__main,
+.m-split-button--large .m-split-button__trigger {
+    --m-split-button-icon-size: 1.125rem;
     min-height: var(--m-control-height-large);
     font-size: var(--m-control-font-large);
 }
 
-.m-splitbutton__icon {
+.m-split-button__icon {
     align-items: center;
     display: inline-flex;
     flex-shrink: 0;
-    height: var(--m-splitbutton-icon-size);
+    height: var(--m-split-button-icon-size);
     justify-content: center;
     line-height: 0;
-    width: var(--m-splitbutton-icon-size);
+    width: var(--m-split-button-icon-size);
 }
 
-.m-splitbutton__icon :is(.m-icon, svg) {
+.m-split-button__icon :is(.m-icon, svg) {
     display: block;
     height: 100%;
     width: 100%;
 }
 
-.m-splitbutton__trigger :is(.m-icon, svg) {
+.m-split-button__trigger :is(.m-icon, svg) {
     display: block;
-    height: var(--m-splitbutton-icon-size);
-    width: var(--m-splitbutton-icon-size);
+    height: var(--m-split-button-icon-size);
+    width: var(--m-split-button-icon-size);
 }
 
-.m-splitbutton--disabled {
+.m-split-button--disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
     pointer-events: none;
 }
 
-.m-splitbutton__item:focus-visible {
+.m-split-button__item:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-splitbutton__menu {
+.m-split-button__menu {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
@@ -181,7 +181,7 @@
     z-index: var(--m-z-popper);
 }
 
-.m-splitbutton__menu--teleported {
+.m-split-button__menu--teleported {
     margin: 0;
     position: fixed;
     right: auto;
@@ -189,7 +189,7 @@
     z-index: var(--m-z-dropdown);
 }
 
-.m-splitbutton__item {
+.m-split-button__item {
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
@@ -202,7 +202,7 @@
     width: 100%;
 }
 
-.m-splitbutton__item:hover:not(:disabled) {
+.m-split-button__item:hover:not(:disabled) {
     background: color-mix(
         in srgb,
         var(--m-color-primary) 10%,
@@ -210,7 +210,7 @@
     );
 }
 
-.m-splitbutton__item:disabled {
+.m-split-button__item:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }

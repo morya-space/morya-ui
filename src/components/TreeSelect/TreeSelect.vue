@@ -62,7 +62,7 @@ const { transitionName, transitionCss } = useMotionTransition({
 })
 const locale = useMLocale()
 const sizeClass = useConfiguredSize('TreeSelect', () => props.size)
-const autoFieldId = useMId('m-treeselect')
+const autoFieldId = useMId('m-tree-select')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const open = ref(false)
@@ -135,7 +135,7 @@ const flatNodes = computed<FlatTreeNode[]>(() => {
   return list
 })
 
-const panelId = useMId('m-treeselect-panel')
+const panelId = useMId('m-tree-select-panel')
 
 const keyboard = useMenuKeyboard({
   itemCount: () => flatNodes.value.length,
@@ -156,7 +156,7 @@ const activeKey = computed(() => flatNodes.value[keyboard.activeIndex.value]?.no
 function focusActiveNode() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  const options = panel.value?.querySelectorAll<HTMLElement>('.m-treeselect__option')
+  const options = panel.value?.querySelectorAll<HTMLElement>('.m-tree-select__option')
   const option = options?.[index]
   if (option && document.activeElement !== option) option.focus({ preventScroll: true })
   option?.scrollIntoView({ block: 'nearest' })
@@ -178,11 +178,11 @@ function openPanel(fromKeyboard = false) {
       const selectedIndex = flatNodes.value.findIndex((flat) => selectedKeys.value.includes(flat.node.key))
       if (selectedIndex >= 0) keyboard.setActive(selectedIndex)
       else keyboard.moveFirst()
-      if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-treeselect__filter')?.focus()
+      if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-tree-select__filter')?.focus()
       else focusActiveNode()
     } else {
       keyboard.setActive(-1)
-      if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-treeselect__filter')?.focus()
+      if (props.filterable) panel.value?.querySelector<HTMLElement>('.m-tree-select__filter')?.focus()
     }
   })
 }
@@ -251,7 +251,7 @@ watch(keyboard.activeIndex, () => {
   else if (open.value) {
     const index = keyboard.activeIndex.value
     panel.value
-      ?.querySelectorAll<HTMLElement>('.m-treeselect__option')
+      ?.querySelectorAll<HTMLElement>('.m-tree-select__option')
       [index]?.scrollIntoView({ block: 'nearest' })
   }
 })
@@ -357,19 +357,19 @@ onBeforeUnmount(() => {
   <div ref="root" v-bind="rootAttrs" class="m-select-field">
     <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div
-      class="m-treeselect"
+      class="m-tree-select"
       :class="[
-        `m-treeselect--${sizeClass}`,
+        `m-tree-select--${sizeClass}`,
         {
-          'm-treeselect--disabled': disabled,
-          'm-treeselect--open': open,
-          'm-treeselect--multiple': isMultiple,
-          'm-treeselect--invalid': isInvalid,
+          'm-tree-select--disabled': disabled,
+          'm-tree-select--open': open,
+          'm-tree-select--multiple': isMultiple,
+          'm-tree-select--invalid': isInvalid,
         },
       ]"
     >
       <div
-        class="m-treeselect__control m-select__control"
+        class="m-tree-select__control m-select__control"
         :class="{
           'm-select__control--clearable': showClearButton,
           'm-select__control--open': open,
@@ -379,7 +379,7 @@ onBeforeUnmount(() => {
           v-bind="controlAttrs"
           :id="fieldId"
           ref="trigger"
-          class="m-treeselect__trigger"
+          class="m-tree-select__trigger"
           role="combobox"
           :tabindex="disabled ? -1 : 0"
           :aria-disabled="disabled || undefined"
@@ -391,7 +391,7 @@ onBeforeUnmount(() => {
           @click="toggle"
           @keydown="onTriggerKeydown"
         >
-          <div v-if="isMultiple && selectedTags.length" class="m-treeselect__tags">
+          <div v-if="isMultiple && selectedTags.length" class="m-tree-select__tags">
             <span v-for="tag in visibleTags" :key="tag.key" class="m-select__tag">
               <span class="m-select__tag-label">{{ tag.label }}</span>
               <button
@@ -410,8 +410,8 @@ onBeforeUnmount(() => {
           </div>
           <span
             v-else-if="!(slots.value && selectedNode)"
-            class="m-treeselect__label"
-            :class="{ 'm-treeselect__label--placeholder': !selectedKeys.length }"
+            class="m-tree-select__label"
+            :class="{ 'm-tree-select__label--placeholder': !selectedKeys.length }"
           >
             {{ displayLabel }}
           </span>
@@ -442,15 +442,15 @@ onBeforeUnmount(() => {
             v-if="open"
             :id="panelId"
             ref="panel"
-            class="m-treeselect__panel"
-            :class="{ 'm-treeselect__panel--teleported': teleported }"
+            class="m-tree-select__panel"
+            :class="{ 'm-tree-select__panel--teleported': teleported }"
             :style="teleported ? panelStyle : undefined"
             @keydown="onTreeKeydown"
           >
             <input
               v-if="filterable"
               v-model="query"
-              class="m-treeselect__filter"
+              class="m-tree-select__filter"
               type="search"
               size="1"
               :placeholder="locale.searchPlaceholder"
@@ -458,12 +458,12 @@ onBeforeUnmount(() => {
               @keydown="onFilterKeydown"
             >
             <MScrollbar
-              class="m-treeselect__tree-scroll"
+              class="m-tree-select__tree-scroll"
               fit-content
-              wrap-class="m-treeselect__tree-wrap"
-              view-class="m-treeselect__tree-view"
+              wrap-class="m-tree-select__tree-wrap"
+              view-class="m-tree-select__tree-view"
             >
-              <ul class="m-treeselect__tree" role="tree">
+              <ul class="m-tree-select__tree" role="tree">
                 <TreeSelectNodeItem
                   v-for="node in filteredOptions"
                   :key="node.key"

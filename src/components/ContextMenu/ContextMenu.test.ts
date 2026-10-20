@@ -17,10 +17,10 @@ describe('muContextMenu', () => {
     menu.show({ clientX: 40, clientY: 60, preventDefault: vi.fn() } as unknown as MouseEvent)
     await wrapper.setProps({ modelValue: true, position: { x: 40, y: 60 } })
     await nextTick()
-    const el = document.body.querySelector('.m-contextmenu') as HTMLElement | null
+    const el = document.body.querySelector('.m-context-menu') as HTMLElement | null
     expect(el).toBeTruthy()
     expect(el!.style.left).toBe('40px')
-    document.body.querySelector('.m-contextmenu__item')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    document.body.querySelector('.m-context-menu__item')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await nextTick()
     expect(command).toHaveBeenCalledOnce()
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([false])
@@ -45,7 +45,7 @@ describe('muContextMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-contextmenu--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-context-menu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -58,7 +58,7 @@ describe('muContextMenu', () => {
     await wrapper.find('.trigger').trigger('contextmenu', { clientX: 50, clientY: 60 })
     await nextTick()
     await flushPromises()
-    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    expect(document.body.querySelector('.m-context-menu')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -81,7 +81,7 @@ describe('muContextMenu', () => {
     await nextTick()
     await flushPromises()
     expect(visible.value).toBe(true)
-    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    expect(document.body.querySelector('.m-context-menu')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -113,7 +113,7 @@ describe('muContextMenu', () => {
     await nextTick()
     await flushPromises()
     expect(visible.value).toBe(true)
-    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    expect(document.body.querySelector('.m-context-menu')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -128,10 +128,10 @@ describe('muContextMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    document.body.querySelector('.m-contextmenu__item--parent')!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
+    document.body.querySelector('.m-context-menu__item--parent')!.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
     await nextTick()
-    expect(document.body.querySelector('.m-contextmenu__submenu')).toBeTruthy()
-    document.body.querySelector('.m-contextmenu__submenu .m-contextmenu__item')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    expect(document.body.querySelector('.m-context-menu__submenu')).toBeTruthy()
+    document.body.querySelector('.m-context-menu__submenu .m-context-menu__item')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
     await nextTick()
     expect(command).toHaveBeenCalledOnce()
     wrapper.unmount()
@@ -147,7 +147,7 @@ describe('muContextMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    expect(document.body.querySelector('.m-context-menu')).toBeTruthy()
 
     window.dispatchEvent(new Event('scroll', { bubbles: true }))
     await nextTick()
@@ -171,15 +171,15 @@ describe('muContextMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const panel = document.body.querySelector('.m-contextmenu') as HTMLElement
+    const panel = document.body.querySelector('.m-context-menu') as HTMLElement
     const scrollTarget =
       panel.querySelector('.m-scrollbar__wrap') ??
-      panel.querySelector('.m-contextmenu__scroll') ??
+      panel.querySelector('.m-context-menu__scroll') ??
       panel
     scrollTarget.dispatchEvent(new Event('scroll', { bubbles: true }))
     await nextTick()
     expect(wrapper.emitted('update:modelValue')).toBeUndefined()
-    expect(document.body.querySelector('.m-contextmenu')).toBeTruthy()
+    expect(document.body.querySelector('.m-context-menu')).toBeTruthy()
     wrapper.unmount()
   })
 })

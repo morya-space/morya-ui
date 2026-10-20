@@ -1,7 +1,7 @@
 /* —— Navigation: MegaMenu —— */
-.m-megamenu {
-    --m-megamenu-column-min-width: 8rem;
-    --m-megamenu-panel-gap: var(--m-space-4);
+.m-mega-menu {
+    --m-mega-menu-column-min-width: 8rem;
+    --m-mega-menu-panel-gap: var(--m-space-4);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
@@ -11,11 +11,11 @@
     position: relative;
 }
 
-.m-megamenu__item {
+.m-mega-menu__item {
     position: relative;
 }
 
-.m-megamenu__trigger {
+.m-mega-menu__trigger {
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
@@ -29,23 +29,23 @@
     transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-megamenu__item--open .m-megamenu__trigger,
-.m-megamenu__trigger:hover:not(:disabled) {
+.m-mega-menu__item--open .m-mega-menu__trigger,
+.m-mega-menu__trigger:hover:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
 }
 
-.m-megamenu__trigger:focus-visible {
+.m-mega-menu__trigger:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-megamenu__panel {
+.m-mega-menu__panel {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     box-shadow: var(--m-shadow-md);
     display: flex;
-    gap: var(--m-megamenu-panel-gap);
+    gap: var(--m-mega-menu-panel-gap);
     left: 0;
     margin-top: var(--m-space-1);
     padding: var(--m-space-3);
@@ -54,21 +54,21 @@
     z-index: var(--m-z-popper);
 }
 
-.m-megamenu__panel--teleported {
+.m-mega-menu__panel--teleported {
     margin-top: 0;
     position: fixed;
     top: auto;
     z-index: var(--m-z-dropdown);
 }
 
-.m-megamenu__column {
+.m-mega-menu__column {
     display: flex;
     flex-direction: column;
     gap: var(--m-space-1);
-    min-width: var(--m-megamenu-column-min-width);
+    min-width: var(--m-mega-menu-column-min-width);
 }
 
-.m-megamenu__link {
+.m-mega-menu__link {
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
@@ -80,18 +80,18 @@
     transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-megamenu__link:hover:not(:disabled) {
+.m-mega-menu__link:hover:not(:disabled) {
     background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
 }
 
-.m-megamenu__trigger:disabled,
-.m-megamenu__link:disabled {
+.m-mega-menu__trigger:disabled,
+.m-mega-menu__link:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-megamenu__trigger:focus-visible,
-.m-megamenu__link:focus-visible {
+.m-mega-menu__trigger:focus-visible,
+.m-mega-menu__link:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }

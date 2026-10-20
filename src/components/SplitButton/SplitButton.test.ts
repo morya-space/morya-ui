@@ -11,7 +11,7 @@ const items = [
 describe('muSplitButton', () => {
   it('emits click from main button', async () => {
     const wrapper = mount(MSplitButton, { props: { label: 'Save' } })
-    await wrapper.find('.m-splitbutton__main').trigger('click')
+    await wrapper.find('.m-split-button__main').trigger('click')
     expect(wrapper.emitted('click')).toHaveLength(1)
   })
 
@@ -20,9 +20,9 @@ describe('muSplitButton', () => {
       attachTo: document.body,
       props: { label: 'Save', model: items },
     })
-    await wrapper.find('.m-splitbutton__trigger').trigger('click')
+    await wrapper.find('.m-split-button__trigger').trigger('click')
     await nextTick()
-    expect(document.body.querySelector('.m-splitbutton__menu--teleported')).toBeTruthy()
+    expect(document.body.querySelector('.m-split-button__menu--teleported')).toBeTruthy()
     wrapper.unmount()
   })
 
@@ -30,16 +30,16 @@ describe('muSplitButton', () => {
     const wrapper = mount(MSplitButton, {
       props: { label: 'Save', model: items, teleport: false },
     })
-    await wrapper.find('.m-splitbutton__trigger').trigger('click')
+    await wrapper.find('.m-split-button__trigger').trigger('click')
     await nextTick()
-    expect(wrapper.find('.m-splitbutton__menu--teleported').exists()).toBe(false)
+    expect(wrapper.find('.m-split-button__menu--teleported').exists()).toBe(false)
     expect(wrapper.find('[role="menu"]').exists()).toBe(true)
   })
 
   it('renders registered icon names with MIcon', () => {
     const wrapper = mount(MSplitButton, { props: { label: 'Save', icon: 'check', size: 'large' } })
-    expect(wrapper.find('.m-splitbutton__icon .m-icon').exists()).toBe(true)
-    expect(wrapper.find('.m-splitbutton__icon .m-icon').classes()).toContain('m-icon--large')
+    expect(wrapper.find('.m-split-button__icon .m-icon').exists()).toBe(true)
+    expect(wrapper.find('.m-split-button__icon .m-icon').classes()).toContain('m-icon--large')
   })
 
   it('opens menu and emits command', async () => {
@@ -51,8 +51,8 @@ describe('muSplitButton', () => {
         model: [{ label: 'Save As', command }, { label: 'Export', disabled: true }],
       },
     })
-    await wrapper.find('.m-splitbutton__trigger').trigger('click')
-    await wrapper.findAll('.m-splitbutton__item')[0]!.trigger('click')
+    await wrapper.find('.m-split-button__trigger').trigger('click')
+    await wrapper.findAll('.m-split-button__item')[0]!.trigger('click')
     expect(command).toHaveBeenCalled()
     expect(wrapper.emitted('command')?.[0]?.[0]).toMatchObject({ label: 'Save As' })
   })
@@ -67,12 +67,12 @@ describe('muSplitButton', () => {
         model: [{ label: 'A' }, { label: 'B', disabled: true }, { label: 'C', command: commandC }],
       },
     })
-    const triggerEl = wrapper.get('.m-splitbutton__trigger')
+    const triggerEl = wrapper.get('.m-split-button__trigger')
     await triggerEl.trigger('keydown', { key: 'ArrowDown' })
     await nextTick()
-    const menu = wrapper.get('.m-splitbutton__menu')
+    const menu = wrapper.get('.m-split-button__menu')
     expect(triggerEl.attributes('aria-controls')).toBe(menu.attributes('id'))
-    const itemEls = () => wrapper.findAll('.m-splitbutton__item')
+    const itemEls = () => wrapper.findAll('.m-split-button__item')
     expect(document.activeElement).toBe(itemEls()[0]!.element)
 
     await menu.trigger('keydown', { key: 'ArrowDown' })
@@ -81,7 +81,7 @@ describe('muSplitButton', () => {
     await menu.trigger('keydown', { key: 'Enter' })
     expect(commandC).toHaveBeenCalled()
     await nextTick()
-    expect(wrapper.find('.m-splitbutton__menu').exists()).toBe(false)
+    expect(wrapper.find('.m-split-button__menu').exists()).toBe(false)
     expect(document.activeElement).toBe(triggerEl.element)
     wrapper.unmount()
   })
@@ -91,12 +91,12 @@ describe('muSplitButton', () => {
       attachTo: document.body,
       props: { label: 'Save', teleport: false, model: items },
     })
-    const triggerEl = wrapper.get('.m-splitbutton__trigger')
+    const triggerEl = wrapper.get('.m-split-button__trigger')
     await triggerEl.trigger('click')
     await nextTick()
-    await wrapper.get('.m-splitbutton__menu').trigger('keydown', { key: 'Escape' })
+    await wrapper.get('.m-split-button__menu').trigger('keydown', { key: 'Escape' })
     await nextTick()
-    expect(wrapper.find('.m-splitbutton__menu').exists()).toBe(false)
+    expect(wrapper.find('.m-split-button__menu').exists()).toBe(false)
     expect(document.activeElement).toBe(triggerEl.element)
     wrapper.unmount()
   })

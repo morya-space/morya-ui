@@ -7,7 +7,7 @@ describe('inputGroupAddon', () => {
     const wrapper = mount(MInputGroupAddon, {
       slots: { default: '@' },
     })
-    expect(wrapper.classes()).toContain('m-inputgroup-addon')
+    expect(wrapper.classes()).toContain('m-input-group-addon')
     expect(wrapper.text()).toBe('@')
   })
 })

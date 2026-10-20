@@ -29,7 +29,7 @@ export const builtinMotionPresets: Readonly<Record<string, MotionPresetDefinitio
   /** Alias of `scale-fade` — kept for backward-compatible `transition="popover"`. */
   popover: { name: 'm-scale-fade' },
   loading: { name: 'm-loading' },
-  blockui: { name: 'm-blockui' },
+  blockui: { name: 'm-block-ui' },
   message: { name: 'm-message-slide' },
   none: { name: 'm-none' },
 }

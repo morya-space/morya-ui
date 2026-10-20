@@ -45,7 +45,7 @@ const form = inject(M_FORM_KEY, null)
 const locale = useMLocale()
 const unmasked = ref(false)
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useMId('m-password')
+const autoInputId = useMId('m-input-password')
 const inputId = computed(() => props.id ?? autoInputId)
 const isInvalid = computed(() => props.invalid || props.status === 'error')
 const isWarning = computed(() => props.status === 'warning' && !isInvalid.value)
@@ -113,16 +113,16 @@ const describedBy = computed(() => {
 })
 
 const rootClass = computed(() => [
-  'm-password',
-  `m-password--${sizeClass.value}`,
+  'm-input-password',
+  `m-input-password--${sizeClass.value}`,
   {
-    'm-password--filled': resolvedVariant.value === 'filled',
-    'm-password--fluid': resolvedFluid.value,
-    'm-password--invalid': isInvalid.value,
-    'm-password--warning': isWarning.value,
-    'm-password--disabled': props.disabled,
-    'm-password--toggle': props.toggleMask,
-    'm-password--clearable': showClear.value,
+    'm-input-password--filled': resolvedVariant.value === 'filled',
+    'm-input-password--fluid': resolvedFluid.value,
+    'm-input-password--invalid': isInvalid.value,
+    'm-input-password--warning': isWarning.value,
+    'm-input-password--disabled': props.disabled,
+    'm-input-password--toggle': props.toggleMask,
+    'm-input-password--clearable': showClear.value,
   },
 ])
 
@@ -209,16 +209,16 @@ defineExpose({ focus, blur, select })
 <template>
   <div
     v-bind="rootAttrs"
-    class="m-password-field"
-    :class="{ 'm-password-field--fluid': resolvedFluid }"
+    class="m-input-password-field"
+    :class="{ 'm-input-password-field--fluid': resolvedFluid }"
   >
-    <label v-if="label" class="m-password-field__label" :for="inputId">{{ label }}</label>
+    <label v-if="label" class="m-input-password-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <input
         v-bind="controlAttrs"
         :id="inputId"
         ref="inputElement"
-        class="m-password__input"
+        class="m-input-password__input"
         :type="unmasked ? 'text' : 'password'"
         :value="modelValue"
         :disabled="disabled"
@@ -237,7 +237,7 @@ defineExpose({ focus, blur, select })
       >
       <button
         v-if="showClear"
-        class="m-password__clear"
+        class="m-input-password__clear"
         type="button"
         :aria-label="locale.clearInput"
         :disabled="disabled || readonly"
@@ -247,7 +247,7 @@ defineExpose({ focus, blur, select })
       </button>
       <button
         v-if="toggleMask"
-        class="m-password__toggle"
+        class="m-input-password__toggle"
         type="button"
         :aria-label="unmasked ? locale.hidePassword : locale.showPassword"
         :aria-pressed="unmasked"
@@ -266,12 +266,12 @@ defineExpose({ focus, blur, select })
         </slot>
       </button>
     </div>
-    <div v-if="(feedback && strength !== 'empty') || resolvedShowCount" class="m-password-field__meta">
+    <div v-if="(feedback && strength !== 'empty') || resolvedShowCount" class="m-input-password-field__meta">
       <span
         v-if="feedback && strength !== 'empty'"
         :id="`${inputId}-feedback`"
-        class="m-password__feedback"
-        :class="`m-password__feedback--${strength}`"
+        class="m-input-password__feedback"
+        :class="`m-input-password__feedback--${strength}`"
         role="meter"
         :aria-valuemin="0"
         :aria-valuemax="4"
@@ -283,7 +283,7 @@ defineExpose({ focus, blur, select })
       <span
         v-if="resolvedShowCount"
         :id="`${inputId}-count`"
-        class="m-password-field__count"
+        class="m-input-password-field__count"
         aria-live="polite"
       >
         {{ countText }}

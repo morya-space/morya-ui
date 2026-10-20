@@ -17,12 +17,12 @@ describe('muCommandMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const input = document.querySelector('.m-commandmenu__input') as HTMLInputElement
+    const input = document.querySelector('.m-command-menu__input') as HTMLInputElement
     expect(input).toBeTruthy()
     input.value = 'new'
     input.dispatchEvent(new Event('input'))
     await nextTick()
-    const items = document.querySelectorAll('.m-commandmenu__item')
+    const items = document.querySelectorAll('.m-command-menu__item')
     expect(items).toHaveLength(1)
     ;(items[0] as HTMLButtonElement).click()
     await nextTick()
@@ -37,8 +37,8 @@ describe('muCommandMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(document.body.querySelector('.m-commandmenu-backdrop')).toBeTruthy()
-    expect(wrapper.find('.m-commandmenu-backdrop').exists()).toBe(false)
+    expect(document.body.querySelector('.m-command-menu-backdrop')).toBeTruthy()
+    expect(wrapper.find('.m-command-menu-backdrop').exists()).toBe(false)
     wrapper.unmount()
   })
 
@@ -48,8 +48,8 @@ describe('muCommandMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    expect(wrapper.find('.m-commandmenu-backdrop').exists()).toBe(true)
-    expect(document.body.querySelectorAll('.m-commandmenu-backdrop')).toHaveLength(1)
+    expect(wrapper.find('.m-command-menu-backdrop').exists()).toBe(true)
+    expect(document.body.querySelectorAll('.m-command-menu-backdrop')).toHaveLength(1)
     wrapper.unmount()
   })
 
@@ -79,11 +79,11 @@ describe('muCommandMenu', () => {
       attachTo: document.body,
     })
     await nextTick()
-    const panel = document.body.querySelector('.m-commandmenu') as HTMLElement
+    const panel = document.body.querySelector('.m-command-menu') as HTMLElement
     panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }))
     await nextTick()
-    expect(document.body.querySelectorAll('.m-commandmenu__item')[1]?.className).toContain(
-      'm-commandmenu__item--active',
+    expect(document.body.querySelectorAll('.m-command-menu__item')[1]?.className).toContain(
+      'm-command-menu__item--active',
     )
     panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }))
     await nextTick()

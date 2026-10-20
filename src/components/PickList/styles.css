@@ -1,12 +1,12 @@
 /* —— Data: PickList —— */
-.m-picklist {
+.m-pick-list {
     align-items: stretch;
     display: flex;
     gap: var(--m-space-3);
     width: 100%;
 }
 
-.m-picklist__listbox {
+.m-pick-list__listbox {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -14,7 +14,7 @@
     min-width: 0;
 }
 
-.m-picklist__header {
+.m-pick-list__header {
     background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
     border: var(--m-border-width) solid var(--m-color-border);
     border-bottom: 0;
@@ -24,12 +24,12 @@
     padding: var(--m-space-2) var(--m-space-3);
 }
 
-.m-picklist__listbox .m-picklist__list {
+.m-pick-list__listbox .m-pick-list__list {
     border-radius: 0 0 var(--m-radius-md) var(--m-radius-md);
     flex: 1;
 }
 
-.m-picklist__controls {
+.m-pick-list__controls {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -37,17 +37,17 @@
     justify-content: center;
 }
 
-.m-picklist__btn:disabled {
+.m-pick-list__btn:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-picklist__btn:hover:not(:disabled) {
+.m-pick-list__btn:hover:not(:disabled) {
     border-color: var(--m-color-primary);
     color: var(--m-color-primary);
 }
 
-.m-picklist__empty {
+.m-pick-list__empty {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
     line-height: 1.5;

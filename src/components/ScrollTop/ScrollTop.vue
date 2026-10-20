@@ -33,12 +33,12 @@ function toCssSize(value?: string | number) {
 }
 
 const rootClass = computed(() => [
-  'm-scrolltop',
-  `m-scrolltop--${props.shape}`,
+  'm-scroll-top',
+  `m-scroll-top--${props.shape}`,
   {
-    'm-scrolltop--visible': visible.value,
-    'm-scrolltop--parent': props.target === 'parent',
-    'm-scrolltop--teleported': teleported.value,
+    'm-scroll-top--visible': visible.value,
+    'm-scroll-top--parent': props.target === 'parent',
+    'm-scroll-top--teleported': teleported.value,
   },
 ])
 
@@ -112,7 +112,7 @@ watch(
 </script>
 
 <template>
-  <span ref="anchor" class="m-scrolltop-anchor" aria-hidden="true">
+  <span ref="anchor" class="m-scroll-top-anchor" aria-hidden="true">
     <Teleport :to="teleportTarget.to" :disabled="teleportTarget.disabled">
       <button
         v-bind="rootAttrs"

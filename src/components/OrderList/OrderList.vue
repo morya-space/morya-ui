@@ -93,7 +93,7 @@ function itemTabindex(index: number): 0 | -1 {
 
 function focusItem(index: number) {
   listEl()
-    ?.querySelectorAll<HTMLElement>('.m-orderlist__item')
+    ?.querySelectorAll<HTMLElement>('.m-order-list__item')
     [index]?.focus({ preventScroll: true })
 }
 
@@ -154,11 +154,11 @@ function armHandle() {
 }
 
 function makeDragPreview(index: number): HTMLElement | null {
-  const source = listEl()?.querySelectorAll<HTMLElement>('.m-orderlist__item')[index]
+  const source = listEl()?.querySelectorAll<HTMLElement>('.m-order-list__item')[index]
   if (!source) return null
   const rect = source.getBoundingClientRect()
   const clone = source.cloneNode(true) as HTMLElement
-  clone.classList.add('m-orderlist__drag-preview')
+  clone.classList.add('m-order-list__drag-preview')
   clone.style.width = `${rect.width}px`
   clone.style.height = `${rect.height}px`
   document.body.appendChild(clone)
@@ -249,13 +249,13 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-bind="rootAttrs"
-    class="m-orderlist"
-    :class="{ 'm-orderlist--disabled': disabled }"
+    class="m-order-list"
+    :class="{ 'm-order-list--disabled': disabled }"
   >
-    <div class="m-orderlist__controls">
+    <div class="m-order-list__controls">
       <button
         type="button"
-        class="m-orderlist__btn"
+        class="m-order-list__btn"
         :aria-label="locale.moveTop"
         :disabled="!canMoveUp"
         @click="moveTo(0)"
@@ -264,7 +264,7 @@ onBeforeUnmount(() => {
       </button>
       <button
         type="button"
-        class="m-orderlist__btn"
+        class="m-order-list__btn"
         :aria-label="locale.moveUp"
         :disabled="!canMoveUp"
         @click="moveBy(-1)"
@@ -273,7 +273,7 @@ onBeforeUnmount(() => {
       </button>
       <button
         type="button"
-        class="m-orderlist__btn"
+        class="m-order-list__btn"
         :aria-label="locale.moveDown"
         :disabled="!canMoveDown"
         @click="moveBy(1)"
@@ -282,7 +282,7 @@ onBeforeUnmount(() => {
       </button>
       <button
         type="button"
-        class="m-orderlist__btn"
+        class="m-order-list__btn"
         :aria-label="locale.moveBottom"
         :disabled="!canMoveDown"
         @click="moveTo(modelValue.length - 1)"
@@ -294,15 +294,15 @@ onBeforeUnmount(() => {
     <ScrollBody
       v-if="modelValue.length"
       ref="scrollBodyRef"
-      root-class="m-orderlist__scrollbar"
-      wrap-class="m-orderlist__list"
+      root-class="m-order-list__scrollbar"
+      wrap-class="m-order-list__list"
       :wrap-style="listStyle"
     >
       <TransitionGroup
         ref="list"
         tag="ul"
-        name="m-orderlist"
-        class="m-orderlist__options"
+        name="m-order-list"
+        class="m-order-list__options"
         role="listbox"
         tabindex="0"
         :aria-label="locale.selectOption"
@@ -312,15 +312,15 @@ onBeforeUnmount(() => {
         <li
           v-for="(item, index) in modelValue"
           :key="itemKey(item, index)"
-          class="m-orderlist__item"
+          class="m-order-list__item"
           :class="{
-            'm-orderlist__item--selected': selectedIndex === index,
-            'm-orderlist__item--disabled': disabled,
-            'm-orderlist__ghost': dragdrop && dragFrom === index,
-            'm-orderlist__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
-            'm-orderlist__drop-before':
+            'm-order-list__item--selected': selectedIndex === index,
+            'm-order-list__item--disabled': disabled,
+            'm-order-list__ghost': dragdrop && dragFrom === index,
+            'm-order-list__drop-target': dragdrop && dropTarget === index && dragFrom !== index,
+            'm-order-list__drop-before':
               dragdrop && dropTarget === index && dragFrom !== null && dragFrom > index,
-            'm-orderlist__drop-after':
+            'm-order-list__drop-after':
               dragdrop && dropTarget === index && dragFrom !== null && dragFrom < index,
           }"
           role="option"
@@ -337,7 +337,7 @@ onBeforeUnmount(() => {
           <button
             v-if="dragdrop"
             type="button"
-            class="m-orderlist__handle"
+            class="m-order-list__handle"
             :aria-label="locale.dragToReorder"
             :disabled="disabled"
             tabindex="-1"
@@ -346,7 +346,7 @@ onBeforeUnmount(() => {
           >
             <MIcon name="grip" size="sm" />
           </button>
-          <span class="m-orderlist__label">
+          <span class="m-order-list__label">
             <slot
               name="item"
               :item="item"
@@ -358,9 +358,9 @@ onBeforeUnmount(() => {
         </li>
       </TransitionGroup>
     </ScrollBody>
-    <div v-else class="m-orderlist__message" role="status">
+    <div v-else class="m-order-list__message" role="status">
       <slot name="empty">
-        <p class="m-orderlist__empty-text">
+        <p class="m-order-list__empty-text">
           {{ resolvedEmptyMessage }}
         </p>
       </slot>

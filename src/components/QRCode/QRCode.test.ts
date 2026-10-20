@@ -17,8 +17,8 @@ describe('muQRCode', () => {
       props: { value: 'hello', size: 120, bordered: true },
     })
     await nextTick()
-    expect(wrapper.classes()).toContain('m-qrcode--bordered')
-    expect(wrapper.find('canvas.m-qrcode__canvas').exists()).toBe(true)
+    expect(wrapper.classes()).toContain('m-qr-code--bordered')
+    expect(wrapper.find('canvas.m-qr-code__canvas').exists()).toBe(true)
   })
 
   it('emits refresh when expired overlay button clicked', async () => {
@@ -26,7 +26,7 @@ describe('muQRCode', () => {
       props: { value: 'x', status: 'expired' },
     })
     await nextTick()
-    const button = wrapper.find('.m-qrcode__mask button')
+    const button = wrapper.find('.m-qr-code__mask button')
     expect(button.exists()).toBe(true)
     await button.trigger('click')
     expect(wrapper.emitted('refresh')).toHaveLength(1)
@@ -40,14 +40,14 @@ describe('muQRCode', () => {
       },
     })
     expect(wrapper.find('.custom-status').text()).toBe('Custom')
-    expect(wrapper.find('.m-qrcode__status-text').exists()).toBe(false)
+    expect(wrapper.find('.m-qr-code__status-text').exists()).toBe(false)
   })
 
   it('shows scanned status text', () => {
     const wrapper = mount(MQRCode, {
       props: { value: 'x', status: 'scanned' },
     })
-    expect(wrapper.find('.m-qrcode--scanned').exists()).toBe(true)
-    expect(wrapper.find('.m-qrcode__status-text').exists()).toBe(true)
+    expect(wrapper.find('.m-qr-code--scanned').exists()).toBe(true)
+    expect(wrapper.find('.m-qr-code__status-text').exists()).toBe(true)
   })
 })

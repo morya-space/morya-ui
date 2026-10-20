@@ -7,7 +7,7 @@ describe('muPickList', () => {
     const wrapper = mount(MPickList, {
       props: { source: ['a', 'b'], target: ['c'] },
     })
-    await wrapper.findAll('.m-picklist__listbox')[0]!.findAll('.m-picklist__item')[0]!.trigger('click')
+    await wrapper.findAll('.m-pick-list__listbox')[0]!.findAll('.m-pick-list__item')[0]!.trigger('click')
     await wrapper.find('[aria-label="移到右侧"]').trigger('click')
     expect(wrapper.emitted('update:source')?.at(-1)).toEqual([['b']])
     expect(wrapper.emitted('update:target')?.at(-1)).toEqual([['c', 'a']])
@@ -26,7 +26,7 @@ describe('muPickList', () => {
     const wrapper = mount(MPickList, {
       props: { source: [], target: [] },
     })
-    const emptyItems = wrapper.findAll('.m-picklist__empty')
+    const emptyItems = wrapper.findAll('.m-pick-list__empty')
     expect(emptyItems).toHaveLength(2)
     expect(emptyItems[0]!.text()).toBe('暂无数据')
   })

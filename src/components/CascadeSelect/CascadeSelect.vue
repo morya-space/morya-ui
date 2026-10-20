@@ -51,7 +51,7 @@ const trigger = ref<HTMLElement | null>(null)
 const panel = ref<HTMLElement | null>(null)
 const panelStyle = ref<Record<string, string>>({})
 const path = ref<CascadeSelectOption[][]>([])
-const autoFieldId = useMId('m-cascadeselect')
+const autoFieldId = useMId('m-cascade-select')
 const fieldId = computed(() => props.id ?? autoFieldId)
 const teleportTarget = computed(() => resolveOverlayTeleport(props, config.value.appendTo))
 const teleported = computed(() => isOverlayTeleported(props, config.value.appendTo))
@@ -136,8 +136,8 @@ function buildPathToValue(
 function focusActiveOption() {
   const index = keyboard.activeIndex.value
   if (index < 0) return
-  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.m-cascadeselect__column')[activeColumn.value]
-  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.m-cascadeselect__option')[index]
+  const columnEl = panel.value?.querySelectorAll<HTMLElement>('.m-cascade-select__column')[activeColumn.value]
+  const optionEl = columnEl?.querySelectorAll<HTMLElement>('.m-cascade-select__option')[index]
   optionEl?.focus({ preventScroll: true })
 }
 
@@ -305,19 +305,19 @@ onBeforeUnmount(() => {
   <div
     ref="root"
     v-bind="rootAttrs"
-    class="m-select-field m-cascadeselect"
+    class="m-select-field m-cascade-select"
     :class="[
-      `m-cascadeselect--${sizeClass}`,
+      `m-cascade-select--${sizeClass}`,
       {
         'm-select-field--fluid': resolvedFluid,
-        'm-cascadeselect--disabled': disabled,
-        'm-cascadeselect--open': open,
+        'm-cascade-select--disabled': disabled,
+        'm-cascade-select--open': open,
       },
     ]"
   >
     <label v-if="label" class="m-select-field__label" :for="fieldId">{{ label }}</label>
     <div
-      class="m-cascadeselect__control m-select__control"
+      class="m-cascade-select__control m-select__control"
       :class="{
         'm-select__control--clearable': showClearButton,
         'm-select__control--open': open,
@@ -328,9 +328,9 @@ onBeforeUnmount(() => {
         :id="fieldId"
         ref="trigger"
         type="button"
-        class="m-cascadeselect__trigger"
+        class="m-cascade-select__trigger"
         role="combobox"
-        :class="{ 'm-cascadeselect__trigger--invalid': isInvalid, 'm-cascadeselect__trigger--placeholder': !hasValue }"
+        :class="{ 'm-cascade-select__trigger--invalid': isInvalid, 'm-cascade-select__trigger--placeholder': !hasValue }"
         :disabled="disabled"
         :aria-expanded="open"
         :aria-controls="open ? panelId : undefined"
@@ -341,7 +341,7 @@ onBeforeUnmount(() => {
         @keydown="onTriggerKeydown"
       >
         <slot v-if="slots.value && hasValue && selectedOption" name="value" :option="selectedOption" />
-        <span v-else class="m-cascadeselect__label">{{ displayLabel }}</span>
+        <span v-else class="m-cascade-select__label">{{ displayLabel }}</span>
       </button>
       <div class="m-select__suffix">
         <button
@@ -376,8 +376,8 @@ onBeforeUnmount(() => {
           v-if="open"
           :id="panelId"
           ref="panel"
-          class="m-cascadeselect__panel"
-          :class="{ 'm-cascadeselect__panel--teleported': teleported }"
+          class="m-cascade-select__panel"
+          :class="{ 'm-cascade-select__panel--teleported': teleported }"
           :style="panelStyle"
           role="listbox"
           @keydown="onPanelKeydown"
@@ -386,24 +386,24 @@ onBeforeUnmount(() => {
             v-for="(column, columnIndex) in path"
             :key="columnIndex"
             tag="ul"
-            class="m-cascadeselect__column"
+            class="m-cascade-select__column"
             fit-content
-            max-height="var(--m-cascadeselect-column-max-height)"
-            view-class="m-cascadeselect__column-list"
+            max-height="var(--m-cascade-select-column-max-height)"
+            view-class="m-cascade-select__column-list"
           >
             <li v-for="(option, optionIndex) in column" :key="String(option.value)">
               <button
                 type="button"
-                class="m-cascadeselect__option"
+                class="m-cascade-select__option"
                 :class="{
-                  'm-cascadeselect__option--selected': option.value === modelValue,
-                  'm-cascadeselect__option--in-path': isOptionInPath(option, columnIndex),
-                  'm-cascadeselect__option--highlighted': isOptionHighlighted(
+                  'm-cascade-select__option--selected': option.value === modelValue,
+                  'm-cascade-select__option--in-path': isOptionInPath(option, columnIndex),
+                  'm-cascade-select__option--highlighted': isOptionHighlighted(
                     option,
                     columnIndex,
                     optionIndex,
                   ),
-                  'm-cascadeselect__option--parent': Boolean(option.children?.length),
+                  'm-cascade-select__option--parent': Boolean(option.children?.length),
                 }"
                 :disabled="option.disabled"
                 role="option"
@@ -416,7 +416,7 @@ onBeforeUnmount(() => {
                 </slot>
                 <MIcon
                   v-if="option.value === modelValue"
-                  class="m-cascadeselect__check"
+                  class="m-cascade-select__check"
                   name="check"
                   size="sm"
                   aria-hidden="true"

@@ -138,7 +138,7 @@ useModalOverlay({
         <div class="m-dialog-zoom" @click.self="onOutsideClick">
           <section
             ref="dialogElement"
-            class="m-dialog m-confirmdialog"
+            class="m-dialog m-confirm-dialog"
             :class="{ [`m-dialog--${props.type}`]: props.type }"
             role="alertdialog"
             aria-modal="true"
@@ -150,15 +150,15 @@ useModalOverlay({
                 <h2>{{ title }}</h2>
               </slot>
             </header>
-            <div class="m-dialog__body m-confirmdialog__message">
+            <div class="m-dialog__body m-confirm-dialog__message">
               <span v-if="typeIcon" class="m-dialog__type-icon" aria-hidden="true">
                 <MIcon :name="typeIcon" size="sm" />
               </span>
-              <div class="m-confirmdialog__copy">
+              <div class="m-confirm-dialog__copy">
                 <slot>{{ message }}</slot>
               </div>
             </div>
-            <footer class="m-dialog__footer m-confirmdialog__footer">
+            <footer class="m-dialog__footer m-confirm-dialog__footer">
               <slot name="footer">
                 <MButton :label="rejectText" :disabled="busy" :loading="pending === 'reject'" @click="reject" />
                 <MButton

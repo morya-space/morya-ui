@@ -30,27 +30,27 @@
 .m-page-toolbar,
 .m-menu,
 .m-menubar,
-.m-contextmenu,
-.m-tieredmenu,
+.m-context-menu,
+.m-tiered-menu,
 .m-dropdown,
 .m-breadcrumb,
 .m-tabs,
-.m-datepicker,
+.m-date-picker,
 .m-listbox,
-.m-togglebutton,
+.m-toggle-button,
 .m-select,
 .m-textarea,
-.m-selectbutton,
-.m-inputotp,
+.m-select-button,
+.m-input-otp,
 .m-knob,
-.m-autocomplete,
-.m-splitbutton,
+.m-auto-complete,
+.m-split-button,
 .m-tree,
 .m-timeline,
-.m-dataview,
-.m-confirmpopup,
-.m-scrolltop,
-.m-blockui,
+.m-data-view,
+.m-confirm-popup,
+.m-scroll-top,
+.m-block-ui,
 .m-inplace,
 .m-message,
 .m-toast,
@@ -58,23 +58,23 @@
 .m-empty,
 .m-result,
 .m-progress-spinner,
-.m-cascadeselect,
-.m-treeselect,
-.m-colorpicker,
-.m-inputtags,
+.m-cascade-select,
+.m-tree-select,
+.m-color-picker,
+.m-input-tags,
 .m-label,
-.m-speeddial,
-.m-orderlist,
-.m-picklist,
-.m-virtualscroller,
-.m-megamenu,
+.m-speed-dial,
+.m-order-list,
+.m-pick-list,
+.m-virtual-scroller,
+.m-mega-menu,
 .m-dock,
 .m-sidebar,
-.m-commandmenu,
-.m-fileupload,
+.m-command-menu,
+.m-file-upload,
 .m-carousel,
 .m-gallery,
-.m-metergroup,
+.m-meter-group,
 .m-fluid,
 .m-terminal {
     font-family: var(--m-font-sans);
@@ -83,11 +83,11 @@
 
 .m-input:disabled,
 .m-textarea:disabled,
-.m-password__input:disabled,
-.m-inputnumber__input:disabled,
-.m-inputotp__input:disabled,
-.m-colorpicker__trigger:disabled,
-.m-inputtags--disabled {
+.m-input-password__input:disabled,
+.m-input-number__input:disabled,
+.m-input-otp__input:disabled,
+.m-color-picker__trigger:disabled,
+.m-input-tags--disabled {
     background-color: var(--m-color-bg-disabled);
     color: var(--m-color-text-disabled);
     cursor: not-allowed;
@@ -97,9 +97,9 @@
 .m-input-field__control--prefixed .m-input:disabled,
 .m-input-field__control--suffixed .m-input:disabled,
 .m-input-field__control--clearable .m-input:disabled,
-.m-password--disabled .m-password__input,
-.m-inputnumber--disabled .m-inputnumber__input,
-.m-datepicker--disabled .m-datepicker__input,
+.m-input-password--disabled .m-input-password__input,
+.m-input-number--disabled .m-input-number__input,
+.m-date-picker--disabled .m-date-picker__input,
 .m-icon-field--anchored .m-input:disabled,
 .m-icon-field--anchored .m-textarea:disabled {
     opacity: 1;
@@ -107,16 +107,16 @@
 
 .m-input::placeholder,
 .m-textarea::placeholder,
-.m-password__input::placeholder,
-.m-inputnumber__input::placeholder,
-.m-inputtags__input::placeholder {
+.m-input-password__input::placeholder,
+.m-input-number__input::placeholder,
+.m-input-tags__input::placeholder {
     color: var(--m-color-text-muted);
     opacity: 1;
 }
 
 .m-input-field__meta,
 .m-textarea-field__meta,
-.m-password-field__meta {
+.m-input-password-field__meta {
     align-items: baseline;
     display: flex;
     gap: var(--m-space-2);
@@ -125,13 +125,13 @@
 
 .m-input-field__meta:not(:has(.m-input-field__help)),
 .m-textarea-field__meta:not(:has(.m-textarea-field__help)),
-.m-password-field__meta:not(:has(.m-password__feedback)) {
+.m-input-password-field__meta:not(:has(.m-input-password__feedback)) {
     justify-content: flex-end;
 }
 
 .m-input-field__count,
 .m-textarea-field__count,
-.m-password-field__count {
+.m-input-password-field__count {
     color: var(--m-color-text-muted);
     flex: 0 0 auto;
     font-size: var(--m-font-size-xs);
@@ -512,61 +512,84 @@
     opacity: 1;
 }
 
-.m-inputgroup > .m-input,
-.m-inputgroup > .m-input-field,
-.m-inputgroup > .m-password-field,
-.m-inputgroup > .m-inputnumber-field {
+.m-input-group > .m-input,
+.m-input-group > .m-input-field,
+.m-input-group > .m-input-password-field,
+.m-input-group > .m-input-number-field {
     flex: 1 1 auto;
     min-width: 0;
 }
 
-.m-inputgroup > .m-input-field,
-.m-inputgroup > .m-password-field,
-.m-inputgroup > .m-inputnumber-field {
+.m-input-group > .m-input-field,
+.m-input-group > .m-input-password-field,
+.m-input-group > .m-input-number-field {
     display: flex;
     flex-direction: column;
     gap: 0;
 }
 
-.m-inputgroup > .m-input,
-.m-inputgroup .m-input,
-.m-inputgroup .m-password,
-.m-inputgroup .m-inputnumber__input-wrap,
-.m-inputgroup .m-input-field__control--prefixed,
-.m-inputgroup .m-input-field__control--suffixed,
-.m-inputgroup .m-input-field__control--clearable {
+.m-input-group > .m-input,
+.m-input-group .m-input,
+.m-input-group .m-input-password,
+.m-input-group .m-input-number:not(.m-input-number--buttons):not(.m-input-number--buttons-right)
+    .m-input-number__input-wrap,
+.m-input-group .m-input-field__control--prefixed,
+.m-input-group .m-input-field__control--suffixed,
+.m-input-group .m-input-field__control--clearable {
     border-radius: 0;
     width: 100%;
 }
 
-.m-inputgroup > :first-child.m-input,
-.m-inputgroup > :first-child .m-input,
-.m-inputgroup > :first-child .m-password,
-.m-inputgroup > :first-child .m-inputnumber__input-wrap,
-.m-inputgroup > :first-child .m-input-field__control--prefixed,
-.m-inputgroup > :first-child .m-input-field__control--suffixed,
-.m-inputgroup > :first-child .m-input-field__control--clearable,
-.m-inputgroup > :first-child.m-inputgroup-addon {
+/* With buttons, the frame lives on the root: stretch the whole control and
+   let the input-wrap flex inside it, so the buttons stay inside the frame. */
+.m-input-group .m-input-number--buttons,
+.m-input-group .m-input-number--buttons-right {
+    border-radius: 0;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+}
+
+.m-input-group .m-input-number--buttons .m-input-number__input-wrap,
+.m-input-group .m-input-number--buttons-right .m-input-number__input-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.m-input-group > :first-child.m-input,
+.m-input-group > :first-child .m-input,
+.m-input-group > :first-child .m-input-password,
+.m-input-group > :first-child .m-input-number,
+.m-input-group > :first-child .m-input-number__input-wrap,
+.m-input-group > :first-child .m-input-field__control--prefixed,
+.m-input-group > :first-child .m-input-field__control--suffixed,
+.m-input-group > :first-child .m-input-field__control--clearable,
+.m-input-group > :first-child.m-input-group-addon {
     border-bottom-left-radius: var(--m-radius-control);
     border-top-left-radius: var(--m-radius-control);
 }
 
-.m-inputgroup > :last-child.m-input,
-.m-inputgroup > :last-child .m-input,
-.m-inputgroup > :last-child .m-password,
-.m-inputgroup > :last-child .m-inputnumber__input-wrap,
-.m-inputgroup > :last-child .m-input-field__control--prefixed,
-.m-inputgroup > :last-child .m-input-field__control--suffixed,
-.m-inputgroup > :last-child .m-input-field__control--clearable,
-.m-inputgroup > :last-child.m-inputgroup-addon {
+.m-input-group > :last-child.m-input,
+.m-input-group > :last-child .m-input,
+.m-input-group > :last-child .m-input-password,
+.m-input-group > :last-child .m-input-number,
+.m-input-group > :last-child .m-input-number__input-wrap,
+.m-input-group > :last-child .m-input-field__control--prefixed,
+.m-input-group > :last-child .m-input-field__control--suffixed,
+.m-input-group > :last-child .m-input-field__control--clearable,
+.m-input-group > :last-child.m-input-group-addon {
     border-bottom-right-radius: var(--m-radius-control);
     border-top-right-radius: var(--m-radius-control);
 }
 
-.m-inputgroup > .m-inputgroup-addon + .m-input,
-.m-inputgroup > .m-inputgroup-addon + .m-input-field .m-input,
-.m-inputgroup > .m-input + .m-inputgroup-addon,
-.m-inputgroup > .m-input-field + .m-inputgroup-addon {
+.m-input-group > .m-input-group-addon + .m-input,
+.m-input-group > .m-input-group-addon + .m-input-field .m-input,
+.m-input-group > .m-input + .m-input-group-addon,
+.m-input-group > .m-input-field + .m-input-group-addon,
+.m-input-group > .m-input-group-addon + .m-input-number-field .m-input-number,
+.m-input-group > .m-input-number-field + .m-input-group-addon,
+.m-input-group > .m-input-group-addon + .m-input-password-field .m-input-password,
+.m-input-group > .m-input-password-field + .m-input-group-addon {
     margin-left: calc(var(--m-border-width) * -1);
 }
 
@@ -599,8 +622,8 @@
     overflow: auto;
 }
 
-.m-orderlist__btn,
-.m-picklist__btn {
+.m-order-list__btn,
+.m-pick-list__btn {
     align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -616,72 +639,72 @@
     padding: var(--m-space-1) var(--m-space-2);
 }
 
-.m-orderlist__btn:hover:not(:disabled),
-.m-picklist__btn:hover:not(:disabled) {
+.m-order-list__btn:hover:not(:disabled),
+.m-pick-list__btn:hover:not(:disabled) {
     border-color: var(--m-color-primary);
     color: var(--m-color-primary);
 }
 
-.m-orderlist__btn:disabled,
-.m-picklist__btn:disabled {
+.m-order-list__btn:disabled,
+.m-pick-list__btn:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-orderlist__btn:focus-visible,
-.m-picklist__btn:focus-visible {
+.m-order-list__btn:focus-visible,
+.m-pick-list__btn:focus-visible {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-picklist__btn .m-icon + .m-icon {
+.m-pick-list__btn .m-icon + .m-icon {
     margin-left: -0.35rem;
 }
 
-.m-orderlist__scrollbar,
-.m-picklist__scrollbar {
+.m-order-list__scrollbar,
+.m-pick-list__scrollbar {
     flex: 1;
     max-height: 16rem;
     min-height: 12rem;
     min-width: var(--m-overlay-menu-min-width);
 }
 
-.m-orderlist__list,
-.m-picklist__list {
+.m-order-list__list,
+.m-pick-list__list {
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
     padding: var(--m-space-1);
 }
 
-.m-orderlist__options,
-.m-picklist__options {
+.m-order-list__options,
+.m-pick-list__options {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.m-orderlist__item,
-.m-picklist__item {
+.m-order-list__item,
+.m-pick-list__item {
     border-radius: var(--m-radius-sm);
     cursor: pointer;
     padding: var(--m-space-2) var(--m-space-3);
 }
 
-.m-orderlist__item:hover,
-.m-picklist__item:hover {
+.m-order-list__item:hover,
+.m-pick-list__item:hover {
     background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
 }
 
-.m-orderlist__item:focus-visible,
-.m-picklist__item:focus-visible {
+.m-order-list__item:focus-visible,
+.m-pick-list__item:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-orderlist__item--selected,
-.m-picklist__item--selected {
+.m-order-list__item--selected,
+.m-pick-list__item--selected {
     background: color-mix(in srgb, var(--m-color-primary) 14%, var(--m-color-surface));
     color: var(--m-color-primary);
     font-weight: 500;
@@ -707,30 +730,30 @@
 }
 
 /* Shared hover/focus for remaining form triggers */
-.m-inputotp__input:hover:not(:disabled):not(:focus),
-.m-cascadeselect:not(.m-cascadeselect--open)
-    .m-cascadeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
-.m-treeselect:not(.m-treeselect--open)
-    .m-treeselect__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
-.m-inputtags:hover:not(.m-inputtags--disabled):not(:focus-within),
-.m-togglebutton:hover:not(:disabled):not(.m-togglebutton--checked):not(:focus-visible),
+.m-input-otp__input:hover:not(:disabled):not(:focus),
+.m-cascade-select:not(.m-cascade-select--open)
+    .m-cascade-select__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
+.m-tree-select:not(.m-tree-select--open)
+    .m-tree-select__trigger:hover:not(:disabled):not(:focus):not(:focus-visible),
+.m-input-tags:hover:not(.m-input-tags--disabled):not(:focus-within),
+.m-toggle-button:hover:not(:disabled):not(.m-toggle-button--checked):not(:focus-visible),
 .m-inplace__display:hover:not(:focus-visible) {
     border-color: var(--m-color-primary-hover);
 }
 
-.m-inputotp__input:focus,
-.m-inputotp__input:focus-visible,
-.m-cascadeselect--open .m-cascadeselect__trigger,
-.m-cascadeselect__trigger:focus,
-.m-cascadeselect__trigger:focus-visible,
-.m-treeselect--open .m-treeselect__trigger,
-.m-treeselect__trigger:focus,
-.m-treeselect__trigger:focus-visible,
-.m-inputtags:focus-within,
-.m-togglebutton:focus-visible,
-.m-selectbutton__button:focus-visible,
-.m-splitbutton__main:focus-visible,
-.m-splitbutton__trigger:focus-visible,
+.m-input-otp__input:focus,
+.m-input-otp__input:focus-visible,
+.m-cascade-select--open .m-cascade-select__trigger,
+.m-cascade-select__trigger:focus,
+.m-cascade-select__trigger:focus-visible,
+.m-tree-select--open .m-tree-select__trigger,
+.m-tree-select__trigger:focus,
+.m-tree-select__trigger:focus-visible,
+.m-input-tags:focus-within,
+.m-toggle-button:focus-visible,
+.m-select-button__button:focus-visible,
+.m-split-button__main:focus-visible,
+.m-split-button__trigger:focus-visible,
 .m-inplace__display:focus-visible,
 .m-pagination__button:focus-visible {
     border-color: var(--m-color-primary);
@@ -738,9 +761,9 @@
     outline: none;
 }
 
-.m-inputotp--invalid .m-inputotp__input:focus,
-.m-inputotp--invalid .m-inputotp__input:focus-visible,
-.m-inputtags--invalid:focus-within {
+.m-input-otp--invalid .m-input-otp__input:focus,
+.m-input-otp--invalid .m-input-otp__input:focus-visible,
+.m-input-tags--invalid:focus-within {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
@@ -764,8 +787,8 @@
     width: 1.35rem;
 }
 
-.m-inputnumber__clear,
-.m-autocomplete__clear {
+.m-input-number__clear,
+.m-auto-complete__clear {
     background: transparent;
     border: 0;
     color: var(--m-color-text-muted);

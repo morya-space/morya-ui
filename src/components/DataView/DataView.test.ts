@@ -6,16 +6,16 @@ import MDataView from './DataView.vue'
 describe('muDataView', () => {
   it('renders list layout by default', () => {
     const wrapper = mount(MDataView, { props: { value: ['A', 'B', 'C'] } })
-    expect(wrapper.classes()).toContain('m-dataview--list')
-    expect(wrapper.findAll('.m-dataview__list-item')).toHaveLength(3)
+    expect(wrapper.classes()).toContain('m-data-view--list')
+    expect(wrapper.findAll('.m-data-view__list-item')).toHaveLength(3)
   })
 
   it('paginates items when enabled', async () => {
     const wrapper = mount(MDataView, {
       props: { value: Array.from({ length: 12 }, (_, i) => `Item ${i}`), paginator: true, rows: 5 },
     })
-    expect(wrapper.findAll('.m-dataview__list-item')).toHaveLength(5)
-    expect(wrapper.find('.m-dataview__paginator').exists()).toBe(true)
+    expect(wrapper.findAll('.m-data-view__list-item')).toHaveLength(5)
+    expect(wrapper.find('.m-data-view__paginator').exists()).toBe(true)
   })
 
   it('uses grid slot', () => {
@@ -31,8 +31,8 @@ describe('muDataView', () => {
 
   it('shows default empty message', () => {
     const wrapper = mount(MDataView, { props: { value: [] } })
-    expect(wrapper.find('.m-dataview__message').exists()).toBe(true)
-    expect(wrapper.find('.m-dataview__empty-text').text()).toBe('暂无数据')
+    expect(wrapper.find('.m-data-view__message').exists()).toBe(true)
+    expect(wrapper.find('.m-data-view__empty-text').text()).toBe('暂无数据')
   })
 
   it('supports custom empty slot', () => {
@@ -70,8 +70,8 @@ describe('muDataView', () => {
         'onUpdate:page': (page: number) => wrapper.setProps({ page }),
       },
     })
-    expect(wrapper.findAll('.m-dataview__list-item')).toHaveLength(5)
-    expect(wrapper.find('.m-dataview__list-item').text()).toBe('Item 5')
+    expect(wrapper.findAll('.m-data-view__list-item')).toHaveLength(5)
+    expect(wrapper.find('.m-data-view__list-item').text()).toBe('Item 5')
   })
 
   it('does not reset page when data is appended', async () => {
@@ -95,6 +95,6 @@ describe('muDataView', () => {
       props: { value: ['a'] },
       slots: { header: '<div class="header-toolbar">Toolbar</div>' },
     })
-    expect(wrapper.find('.m-dataview__header .header-toolbar').text()).toBe('Toolbar')
+    expect(wrapper.find('.m-data-view__header .header-toolbar').text()).toBe('Toolbar')
   })
 })

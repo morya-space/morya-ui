@@ -8,7 +8,7 @@ function makeFile(name = 'hello.txt', type = 'text/plain', content = 'hello') {
 }
 
 async function pick(wrapper: ReturnType<typeof mount>, files: File[]) {
-  const input = wrapper.find('.m-fileupload__input')
+  const input = wrapper.find('.m-file-upload__input')
   Object.defineProperty(input.element, 'files', {
     value: files,
     configurable: true,
@@ -29,23 +29,23 @@ describe('muFileUpload', () => {
 
   it('opens picker on choose click', async () => {
     const wrapper = mount(MFileUpload)
-    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const input = wrapper.find('.m-file-upload__input').element as HTMLInputElement
     const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
-    await wrapper.find('.m-fileupload__choose').trigger('click')
+    await wrapper.find('.m-file-upload__choose').trigger('click')
     expect(click).toHaveBeenCalled()
   })
 
   it('renders a drop zone when drag is enabled', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true } })
-    expect(wrapper.find('.m-fileupload__dragger').exists()).toBe(true)
-    expect(wrapper.find('.m-fileupload__choose').exists()).toBe(false)
+    expect(wrapper.find('.m-file-upload__dragger').exists()).toBe(true)
+    expect(wrapper.find('.m-file-upload__choose').exists()).toBe(false)
     expect(wrapper.text()).toContain('将文件拖到此处')
   })
 
   it('emits select when files are dropped', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true, multiple: true } })
     const file = makeFile()
-    await wrapper.find('.m-fileupload__dragger').trigger('drop', {
+    await wrapper.find('.m-file-upload__dragger').trigger('drop', {
       dataTransfer: { files: [file] },
     })
     await nextTick()
@@ -55,16 +55,16 @@ describe('muFileUpload', () => {
 
   it('highlights the drop zone while dragging over', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true } })
-    const zone = wrapper.find('.m-fileupload__dragger')
+    const zone = wrapper.find('.m-file-upload__dragger')
     await zone.trigger('dragover', { dataTransfer: { dropEffect: 'none' } })
-    expect(zone.classes()).toContain('m-fileupload__dragger--over')
+    expect(zone.classes()).toContain('m-file-upload__dragger--over')
     await zone.trigger('dragleave')
-    expect(zone.classes()).not.toContain('m-fileupload__dragger--over')
+    expect(zone.classes()).not.toContain('m-file-upload__dragger--over')
   })
 
   it('emits exceed when dropped files go past the limit', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true, multiple: true, limit: 1 } })
-    await wrapper.find('.m-fileupload__dragger').trigger('drop', {
+    await wrapper.find('.m-file-upload__dragger').trigger('drop', {
       dataTransfer: { files: [makeFile('a.txt'), makeFile('b.txt')] },
     })
     expect(wrapper.emitted('exceed')?.[0]?.[0]).toHaveLength(2)
@@ -73,7 +73,7 @@ describe('muFileUpload', () => {
 
   it('emits exceed when appending files would pass the limit', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true, multiple: true, limit: 2 } })
-    const zone = wrapper.find('.m-fileupload__dragger')
+    const zone = wrapper.find('.m-file-upload__dragger')
     await zone.trigger('drop', { dataTransfer: { files: [makeFile('a.txt')] } })
     await nextTick()
     expect(wrapper.emitted('select')).toHaveLength(1)
@@ -88,12 +88,12 @@ describe('muFileUpload', () => {
   it('removes a listed file', async () => {
     const wrapper = mount(MFileUpload, { props: { mode: 'advanced' } })
     await pick(wrapper, [makeFile()])
-    expect(wrapper.find('.m-fileupload__file').exists()).toBe(true)
+    expect(wrapper.find('.m-file-upload__file').exists()).toBe(true)
 
     await wrapper.find('[aria-label="删除文件"]').trigger('click')
     await nextTick()
     expect(wrapper.emitted('remove')?.[0]?.[0]).toMatchObject({ name: 'hello.txt' })
-    expect(wrapper.find('.m-fileupload__file').exists()).toBe(false)
+    expect(wrapper.find('.m-file-upload__file').exists()).toBe(false)
   })
 
   it('skips files rejected by beforeUpload', async () => {
@@ -102,7 +102,7 @@ describe('muFileUpload', () => {
     })
     await pick(wrapper, [makeFile()])
     expect(wrapper.emitted('select')).toBeUndefined()
-    expect(wrapper.find('.m-fileupload__file').exists()).toBe(false)
+    expect(wrapper.find('.m-file-upload__file').exists()).toBe(false)
   })
 
   it('uploads through httpRequest and emits success', async () => {
@@ -127,7 +127,7 @@ describe('muFileUpload', () => {
     expect(httpRequest).not.toHaveBeenCalled()
     expect(wrapper.text()).toContain('上传')
 
-    await wrapper.find('.m-fileupload__toolbar .m-fileupload__choose').trigger('click')
+    await wrapper.find('.m-file-upload__toolbar .m-file-upload__choose').trigger('click')
     await vi.waitFor(() => {
       expect(wrapper.emitted('success')).toBeTruthy()
     })
@@ -136,12 +136,12 @@ describe('muFileUpload', () => {
 
   it('renders picture-card add tile and opens the picker', async () => {
     const wrapper = mount(MFileUpload, { props: { listType: 'picture-card' } })
-    expect(wrapper.find('.m-fileupload__choose').exists()).toBe(false)
-    expect(wrapper.find('.m-fileupload__card--add').exists()).toBe(true)
+    expect(wrapper.find('.m-file-upload__choose').exists()).toBe(false)
+    expect(wrapper.find('.m-file-upload__card--add').exists()).toBe(true)
 
-    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const input = wrapper.find('.m-file-upload__input').element as HTMLInputElement
     const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
-    await wrapper.find('.m-fileupload__card--add').trigger('click')
+    await wrapper.find('.m-file-upload__card--add').trigger('click')
     expect(click).toHaveBeenCalled()
   })
 
@@ -149,7 +149,7 @@ describe('muFileUpload', () => {
     const wrapper = mount(MFileUpload, {
       props: { drag: true, accept: 'image/*' },
     })
-    await wrapper.find('.m-fileupload__dragger').trigger('drop', {
+    await wrapper.find('.m-file-upload__dragger').trigger('drop', {
       dataTransfer: { files: [makeFile('notes.txt', 'text/plain')] },
     })
     await nextTick()
@@ -158,7 +158,7 @@ describe('muFileUpload', () => {
 
   it('sets directory attributes on the file input', () => {
     const wrapper = mount(MFileUpload, { props: { directory: true } })
-    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const input = wrapper.find('.m-file-upload__input').element as HTMLInputElement
     expect(input.multiple).toBe(true)
     expect(input.hasAttribute('webkitdirectory')).toBe(true)
   })
@@ -189,9 +189,9 @@ describe('muFileUpload', () => {
 
   it('opens the picker from the drop zone with Enter or Space', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true } })
-    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const input = wrapper.find('.m-file-upload__input').element as HTMLInputElement
     const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
-    const zone = wrapper.find('.m-fileupload__dragger')
+    const zone = wrapper.find('.m-file-upload__dragger')
     await zone.trigger('keydown', { key: 'Enter' })
     await zone.trigger('keydown', { key: ' ' })
     expect(click).toHaveBeenCalledTimes(2)
@@ -199,9 +199,9 @@ describe('muFileUpload', () => {
 
   it('does not open the picker while disabled', async () => {
     const wrapper = mount(MFileUpload, { props: { drag: true, disabled: true } })
-    const input = wrapper.find('.m-fileupload__input').element as HTMLInputElement
+    const input = wrapper.find('.m-file-upload__input').element as HTMLInputElement
     const click = vi.spyOn(input, 'click').mockImplementation(() => undefined)
-    await wrapper.find('.m-fileupload__dragger').trigger('keydown', { key: 'Enter' })
+    await wrapper.find('.m-file-upload__dragger').trigger('keydown', { key: 'Enter' })
     expect(click).not.toHaveBeenCalled()
   })
 })

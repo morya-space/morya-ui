@@ -31,12 +31,12 @@ const locale = useMLocale()
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 const rootClass = computed(() => [
-  'm-qrcode',
+  'm-qr-code',
   {
-    'm-qrcode--bordered': props.bordered,
-    'm-qrcode--loading': props.status === 'loading',
-    'm-qrcode--expired': props.status === 'expired',
-    'm-qrcode--scanned': props.status === 'scanned',
+    'm-qr-code--bordered': props.bordered,
+    'm-qr-code--loading': props.status === 'loading',
+    'm-qr-code--expired': props.status === 'expired',
+    'm-qr-code--scanned': props.status === 'scanned',
   },
 ])
 
@@ -82,14 +82,14 @@ function onRefresh() {
   >
     <canvas
       ref="canvasRef"
-      class="m-qrcode__canvas"
+      class="m-qr-code__canvas"
       :width="size"
       :height="size"
     />
 
     <div
       v-if="status !== 'active'"
-      class="m-qrcode__mask"
+      class="m-qr-code__mask"
     >
       <slot
         name="statusRender"
@@ -100,7 +100,7 @@ function onRefresh() {
           <MProgressSpinner size="small" />
         </template>
         <template v-else-if="status === 'expired'">
-          <p class="m-qrcode__status-text">
+          <p class="m-qr-code__status-text">
             {{ locale.qrCodeExpired }}
           </p>
           <MButton variant="text" size="small" @click="onRefresh">
@@ -112,7 +112,7 @@ function onRefresh() {
           </MButton>
         </template>
         <template v-else-if="status === 'scanned'">
-          <p class="m-qrcode__status-text">
+          <p class="m-qr-code__status-text">
             {{ locale.qrCodeScanned }}
           </p>
         </template>

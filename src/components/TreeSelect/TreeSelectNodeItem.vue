@@ -29,8 +29,8 @@ const locale = useMLocale()
 
 <template>
   <li
-    class="m-treeselect__node"
-    :class="{ 'm-treeselect__node--active': node.key === activeKey }"
+    class="m-tree-select__node"
+    :class="{ 'm-tree-select__node--active': node.key === activeKey }"
     role="treeitem"
     :aria-expanded="node.children?.length ? Boolean(expanded[node.key]) : undefined"
     :aria-level="depth + 1"
@@ -38,21 +38,21 @@ const locale = useMLocale()
     :aria-selected="showCheckbox ? undefined : selectedKeys.includes(node.key)"
     :aria-checked="showCheckbox ? Boolean(checkedKeys[node.key]) : undefined"
   >
-    <div class="m-treeselect__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
+    <div class="m-tree-select__row" :style="{ paddingLeft: `${depth * 0.75}rem` }">
       <button
         v-if="node.children?.length"
         type="button"
-        class="m-treeselect__toggler"
+        class="m-tree-select__toggler"
         tabindex="-1"
         :aria-label="expanded[node.key] ? locale.collapse : locale.expand"
         @click.stop="$emit('toggle', node.key)"
       >
         <MIcon :name="expanded[node.key] ? 'chevron-down' : 'chevron-right'" size="sm" />
       </button>
-      <span v-else class="m-treeselect__toggler-spacer" />
+      <span v-else class="m-tree-select__toggler-spacer" />
       <MCheckbox
         v-if="showCheckbox"
-        class="m-treeselect__checkbox"
+        class="m-tree-select__checkbox"
         tabindex="-1"
         :model-value="Boolean(checkedKeys[node.key])"
         :disabled="node.disabled"
@@ -61,8 +61,8 @@ const locale = useMLocale()
       />
       <button
         type="button"
-        class="m-treeselect__option"
-        :class="{ 'm-treeselect__option--selected': selectedKeys.includes(node.key) }"
+        class="m-tree-select__option"
+        :class="{ 'm-tree-select__option--selected': selectedKeys.includes(node.key) }"
         :disabled="node.disabled"
         :tabindex="node.key === activeKey ? 0 : -1"
         @mouseenter="$emit('activate', node)"
