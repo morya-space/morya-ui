@@ -1,0 +1,8 @@
+{
+  "chat.tools.terminal.autoApprove": {
+    "/^node 'c:\\\\Users\\\\chenw\\\\\\.copilot\\\\session-state\\\\b60bd77d-ba52-436c-84e9-1181f8ef8836\\\\files\\\\scan-root-classes\\.mjs'$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
+}
