@@ -1,43 +1,92 @@
 /* --- Form: InputNumber --- */
-.m-inputnumber-field {
+.m-input-number-field {
     display: grid;
     gap: var(--m-space-2);
 }
 
-.m-inputnumber-field--fluid {
+.m-input-number-field--fluid {
     width: 100%;
 }
 
-.m-inputnumber-field__label {
+.m-input-number-field__label {
     color: var(--m-color-text);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
     font-weight: 500;
 }
 
-.m-inputnumber-field__help {
+.m-input-number-field__help {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
 }
 
-.m-inputnumber-field__help--invalid {
+.m-input-number-field__help--invalid {
     color: var(--m-color-danger);
 }
 
-.m-inputnumber {
-    --m-inputnumber-width: 8rem;
-    --m-inputnumber-stack-button-padding-x: var(--m-space-2);
+.m-input-number {
+    --m-input-number-width: 8rem;
+    --m-input-number-stack-button-padding-x: var(--m-space-2);
     align-items: stretch;
     display: inline-flex;
     max-width: 100%;
 }
 
-.m-inputnumber--fluid {
+/* With buttons, the whole control shares one frame on the root so the
+   increment/decrement buttons read as inside the input. Children keep only
+   the inner seams; hover/focus/invalid paint on this frame. */
+.m-input-number--buttons,
+.m-input-number--buttons-right {
+    border: var(--m-border-width) solid var(--m-color-border);
+    border-radius: var(--m-radius-control);
+    transition:
+        border-color var(--m-motion-fast) var(--m-motion-ease),
+        box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-input-number--buttons:hover:not(.m-input-number--disabled):not(
+        :focus-within
+    ),
+.m-input-number--buttons-right:hover:not(.m-input-number--disabled):not(
+        :focus-within
+    ) {
+    border-color: var(--m-color-primary-hover);
+}
+
+.m-input-number--buttons:focus-within,
+.m-input-number--buttons-right:focus-within {
+    border-color: var(--m-color-primary);
+    box-shadow: var(--m-focus-shadow);
+}
+
+.m-input-number--buttons.m-input-number--invalid,
+.m-input-number--buttons-right.m-input-number--invalid {
+    border-color: var(--m-color-danger);
+}
+
+.m-input-number--buttons.m-input-number--invalid:focus-within,
+.m-input-number--buttons-right.m-input-number--invalid:focus-within {
+    border-color: var(--m-color-danger);
+    box-shadow: var(--m-focus-shadow-danger);
+}
+
+.m-input-number--buttons .m-input-number__input-wrap:hover,
+.m-input-number--buttons-right .m-input-number__input-wrap:hover {
+    border-color: var(--m-color-border);
+}
+
+.m-input-number--buttons .m-input-number__input-wrap:focus-within,
+.m-input-number--buttons-right .m-input-number__input-wrap:focus-within {
+    border-color: var(--m-color-border);
+    box-shadow: none;
+}
+
+.m-input-number--fluid {
     display: flex;
     width: 100%;
 }
 
-.m-inputnumber__input-wrap {
+.m-input-number__input-wrap {
     align-items: center;
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
@@ -49,46 +98,47 @@
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
         box-shadow var(--m-motion-fast) var(--m-motion-ease);
-    width: var(--m-inputnumber-width);
+    width: var(--m-input-number-width);
 }
 
-.m-inputnumber--fluid .m-inputnumber__input-wrap {
+.m-input-number--fluid .m-input-number__input-wrap {
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
 }
 
-.m-inputnumber__input-wrap:hover:has(.m-inputnumber__input:not(:disabled)):not(
+.m-input-number__input-wrap:hover:has(.m-input-number__input:not(:disabled)):not(
         :focus-within
     ) {
     border-color: var(--m-color-primary-hover);
 }
 
-.m-inputnumber__input-wrap:focus-within {
+.m-input-number__input-wrap:focus-within {
     border-color: var(--m-color-primary);
     box-shadow: var(--m-focus-shadow);
 }
 
-.m-inputnumber--invalid .m-inputnumber__input-wrap {
+.m-input-number--invalid .m-input-number__input-wrap {
     border-color: var(--m-color-danger);
 }
 
-.m-inputnumber--invalid .m-inputnumber__input-wrap:focus-within {
+.m-input-number--invalid .m-input-number__input-wrap:focus-within {
     border-color: var(--m-color-danger);
     box-shadow: var(--m-focus-shadow-danger);
 }
 
-.m-inputnumber--buttons .m-inputnumber__input-wrap {
+.m-input-number--buttons .m-input-number__input-wrap {
+    border: 0;
     border-radius: 0;
 }
 
-.m-inputnumber--buttons-right .m-inputnumber__input-wrap {
+.m-input-number--buttons-right .m-input-number__input-wrap {
+    border: 0;
     border-radius: var(--m-radius-control) 0 0 var(--m-radius-control);
-    border-right: 0;
 }
 
-.m-inputnumber__prefix,
-.m-inputnumber__suffix {
+.m-input-number__prefix,
+.m-input-number__suffix {
     align-items: center;
     color: var(--m-color-text-muted);
     display: inline-flex;
@@ -97,7 +147,7 @@
     white-space: nowrap;
 }
 
-.m-inputnumber__input {
+.m-input-number__input {
     background: transparent;
     border: 0;
     border-radius: 0;
@@ -114,21 +164,21 @@
     width: 100%;
 }
 
-.m-inputnumber__input-wrap:has(.m-inputnumber__prefix) .m-inputnumber__input {
+.m-input-number__input-wrap:has(.m-input-number__prefix) .m-input-number__input {
     padding-left: 0;
 }
 
-.m-inputnumber__input-wrap:has(.m-inputnumber__suffix) .m-inputnumber__input {
+.m-input-number__input-wrap:has(.m-input-number__suffix) .m-input-number__input {
     padding-right: 0;
 }
 
-.m-inputnumber__input:focus,
-.m-inputnumber__input:focus-visible {
+.m-input-number__input:focus,
+.m-input-number__input:focus-visible {
     box-shadow: none;
     outline: none;
 }
 
-.m-inputnumber__clear {
+.m-input-number__clear {
     align-items: center;
     align-self: center;
     background: transparent;
@@ -144,74 +194,74 @@
     width: var(--m-control-affix-size);
 }
 
-.m-inputnumber__clear:hover:not(:disabled) {
+.m-input-number__clear:hover:not(:disabled) {
     color: var(--m-color-text);
 }
 
-.m-inputnumber__clear:focus-visible {
+.m-input-number__clear:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
 }
 
-.m-inputnumber__clear:disabled {
+.m-input-number__clear:disabled {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-inputnumber--buttons .m-inputnumber__input {
+.m-input-number--buttons .m-input-number__input {
     text-align: center;
 }
 
-.m-inputnumber--small .m-inputnumber__input,
-.m-inputnumber--small .m-inputnumber__button {
+.m-input-number--small .m-input-number__input,
+.m-input-number--small .m-input-number__button {
     font-size: var(--m-control-font-small);
     min-height: var(--m-control-height-small);
 }
 
-.m-inputnumber--small .m-inputnumber__input {
+.m-input-number--small .m-input-number__input {
     height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     line-height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     min-height: 0;
 }
 
-.m-inputnumber--small .m-inputnumber__input-wrap {
+.m-input-number--small .m-input-number__input-wrap {
     min-height: var(--m-control-height-small);
 }
 
-.m-inputnumber--small .m-inputnumber__prefix,
-.m-inputnumber--small .m-inputnumber__suffix {
+.m-input-number--small .m-input-number__prefix,
+.m-input-number--small .m-input-number__suffix {
     padding-inline: var(--m-space-2);
 }
 
-.m-inputnumber--large .m-inputnumber__input,
-.m-inputnumber--large .m-inputnumber__button {
+.m-input-number--large .m-input-number__input,
+.m-input-number--large .m-input-number__button {
     font-size: var(--m-control-font-large);
     min-height: var(--m-control-height-large);
 }
 
-.m-inputnumber--large .m-inputnumber__input {
+.m-input-number--large .m-input-number__input {
     height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     line-height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     min-height: 0;
 }
 
-.m-inputnumber--large .m-inputnumber__input-wrap {
+.m-input-number--large .m-input-number__input-wrap {
     min-height: var(--m-control-height-large);
 }
 
-.m-inputnumber--large .m-inputnumber__prefix,
-.m-inputnumber--large .m-inputnumber__suffix {
+.m-input-number--large .m-input-number__prefix,
+.m-input-number--large .m-input-number__suffix {
     padding-inline: var(--m-space-3);
 }
 
-.m-inputnumber__button {
+.m-input-number__button {
     align-items: center;
     background: color-mix(
         in srgb,
         var(--m-color-text-muted) 12%,
         var(--m-color-surface)
     );
-    border: var(--m-border-width) solid var(--m-color-border);
+    border: 0;
     color: var(--m-color-text);
     cursor: pointer;
     display: inline-flex;
@@ -223,58 +273,85 @@
     padding: 0;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
+        color var(--m-motion-fast) var(--m-motion-ease),
         opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-inputnumber__button--decrement {
-    border-radius: var(--m-radius-control) 0 0 var(--m-radius-control);
-    border-right: 0;
+.m-input-number__button--decrement {
+    border-radius: calc(var(--m-radius-control) - var(--m-border-width)) 0 0
+        calc(var(--m-radius-control) - var(--m-border-width));
+    border-right: var(--m-border-width) solid var(--m-color-border);
 }
 
-.m-inputnumber__button--increment {
-    border-left: 0;
-    border-radius: 0 var(--m-radius-control) var(--m-radius-control) 0;
+.m-input-number__button--increment {
+    border-left: var(--m-border-width) solid var(--m-color-border);
+    border-radius: 0 calc(var(--m-radius-control) - var(--m-border-width))
+        calc(var(--m-radius-control) - var(--m-border-width)) 0;
 }
 
 /* Right-stacked buttons: only the outer corners keep radius, inner seams are square. */
-.m-inputnumber__stack {
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-left: 0;
-    border-radius: 0 var(--m-radius-control) var(--m-radius-control) 0;
+.m-input-number__stack {
+    border-left: var(--m-border-width) solid var(--m-color-border);
+    border-radius: 0 calc(var(--m-radius-control) - var(--m-border-width))
+        calc(var(--m-radius-control) - var(--m-border-width)) 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
-.m-inputnumber__stack .m-inputnumber__button {
+.m-input-number__stack .m-input-number__button {
     border: 0;
     border-radius: 0;
     flex: 1 1 0;
     min-height: 0;
     min-width: 0;
-    padding: 0 var(--m-inputnumber-stack-button-padding-x);
+    padding: 0 var(--m-input-number-stack-button-padding-x);
 }
 
-.m-inputnumber__stack .m-inputnumber__button + .m-inputnumber__button {
+/* Inside an InputGroup, the outer frame corners are squared by group position,
+   so the flush buttons/stack follow suit. */
+.m-input-group .m-input-number__button,
+.m-input-group .m-input-number__stack {
+    border-radius: 0;
+}
+
+.m-input-group > :first-child .m-input-number__button--decrement {
+    border-radius: calc(var(--m-radius-control) - var(--m-border-width)) 0 0
+        calc(var(--m-radius-control) - var(--m-border-width));
+}
+
+.m-input-group > :last-child .m-input-number__button--increment,
+.m-input-group > :last-child .m-input-number__stack {
+    border-radius: 0 calc(var(--m-radius-control) - var(--m-border-width))
+        calc(var(--m-radius-control) - var(--m-border-width)) 0;
+}
+
+.m-input-number__stack .m-input-number__button + .m-input-number__button {
     border-top: var(--m-border-width) solid var(--m-color-border);
 }
 
-.m-inputnumber__button:hover:not(:disabled) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 20%,
-        var(--m-color-surface)
-    );
+.m-input-number__button:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
+    color: var(--m-color-primary);
 }
 
-.m-inputnumber__button:disabled,
-.m-inputnumber--disabled .m-inputnumber__input-wrap {
+.m-input-number__button:disabled,
+.m-input-number--disabled .m-input-number__input-wrap {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
-.m-inputnumber__button:focus-visible {
+.m-input-number__button:focus-visible {
     box-shadow: var(--m-focus-shadow);
     outline: none;
     z-index: 1;
+}
+
+/* Keep the seam next to a focused button from showing through its ring. */
+.m-input-number__button:focus-visible.m-input-number__button--decrement {
+    border-right-color: var(--m-color-primary);
+}
+
+.m-input-number__button:focus-visible.m-input-number__button--increment {
+    border-left-color: var(--m-color-primary);
 }

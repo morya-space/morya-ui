@@ -14,10 +14,10 @@ describe('muInputNumber', () => {
     const wrapper = mount(MInputNumber, {
       props: { modelValue: 5, min: 0, max: 10, step: 2, showButtons: true },
     })
-    await wrapper.get('.m-inputnumber__button--increment').trigger('click')
+    await wrapper.get('.m-input-number__button--increment').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([7])
     await wrapper.setProps({ modelValue: 9 })
-    await wrapper.get('.m-inputnumber__button--increment').trigger('click')
+    await wrapper.get('.m-input-number__button--increment').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([10])
   })
 
@@ -25,17 +25,17 @@ describe('muInputNumber', () => {
     const wrapper = mount(MInputNumber, {
       props: { size: 'small', fluid: true, invalid: true },
     })
-    expect(wrapper.get('.m-inputnumber').classes()).toEqual(
-      expect.arrayContaining(['m-inputnumber--small', 'm-inputnumber--fluid', 'm-inputnumber--invalid']),
+    expect(wrapper.get('.m-input-number').classes()).toEqual(
+      expect.arrayContaining(['m-input-number--small', 'm-input-number--fluid', 'm-input-number--invalid']),
     )
   })
 
   it('rounds to precision and can clear', async () => {
     const wrapper = mount(MInputNumber, { props: { modelValue: 1.234, precision: 1, step: 0.1, clearable: true } })
-    await wrapper.get('.m-inputnumber__clear').trigger('click')
+    await wrapper.get('.m-input-number__clear').trigger('click')
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([null])
     const stepped = mount(MInputNumber, { props: { modelValue: 1.24, precision: 1, step: 0.1, showButtons: true } })
-    await stepped.get('.m-inputnumber__button--increment').trigger('click')
+    await stepped.get('.m-input-number__button--increment').trigger('click')
     expect(stepped.emitted('update:modelValue')?.at(-1)).toEqual([1.3])
   })
 

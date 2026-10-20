@@ -31,21 +31,21 @@ const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt)
 const locale = useMLocale()
 const inputElement = ref<HTMLInputElement | null>(null)
-const autoInputId = useMId('m-inputnumber')
+const autoInputId = useMId('m-input-number')
 const inputId = computed(() => props.id ?? autoInputId)
 const sizeClass = useConfiguredSize('InputNumber', () => props.size)
 const { isInvalid, feedbackText, feedbackIsError } = useFieldFeedback(props)
 const showClear = computed(() => props.clearable && props.modelValue != null && !props.disabled)
 
 const rootClass = computed(() => [
-  'm-inputnumber',
-  `m-inputnumber--${sizeClass.value}`,
+  'm-input-number',
+  `m-input-number--${sizeClass.value}`,
   {
-    'm-inputnumber--fluid': props.fluid,
-    'm-inputnumber--invalid': isInvalid.value,
-    'm-inputnumber--disabled': props.disabled,
-    'm-inputnumber--buttons': props.showButtons,
-    'm-inputnumber--buttons-right': props.showButtons && props.buttonPlacement === 'right',
+    'm-input-number--fluid': props.fluid,
+    'm-input-number--invalid': isInvalid.value,
+    'm-input-number--disabled': props.disabled,
+    'm-input-number--buttons': props.showButtons,
+    'm-input-number--buttons-right': props.showButtons && props.buttonPlacement === 'right',
   },
 ])
 
@@ -149,14 +149,14 @@ defineExpose({ focus, blur, select })
 <template>
   <div
     v-bind="rootAttrs"
-    class="m-inputnumber-field"
-    :class="{ 'm-inputnumber-field--fluid': fluid }"
+    class="m-input-number-field"
+    :class="{ 'm-input-number-field--fluid': fluid }"
   >
-    <label v-if="label" class="m-inputnumber-field__label" :for="inputId">{{ label }}</label>
+    <label v-if="label" class="m-input-number-field__label" :for="inputId">{{ label }}</label>
     <div :class="rootClass">
       <button
         v-if="showButtons && buttonPlacement === 'both'"
-        class="m-inputnumber__button m-inputnumber__button--decrement"
+        class="m-input-number__button m-input-number__button--decrement"
         type="button"
         :aria-label="locale.decrease"
         :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
@@ -164,15 +164,15 @@ defineExpose({ focus, blur, select })
       >
         <MIcon name="minus" size="sm" />
       </button>
-      <div class="m-inputnumber__input-wrap">
-        <span v-if="$slots.prefix" class="m-inputnumber__prefix">
+      <div class="m-input-number__input-wrap">
+        <span v-if="$slots.prefix" class="m-input-number__prefix">
           <slot name="prefix" />
         </span>
         <input
           v-bind="controlAttrs"
           :id="inputId"
           ref="inputElement"
-          class="m-inputnumber__input"
+          class="m-input-number__input"
           type="text"
           inputmode="decimal"
           :value="displayValue"
@@ -188,22 +188,22 @@ defineExpose({ focus, blur, select })
           @blur="onBlur"
           @keydown="onInputKeydown"
         >
-        <span v-if="$slots.suffix" class="m-inputnumber__suffix">
+        <span v-if="$slots.suffix" class="m-input-number__suffix">
           <slot name="suffix" />
         </span>
         <button
           v-if="showClear"
           type="button"
-          class="m-inputnumber__clear"
+          class="m-input-number__clear"
           :aria-label="locale.clearInput"
           @click="clear"
         >
           <MIcon name="close" size="sm" />
         </button>
       </div>
-      <div v-if="showButtons && buttonPlacement === 'right'" class="m-inputnumber__stack">
+      <div v-if="showButtons && buttonPlacement === 'right'" class="m-input-number__stack">
         <button
-          class="m-inputnumber__button m-inputnumber__button--increment"
+          class="m-input-number__button m-input-number__button--increment"
           type="button"
           :aria-label="locale.increase"
           :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
@@ -212,7 +212,7 @@ defineExpose({ focus, blur, select })
           <MIcon name="plus" size="sm" />
         </button>
         <button
-          class="m-inputnumber__button m-inputnumber__button--decrement"
+          class="m-input-number__button m-input-number__button--decrement"
           type="button"
           :aria-label="locale.decrease"
           :disabled="disabled || (min != null && modelValue != null && modelValue <= min)"
@@ -223,7 +223,7 @@ defineExpose({ focus, blur, select })
       </div>
       <button
         v-else-if="showButtons"
-        class="m-inputnumber__button m-inputnumber__button--increment"
+        class="m-input-number__button m-input-number__button--increment"
         type="button"
         :aria-label="locale.increase"
         :disabled="disabled || (max != null && modelValue != null && modelValue >= max)"
@@ -235,8 +235,8 @@ defineExpose({ focus, blur, select })
     <span
       v-if="feedbackText"
       :id="`${inputId}-help`"
-      class="m-inputnumber-field__help"
-      :class="{ 'm-inputnumber-field__help--invalid': feedbackIsError }"
+      class="m-input-number-field__help"
+      :class="{ 'm-input-number-field__help--invalid': feedbackIsError }"
       :role="feedbackIsError ? 'alert' : undefined"
     >
       {{ feedbackText }}
