@@ -1,5 +1,27 @@
 # morya-ui
 
+## 0.5.2
+
+### Features
+
+- add smooth sliding thumb to selection
+- normalize system icon optical sizes
+- switch system icons to filled Material Icons
+- keep dialog open on mask click by default
+- unify button-mode control frame
+- update dialog width prop and update skill、mcp
+
+### Fixes
+
+- stop zeroing component motion on OS reduced-motion
+- shrink corner-filling glyphs for optical balance
+- unify compact mark sizes with full icons
+
+### Changes
+
+- remove component in favor of input affix slots
+- rename component classes to kebab-case
+
 ## 0.5.1
 
 ### Breaking Changes

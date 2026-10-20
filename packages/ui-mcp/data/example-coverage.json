@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-14T09:30:52.509Z",
-  "catalogGeneratedAt": "2026-10-14T09:30:48.391Z",
+  "generatedAt": "2026-10-20T12:29:15.220Z",
+  "catalogGeneratedAt": "2026-10-20T12:29:10.609Z",
   "components": [
     {
       "id": "Accordion",
@@ -910,10 +910,10 @@
     {
       "id": "Dialog",
       "exportName": "MDialog",
-      "examples": 16,
+      "examples": 18,
       "props": {
         "total": 26,
-        "covered": 11,
+        "covered": 12,
         "missing": [
           "title",
           "closeOnEsc",
@@ -928,8 +928,7 @@
           "positiveColor",
           "onNegativeClick",
           "ariaLabel",
-          "transition",
-          "pt"
+          "transition"
         ]
       },
       "events": {
@@ -2706,7 +2705,7 @@
     {
       "id": "Segmented",
       "exportName": "MSegmented",
-      "examples": 6,
+      "examples": 8,
       "props": {
         "total": 9,
         "covered": 4,
@@ -3976,8 +3975,8 @@
     }
   ],
   "summary": {
-    "components": 107,
-    "componentsWithMissingCoverage": 106,
+    "components": 106,
+    "componentsWithMissingCoverage": 105,
     "totalExamples": 1013
   }
 }

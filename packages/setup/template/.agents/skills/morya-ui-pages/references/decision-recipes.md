@@ -1726,7 +1726,7 @@ This file is the **offline** mirror for agents without MCP.
 
 ## `input-addon-choice` — 输入框前后缀如何选择
 
-> 输入框需要带图标或文字前缀时，用 MIconField 还是 MInput 插槽？
+> 输入框需要带图标、文字前缀时，用 MIconField 还是 MInput 插槽？
 
 ### MIconField
 
@@ -1754,7 +1754,7 @@ This file is the **offline** mirror for agents without MCP.
 **Anti-patterns**
 
 - 手写 absolute 定位图标 → MIconField
-- 文字前缀用 MIconField → MInput 的 #prefix / #suffix 插槽
+- 文字前缀用 MIconField → MInput #prefix / #suffix 插槽
 
 
 ### MInput #prefix / #suffix
@@ -1767,11 +1767,16 @@ This file is the **offline** mirror for agents without MCP.
 
 - 只是输入框内放一个图标
 
-**Recipe · slots**
+**Recipe · props**
 
 - #prefix 放文字前缀（https://、$）
 - #suffix 放文字后缀（单位、.00）
 - 前后缀随输入框状态（disabled / invalid / size）自动对齐
+
+**Recipe · slots**
+
+- #prefix 前缀内容
+- #suffix 后缀内容
 
 **Anti-patterns**
 
