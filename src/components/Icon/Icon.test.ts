@@ -53,7 +53,8 @@ describe('muIcon', () => {
     ] as const) {
       expect(isIconName(name)).toBe(true)
       const wrapper = mount(MIcon, { props: { name } })
-      expect(wrapper.find('svg').attributes('viewBox')).toBe('0 0 24 24')
+      // viewBox is normalized per icon for consistent optical size
+      expect(wrapper.find('svg').attributes('viewBox')).toMatch(/^-?[\d.]+ -?[\d.]+ [\d.]+ [\d.]+$/)
     }
     expect(iconNames.length).toBeGreaterThan(100)
   })

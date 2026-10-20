@@ -618,6 +618,165 @@ function parseBody(id, body) {
 const parsed = new Map()
 for (const [id, body] of bodies) parsed.set(id, parseBody(id, body))
 
+// --- Optical size normalization ----------------------------------------------
+// Material icons are drawn on keylines: ink size varies deliberately per
+// shape (chevrons 12px, clouds 24px). Inside a UI kit that variance reads as
+// inconsistent sizing, so each icon gets a per-icon viewBox that scales its
+// ink toward a common target size (clamped, so small marks don't blow up).
+
+function pathBBox(d) {
+  const tokens = d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e-?\d+)?/g) ?? []
+  let i = 0
+  let cmd = null
+  let x = 0, y = 0, sx = 0, sy = 0
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
+  const pt = (px, py) => {
+    if (px < minX) minX = px
+    if (py < minY) minY = py
+    if (px > maxX) maxX = px
+    if (py > maxY) maxY = py
+  }
+  const num = () => Number(tokens[i++])
+  const hasNum = () => i < tokens.length && !/[a-zA-Z]/.test(tokens[i])
+  const cubic = (p0, p1, p2, p3) => {
+    for (let k = 0; k <= 16; k++) {
+      const t = k / 16, u = 1 - t
+      pt(u ** 3 * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t ** 3 * p3[0],
+         u ** 3 * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t ** 3 * p3[1])
+    }
+  }
+  const quad = (p0, p1, p2) => {
+    for (let k = 0; k <= 16; k++) {
+      const t = k / 16, u = 1 - t
+      pt(u * u * p0[0] + 2 * u * t * p1[0] + t * t * p2[0],
+         u * u * p0[1] + 2 * u * t * p1[1] + t * t * p2[1])
+    }
+  }
+  const arc = (rx, ry, rot, large, sweep, x2, y2) => {
+    if (rx === 0 || ry === 0) { pt(x2, y2); return }
+    const phi = (rot * Math.PI) / 180
+    const cosP = Math.cos(phi), sinP = Math.sin(phi)
+    const dx = (x - x2) / 2, dy = (y - y2) / 2
+    let x1p = cosP * dx + sinP * dy
+    let y1p = -sinP * dx + cosP * dy
+    rx = Math.abs(rx); ry = Math.abs(ry)
+    const lam = (x1p * x1p) / (rx * rx) + (y1p * y1p) / (ry * ry)
+    if (lam > 1) { rx *= Math.sqrt(lam); ry *= Math.sqrt(lam) }
+    const num_ = rx * rx * ry * ry - rx * rx * y1p * y1p - ry * ry * x1p * x1p
+    const den = rx * rx * y1p * y1p + ry * ry * x1p * x1p
+    let co = Math.sqrt(Math.max(0, num_ / den))
+    if (large === sweep) co = -co
+    const cxp = (co * rx * y1p) / ry
+    const cyp = (-co * ry * x1p) / rx
+    const cx = cosP * cxp - sinP * cyp + (x + x2) / 2
+    const cy = sinP * cxp + cosP * cyp + (y + y2) / 2
+    const ang = (ux, uy, vx, vy) => {
+      const dot = ux * vx + uy * vy
+      const len = Math.sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy))
+      let a = Math.acos(Math.min(1, Math.max(-1, dot / len)))
+      if (ux * vy - uy * vx < 0) a = -a
+      return a
+    }
+    const th1 = ang(1, 0, (x1p - cxp) / rx, (y1p - cyp) / ry)
+    let dth = ang((x1p - cxp) / rx, (y1p - cyp) / ry, (-x1p - cxp) / rx, (-y1p - cyp) / ry)
+    if (!sweep && dth > 0) dth -= 2 * Math.PI
+    if (sweep && dth < 0) dth += 2 * Math.PI
+    const steps = Math.max(4, Math.ceil(Math.abs(dth) / (Math.PI / 12)))
+    for (let k = 0; k <= steps; k++) {
+      const th = th1 + (dth * k) / steps
+      pt(cx + rx * Math.cos(th) * cosP - ry * Math.sin(th) * sinP,
+         cy + rx * Math.cos(th) * sinP + ry * Math.sin(th) * cosP)
+    }
+  }
+
+  while (i < tokens.length) {
+    if (/[a-zA-Z]/.test(tokens[i])) cmd = tokens[i++]
+    const rel = cmd === cmd.toLowerCase()
+    const c = cmd.toUpperCase()
+    if (c === 'M') {
+      const nx = num(), ny = num()
+      x = rel ? x + nx : nx; y = rel ? y + ny : ny
+      sx = x; sy = y; pt(x, y)
+      cmd = rel ? 'l' : 'L'
+    } else if (c === 'L') {
+      const nx = num(), ny = num()
+      x = rel ? x + nx : nx; y = rel ? y + ny : ny; pt(x, y)
+    } else if (c === 'H') {
+      const nx = num(); x = rel ? x + nx : nx; pt(x, y)
+    } else if (c === 'V') {
+      const ny = num(); y = rel ? y + ny : ny; pt(x, y)
+    } else if (c === 'C') {
+      const x1 = num(), y1 = num(), x2 = num(), y2 = num(), xe = num(), ye = num()
+      const p1 = rel ? [x + x1, y + y1] : [x1, y1]
+      const p2 = rel ? [x + x2, y + y2] : [x2, y2]
+      const pe = rel ? [x + xe, y + ye] : [xe, ye]
+      cubic([x, y], p1, p2, pe); x = pe[0]; y = pe[1]
+    } else if (c === 'S') {
+      const x2 = num(), y2 = num(), xe = num(), ye = num()
+      const p2 = rel ? [x + x2, y + y2] : [x2, y2]
+      const pe = rel ? [x + xe, y + ye] : [xe, ye]
+      cubic([x, y], [x, y], p2, pe); x = pe[0]; y = pe[1]
+    } else if (c === 'Q') {
+      const x1 = num(), y1 = num(), xe = num(), ye = num()
+      const p1 = rel ? [x + x1, y + y1] : [x1, y1]
+      const pe = rel ? [x + xe, y + ye] : [xe, ye]
+      quad([x, y], p1, pe); x = pe[0]; y = pe[1]
+    } else if (c === 'T') {
+      const xe = num(), ye = num()
+      const pe = rel ? [x + xe, y + ye] : [xe, ye]
+      quad([x, y], [x, y], pe); x = pe[0]; y = pe[1]
+    } else if (c === 'A') {
+      const rx = num(), ry = num(), rot = num(), large = num(), sweep = num(), xe = num(), ye = num()
+      const pe = rel ? [x + xe, y + ye] : [xe, ye]
+      arc(rx, ry, rot, large, sweep, pe[0], pe[1]); x = pe[0]; y = pe[1]
+    } else if (c === 'Z') {
+      x = sx; y = sy
+    }
+    if (!hasNum() && i < tokens.length && !/[a-zA-Z]/.test(tokens[i])) i++
+  }
+  return { minX, minY, maxX, maxY }
+}
+
+function inkBBox({ paths, circles }) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity
+  for (const d of paths) {
+    const b = pathBBox(d)
+    minX = Math.min(minX, b.minX); minY = Math.min(minY, b.minY)
+    maxX = Math.max(maxX, b.maxX); maxY = Math.max(maxY, b.maxY)
+  }
+  for (const c of circles) {
+    minX = Math.min(minX, c.cx - c.r); minY = Math.min(minY, c.cy - c.r)
+    maxX = Math.max(maxX, c.cx + c.r); maxY = Math.max(maxY, c.cy + c.r)
+  }
+  return { minX, minY, maxX, maxY, w: maxX - minX, h: maxY - minY }
+}
+
+// Target: ink's longest side renders as 20 of 24 units. Zoom is clamped so
+// small marks (chevrons, triangles) grow at most 1.35× and full-bleed icons
+// shrink at most 0.75× — tighter than Material keylines, not mechanically
+// uniform (perfectly equal ink looks wrong across mixed shapes).
+const TARGET_DIM = 20
+const MIN_ZOOM = 0.75
+const MAX_ZOOM = 1.35
+
+function normalizedViewBox(icon) {
+  const b = inkBBox(icon)
+  const inkMax = Math.max(b.w, b.h)
+  if (inkMax <= 0) return '0 0 24 24'
+  const zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, TARGET_DIM / inkMax))
+  const side = 24 / zoom
+  const cx = (b.minX + b.maxX) / 2
+  const cy = (b.minY + b.maxY) / 2
+  const x0 = cx - side / 2
+  const y0 = cy - side / 2
+  const r = (v) => Math.round(v * 100) / 100
+  if (Math.abs(x0) < 0.01 && Math.abs(y0) < 0.01 && Math.abs(side - 24) < 0.01) return '0 0 24 24'
+  return `${r(x0)} ${r(y0)} ${r(side)} ${r(side)}`
+}
+
+const viewBoxes = new Map()
+for (const [id, icon] of parsed) viewBoxes.set(id, normalizedViewBox(icon))
+
 // --- Emit icons.ts -----------------------------------------------------------
 function escapePath(d) {
   return d.replace(/\\/g, '\\\\').replace(/'/g, "\\'")
@@ -631,18 +790,21 @@ function formatEntry(entry) {
   const { paths, circles } = parsed.get(entry.id)
   const helper = entry.spin ? 'spinIcon' : 'f'
   const parts = [
+    `'${viewBoxes.get(entry.id)}'`,
     ...paths.map((d) => `'${escapePath(d)}'`),
     ...circles.map((c) => `{ cx: ${c.cx}, cy: ${c.cy}, r: ${c.r} }`),
   ]
-  if (parts.length === 1) return `  ${keyOf(entry.name)}: ${helper}(${parts[0]}),`
+  if (parts.length === 2) return `  ${keyOf(entry.name)}: ${helper}(${parts[0]}, ${parts[1]}),`
   const body = parts.map((p) => `    ${p},`).join('\n')
   return `  ${keyOf(entry.name)}: ${helper}(\n${body}\n  ),`
 }
 
 const header = `/**
- * Built-in system icons — filled (Google Material Icons baseline, 24×24).
+ * Built-in system icons — filled (Google Material Icons baseline).
  * GENERATED by scripts/generate-system-icons.mjs — do not edit by hand.
  * Filled shapes stay crisp at small sizes (14–16px), unlike stroke icons.
+ * Each icon's viewBox is normalized so ink renders at a consistent optical
+ * size (~20/24 of the box, clamped) — Material keyline variance is removed.
  * App-specific icons → default slot (Lucide etc.), see docs.
  */
 import type { IconDefinition, IconPrimitive } from './icons-types'
@@ -656,17 +818,17 @@ function toPrimitive(part: IconPart): IconPrimitive {
   return { tag: 'circle', cx: part.cx, cy: part.cy, r: part.r, fill: 'currentColor' }
 }
 
-/** Filled icon (24×24, fill currentColor, no stroke). */
-function f(...parts: IconPart[]): IconDefinition {
+/** Filled icon (fill currentColor, no stroke, per-icon normalized viewBox). */
+function f(viewBox: string, ...parts: IconPart[]): IconDefinition {
   return {
-    viewBox: '0 0 24 24',
+    viewBox,
     primitives: parts.map(toPrimitive),
   }
 }
 
 /** Spinning filled icon (loader). */
-function spinIcon(...parts: IconPart[]): IconDefinition {
-  return { ...f(...parts), spin: true }
+function spinIcon(viewBox: string, ...parts: IconPart[]): IconDefinition {
+  return { ...f(viewBox, ...parts), spin: true }
 }
 
 export const iconRegistry = {`
