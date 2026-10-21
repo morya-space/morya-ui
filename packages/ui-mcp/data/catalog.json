@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T12:29:10.609Z",
+  "generatedAt": "2026-10-21T08:11:36.793Z",
   "library": {
     "name": "morya-ui",
     "version": "0.5.2"
@@ -67,6 +67,18 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-accordion-bg": "var(--m-color-surface)",
+          "--m-accordion-color": "var(--m-color-text)",
+          "--m-accordion-border-color": "var(--m-color-border)",
+          "--m-accordion-header-hover-bg": "color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface))",
+          "--m-accordion-header-active-color": "var(--m-color-primary)",
+          "--m-accordion-header-disabled-color": "var(--m-color-text-muted)",
+          "--m-accordion-header-focus-shadow": "var(--m-focus-shadow)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -286,6 +298,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-z-sticky": "10"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -476,6 +494,22 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-alert-tone": "var(--m-color-danger)",
+          "--m-alert-bg": "color-mix(\n        in srgb,\n        var(--m-alert-tone) 8%,\n        var(--m-color-surface)\n    )",
+          "--m-alert-border": "color-mix(\n        in srgb,\n        var(--m-alert-tone) 35%,\n        var(--m-color-border)\n    )",
+          "--m-alert-padding-block": "var(--m-space-4)",
+          "--m-alert-padding-inline": "var(--m-space-5)",
+          "--m-alert-gap": "var(--m-space-2)",
+          "--m-alert-title-size": "var(--m-font-size-lg)",
+          "--m-alert-desc-size": "var(--m-font-size-sm)",
+          "--m-alert-close-color": "var(--m-color-text-muted)",
+          "--m-alert-close-hover-color": "var(--m-color-text)",
+          "--m-alert-icon-margin-top": "0.125rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -794,6 +828,18 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-anchor-link-color": "var(--m-color-text-muted)",
+          "--m-anchor-link-active": "var(--m-color-primary)",
+          "--m-anchor-ink-width": "2px",
+          "--m-anchor-gap": "var(--m-space-2)"
+        },
+        "overridable": {
+          "--m-z-sticky": "10",
+          "--m-font-weight-medium": "500"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -1071,6 +1117,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-auto-complete-min-width": "14rem",
+          "--m-auto-complete-dropdown-max-height": "min(18rem, 45vh)",
+          "--m-auto-complete-spinner-size": "0.85rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -1308,6 +1362,22 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-avatar-size-small": "var(--m-space-8)",
+          "--m-avatar-size-medium": "calc(var(--m-space-8) + var(--m-space-2))",
+          "--m-avatar-size-large": "calc(var(--m-space-8) + var(--m-space-6))",
+          "--m-avatar-size-xlarge": "calc(var(--m-space-8) * 2 + var(--m-space-2))",
+          "--m-avatar-size": "var(--m-avatar-size-xlarge)",
+          "--m-avatar-icon-size": "2rem",
+          "--m-avatar-font-size-xlarge": "1.5rem",
+          "--m-avatar-group-overlap": "var(--m-space-2)",
+          "--m-avatar-group-ring-width": "var(--m-border-width)",
+          "--m-avatar-bg": "color-mix(\n        in srgb,\n        var(--m-color-text-muted) 16%,\n        var(--m-color-surface)\n    )",
+          "--m-avatar-fg": "var(--m-color-text)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -1511,6 +1581,23 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-badge-size": "var(--m-badge-size-large)",
+          "--m-badge-font-size": "var(--m-font-size-sm)",
+          "--m-badge-padding-y": "var(--m-space-1)",
+          "--m-badge-padding-x": "var(--m-space-2)",
+          "--m-badge-size-small": "1rem",
+          "--m-badge-size-large": "1.5rem",
+          "--m-badge-dot-size": "var(--m-badge-dot-size-large)",
+          "--m-badge-dot-size-small": "0.375rem",
+          "--m-badge-dot-size-large": "0.625rem",
+          "--m-badge-processing-opacity": "0.35",
+          "--m-badge-offset-x": "0px",
+          "--m-badge-offset-y": "0px"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -1917,6 +2004,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-breadcrumb-separator-color": "color-mix(in srgb, var(--m-color-text-muted"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -2239,6 +2332,72 @@
           "description": "根 `HTMLButtonElement` 或 `HTMLAnchorElement`。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-button-radius": "0",
+          "--m-button-border-width": "var(--m-border-width)",
+          "--m-button-gap": "var(--m-space-2)",
+          "--m-button-font-weight": "var(--m-font-weight)",
+          "--m-button-font-size": "var(--m-control-font-large)",
+          "--m-button-height": "var(--m-control-height-large)",
+          "--m-button-padding-x": "var(--m-button-padding-x-large)",
+          "--m-button-padding-x-small": "var(--m-control-padding-x-small)",
+          "--m-button-padding-x-medium": "calc(\n        var(--m-control-padding-x-medium) + var(--m-space-1)\n    )",
+          "--m-button-padding-x-large": "calc(\n        var(--m-control-padding-x-large) + var(--m-space-1)\n    )",
+          "--m-button-padding-x-round-extra": "var(--m-space-2)",
+          "--m-button-icon-size": "var(--m-button-icon-size-large)",
+          "--m-button-icon-size-small": "0.875rem",
+          "--m-button-icon-size-large": "1.25rem",
+          "--m-button-spinner-size": "0.875rem",
+          "--m-button-spinner-border-width": "2px",
+          "--m-button-cn-letter-spacing": "0.3em",
+          "--m-button-fill-opacity": "10%",
+          "--m-button-fill-opacity-hover": "16%",
+          "--m-button-fill-opacity-active": "22%",
+          "--m-button-fill-opacity-muted": "6%",
+          "--m-button-fill-opacity-muted-hover": "10%",
+          "--m-button-fill-opacity-muted-active": "14%",
+          "--m-button-loading-opacity": "0.72",
+          "--m-button-press-scale": "0.97",
+          "--m-button-press-duration": "0ms",
+          "--m-button-ripple-duration": "0ms",
+          "--m-button-ripple-opacity-start": "0.42",
+          "--m-button-ripple-opacity-mid": "0.22",
+          "--m-button-ghost-hover-opacity": "80%",
+          "--m-button-color-base": "var(--m-color-on-emphasis)",
+          "--m-button-color-hover": "color-mix(\n        in srgb,\n        var(--m-color-on-emphasis) var(--m-button-ghost-hover-opacity),\n        transparent\n    )",
+          "--m-button-color-active": "var(--m-color-primary-active)",
+          "--m-button-color-light": "color-mix(\n        in srgb,\n        var(--m-color-text) var(--m-button-fill-opacity-muted),\n        var(--m-color-surface)\n    )",
+          "--m-button-color-light-hover": "color-mix(\n        in srgb,\n        var(--m-color-text) var(--m-button-fill-opacity-muted-hover),\n        var(--m-color-surface)\n    )",
+          "--m-button-color-light-active": "color-mix(\n        in srgb,\n        var(--m-color-text) var(--m-button-fill-opacity-muted-active),\n        var(--m-color-surface)\n    )",
+          "--m-button-on-color": "var(--m-color-contrast-fg)",
+          "--m-button-bg": "transparent",
+          "--m-button-fg": "var(--m-color-on-emphasis)",
+          "--m-button-border": "var(--m-color-on-emphasis)",
+          "--m-button-hover-bg": "transparent",
+          "--m-button-hover-fg": "var(--m-button-color-hover)",
+          "--m-button-hover-border": "var(--m-button-color-hover)",
+          "--m-button-active-bg": "transparent",
+          "--m-button-border-style": "dashed",
+          "--m-button-active-fg": "var(--m-button-color-active, var(--m-button-color-hover))",
+          "--m-button-active-border": "var(--m-button-color-active, var(--m-button-color-hover))",
+          "--m-button-disabled-bg": "var(--m-color-bg-disabled)",
+          "--m-button-disabled-fg": "var(--m-color-text-disabled)",
+          "--m-button-disabled-border": "var(--m-color-border)",
+          "--m-button-focus-shadow": "var(--m-focus-shadow)",
+          "--m-button-solid-bg": "var(--m-color-contrast)",
+          "--m-button-solid-bg-hover": "var(--m-color-contrast-hover)",
+          "--m-button-solid-bg-active": "var(--m-color-contrast-active)",
+          "--m-button-outlined-border": "var(--m-color-contrast)",
+          "--m-button-outlined-fg": "var(--m-color-contrast)",
+          "--m-button-outlined-hover-border": "var(--m-color-contrast-hover)",
+          "--m-button-outlined-hover-fg": "var(--m-color-contrast-hover)",
+          "--m-button-outlined-bg": "var(--m-color-surface)",
+          "--m-button-outlined-hover-bg": "var(--m-button-color-light)",
+          "--m-button-outlined-active-bg": "var(--m-color-surface)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -2710,6 +2869,15 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-calendar-cell-size": "var(--m-control-affix-size, 2rem)",
+          "--m-calendar-date-min-height": "calc(var(--m-calendar-cell-size) * 1.5)"
+        },
+        "overridable": {
+          "--m-control-affix-size": "2rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -2931,6 +3099,21 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-card-shadow-rest": "var(--m-shadow-raised)",
+          "--m-card-bg": "var(--m-color-surface)",
+          "--m-card-color": "var(--m-color-text)",
+          "--m-card-border-color": "var(--m-color-border)",
+          "--m-card-header-border-color": "var(--m-color-split)",
+          "--m-card-footer-border-color": "var(--m-color-split)",
+          "--m-card-subtitle-color": "var(--m-color-text-muted)",
+          "--m-card-radius": "var(--m-radius-lg)",
+          "--m-card-focus-border-color": "var(--m-color-primary)",
+          "--m-card-focus-shadow": "var(--m-focus-shadow)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -3315,6 +3498,19 @@
           "description": "获取当前页。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-carousel-dot-size": "0.5rem",
+          "--m-carousel-dot-line-width": "1rem",
+          "--m-carousel-dot-line-width-active": "1.75rem",
+          "--m-carousel-dot-line-thickness": "0.25rem",
+          "--m-carousel-duration": "300ms",
+          "--m-carousel-gap": "0px",
+          "--m-carousel-arrow-inset": "var(--m-space-3)",
+          "--m-carousel-dots-inset": "var(--m-space-3)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -3340,7 +3536,7 @@
           "sectionId": "autoplay",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['01', '02', '03', '04']\n</script>\n\n<template>\n  <MCarousel\n    autoplay\n    :interval=\"4000\"\n    show-arrow\n    style=\"height: 160px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-muted, #f3f4f6);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          font-size: 2rem;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['01', '02', '03', '04']\n</script>\n\n<template>\n  <MCarousel\n    autoplay\n    :interval=\"4000\"\n    show-arrow\n    style=\"height: 160px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-secondary);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          font-size: 2rem;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -3358,7 +3554,7 @@
           "sectionId": "多图同屏",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['一', '二', '三', '四', '五', '六']\n</script>\n\n<template>\n  <MCarousel\n    :slides-per-view=\"3\"\n    :space-between=\"12\"\n    :loop=\"false\"\n    show-arrow\n    draggable\n    style=\"height: 120px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-muted, #f3f4f6);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['一', '二', '三', '四', '五', '六']\n</script>\n\n<template>\n  <MCarousel\n    :slides-per-view=\"3\"\n    :space-between=\"12\"\n    :loop=\"false\"\n    show-arrow\n    draggable\n    style=\"height: 120px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-secondary);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
           "locale": "zh-CN"
         },
         {
@@ -3394,7 +3590,7 @@
           "sectionId": "autoplay",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['01', '02', '03', '04']\n</script>\n\n<template>\n  <MCarousel\n    autoplay\n    :interval=\"4000\"\n    show-arrow\n    style=\"height: 160px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-muted, #f3f4f6);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          font-size: 2rem;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['01', '02', '03', '04']\n</script>\n\n<template>\n  <MCarousel\n    autoplay\n    :interval=\"4000\"\n    show-arrow\n    style=\"height: 160px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-secondary);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          font-size: 2rem;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
           "locale": "en-US"
         },
         {
@@ -3412,7 +3608,7 @@
           "sectionId": "multiple-slides",
           "lang": "vue",
           "preview": true,
-          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['One', 'Two', 'Three', 'Four', 'Five', 'Six']\n</script>\n\n<template>\n  <MCarousel\n    :slides-per-view=\"3\"\n    :space-between=\"12\"\n    :loop=\"false\"\n    show-arrow\n    draggable\n    style=\"height: 120px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-muted, #f3f4f6);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
+          "code": "<script setup lang=\"ts\">\nimport { MCarousel, MCarouselItem } from 'morya-ui'\n\nconst slides = ['One', 'Two', 'Three', 'Four', 'Five', 'Six']\n</script>\n\n<template>\n  <MCarousel\n    :slides-per-view=\"3\"\n    :space-between=\"12\"\n    :loop=\"false\"\n    show-arrow\n    draggable\n    style=\"height: 120px\"\n  >\n    <MCarouselItem\n      v-for=\"slide in slides\"\n      :key=\"slide\"\n    >\n      <div\n        style=\"\n          align-items: center;\n          background: var(--m-color-surface-secondary);\n          border-radius: var(--m-radius-md);\n          display: flex;\n          height: 100%;\n          justify-content: center;\n        \"\n      >\n        {{ slide }}\n      </div>\n    </MCarouselItem>\n  </MCarousel>\n</template>",
           "locale": "en-US"
         },
         {
@@ -3687,6 +3883,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-cascade-select-min-width": "12rem",
+          "--m-cascade-select-column-min-width": "10rem",
+          "--m-cascade-select-column-max-height": "min(18rem, 45vh)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -4014,6 +4218,22 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-checkbox-control-bg": "var(--m-color-surface)",
+          "--m-checkbox-control-border-color": "var(--m-color-border)",
+          "--m-checkbox-control-checked-bg": "var(--m-color-primary)",
+          "--m-checkbox-control-checked-border-color": "var(--m-color-primary)",
+          "--m-checkbox-control-hover-border-color": "color-mix(\n        in srgb,\n        var(--m-color-primary) 45%,\n        var(--m-color-border)\n    )",
+          "--m-checkbox-check-color": "var(--m-color-on-emphasis)",
+          "--m-checkbox-focus-shadow": "var(--m-focus-shadow)",
+          "--m-checkbox-invalid-border-color": "var(--m-color-danger)",
+          "--m-checkbox-invalid-focus-shadow": "var(--m-focus-shadow-danger)"
+        },
+        "overridable": {
+          "--m-checkbox-control-size": "1.125rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -4299,6 +4519,15 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-chip-avatar-size": "1.25rem",
+          "--m-chip-icon-size": "1.25rem",
+          "--m-chip-small-padding-y": "0.15rem",
+          "--m-chip-remove-size": "var(--m-chip-avatar-size)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -4570,6 +4799,31 @@
           "description": "切换颜色选择面板的显示状态。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-color-picker-handle-border": "var(--m-color-on-emphasis)",
+          "--m-color-picker-swatch-border": "rgb(0 0 0 / 10%)",
+          "--m-color-picker-panel-width": "260px",
+          "--m-color-picker-saturation-height": "160px",
+          "--m-color-picker-handle-size": "12px",
+          "--m-color-picker-slider-handle-size": "16px",
+          "--m-color-picker-slider-height": "12px",
+          "--m-color-picker-stops-max-height": "120px",
+          "--m-color-picker-stop-color-size": "16px",
+          "--m-color-picker-delete-size": "20px",
+          "--m-color-picker-swatch-size": "20px",
+          "--m-color-picker-gradient-bar-height": "24px",
+          "--m-color-picker-mode-width": "90px",
+          "--m-color-picker-angle-width": "70px",
+          "--m-color-picker-item-hover-bg": "var(--m-color-surface-secondary)",
+          "--m-color-picker-item-active-bg": "var(--m-color-primary-light)",
+          "--m-color-picker-delete-hover-bg": "rgb(0 0 0 / 8%)",
+          "--m-color-picker-active-ring": "0 0 0 2px var(--m-color-primary)"
+        },
+        "overridable": {
+          "--m-z-overlay": "1000"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -4888,6 +5142,13 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-command-menu-width": "32rem",
+          "--m-command-menu-list-max-height": "18rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -5584,6 +5845,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-confirm-dialog-width": "28rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -5817,6 +6084,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-confirm-popup-width": "20rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -6040,6 +6313,17 @@
           "description": "隐藏菜单。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-context-menu-min-width": "var(--m-overlay-menu-min-width, 10rem)",
+          "--m-context-menu-item-gap": "var(--m-space-1)",
+          "--m-context-menu-max-height": "min(18rem, 45vh)",
+          "--m-context-menu-submenu-max-height": "min(18rem, 45vh)"
+        },
+        "overridable": {
+          "--m-overlay-menu-min-width": "10rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -6337,6 +6621,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-data-view-grid-min": "10rem"
+        },
+        "overridable": {
+          "--m-control-height-medium": "2.5rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -6654,6 +6946,22 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-date-picker-calendar-cell-size": "1.75rem",
+          "--m-date-picker-day-size": "var(--m-date-picker-calendar-cell-size)",
+          "--m-date-picker-grid-gap": "0.125rem",
+          "--m-date-picker-control-height": "var(--m-control-height-large)",
+          "--m-date-picker-font-size": "var(--m-control-font-large)",
+          "--m-date-picker-padding-x": "var(--m-control-padding-x-large)",
+          "--m-date-picker-affix-size": "calc(\n        var(--m-control-height-large) - 2 * var(--m-border-width)\n    )",
+          "--m-date-picker-panel-min-width": "calc(\n        3 * 4rem + 2 * var(--m-space-1) + 2 * var(--m-space-3)\n    )",
+          "--m-date-picker-shortcuts-width": "6rem"
+        },
+        "overridable": {
+          "--m-focus-shadow-warning": "0 0 0 3px color-mix(in srgb, var(--m-color-warning"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -7518,6 +7826,19 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-descriptions-label-width": "9rem",
+          "--m-descriptions-gap": "var(--m-space-5)",
+          "--m-descriptions-pad": "var(--m-space-4)",
+          "--m-descriptions-label-color": "var(--m-color-text-muted)",
+          "--m-descriptions-content-color": "var(--m-color-text)",
+          "--m-descriptions-font-size": "var(--m-font-size-lg)"
+        },
+        "overridable": {
+          "--m-descriptions-cols": "3"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -7911,6 +8232,26 @@
           "description": "关闭全部"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-dialog-width": "32rem",
+          "--m-dialog-max-height": "min(90vh, 100%)",
+          "--m-dialog-radius": "0",
+          "--m-dialog-bg": "var(--m-color-surface)",
+          "--m-dialog-color": "var(--m-color-text)",
+          "--m-dialog-shadow": "var(--m-shadow-lg)",
+          "--m-dialog-mask-bg": "var(--m-overlay-scrim)",
+          "--m-dialog-header-border-color": "var(--m-color-split)",
+          "--m-dialog-footer-border-color": "var(--m-color-split)",
+          "--m-dialog-action-color": "var(--m-color-text-muted)",
+          "--m-dialog-action-hover-color": "var(--m-color-text)",
+          "--m-dialog-action-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 10%,\n        var(--m-color-surface)\n    )"
+        },
+        "overridable": {
+          "--m-dialog-origin-x": "50%",
+          "--m-dialog-origin-y": "50%"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -8304,6 +8645,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-divider-stub": "var(--m-space-5)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -8595,6 +8942,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-dock-icon-size": "2.75rem",
+          "--m-dock-edge-offset": "var(--m-space-4)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -8906,6 +9260,22 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-drawer-side-width": "20rem",
+          "--m-drawer-top-height": "40vh",
+          "--m-drawer-bg": "var(--m-color-surface)",
+          "--m-drawer-color": "var(--m-color-text)",
+          "--m-drawer-shadow": "var(--m-shadow-lg)",
+          "--m-drawer-mask-bg": "var(--m-overlay-scrim)",
+          "--m-drawer-header-border-color": "var(--m-color-split)",
+          "--m-drawer-footer-border-color": "var(--m-color-split)",
+          "--m-drawer-close-color": "var(--m-color-text-muted)",
+          "--m-drawer-close-hover-color": "var(--m-color-text)",
+          "--m-drawer-close-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 10%,\n        var(--m-color-surface)\n    )"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -9182,6 +9552,16 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-dropdown-menu-min-width": "var(--m-overlay-menu-min-width, 10rem)",
+          "--m-dropdown-menu-max-height": "min(18rem, 45vh)",
+          "--m-dropdown-submenu-max-height": "min(18rem, 45vh)"
+        },
+        "overridable": {
+          "--m-overlay-menu-min-width": "10rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -9457,6 +9837,16 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-empty-illustration-width": "15rem",
+          "--m-empty-illustration-height": "7.75rem",
+          "--m-empty-max-width": "20rem",
+          "--m-empty-icon-size": "calc(var(--m-space-8) + var(--m-space-2))",
+          "--m-empty-font-size": "var(--m-font-size-lg)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -10112,6 +10502,18 @@
           "description": "清空列表并中止上传。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-file-upload-dropzone-min-height": "10rem",
+          "--m-file-upload-icon-size": "2.5rem",
+          "--m-file-upload-thumb-size": "2.5rem",
+          "--m-file-upload-card-size": "7.5rem",
+          "--m-file-upload-progress-height": "0.25rem"
+        },
+        "overridable": {
+          "--m-radius-full": "999px"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -10710,6 +11112,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-float-label-inset-x": "var(--m-control-padding-x-large)",
+          "--m-float-label-lift": "calc(0.5 * var(--m-control-height-large))"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -11218,6 +11627,12 @@
           "description": "只读；当前错误 / 警告表（`Record<string, string>`）"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-form-inline-item-min-width": "12rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -11555,6 +11970,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-gallery-image-max-height": "20rem",
+          "--m-gallery-thumb-height": "3.5rem",
+          "--m-gallery-thumb-width": "5rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -12354,6 +12777,18 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-icon-field-z-icon": "1",
+          "--m-icon-field-color": "var(--m-color-text-muted)",
+          "--m-icon-field-filled-bg": "color-mix(\n        in srgb,\n        var(--m-color-text-muted) 12%,\n        var(--m-color-surface)\n    )",
+          "--m-icon-field-hover-border-color": "var(--m-color-primary-hover)",
+          "--m-icon-field-focus-border-color": "var(--m-color-primary)",
+          "--m-icon-field-focus-shadow": "var(--m-focus-shadow)",
+          "--m-icon-field-invalid-border-color": "var(--m-color-danger)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -12532,6 +12967,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-image-preview-action-bg": "color-mix(in srgb, var(--m-color-surface"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -12767,6 +13208,12 @@
           "description": "退出编辑态。"
         }
       ],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-inplace-display-hover-bg": "color-mix(in srgb, var(--m-color-primary"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -13079,6 +13526,26 @@
           "description": "选中底层 input 的全部文本。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-input-radius": "var(--m-radius-control)",
+          "--m-input-bg": "var(--m-color-surface)",
+          "--m-input-color": "var(--m-color-text)",
+          "--m-input-border-color": "var(--m-color-border)",
+          "--m-input-placeholder-color": "var(--m-color-text-muted)",
+          "--m-input-filled-bg": "color-mix(\n        in srgb,\n        var(--m-color-text-muted) 12%,\n        var(--m-color-surface)\n    )",
+          "--m-input-hover-border-color": "var(--m-color-primary-hover)",
+          "--m-input-focus-border-color": "var(--m-color-primary)",
+          "--m-input-focus-shadow": "var(--m-focus-shadow)",
+          "--m-input-disabled-bg": "var(--m-color-bg-disabled)",
+          "--m-input-disabled-color": "var(--m-color-text-disabled)",
+          "--m-input-invalid-border-color": "var(--m-color-danger)",
+          "--m-input-invalid-focus-shadow": "var(--m-focus-shadow-danger)",
+          "--m-input-warning-border-color": "var(--m-color-warning)",
+          "--m-input-warning-focus-shadow": "var(--m-focus-shadow-warning)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -13704,6 +14171,13 @@
           "description": "选中输入框的全部文本。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-input-number-width": "8rem",
+          "--m-input-number-stack-button-padding-x": "var(--m-space-2)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -13964,6 +14438,12 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-input-otp-gap": "var(--m-space-2)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -14282,6 +14762,12 @@
           "description": "选中输入框的全部文本。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-input-password-toggle-size": "var(--m-control-affix-size)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -14609,6 +15095,16 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-input-tags-input-min-width": "6rem",
+          "--m-input-tags-chip-padding-y": "var(--m-space-1)",
+          "--m-input-tags-chip-padding-x": "var(--m-space-2)"
+        },
+        "overridable": {
+          "--m-radius-full": "999px"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -14837,6 +15333,13 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-knob-track-color": "color-mix(in srgb, var(--m-color-text-muted",
+          "--m-knob-value-color": "var(--m-color-primary"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -15295,6 +15798,17 @@
           "description": "滚动内容区；接受 `(options: ScrollToOptions)` 或 `(x, y)`。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-layout-height": "100%",
+          "--m-layout-radius": "0",
+          "--m-layout-padding": "0 var(--m-space-4)",
+          "--m-layout-sider-width": "var(--m-nav-rail-width)",
+          "--m-layout-sider-collapsed-width": "var(--m-nav-rail-collapsed-width)",
+          "--m-layout-trigger-size": "var(--m-space-6)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -15757,6 +16271,24 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-list-pad-y": "var(--m-space-5)",
+          "--m-list-pad-x": "var(--m-space-5)",
+          "--m-list-item-gap": "var(--m-space-5)",
+          "--m-list-font-size": "var(--m-font-size-lg)",
+          "--m-list-meta-title-size": "var(--m-font-size-lg)",
+          "--m-list-meta-desc-color": "var(--m-color-text-muted)",
+          "--m-list-grid-gutter": "var(--m-space-4)",
+          "--m-list-grid-column": "1",
+          "--m-list-grid-column-xs": "var(--m-list-grid-column)",
+          "--m-list-grid-column-sm": "var(--m-list-grid-column)",
+          "--m-list-grid-column-md": "var(--m-list-grid-column)",
+          "--m-list-grid-column-lg": "var(--m-list-grid-column)",
+          "--m-list-grid-column-xl": "var(--m-list-grid-column)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -16000,6 +16532,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-listbox-min-width": "12rem",
+          "--m-listbox-list-max-height": "14rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -16233,6 +16772,28 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-loading-z-index": "calc(var(--m-z-base) + 200)",
+          "--m-loading-mask-bg": "color-mix(in srgb, var(--m-color-surface) 80%, transparent)",
+          "--m-loading-c1": "var(--m-color-primary)",
+          "--m-loading-c2": "color-mix(in srgb, var(--m-color-primary) 62%, white)",
+          "--m-loading-c3": "var(--m-color-success)",
+          "--m-loading-c4": "var(--m-color-warning)",
+          "--m-loading-c5": "var(--m-color-danger)",
+          "--m-loading-c6": "var(--m-color-text-muted)",
+          "--m-loading-spin": "var(--m-motion-spin)",
+          "--m-loading-aurora-glow": "var(--m-motion-loading-aurora)",
+          "--m-loading-bounce": "var(--m-motion-loading-bounce)",
+          "--m-loading-wave": "var(--m-motion-spin-medium)",
+          "--m-loading-pulse": "var(--m-motion-loading-pulse)",
+          "--m-loading-stardust": "var(--m-motion-loading-stardust)",
+          "--m-loading-circular-rotate": "var(--m-motion-loading-circular-rotate)",
+          "--m-loading-circular-dash": "var(--m-motion-spin-dash)",
+          "--m-loading-scale": "1.15"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -16558,6 +17119,13 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-mega-menu-column-min-width": "8rem",
+          "--m-mega-menu-panel-gap": "var(--m-space-4)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -16888,6 +17456,13 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-mentions-filled-bg": "color-mix(in srgb, var(--m-color-text-muted",
+          "--m-mentions-option-active-bg": "color-mix(in srgb, var(--m-color-primary"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -17190,6 +17765,35 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-menu-indent": "var(--m-space-3)",
+          "--m-menu-root-indent": "var(--m-space-4)",
+          "--m-menu-submenu-gap": "var(--m-space-2)",
+          "--m-menu-submenu-inset": "var(--m-space-2)",
+          "--m-menu-item-radius": "var(--m-radius-md)",
+          "--m-menu-color": "transparent",
+          "--m-menu-item-color-hover": "color-mix(\n        in srgb,\n        var(--m-color-contrast-fg) 8%,\n        transparent\n    )",
+          "--m-menu-item-color-active": "var(--m-color-primary)",
+          "--m-menu-item-text": "color-mix(\n        in srgb,\n        var(--m-color-contrast-fg) 82%,\n        transparent\n    )",
+          "--m-menu-item-text-active": "var(--m-color-contrast-fg)",
+          "--m-menu-item-text-child-active": "var(--m-color-contrast-fg)",
+          "--m-menu-item-icon": "color-mix(\n        in srgb,\n        var(--m-color-contrast-fg) 82%,\n        transparent\n    )",
+          "--m-menu-item-icon-active": "var(--m-color-contrast-fg)",
+          "--m-menu-arrow": "color-mix(\n        in srgb,\n        var(--m-color-contrast-fg) 72%,\n        transparent\n    )",
+          "--m-menu-border-color": "var(--m-color-border)",
+          "--m-menu-separator-color": "var(--m-color-border)",
+          "--m-menu-item-text-disabled": "var(--m-color-text-disabled)",
+          "--m-menu-flyout-gap": "var(--m-space-1)",
+          "--m-menu-flyout-item-height": "var(--m-menu-item-height)",
+          "--m-menu-flyout-padding": "var(--m-space-2)",
+          "--m-menu-flyout-radius": "var(--m-radius-md)",
+          "--m-menu-popup-max-height": "min(18rem, 45vh)",
+          "--m-menu-horizontal-gap": "var(--m-space-1)",
+          "--m-menu-horizontal-height": "var(--m-menu-item-height)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -17608,6 +18212,16 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-menubar-menu-min-width": "var(--m-overlay-menu-min-width, 10rem)",
+          "--m-menubar-item-gap": "var(--m-space-1)",
+          "--m-menubar-submenu-max-height": "min(18rem, 45vh)"
+        },
+        "overridable": {
+          "--m-overlay-menu-min-width": "10rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -17849,6 +18463,20 @@
           "description": "宿主位置与并发上限"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-message-host-max-width": "28rem",
+          "--m-message-min-width": "16rem",
+          "--m-message-tone": "var(--m-color-text-muted)",
+          "--m-message-fill-opacity": "10%",
+          "--m-message-border-opacity": "22%",
+          "--m-message-bg": "var(--m-color-contrast)",
+          "--m-message-border-color": "var(--m-color-contrast)",
+          "--m-message-icon-color": "var(--m-color-contrast-fg)",
+          "--m-message-close-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 10%,\n        transparent\n    )"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -18080,6 +18708,15 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-meter-group-meter-height": "var(--m-meter-track-height)",
+          "--m-meter-group-swatch-size": "var(--m-space-3)"
+        },
+        "overridable": {
+          "--m-radius-full": "999px"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -18309,6 +18946,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-order-list-ghost-bg": "color-mix(in srgb, var(--m-color-primary",
+          "--m-control-height-medium": "2.5rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -18684,6 +19328,18 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-page-content-body-lead": "0",
+          "--m-page-content-tools-pull": "0",
+          "--m-page-content-gap": "var(--m-space-6)",
+          "--m-page-content-padding": "var(--m-space-4)",
+          "--m-page-stat-value-size": "var(--m-font-size-xl)"
+        },
+        "overridable": {
+          "--m-page-placeholder-min-height": "12rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -18984,6 +19640,25 @@
           "description": "总页数。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-pagination-height": "var(--m-control-height-large)",
+          "--m-pagination-font": "var(--m-control-font-large)",
+          "--m-pagination-padding-x": "var(--m-control-padding-x-large)",
+          "--m-pagination-simple-width": "3.5rem",
+          "--m-pagination-jumper-width": "5.5rem",
+          "--m-pagination-button-bg": "var(--m-color-surface)",
+          "--m-pagination-button-color": "var(--m-color-text)",
+          "--m-pagination-button-border-color": "var(--m-color-border)",
+          "--m-pagination-button-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 10%,\n        var(--m-color-surface)\n    )",
+          "--m-pagination-button-active-bg": "var(--m-color-primary)",
+          "--m-pagination-button-active-border-color": "var(--m-color-primary)",
+          "--m-pagination-button-active-color": "var(--m-color-on-emphasis)",
+          "--m-pagination-button-disabled-color": "var(--m-color-text-disabled)",
+          "--m-pagination-button-focus-shadow": "var(--m-focus-shadow)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -19216,6 +19891,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-panel-header-bg": "color-mix(in srgb, var(--m-color-text-muted"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -19434,6 +20115,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-pick-list-header-bg": "color-mix(in srgb, var(--m-color-text"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -19708,6 +20395,17 @@
           "description": "切换显示状态。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-popover-min-width": "12rem",
+          "--m-popover-bg": "var(--m-color-surface)",
+          "--m-popover-color": "var(--m-color-text)",
+          "--m-popover-border-color": "var(--m-color-border)",
+          "--m-popover-shadow": "var(--m-shadow-md)",
+          "--m-popover-radius": "var(--m-radius-md)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -19944,6 +20642,21 @@
       "events": [],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-progress-bar-height": "var(--m-meter-track-height)",
+          "--m-progress-bar-track": "color-mix(in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface))",
+          "--m-progress-bar-fill": "var(--m-color-danger)",
+          "--m-progress-bar-label-color": "var(--m-color-on-emphasis)",
+          "--m-progress-bar-stripe-color": "color-mix(in srgb, var(--m-color-surface) 55%, transparent)",
+          "--m-progress-bar-stripe-opacity": "0.45",
+          "--m-progress-bar-circle-stroke-width": "8",
+          "--m-progress-bar-size": "5.5rem"
+        },
+        "overridable": {
+          "--m-progress-bar-scale": "0"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -20159,6 +20872,15 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-progress-spinner-size": "calc(var(--m-space-8) + var(--m-space-6))",
+          "--m-progress-spinner-color": "var(--m-color-primary)"
+        },
+        "overridable": {
+          "--m-block-ui-z-index": "10"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -20370,6 +21092,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-qr-code-overlay-bg": "color-mix(in srgb, var(--m-color-surface"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -20597,6 +21325,16 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-radio-check-color": "var(--m-checkbox-check-color)",
+          "--m-radio-checked-border-color": "var(--m-checkbox-control-checked-border-color)",
+          "--m-radio-focus-shadow": "var(--m-checkbox-focus-shadow)",
+          "--m-radio-invalid-border-color": "var(--m-checkbox-invalid-border-color)",
+          "--m-radio-invalid-focus-shadow": "var(--m-checkbox-invalid-focus-shadow)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -21145,6 +21883,21 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-result-tone": "var(--m-color-primary)",
+          "--m-result-tone-bg": "color-mix(\n        in srgb,\n        var(--m-result-tone) 14%,\n        var(--m-color-surface)\n    )",
+          "--m-result-icon-size": "calc(var(--m-space-8) * 2 + var(--m-space-2) + var(--m-space-1))",
+          "--m-result-glyph-size": "calc(var(--m-space-8) + var(--m-space-2))",
+          "--m-result-title-size": "calc(var(--m-font-size-lg) + var(--m-space-1))",
+          "--m-result-illustration-width": "19rem",
+          "--m-result-illustration-height": "11rem",
+          "--m-result-icon-margin": "var(--m-space-6)",
+          "--m-result-footer-margin": "calc(var(--m-space-8) + var(--m-space-1))",
+          "--m-result-desc-max-width": "25rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -21556,6 +22309,17 @@
           "description": "wrap 的 scroll 事件处理，可手动转发。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-scrollbar-track-size": "6px",
+          "--m-scrollbar-inset": "0.125rem",
+          "--m-scrollbar-bg": "color-mix(\n        in srgb,\n        var(--m-color-text) 28%,\n        transparent\n    )",
+          "--m-scrollbar-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-text) 45%,\n        transparent\n    )",
+          "--m-scrollbar-opacity": "0.5",
+          "--m-scrollbar-hover-opacity": "0.8"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -21900,6 +22664,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-radius-full": "999px"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -22109,6 +22879,22 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-segmented-track-padding": "var(--m-space-1)",
+          "--m-segmented-track-background": "color-mix(in srgb, var(--m-color-text-muted) 8%, var(--m-color-surface))",
+          "--m-segmented-thumb-background": "var(--m-color-surface)",
+          "--m-segmented-thumb-shadow": "var(--m-shadow-sm)",
+          "--m-segmented-text-color": "var(--m-color-text-muted)",
+          "--m-segmented-active-text-color": "var(--m-color-text)",
+          "--m-segmented-disabled-text-color": "var(--m-color-text-disabled)",
+          "--m-segmented-radius": "var(--m-radius-pill)",
+          "--m-segmented-thumb-radius": "var(--m-radius-pill)",
+          "--m-segmented-motion-duration": "var(--m-motion-normal)",
+          "--m-segmented-motion-easing": "var(--m-motion-ease)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -22572,6 +23358,34 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-select-bg": "var(--m-color-surface)",
+          "--m-select-color": "var(--m-color-text)",
+          "--m-select-border-color": "var(--m-color-border)",
+          "--m-select-placeholder-color": "var(--m-color-text-muted)",
+          "--m-select-filled-bg": "color-mix(\n        in srgb,\n        var(--m-color-text-muted) 12%,\n        var(--m-color-surface)\n    )",
+          "--m-select-hover-border-color": "var(--m-color-primary-hover)",
+          "--m-select-focus-border-color": "var(--m-color-primary)",
+          "--m-select-focus-shadow": "var(--m-focus-shadow)",
+          "--m-select-disabled-bg": "var(--m-color-bg-disabled)",
+          "--m-select-disabled-color": "var(--m-color-text-disabled)",
+          "--m-select-invalid-border-color": "var(--m-color-danger)",
+          "--m-select-invalid-focus-shadow": "var(--m-focus-shadow-danger)",
+          "--m-select-warning-border-color": "var(--m-color-warning)",
+          "--m-select-warning-focus-shadow": "var(--m-focus-shadow-warning)",
+          "--m-select-spinner-size": "0.85rem",
+          "--m-select-menu-max-height": "min(18rem, 45vh)",
+          "--m-select-list-max-height": "calc(\n        var(--m-select-menu-max-height) - var(--m-control-height-small) - var(--m-space-6)\n    )"
+        },
+        "overridable": {
+          "--m-select-bg": "var(--m-color-surface",
+          "--m-select-border-color": "var(--m-color-border",
+          "--m-select-color": "var(--m-color-text",
+          "--m-select-disabled-bg": "var(--m-color-bg-disabled",
+          "--m-select-disabled-color": "var(--m-color-text-disabled"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -23371,6 +24185,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-sidebar-width": "var(--m-nav-rail-width)",
+          "--m-sidebar-collapsed-width": "var(--m-nav-rail-collapsed-width)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -23575,6 +24396,12 @@
       "events": [],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-skeleton-bg": "color-mix(in srgb, var(--m-color-text-muted) 14%, var(--m-color-surface))"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -23889,6 +24716,27 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-slider-track-height": "0.35rem",
+          "--m-slider-thumb-size": "1.15rem",
+          "--m-slider-vertical-height": "12rem",
+          "--m-slider-vertical-width": "2.5rem",
+          "--m-slider-tooltip-offset": "1.5rem",
+          "--m-slider-marks-inset-block": "0.9rem",
+          "--m-slider-marks-inset-inline": "0.5rem",
+          "--m-slider-track-bg": "color-mix(\n        in srgb,\n        var(--m-color-text-muted) 28%,\n        var(--m-color-surface)\n    )",
+          "--m-slider-thumb-bg": "var(--m-color-primary)",
+          "--m-slider-thumb-border-color": "var(--m-color-surface)",
+          "--m-slider-thumb-ring-color": "color-mix(in srgb, var(--m-color-primary) 40%, transparent)",
+          "--m-slider-thumb-focus-shadow": "var(--m-focus-shadow)",
+          "--m-slider-thumb-focus-shadow-invalid": "var(--m-focus-shadow-danger)",
+          "--m-slider-tooltip-bg": "var(--m-color-text)",
+          "--m-slider-tooltip-color": "var(--m-color-surface)",
+          "--m-slider-mark-color": "var(--m-color-text-muted)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -24456,6 +25304,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-radius-full": "999px",
+          "--m-speed-dial-action-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -24714,6 +25569,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-split-button-icon-size": "1.125rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -24993,6 +25854,18 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-splitter-trigger-size": "6px",
+          "--m-splitter-min-height": "6rem",
+          "--m-splitter-panel-bg": "var(--m-color-surface)",
+          "--m-splitter-gutter-bg": "var(--m-color-border)",
+          "--m-splitter-gutter-slotted-bg": "color-mix(in srgb, var(--m-color-border) 55%, var(--m-color-surface))",
+          "--m-splitter-gutter-hover-bg": "var(--m-color-primary)",
+          "--m-splitter-gutter-focus-shadow": "var(--m-focus-shadow)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -25347,6 +26220,13 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-font-size-2xl": "1.5rem",
+          "--m-font-weight-medium": "500"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -25570,6 +26450,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-status-dot-size": "0.375rem",
+          "--m-status-icon-size": "1.125rem",
+          "--m-status-soft-bg": "color-mix(in srgb, currentColor 16%, transparent)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -25855,6 +26743,16 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-stepper-marker-size": "1.25rem",
+          "--m-stepper-connector-width": "var(--m-space-4)",
+          "--m-stepper-font": "var(--m-control-font-small)",
+          "--m-stepper-pad-y": "var(--m-space-1)",
+          "--m-stepper-pad-x": "var(--m-space-2)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -26106,6 +27004,23 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-switch-track-height": "1.5rem",
+          "--m-switch-track-width": "2.75rem",
+          "--m-switch-thumb-size": "1.2rem",
+          "--m-switch-checked-offset": "1.25rem",
+          "--m-switch-spinner-size": "0.55rem",
+          "--m-switch-track-bg": "var(--m-color-border)",
+          "--m-switch-track-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-text-muted) 55%,\n        var(--m-color-border)\n    )",
+          "--m-switch-track-checked-bg": "var(--m-color-primary)",
+          "--m-switch-track-checked-hover-bg": "var(--m-color-primary-hover)",
+          "--m-switch-thumb-bg": "var(--m-color-surface)",
+          "--m-switch-thumb-shadow": "var(--m-shadow-sm)",
+          "--m-switch-text-color": "var(--m-color-on-emphasis)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -27109,6 +28024,39 @@
           "description": "树节点展开。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-table-cell-padding-block": "var(--m-space-3)",
+          "--m-table-accent-bg": "color-mix(in srgb, var(--m-color-primary) 8%, transparent)",
+          "--m-table-accent-color": "var(--m-color-primary)",
+          "--m-table-header-sort-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 6%,\n        var(--m-table-header-bg)\n    )",
+          "--m-table-header-drag-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 4%,\n        var(--m-table-header-bg)\n    )",
+          "--m-table-header-drag-over-bg": "color-mix(\n        in srgb,\n        var(--m-color-primary) 10%,\n        var(--m-table-header-bg)\n    )",
+          "--m-table-header-drag-indicator": "var(--m-color-primary)",
+          "--m-table-sort-icon-color": "color-mix(in srgb, var(--m-color-text-muted) 55%, transparent)",
+          "--m-table-sort-icon-hover-color": "color-mix(in srgb, var(--m-color-text-muted) 80%, transparent)",
+          "--m-table-sort-icon-active-color": "var(--m-color-primary)",
+          "--m-table-shadow-start": "inset 6px 0 5px -3px color-mix(in srgb, var(--m-color-text) 18%, transparent)",
+          "--m-table-loading-line-bg": "color-mix(in srgb, var(--m-color-primary) 16%, transparent)",
+          "--m-table-loading-line-color": "var(--m-color-primary)",
+          "--m-table-resize-handle-bg": "color-mix(in srgb, var(--m-color-primary) 35%, transparent)",
+          "--m-table-filter-btn-color": "color-mix(in srgb, var(--m-color-text-muted) 70%, transparent)",
+          "--m-table-tree-toggler-color": "var(--m-color-text-muted)",
+          "--m-table-tree-line-color": "var(--m-color-border)",
+          "--m-table-skeleton-base": "color-mix(in srgb, var(--m-color-text) 8%, transparent)",
+          "--m-table-skeleton-highlight": "color-mix(in srgb, var(--m-color-text) 14%, transparent)",
+          "--m-table-z-edge": "3",
+          "--m-table-z-sticky": "2",
+          "--m-table-z-resize": "4",
+          "--m-table-z-column-setting": "5",
+          "--m-table-skeleton-duration": "1.4s",
+          "--m-table-cell-padding-inline": "var(--m-space-4)",
+          "--m-table-font-size": "var(--m-font-size-md)"
+        },
+        "overridable": {
+          "--m-tree-toggler-size": "1.25rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -27973,6 +28921,25 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-tabs-font": "var(--m-control-font-large)",
+          "--m-tabs-pad-y": "var(--m-space-4)",
+          "--m-tabs-pad-x": "var(--m-space-3)",
+          "--m-tabs-min-height": "var(--m-control-height-large)",
+          "--m-tabs-tab-color": "var(--m-color-text-muted)",
+          "--m-tabs-tab-hover-color": "var(--m-color-primary)",
+          "--m-tabs-tab-active-color": "var(--m-color-primary)",
+          "--m-tabs-tab-disabled-color": "var(--m-color-text-disabled)",
+          "--m-tabs-indicator-color": "var(--m-color-primary)",
+          "--m-tabs-card-bg": "color-mix(in srgb, var(--m-color-border) 35%, var(--m-color-surface))",
+          "--m-tabs-card-active-bg": "var(--m-color-surface)",
+          "--m-tabs-card-hover-bg": "color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface))",
+          "--m-tabs-action-hover-bg": "color-mix(in srgb, var(--m-color-primary) 10%, transparent)",
+          "--m-tabs-indicator-width": "2px"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -28250,6 +29217,21 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-tag-icon-size": "1rem",
+          "--m-tag-padding-block": "var(--m-space-1)",
+          "--m-tag-padding-inline": "var(--m-space-3)",
+          "--m-tag-close-gap": "calc(var(--m-space-1) - var(--m-border-width))",
+          "--m-tag-line-height": "1.375",
+          "--m-tag-fill-opacity": "12%",
+          "--m-tag-fill-opacity-strong": "14%",
+          "--m-tag-secondary-fill-opacity": "16%",
+          "--m-tag-checkable-hover-bg": "color-mix(\n        in srgb,\n        var(--m-color-text) 6%,\n        var(--m-color-surface)\n    )",
+          "--m-tag-close-opacity": "0.75"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -28573,6 +29555,16 @@
           "description": "聚焦命令输入框。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-terminal-bg": "color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface))",
+          "--m-terminal-fg": "var(--m-color-text)",
+          "--m-terminal-prompt": "var(--m-color-success)",
+          "--m-terminal-border": "color-mix(in srgb, var(--m-color-on-emphasis) 14%, transparent)",
+          "--m-terminal-min-height": "12rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -28888,6 +29880,14 @@
           "description": "选中文本域的全部文本。"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-textarea-min-height": "6rem",
+          "--m-textarea-min-height-small": "4.5rem",
+          "--m-textarea-min-height-large": "7.5rem"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -29164,6 +30164,18 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-tiered-menu-submenu-min-width": "var(--m-overlay-menu-min-width, 10rem)",
+          "--m-tiered-menu-min-width": "var(--m-overlay-menu-min-width)",
+          "--m-tiered-menu-item-gap": "var(--m-space-1)",
+          "--m-tiered-menu-max-height": "min(18rem, 45vh)",
+          "--m-tiered-menu-submenu-max-height": "min(18rem, 45vh)"
+        },
+        "overridable": {
+          "--m-overlay-menu-min-width": "10rem"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -29419,6 +30431,29 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-timeline-z-marker": "1",
+          "--m-timeline-marker-bg": "var(--m-color-surface)",
+          "--m-timeline-marker-border-color": "var(--m-color-primary)",
+          "--m-timeline-marker-color": "var(--m-color-primary)",
+          "--m-timeline-connector-bg": "var(--m-color-border)",
+          "--m-timeline-status-color": "var(--m-color-text-muted)",
+          "--m-timeline-opposite-color": "var(--m-color-text-muted)"
+        },
+        "overridable": {
+          "--m-timeline-marker-border-color-success": "var(--m-color-success",
+          "--m-timeline-marker-color-success": "var(--m-color-success",
+          "--m-timeline-marker-border-color-info": "var(--m-color-info",
+          "--m-timeline-marker-color-info": "var(--m-color-info",
+          "--m-timeline-marker-border-color-warning": "var(--m-color-warning",
+          "--m-timeline-marker-color-warning": "var(--m-color-warning",
+          "--m-timeline-marker-border-color-danger": "var(--m-color-danger",
+          "--m-timeline-marker-color-danger": "var(--m-color-danger",
+          "--m-timeline-marker-border-color-help": "var(--m-color-help",
+          "--m-timeline-marker-color-help": "var(--m-color-help"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -29988,6 +31023,12 @@
           "description": "关闭全部"
         }
       ],
+      "styleTokens": {
+        "declared": {
+          "--m-toast-accent-width": "3px"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -30659,6 +31700,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-tooltip-bg": "var(--m-color-text)",
+          "--m-tooltip-color": "var(--m-color-surface)",
+          "--m-tooltip-radius": "var(--m-radius-sm)"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -30877,6 +31926,25 @@
       ],
       "slots": [],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-tour-spotlight-color": "color-mix(in srgb, var(--m-color-text) 45%, transparent)",
+          "--m-tour-panel-bg": "var(--m-color-surface)",
+          "--m-tour-panel-color": "var(--m-color-text)",
+          "--m-tour-panel-border-color": "var(--m-color-border)",
+          "--m-tour-panel-shadow": "var(--m-shadow-lg)",
+          "--m-tour-panel-radius": "var(--m-radius-control)",
+          "--m-tour-panel-primary-bg": "var(--m-color-primary)",
+          "--m-tour-panel-primary-border-color": "color-mix(\n        in srgb,\n        var(--m-color-primary) 80%,\n        var(--m-color-border)\n    )",
+          "--m-tour-panel-primary-color": "var(--m-color-on-primary, var(--m-color-surface))",
+          "--m-tour-panel-primary-description-color": "color-mix(\n        in srgb,\n        var(--m-color-on-primary, #fff) 85%,\n        transparent\n    )",
+          "--m-tour-panel-primary-indicators-color": "color-mix(\n        in srgb,\n        var(--m-color-on-primary, #fff) 75%,\n        transparent\n    )"
+        },
+        "overridable": {
+          "--m-color-on-primary": "#fff",
+          "--m-font-weight-medium": "500"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -31174,6 +32242,14 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {},
+        "overridable": {
+          "--m-tree-children-border-color": "color-mix(in srgb, var(--m-color-border",
+          "--m-tree-row-hover-bg": "color-mix(in srgb, var(--m-color-primary",
+          "--m-tree-row-selected-bg": "color-mix(in srgb, var(--m-color-primary"
+        }
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -31583,6 +32659,15 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-tree-select-min-width": "12rem",
+          "--m-tree-select-toggler-size": "1.25rem",
+          "--m-tree-select-panel-max-height": "min(18rem, 45vh)",
+          "--m-tree-select-list-max-height": "calc(\n        var(--m-tree-select-panel-max-height) - var(--m-control-height-small) - var(--m-space-6)\n    )"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",
@@ -31880,6 +32965,12 @@
         }
       ],
       "methods": [],
+      "styleTokens": {
+        "declared": {
+          "--m-typography-rows": "1"
+        },
+        "overridable": {}
+      },
       "examples": [
         {
           "id": "引入-1",

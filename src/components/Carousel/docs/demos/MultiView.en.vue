@@ -20,7 +20,7 @@ const slides = ['One', 'Two', 'Three', 'Four', 'Five', 'Six']
       <div
         style="
           align-items: center;
-          background: var(--m-color-surface-muted, #f3f4f6);
+          background: var(--m-color-surface-secondary);
           border-radius: var(--m-radius-md);
           display: flex;
           height: 100%;

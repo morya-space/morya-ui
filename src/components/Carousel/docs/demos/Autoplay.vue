@@ -18,7 +18,7 @@ const slides = ['01', '02', '03', '04']
       <div
         style="
           align-items: center;
-          background: var(--m-color-surface-muted, #f3f4f6);
+          background: var(--m-color-surface-secondary);
           border-radius: var(--m-radius-md);
           display: flex;
           font-size: 2rem;

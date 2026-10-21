@@ -346,6 +346,109 @@ function buildDocLocale(raw, exportName, mdPath = '') {
   }
 }
 
+// ─── Style tokens ────────────────────────────────────────────────────────────
+//
+// Extracts the CSS custom-property panel declared on a component's root class
+// (e.g. `.m-input { --m-input-bg: ...; }`) plus any `var(--token, fallback)`
+// override tokens used inside the same stylesheet.  The result is a
+// machine-readable map consumers can use for style customization:
+//
+//   {
+//     declared:   { '--m-input-bg': 'var(--m-color-surface)', ... },
+//     overridable: { '--m-tree-row-hover-bg': 'color-mix(...)', ... }
+//   }
+//
+// "Declared" tokens are set on the root class — override them by redefining
+// the same custom property at a higher specificity or on a wrapper element.
+// "Overridable" tokens appear as `var(--token, fallback)` with no declaration
+// in the same file — they are intentionally left unset so consumers can inject
+// them at any level.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * @param {string} css   Raw CSS text
+ * @param {string} rootClass  e.g. ".m-input"
+ */
+function extractStyleTokens(css, rootClass) {
+  const declared = {}
+  const overridable = {}
+
+  // ── 1. Declared tokens ────────────────────────────────────────────────────
+  // Strategy: scan the entire file for declarations whose token prefix matches
+  // this component (e.g. `--m-tooltip-*` in Tooltip/styles.css).  This handles
+  // tokens declared on any element (root class, sub-element, modifier class)
+  // without requiring a specific selector structure.
+  //
+  // The prefix is derived from rootClass: ".m-tooltip" → "--m-tooltip-".
+  // We only accept tokens that start with this exact prefix so shared/global
+  // tokens like `--m-color-surface` are not picked up.
+  const prefix = rootClass.slice(1) + '-'  // ".m-tooltip" → "m-tooltip-" → prepend "--"
+  const tokenPrefix = `--${prefix}`         // "--m-tooltip-"
+  const cleanCss = css.replace(/\/\*[\s\S]*?\*\//g, '')
+  for (const m of cleanCss.matchAll(/(--m-[\w-]+)\s*:\s*([^;]+);/g)) {
+    if (m[1].startsWith(tokenPrefix)) {
+      declared[m[1]] = m[2].trim()
+    }
+  }
+
+  // ── 2. Overridable tokens ─────────────────────────────────────────────────
+  // var(--token, fallback) where --token is NOT declared in the same file.
+  const declaredAll = new Set(
+    [...css.matchAll(/(--m-[\w-]+)\s*:/g)].map((m) => m[1]),
+  )
+  for (const m of css.matchAll(/var\((--m-[\w-]+)\s*,\s*([^)]+)\)/g)) {
+    const token = m[1]
+    if (!declaredAll.has(token)) {
+      overridable[token] = m[2].trim()
+    }
+  }
+
+  const hasTokens = Object.keys(declared).length || Object.keys(overridable).length
+  return hasTokens ? { declared, overridable } : null
+}
+
+// Cache base.css contents — shared control tokens (e.g. --m-checkbox-control-*)
+// live there and must be picked up for components that have no component-level
+// styles.css panel of their own.
+const baseCssPath = join(repoRoot, 'src/styles/base.css')
+const baseCss = existsSync(baseCssPath) ? readText(baseCssPath) : ''
+
+/** Read styles.css for a component folder and return its token panel. */
+function collectStyleTokens(componentDir, folderName) {
+  const cssPath = join(componentDir, 'styles.css')
+  const css = existsSync(cssPath) ? readText(cssPath) : ''
+  // Derive root class from the folder name: PascalCase → kebab-case
+  // e.g. "ProgressBar" → ".m-progress-bar", "AutoComplete" → ".m-auto-complete"
+  const kebab = folderName
+    .replace(/([A-Z])/g, (c, _g, i) => (i > 0 ? `-${c.toLowerCase()}` : c.toLowerCase()))
+    .replace(/^-/, '')
+  const rootClass = `.m-${kebab}`
+  const result = extractStyleTokens(css, rootClass)
+
+  // Merge matching tokens from base.css (shared control axes like Checkbox/Radio/Switch)
+  if (baseCss) {
+    const prefix = `--m-${kebab}-`
+    const cleanBase = baseCss.replace(/\/\*[\s\S]*?\*\//g, '')
+    const baseResult = { declared: {}, overridable: {} }
+    for (const m of cleanBase.matchAll(/(--m-[\w-]+)\s*:\s*([^;]+);/g)) {
+      if (m[1].startsWith(prefix)) baseResult.declared[m[1]] = m[2].trim()
+    }
+    for (const m of cleanBase.matchAll(/var\((--m-[\w-]+)\s*,\s*([^)]+)\)/g)) {
+      if (m[1].startsWith(prefix) && !baseResult.declared[m[1]]) {
+        baseResult.overridable[m[1]] = m[2].trim()
+      }
+    }
+    if (Object.keys(baseResult.declared).length || Object.keys(baseResult.overridable).length) {
+      return {
+        declared: { ...(result?.declared || {}), ...baseResult.declared },
+        overridable: { ...(result?.overridable || {}), ...baseResult.overridable },
+      }
+    }
+  }
+
+  return result
+}
+
 function collectComponents() {
   const folders = readdirSync(componentsDir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
@@ -363,6 +466,7 @@ function collectComponents() {
     const zh = buildDocLocale(readText(zhPath), exportName, zhPath)
     const en = buildDocLocale(readText(enPath), exportName, enPath)
     const primary = zh || en
+    const styleTokens = collectStyleTokens(dir, folder)
 
     components.push({
       id: folder,
@@ -376,6 +480,7 @@ function collectComponents() {
       events: primary?.events || [],
       slots: primary?.slots || [],
       methods: primary?.methods || [],
+      ...(styleTokens ? { styleTokens } : {}),
       examples: [
         ...(zh?.examples || []).map((item) => ({ ...item, locale: 'zh-CN' })),
         ...(en?.examples || []).map((item) => ({ ...item, locale: 'en-US' })),
