@@ -80,14 +80,14 @@
 }
 
 .m-select__suffix {
-    --m-affix-icon-size: 1rem;
+    --m-affix-icon-size: var(--m-affix-icon-size-md);
 }
 
 .m-select__control:has(.m-select--small) .m-select__suffix,
 .m-select__control:has(.m-select--sm) .m-select__suffix,
 .m-select__control:has(.m-tree-select--small) .m-select__suffix,
 .m-select__control:has(.m-cascade-select--small) .m-select__suffix {
-    --m-affix-icon-size: 0.875rem;
+    --m-affix-icon-size: var(--m-affix-icon-size-sm);
     height: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
     width: calc(var(--m-control-height-small) - 2 * var(--m-border-width));
 }
@@ -96,7 +96,7 @@
 .m-select__control:has(.m-select--lg) .m-select__suffix,
 .m-select__control:has(.m-tree-select--large) .m-select__suffix,
 .m-select__control:has(.m-cascade-select--large) .m-select__suffix {
-    --m-affix-icon-size: 1.125rem;
+    --m-affix-icon-size: var(--m-affix-icon-size-lg);
     height: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
     width: calc(var(--m-control-height-large) - 2 * var(--m-border-width));
 }

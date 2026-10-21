@@ -1,15 +1,20 @@
 /* Shared multi-select tag chips (Select, TreeSelect, InputTags). */
 .m-select__tag {
-    --m-select-tag-remove-size: 0.875rem;
-    --m-select-tag-padding-y: 0.15rem;
-    align-items: center;
-    background: color-mix(
+    --m-select-tag-remove-size: var(--m-affix-icon-size-sm);
+    --m-select-tag-padding-y: var(--m-space-1);
+    --m-select-tag-bg: color-mix(
         in srgb,
-        var(--m-color-text-muted) 14%,
+        var(--m-color-text-muted) var(--m-fill-opacity-strong, 14%),
         var(--m-color-surface)
     );
+    --m-select-tag-color: var(--m-color-text);
+    --m-select-tag-remove-color: var(--m-color-text-muted);
+    --m-select-tag-remove-hover-color: var(--m-color-text);
+    --m-select-tag-more-color: var(--m-color-text-muted);
+    align-items: center;
+    background: var(--m-select-tag-bg);
     border-radius: var(--m-radius-sm);
-    color: var(--m-color-text);
+    color: var(--m-select-tag-color);
     display: inline-flex;
     font-size: var(--m-font-size-xs);
     gap: var(--m-space-1);
@@ -30,7 +35,7 @@
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
-    color: var(--m-color-text-muted);
+    color: var(--m-select-tag-remove-color);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
@@ -48,7 +53,7 @@
 }
 
 .m-select__tag-remove:hover:not(:disabled) {
-    color: var(--m-color-text);
+    color: var(--m-select-tag-remove-hover-color);
 }
 
 .m-select__tag-remove:focus-visible {
@@ -57,6 +62,6 @@
 }
 
 .m-select__tag--more {
-    color: var(--m-color-text-muted);
+    color: var(--m-select-tag-more-color);
     padding-right: var(--m-space-2);
 }
