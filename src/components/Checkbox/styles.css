@@ -5,7 +5,7 @@
 .m-checkbox__control svg {
     fill: none;
     height: 0.875rem;
-    stroke: var(--m-color-on-emphasis);
+    stroke: var(--m-checkbox-check-color);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2;
@@ -13,16 +13,16 @@
 }
 
 .m-checkbox__input:indeterminate + .m-checkbox__control {
-    background: var(--m-color-primary);
-    border-color: var(--m-color-primary);
+    background: var(--m-checkbox-control-checked-bg);
+    border-color: var(--m-checkbox-control-checked-border-color);
 }
 
 .m-checkbox__input:focus-visible + .m-checkbox__control {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
+    border-color: var(--m-checkbox-control-checked-border-color);
+    box-shadow: var(--m-checkbox-focus-shadow);
 }
 
 .m-checkbox--invalid .m-checkbox__input:focus-visible + .m-checkbox__control {
-    border-color: var(--m-color-danger);
-    box-shadow: var(--m-focus-shadow-danger);
+    border-color: var(--m-checkbox-invalid-border-color);
+    box-shadow: var(--m-checkbox-invalid-focus-shadow);
 }

@@ -1,36 +1,66 @@
+/* Component token panel: applies to bare .m-input and the affix/clear wrapper
+   (.m-input-field__control--*). Override any --m-input-* at the field, form,
+   or app root to restyle every input in scope. */
+.m-input,
+.m-input-field__control {
+    /* Geometry */
+    --m-input-radius: var(--m-radius-control);
+    /* Base colors */
+    --m-input-bg: var(--m-color-surface);
+    --m-input-color: var(--m-color-text);
+    --m-input-border-color: var(--m-color-border);
+    --m-input-placeholder-color: var(--m-color-text-muted);
+    /* Filled variant */
+    --m-input-filled-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 12%,
+        var(--m-color-surface)
+    );
+    /* State axis */
+    --m-input-hover-border-color: var(--m-color-primary-hover);
+    --m-input-focus-border-color: var(--m-color-primary);
+    --m-input-focus-shadow: var(--m-focus-shadow);
+    --m-input-disabled-bg: var(--m-color-bg-disabled);
+    --m-input-disabled-color: var(--m-color-text-disabled);
+    --m-input-invalid-border-color: var(--m-color-danger);
+    --m-input-invalid-focus-shadow: var(--m-focus-shadow-danger);
+    --m-input-warning-border-color: var(--m-color-warning);
+    --m-input-warning-focus-shadow: var(--m-focus-shadow-warning);
+}
+
 .m-input:hover:not(:disabled):not(:focus):not(.m-input--invalid):not(
         .m-input--warning
     ) {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-input-hover-border-color);
 }
 
 /* Outlined active state: border color + soft control-outline shadow */
 .m-input:focus,
 .m-input:focus-visible {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
+    border-color: var(--m-input-focus-border-color);
+    box-shadow: var(--m-input-focus-shadow);
     outline: 0;
 }
 
 .m-input--invalid:hover:not(:disabled):not(:focus) {
-    border-color: var(--m-color-danger);
+    border-color: var(--m-input-invalid-border-color);
 }
 
 .m-input--invalid:focus,
 .m-input--invalid:focus-visible {
-    border-color: var(--m-color-danger);
-    box-shadow: var(--m-focus-shadow-danger);
+    border-color: var(--m-input-invalid-border-color);
+    box-shadow: var(--m-input-invalid-focus-shadow);
     outline: 0;
 }
 
 .m-input--warning:hover:not(:disabled):not(:focus) {
-    border-color: var(--m-color-warning);
+    border-color: var(--m-input-warning-border-color);
 }
 
 .m-input--warning:focus,
 .m-input--warning:focus-visible {
-    border-color: var(--m-color-warning);
-    box-shadow: var(--m-focus-shadow-warning);
+    border-color: var(--m-input-warning-border-color);
+    box-shadow: var(--m-input-warning-focus-shadow);
     outline: 0;
 }
 
@@ -71,9 +101,9 @@
 .m-input-field__control--suffixed,
 .m-input-field__control--clearable {
     align-items: center;
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
+    background: var(--m-input-bg);
+    border: var(--m-border-width) solid var(--m-input-border-color);
+    border-radius: var(--m-input-radius);
     box-sizing: border-box;
     display: flex;
     max-width: 100%;
@@ -111,24 +141,20 @@
 .m-input-field__control--prefixed:has(.m-input--filled),
 .m-input-field__control--suffixed:has(.m-input--filled),
 .m-input-field__control--clearable:has(.m-input--filled) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 12%,
-        var(--m-color-surface)
-    );
+    background: var(--m-input-filled-bg);
     border-color: transparent;
 }
 
 .m-input-field__control--prefixed:has(.m-input--invalid),
 .m-input-field__control--suffixed:has(.m-input--invalid),
 .m-input-field__control--clearable:has(.m-input--invalid) {
-    border-color: var(--m-color-danger);
+    border-color: var(--m-input-invalid-border-color);
 }
 
 .m-input-field__control--prefixed:has(.m-input--warning),
 .m-input-field__control--suffixed:has(.m-input--warning),
 .m-input-field__control--clearable:has(.m-input--warning) {
-    border-color: var(--m-color-warning);
+    border-color: var(--m-input-warning-border-color);
 }
 
 .m-input-field__control--prefixed:hover:not(:focus-within):has(
@@ -140,35 +166,35 @@
 .m-input-field__control--clearable:hover:not(:focus-within):has(
         .m-input:not(:disabled)
     ) {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-input-hover-border-color);
 }
 
 .m-input-field__control--prefixed:focus-within,
 .m-input-field__control--suffixed:focus-within,
 .m-input-field__control--clearable:focus-within {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
+    border-color: var(--m-input-focus-border-color);
+    box-shadow: var(--m-input-focus-shadow);
 }
 
 .m-input-field__control--prefixed:has(.m-input--invalid):focus-within,
 .m-input-field__control--suffixed:has(.m-input--invalid):focus-within,
 .m-input-field__control--clearable:has(.m-input--invalid):focus-within {
-    border-color: var(--m-color-danger);
-    box-shadow: var(--m-focus-shadow-danger);
+    border-color: var(--m-input-invalid-border-color);
+    box-shadow: var(--m-input-invalid-focus-shadow);
 }
 
 .m-input-field__control--prefixed:has(.m-input--warning):focus-within,
 .m-input-field__control--suffixed:has(.m-input--warning):focus-within,
 .m-input-field__control--clearable:has(.m-input--warning):focus-within {
-    border-color: var(--m-color-warning);
-    box-shadow: var(--m-focus-shadow-warning);
+    border-color: var(--m-input-warning-border-color);
+    box-shadow: var(--m-input-warning-focus-shadow);
 }
 
 .m-input-field__control--prefixed:has(.m-input:disabled),
 .m-input-field__control--suffixed:has(.m-input:disabled),
 .m-input-field__control--clearable:has(.m-input:disabled) {
-    background-color: var(--m-color-bg-disabled);
-    color: var(--m-color-text-disabled);
+    background-color: var(--m-input-disabled-bg);
+    color: var(--m-input-disabled-color);
     cursor: not-allowed;
     opacity: 1;
 }
@@ -273,10 +299,10 @@
 }
 
 .m-input {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
+    background: var(--m-input-bg);
+    border: var(--m-border-width) solid var(--m-input-border-color);
+    border-radius: var(--m-input-radius);
+    color: var(--m-input-color);
     font-family: var(--m-font-sans);
     font-size: var(--m-control-font-medium);
     line-height: calc(var(--m-control-height-medium) - 2 * var(--m-border-width));
@@ -290,11 +316,7 @@
 }
 
 .m-input--filled {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 12%,
-        var(--m-color-surface)
-    );
+    background: var(--m-input-filled-bg);
     border-color: transparent;
 }
 
@@ -303,11 +325,11 @@
 }
 
 .m-input--invalid {
-    border-color: var(--m-color-danger);
+    border-color: var(--m-input-invalid-border-color);
 }
 
 .m-input--warning {
-    border-color: var(--m-color-warning);
+    border-color: var(--m-input-warning-border-color);
 }
 
 .m-input--small,

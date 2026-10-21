@@ -75,6 +75,12 @@
     --m-button-active-fg: var(--m-button-fg);
     --m-button-active-border: var(--m-button-border);
 
+    /* Disabled & focus */
+    --m-button-disabled-bg: var(--m-color-bg-disabled);
+    --m-button-disabled-fg: var(--m-color-text-disabled);
+    --m-button-disabled-border: var(--m-color-border);
+    --m-button-focus-shadow: var(--m-focus-shadow);
+
     align-items: center;
     background: var(--m-button-bg);
     border: var(--m-button-border-width) var(--m-button-border-style)
@@ -130,15 +136,15 @@
 }
 
 .m-button:focus-visible {
-    box-shadow: var(--m-focus-shadow);
+    box-shadow: var(--m-button-focus-shadow);
     outline: none;
 }
 
 .m-button:disabled,
 .m-button--disabled {
-    background: var(--m-color-bg-disabled);
-    border-color: var(--m-color-border);
-    color: var(--m-color-text-disabled);
+    background: var(--m-button-disabled-bg);
+    border-color: var(--m-button-disabled-border);
+    color: var(--m-button-disabled-fg);
     cursor: not-allowed;
     opacity: 1;
 }

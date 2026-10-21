@@ -2,6 +2,54 @@
 
 .m-table {
     --m-table-cell-padding-block: var(--m-space-2);
+
+    /* Interaction accents (sort / filter / expand / tree toggler share one axis) */
+    --m-table-accent-bg: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+    --m-table-accent-color: var(--m-color-primary);
+    /* Header states */
+    --m-table-header-sort-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-primary) 6%,
+        var(--m-table-header-bg)
+    );
+    --m-table-header-drag-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-primary) 4%,
+        var(--m-table-header-bg)
+    );
+    --m-table-header-drag-over-bg: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        var(--m-table-header-bg)
+    );
+    --m-table-header-drag-indicator: var(--m-color-primary);
+    /* Sort icons */
+    --m-table-sort-icon-color: color-mix(in srgb, var(--m-color-text-muted) 55%, transparent);
+    --m-table-sort-icon-hover-color: color-mix(in srgb, var(--m-color-text-muted) 80%, transparent);
+    --m-table-sort-icon-active-color: var(--m-color-primary);
+    /* Fixed-column edge shadow */
+    --m-table-shadow-start: inset 6px 0 5px -3px color-mix(in srgb, var(--m-color-text) 18%, transparent);
+    /* Loading line */
+    --m-table-loading-line-bg: color-mix(in srgb, var(--m-color-primary) 16%, transparent);
+    --m-table-loading-line-color: var(--m-color-primary);
+    /* Column resize handle */
+    --m-table-resize-handle-bg: color-mix(in srgb, var(--m-color-primary) 35%, transparent);
+    /* Filter button */
+    --m-table-filter-btn-color: color-mix(in srgb, var(--m-color-text-muted) 70%, transparent);
+    /* Tree toggler */
+    --m-table-tree-toggler-color: var(--m-color-text-muted);
+    --m-table-tree-line-color: var(--m-color-border);
+    /* Skeleton rows */
+    --m-table-skeleton-base: color-mix(in srgb, var(--m-color-text) 8%, transparent);
+    --m-table-skeleton-highlight: color-mix(in srgb, var(--m-color-text) 14%, transparent);
+    /* Sticky layer z-indices (in-table stacking context) */
+    --m-table-z-edge: 3;
+    --m-table-z-sticky: 2;
+    --m-table-z-resize: 4;
+    --m-table-z-column-setting: 5;
+    /* Skeleton animation duration */
+    --m-table-skeleton-duration: 1.4s;
+
     position: relative;
     box-sizing: border-box;
     width: 100%;
@@ -84,7 +132,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    z-index: 3;
+    z-index: var(--m-table-z-edge);
     width: 100%;
     height: 1px;
     background: var(--m-table-border-color);
@@ -96,7 +144,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 3;
+    z-index: var(--m-table-z-edge);
     width: 100%;
     height: 1px;
     background: var(--m-table-border-color);
@@ -106,7 +154,7 @@
 .m-table__main--fixed-header .m-table__header th {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: var(--m-table-z-sticky);
 }
 
 .m-table__main--table-fixed table {
@@ -115,7 +163,7 @@
 
 .m-table__main--shadow .m-table__header-cell--shadow::after,
 .m-table__main--shadow .m-table__cell--shadow::after {
-    box-shadow: inset 6px 0 5px -3px color-mix(in srgb, var(--m-color-text) 18%, transparent);
+    box-shadow: var(--m-table-shadow-start);
 }
 
 .m-table__main--shadow-end .m-table__header-cell--shadow-end,
@@ -187,8 +235,8 @@
 }
 
 .m-table__header-cell--sortable:hover {
-    background: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-table-header-bg));
-    color: var(--m-color-primary);
+    background: var(--m-table-header-sort-hover-bg);
+    color: var(--m-table-accent-color);
 }
 
 .m-table__header-cell--sortable:focus-visible {
@@ -242,7 +290,7 @@
     display: block;
     /* width: 0.75rem;
     height: 0.375rem; */
-    color: color-mix(in srgb, var(--m-color-text-muted) 55%, transparent);
+    color: var(--m-table-sort-icon-color);
 }
 
 .m-table__sort-icon--ascending {
@@ -254,17 +302,17 @@
 }
 
 .m-table__header-cell--sortable:hover .m-table__sort-icon {
-    color: color-mix(in srgb, var(--m-color-text-muted) 80%, transparent);
+    color: var(--m-table-sort-icon-hover-color);
 }
 
 .m-table__header-cell--ascending .m-table__sort-icon--ascending,
 .m-table__header-cell--descending .m-table__sort-icon--descending {
-    color: var(--m-color-primary);
+    color: var(--m-table-sort-icon-active-color);
 }
 
 .m-table__header-cell--sortable:hover.m-table__header-cell--ascending .m-table__sort-icon--ascending,
 .m-table__header-cell--sortable:hover.m-table__header-cell--descending .m-table__sort-icon--descending {
-    color: var(--m-color-primary);
+    color: var(--m-table-sort-icon-active-color);
 }
 
 .m-table__multi-sort-number {
@@ -413,13 +461,13 @@
 }
 
 .m-table__expand-btn:hover:not(:disabled) {
-    color: var(--m-color-primary);
-    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+    color: var(--m-table-accent-color);
+    background: var(--m-table-accent-bg);
 }
 
 .m-table__expand-btn--expanded {
     transform: rotate(90deg);
-    color: var(--m-color-primary);
+    color: var(--m-table-accent-color);
 }
 
 .m-table__expand-btn:focus-visible {
@@ -438,12 +486,14 @@
     position: relative;
 }
 
-.m-table__cell--expanded:hover {
-    background: var(--m-table-expanded-bg) !important;
+/* The `:not()` bumps this above `.m-table--enable-row-hover ... tr:hover > td`
+   so expanded cells keep their own bg on hover without needing `!important`. */
+.m-table__cell--expanded:not([hidden]):hover {
+    background: var(--m-table-expanded-bg);
 }
 
 .m-table__loading-line {
-    background: color-mix(in srgb, var(--m-color-primary) 16%, transparent);
+    background: var(--m-table-loading-line-bg);
     border-radius: var(--m-radius-full);
     height: calc(var(--m-space-1) / 2);
     left: 0;
@@ -455,7 +505,7 @@
 
 .m-table__loading-line::before {
     animation: m-table-loading-line var(--m-motion-pulse) var(--m-motion-ease) infinite;
-    background: var(--m-color-primary);
+    background: var(--m-table-loading-line-color);
     border-radius: inherit;
     content: '';
     inset: 0 auto 0 0;
@@ -539,7 +589,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 4;
+    z-index: var(--m-table-z-resize);
     width: 6px;
     height: 100%;
     cursor: col-resize;
@@ -548,7 +598,7 @@
 
 .m-table__resize-handle:hover,
 .m-table__resize-handle:active {
-    background: color-mix(in srgb, var(--m-color-primary) 35%, transparent);
+    background: var(--m-table-resize-handle-bg);
 }
 
 .m-table__filter-btn {
@@ -562,15 +612,15 @@
     padding: 0;
     border: 0;
     border-radius: var(--m-radius-control);
-    color: color-mix(in srgb, var(--m-color-text-muted) 70%, transparent);
+    color: var(--m-table-filter-btn-color);
     background: transparent;
     cursor: pointer;
 }
 
 .m-table__filter-btn:hover,
 .m-table__filter-btn--active {
-    color: var(--m-color-primary);
-    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+    color: var(--m-table-accent-color);
+    background: var(--m-table-accent-bg);
 }
 
 .m-table__filter-btn:focus-visible {
@@ -624,9 +674,11 @@
     padding-top: var(--m-space-2);
 }
 
-.m-table__virtual-spacer td {
+/* `td:not([class])` raises this above `.m-table--enable-row-hover ... tr:hover > td`
+   so spacer rows always stay transparent without `!important`. */
+.m-table__virtual-spacer td:not([class]) {
     line-height: 0;
-    background: transparent !important;
+    background: transparent;
 }
 
 .m-table__tfoot td {
@@ -664,7 +716,7 @@
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
-    color: var(--m-color-text-muted);
+    color: var(--m-table-tree-toggler-color);
     flex: 0 0 var(--m-tree-toggler-size, 1.25rem);
     font: inherit;
     height: var(--m-tree-toggler-size, 1.25rem);
@@ -682,8 +734,8 @@
 }
 
 .m-table__tree-toggler:hover:not(:disabled) {
-    color: var(--m-color-primary);
-    background: color-mix(in srgb, var(--m-color-primary) 8%, transparent);
+    color: var(--m-table-accent-color);
+    background: var(--m-table-accent-bg);
 }
 
 .m-table__tree-toggler:focus-visible {
@@ -705,7 +757,7 @@
 }
 
 .m-table--tree-line .m-table__tree-cell::before {
-    border-left: var(--m-border-width) solid var(--m-color-border);
+    border-left: var(--m-border-width) solid var(--m-table-tree-line-color);
     bottom: 0;
     content: '';
     left: calc(var(--m-space-1) + 0.35rem);
@@ -716,7 +768,7 @@
 .m-table__main--fixed-header .m-table__tfoot td {
     position: sticky;
     bottom: 0;
-    z-index: 2;
+    z-index: var(--m-table-z-sticky);
 }
 
 [data-m-motion="reduced"] .m-table__header th,
@@ -744,7 +796,7 @@
 }
 
 .m-table__header-cell--draggable:hover {
-    background: color-mix(in srgb, var(--m-color-primary) 4%, var(--m-table-header-bg));
+    background: var(--m-table-header-drag-hover-bg);
 }
 
 .m-table__header-cell--draggable:active {
@@ -756,8 +808,8 @@
 }
 
 .m-table__header-cell--drag-over {
-    background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-table-header-bg));
-    box-shadow: inset 3px 0 0 var(--m-color-primary);
+    background: var(--m-table-header-drag-over-bg);
+    box-shadow: inset 3px 0 0 var(--m-table-header-drag-indicator);
 }
 
 [data-m-motion="reduced"] .m-table__header-cell--draggable,
@@ -771,7 +823,7 @@
     position: absolute;
     top: var(--m-space-2);
     right: var(--m-space-2);
-    z-index: 5;
+    z-index: var(--m-table-z-column-setting);
     display: inline-flex;
     background: var(--m-table-header-bg);
     border-radius: var(--m-radius-control);
@@ -791,12 +843,12 @@
     border-radius: var(--m-radius-sm);
     background: linear-gradient(
         90deg,
-        color-mix(in srgb, var(--m-color-text) 8%, transparent) 25%,
-        color-mix(in srgb, var(--m-color-text) 14%, transparent) 37%,
-        color-mix(in srgb, var(--m-color-text) 8%, transparent) 63%
+        var(--m-table-skeleton-base) 25%,
+        var(--m-table-skeleton-highlight) 37%,
+        var(--m-table-skeleton-base) 63%
     );
     background-size: 400% 100%;
-    animation: m-table-skeleton-wave 1.4s ease infinite;
+    animation: m-table-skeleton-wave var(--m-table-skeleton-duration) ease infinite;
 }
 
 @keyframes m-table-skeleton-wave {

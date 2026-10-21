@@ -8,11 +8,23 @@
     --m-switch-thumb-size: 1rem;
     --m-switch-checked-offset: 1rem;
     --m-switch-spinner-size: 0.55rem;
+    /* Color axis */
+    --m-switch-track-bg: var(--m-color-border);
+    --m-switch-track-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 55%,
+        var(--m-color-border)
+    );
+    --m-switch-track-checked-bg: var(--m-color-primary);
+    --m-switch-track-checked-hover-bg: var(--m-color-primary-hover);
+    --m-switch-thumb-bg: var(--m-color-surface);
+    --m-switch-thumb-shadow: var(--m-shadow-sm);
+    --m-switch-text-color: var(--m-color-on-emphasis);
 }
 
 .m-switch__track {
     align-items: center;
-    background: var(--m-color-border);
+    background: var(--m-switch-track-bg);
     border-radius: var(--m-radius-full);
     display: inline-flex;
     flex: 0 0 auto;
@@ -27,13 +39,13 @@
 .m-switch:not(.m-switch--disabled):hover
     .m-switch__input:not(:checked)
     + .m-switch__track {
-    background: color-mix(in srgb, var(--m-color-text-muted) 55%, var(--m-color-border));
+    background: var(--m-switch-track-hover-bg);
 }
 
 .m-switch__thumb {
-    background: var(--m-color-surface);
+    background: var(--m-switch-thumb-bg);
     border-radius: var(--m-radius-full);
-    box-shadow: var(--m-shadow-sm);
+    box-shadow: var(--m-switch-thumb-shadow);
     height: var(--m-switch-thumb-size);
     transform: translateX(0);
     transition: transform var(--m-motion-fast) var(--m-motion-ease);
@@ -41,11 +53,11 @@
 }
 
 .m-switch__input:checked + .m-switch__track {
-    background: var(--m-color-primary);
+    background: var(--m-switch-track-checked-bg);
 }
 
 .m-switch:not(.m-switch--disabled):hover .m-switch__input:checked + .m-switch__track {
-    background: var(--m-color-primary-hover);
+    background: var(--m-switch-track-checked-hover-bg);
 }
 
 .m-switch__input:checked + .m-switch__track .m-switch__thumb {
@@ -105,7 +117,7 @@
 }
 
 .m-switch__text {
-    color: var(--m-color-on-emphasis);
+    color: var(--m-switch-text-color);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-xs);
     padding: 0 var(--m-space-1);

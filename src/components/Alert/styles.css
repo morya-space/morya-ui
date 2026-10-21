@@ -16,6 +16,10 @@
     --m-alert-gap: var(--m-space-3);
     --m-alert-title-size: var(--m-font-size-md);
     --m-alert-desc-size: var(--m-font-size-md);
+    /* Close affordance */
+    --m-alert-close-color: var(--m-color-text-muted);
+    --m-alert-close-hover-color: var(--m-color-text);
+    --m-alert-icon-margin-top: 0.125rem;
     align-items: flex-start;
     background: var(--m-alert-bg);
     border: var(--m-border-width) solid var(--m-alert-border);
@@ -70,7 +74,7 @@
     display: inline-flex;
     flex-shrink: 0;
     line-height: 1;
-    margin-top: 0.125rem;
+    margin-top: var(--m-alert-icon-margin-top);
 }
 
 .m-alert__body {
@@ -111,7 +115,7 @@
     background: transparent;
     border: none;
     border-radius: var(--m-radius-sm);
-    color: var(--m-color-text-muted);
+    color: var(--m-alert-close-color);
     cursor: pointer;
     display: inline-flex;
     flex-shrink: 0;
@@ -122,7 +126,7 @@
 }
 
 .m-alert__close:hover {
-    color: var(--m-color-text);
+    color: var(--m-alert-close-hover-color);
 }
 
 .m-alert__close:focus-visible {

@@ -370,6 +370,20 @@
 .m-checkbox,
 .m-radio,
 .m-switch {
+    /* Shared control color axis (component styles may refine per control) */
+    --m-checkbox-control-bg: var(--m-color-surface);
+    --m-checkbox-control-border-color: var(--m-color-border);
+    --m-checkbox-control-checked-bg: var(--m-color-primary);
+    --m-checkbox-control-checked-border-color: var(--m-color-primary);
+    --m-checkbox-control-hover-border-color: color-mix(
+        in srgb,
+        var(--m-color-primary) 45%,
+        var(--m-color-border)
+    );
+    --m-checkbox-check-color: var(--m-color-on-emphasis);
+    --m-checkbox-focus-shadow: var(--m-focus-shadow);
+    --m-checkbox-invalid-border-color: var(--m-color-danger);
+    --m-checkbox-invalid-focus-shadow: var(--m-focus-shadow-danger);
     align-items: center;
     color: var(--m-color-text);
     cursor: pointer;
@@ -390,7 +404,7 @@
 
 .m-checkbox--invalid .m-checkbox__control,
 .m-radio--invalid .m-radio__control {
-    border-color: var(--m-color-danger);
+    border-color: var(--m-checkbox-invalid-border-color);
 }
 
 .m-checkbox__input,
@@ -410,8 +424,8 @@
 .m-checkbox__control,
 .m-radio__control {
     align-items: center;
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
+    background: var(--m-checkbox-control-bg);
+    border: var(--m-border-width) solid var(--m-checkbox-control-border-color);
     display: inline-flex;
     flex: 0 0 auto;
     height: var(--m-checkbox-control-size, 1.125rem);
@@ -425,19 +439,19 @@
 
 .m-checkbox__input:checked + .m-checkbox__control,
 .m-radio__input:checked + .m-radio__control {
-    background: var(--m-color-primary);
-    border-color: var(--m-color-primary);
+    background: var(--m-checkbox-control-checked-bg);
+    border-color: var(--m-checkbox-control-checked-border-color);
 }
 
 .m-checkbox:not(.m-checkbox--disabled):hover .m-checkbox__control,
 .m-radio:not(.m-radio--disabled):hover .m-radio__control {
-    border-color: color-mix(in srgb, var(--m-color-primary) 45%, var(--m-color-border));
+    border-color: var(--m-checkbox-control-hover-border-color);
 }
 
 .m-checkbox__input:focus-visible + .m-checkbox__control,
 .m-radio__input:focus-visible + .m-radio__control,
 .m-switch__input:focus-visible + .m-switch__track {
-    box-shadow: var(--m-focus-shadow);
+    box-shadow: var(--m-checkbox-focus-shadow);
     outline: none;
 }
 
@@ -482,10 +496,11 @@
 
 .m-textarea,
 .m-select {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
+    background: var(--m-select-bg, var(--m-color-surface));
+    border: var(--m-border-width) solid
+        var(--m-select-border-color, var(--m-color-border));
     border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
+    color: var(--m-select-color, var(--m-color-text));
     font: inherit;
     transition:
         border-color var(--m-motion-fast) var(--m-motion-ease),
@@ -506,8 +521,8 @@
 .m-textarea:disabled,
 .m-select:disabled,
 .m-select--disabled {
-    background-color: var(--m-color-bg-disabled);
-    color: var(--m-color-text-disabled);
+    background-color: var(--m-select-disabled-bg, var(--m-color-bg-disabled));
+    color: var(--m-select-disabled-color, var(--m-color-text-disabled));
     cursor: not-allowed;
     opacity: 1;
 }

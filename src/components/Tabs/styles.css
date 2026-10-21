@@ -4,6 +4,16 @@
     --m-tabs-pad-y: var(--m-space-3);
     --m-tabs-pad-x: var(--m-space-2);
     --m-tabs-min-height: var(--m-control-height-medium);
+    /* Color axis */
+    --m-tabs-tab-color: var(--m-color-text-muted);
+    --m-tabs-tab-hover-color: var(--m-color-primary);
+    --m-tabs-tab-active-color: var(--m-color-primary);
+    --m-tabs-tab-disabled-color: var(--m-color-text-disabled);
+    --m-tabs-indicator-color: var(--m-color-primary);
+    --m-tabs-card-bg: color-mix(in srgb, var(--m-color-border) 35%, var(--m-color-surface));
+    --m-tabs-card-active-bg: var(--m-color-surface);
+    --m-tabs-card-hover-bg: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
+    --m-tabs-action-hover-bg: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
 }
 
 .m-tabs--small {
@@ -67,7 +77,7 @@
     background: transparent;
     border: 0;
     border-bottom: var(--m-tabs-indicator-width) solid transparent;
-    color: var(--m-color-text-muted);
+    color: var(--m-tabs-tab-color);
     cursor: pointer;
     font-family: var(--m-font-sans);
     font-size: var(--m-tabs-font);
@@ -80,34 +90,34 @@
 }
 
 .m-tabs__tab:hover:not(:disabled):not(.m-tabs__tab--active) {
-    color: var(--m-color-primary);
+    color: var(--m-tabs-tab-hover-color);
 }
 
 .m-tabs__tab--active {
-    border-color: var(--m-color-primary);
-    color: var(--m-color-primary);
+    border-color: var(--m-tabs-indicator-color);
+    color: var(--m-tabs-tab-active-color);
     font-weight: 500;
 }
 
 .m-tabs--card .m-tabs__tab {
-    background: color-mix(in srgb, var(--m-color-border) 35%, var(--m-color-surface));
+    background: var(--m-tabs-card-bg);
     border: var(--m-border-width) solid var(--m-color-border);
     border-bottom: 0;
     border-radius: var(--m-radius-sm) var(--m-radius-sm) 0 0;
 }
 
 .m-tabs--card .m-tabs__tab--active {
-    background: var(--m-color-surface);
+    background: var(--m-tabs-card-active-bg);
     border-color: var(--m-color-border);
-    color: var(--m-color-primary);
+    color: var(--m-tabs-tab-active-color);
 }
 
 .m-tabs--card .m-tabs__tab:hover:not(:disabled):not(.m-tabs__tab--active) {
-    background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
+    background: var(--m-tabs-card-hover-bg);
 }
 
 .m-tabs__tab:disabled {
-    color: var(--m-color-text-disabled);
+    color: var(--m-tabs-tab-disabled-color);
     cursor: not-allowed;
     opacity: 1;
 }
@@ -138,7 +148,7 @@
 .m-tabs__close:hover:not(:disabled),
 .m-tabs__add:hover:not(:disabled),
 .m-tabs__scroll:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--m-color-primary) 10%, transparent);
+    background: var(--m-tabs-action-hover-bg);
     color: var(--m-color-primary);
 }
 
