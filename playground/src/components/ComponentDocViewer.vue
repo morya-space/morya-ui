@@ -214,6 +214,12 @@ defineExpose({ scrollToSection })
 </style>
 
 <style>
+/*
+ * All rules use `>` direct-child selectors so they only apply to elements that
+ * markdown-it renders as top-level blocks. Embedded demos (`.m-demo-preview`,
+ * live components like MDialog/MTable) live deeper in the tree and must not be
+ * styled by these document rules.
+ */
 .m-markdown-doc {
   color: var(--m-color-text);
   font-size: 0.9375rem;
@@ -223,9 +229,12 @@ defineExpose({ scrollToSection })
 .m-markdown-doc > h1:first-of-type {
   display: none;
 }
-.m-markdown-doc h1,
-.m-markdown-doc h2,
-.m-markdown-doc h3 {
+.m-markdown-doc > h1,
+.m-markdown-doc > h2,
+.m-markdown-doc > h3,
+.m-markdown-doc > h4,
+.m-markdown-doc > h5,
+.m-markdown-doc > h6 {
   color: var(--m-color-text);
   font-family: var(--docs-display);
   font-weight: 700;
@@ -233,36 +242,56 @@ defineExpose({ scrollToSection })
   margin: 2.25rem 0 0.75rem;
   text-wrap: balance;
 }
-.m-markdown-doc h1 {
+.m-markdown-doc > h1 {
   font-size: 1.5rem;
 }
-.m-markdown-doc h2 {
+.m-markdown-doc > h2 {
   border-bottom: 1px solid color-mix(in srgb, var(--m-color-border) 60%, transparent);
   font-size: 1.25rem;
   padding-bottom: 0.45rem;
 }
-.m-markdown-doc h3 {
+.m-markdown-doc > h3 {
   font-size: 1.05rem;
   font-weight: 600;
 }
-.m-markdown-doc p,
-.m-markdown-doc ul,
-.m-markdown-doc ol,
-.m-markdown-doc li,
-.m-markdown-doc blockquote {
+.m-markdown-doc > h4 {
+  font-size: 0.95rem;
+}
+.m-markdown-doc > p,
+.m-markdown-doc > ul,
+.m-markdown-doc > ol,
+.m-markdown-doc > blockquote {
   color: var(--m-color-text);
   margin: 0.75rem 0;
 }
-.m-markdown-doc a {
+.m-markdown-doc > ul > li,
+.m-markdown-doc > ol > li {
+  color: var(--m-color-text);
+  margin: 0.375rem 0;
+}
+.m-markdown-doc p > a,
+.m-markdown-doc li > a,
+.m-markdown-doc td > a,
+.m-markdown-doc th > a {
   color: var(--m-color-primary);
   text-decoration: none;
   text-underline-offset: 0.15em;
   transition: color var(--m-motion-fast) var(--m-motion-ease);
 }
-.m-markdown-doc a:hover {
+.m-markdown-doc p > a:hover,
+.m-markdown-doc li > a:hover,
+.m-markdown-doc td > a:hover,
+.m-markdown-doc th > a:hover {
   text-decoration: underline;
 }
-.m-markdown-doc code {
+.m-markdown-doc p > code,
+.m-markdown-doc li > code,
+.m-markdown-doc td > code,
+.m-markdown-doc th > code,
+.m-markdown-doc h1 > code,
+.m-markdown-doc h2 > code,
+.m-markdown-doc h3 > code,
+.m-markdown-doc h4 > code {
   background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
   border: 1px solid color-mix(in srgb, var(--m-color-primary) 14%, transparent);
   border-radius: 0.35rem;
@@ -272,22 +301,22 @@ defineExpose({ scrollToSection })
   font-weight: 500;
   padding: 0.14rem 0.38rem;
 }
-.m-markdown-doc pre {
+.m-markdown-doc > pre {
   background: var(--docs-surface-raised);
   border: 1px solid color-mix(in srgb, var(--m-color-border) 70%, transparent);
   border-radius: var(--m-radius-lg, 0.75rem);
   overflow-x: auto;
   padding: var(--m-space-4);
 }
-.m-markdown-doc .m-code-block {
+.m-markdown-doc > .m-code-block {
   margin: 1.25rem 0 1.75rem;
   position: relative;
 }
-.m-markdown-doc .m-code-block > pre {
+.m-markdown-doc > .m-code-block > pre {
   margin: 0;
   padding-right: 4.25rem;
 }
-.m-markdown-doc .m-code-block__copy {
+.m-markdown-doc > .m-code-block > .m-code-block__copy {
   background: color-mix(in srgb, var(--m-color-surface) 88%, transparent);
   border: 1px solid color-mix(in srgb, var(--m-color-border) 75%, transparent);
   border-radius: var(--m-radius-sm);
@@ -305,15 +334,15 @@ defineExpose({ scrollToSection })
     color var(--m-motion-fast) var(--m-motion-ease);
   z-index: 1;
 }
-.m-markdown-doc .m-code-block__copy:hover {
+.m-markdown-doc > .m-code-block > .m-code-block__copy:hover {
   border-color: color-mix(in srgb, var(--m-color-primary) 40%, var(--m-color-border));
   color: var(--m-color-primary);
 }
-.m-markdown-doc .m-code-block__copy[data-copied='true'] {
+.m-markdown-doc > .m-code-block > .m-code-block__copy[data-copied='true'] {
   border-color: color-mix(in srgb, var(--m-color-success, #16a34a) 45%, var(--m-color-border));
   color: var(--m-color-success, #16a34a);
 }
-.m-markdown-doc pre code {
+.m-markdown-doc > pre > code {
   background: transparent;
   border: 0;
   padding: 0;
@@ -325,8 +354,8 @@ defineExpose({ scrollToSection })
   min-width: 100%;
   width: 100%;
 }
-.m-markdown-doc th,
-.m-markdown-doc td {
+.m-markdown-doc > table > thead > tr > th,
+.m-markdown-doc > table > tbody > tr > td {
   border-bottom: 1px solid color-mix(in srgb, var(--m-color-border) 70%, transparent);
   color: var(--m-color-text);
   line-height: 1.6;
@@ -334,15 +363,15 @@ defineExpose({ scrollToSection })
   text-align: left;
   vertical-align: top;
 }
-.m-markdown-doc h3[id],
-.m-markdown-doc h4[id] {
+.m-markdown-doc > h3[id],
+.m-markdown-doc > h4[id] {
   scroll-margin-top: 4.5rem;
 }
-.m-markdown-doc h4[id] {
+.m-markdown-doc > h4[id] {
   font-size: 0.95rem;
   margin-top: 1.5rem;
 }
-.m-markdown-doc thead th {
+.m-markdown-doc > table > thead > tr > th {
   background: var(--docs-surface-sunken);
   color: var(--m-color-text-muted);
   font-family: var(--docs-mono);
@@ -352,21 +381,21 @@ defineExpose({ scrollToSection })
   opacity: 1;
   text-transform: none;
 }
-.m-markdown-doc tbody tr {
+.m-markdown-doc > table > tbody > tr {
   transition: background-color var(--m-motion-fast) var(--m-motion-ease);
 }
 /* Subtle zebra so wide API tables stay scannable */
-.m-markdown-doc tbody tr:nth-child(even) {
+.m-markdown-doc > table > tbody > tr:nth-child(even) {
   background: color-mix(in srgb, var(--m-color-text) 1.5%, transparent);
 }
-.m-markdown-doc tbody tr:hover {
+.m-markdown-doc > table > tbody > tr:hover {
   background: color-mix(in srgb, var(--m-color-primary) 4%, transparent);
 }
-.m-markdown-doc tbody td {
+.m-markdown-doc > table > tbody > tr > td {
   color: var(--m-color-text);
   opacity: 1;
 }
-.m-markdown-doc tbody td code {
+.m-markdown-doc > table > tbody > tr > td > code {
   color: var(--m-color-primary);
   font-weight: 600;
 }

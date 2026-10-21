@@ -147,7 +147,7 @@ useModalOverlay({
           >
             <header class="m-dialog__header">
               <slot name="header">
-                <h2>{{ title }}</h2>
+                <h2 class="m-dialog__title m-confirm-dialog__title">{{ title }}</h2>
               </slot>
             </header>
             <div class="m-dialog__body m-confirm-dialog__message">

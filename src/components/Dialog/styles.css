@@ -112,9 +112,22 @@
     gap: var(--m-space-3);
 }
 
-.m-dialog__header h2 {
+/*
+ * Reset every property a doc/global stylesheet might set on a bare `h2`
+ * (font, margin, letter-spacing, border, padding, ...). Specificity of
+ * `.m-dialog__title` beats `.m-markdown-doc h2`-style descendant selectors
+ * because the class selector targets the element directly.
+ */
+.m-dialog__title {
+    border: 0;
+    color: inherit;
+    font-family: inherit;
     font-size: var(--m-font-size-lg);
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.4;
     margin: 0;
+    padding: 0;
 }
 
 .m-dialog__heading {

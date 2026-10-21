@@ -199,9 +199,17 @@
     border-bottom: var(--m-border-width) solid var(--m-color-split);
 }
 
-.m-drawer__header h2 {
+/* See `.m-dialog__title` for why this uses a class + full reset. */
+.m-drawer__title {
+    border: 0;
+    color: inherit;
+    font-family: inherit;
     font-size: var(--m-font-size-lg);
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.4;
     margin: 0;
+    padding: 0;
 }
 
 .m-drawer__close {
