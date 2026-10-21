@@ -12,8 +12,9 @@
 }
 
 .m-tour__spotlight {
+    --m-tour-spotlight-color: color-mix(in srgb, var(--m-color-text) 45%, transparent);
     border-radius: var(--m-radius-control);
-    box-shadow: 0 0 0 9999px color-mix(in srgb, var(--m-color-text) 45%, transparent);
+    box-shadow: 0 0 0 9999px var(--m-tour-spotlight-color);
     pointer-events: none;
     position: fixed;
     transition:
@@ -24,12 +25,34 @@
 }
 
 .m-tour__panel {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-control);
-    box-shadow: var(--m-shadow-lg);
+    --m-tour-panel-bg: var(--m-color-surface);
+    --m-tour-panel-color: var(--m-color-text);
+    --m-tour-panel-border-color: var(--m-color-border);
+    --m-tour-panel-shadow: var(--m-shadow-lg);
+    --m-tour-panel-radius: var(--m-radius-control);
+    --m-tour-panel-primary-bg: var(--m-color-primary);
+    --m-tour-panel-primary-border-color: color-mix(
+        in srgb,
+        var(--m-color-primary) 80%,
+        var(--m-color-border)
+    );
+    --m-tour-panel-primary-color: var(--m-color-on-primary, var(--m-color-surface));
+    --m-tour-panel-primary-description-color: color-mix(
+        in srgb,
+        var(--m-color-on-primary, #fff) 85%,
+        transparent
+    );
+    --m-tour-panel-primary-indicators-color: color-mix(
+        in srgb,
+        var(--m-color-on-primary, #fff) 75%,
+        transparent
+    );
+    background: var(--m-tour-panel-bg);
+    border: var(--m-border-width) solid var(--m-tour-panel-border-color);
+    border-radius: var(--m-tour-panel-radius);
+    box-shadow: var(--m-tour-panel-shadow);
     box-sizing: border-box;
-    color: var(--m-color-text);
+    color: var(--m-tour-panel-color);
     font-family: var(--m-font-sans);
     max-width: min(22rem, calc(100vw - var(--m-space-8)));
     min-width: 16rem;
@@ -39,13 +62,13 @@
 }
 
 .m-tour__panel--primary {
-    background: var(--m-color-primary);
-    border-color: color-mix(in srgb, var(--m-color-primary) 80%, var(--m-color-border));
-    color: var(--m-color-on-primary, var(--m-color-surface));
+    background: var(--m-tour-panel-primary-bg);
+    border-color: var(--m-tour-panel-primary-border-color);
+    color: var(--m-tour-panel-primary-color);
 }
 
 .m-tour__panel--primary .m-tour__description {
-    color: color-mix(in srgb, var(--m-color-on-primary, #fff) 85%, transparent);
+    color: var(--m-tour-panel-primary-description-color);
 }
 
 .m-tour__close {
@@ -100,7 +123,7 @@
 }
 
 .m-tour__panel--primary .m-tour__indicators {
-    color: color-mix(in srgb, var(--m-color-on-primary, #fff) 75%, transparent);
+    color: var(--m-tour-panel-primary-indicators-color);
 }
 
 .m-tour__actions {

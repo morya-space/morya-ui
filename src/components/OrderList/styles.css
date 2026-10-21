@@ -70,7 +70,7 @@
 
 /* Drag source: dimmed placeholder left in the list. */
 .m-order-list__ghost {
-    background: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
+    background: var(--m-order-list-ghost-bg, color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface)));
     opacity: var(--m-opacity-disabled);
 }
 

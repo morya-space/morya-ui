@@ -29,7 +29,7 @@
   justify-content: center;
   gap: var(--m-space-2);
   padding: var(--m-space-2);
-  background: color-mix(in srgb, var(--m-color-surface) 82%, transparent);
+  background: var(--m-qr-code-overlay-bg, color-mix(in srgb, var(--m-color-surface) 82%, transparent));
   text-align: center;
 }
 

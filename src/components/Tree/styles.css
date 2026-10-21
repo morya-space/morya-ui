@@ -23,7 +23,7 @@
 }
 
 .m-tree__children {
-    border-left: var(--m-border-width) solid color-mix(in srgb, var(--m-color-border) 80%, transparent);
+    border-left: var(--m-border-width) solid var(--m-tree-children-border-color, color-mix(in srgb, var(--m-color-border) 80%, transparent));
     margin-left: var(--m-tree-indent);
     padding-left: var(--m-tree-indent-padding);
 }
@@ -40,7 +40,7 @@
 
 .m-tree__row:hover,
 .m-tree__node:focus-visible > .m-tree__row {
-    background: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface));
+    background: var(--m-tree-row-hover-bg, color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface)));
 }
 
 .m-tree__node:focus-visible {
@@ -52,7 +52,7 @@
 }
 
 .m-tree__row--selected {
-    background: color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface));
+    background: var(--m-tree-row-selected-bg, color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface)));
 }
 
 .m-tree__row--matched .m-tree__label {

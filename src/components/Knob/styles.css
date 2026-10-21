@@ -22,11 +22,11 @@
 }
 
 .m-knob__track {
-    stroke: color-mix(in srgb, var(--m-color-text-muted) 28%, var(--m-color-surface));
+    stroke: var(--m-knob-track-color, color-mix(in srgb, var(--m-color-text-muted) 28%, var(--m-color-surface)));
 }
 
 .m-knob__value {
-    stroke: var(--m-color-primary);
+    stroke: var(--m-knob-value-color, var(--m-color-primary));
     stroke-linecap: round;
     transition: stroke-dashoffset var(--m-motion-fast) var(--m-motion-ease);
 }

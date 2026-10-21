@@ -50,5 +50,5 @@ a.m-breadcrumb__link:focus-visible {
 }
 
 .m-breadcrumb__separator {
-    color: color-mix(in srgb, var(--m-color-text-muted) 70%, transparent);
+    color: var(--m-breadcrumb-separator-color, color-mix(in srgb, var(--m-color-text-muted) 70%, transparent));
 }

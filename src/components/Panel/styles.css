@@ -9,7 +9,7 @@
 
 .m-panel__header {
     align-items: center;
-    background: color-mix(in srgb, var(--m-color-text-muted) 8%, var(--m-color-surface));
+    background: var(--m-panel-header-bg, color-mix(in srgb, var(--m-color-text-muted) 8%, var(--m-color-surface)));
     display: flex;
     gap: var(--m-space-2);
     justify-content: space-between;

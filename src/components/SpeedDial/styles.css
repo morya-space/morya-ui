@@ -145,11 +145,11 @@
 }
 
 .m-speed-dial__action:hover:not(:disabled) {
-    background: color-mix(
+    background: var(--m-speed-dial-action-hover-bg, color-mix(
         in srgb,
         var(--m-color-primary) 10%,
         var(--m-color-surface)
-    );
+    ));
 }
 
 .m-speed-dial__action:disabled {

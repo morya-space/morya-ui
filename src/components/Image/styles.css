@@ -51,7 +51,7 @@
 
 .m-image-preview__close {
     align-items: center;
-    background: color-mix(in srgb, var(--m-color-surface) 18%, transparent);
+    background: var(--m-image-preview-action-bg, color-mix(in srgb, var(--m-color-surface) 18%, transparent));
     border: none;
     border-radius: var(--m-radius-full);
     color: var(--m-color-on-emphasis);
@@ -73,7 +73,7 @@
 
 .m-image-preview__nav {
     align-items: center;
-    background: color-mix(in srgb, var(--m-color-surface) 18%, transparent);
+    background: var(--m-image-preview-action-bg, color-mix(in srgb, var(--m-color-surface) 18%, transparent));
     border: none;
     border-radius: var(--m-radius-full);
     color: var(--m-color-on-emphasis);

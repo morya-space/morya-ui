@@ -2,6 +2,12 @@
 .m-splitter {
     --m-splitter-trigger-size: 6px;
     --m-splitter-min-height: 6rem;
+    /* Color axis */
+    --m-splitter-panel-bg: var(--m-color-surface);
+    --m-splitter-gutter-bg: var(--m-color-border);
+    --m-splitter-gutter-slotted-bg: color-mix(in srgb, var(--m-color-border) 55%, var(--m-color-surface));
+    --m-splitter-gutter-hover-bg: var(--m-color-primary);
+    --m-splitter-gutter-focus-shadow: var(--m-focus-shadow);
     display: flex;
     font-family: var(--m-font-sans);
     min-height: var(--m-splitter-min-height);
@@ -23,7 +29,7 @@
 }
 
 .m-splitter__panel {
-    background: var(--m-color-surface);
+    background: var(--m-splitter-panel-bg);
     min-height: 0;
     min-width: 0;
     overflow: auto;
@@ -35,7 +41,7 @@
 
 .m-splitter__gutter {
     align-items: center;
-    background: var(--m-color-border);
+    background: var(--m-splitter-gutter-bg);
     display: flex;
     flex: 0 0 var(--m-splitter-trigger-size);
     justify-content: center;
@@ -45,7 +51,7 @@
 }
 
 .m-splitter__gutter--slotted {
-    background: color-mix(in srgb, var(--m-color-border) 55%, var(--m-color-surface));
+    background: var(--m-splitter-gutter-slotted-bg);
 }
 
 .m-splitter__gutter > * {
@@ -67,11 +73,11 @@
 .m-splitter__gutter:hover,
 .m-splitter--dragging > .m-splitter__gutter,
 .m-splitter__gutter:focus-visible {
-    background: var(--m-color-primary);
+    background: var(--m-splitter-gutter-hover-bg);
 }
 
 .m-splitter__gutter:focus-visible {
-    box-shadow: var(--m-focus-shadow);
+    box-shadow: var(--m-splitter-gutter-focus-shadow);
     outline: none;
 }
 

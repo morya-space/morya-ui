@@ -8,7 +8,7 @@
 }
 
 .m-inplace__display:hover {
-    background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
+    background: var(--m-inplace-display-hover-bg, color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface)));
 }
 
 .m-inplace__display:focus-visible {

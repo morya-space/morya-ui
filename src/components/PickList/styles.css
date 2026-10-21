@@ -15,7 +15,7 @@
 }
 
 .m-pick-list__header {
-    background: color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface));
+    background: var(--m-pick-list-header-bg, color-mix(in srgb, var(--m-color-text) 4%, var(--m-color-surface)));
     border: var(--m-border-width) solid var(--m-color-border);
     border-bottom: 0;
     border-radius: var(--m-radius-md) var(--m-radius-md) 0 0;

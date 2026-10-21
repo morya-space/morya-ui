@@ -1,5 +1,17 @@
 /* —— Form: IconField —— */
 .m-icon-field {
+    --m-icon-field-z-icon: 1;
+    --m-icon-field-color: var(--m-color-text-muted);
+    /* Filled-control bg when anchored (mirrors Input filled) */
+    --m-icon-field-filled-bg: color-mix(
+        in srgb,
+        var(--m-color-text-muted) 12%,
+        var(--m-color-surface)
+    );
+    --m-icon-field-hover-border-color: var(--m-color-primary-hover);
+    --m-icon-field-focus-border-color: var(--m-color-primary);
+    --m-icon-field-focus-shadow: var(--m-focus-shadow);
+    --m-icon-field-invalid-border-color: var(--m-color-danger);
     display: block;
     max-width: 100%;
     position: relative;
@@ -13,12 +25,12 @@
 
 .m-icon-field__icon {
     align-items: center;
-    color: var(--m-color-text-muted);
+    color: var(--m-icon-field-color);
     display: inline-flex;
     flex: 0 0 auto;
     line-height: 1;
     pointer-events: none;
-    z-index: 1;
+    z-index: var(--m-icon-field-z-icon);
 }
 
 /* Fallback when slot is a bare input/textarea (no control shell to anchor into). */
@@ -160,7 +172,7 @@
     .m-textarea-field__control:not(.m-textarea-field__control--clearable):hover:not(
         :focus-within
     ):has(.m-textarea:not(:disabled)) {
-    border-color: var(--m-color-primary-hover);
+    border-color: var(--m-icon-field-hover-border-color);
 }
 
 .m-icon-field--anchored
@@ -173,11 +185,7 @@
     .m-textarea-field__control:not(.m-textarea-field__control--clearable):has(
         .m-textarea--filled
     ) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-text-muted) 12%,
-        var(--m-color-surface)
-    );
+    background: var(--m-icon-field-filled-bg);
     border-color: transparent;
 }
 
@@ -191,7 +199,7 @@
     .m-textarea-field__control:not(.m-textarea-field__control--clearable):has(
         .m-textarea--invalid
     ) {
-    border-color: var(--m-color-danger);
+    border-color: var(--m-icon-field-invalid-border-color);
 }
 
 .m-icon-field--anchored
@@ -210,8 +218,8 @@
     ):focus-within,
 .m-icon-field--anchored
     .m-textarea-field__control:not(.m-textarea-field__control--clearable):focus-within {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
+    border-color: var(--m-icon-field-focus-border-color);
+    box-shadow: var(--m-icon-field-focus-shadow);
 }
 
 .m-icon-field--anchored

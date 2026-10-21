@@ -69,12 +69,12 @@
     width: 100%;
 }
 
-/* fade */
+/* fade — override inline `transform` from slidesStyle (JS sets it for slide layout only) */
 .m-carousel--fade .m-carousel__slides {
     display: block;
     height: 100%;
     position: relative;
-    transform: none !important;
+    transform: none !important; /* JS always wins for slide; fade/card must clear it */
     width: 100%;
 }
 
@@ -95,12 +95,12 @@
     width: 100%;
 }
 
-/* card */
+/* card — same inline-transform override as fade */
 .m-carousel--card .m-carousel__slides {
     height: 100%;
     perspective: 1000px;
     position: relative;
-    transform: none !important;
+    transform: none !important; /* JS always wins for slide; fade/card must clear it */
     width: 100%;
 }
 

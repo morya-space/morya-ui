@@ -1,9 +1,20 @@
+/*
+ * Radio shares the --m-checkbox-control-* axis declared in base.css.
+ * Override --m-radio-* tokens below to style Radio independently,
+ * or override the shared axis to theme both Checkbox and Radio at once.
+ */
 .m-radio__control {
+    /* Alias: theme Radio via --m-radio-* or the shared --m-checkbox-control-* axis */
+    --m-radio-check-color: var(--m-checkbox-check-color);
+    --m-radio-checked-border-color: var(--m-checkbox-control-checked-border-color);
+    --m-radio-focus-shadow: var(--m-checkbox-focus-shadow);
+    --m-radio-invalid-border-color: var(--m-checkbox-invalid-border-color);
+    --m-radio-invalid-focus-shadow: var(--m-checkbox-invalid-focus-shadow);
     border-radius: var(--m-radius-full);
 }
 
 .m-radio__input:checked + .m-radio__control::after {
-    background: var(--m-color-on-emphasis);
+    background: var(--m-radio-check-color, var(--m-checkbox-check-color));
     border-radius: var(--m-radius-full);
     content: "";
     height: 0.375rem;
@@ -11,11 +22,11 @@
 }
 
 .m-radio__input:focus-visible + .m-radio__control {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
+    border-color: var(--m-radio-checked-border-color, var(--m-checkbox-control-checked-border-color));
+    box-shadow: var(--m-radio-focus-shadow, var(--m-checkbox-focus-shadow));
 }
 
 .m-radio--invalid .m-radio__input:focus-visible + .m-radio__control {
-    border-color: var(--m-color-danger);
-    box-shadow: var(--m-focus-shadow-danger);
+    border-color: var(--m-radio-invalid-border-color, var(--m-checkbox-invalid-border-color));
+    box-shadow: var(--m-radio-invalid-focus-shadow, var(--m-checkbox-invalid-focus-shadow));
 }

@@ -1,18 +1,25 @@
 .m-accordion {
-    border: var(--m-border-width) solid var(--m-color-border);
+    --m-accordion-bg: var(--m-color-surface);
+    --m-accordion-color: var(--m-color-text);
+    --m-accordion-border-color: var(--m-color-border);
+    --m-accordion-header-hover-bg: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface));
+    --m-accordion-header-active-color: var(--m-color-primary);
+    --m-accordion-header-disabled-color: var(--m-color-text-muted);
+    --m-accordion-header-focus-shadow: var(--m-focus-shadow);
+    border: var(--m-border-width) solid var(--m-accordion-border-color);
     border-radius: var(--m-radius-md);
     overflow: hidden;
 }
 
 .m-accordion__tab + .m-accordion__tab {
-    border-top: var(--m-border-width) solid var(--m-color-border);
+    border-top: var(--m-border-width) solid var(--m-accordion-border-color);
 }
 
 .m-accordion__header {
     align-items: center;
-    background: var(--m-color-surface);
+    background: var(--m-accordion-bg);
     border: 0;
-    color: var(--m-color-text);
+    color: var(--m-accordion-color);
     cursor: pointer;
     display: flex;
     font-family: var(--m-font-sans);
@@ -26,27 +33,27 @@
 }
 
 .m-accordion__header:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--m-color-primary) 6%, var(--m-color-surface));
+    background: var(--m-accordion-header-hover-bg);
 }
 
 .m-accordion__header--active {
-    color: var(--m-color-primary);
+    color: var(--m-accordion-header-active-color);
 }
 
 .m-accordion__header:disabled {
-    color: var(--m-color-text-muted);
+    color: var(--m-accordion-header-disabled-color);
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
 }
 
 .m-accordion__header:focus-visible {
-    box-shadow: var(--m-focus-shadow);
+    box-shadow: var(--m-accordion-header-focus-shadow);
     outline: none;
 }
 
 .m-accordion__content {
-    background: var(--m-color-surface);
-    color: var(--m-color-text);
+    background: var(--m-accordion-bg);
+    color: var(--m-accordion-color);
     min-height: 0;
     overflow: hidden;
     padding: 0 var(--m-space-4) var(--m-space-4);

@@ -102,7 +102,7 @@
 }
 
 .m-mentions__textarea--filled {
-    background: color-mix(in srgb, var(--m-color-text-muted) 12%, var(--m-color-surface));
+    background: var(--m-mentions-filled-bg, color-mix(in srgb, var(--m-color-text-muted) 12%, var(--m-color-surface)));
     border-color: transparent;
 }
 
@@ -170,7 +170,7 @@
 
 .m-mentions__option--active,
 .m-mentions__option:hover {
-    background: color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface));
+    background: var(--m-mentions-option-active-bg, color-mix(in srgb, var(--m-color-primary) 12%, var(--m-color-surface)));
 }
 
 .m-mentions__option-value {
