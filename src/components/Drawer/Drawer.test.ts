@@ -61,7 +61,9 @@ describe('muDrawer', () => {
     })
     await nextTick()
     const pane = document.body.querySelector('.m-drawer') as HTMLElement
-    expect(pane.style.width).toBe('320px')
+    // Width goes through the `--m-drawer-side-width` token so the default
+    // `min(var(--m-drawer-side-width), 100vw)` rule tracks the caller value.
+    expect(pane.style.getPropertyValue('--m-drawer-side-width')).toBe('320px')
     wrapper.unmount()
   })
 

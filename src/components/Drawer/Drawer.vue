@@ -59,13 +59,17 @@ const paneStyle = computed(() => {
   const style: Record<string, string> = {}
   if (props.position === 'left' || props.position === 'right') {
     const width = toCssSize(props.width)
-    if (width) style.width = width
+    // Override the component token so `width: min(var(--m-drawer-side-width), 100vw)`
+    // tracks the caller-provided size while keeping the viewport guard.
+    if (width) style['--m-drawer-side-width'] = width
   }
   if (props.position === 'top' || props.position === 'bottom') {
     const height = toCssSize(props.height)
     if (height) {
       style.height = height
-      style.maxHeight = height
+      // Override the component token so `max-height: min(var(--m-drawer-top-height), 100%)`
+      // no longer clamps larger sizes.
+      style['--m-drawer-top-height'] = height
     }
   }
   return style
@@ -130,7 +134,7 @@ useModalOverlay({
         >
           <header v-if="$slots.header || header || showCloseIcon" class="m-drawer__header">
             <slot name="header">
-              <h2 v-if="header">
+              <h2 v-if="header" class="m-drawer__title">
                 {{ header }}
               </h2>
             </slot>
