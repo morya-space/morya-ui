@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T07:45:27.079Z",
+  "generatedAt": "2026-10-21T02:08:10.587Z",
   "source": "src/**/*.css",
   "prefix": "m",
   "categories": [
@@ -4241,7 +4241,7 @@
       "name": "--m-segmented-motion-duration",
       "category": "component",
       "source": "src/components/Segmented/styles.css",
-      "default": "var(--m-motion-fast)",
+      "default": "var(--m-motion-normal)",
       "description": {
         "zh-CN": "组件专用相关变量：Segmented Motion Duration",
         "en-US": "Component-specific token: Segmented Motion Duration"

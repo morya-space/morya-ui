@@ -15,16 +15,10 @@ const  openDialog  =() => {
     <MButton @click="openDialog">
       Click me
     </MButton>
-    <MButton type="primary">
-      Click me
-    </MButton>
-    <MButton type="primary" danger>
-      Click me
-    </MButton>
   </MFlex>
 
 
-  <MDialog v-model="showDialog">
+  <MDialog v-model="showDialog" title="测试弹窗" width="72rem">
     222
   </MDialog>
 </template>
