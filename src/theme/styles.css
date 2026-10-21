@@ -95,6 +95,10 @@
     );
     --m-control-affix-gap: 2.35rem;
     --m-control-affix-padding: 2.5rem;
+    /* Inline icon sizes inside compact control affordances (clear / toggle / chevron) */
+    --m-affix-icon-size-sm: 0.875rem;
+    --m-affix-icon-size-md: 1rem;
+    --m-affix-icon-size-lg: 1.125rem;
     --m-meter-track-height: var(--m-space-5);
     --m-tree-toggler-size: var(--m-checkbox-control-size);
     --m-nav-rail-width: 12.5rem;
@@ -160,6 +164,24 @@
     --m-slider-marks-inset: 0.9rem;
     --m-slider-marks-side: 0.5rem;
     --m-stepper-connector-color: var(--m-color-border);
+
+    /* Semantic fill / border mix ratios (used with color-mix; component styles
+       should reference these instead of hard-coding percentages) */
+    --m-fill-opacity-muted: 6%;
+    --m-fill-opacity-light: 8%;
+    --m-fill-opacity: 10%;
+    --m-fill-opacity-strong: 14%;
+    --m-border-opacity-soft: 28%;
+    --m-border-opacity: 35%;
+    --m-border-opacity-strong: 45%;
+
+    /* Brand-tinted surface + text on brand (referenced by component docs) */
+    --m-color-primary-subtle: color-mix(in srgb, var(--m-color-primary) 10%, var(--m-color-surface));
+    --m-color-text-on-primary: var(--m-color-on-emphasis);
+    /* Aliases previously referenced with fallbacks (kept for compatibility) */
+    --m-color-surface-secondary: var(--m-color-bg-disabled);
+    --m-color-primary-light: var(--m-color-primary-subtle);
+    --m-control-height-sm: var(--m-control-height-small);
 
     /* Table */
     --m-color-fill-light: color-mix(in srgb, var(--m-color-text) 6%, var(--m-color-surface));
@@ -374,6 +396,9 @@
     --m-color-contrast-hover: #f5f5f5;
     --m-color-contrast-active: #d9d9d9;
     --m-overlay-scrim: rgb(0 0 0 / 0.65);
+    /* Dark brand-tinted surface keeps ≥ readable contrast on dark bg */
+    --m-color-primary-subtle: color-mix(in srgb, var(--m-color-primary) 20%, var(--m-color-surface));
+    --m-color-surface-secondary: var(--m-color-bg-disabled);
     --m-shadow-sm:
         0 1px 2px 0 rgb(0 0 0 / 0.16), 0 1px 6px -1px rgb(0 0 0 / 0.12),
         0 2px 4px 0 rgb(0 0 0 / 0.08);
