@@ -21,8 +21,13 @@
 
 .m-order-list__item {
     align-items: center;
+    background: none;
+    border: 0;
     display: flex;
     gap: var(--m-space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .m-order-list__item--disabled {
@@ -115,9 +120,10 @@
 }
 
 .m-order-list__empty-text {
-    margin: 0;
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
+    margin: 0;
+    padding: 0;
     line-height: 1.5;
 }
 

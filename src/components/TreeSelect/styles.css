@@ -123,8 +123,20 @@
     min-height: 0;
 }
 
+/* Reset any global `ul { margin/padding/list-style }` the host app might set. */
 .m-tree-select__tree,
-.m-tree-select__node ul {
+.m-tree-select__children {
+    background: none;
+    border: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset any global `li { margin/padding/list-style }` the host app might set. */
+.m-tree-select__node {
+    background: none;
+    border: 0;
     list-style: none;
     margin: 0;
     padding: 0;

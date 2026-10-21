@@ -147,7 +147,13 @@
     width: 100%;
 }
 
-.m-cascade-select__column-list > li {
+/* Reset any global `li { margin/padding/list-style }` the host app might set. */
+.m-cascade-select__item {
+    background: none;
+    border: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     width: 100%;
 }
 

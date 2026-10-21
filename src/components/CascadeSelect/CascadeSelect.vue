@@ -391,7 +391,7 @@ onBeforeUnmount(() => {
             max-height="var(--m-cascade-select-column-max-height)"
             view-class="m-cascade-select__column-list"
           >
-            <li v-for="(option, optionIndex) in column" :key="String(option.value)">
+            <li v-for="(option, optionIndex) in column" :key="String(option.value)" class="m-cascade-select__item">
               <button
                 type="button"
                 class="m-cascade-select__option"

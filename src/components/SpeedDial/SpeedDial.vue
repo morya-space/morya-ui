@@ -241,7 +241,7 @@ onBeforeUnmount(() => {
           role="menu"
           @keydown="onListKeydown"
         >
-          <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="none">
+          <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="m-speed-dial__item" role="none">
             <button
               type="button"
               class="m-speed-dial__action"

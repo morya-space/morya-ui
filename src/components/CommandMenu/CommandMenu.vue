@@ -138,7 +138,7 @@ watch(filtered, () => {
             fit-content
             view-class="m-command-menu__list-view"
           >
-            <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" role="presentation">
+            <li v-for="(item, index) in filtered" :key="`${item.label}-${index}`" class="m-command-menu__entry" role="presentation">
               <button
                 type="button"
                 class="m-command-menu__item"

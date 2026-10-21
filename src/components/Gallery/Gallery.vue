@@ -124,7 +124,7 @@ watch(keyboard.activeIndex, (index) => {
         :aria-label="locale.thumbnails"
         @keydown="keyboard.onKeydown"
       >
-        <li v-for="(image, index) in images" :key="`${imageSrc(image)}-${index}`">
+        <li v-for="(image, index) in images" :key="`${imageSrc(image)}-${index}`" class="m-gallery__thumb-item">
           <button
             type="button"
             class="m-gallery__thumb"

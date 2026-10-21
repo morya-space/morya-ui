@@ -207,7 +207,7 @@ watch(keyboard.activeIndex, () => {
       :aria-multiselectable="multiple || undefined"
       @keydown="onListKeydown"
     >
-      <li v-for="(option, index) in filteredOptions" :key="String(option.value)" role="presentation">
+      <li v-for="(option, index) in filteredOptions" :key="String(option.value)" class="m-listbox__item" role="presentation">
         <button
           type="button"
           class="m-listbox__option"

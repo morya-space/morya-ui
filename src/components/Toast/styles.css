@@ -104,11 +104,13 @@
     margin-top: var(--m-space-1);
 }
 
-.m-toast__content p {
+/* Reset any global `p { margin/font }` the host app might set. */
+.m-toast__detail {
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
     line-height: 1.45;
     margin: 0;
+    padding: 0;
 }
 
 .m-toast__close {

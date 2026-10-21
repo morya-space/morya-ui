@@ -61,6 +61,15 @@
     width: max-content;
 }
 
+/* Reset any global `li { margin/padding/list-style }` the host app might set. */
+.m-gallery__thumb-item {
+    background: none;
+    border: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .m-gallery__thumb {
     background: transparent;
     border: var(--m-border-width) solid transparent;

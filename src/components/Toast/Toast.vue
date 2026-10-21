@@ -116,7 +116,7 @@ function onMouseLeave(message: ToastMessage) {
               />
               <strong><MRenderableView :value="message.summary" /></strong>
             </div>
-            <p v-if="message.detail != null && message.detail !== ''">
+            <p v-if="message.detail != null && message.detail !== ''" class="m-toast__detail">
               <MRenderableView :value="message.detail" />
             </p>
             <div v-if="message.actions != null && message.actions !== ''" class="m-toast__actions">

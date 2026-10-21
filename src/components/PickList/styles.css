@@ -48,10 +48,13 @@
 }
 
 .m-pick-list__empty {
+    background: none;
+    border: 0;
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-sm);
     line-height: 1.5;
     list-style: none;
+    margin: 0;
     padding: var(--m-space-3);
     text-align: center;
 }

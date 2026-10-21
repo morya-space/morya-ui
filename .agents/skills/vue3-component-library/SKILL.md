@@ -137,6 +137,7 @@ export type { ButtonEmits, ButtonProps, ButtonInstance } from "./types";
 ## 样式与视觉一致性
 
 - 为每个组件定义根 class、元素 class、状态/变体修饰符，例如 `.acme-button__icon`、`.acme-button--loading`。不要依赖 DOM 层级或标签名作为公开样式 API。
+- **避免用裸标签选择器命中组件内部元素**：组件内任何 `<h1-h6>`、`<p>`、`<ul>/<ol>/<li>`、`<table>/<thead>/<tbody>/<tr>/<td>/<th>`、`<figure>/<figcaption>`、`<pre>`、`<blockquote>` 等元素都必须加 BEM 元素 class（如 `.acme-dialog__title`、`.acme-list__item`），并通过该 class 显式 reset 宿主全局 element selector 可能设置的属性（至少 `margin`/`padding`，列表再加 `list-style: none; background: none; border: 0`）。组件 CSS 不依赖 `tag` 选择器命中内部元素，避免被宿主项目的 `p { ... }`、`ul { ... }` 等全局规则污染。语义标签仍然保留以维持可访问性，但样式必须由 class 完全控制。
 - 样式默认以组件根为边界。谨慎使用 `scoped`：它可以避免泄漏，但会阻碍某些主题和覆盖策略；按仓库方案统一选择，而非混用。
 - 为尺寸变体规定一致的高度、水平内边距、字号、图标尺寸和触控目标；相同 `size` 在同类组件中应含义一致。
 - `disabled` 不等同于视觉变淡：同时阻止交互、正确传递原生禁用语义，并避免不可读的对比度。

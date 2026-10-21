@@ -70,6 +70,7 @@
     color: var(--m-color-text-muted);
     font-size: var(--m-font-size-xs);
     margin: 0;
+    padding: 0;
 }
 
 .m-date-picker__help--invalid {

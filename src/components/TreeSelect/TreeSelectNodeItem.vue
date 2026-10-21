@@ -74,7 +74,7 @@ const locale = useMLocale()
         </template>
       </button>
     </div>
-    <ul v-if="node.children?.length && expanded[node.key]" role="group">
+    <ul v-if="node.children?.length && expanded[node.key]" class="m-tree-select__children" role="group">
       <TreeSelectNodeItem
         v-for="child in node.children"
         :key="child.key"

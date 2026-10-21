@@ -62,6 +62,15 @@
     position: absolute;
 }
 
+/* Reset any global `li { margin/padding/list-style }` the host app might set. */
+.m-speed-dial__item {
+    background: none;
+    border: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .m-speed-dial__list--teleported {
     position: fixed;
     z-index: var(--m-z-dropdown);

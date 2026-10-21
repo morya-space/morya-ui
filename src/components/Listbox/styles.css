@@ -49,6 +49,15 @@
     padding: var(--m-space-1);
 }
 
+/* Reset any global `li { margin/padding/list-style }` the host app might set. */
+.m-listbox__item {
+    background: none;
+    border: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .m-listbox__option {
     background: transparent;
     border: 0;

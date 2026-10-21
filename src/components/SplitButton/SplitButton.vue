@@ -224,7 +224,7 @@ onBeforeUnmount(() => {
           role="menu"
           @keydown="keyboard.onKeydown"
         >
-          <li v-for="(item, index) in model" :key="`${item.label}-${index}`" role="presentation">
+          <li v-for="(item, index) in model" :key="`${item.label}-${index}`" class="m-split-button__entry" role="presentation">
             <button
               type="button"
               class="m-split-button__item"
