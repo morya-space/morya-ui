@@ -1,6 +1,6 @@
 # Morya UI 组件 CSS 变量改进计划
 
-> 对标 Element Plus 的组件级 CSS 变量模式（如 `.el-button` 下声明的 `--el-button-*` 系列），对 Morya UI 全部组件做“根级组件 token 声明 + 状态轴映射”审查，并给出按组件落地的改造清单。
+> 对 Morya UI 全部组件做"根级组件 token 声明 + 状态轴映射"审查，即在每个组件根 class 下集中声明 `--m-<component>-*` 系列 CSS 变量（几何、颜色、状态轴），并给出按组件落地的改造清单。
 
 ## 一、现状结论
 
@@ -21,7 +21,7 @@
 | **覆盖度分层（关键属性扫描）** | 仅 3 组件达标 | 对每个组件的"颜色/尺寸/阴影/z-index/行高是否走变量"逐一扫描：**A 档（基本达标）仅 Button、Segmented、Avatar 3 个**；B 档（有几何变量、缺颜色状态轴）约 25 个；C 档（近零组件变量）约 70 个，含 Input/Select/Dialog/Table/Checkbox/Card 等主力；D 档（功能性硬编码，补变量也覆盖不到）见下 |
 | **功能性硬编码** | D 档，4 类 | ① ColorPicker 23 处写死：`border: 2px solid #fff` 手柄、预设色板 `rgb(0 0 0/10%)`、面板 `260px/160px` 等，**暗色主题下手柄白边与分割线全是错的**；② `z-index` 写死数字散落 24 个文件（Table 6、Button 3、SelectButton 2…），未走 `--m-z-*`；③ 行高 `1.4/1.5/1.5715/1.65` 写死散落 60+ 组件，未走 `--m-line-height-*`；④ Menu `min-width:10rem`、Page `max-width:42rem`、Loading `3.75rem` 等局部尺寸写死。注：ColorPicker 色相渐变 `#f00→#ff0→…` 属功能性色轮，可豁免 |
 
-**总体判断：** 组件库已经有不错的全局 token 基础，但距离 Element Plus 那种“每个组件根类自带完整变量面板”的成熟度还有明显差距。核心问题不是“没有 token”，而是 **组件级 token 层不完整**，导致：
+**总体判断：** 组件库已经有不错的全局 token 基础，但距离"每个组件根类自带完整变量面板"的成熟度还有明显差距。核心问题不是"没有 token"，而是 **组件级 token 层不完整**，导致：
 
 1. 单个组件难以独立定制（必须改全局 token 或写深层选择器）；
 2. 状态色（hover/active/disabled）无法按组件微调；
@@ -29,7 +29,7 @@
 
 ---
 
-## 二、目标模式（Element Plus 风格）
+## 二、目标模式
 
 > **本库现成样板**：`Segmented` 组件（`src/components/Segmented/styles.css` + `docs/index.md`）已基本符合该模式 —— 根 class 下声明完整的 `--m-segmented-*` 变量（track/thumb/text/radius/motion），且文档带"样式定制"章节列出变量名/默认值/用途。改造其他组件时可直接参照它的结构与文档格式。注意其文档示例引用了不存在的 `--m-color-primary-subtle` / `--m-color-text-on-primary`，需顺手修正为现有 token。
 
