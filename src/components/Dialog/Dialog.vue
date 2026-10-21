@@ -132,7 +132,9 @@ const backdropClass = computed(() => [
 const panelStyle = computed(() => {
   if (maximized.value) return undefined
   const width = props.width ?? fallthroughPanelWidth.value
-  return width ? { width } : undefined
+  // Override the component token instead of `width` directly so that the
+  // default `max-width: var(--m-dialog-width)` no longer clamps larger sizes.
+  return width ? ({ '--m-dialog-width': width } as Record<string, string>) : undefined
 })
 const zoomAttrs = computed(() => mergePtPart(props.pt?.zoom))
 const panelAttrs = computed(() => mergePtPart(props.pt?.panel))
@@ -268,7 +270,7 @@ defineExpose({
                   <MIcon :name="typeIcon" size="sm" />
                 </span>
                 <slot name="header">
-                  <h2 v-if="dialogTitle">
+                  <h2 v-if="dialogTitle" class="m-dialog__title">
                     {{ dialogTitle }}
                   </h2>
                 </slot>

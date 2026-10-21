@@ -209,7 +209,9 @@ describe('muDialog', () => {
     })
     await nextTick()
     const panel = document.body.querySelector('.m-dialog') as HTMLElement
-    expect(panel.style.width).toBe('28rem')
+    // Width goes through the `--m-dialog-width` token so the default
+    // `max-width` bound tracks the caller-provided size.
+    expect(panel.style.getPropertyValue('--m-dialog-width')).toBe('28rem')
     wrapper.unmount()
   })
 
@@ -236,7 +238,7 @@ describe('muDialog', () => {
     const backdrop = document.body.querySelector('.m-dialog-backdrop') as HTMLElement
     const panel = document.body.querySelector('.m-dialog') as HTMLElement
     expect(backdrop.style.width).toBe('')
-    expect(panel.style.width).toBe('28rem')
+    expect(panel.style.getPropertyValue('--m-dialog-width')).toBe('28rem')
     wrapper.unmount()
   })
 
