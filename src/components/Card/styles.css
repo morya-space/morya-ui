@@ -1,10 +1,19 @@
 .m-card {
     --m-card-shadow-rest: var(--m-shadow-raised);
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-lg);
+    --m-card-bg: var(--m-color-surface);
+    --m-card-color: var(--m-color-text);
+    --m-card-border-color: var(--m-color-border);
+    --m-card-header-border-color: var(--m-color-split);
+    --m-card-footer-border-color: var(--m-color-split);
+    --m-card-subtitle-color: var(--m-color-text-muted);
+    --m-card-radius: var(--m-radius-lg);
+    --m-card-focus-border-color: var(--m-color-primary);
+    --m-card-focus-shadow: var(--m-focus-shadow);
+    background: var(--m-card-bg);
+    border: var(--m-border-width) solid var(--m-card-border-color);
+    border-radius: var(--m-card-radius);
     box-shadow: none;
-    color: var(--m-color-text);
+    color: var(--m-card-color);
     overflow: visible;
 }
 
@@ -20,12 +29,12 @@
 
 .m-card__header,
 .m-card__footer {
-    border-bottom: var(--m-border-width) solid var(--m-color-split);
+    border-bottom: var(--m-border-width) solid var(--m-card-header-border-color);
 }
 
 .m-card__footer {
     border-bottom: 0;
-    border-top: var(--m-border-width) solid var(--m-color-split);
+    border-top: var(--m-border-width) solid var(--m-card-footer-border-color);
 }
 
 .m-card__title {
@@ -36,7 +45,7 @@
 }
 
 .m-card__subtitle {
-    color: var(--m-color-text-muted);
+    color: var(--m-card-subtitle-color);
     font-size: var(--m-font-size-md);
     margin: var(--m-space-1) 0 0;
 }
@@ -62,8 +71,8 @@
 
 .m-card--shadow-hover:focus-within,
 .m-card--shadow-always:focus-within {
-    border-color: var(--m-color-primary);
-    box-shadow: var(--m-focus-shadow);
+    border-color: var(--m-card-focus-border-color);
+    box-shadow: var(--m-card-focus-shadow);
 }
 
 .m-card--small .m-card__header,
@@ -79,7 +88,7 @@
 }
 
 .m-card__cover {
-    border-radius: var(--m-radius-lg) var(--m-radius-lg) 0 0;
+    border-radius: var(--m-card-radius) var(--m-card-radius) 0 0;
     display: block;
     overflow: hidden;
 }

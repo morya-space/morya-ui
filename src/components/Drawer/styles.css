@@ -143,15 +143,29 @@
 }
 
 .m-drawer-backdrop--modal {
-    background: var(--m-overlay-scrim);
+    background: var(--m-drawer-mask-bg, var(--m-overlay-scrim));
 }
 
 .m-drawer {
     --m-drawer-side-width: 20rem;
     --m-drawer-top-height: 40vh;
-    background: var(--m-color-surface);
-    box-shadow: var(--m-shadow-lg);
-    color: var(--m-color-text);
+    --m-drawer-bg: var(--m-color-surface);
+    --m-drawer-color: var(--m-color-text);
+    --m-drawer-shadow: var(--m-shadow-lg);
+    --m-drawer-mask-bg: var(--m-overlay-scrim);
+    --m-drawer-header-border-color: var(--m-color-split);
+    --m-drawer-footer-border-color: var(--m-color-split);
+    /* Close button */
+    --m-drawer-close-color: var(--m-color-text-muted);
+    --m-drawer-close-hover-color: var(--m-color-text);
+    --m-drawer-close-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        var(--m-color-surface)
+    );
+    background: var(--m-drawer-bg);
+    box-shadow: var(--m-drawer-shadow);
+    color: var(--m-drawer-color);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -196,7 +210,7 @@
 }
 
 .m-drawer__header {
-    border-bottom: var(--m-border-width) solid var(--m-color-split);
+    border-bottom: var(--m-border-width) solid var(--m-drawer-header-border-color);
 }
 
 /* See `.m-dialog__title` for why this uses a class + full reset. */
@@ -217,7 +231,7 @@
     background: transparent;
     border: 0;
     border-radius: var(--m-radius-sm);
-    color: var(--m-color-text-muted);
+    color: var(--m-drawer-close-color);
     cursor: pointer;
     display: inline-flex;
     font-size: var(--m-font-size-lg);
@@ -231,12 +245,8 @@
 }
 
 .m-drawer__close:hover:not(:disabled) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        var(--m-color-surface)
-    );
-    color: var(--m-color-text);
+    background: var(--m-drawer-close-hover-bg);
+    color: var(--m-drawer-close-hover-color);
 }
 
 .m-drawer__close:disabled {
@@ -258,7 +268,7 @@
 }
 
 .m-drawer__footer {
-    border-top: var(--m-border-width) solid var(--m-color-split);
+    border-top: var(--m-border-width) solid var(--m-drawer-footer-border-color);
     gap: var(--m-space-2);
     width: 100%;
 }

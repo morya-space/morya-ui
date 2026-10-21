@@ -5,9 +5,13 @@
 }
 
 .m-tooltip__content {
-    background: var(--m-color-text);
-    border-radius: var(--m-radius-sm);
-    color: var(--m-color-surface);
+    /* Inverted surface by default (dark text color on light surface reads as the classic tooltip) */
+    --m-tooltip-bg: var(--m-color-text);
+    --m-tooltip-color: var(--m-color-surface);
+    --m-tooltip-radius: var(--m-radius-sm);
+    background: var(--m-tooltip-bg);
+    border-radius: var(--m-tooltip-radius);
+    color: var(--m-tooltip-color);
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-xs);
     left: 50%;

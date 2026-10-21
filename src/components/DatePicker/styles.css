@@ -395,7 +395,7 @@ button.m-date-picker__month--switch:focus-visible {
     cursor: pointer;
     font-family: var(--m-font-sans);
     font-size: var(--m-date-picker-font-size);
-    height: var(--m-control-height-sm, 1.75rem);
+    height: var(--m-control-height-sm);
     padding: 0 var(--m-space-3);
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),

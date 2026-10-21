@@ -4,6 +4,20 @@
     --m-pagination-padding-x: var(--m-control-padding-x-medium);
     --m-pagination-simple-width: 3.5rem;
     --m-pagination-jumper-width: 5.5rem;
+    /* Button color axis */
+    --m-pagination-button-bg: var(--m-color-surface);
+    --m-pagination-button-color: var(--m-color-text);
+    --m-pagination-button-border-color: var(--m-color-border);
+    --m-pagination-button-hover-bg: color-mix(
+        in srgb,
+        var(--m-color-primary) 10%,
+        var(--m-color-surface)
+    );
+    --m-pagination-button-active-bg: var(--m-color-primary);
+    --m-pagination-button-active-border-color: var(--m-color-primary);
+    --m-pagination-button-active-color: var(--m-color-on-emphasis);
+    --m-pagination-button-disabled-color: var(--m-color-text-disabled);
+    --m-pagination-button-focus-shadow: var(--m-focus-shadow);
     align-items: center;
     display: flex;
     font-family: var(--m-font-sans);
@@ -23,10 +37,10 @@
 }
 
 .m-pagination__button {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
+    background: var(--m-pagination-button-bg);
+    border: var(--m-border-width) solid var(--m-pagination-button-border-color);
     border-radius: var(--m-radius-control);
-    color: var(--m-color-text);
+    color: var(--m-pagination-button-color);
     cursor: pointer;
     font: inherit;
     font-size: var(--m-pagination-font);
@@ -40,27 +54,23 @@
 }
 
 .m-pagination__button--active {
-    background: var(--m-color-primary);
-    border-color: var(--m-color-primary);
-    color: var(--m-color-on-emphasis);
+    background: var(--m-pagination-button-active-bg);
+    border-color: var(--m-pagination-button-active-border-color);
+    color: var(--m-pagination-button-active-color);
 }
 
 .m-pagination__button:disabled {
-    color: var(--m-color-text-disabled);
+    color: var(--m-pagination-button-disabled-color);
     cursor: not-allowed;
     opacity: 1;
 }
 
 .m-pagination__button:hover:not(:disabled):not(.m-pagination__button--active) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        var(--m-color-surface)
-    );
+    background: var(--m-pagination-button-hover-bg);
 }
 
 .m-pagination__button:focus-visible {
-    box-shadow: var(--m-focus-shadow);
+    box-shadow: var(--m-pagination-button-focus-shadow);
     outline: none;
 }
 

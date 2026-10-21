@@ -9,6 +9,8 @@
     --m-badge-dot-size: 0.5rem;
     --m-badge-dot-size-small: 0.375rem;
     --m-badge-dot-size-large: 0.625rem;
+    /* Processing pulse ring */
+    --m-badge-processing-opacity: 0.35;
     align-items: center;
     background: var(--m-color-primary);
     border-radius: var(--m-radius-full);
@@ -138,7 +140,7 @@
     border-radius: inherit;
     content: '';
     inset: 0;
-    opacity: 0.35;
+    opacity: var(--m-badge-processing-opacity);
     pointer-events: none;
     position: absolute;
     z-index: -1;
@@ -148,7 +150,7 @@
 @keyframes m-badge-pulse-ring {
     0%,
     100% {
-        opacity: 0.35;
+        opacity: var(--m-badge-processing-opacity);
         transform: scale(1);
     }
     70% {

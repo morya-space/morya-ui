@@ -22,9 +22,12 @@
     --m-menu-item-icon: var(--m-color-text);
     --m-menu-item-icon-active: var(--m-color-primary);
     --m-menu-arrow: var(--m-color-text-muted);
+    --m-menu-border-color: var(--m-color-border);
+    --m-menu-separator-color: var(--m-color-border);
+    --m-menu-item-text-disabled: var(--m-color-text-disabled);
 
     background: var(--m-menu-color);
-    border: var(--m-border-width) solid var(--m-color-border);
+    border: var(--m-border-width) solid var(--m-menu-border-color);
     border-radius: var(--m-radius-md);
     box-sizing: border-box;
     color: var(--m-menu-item-text);
@@ -200,7 +203,7 @@
 
 .m-menu--horizontal .m-menu__item-content--selected::before,
 .m-menu--horizontal .m-menu__item-content--child-active::before {
-    background: var(--m-menu-item-color-active) !important;
+    background: var(--m-menu-item-color-active);
 }
 
 .m-menu--horizontal .m-menu__item-content--selected,
@@ -279,14 +282,17 @@
     width: 100%;
 }
 
-.m-menu--collapsed .m-menu__item-content {
+/* Body-class + attribute selector lifts this above `.m-menu--horizontal .m-menu__item-content`
+   so no `!important` is needed to neutralize the horizontal padding. */
+.m-menu--collapsed .m-menu__item-content,
+body .m-menu--collapsed .m-menu__item-content {
     align-items: center;
     display: flex;
     grid-template-areas: none;
     grid-template-columns: unset;
     height: var(--m-menu-item-height);
     justify-content: center;
-    padding-inline: 0 !important;
+    padding-inline: 0;
     width: 100%;
 }
 
@@ -307,7 +313,7 @@
 
 .m-menu--collapsed .m-menu__item-content--selected::before,
 .m-menu--collapsed .m-menu__item-content--child-active::before {
-    background: var(--m-menu-item-color-active) !important;
+    background: var(--m-menu-item-color-active);
 }
 
 .m-menu__item {
@@ -376,8 +382,14 @@ a.m-menu__item-content:active {
     background: var(--m-menu-item-color-hover);
 }
 
-.m-menu__item-content--selected::before {
-    background: var(--m-menu-item-color-active) !important;
+/* The `:not()` bumps this above the sibling hover/active `::before` rule that
+   would otherwise win via the extra pseudo-class in its compound selector. */
+.m-menu__item-content--selected:not(a)::before {
+    background: var(--m-menu-item-color-active);
+}
+
+a.m-menu__item-content--selected::before {
+    background: var(--m-menu-item-color-active);
 }
 
 .m-menu__item-content--selected,
@@ -399,12 +411,11 @@ a.m-menu__item-content--selected:visited {
     color: var(--m-menu-item-text-child-active);
 }
 
-.m-menu--inverted .m-menu__item-content--selected::before {
-    background: var(--m-menu-item-color-active) !important;
-}
+/* Redundant re-assertion kept for theme specificity parity; base selected
+   rule above already resolves through `--m-menu-item-color-active`. */
 
 .m-menu__item-content--disabled {
-    color: var(--m-color-text-disabled);
+    color: var(--m-menu-item-text-disabled);
     cursor: not-allowed;
     opacity: 1;
 }
@@ -466,7 +477,7 @@ a.m-menu__item-content--selected:visited {
 }
 
 .m-menu__separator {
-    background: var(--m-color-border);
+    background: var(--m-menu-separator-color);
     height: 1px;
     margin: 0.375rem 0.75rem;
 }
@@ -593,7 +604,7 @@ a.m-menu__item-content--selected:visited {
 }
 
 .m-menu--flyout .m-menu__item-content--selected::before {
-    background: var(--m-menu-item-color-active) !important;
+    background: var(--m-menu-item-color-active);
 }
 
 .m-menu--flyout .m-menu__item-content--selected .m-menu__label,

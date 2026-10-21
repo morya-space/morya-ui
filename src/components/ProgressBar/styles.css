@@ -2,6 +2,12 @@
     --m-progress-bar-height: var(--m-meter-track-height);
     --m-progress-bar-track: color-mix(in srgb, var(--m-color-text-muted) 16%, var(--m-color-surface));
     --m-progress-bar-fill: var(--m-color-primary);
+    --m-progress-bar-label-color: var(--m-color-on-emphasis);
+    /* Active stripe shimmer */
+    --m-progress-bar-stripe-color: color-mix(in srgb, var(--m-color-surface) 55%, transparent);
+    --m-progress-bar-stripe-opacity: 0.45;
+    /* Circle */
+    --m-progress-bar-circle-stroke-width: 8;
     background: var(--m-progress-bar-track);
     border-radius: var(--m-radius-full);
     display: block;
@@ -39,7 +45,7 @@
 }
 
 .m-progress-bar__label {
-    color: var(--m-color-on-emphasis);
+    color: var(--m-progress-bar-label-color);
     font-size: var(--m-font-size-xs);
     font-weight: 500;
     line-height: 1;
@@ -100,7 +106,7 @@
 /* `status="active"`: determinate stripe shimmer on the fill (line only). */
 .m-progress-bar--active .m-progress-bar__fill::after {
     animation: m-progress-bar-active var(--m-motion-pulse) var(--m-motion-ease) infinite;
-    background: color-mix(in srgb, var(--m-color-surface) 55%, transparent);
+    background: var(--m-progress-bar-stripe-color);
     border-radius: inherit;
     content: '';
     inset: 0;
@@ -110,7 +116,7 @@
 
 @keyframes m-progress-bar-active {
     0% {
-        opacity: 0.45;
+        opacity: var(--m-progress-bar-stripe-opacity);
         transform: translateX(-100%);
     }
     100% {
@@ -141,13 +147,13 @@
 
 .m-progress-bar__circle-track {
     stroke: var(--m-progress-bar-track);
-    stroke-width: 8;
+    stroke-width: var(--m-progress-bar-circle-stroke-width);
 }
 
 .m-progress-bar__circle-value {
     stroke: var(--m-progress-bar-fill);
     stroke-linecap: round;
-    stroke-width: 8;
+    stroke-width: var(--m-progress-bar-circle-stroke-width);
     transition: stroke-dashoffset var(--m-motion-fast) var(--m-motion-ease);
 }
 

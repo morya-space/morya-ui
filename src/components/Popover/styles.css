@@ -10,11 +10,16 @@
 }
 
 .m-popover__content {
-    background: var(--m-color-surface);
-    border: var(--m-border-width) solid var(--m-color-border);
-    border-radius: var(--m-radius-md);
-    box-shadow: var(--m-shadow-md);
-    color: var(--m-color-text);
+    --m-popover-bg: var(--m-color-surface);
+    --m-popover-color: var(--m-color-text);
+    --m-popover-border-color: var(--m-color-border);
+    --m-popover-shadow: var(--m-shadow-md);
+    --m-popover-radius: var(--m-radius-md);
+    background: var(--m-popover-bg);
+    border: var(--m-border-width) solid var(--m-popover-border-color);
+    border-radius: var(--m-popover-radius);
+    box-shadow: var(--m-popover-shadow);
+    color: var(--m-popover-color);
     min-width: var(--m-popover-min-width);
     overscroll-behavior: contain;
     padding: var(--m-space-3);
