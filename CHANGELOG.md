@@ -1,5 +1,29 @@
 # morya-ui
 
+## 0.5.3
+
+### 新功能
+
+- enhance code block styling and copy functionality
+- expose component styleTokens in catalog; fix dangling demo references
+- converge hardcoded sizes in shared control styles to semantic tokens
+- tokenize P2 auxiliary components
+- tokenize P1 overlay and navigation components
+- tokenize P0 core components with root-level CSS variable panels
+- add semantic fill/border opacity ratios and missing alias tokens
+- add MCard and MDrawer components; update MDialog title and default motion duration
+
+### 修复
+
+- scope markdown styles to direct children, harden dialog h2
+- apply width prop through --m-dialog-width token
+
+### 变更
+
+- remove third-party component library references from comments and docs
+- harden bare semantic tags against host global styles
+- drive size via --m-drawer-side-width / --m-drawer-top-height tokens
+
 ## 0.5.2
 
 ### 新功能
