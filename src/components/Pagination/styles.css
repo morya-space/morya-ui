@@ -37,13 +37,18 @@
 }
 
 .m-pagination__button {
+    align-items: center;
     background: var(--m-pagination-button-bg);
     border: var(--m-border-width) solid var(--m-pagination-button-border-color);
     border-radius: var(--m-radius-control);
+    box-sizing: border-box;
     color: var(--m-pagination-button-color);
     cursor: pointer;
+    display: inline-flex;
     font: inherit;
     font-size: var(--m-pagination-font);
+    justify-content: center;
+    line-height: 1;
     min-height: var(--m-pagination-height);
     min-width: var(--m-pagination-height);
     padding: 0 var(--m-pagination-padding-x);
