@@ -10,6 +10,10 @@
 }
 
 .m-popover__content {
+    /* The content is Teleported to <body>, outside the .m-popover subtree, so
+       host-scoped custom properties do not reach it. Re-declare the tokens the
+       content relies on to keep it self-contained. */
+    --m-popover-min-width: 12rem;
     --m-popover-bg: var(--m-color-surface);
     --m-popover-color: var(--m-color-text);
     --m-popover-border-color: var(--m-color-border);

@@ -89,6 +89,11 @@
 
 .m-tiered-menu__submenu {
     --m-tiered-menu-submenu-max-height: min(18rem, 45vh);
+    /* The submenu is Teleported to <body>, outside the .m-tiered-menu subtree,
+       so host-scoped custom properties do not reach it. Re-declare the tokens
+       the submenu relies on to keep it self-contained. */
+    --m-tiered-menu-submenu-min-width: var(--m-overlay-menu-min-width, 10rem);
+    --m-tiered-menu-item-gap: var(--m-space-1);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);

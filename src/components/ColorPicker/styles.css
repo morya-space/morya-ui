@@ -1,5 +1,14 @@
 /* --- Form: ColorPicker --- */
-.m-color-picker {
+/*
+ * Component-scoped tokens live on BOTH the host wrapper (.m-color-picker) and
+ * the floating panel (.m-color-picker__panel). The panel is Teleported to
+ * <body>, so it is no longer inside the .m-color-picker subtree and would
+ * otherwise not inherit these custom properties — leaving slider/saturation
+ * heights at 0 and collapsing the popup. Defining them on the panel keeps the
+ * popup self-contained regardless of teleport target.
+ */
+.m-color-picker,
+.m-color-picker__panel {
     /* Handle ring / swatch borders: pure white ring reads on any color swatch
        (incl. dark theme); the halo shadow stays a dark translucent by design. */
     --m-color-picker-handle-border: var(--m-color-on-emphasis);
@@ -22,7 +31,9 @@
     --m-color-picker-item-active-bg: var(--m-color-primary-light);
     --m-color-picker-delete-hover-bg: rgb(0 0 0 / 8%);
     --m-color-picker-active-ring: 0 0 0 2px var(--m-color-primary);
+}
 
+.m-color-picker {
     display: inline-block;
     position: relative;
 }

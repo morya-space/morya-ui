@@ -136,14 +136,15 @@
     padding: var(--m-space-1);
 }
 
-/* Reset any global `li { margin/padding/list-style }` the host app might set. */
+/* Reset any global `li { margin/list-style }` the host app might set.
+   Padding intentionally omitted: it is provided by shared/styles/select-overlay.css
+   which is imported before this file and must win the cascade. */
 .m-auto-complete__item,
 .m-auto-complete__status {
     background: none;
     border: 0;
     list-style: none;
     margin: 0;
-    padding: 0;
 }
 
 .m-auto-complete__panel--teleported {

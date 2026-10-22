@@ -40,6 +40,11 @@
 }
 
 .m-mega-menu__panel {
+    /* The panel is Teleported to <body>, outside the .m-mega-menu subtree, so
+       host-scoped custom properties do not reach it. Re-declare the tokens the
+       panel (and its columns) rely on to keep it self-contained. */
+    --m-mega-menu-column-min-width: 8rem;
+    --m-mega-menu-panel-gap: var(--m-space-4);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);

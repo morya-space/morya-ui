@@ -111,6 +111,11 @@
 
 .m-context-menu__submenu {
     --m-context-menu-submenu-max-height: min(18rem, 45vh);
+    /* The submenu is Teleported to <body>, outside the .m-context-menu subtree,
+       so host-scoped custom properties do not reach it. Re-declare the tokens
+       the submenu relies on to keep it self-contained. */
+    --m-context-menu-min-width: var(--m-overlay-menu-min-width, 10rem);
+    --m-context-menu-item-gap: var(--m-space-1);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);

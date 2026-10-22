@@ -144,6 +144,39 @@ export type { ButtonEmits, ButtonProps, ButtonInstance } from "./types";
 - 使用 z-index token 管理 Dropdown、Popover、Modal、Toast 等层级，避免任意大数。
 - 对外提供的 class、CSS 变量、`part` 或样式插槽都属于 API，改动时评估兼容性。
 
+### 浮层（Teleport）的 CSS 变量必须自包含
+
+凡是通过 `<Teleport>` 渲染到 `<body>`（或组件根之外）的浮层——如下拉菜单 `__menu`、面板 `__panel`、气泡 `__content`、子菜单 `__submenu`——其内部引用的**组件级 CSS 变量必须定义在该浮层选择器自身上，或与宿主根双写**。绝不能依赖从组件根元素（`.acme-select`、`.acme-date-picker` 等）继承这些变量。
+
+原因：CSS 自定义属性沿 DOM 树继承，而 `Teleport` 会把浮层移出组件根的子树，继承链就此断裂。浮层一旦引用只定义在宿主根上的 sizing 变量（高度、宽度、间距等），这些变量会解析为空并回退，导致滑块塌陷为 0 高、菜单 `min-width`/`gap` 失效、浮层尺寸收缩等"样式和功能同时坏掉"的故障。
+
+```css
+/* ❌ 错误：变量只定义在宿主根，浮层 Teleport 后丢失 */
+.acme-color-picker {
+  --acme-color-picker-slider-height: 12px;
+}
+.acme-color-picker__panel {
+  /* Teleport 到 body 后，--acme-color-picker-slider-height 继承不到 */
+}
+
+/* ✅ 正确：浮层自包含，与宿主根双写 */
+.acme-color-picker,
+.acme-color-picker__panel {
+  --acme-color-picker-slider-height: 12px;
+}
+
+/* ✅ 也正确：变量直接定义在浮层自己身上（浮层即根时天然安全） */
+.acme-select__menu {
+  --acme-select-menu-max-height: min(18rem, 45vh);
+}
+```
+
+判断要点：
+
+- **变量定义在会被 Teleport 的那个元素自身**（如 `.acme-dialog` 根本身被 Teleport）→ 变量跟着走，天然安全。
+- **变量定义在浮层的父级宿主根，浮层是它的子元素**（如 `.acme-dropdown` → `.acme-dropdown__menu`）→ 继承断裂，必须在浮层上重声明。
+- 全局语义/基础 token（定义在 `:root` 的 `--acme-color-*`、`--acme-space-*`）不受影响，浮层可自由引用。
+
 ## 动效与交互反馈
 
 动效应帮助理解状态变化，而不是装饰或延迟操作。

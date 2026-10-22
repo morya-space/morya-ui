@@ -29,6 +29,10 @@
 
 .m-dropdown__menu {
     --m-dropdown-menu-max-height: min(18rem, 45vh);
+    /* The menu is Teleported to <body>, outside the .m-dropdown subtree, so
+       host-scoped custom properties do not reach it. Re-declare the tokens the
+       menu relies on to keep it self-contained. */
+    --m-dropdown-menu-min-width: var(--m-overlay-menu-min-width, 10rem);
     background: var(--m-color-surface);
     border: var(--m-border-width) solid var(--m-color-border);
     border-radius: var(--m-radius-md);
