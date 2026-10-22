@@ -309,38 +309,86 @@ defineExpose({ scrollToSection })
   padding: var(--m-space-4);
 }
 .m-markdown-doc > .m-code-block {
+  background: var(--docs-surface-raised);
+  border: 1px solid color-mix(in srgb, var(--m-color-border) 70%, transparent);
+  border-radius: var(--m-radius-lg, 0.75rem);
+  /* Soft lift so the block reads as a card against the page */
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--m-color-surface) 60%, transparent),
+    0 1px 2px color-mix(in srgb, var(--m-color-text) 4%, transparent);
   margin: 1.25rem 0 1.75rem;
+  overflow: hidden;
   position: relative;
+  transition:
+    border-color var(--m-motion-normal) var(--m-motion-ease),
+    box-shadow var(--m-motion-normal) var(--m-motion-ease);
 }
 .m-markdown-doc > .m-code-block > pre {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--docs-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.65;
   margin: 0;
-  padding-right: 4.25rem;
+  overflow-x: auto;
+  padding: calc(var(--m-space-4) + 0.25rem) 6.5rem var(--m-space-4) var(--m-space-4);
 }
 .m-markdown-doc > .m-code-block > .m-code-block__copy {
+  align-items: center;
   background: color-mix(in srgb, var(--m-color-surface) 88%, transparent);
   border: 1px solid color-mix(in srgb, var(--m-color-border) 75%, transparent);
   border-radius: var(--m-radius-sm);
   color: var(--m-color-text-muted);
   cursor: pointer;
+  display: inline-flex;
   font-family: var(--docs-body);
   font-size: 0.72rem;
+  gap: 0.3rem;
   line-height: 1;
   padding: 0.35rem 0.55rem;
   position: absolute;
   right: 0.55rem;
   top: 0.55rem;
   transition:
+    background-color var(--m-motion-fast) var(--m-motion-ease),
     border-color var(--m-motion-fast) var(--m-motion-ease),
-    color var(--m-motion-fast) var(--m-motion-ease);
+    color var(--m-motion-fast) var(--m-motion-ease),
+    transform var(--m-motion-fast) var(--m-motion-ease);
   z-index: 1;
 }
+.m-markdown-doc > .m-code-block > .m-code-block__copy svg {
+  display: block;
+  fill: currentColor;
+  height: 0.75rem;
+  width: 0.75rem;
+}
 .m-markdown-doc > .m-code-block > .m-code-block__copy:hover {
+  background: color-mix(in srgb, var(--m-color-primary) 8%, var(--m-color-surface));
   border-color: color-mix(in srgb, var(--m-color-primary) 40%, var(--m-color-border));
   color: var(--m-color-primary);
 }
+.m-markdown-doc > .m-code-block > .m-code-block__copy:active {
+  transform: scale(0.96);
+}
+.m-markdown-doc > .m-code-block > .m-code-block__copy:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--m-color-primary) 70%, transparent);
+  outline-offset: 2px;
+}
 .m-markdown-doc > .m-code-block > .m-code-block__copy[data-copied='true'] {
+  background: color-mix(in srgb, var(--m-color-success, #16a34a) 8%, var(--m-color-surface));
   border-color: color-mix(in srgb, var(--m-color-success, #16a34a) 45%, var(--m-color-border));
   color: var(--m-color-success, #16a34a);
+}
+@media (prefers-reduced-motion: reduce) {
+  .m-markdown-doc > .m-code-block,
+  .m-markdown-doc > .m-code-block > .m-code-block__copy {
+    transition: none;
+  }
+  .m-markdown-doc > .m-code-block > .m-code-block__copy:active {
+    transform: none;
+  }
 }
 .m-markdown-doc > pre > code {
   background: transparent;
@@ -430,7 +478,10 @@ html[data-theme='dark'] .m-markdown-doc .shiki span {
   font-weight: var(--shiki-dark-font-weight);
   text-decoration: var(--shiki-dark-text-decoration);
 }
-.m-markdown-doc pre.shiki {
+.m-markdown-doc > pre.shiki {
   background: var(--docs-surface-raised) !important;
+}
+.m-markdown-doc > .m-code-block > pre.shiki {
+  background: transparent !important;
 }
 </style>
