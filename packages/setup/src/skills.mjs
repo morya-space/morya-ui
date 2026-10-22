@@ -11,7 +11,7 @@ import {
 import { dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ensureDir, readJson } from './fs-utils.mjs'
-import { question } from './prompt.mjs'
+import { multiSelect } from './prompt.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const CATALOG_PATH = join(__dirname, '..', 'catalog', 'skills.json')
@@ -407,41 +407,26 @@ export async function resolveSkillSelection(skills, { skipPrompt = false } = {})
   const required = skills.filter((s) => s.required).map((s) => s.id)
   const optional = skills.filter((s) => !s.required)
 
-  if (skipPrompt || optional.length === 0 || !process.stdin.isTTY) {
+  if (skipPrompt || optional.length === 0) {
     return defaultSkillIds(skills)
   }
 
-  console.log('Select optional Agent skills (in addition to required):')
-  optional.forEach((skill, index) => {
-    const mark = skill.default ? 'x' : ' '
-    const via = isSkillsCliSkill(skill) ? ' [latest via skills CLI]' : ''
-    console.log(`  ${index + 1}. [${mark}] ${skill.id} — ${skill.description}${via}`)
-  })
-  console.log('')
-  console.log('Enter comma-separated numbers or ids (empty = defaults only).')
-  console.log(`Required: ${required.join(', ') || '(none)'}`)
-
-  const answer = await question('> ')
-  const trimmed = answer.trim()
-  if (!trimmed) return defaultSkillIds(skills)
-
-  const selected = new Set(required)
-  const tokens = trimmed.split(/[\s,]+/).filter(Boolean)
-  for (const token of tokens) {
-    const asIndex = Number(token)
-    if (Number.isInteger(asIndex) && asIndex >= 1 && asIndex <= optional.length) {
-      selected.add(optional[asIndex - 1].id)
-      continue
-    }
-    if (token === 'all') {
-      for (const skill of optional) selected.add(skill.id)
-      continue
-    }
-    if (!skills.some((s) => s.id === token)) {
-      throw new Error(`Unknown skill selection: ${token}`)
-    }
-    selected.add(token)
+  // Use interactive multi-select when TTY
+  if (process.stdin.isTTY) {
+    const options = optional.map((skill) => ({
+      value: skill.id,
+      label: skill.id,
+      hint: `${skill.description}${isSkillsCliSkill(skill) ? ' [latest via skills CLI]' : ''}`,
+      checked: skill.default,
+    }))
+    const selected = await multiSelect(
+      `Select optional Agent skills (required: ${required.join(', ') || 'none'}):`,
+      options,
+      { required },
+    )
+    return skills.map((s) => s.id).filter((id) => selected.includes(id))
   }
 
-  return skills.map((s) => s.id).filter((id) => selected.has(id))
+  // Fallback for non-TTY (should not reach here due to skipPrompt check in caller)
+  return defaultSkillIds(skills)
 }

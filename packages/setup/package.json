@@ -35,5 +35,8 @@
     "build": "pnpm run sync-template",
     "test": "node --test src/__tests__/**/*.test.mjs",
     "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.4"
   }
 }
