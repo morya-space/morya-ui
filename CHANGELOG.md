@@ -1,5 +1,11 @@
 # morya-ui
 
+## 0.5.4
+
+### 修复
+
+- upgrade template files and MCP config in place on re-run
+
 ## 0.5.3
 
 ### 新功能
