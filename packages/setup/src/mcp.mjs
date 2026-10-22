@@ -75,6 +75,9 @@ function readConfigOrDefault(path, fallback) {
 }
 
 /**
+ * The MCP entry is tool-generated (no user-owned content), so re-running setup
+ * refreshes it by default: an up-to-date entry is left untouched, a drifted
+ * one is updated to the current shape.
  * @param {object} args
  * @param {string} args.path
  * @param {boolean} args.exists
@@ -84,16 +87,18 @@ function readConfigOrDefault(path, fallback) {
  * @param {boolean} args.force
  * @param {boolean} args.dryRun
  * @param {string} args.editor
- * @returns {{ editor: string, path: string, action: 'created' | 'merged' | 'skipped' | 'forced', dryRun?: boolean }}
+ * @returns {{ editor: string, path: string, action: 'created' | 'merged' | 'updated' | 'unchanged' | 'skipped' | 'forced', dryRun?: boolean }}
  */
 function mergeServerEntry({ path, exists, data, bucketKey, serverConfig, force, dryRun, editor }) {
   if (!data[bucketKey] || typeof data[bucketKey] !== 'object' || Array.isArray(data[bucketKey])) {
     data[bucketKey] = {}
   }
   const bucket = /** @type {Record<string, unknown>} */ (data[bucketKey])
-  const hasExisting = Boolean(bucket[SERVER_NAME])
-  if (hasExisting && !force) {
-    return { editor, path, action: 'skipped', dryRun }
+  const existing = bucket[SERVER_NAME]
+  const hasExisting = Boolean(existing)
+
+  if (hasExisting && !force && JSON.stringify(existing) === JSON.stringify(serverConfig)) {
+    return { editor, path, action: 'unchanged', dryRun }
   }
 
   bucket[SERVER_NAME] = { ...serverConfig }
@@ -104,6 +109,7 @@ function mergeServerEntry({ path, exists, data, bucketKey, serverConfig, force, 
 
   let action = 'created'
   if (exists && hasExisting && force) action = 'forced'
+  else if (exists && hasExisting) action = 'updated'
   else if (exists) action = 'merged'
 
   return { editor, path, action, dryRun }

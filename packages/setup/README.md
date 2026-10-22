@@ -115,7 +115,8 @@ npx @morya-ui/setup ai --skip-install
 | `--editors <list>` | MCP targets: `cursor`, `vscode`, `zed`, or `all` (default: all three). Always also writes root `.mcp.json` |
 | `--agents <list>` | Skill agents: `cursor`, `github-copilot`, `zed`, `claude-code`, `windsurf` (default), or `all` (`-a '*'`) |
 | `--yes` / `-y` | Use default skills without prompting |
-| `--force` | Overwrite existing template files, MCP `morya-ui` entry, and skill-dir links |
+| `--force` | Overwrite even locally modified template files and skill-dir links |
+| `--keep-local` | Preserve locally modified template files (default: upgrade them in place) |
 | `--dry-run` | Print actions without writing or installing |
 | `--skip-install` | Do not install / upgrade `morya-ui` or `@morya-ui/*` |
 | `--skip-template` | Do not copy AI skill / rules / docs (also skips companion skill install) |
@@ -137,11 +138,13 @@ Catalog: [`catalog/skills.json`](./catalog/skills.json).
 
 ### Conflict policy
 
+Re-running `npx @morya-ui/setup` on an already-configured project **upgrades everything to latest by default** — that is the intended "re-run to update" workflow. Only locally modified files get special handling:
+
 - Dependencies: always install / upgrade `morya-ui@latest` and any existing `@morya-ui/*` (e.g. `@morya-ui/nuxt`) to `@latest` unless `--skip-install`.
-- Template files and `.cursor/rules/*`: **skip** if the destination exists (unless `--force`).
+- Template files (skills / `DESIGN.md` / `AGENTS.md` / `.cursor/rules/*`): **upgraded in place** when they drift from the shipped template; identical files are left untouched. Locally edited files are overwritten too — pass `--keep-local` to preserve your edits, or `--force` to guarantee a clean overwrite regardless.
 - Companion skills (`skills-cli`): always reinstall/update to **latest** when selected (default agents: the five listed under `--agents`).
-- Mirrored skill dirs (`.claude/skills`, `.windsurf/skills`, `.github/skills`): **skip** if the destination exists (unless `--force`).
-- MCP configs: merge other servers / settings; skip existing `morya-ui` entry unless `--force`. New or forced entries use `npx -y @morya-ui/mcp@latest`.
+- Mirrored skill dirs (`.claude/skills`, `.windsurf/skills`, `.github/skills`): re-linked to the upgraded `.agents/skills` content on every run (they mirror publisher-owned files). Pass `--keep-local` to leave existing links/dirs untouched.
+- MCP configs: merge other servers / settings; the `morya-ui` entry is **refreshed in place** whenever it drifts from the current shape (`npx -y @morya-ui/mcp@latest`), untouched when already up to date.
 - `package.json` `check:colors`: add only if missing (unless `--force`).
 - Styles: inject only when an entry file is found and the import is not already present.
 

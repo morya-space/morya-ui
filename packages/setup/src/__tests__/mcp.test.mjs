@@ -71,7 +71,7 @@ describe('mergeMcpConfig', () => {
     })
   })
 
-  it('skips existing morya-ui entries unless force', () => {
+  it('updates drifted morya-ui entries and refreshes with force', () => {
     const cwd = makeCwd()
     mkdirSync(join(cwd, '.cursor'), { recursive: true })
     writeFileSync(
@@ -85,12 +85,21 @@ describe('mergeMcpConfig', () => {
       'utf8',
     )
 
-    const skipped = mergeMcpConfig(cwd, { editors: ['cursor'] })
-    const cursorSkip = skipped.results.find((r) => r.editor === 'cursor')
-    assert.equal(cursorSkip.action, 'skipped')
-    assert.equal(readJson(join(cwd, '.cursor', 'mcp.json')).mcpServers['morya-ui'].command, 'old')
+    // Drifted entry is updated by default (MCP config is tool-generated).
+    const updated = mergeMcpConfig(cwd, { editors: ['cursor'] })
+    const cursorUpdate = updated.results.find((r) => r.editor === 'cursor')
+    assert.equal(cursorUpdate.action, 'updated')
+    assert.deepEqual(readJson(join(cwd, '.cursor', 'mcp.json')).mcpServers['morya-ui'], SERVER_CONFIG)
     assert.ok(readJson(join(cwd, '.cursor', 'mcp.json')).mcpServers.other)
 
+    // Up-to-date entry is left untouched.
+    const unchanged = mergeMcpConfig(cwd, { editors: ['cursor'] })
+    assert.equal(unchanged.results.find((r) => r.editor === 'cursor').action, 'unchanged')
+
+    // Force still overwrites an up-to-date entry.
+    const driftAgain = readJson(join(cwd, '.cursor', 'mcp.json'))
+    driftAgain.mcpServers['morya-ui'] = { command: 'old' }
+    writeFileSync(join(cwd, '.cursor', 'mcp.json'), JSON.stringify(driftAgain), 'utf8')
     const forced = mergeMcpConfig(cwd, { editors: ['cursor'], force: true })
     const cursorForce = forced.results.find((r) => r.editor === 'cursor')
     assert.equal(cursorForce.action, 'forced')

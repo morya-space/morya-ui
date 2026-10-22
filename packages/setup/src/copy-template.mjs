@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
 
 /**
@@ -34,15 +34,36 @@ function matchesInclude(rel, include) {
 }
 
 /**
+ * Byte-for-byte comparison; false when the target is missing or unreadable.
+ * @param {string} a
+ * @param {string} b
+ */
+function sameFileContent(a, b) {
+  try {
+    return readFileSync(a).equals(readFileSync(b))
+  } catch {
+    return false
+  }
+}
+
+/**
  * Copy template tree into target cwd.
+ *
+ * Template files are publisher-owned, so re-running setup upgrades them by
+ * default: identical files are left untouched (`unchanged`), drifted ones are
+ * overwritten (`updated`). Pass `keepLocal` to preserve locally edited files
+ * instead (`kept-local`), or `force` to overwrite unconditionally.
+ *
  * @param {string} templateRoot
  * @param {string} cwd
- * @param {{ force?: boolean, dryRun?: boolean, include?: string[] }} [options]
- * @returns {{ copied: string[], skipped: string[], forced: string[] }}
+ * @param {{ force?: boolean, keepLocal?: boolean, dryRun?: boolean, include?: string[] }} [options]
+ * @returns {{ copied: string[], updated: string[], unchanged: string[], keptLocal: string[], forced: string[] }}
  */
-export function copyTemplate(templateRoot, cwd, { force = false, dryRun = false, include } = {}) {
+export function copyTemplate(templateRoot, cwd, { force = false, keepLocal = false, dryRun = false, include } = {}) {
   const copied = []
-  const skipped = []
+  const updated = []
+  const unchanged = []
+  const keptLocal = []
   const forced = []
 
   if (!existsSync(templateRoot)) {
@@ -57,22 +78,33 @@ export function copyTemplate(templateRoot, cwd, { force = false, dryRun = false,
     const to = join(cwd, rel)
     const exists = existsSync(to)
 
-    if (exists && !force) {
-      skipped.push(rel)
+    if (!exists) {
+      if (!dryRun) {
+        mkdirSync(dirname(to), { recursive: true })
+        cpSync(from, to)
+      }
+      copied.push(rel)
       continue
     }
 
-    if (dryRun) {
-      if (exists) forced.push(rel)
-      else copied.push(rel)
+    if (sameFileContent(from, to)) {
+      unchanged.push(rel)
       continue
     }
 
-    mkdirSync(dirname(to), { recursive: true })
-    cpSync(from, to)
-    if (exists) forced.push(rel)
-    else copied.push(rel)
+    // File exists locally and has drifted from the template.
+    if (keepLocal && !force) {
+      keptLocal.push(rel)
+      continue
+    }
+
+    if (!dryRun) {
+      mkdirSync(dirname(to), { recursive: true })
+      cpSync(from, to)
+    }
+    if (force) forced.push(rel)
+    else updated.push(rel)
   }
 
-  return { copied, skipped, forced }
+  return { copied, updated, unchanged, keptLocal, forced }
 }

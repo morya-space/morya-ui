@@ -44,6 +44,12 @@ const SKIP_FLAGS = {
   '--skip-scripts': 'skipScripts',
 }
 
+const BOOLEAN_FLAGS = {
+  '--force': 'force',
+  '--keep-local': 'keepLocal',
+  '--dry-run': 'dryRun',
+}
+
 export function printHelp() {
   const { skills } = loadSkillsCatalog()
   const skillList = skills.map((s) => {
@@ -90,7 +96,8 @@ Options:
   --editors <list>  MCP targets: cursor,vscode,zed (default: all); always also writes .mcp.json
   --agents <list>   Skill agents: cursor,github-copilot,zed,claude-code,windsurf (default), or all
   --yes             Use default skills without prompting (CI / non-interactive)
-  --force           Overwrite existing template files, MCP entry, and skill dir links
+  --force           Overwrite even locally modified template files and skill dir links
+  --keep-local      Preserve locally modified template files (default: upgrade them in place)
   --dry-run         Print actions without writing or installing
   --skip-install    Skip dependency install / upgrade
   --skip-template   Skip copying AI template files
@@ -119,6 +126,7 @@ export function parseArgs(argv) {
     template: undefined,
     yes: false,
     force: false,
+    keepLocal: false,
     dryRun: false,
     skipInstall: false,
     skipTemplate: false,
@@ -150,12 +158,8 @@ export function parseArgs(argv) {
       options.explicit.mode = true
       continue
     }
-    if (arg === '--force') {
-      options.force = true
-      continue
-    }
-    if (arg === '--dry-run') {
-      options.dryRun = true
+    if (BOOLEAN_FLAGS[arg]) {
+      options[BOOLEAN_FLAGS[arg]] = true
       continue
     }
     if (arg === '--yes' || arg === '-y') {
@@ -341,6 +345,7 @@ export async function runSetup(rawOptions) {
     mode,
     cwd,
     force,
+    keepLocal,
     dryRun,
     skipInstall,
     skipTemplate,
@@ -427,9 +432,10 @@ export async function runSetup(rawOptions) {
   // AI pack, MCP, skills, and scripts land at the config root (workspace root
   // in a monorepo, where the editor is opened).
   const template_ = skipTemplate
-    ? { copied: [], skipped: [], forced: [], skippedStep: true }
+    ? { copied: [], updated: [], unchanged: [], keptLocal: [], forced: [], skippedStep: true }
     : copyTemplate(TEMPLATE_ROOT, configRoot, {
         force,
+        keepLocal,
         dryRun,
         include: aiInclude,
       })
@@ -449,7 +455,7 @@ export async function runSetup(rawOptions) {
 
   const skillSync = skipTemplate || !skillNamesForSync.length
     ? { results: [], skipped: true }
-    : syncProjectSkillsToAgents(configRoot, skillNamesForSync, { force, dryRun, agents })
+    : syncProjectSkillsToAgents(configRoot, skillNamesForSync, { force: force || !keepLocal, dryRun, agents })
 
   const mcp = skipMcp
     ? { skipped: true, results: [] }
@@ -487,15 +493,18 @@ export async function runSetup(rawOptions) {
   if (template_.skippedStep) {
     console.log('Template: skipped (--skip-template or app mode)')
   } else {
+    const refreshed = template_.updated.length + template_.forced.length
+    const keptNote = template_.keptLocal.length ? `, ${template_.keptLocal.length} kept local` : ''
     console.log(
-      `Template: ${template_.copied.length} copied, ${template_.forced.length} overwritten, ${template_.skipped.length} skipped`,
+      `Template: ${template_.copied.length} copied, ${refreshed} updated, ${template_.unchanged.length} unchanged${keptNote}`,
     )
     if (selectedSkills.length) console.log(`  skills: ${selectedSkills.join(', ')}`)
-    if (template_.skipped.length && template_.skipped.length <= 8) {
-      for (const file of template_.skipped) console.log(`  skip ${file}`)
-    } else if (template_.skipped.length > 8) {
-      for (const file of template_.skipped.slice(0, 5)) console.log(`  skip ${file}`)
-      console.log(`  … and ${template_.skipped.length - 5} more (use --force to overwrite)`)
+    if (template_.keptLocal.length) {
+      const shown = template_.keptLocal.slice(0, 6)
+      for (const file of shown) console.log(`  kept ${file}`)
+      if (template_.keptLocal.length > shown.length) {
+        console.log(`  … and ${template_.keptLocal.length - shown.length} more (use --force to overwrite)`)
+      }
     }
   }
 
