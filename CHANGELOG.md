@@ -1,5 +1,16 @@
 # morya-ui
 
+## 0.5.5
+
+### 新功能
+
+- add @inquirer/prompts dependency and refactor prompt functions
+
+### 修复
+
+- center prev/next icons inside their buttons
+- keep teleported overlay CSS variables self-contained
+
 ## 0.5.4
 
 ### 修复
