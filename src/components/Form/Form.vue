@@ -18,11 +18,9 @@ defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<FormProps>(), {
   labelPosition: undefined,
-  labelPlacement: undefined,
   labelAlign: 'left',
   inline: false,
   requireMark: undefined,
-  requiredMark: undefined,
   disabled: false,
   scrollToFirstError: false,
   validateOn: () => ['submit'] as FormValidateTrigger[],
@@ -73,12 +71,8 @@ const validateOn = computed<FormValidateTrigger[]>(() => {
   const value = props.validateOn
   return Array.isArray(value) ? value : [value]
 })
-const resolvedLabelPosition = computed(() => props.labelPosition ?? props.labelPlacement ?? 'top')
-const resolvedRequireMark = computed(() => {
-  if (props.requireMark !== undefined) return props.requireMark
-  if (props.requiredMark !== undefined) return props.requiredMark
-  return true
-})
+const resolvedLabelPosition = computed(() => props.labelPosition ?? 'top')
+const resolvedRequireMark = computed(() => props.requireMark ?? true)
 const sizeClass = computed(() => (props.size ? resolveSizeClass(props.size) : undefined))
 
 /** Clear (or set) a field's error message. Passing nothing clears both stores. */

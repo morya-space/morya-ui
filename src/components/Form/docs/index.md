@@ -89,12 +89,10 @@ const { valid, errors } = await form.validate()
 | `initialValues` | `Record<string, unknown>` | — | 首次挂载写入模型的初始值，键支持点路径 |
 | `rules` | `FormRules` | — | 按 `name` 声明的规则 |
 | `labelPosition` | `'top' \| 'left'` | `'top'` | 标签位置 |
-| `labelPlacement` | `'top' \| 'left'` | — | `labelPosition` 的别名 |
 | `labelAlign` | `'left' \| 'center' \| 'right'` | `'left'` | 标签文本对齐 |
 | `labelWidth` | `string \| number` | — | 左侧标签宽度；数字视为 px |
 | `inline` | `boolean` | `false` | 表单项横向排列 |
 | `requireMark` | `boolean` | `true` | 必填星号（`required` 或 `rules.required`） |
-| `requiredMark` | `boolean` | — | `requireMark` 的别名 |
 | `disabled` | `boolean` | `false` | 禁用态 |
 | `size` | [MSizeInput](/docs/types#MSizeInput) | — | 未设 `size` 的嵌套录入控件继承此尺寸 |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| 数组` | `['submit']` | 默认触发时机；无 `trigger` 的规则继承此项 |

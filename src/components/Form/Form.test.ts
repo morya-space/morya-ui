@@ -75,9 +75,9 @@ describe('muForm / MFormItem', () => {
     expect(wrapper.get('.m-form-item__error').text()).toBe('必填')
   })
 
-  it('accepts labelPlacement as an alias of labelPosition', () => {
+  it('accepts labelPosition on the form', () => {
     const wrapper = mount(MForm, {
-      props: { labelPlacement: 'left', labelWidth: 80 },
+      props: { labelPosition: 'left', labelWidth: 80 },
       slots: {
         default: () => h(MFormItem, { label: '邮箱' }, { default: () => h('input') }),
       },
@@ -235,9 +235,9 @@ describe('muForm / MFormItem', () => {
     expect(wrapper.get('.m-form').classes()).toContain('m-form--size-small')
   })
 
-  it('accepts requiredMark as an alias of requireMark', () => {
+  it('hides require marks when requireMark is false', () => {
     const wrapper = mount(MForm, {
-      props: { requiredMark: false },
+      props: { requireMark: false },
       slots: {
         default: () =>
           h(MFormItem, { label: '名称', required: true }, { default: () => h('input') }),

@@ -88,8 +88,6 @@ export interface FormProps {
   rules?: FormRules
   /** Label placement for FormItem children. */
   labelPosition?: FormLabelPosition
-  /** Alias of `labelPosition`. `labelPosition` wins. */
-  labelPlacement?: FormLabelPosition
   /** Label text alignment. */
   labelAlign?: FormLabelAlign
   /** Fixed label column width when labels are on the left. Number is px. */
@@ -98,8 +96,6 @@ export interface FormProps {
   inline?: boolean
   /** Show required mark on FormItem with `required` or a required rule. */
   requireMark?: boolean
-  /** Alias of `requireMark` . `requireMark` wins. */
-  requiredMark?: boolean
   /** Disable all nested fields (informational; FormItem forwards via CSS). */
   disabled?: boolean
   /**

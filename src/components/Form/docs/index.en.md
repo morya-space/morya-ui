@@ -89,12 +89,10 @@ When no `model` prop is given the form uses an internal model, so `useForm` work
 | `initialValues` | `Record<string, unknown>` | — | Seeded into the model once on mount; keys accept dot paths |
 | `rules` | `FormRules` | — | Rules keyed by field `name` |
 | `labelPosition` | `'top' \| 'left'` | `'top'` | Label placement |
-| `labelPlacement` | `'top' \| 'left'` | — | Alias of `labelPosition` |
 | `labelAlign` | `'left' \| 'center' \| 'right'` | `'left'` | Label text alignment |
 | `labelWidth` | `string \| number` | — | Left label width; numbers are px |
 | `inline` | `boolean` | `false` | Place items in a wrapping row |
 | `requireMark` | `boolean` | `true` | Required asterisk (`required` or `rules.required`) |
-| `requiredMark` | `boolean` | — | Alias of `requireMark`  |
 | `disabled` | `boolean` | `false` | Disabled state |
 | `size` | [MSizeInput](/docs/types#MSizeInput) | — | Inherited by nested controls that omit their own `size` |
 | `validateOn` | `'submit' \| 'blur' \| 'change' \| 'input' \| array` | `['submit']` | Default timing; rules without `trigger` inherit this |
