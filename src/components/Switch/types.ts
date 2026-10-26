@@ -8,8 +8,6 @@ export interface SwitchProps {
   label?: string
   /** Native input id. */
   id?: string
-  /** Alias of `id` . */
-  inputId?: string
   name?: string
   value?: string
   size?: SwitchSize

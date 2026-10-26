@@ -19,9 +19,9 @@ import { MSwitch } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## Invalid & inputId
+## Invalid & id
 
-`inputId` is an alias for `id`.
+`id` sets the native `<input>` id.
 
 ```vue preview src="./demos/InvalidAndInputid.vue"
 ```
@@ -43,7 +43,6 @@ import { MSwitch } from 'morya-ui'
 | `modelValue` | `boolean` | `false` | On/off state. |
 | `label` | `string` | — | Label text; the default slot can be used instead. |
 | `id` | `string` | — | Native id. |
-| `inputId` | `string` | — | Alias for `id`. |
 | `name` | `string` | — | Native name. |
 | `value` | `string` | — | Native value. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |

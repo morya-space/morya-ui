@@ -7,7 +7,7 @@ const dark = ref(false)
 
 <template>
   <div class="flex flex-col gap-3">
-    <MSwitch v-model="dark" input-id="dark-mode" label="Dark mode" />
+    <MSwitch v-model="dark" id="dark-mode" label="Dark mode" />
     <MSwitch :model-value="false" invalid label="Must be enabled" />
   </div>
 </template>

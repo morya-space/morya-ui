@@ -20,8 +20,8 @@ describe('muSwitch', () => {
     expect(wrapper.get('input').attributes('disabled')).toBeDefined()
   })
 
-  it('supports invalid and inputId alias', () => {
-    const wrapper = mount(MSwitch, { props: { inputId: 'alerts', invalid: true, label: 'Alerts' } })
+  it('supports invalid and id', () => {
+    const wrapper = mount(MSwitch, { props: { id: 'alerts', invalid: true, label: 'Alerts' } })
 
     expect(wrapper.get('label').attributes('for')).toBe('alerts')
     expect(wrapper.get('input').attributes('id')).toBe('alerts')

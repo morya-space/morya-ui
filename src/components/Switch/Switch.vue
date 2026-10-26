@@ -20,7 +20,7 @@ const { rootAttrs, controlAttrs } = useControlRootParts(attrs, () => props.pt)
 const slots = useSlots()
 const autoInputId = useMId('m-switch')
 const resolvedInputId = computed(
-  () => props.inputId ?? props.id ?? autoInputId,
+  () => props.id ?? autoInputId,
 )
 const sizeClass = useConfiguredSize('Switch', () => props.size)
 const isDisabled = computed(() => props.disabled || props.loading)

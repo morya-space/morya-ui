@@ -19,9 +19,9 @@ import { MSwitch } from 'morya-ui'
 ```vue preview src="./demos/Basic.vue"
 ```
 
-## Invalid & inputId
+## Invalid & id
 
-`inputId` 是 `id` 的别名。
+`id` 设置内部 `<input>` 的原生 id。
 
 ```vue preview src="./demos/InvalidAndInputid.vue"
 ```
@@ -43,7 +43,6 @@ import { MSwitch } from 'morya-ui'
 | `modelValue` | `boolean` | `false` | 开关状态。 |
 | `label` | `string` | — | 标签文案；也可用默认插槽。 |
 | `id` | `string` | — | 原生 id。 |
-| `inputId` | `string` | — | `id` 的别名。 |
 | `name` | `string` | — | 原生 name。 |
 | `value` | `string` | — | 原生 value。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
