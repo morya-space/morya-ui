@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   modelValue: false,
   position: 'left',
   modal: true,
-  dismissable: true,
+  closeOnOutsideClick: true,
   closeOnEsc: true,
   showCloseIcon: true,
   blockScroll: true,
@@ -45,10 +45,7 @@ const { transitionName, transitionCss } = useMotionTransition({
   fallback: 'drawer',
 })
 
-const isDismissableMask = computed(() => {
-  if (props.closeOnOutsideClick !== undefined) return props.closeOnOutsideClick
-  return props.dismissable
-})
+const isDismissableMask = computed(() => props.closeOnOutsideClick)
 
 function toCssSize(value?: string | number) {
   if (value == null) return undefined

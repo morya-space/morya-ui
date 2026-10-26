@@ -33,7 +33,7 @@ describe('muDrawer', () => {
 
     const masked = mount(MDrawer, {
       attachTo: document.body,
-      props: { modelValue: true, dismissable: false },
+      props: { modelValue: true, closeOnOutsideClick: false },
     })
     await nextTick()
     document.body.querySelector('.m-drawer-backdrop')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))

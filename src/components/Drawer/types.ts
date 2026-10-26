@@ -12,9 +12,7 @@ export interface DrawerProps {
   position?: DrawerPosition
   /** Show dimmed mask behind the panel. */
   modal?: boolean
-  /** Close when clicking the mask. Alias of `closeOnOutsideClick`. */
-  dismissable?: boolean
-  /** Close when clicking the mask. Preferred over `dismissable`. */
+  /** Close when clicking the mask. Defaults to `true`. */
   closeOnOutsideClick?: boolean
   /** Close when pressing Escape. */
   closeOnEsc?: boolean

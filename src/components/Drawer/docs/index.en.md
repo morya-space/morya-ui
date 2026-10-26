@@ -40,7 +40,7 @@ Use `#footer` for cancel / save actions; the body scrolls independently.
 | `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |
 | `position` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | Edge the drawer appears from. |
 | `modal` | `boolean` | `true` | Show the overlay mask. |
-| `dismissable` | `boolean` | `true` | Close when clicking the mask. |
+| `closeOnOutsideClick` | `boolean` | `true` | Close when clicking the mask. |
 | `showCloseIcon` | `boolean` | `true` | Show the close button. |
 | `header` | `string` | — | Header text. |
 | `width` | `number \| string` | — | Width for left/right drawers (`number` = px). |

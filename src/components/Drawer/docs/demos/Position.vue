@@ -19,7 +19,7 @@ function openAt(next: 'left' | 'right' | 'top' | 'bottom') {
     <MButton label="Bottom" size="small" @click="openAt('bottom')"/>
     <MDrawer v-model="open" :header="`Position: ${position}`" :position="position">
       <p style="margin:0">
-        Use <code>dismissable</code> to control mask dismiss.
+        Use <code>closeOnOutsideClick</code> to control mask dismiss.
       </p>
     </MDrawer>
   </div>

@@ -40,7 +40,7 @@ import { MButton, MDrawer } from 'morya-ui'
 | `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |
 | `position` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | 抽屉出现位置。 |
 | `modal` | `boolean` | `true` | 显示遮罩层。 |
-| `dismissable` | `boolean` | `true` | 点击遮罩关闭。 |
+| `closeOnOutsideClick` | `boolean` | `true` | 点击遮罩关闭。 |
 | `showCloseIcon` | `boolean` | `true` | 显示关闭按钮。 |
 | `header` | `string` | — | 标题文案。 |
 | `width` | `string \| number` | — | 左右抽屉宽度。 |
@@ -51,7 +51,6 @@ import { MButton, MDrawer } from 'morya-ui'
 | `transition` | `string \| false` | `'drawer'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `beforeClose` | [AsyncGuard](/docs/types#AsyncGuard) | — | — |
 | `closeOnEsc` | `boolean` | — | — |
-| `closeOnOutsideClick` | `boolean` | — | — |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
