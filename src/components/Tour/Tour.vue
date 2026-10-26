@@ -21,7 +21,6 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<TourProps>(), {
   steps: () => [],
   open: undefined,
-  modelValue: undefined,
   current: 0,
   placement: 'bottom',
   mask: true,
@@ -32,7 +31,6 @@ const props = withDefaults(defineProps<TourProps>(), {
 
 const emit = defineEmits<{
   'update:open': [open: boolean]
-  'update:modelValue': [open: boolean]
   'update:current': [index: number]
   close: []
   finish: []
@@ -49,10 +47,9 @@ const spotlightStyle = ref<Record<string, string>>({})
 const panelStyle = ref<Record<string, string>>({})
 
 const isOpen = computed({
-  get: () => props.open ?? props.modelValue ?? false,
+  get: () => props.open ?? false,
   set: (value: boolean) => {
     emit('update:open', value)
-    emit('update:modelValue', value)
   },
 })
 

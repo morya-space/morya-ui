@@ -26,10 +26,8 @@ export interface TourStep {
 export interface TourProps {
   pt?: RootPassThrough
   steps?: TourStep[]
-  /** Controlled open state (`v-model:open`). */
+  /** Controlled open state. Use with `v-model:open`. */
   open?: boolean
-  /** Visibility alias for `v-model` (`open`). */
-  modelValue?: boolean
   /** Current step index (`v-model:current`). */
   current?: number
   /** Default panel placement when step omits `placement`. */
@@ -45,7 +43,6 @@ export interface TourProps {
 
 export interface TourEmits {
   'update:open': [open: boolean]
-  'update:modelValue': [open: boolean]
   'update:current': [index: number]
   close: []
   finish: []
