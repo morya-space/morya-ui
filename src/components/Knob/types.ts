@@ -7,11 +7,6 @@ export interface KnobProps {
   step?: number
   /** Diameter of the dial in pixels. Defaults to `100`. */
   diameter?: number
-  /**
-   * @deprecated Use `diameter` instead. Kept as an alias; `diameter`
-   * takes precedence when both are set.
-   */
-  size?: number
   disabled?: boolean
   /** Template with `{value}` placeholder, e.g. `{value}%`. */
   valueTemplate?: string

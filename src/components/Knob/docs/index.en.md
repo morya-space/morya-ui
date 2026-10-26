@@ -25,7 +25,7 @@ import { MKnob } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `number` | `0` | Current value. |
 | `min` / `max` / `step` | `number` | `0` / `100` / `1` | Range and step. |
-| `size` | `number` | `100` | Diameter in pixels. |
+| `diameter` | `number` | `100` | Diameter in pixels. |
 | `valueTemplate` | `string` | `{value}` | Display template. |
 | `disabled` | `boolean` | `false` | Disabled. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |

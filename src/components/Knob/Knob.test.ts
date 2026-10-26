@@ -43,7 +43,7 @@ describe('muKnob', () => {
     expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([30])
   })
 
-  it('supports diameter prop over the deprecated size alias', () => {
+  it('sets the SVG size from the diameter prop', () => {
     const wrapper = mount(MKnob, { props: { modelValue: 0, diameter: 160 } })
     const svg = wrapper.get('svg')
     expect(svg.attributes('width')).toBe('160')

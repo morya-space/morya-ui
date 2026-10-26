@@ -6,5 +6,5 @@ const value = ref(60)
 </script>
 
 <template>
-  <MKnob v-model="value" :size="120" value-template="{value}%" />
+  <MKnob v-model="value" :diameter="120" value-template="{value}%" />
 </template>

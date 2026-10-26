@@ -25,12 +25,11 @@ import { MKnob } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `number` | `0` | 当前值。 |
 | `min` / `max` / `step` | `number` | `0` / `100` / `1` | 范围与步进。 |
-| `size` | `number` | `100` | 直径像素。 |
+| `diameter` | `number` | `100` | 直径像素。 |
 | `valueTemplate` | `string` | `{value}` | 展示模板。 |
 | `disabled` | `boolean` | `false` | 禁用。 |
 | `ariaLabel` | `string` | — | — |
 | `ariaLabelledby` | `string` | — | — |
-| `diameter` | `number` | — | — |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 

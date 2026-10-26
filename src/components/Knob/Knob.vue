@@ -10,8 +10,7 @@ const props = withDefaults(defineProps<KnobProps>(), {
   min: 0,
   max: 100,
   step: 1,
-  diameter: undefined,
-  size: 100,
+  diameter: 100,
   disabled: false,
   valueTemplate: '{value}',
   ariaLabel: undefined,
@@ -38,7 +37,7 @@ const ratio = computed(() => {
   return (clamped.value - props.min) / span
 })
 
-const diameter = computed(() => props.diameter ?? props.size)
+const diameter = computed(() => props.diameter)
 const radius = computed(() => diameter.value / 2 - 8)
 const circumference = computed(() => 2 * Math.PI * radius.value)
 const dashOffset = computed(() => circumference.value * (1 - ratio.value))
