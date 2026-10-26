@@ -31,7 +31,6 @@ import { MPanel } from 'morya-ui'
 | `header` | `string` | — | 标题文本。 |
 | `toggleable` | `boolean` | `false` | 是否可折叠。 |
 | `collapsed` | `boolean` | `false` | 折叠状态。 |
-| `modelValue` | `boolean` | — | `collapsed` 的 `v-model` 别名。 |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | 尺寸。 |
 | `defaultCollapsed` | `boolean` | — | — |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
@@ -42,7 +41,6 @@ import { MPanel } from 'morya-ui'
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:collapsed` | `boolean` | 折叠状态变化。 |
-| `update:modelValue` | `boolean` | 同 `update:collapsed`。 |
 
 ## Slots
 

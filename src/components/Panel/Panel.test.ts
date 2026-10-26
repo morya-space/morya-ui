@@ -13,16 +13,15 @@ describe('muPanel', () => {
     expect(wrapper.find('.m-panel__toggler').exists()).toBe(false)
   })
 
-  it('toggles collapsed via modelValue and emits both events', async () => {
+  it('toggles collapsed via the collapsed prop and emits update:collapsed', async () => {
     const wrapper = mount(MPanel, {
-      props: { header: 'Box', toggleable: true, modelValue: false },
+      props: { header: 'Box', toggleable: true, collapsed: false },
       slots: { default: 'Inner' },
     })
     expect(wrapper.get('.m-panel__content').isVisible()).toBe(true)
     await wrapper.get('.m-panel__toggler').trigger('click')
-    expect(wrapper.emitted('update:modelValue')).toEqual([[true]])
     expect(wrapper.emitted('update:collapsed')).toEqual([[true]])
-    await wrapper.setProps({ modelValue: true })
+    await wrapper.setProps({ collapsed: true })
     expect(wrapper.classes()).toContain('m-panel--collapsed')
     expect(wrapper.get('.m-panel__toggler').attributes('aria-expanded')).toBe('false')
   })

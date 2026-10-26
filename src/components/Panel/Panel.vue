@@ -14,11 +14,9 @@ const props = withDefaults(defineProps<PanelProps>(), {
   toggleable: false,
   defaultCollapsed: false,
   collapsed: undefined,
-  modelValue: undefined,
 })
 const emit = defineEmits<{
   (event: 'update:collapsed', value: boolean): void
-  (event: 'update:modelValue', value: boolean): void
 }>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
@@ -30,7 +28,6 @@ const sizeTone = computed(() => resolveSizeClass(props.size))
 
 function resolveControlledCollapsed() {
   if (props.collapsed !== undefined) return props.collapsed
-  if (props.modelValue !== undefined) return props.modelValue
   return undefined
 }
 
@@ -41,7 +38,6 @@ const { value: isCollapsed, setValue: setCollapsed } = useControllable(
   },
   (next) => {
     emit('update:collapsed', next)
-    emit('update:modelValue', next)
   },
 )
 

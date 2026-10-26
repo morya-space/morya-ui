@@ -31,7 +31,6 @@ import { MPanel } from 'morya-ui'
 | `header` | `string` | — | Header text. |
 | `toggleable` | `boolean` | `false` | Whether the panel can collapse. |
 | `collapsed` | `boolean` | `false` | Collapsed state. |
-| `modelValue` | `boolean` | — | `v-model` alias for `collapsed`. |
 | `size` | `'small' \| 'large' \| 'sm' \| 'md' \| 'lg'` | — | Size. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
@@ -41,7 +40,6 @@ import { MPanel } from 'morya-ui'
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:collapsed` | `boolean` | Emitted when the collapsed state changes. |
-| `update:modelValue` | `boolean` | Same as `update:collapsed`. |
 
 ## Slots
 
