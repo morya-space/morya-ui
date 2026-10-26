@@ -1,18 +1,14 @@
 import type { RootPassThrough } from '../../shared/passThrough'
 export interface BreadcrumbItem {
   label: string
-  /** Link target. Prefer `to`; `href` is an alias. */
+  /** Link target. */
   to?: string
-  /** Alias of `to` (`href`). */
-  href?: string
   disabled?: boolean
 }
 
 export interface BreadcrumbHome {
   label?: string
   to?: string
-  /** Alias of `to` (`href`). */
-  href?: string
 }
 
 export interface BreadcrumbProps {

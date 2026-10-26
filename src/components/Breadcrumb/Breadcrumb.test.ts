@@ -59,11 +59,11 @@ describe('muBreadcrumb', () => {
     expect(wrapper.text()).toContain('[B*]')
   })
 
-  it('accepts href as an alias of to', () => {
+  it('renders links from the to field', () => {
     const wrapper = mount(MBreadcrumb, {
       props: {
-        home: { href: '/' },
-        model: [{ label: 'Docs', href: '/docs' }, { label: 'API' }],
+        home: { to: '/' },
+        model: [{ label: 'Docs', to: '/docs' }, { label: 'API' }],
       },
     })
     expect(wrapper.get('a[href="/"]').text()).toBe('首页')

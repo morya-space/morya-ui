@@ -14,8 +14,8 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
 
-function itemHref(item: Pick<BreadcrumbItem, 'to' | 'href'>) {
-  return item.to ?? item.href
+function itemHref(item: Pick<BreadcrumbItem, 'to'>) {
+  return item.to
 }
 
 const items = computed(() => {
