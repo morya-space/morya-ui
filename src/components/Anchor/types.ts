@@ -31,10 +31,8 @@ export interface AnchorProps {
   direction?: AnchorDirection
   /** Scroll offset for spy + scroll target. */
   offsetTop?: number
-  /** Alias for `bounds`. Default `5`. */
+  /** Highlight threshold. Default `5`. */
   bounds?: number
-  /** Alias for `bounds` (`bound`). */
-  bound?: number
   /** Scroll offset when clicking a link; falls back to `offsetTop`. */
   targetOffset?: number
   /** Pin nav while scrolling. Default `true`. */

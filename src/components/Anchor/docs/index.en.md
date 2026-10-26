@@ -28,7 +28,7 @@ Prefer declarative `items`, or nest `MAnchorLink` children.
 | `items` | `AnchorLinkItem[]` | — | Link tree |
 | `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout |
 | `offsetTop` | `number` | `0` | Spy / scroll offset |
-| `bounds` / `bound` | `number` | `5` | Highlight threshold |
+| `bounds` | `number` | `5` | Highlight threshold |
 | `targetOffset` | `number` | — | Click scroll offset; defaults to `offsetTop` |
 | `affix` | `boolean` | `true` | Sticky nav |
 | `getContainer` | `() => HTMLElement \| Window` | `window` | Scroll container |

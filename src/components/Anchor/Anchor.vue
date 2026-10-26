@@ -27,7 +27,6 @@ const props = withDefaults(defineProps<AnchorProps>(), {
   direction: 'vertical',
   affix: true,
   bounds: undefined,
-  bound: undefined,
   offsetTop: 0,
   replace: false,
 })
@@ -40,7 +39,7 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
-const resolvedBounds = computed(() => props.bounds ?? props.bound ?? 5)
+const resolvedBounds = computed(() => props.bounds ?? 5)
 
 const links = ref<string[]>([])
 const activeLink = ref<string | null>(null)

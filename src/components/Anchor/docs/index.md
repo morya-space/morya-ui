@@ -28,7 +28,7 @@ import { MAnchor, MAnchorLink } from 'morya-ui'
 | `items` | `AnchorLinkItem[]` | — | 链接树 |
 | `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | 布局方向 |
 | `offsetTop` | `number` | `0` | 滚动监听/定位偏移 |
-| `bounds` / `bound` | `number` | `5` | 高亮判定边界 |
+| `bounds` | `number` | `5` | 高亮判定边界 |
 | `targetOffset` | `number` | — | 点击滚动偏移；默认 `offsetTop` |
 | `affix` | `boolean` | `true` | 粘性定位导航 |
 | `getContainer` | `() => HTMLElement \| Window` | `window` | 滚动容器 |
