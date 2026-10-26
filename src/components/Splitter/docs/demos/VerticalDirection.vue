@@ -3,16 +3,12 @@ import { MSplitter } from 'morya-ui'
 </script>
 
 <template>
-  <MSplitter direction="vertical" style="min-height: 10rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden">
+  <MSplitter layout="vertical" style="min-height: 10rem; border: 1px solid var(--m-color-border); border-radius: var(--m-radius-md); overflow: hidden">
     <template #panel1>
-      <div style="padding: 0.75rem">
-        Top
-      </div>
+      <div style="padding: 1rem">Panel 1</div>
     </template>
     <template #panel2>
-      <div style="padding: 0.75rem">
-        Bottom
-      </div>
+      <div style="padding: 1rem">Panel 2</div>
     </template>
   </MSplitter>
 </template>

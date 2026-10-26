@@ -35,7 +35,7 @@ const slots = useSlots()
 const root = ref<HTMLElement | null>(null)
 const dragging = ref(false)
 
-const resolvedLayout = computed(() => props.layout ?? props.direction ?? 'horizontal')
+const resolvedLayout = computed(() => props.layout ?? 'horizontal')
 const isVertical = computed(() => resolvedLayout.value === 'vertical')
 
 const isControlled = computed(() => props.size !== undefined)

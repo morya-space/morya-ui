@@ -18,9 +18,9 @@ describe('muSplitter', () => {
     expect(wrapper.find('.m-splitter__gutter').exists()).toBe(true)
   })
 
-  it('supports direction alias for layout', () => {
+  it('renders vertical layout', () => {
     const wrapper = mount(MSplitter, {
-      props: { direction: 'vertical' },
+      props: { layout: 'vertical' },
       slots: { panel1: 'Top', panel2: 'Bottom' },
     })
     expect(wrapper.classes()).toContain('m-splitter--vertical')

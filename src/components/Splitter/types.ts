@@ -12,10 +12,8 @@ export type SplitterPassThrough = RootPassThrough &
 
 export interface SplitterProps {
   pt?: SplitterPassThrough
-  /** Split direction. Prefer this name; `direction` is an alias. */
+  /** Split direction. */
   layout?: SplitterLayout
-  /** Alias of `layout`. */
-  direction?: SplitterLayout
   /**
    * Controlled primary pane size.
    * - number `> 1` → percent (0–100)

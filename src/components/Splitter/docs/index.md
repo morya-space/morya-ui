@@ -21,7 +21,7 @@ import { MSplitter } from 'morya-ui'
 
 ## Vertical / direction
 
-`layout` 与 `direction` 等价（`direction` 为别名）。
+`layout` 控制水平 / 垂直分割。
 
 ```vue preview src="./demos/VerticalDirection.vue"
 ```
@@ -59,7 +59,6 @@ import { MSplitter } from 'morya-ui'
 | 参数 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | 分割方向。 |
-| `direction` | 同上 | — | `layout` 的别名。 |
 | `size` | `number \| string` | — | 受控尺寸；`>1` 为 `%`，`≤1` 为比例，`'Npx'` 为像素。 |
 | `defaultSize` | `number \| string` | `50` | 非受控初始尺寸。 |
 | `min` / `max` | `number \| string` | 随模式 | 主面板下限 / 上限（单位与 `size` 一致）。 |

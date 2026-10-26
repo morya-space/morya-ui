@@ -21,7 +21,7 @@ import { MSplitter } from 'morya-ui'
 
 ## Vertical / direction
 
-`layout` and `direction` are equivalent (`direction` is an alias).
+`layout` controls horizontal / vertical split.
 
 ```vue preview src="./demos/VerticalDirection.vue"
 ```
@@ -59,7 +59,6 @@ Style the divider with `resizeTriggerClass` / `resizeTriggerStyle`, and put a ha
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `layout` | `'horizontal' \| 'vertical'` | `'horizontal'` | Split direction. |
-| `direction` | same | — | Alias of `layout`. |
 | `size` | `number \| string` | — | Controlled size; `>1` = `%`, `≤1` = ratio, `'Npx'` = pixels. |
 | `defaultSize` | `number \| string` | `50` | Uncontrolled initial size. |
 | `min` / `max` | `number \| string` | mode-based | Primary pane bounds (same unit family as `size`). |
