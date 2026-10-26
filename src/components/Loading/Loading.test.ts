@@ -49,8 +49,8 @@ describe('mLoading', () => {
     }
   })
 
-  it('accepts tip as an alias of text', () => {
-    const wrapper = mount(MLoading, { props: { tip: '稍候' } })
+  it('renders caption from the text prop', () => {
+    const wrapper = mount(MLoading, { props: { text: '稍候' } })
     expect(wrapper.get('.m-loading-indicator__tip').text()).toBe('稍候')
   })
 

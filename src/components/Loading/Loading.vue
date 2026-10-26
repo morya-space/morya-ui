@@ -36,7 +36,7 @@ const overlay = computed(() => wrapping.value || props.fullscreen)
 const effect = computed(() => normalizeLoadingEffect(props.effect ?? defaults.value.effect))
 const size = computed(() => props.size ?? (defaults.value.size as LoadingProps['size']))
 const delayMs = computed(() => props.delay ?? (defaults.value.delay as number | undefined) ?? 0)
-const caption = computed(() => props.text ?? props.tip)
+const caption = computed(() => props.text)
 const maskStyle = computed(() => (props.background ? { background: props.background } : undefined))
 const teleportTarget = computed(() =>
   resolveOverlayTeleport(

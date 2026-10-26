@@ -29,9 +29,7 @@ export interface LoadingProps {
   effect?: LoadingEffect
   /** Caption under the spinner. Hidden when omitted. */
   text?: string
-  /** Alias of `text` . */
-  tip?: string
-  /** Accessible name. Falls back to `text`/`tip`, then the locale `loading` string. */
+  /** Accessible name. Falls back to `text`, then the locale `loading` string. */
   ariaLabel?: string
   size?: MSizeInput
   /** Mask background. Any CSS color. */
@@ -52,8 +50,6 @@ export interface LoadingProps {
 export interface LoadingBinding {
   loading?: boolean
   text?: string
-  /** Alias of `text` . */
-  tip?: string
   effect?: LoadingEffect
   background?: string
   customClass?: string
@@ -77,8 +73,6 @@ export interface LoadingServiceOptions {
   /** Prevent document scrolling while open. */
   lock?: boolean
   text?: string
-  /** Alias of `text` . */
-  tip?: string
   effect?: LoadingEffect
   background?: string
   customClass?: string

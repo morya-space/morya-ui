@@ -347,7 +347,7 @@ export function loadingService(options: LoadingServiceOptions = {}): LoadingServ
     fullscreen,
     body: Boolean(options.body) && !fullscreen,
     lock: options.lock,
-    text: options.text ?? options.tip,
+    text: options.text,
     effect: options.effect,
     background: options.background,
     customClass: options.customClass,
