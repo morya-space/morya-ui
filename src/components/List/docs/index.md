@@ -16,7 +16,7 @@ import { MList, MListItem, MListItemMeta } from 'morya-ui'
 
 ## 基础用法
 
-数据主字段为 `items`；`dataSource` / `data` 为兼容别名。使用 `#item="{ item, index }"` 渲染每一行。
+数据主字段为 `items`。使用 `#item="{ item, index }"` 渲染每一行。
 
 ```vue preview src="./demos/Basic.vue"
 ```
@@ -33,8 +33,6 @@ import { MList, MListItem, MListItemMeta } from 'morya-ui'
 | Prop | 类型 | 默认 | 说明 |
 | --- | --- | --- | --- |
 | `items` | `unknown[]` | — | 数据数组（主名称） |
-| `dataSource` | `unknown[]` | — | `items` 别名 |
-| `data` | `unknown[]` | — | `items` 别名 |
 | `bordered` | `boolean` | `false` | 外边框 |
 | `split` | `boolean` | `true` | 条目分隔线 |
 | `loading` | `boolean` | `false` | `MLoading` 遮罩 |

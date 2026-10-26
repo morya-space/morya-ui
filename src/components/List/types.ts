@@ -32,10 +32,6 @@ export interface ListProps<T = unknown> {
   pt?: RootPassThrough
   /** Primary data array. */
   items?: T[]
-  /** Alias of `items`. */
-  dataSource?: T[]
-  /** Alias of `items`. */
-  data?: T[]
   bordered?: boolean
   /** Divider between items. Default `true`. */
   split?: boolean

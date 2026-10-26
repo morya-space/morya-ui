@@ -16,7 +16,7 @@ import { MList, MListItem, MListItemMeta } from 'morya-ui'
 
 ## Basic
 
-Primary data prop is `items`; `dataSource` / `data` are aliases. Use `#item="{ item, index }"` for each row.
+Primary data prop is `items`. Use `#item="{ item, index }"` for each row.
 
 ```vue preview src="./demos/Basic.vue"
 ```
@@ -33,8 +33,6 @@ Primary data prop is `items`; `dataSource` / `data` are aliases. Use `#item="{ i
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `items` | `unknown[]` | — | Data array (primary name) |
-| `dataSource` | `unknown[]` | — | Alias of `items` |
-| `data` | `unknown[]` | — | Alias of `items` |
 | `bordered` | `boolean` | `false` | Outer border |
 | `split` | `boolean` | `true` | Dividers between items |
 | `loading` | `boolean` | `false` | `MLoading` overlay |

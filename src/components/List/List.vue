@@ -24,7 +24,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const sizeClass = useConfiguredSize('List', () => props.size)
 
 const sourceItems = computed(() => {
-  const raw = props.items ?? props.dataSource ?? props.data
+  const raw = props.items
   return Array.isArray(raw) ? raw : []
 })
 
