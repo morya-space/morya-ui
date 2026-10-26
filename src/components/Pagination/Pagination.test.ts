@@ -44,7 +44,6 @@ describe('muPagination', () => {
     expect(sizeOption).toBeInstanceOf(HTMLButtonElement)
     ;(sizeOption as HTMLButtonElement).click()
     await nextTick()
-    expect(wrapper.emitted('update:pageSize')?.at(-1)).toEqual([20])
     expect(wrapper.emitted('update:rows')?.at(-1)).toEqual([20])
 
     const jumper = wrapper.get('.m-pagination__jumper [role="combobox"]')
@@ -84,7 +83,7 @@ describe('muPagination', () => {
     wrapper.unmount()
   })
 
-  it('supports size and showSizeChanger alias', () => {
+  it('supports size and showSizePicker', () => {
     const sized = mount(MPagination, {
       props: { totalRecords: 40, rows: 10, size: 'large' },
     })
@@ -92,7 +91,7 @@ describe('muPagination', () => {
     sized.unmount()
 
     const changer = mount(MPagination, {
-      props: { totalRecords: 40, rows: 10, showSizeChanger: true },
+      props: { totalRecords: 40, rows: 10, showSizePicker: true },
     })
     expect(changer.find('.m-pagination__sizer').exists()).toBe(true)
     changer.unmount()

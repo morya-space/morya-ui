@@ -16,7 +16,6 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   disabled: false,
   size: 'medium',
   showSizePicker: false,
-  showSizeChanger: false,
   pageSizes: () => [10, 20, 50, 100],
   showQuickJumper: false,
   simple: false,
@@ -25,14 +24,13 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: number): void
   (event: 'page', value: number): void
   (event: 'update:rows', value: number): void
-  (event: 'update:pageSize', value: number): void
 }>()
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 const locale = useMLocale()
-const resolvedRows = computed(() => Math.max(1, props.pageSize ?? props.rows))
-const showSizer = computed(() => props.showSizePicker || props.showSizeChanger)
+const resolvedRows = computed(() => Math.max(1, props.rows))
+const showSizer = computed(() => props.showSizePicker)
 const pageCount = computed(() => Math.max(1, Math.ceil(props.totalRecords / resolvedRows.value)))
 const currentPage = computed(() => Math.min(Math.max(1, props.modelValue), pageCount.value))
 /** Zero-based index of the first record on the current page . */
@@ -68,7 +66,6 @@ function setPage(page: number) {
 function setRows(next: number) {
   if (props.disabled || next === resolvedRows.value) return
   emit('update:rows', next)
-  emit('update:pageSize', next)
   const nextCount = Math.max(1, Math.ceil(props.totalRecords / next))
   const nextPage = Math.min(currentPage.value, nextCount)
   if (nextPage !== currentPage.value) {

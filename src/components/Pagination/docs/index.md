@@ -8,7 +8,7 @@ description: 分页器，v-model 为页码；实例暴露 first（零基首条�
 
 分页导航，`v-model` 使用 **1-based 页码**；实例属性 `first` 对应零基首条记录索引 `(page - 1) * rows`。
 
-`pageSize` 是 `rows` 的别名（同时传入时 `pageSize` 优先）；另支持 `showSizePicker` / `showSizeChanger`、`showQuickJumper`、`simple`、`size`。
+支持 `showSizePicker`、`showQuickJumper`、`simple`、`size`。
 
 ## 引入
 
@@ -33,11 +33,9 @@ import { MPagination } from 'morya-ui'
 | `modelValue` | `number` | `1` | 当前页（从 1 开始）。 |
 | `totalRecords` | `number` | — | 总记录数。 |
 | `rows` | `number` | `10` | 每页条数。 |
-| `pageSize` | `number` | — | `rows` 的别名；两者同时传入时以 `pageSize` 为准。 |
 | `pageLinkSize` | `number` | `5` | 页码按钮数量。 |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | 控件高度（`--m-control-height-*`）。 |
 | `showSizePicker` | `boolean` | `false` | 显示每页条数选择器。 |
-| `showSizeChanger` | `boolean` | `false` | `showSizePicker` 的别名；任一为 true 即显示。 |
 | `pageSizes` | `number[]` | `[10, 20, 50, 100]` | `showSizePicker` 的选项。 |
 | `showQuickJumper` | `boolean` | `false` | 显示跳转页码选择器。页数超过 10 时可在下拉中筛选。 |
 | `simple` | `boolean` | `false` | 精简为上一页 / 当前页 / 下一页。 |
@@ -51,7 +49,7 @@ import { MPagination } from 'morya-ui'
 | --- | --- | --- |
 | `update:modelValue` | `number` | 页码变化。 |
 | `page` | `number` | 页码变化（同值）。 |
-| `update:rows` / `update:pageSize` | `number` | 每页条数变化（同值）。 |
+| `update:rows` | `number` | 每页条数变化。 |
 
 ## Instance
 
