@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<InplaceProps>(), {
   modelValue: false,
   disabled: false,
   closeOnEsc: true,
-  dismissable: false,
+  closeOnOutsideClick: false,
 })
 const emit = defineEmits<InplaceEmits>()
 const attrs = useAttrs()
@@ -45,7 +45,7 @@ function onDocumentKeydown(event: KeyboardEvent) {
 }
 
 function onDocumentClick(event: MouseEvent) {
-  if (!props.dismissable) return
+  if (!props.closeOnOutsideClick) return
   if (root.value?.contains(event.target as Node)) return
   deactivate()
 }
@@ -60,7 +60,7 @@ watch(
 )
 
 watch(
-  () => [props.modelValue, props.closeOnEsc, props.dismissable] as const,
+  () => [props.modelValue, props.closeOnEsc, props.closeOnOutsideClick] as const,
   ([open]) => {
     document.removeEventListener('keydown', onDocumentKeydown)
     document.removeEventListener('click', onDocumentClick)

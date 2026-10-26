@@ -25,8 +25,8 @@ import { MInplace } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | 是否处于编辑态。 |
 | `disabled` | `boolean` | `false` | 禁用切换。 |
-| `closeOnEsc` | `boolean` | — | — |
-| `dismissable` | `boolean` | — | — |
+| `closeOnEsc` | `boolean` | `true` | 按 Esc 关闭内容。 |
+| `closeOnOutsideClick` | `boolean` | `false` | 点击外部时关闭内容。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 

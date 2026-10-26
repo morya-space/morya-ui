@@ -6,7 +6,7 @@ export interface InplaceProps {
   /** Close the content with Escape. Defaults to `true`. */
   closeOnEsc?: boolean
   /** Close the content when clicking outside of it. Defaults to `false`. */
-  dismissable?: boolean
+  closeOnOutsideClick?: boolean
 }
 
 export interface InplaceEmits {

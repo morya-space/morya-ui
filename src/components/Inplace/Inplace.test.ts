@@ -72,9 +72,9 @@ describe('muInplace', () => {
     wrapper.unmount()
   })
 
-  it('closes on outside click only when dismissable', async () => {
+  it('closes on outside click only when closeOnOutsideClick is true', async () => {
     const wrapper = mount(MInplace, {
-      props: { modelValue: true, dismissable: true },
+      props: { modelValue: true, closeOnOutsideClick: true },
       slots: { display: 'Display', content: 'Content' },
       attachTo: document.body,
     })

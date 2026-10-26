@@ -25,6 +25,8 @@ import { MInplace } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | Whether the editor is active. |
 | `disabled` | `boolean` | `false` | Disable toggling. |
+| `closeOnEsc` | `boolean` | `true` | Close the content with Escape. |
+| `closeOnOutsideClick` | `boolean` | `false` | Close the content when clicking outside of it. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 

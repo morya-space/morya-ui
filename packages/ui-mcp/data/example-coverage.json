@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-26T02:55:54.670Z",
-  "catalogGeneratedAt": "2026-10-26T02:55:42.893Z",
+  "generatedAt": "2026-10-26T03:12:16.934Z",
+  "catalogGeneratedAt": "2026-10-26T03:12:15.737Z",
   "components": [
     {
       "id": "Accordion",
@@ -1522,7 +1522,7 @@
         "missing": [
           "disabled",
           "closeOnEsc",
-          "dismissable",
+          "closeOnOutsideClick",
           "pt"
         ]
       },
