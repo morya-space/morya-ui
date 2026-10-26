@@ -2729,7 +2729,7 @@ export const componentDecisions: ComponentDecision[] = [
         avoidWhenEn: ['Reorder is needed', 'Transfer selection is needed'],
         recipe: recipe(
           [
-            ['items / dataSource 数据数组', 'items / dataSource for the data array'],
+            ['items 数据数组', 'items for the data array'],
             ['MListItem + MListItemMeta 自定义布局', 'MListItem + MListItemMeta for custom layout'],
             ['pagination 分页；grid 网格布局', 'pagination for paging; grid for grid layout'],
           ],
@@ -2982,7 +2982,7 @@ export const componentDecisions: ComponentDecision[] = [
         avoidWhenEn: ['10k+ items', 'Performance-sensitive scenarios'],
         recipe: recipe(
           [
-            ['MList items / dataSource 直接渲染', 'MList items / dataSource for direct rendering'],
+            ['MList items 直接渲染', 'MList items for direct rendering'],
             ['v-for 自定义模板渲染', 'v-for for custom template rendering'],
             ['无需 itemSize 约束', 'No itemSize constraint needed'],
           ],

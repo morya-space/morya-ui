@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-22T10:55:45.573Z",
-  "catalogGeneratedAt": "2026-10-22T10:55:39.650Z",
+  "generatedAt": "2026-10-26T02:55:54.670Z",
+  "catalogGeneratedAt": "2026-10-26T02:55:42.893Z",
   "components": [
     {
       "id": "Accordion",
@@ -102,12 +102,11 @@
       "exportName": "MAnchor",
       "examples": 4,
       "props": {
-        "total": 14,
+        "total": 13,
         "covered": 2,
         "missing": [
           "direction",
           "bounds",
-          "bound",
           "targetOffset",
           "affix",
           "getContainer",
@@ -910,35 +909,40 @@
     {
       "id": "Dialog",
       "exportName": "MDialog",
-      "examples": 18,
+      "examples": 24,
       "props": {
-        "total": 26,
-        "covered": 12,
+        "total": 32,
+        "covered": 15,
         "missing": [
-          "title",
           "closeOnEsc",
           "blockScroll",
-          "closeOnOutsideClick",
-          "maskClosable",
           "closable",
+          "closeIcon",
+          "overflow",
+          "openDelay",
+          "closeDelay",
           "modal",
-          "centered",
+          "top",
+          "zIndex",
           "teleport",
           "appendTo",
           "positiveColor",
           "onNegativeClick",
           "ariaLabel",
+          "headerAriaLevel",
           "transition"
         ]
       },
       "events": {
-        "total": 6,
-        "covered": 0,
+        "total": 9,
+        "covered": 1,
         "missing": [
           "update:modelValue",
           "close",
           "show",
+          "opened",
           "hide",
+          "closed",
           "maximize",
           "unmaximize"
         ]
@@ -951,8 +955,8 @@
         ]
       },
       "methods": {
-        "total": 9,
-        "covered": 2,
+        "total": 10,
+        "covered": 3,
         "missing": [
           "close",
           "maximize",
@@ -969,10 +973,9 @@
       "exportName": "MDivider",
       "examples": 14,
       "props": {
-        "total": 9,
-        "covered": 6,
+        "total": 7,
+        "covered": 5,
         "missing": [
-          "orientation",
           "size",
           "pt"
         ]
@@ -1030,11 +1033,11 @@
       "exportName": "MDrawer",
       "examples": 8,
       "props": {
-        "total": 16,
+        "total": 15,
         "covered": 4,
         "missing": [
           "modal",
-          "dismissable",
+          "closeOnOutsideClick",
           "showCloseIcon",
           "height",
           "blockScroll",
@@ -1043,7 +1046,6 @@
           "transition",
           "beforeClose",
           "closeOnEsc",
-          "closeOnOutsideClick",
           "pt"
         ]
       },
@@ -1229,12 +1231,11 @@
       "exportName": "MFlex",
       "examples": 8,
       "props": {
-        "total": 9,
+        "total": 8,
         "covered": 4,
         "missing": [
           "inline",
           "reverse",
-          "gap",
           "wrap",
           "pt"
         ]
@@ -1317,12 +1318,11 @@
       "exportName": "MForm",
       "examples": 14,
       "props": {
-        "total": 26,
-        "covered": 17,
+        "total": 24,
+        "covered": 16,
         "missing": [
           "initialValues",
           "requireMark",
-          "requiredMark",
           "disabled",
           "size",
           "scrollToFirstError",
@@ -1757,7 +1757,7 @@
       "exportName": "MKnob",
       "examples": 4,
       "props": {
-        "total": 11,
+        "total": 10,
         "covered": 3,
         "missing": [
           "min",
@@ -1766,7 +1766,6 @@
           "disabled",
           "ariaLabel",
           "ariaLabelledby",
-          "diameter",
           "pt"
         ]
       },
@@ -1868,10 +1867,9 @@
       "exportName": "MList",
       "examples": 6,
       "props": {
-        "total": 19,
-        "covered": 10,
+        "total": 17,
+        "covered": 9,
         "missing": [
-          "dataSource",
           "split",
           "loading",
           "size",
@@ -1947,10 +1945,9 @@
       "exportName": "MLoading",
       "examples": 14,
       "props": {
-        "total": 16,
+        "total": 15,
         "covered": 5,
         "missing": [
-          "tip",
           "ariaLabel",
           "background",
           "customClass",
@@ -2292,22 +2289,20 @@
       "exportName": "MPagination",
       "examples": 6,
       "props": {
-        "total": 13,
-        "covered": 9,
+        "total": 11,
+        "covered": 8,
         "missing": [
           "size",
-          "showSizeChanger",
           "disabled",
           "pt"
         ]
       },
       "events": {
-        "total": 4,
+        "total": 3,
         "covered": 1,
         "missing": [
           "update:modelValue",
-          "page",
-          "update:rows"
+          "page"
         ]
       },
       "slots": {
@@ -2329,19 +2324,18 @@
       "exportName": "MPanel",
       "examples": 6,
       "props": {
-        "total": 7,
-        "covered": 5,
+        "total": 6,
+        "covered": 4,
         "missing": [
           "defaultCollapsed",
           "pt"
         ]
       },
       "events": {
-        "total": 2,
+        "total": 1,
         "covered": 0,
         "missing": [
-          "update:collapsed",
-          "update:modelValue"
+          "update:collapsed"
         ]
       },
       "slots": {
@@ -2459,12 +2453,11 @@
       "exportName": "MProgressSpinner",
       "examples": 6,
       "props": {
-        "total": 9,
+        "total": 8,
         "covered": 5,
         "missing": [
           "ariaLabel",
           "delay",
-          "tip",
           "pt"
         ]
       },
@@ -2554,11 +2547,10 @@
       "exportName": "MRating",
       "examples": 8,
       "props": {
-        "total": 14,
+        "total": 13,
         "covered": 4,
         "missing": [
           "stars",
-          "clearable",
           "disabled",
           "ariaLabel",
           "errorMessage",
@@ -3036,10 +3028,9 @@
       "exportName": "MSplitter",
       "examples": 14,
       "props": {
-        "total": 16,
+        "total": 15,
         "covered": 9,
         "missing": [
-          "layout",
           "defaultSize",
           "pane1Class",
           "pane1Style",
@@ -3145,13 +3136,12 @@
       "exportName": "MStepper",
       "examples": 6,
       "props": {
-        "total": 8,
+        "total": 7,
         "covered": 3,
         "missing": [
           "status",
           "size",
           "linear",
-          "orientation",
           "pt"
         ]
       },
@@ -3181,10 +3171,9 @@
       "exportName": "MSwitch",
       "examples": 10,
       "props": {
-        "total": 14,
+        "total": 13,
         "covered": 7,
         "missing": [
-          "id",
           "name",
           "value",
           "size",
@@ -3740,8 +3729,8 @@
       "exportName": "MTour",
       "examples": 4,
       "props": {
-        "total": 11,
-        "covered": 5,
+        "total": 10,
+        "covered": 4,
         "missing": [
           "placement",
           "mask",
@@ -3752,10 +3741,9 @@
         ]
       },
       "events": {
-        "total": 6,
+        "total": 5,
         "covered": 2,
         "missing": [
-          "update:modelValue",
           "change",
           "close",
           "finish"
@@ -3977,6 +3965,6 @@
   "summary": {
     "components": 106,
     "componentsWithMissingCoverage": 105,
-    "totalExamples": 1013
+    "totalExamples": 1019
   }
 }

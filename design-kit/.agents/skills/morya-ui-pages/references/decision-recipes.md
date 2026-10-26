@@ -2918,7 +2918,7 @@ This file is the **offline** mirror for agents without MCP.
 
 **Recipe · props**
 
-- items / dataSource 数据数组
+- items 数据数组
 - MListItem + MListItemMeta 自定义布局
 - pagination 分页；grid 网格布局
 
@@ -3184,7 +3184,7 @@ This file is the **offline** mirror for agents without MCP.
 
 **Recipe · props**
 
-- MList items / dataSource 直接渲染
+- MList items 直接渲染
 - v-for 自定义模板渲染
 - 无需 itemSize 约束
 

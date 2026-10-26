@@ -17,7 +17,7 @@ describe('muDrawer', () => {
     wrapper.unmount()
   })
 
-  it('closes on mask click when dismissable and via close icon', async () => {
+  it('closes on mask click when closeOnOutsideClick is true and via close icon', async () => {
     const wrapper = mount(MDrawer, {
       attachTo: document.body,
       props: { modelValue: true, header: 'Menu', position: 'right' },
