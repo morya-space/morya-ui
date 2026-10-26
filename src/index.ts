@@ -705,7 +705,6 @@ export type {
 export { default as MStepper } from "./components/Stepper/Stepper.vue";
 export type {
   StepperEmits,
-  StepperOrientation,
   StepperProps,
   StepperStatus,
   StepperStep,
