@@ -14,10 +14,8 @@ const props = withDefaults(defineProps<DividerProps>(), {
 const attrs = useAttrs()
 const { rootAttrs } = useRootParts(attrs, () => props.pt)
 const slots = useSlots()
-const resolvedLayout = computed(
-  () => props.layout ?? props.orientation ?? 'horizontal',
-)
-const resolvedAlign = computed(() => props.titlePlacement ?? props.align)
+const resolvedLayout = computed(() => props.layout ?? 'horizontal')
+const resolvedAlign = computed(() => props.align)
 const hasLabel = computed(() => Boolean(props.label || slots.default))
 
 const rootClass = computed(() => [

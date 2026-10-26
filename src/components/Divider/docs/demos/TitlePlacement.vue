@@ -3,5 +3,5 @@ import { MDivider } from 'morya-ui'
 </script>
 
 <template>
-  <MDivider label="Or" title-placement="right" />
+  <MDivider label="Or" align="right" />
 </template>

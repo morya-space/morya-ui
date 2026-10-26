@@ -31,19 +31,6 @@ describe('muDivider', () => {
     expect(wrapper.classes()).toContain('m-divider--align-left')
   })
 
-  it('uses titlePlacement as an alias of align', () => {
-    const wrapper = mount(MDivider, { props: { label: 'Or', titlePlacement: 'right' } })
-    expect(wrapper.classes()).toContain('m-divider--align-right')
-  })
-
-  it('uses orientation as an alias of layout', () => {
-    const wrapper = mount(MDivider, {
-      props: { orientation: 'vertical', label: 'Or' },
-    })
-    expect(wrapper.classes()).toContain('m-divider--vertical')
-    expect(wrapper.attributes('aria-orientation')).toBe('vertical')
-  })
-
   it('applies plain and size modifiers', () => {
     const wrapper = mount(MDivider, {
       props: { label: 'Note', plain: true, size: 'small' },

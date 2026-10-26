@@ -8,18 +8,14 @@ export type DividerSize = 'small' | 'medium' | 'large'
 
 export interface DividerProps {
   /**
-   * Layout direction. Preferred over `orientation`.
+   * Layout direction.
    * @default 'horizontal'
    */
   layout?: DividerLayout
-  /** Alias of `layout` (`orientation`). */
-  orientation?: DividerLayout
   /** Border style of the divider line. */
   type?: DividerType
   /** Label alignment for horizontal dividers with content. */
   align?: DividerAlign
-  /** Alias of `align`. */
-  titlePlacement?: DividerAlign
   /**
    * Use body text style for the label instead of the stronger default.
    * @default false
