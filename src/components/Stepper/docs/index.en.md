@@ -21,7 +21,7 @@ import { MStepper } from 'morya-ui'
 
 ## Vertical
 
-`vertical` (or `orientation="vertical"`) stacks steps. Each step can include `description` / `status`.
+`vertical` stacks steps. Each step can include `description` / `status`.
 
 ```vue preview src="./demos/Vertical.en.vue"
 ```
@@ -36,7 +36,6 @@ import { MStepper } from 'morya-ui'
 | `size` | `'small' \| 'medium'` | `'medium'` | Marker and typography density. |
 | `linear` | `boolean` | `false` | Only the current and previous steps can be selected. |
 | `vertical` | `boolean` | `false` | Vertical layout. |
-| `orientation` | `'horizontal' \| 'vertical'` | — | Alias of `vertical`. |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | Pass-through; see [Styling & attrs](/docs/attrs). |
 
 

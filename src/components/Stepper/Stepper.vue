@@ -21,7 +21,7 @@ const { rootAttrs } = useRootParts(attrs, () => props.pt)
 
 
 const activeIndex = computed(() => props.modelValue ?? 0)
-const isVertical = computed(() => props.vertical || props.orientation === 'vertical')
+const isVertical = computed(() => props.vertical)
 
 function canSelect(index: number, disabled?: boolean) {
   if (disabled) return false

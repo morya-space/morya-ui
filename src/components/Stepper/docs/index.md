@@ -21,7 +21,7 @@ import { MStepper } from 'morya-ui'
 
 ## Vertical
 
-`vertical`（或 `orientation="vertical"`）竖排。步骤可带 `description` / `status`。
+`vertical` 竖排。步骤可带 `description` / `status`。
 
 ```vue preview src="./demos/Vertical.zh.vue"
 ```
@@ -36,7 +36,6 @@ import { MStepper } from 'morya-ui'
 | `size` | `'small' \| 'medium'` | `'medium'` | 标记与字号密度。 |
 | `linear` | `boolean` | `false` | 仅允许选择当前及之前步骤。 |
 | `vertical` | `boolean` | `false` | 竖排。 |
-| `orientation` | `'horizontal' \| 'vertical'` | — | `vertical` 的别名。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 
 
