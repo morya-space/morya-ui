@@ -26,7 +26,7 @@ import { MRating } from 'morya-ui'
 
 ## Half
 
-`allowHalf` enables 0.5 increments. `clearable` is an alias of `cancel` and takes precedence when set.
+`allowHalf` enables 0.5 increments. `clearable` controls the clear button.
 
 ```vue preview src="./demos/Half.vue"
 ```
@@ -37,8 +37,7 @@ import { MRating } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `number` | `0` | Current rating. |
 | `stars` | `number` | `5` | Number of stars. |
-| `cancel` | `boolean` | `true` | Show the clear button. |
-| `clearable` | `boolean \| null` | `null` | Alias of `cancel`; takes precedence when set. |
+| `clearable` | `boolean \| null` | `null` | Show the clear button. |
 | `allowHalf` | `boolean` | `false` | Allow half-star values. |
 | `readonly` | `boolean` | `false` | Read-only. |
 | `disabled` | `boolean` | `false` | Disabled. |

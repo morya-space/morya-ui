@@ -11,11 +11,6 @@ export interface RatingProps {
   helpText?: string
   errorMessage?: string
   size?: MSizeInput
-  /**
-   * @deprecated Use `clearable` instead. Kept as an alias; `clearable`
-   * takes precedence when both are set.
-   */
-  cancel?: boolean
   /** Show a clear control. Defaults to `true`. */
   clearable?: boolean | null
   /** Allow 0.5 increments. */
