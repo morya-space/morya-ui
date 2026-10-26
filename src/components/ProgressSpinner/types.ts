@@ -17,6 +17,4 @@ export interface ProgressSpinnerProps {
   size?: MSizeInput
   /** Optional description under the spinner. */
   description?: string
-  /** Alias of `description` (`tip`). Prefer `MLoading` for full overlay features. */
-  tip?: string
 }
