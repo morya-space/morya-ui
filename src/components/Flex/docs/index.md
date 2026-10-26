@@ -39,7 +39,6 @@ import { MFlex } from 'morya-ui'
 | `vertical` | `boolean` | `false` | 纵向排列。 |
 | `reverse` | `boolean` | `false` | 主轴反向。 |
 | `size` | `'small' \| 'medium' \| 'large' \| number \| string \| [number \| string, number \| string]` | `'medium'` | 子项间距（CSS `gap`）。数字按 `px`；字符串可为 CSS 长度。 |
-| `gap` | 同 `size` | — | `size` 的别名。 |
 | `wrap` | `boolean` | `true` | 是否换行（纵向时强制不换行）。 |
 | `pt` | [RootPassThrough](/docs/types#RootPassThrough) `{ root? }` | — | DOM 透传，见 [样式与 attrs](/docs/attrs). |
 

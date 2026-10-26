@@ -30,9 +30,9 @@ describe('muFlex', () => {
     expect(wrapper.element.style.gap).toBe('12px')
   })
 
-  it('uses gap as an alias of size', () => {
+  it('uses token-named gap size', () => {
     const wrapper = mount(MFlex, {
-      props: { gap: 'large' },
+      props: { size: 'large' },
       slots: { default: '<span>A</span>' },
     })
     expect(wrapper.element.style.gap).toBe('var(--m-space-4)')
