@@ -47,42 +47,42 @@
     transform: none;
 }
 
+/*
+ * Visual language aligned with antd v5 `message`:
+ * - Neutral elevated surface (no tinted background, no tinted border).
+ * - Status color lives on the icon only.
+ * - Deeper "raised" shadow (the same triple-layer shadow antd ships).
+ * - Compact vertical padding, content-driven width (no min-width).
+ */
 .m-message {
-    --m-message-min-width: 16rem;
     /* Tone axis: each variant overrides --m-message-tone only */
     --m-message-tone: var(--m-color-info);
-    --m-message-fill-opacity: 10%;
-    --m-message-border-opacity: 28%;
-    --m-message-bg: color-mix(
-        in srgb,
-        var(--m-message-tone) var(--m-message-fill-opacity),
-        var(--m-color-surface)
-    );
-    --m-message-border-color: color-mix(
-        in srgb,
-        var(--m-message-tone) var(--m-message-border-opacity),
-        var(--m-color-border)
-    );
+    --m-message-bg: var(--m-color-surface);
+    --m-message-border-color: transparent;
     --m-message-icon-color: var(--m-message-tone);
     --m-message-close-hover-bg: color-mix(
         in srgb,
-        var(--m-color-primary) 10%,
+        var(--m-color-text) 6%,
         transparent
     );
     background: var(--m-message-bg);
     border: var(--m-border-width) solid var(--m-message-border-color);
-    border-radius: var(--m-radius-md);
-    box-shadow: var(--m-shadow-md);
+    border-radius: var(--m-radius-lg);
+    box-shadow: var(--m-shadow-lg);
     color: var(--m-color-text);
     display: flex;
     align-items: center;
     font-family: var(--m-font-sans);
     font-size: var(--m-font-size-md);
-    gap: var(--m-space-3);
-    line-height: 1.45;
-    min-width: var(--m-message-min-width);
-    padding: var(--m-space-3) var(--m-space-4);
+    gap: var(--m-space-2);
+    line-height: 1.5714;
+    padding: var(--m-space-2) var(--m-space-4);
     pointer-events: auto;
+    transition: box-shadow var(--m-motion-fast) var(--m-motion-ease);
+}
+
+.m-message:hover {
+    box-shadow: var(--m-shadow-raised);
 }
 
 .m-message__icon {
@@ -111,6 +111,7 @@
     height: var(--m-control-affix-size);
     justify-content: center;
     line-height: 1;
+    margin-right: calc(-1 * var(--m-space-2));
     padding: 0;
     transition:
         background-color var(--m-motion-fast) var(--m-motion-ease),
@@ -144,19 +145,24 @@
     --m-message-tone: var(--m-color-danger);
 }
 
+/* Morya-only variants kept for backward compatibility. */
+
 .m-message--secondary {
-    --m-message-tone: var(--m-color-text-muted);
-    --m-message-border-opacity: 22%;
+    --m-message-icon-color: var(--m-color-text-muted);
 }
 
 .m-message--contrast {
     --m-message-bg: var(--m-color-contrast);
-    --m-message-border-color: var(--m-color-contrast);
     --m-message-icon-color: var(--m-color-contrast-fg);
     color: var(--m-color-contrast-fg);
 }
 
 .m-message--contrast .m-message__close {
+    color: var(--m-color-contrast-fg);
+}
+
+.m-message--contrast .m-message__close:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--m-color-contrast-fg) 14%, transparent);
     color: var(--m-color-contrast-fg);
 }
 
