@@ -17,7 +17,7 @@ function openAt(next: 'center' | 'top' | 'topright' | 'bottomleft') {
     <MButton label="Top" size="small" @click="openAt('top')"/>
     <MButton label="Top Right" size="small" @click="openAt('topright')" />
     <MButton label="Bottom Left" size="small" @click="openAt('bottomleft')"/>
-    <MDialog v-model="open" :header="`Position: ${position}`" :position="position">
+    <MDialog v-model="open" :title="`Position: ${position}`" :position="position">
       <p style="margin:0">
         Dialog can dock to edges and corners.
       </p>

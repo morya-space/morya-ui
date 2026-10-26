@@ -78,6 +78,7 @@
     --m-dialog-color: var(--m-color-text);
     --m-dialog-shadow: var(--m-shadow-lg);
     --m-dialog-mask-bg: var(--m-overlay-scrim);
+    --m-dialog-top: 0;
     --m-dialog-header-border-color: var(--m-color-split);
     --m-dialog-footer-border-color: var(--m-color-split);
     /* Header action buttons */
@@ -94,6 +95,7 @@
     color: var(--m-dialog-color);
     display: flex;
     flex-direction: column;
+    margin-top: var(--m-dialog-top);
     max-height: var(--m-dialog-max-height);
     max-width: var(--m-dialog-width);
     width: min(100%, var(--m-dialog-width));
@@ -103,13 +105,41 @@
     padding: 0;
 }
 
-.m-dialog--maximized {
+.m-dialog--maximized,
+.m-dialog--fullscreen {
     --m-dialog-radius: 0;
     border-radius: var(--m-dialog-radius);
     height: 100%;
+    margin-top: 0;
     max-height: 100%;
     max-width: none;
     width: 100%;
+}
+
+/* Draggable ———————————————————————————————————————————— */
+
+.m-dialog-backdrop--draggable .m-dialog__header {
+    cursor: move;
+    touch-action: none;
+    user-select: none;
+}
+
+.m-dialog-backdrop--draggable .m-dialog__header button {
+    /* Interactive controls inside the header must not start a drag. */
+    cursor: pointer;
+    touch-action: auto;
+}
+
+.m-dialog--draggable {
+    will-change: transform;
+}
+
+.m-dialog--dragging {
+    transition: none;
+}
+
+.m-dialog--dragging .m-dialog__header {
+    cursor: grabbing;
 }
 
 .m-dialog__header,

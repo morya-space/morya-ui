@@ -14,7 +14,7 @@ async function save() {
     <MButton label="Save dialog" @click="open = true" />
     <MDialog
       v-model="open"
-      header="Save changes"
+      title="Save changes"
       type="info"
       positive-text="Save"
       negative-text="Cancel"

@@ -8,7 +8,7 @@ const open = ref(false)
 <template>
   <div>
     <MButton label="Maximizable" @click="open = true" />
-    <MDialog v-model="open" header="Workspace" maximizable width="32rem">
+    <MDialog v-model="open" title="Workspace" maximizable width="32rem">
       <p style="margin:0">
         Toggle maximize to fill the viewport.
       </p>

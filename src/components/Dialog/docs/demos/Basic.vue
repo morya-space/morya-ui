@@ -8,9 +8,9 @@ const open = ref(false)
 <template>
   <div>
     <MButton label="Open Dialog" @click="open = true" />
-    <MDialog v-model="open" header="Confirm" width="28rem">
+    <MDialog v-model="open" title="Confirm" width="28rem">
       <p style="margin:0">
-        Use <code>header</code> or <code>title</code> for the dialog title.
+        Use <code>title</code> for the dialog title.
       </p>
     </MDialog>
   </div>

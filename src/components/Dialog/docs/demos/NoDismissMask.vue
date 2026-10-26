@@ -8,9 +8,9 @@ const open = ref(false)
 <template>
   <div>
     <MButton label="Mask Closable" @click="open = true" />
-    <MDialog v-model="open" header="Mask closable" dismissable-mask>
+    <MDialog v-model="open" title="Mask closable" close-on-outside-click>
       <p style="margin:0">
-        Click the mask — the dialog closes. Without `dismissable-mask` it stays open.
+        Click the mask — the dialog closes. Without `close-on-outside-click` it stays open.
       </p>
     </MDialog>
   </div>

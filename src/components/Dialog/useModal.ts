@@ -37,10 +37,8 @@ export interface ModalStaticOptions {
   width?: string
   /** Placement. */
   position?: DialogProps['position']
-  /** Vertically center the dialog. */
-  centered?: boolean
   /** Allow dismissing by clicking the mask. Default `false`. */
-  maskClosable?: boolean
+  closeOnOutsideClick?: boolean
   /** Called on confirm. Return a Promise to show a loading button until it settles. */
   onOk?: () => void | Promise<void>
   /** Called on cancel / dismiss. */
@@ -148,8 +146,7 @@ function createModal(options: ModalStaticOptions): ModalStaticHandle {
           type: state.type,
           width: state.width,
           position: state.position,
-          centered: state.centered,
-          maskClosable: state.maskClosable ?? false,
+          closeOnOutsideClick: state.closeOnOutsideClick ?? false,
           // Render in place: the host container owns the dialog's lifetime.
           teleport: false,
           onClose: handleCancel,

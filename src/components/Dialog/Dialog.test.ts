@@ -1,8 +1,14 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import { h, nextTick, ref } from 'vue'
 import { setLastPointer } from '../../shared/lastPointer'
 import MDialog from './Dialog.vue'
+
+// The dialog Teleports to `body`; failed assertions would otherwise leak DOM
+// into the next test. Clean up aggressively.
+afterEach(() => {
+  document.body.innerHTML = ''
+})
 
 describe('muDialog', () => {
   it('closes with Escape and emits lifecycle events', async () => {
@@ -33,31 +39,18 @@ describe('muDialog', () => {
     wrapper.unmount()
   })
 
-  it('accepts header and dismissableMask aliases and corner positions', async () => {
+  it('supports corner positions', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, header: 'Alias title', dismissableMask: false, position: 'topright' },
+      props: { modelValue: true, title: 'Corner', position: 'topright' },
     })
     await nextTick()
-    expect(document.body.querySelector('.m-dialog__header h2')?.textContent).toBe('Alias title')
+    expect(document.body.querySelector('.m-dialog__header h2')?.textContent).toBe('Corner')
     expect(document.body.querySelector('.m-dialog-backdrop--topright')).toBeTruthy()
-    document.body.querySelector('.m-dialog-backdrop')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    await nextTick()
-    expect(wrapper.emitted('close')).toBeUndefined()
     wrapper.unmount()
   })
 
-  it('accepts maskClosable and centered aliases', async () => {
-    const mask = mount(MDialog, {
-      attachTo: document.body,
-      props: { modelValue: true, title: 'Mask', maskClosable: false },
-    })
-    await nextTick()
-    document.body.querySelector('.m-dialog-backdrop')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-    await nextTick()
-    expect(mask.emitted('close')).toBeUndefined()
-    mask.unmount()
-
+  it('closes on mask click only when closeOnOutsideClick is true', async () => {
     // Default: clicking the mask does not close the dialog.
     const defaultMask = mount(MDialog, {
       attachTo: document.body,
@@ -69,11 +62,11 @@ describe('muDialog', () => {
     expect(defaultMask.emitted('close')).toBeUndefined()
     defaultMask.unmount()
 
-    // Opt-in: maskClosable closes on mask click. The handler is bound with
+    // Opt-in: closeOnOutsideClick closes on mask click. The handler is bound with
     // `@click.self` on `.m-dialog-zoom`, so click the zoom element itself.
     const closableMask = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, title: 'Closable mask', maskClosable: true },
+      props: { modelValue: true, title: 'Closable mask', closeOnOutsideClick: true },
     })
     await nextTick()
     document.body.querySelector('.m-dialog-zoom')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -81,28 +74,12 @@ describe('muDialog', () => {
     expect(closableMask.emitted('update:modelValue')).toEqual([[false]])
     expect(closableMask.emitted('close')).toHaveLength(1)
     closableMask.unmount()
-
-    const centered = mount(MDialog, {
-      attachTo: document.body,
-      props: { modelValue: true, title: 'Centered', centered: true },
-    })
-    await nextTick()
-    expect(document.body.querySelector('.m-dialog-backdrop--center')).toBeTruthy()
-    centered.unmount()
-
-    const top = mount(MDialog, {
-      attachTo: document.body,
-      props: { modelValue: true, title: 'Top', centered: false },
-    })
-    await nextTick()
-    expect(document.body.querySelector('.m-dialog-backdrop--top')).toBeTruthy()
-    top.unmount()
   })
 
   it('toggles maximized state when maximizable', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, header: 'Workspace', maximizable: true },
+      props: { modelValue: true, title: 'Workspace', maximizable: true },
     })
     await nextTick()
     const maximizeButton = document.body.querySelector('.m-dialog__action') as HTMLButtonElement
@@ -134,7 +111,7 @@ describe('muDialog', () => {
   it('renders a type icon and preset footer actions', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, header: 'Save', type: 'info', positiveText: '保存', negativeText: '取消' },
+      props: { modelValue: true, title: 'Save', type: 'info', positiveText: '保存', negativeText: '取消' },
     })
     await nextTick()
     expect(document.body.querySelector('.m-dialog--info')).toBeTruthy()
@@ -149,7 +126,7 @@ describe('muDialog', () => {
   it('keeps the dialog open when beforeClose returns false', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, header: 'Stay', beforeClose: () => false },
+      props: { modelValue: true, title: 'Stay', beforeClose: () => false },
     })
     await nextTick()
     document.body.querySelector('.m-dialog__action')!.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -164,7 +141,7 @@ describe('muDialog', () => {
       attachTo: document.body,
       props: {
         modelValue: true,
-        header: 'Save',
+        title: 'Save',
         positiveText: '保存',
         onPositiveClick: () => false,
       },
@@ -182,7 +159,7 @@ describe('muDialog', () => {
   it('exposes close / maximize / unmaximize', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, header: 'API', maximizable: true, ariaLabel: 'Custom dialog label' },
+      props: { modelValue: true, title: 'API', maximizable: true, ariaLabel: 'Custom dialog label' },
     })
     await nextTick()
     expect(document.body.querySelector('.m-dialog')?.getAttribute('aria-label')).toBe(
@@ -205,7 +182,7 @@ describe('muDialog', () => {
   it('applies width prop to the panel', async () => {
     const wrapper = mount(MDialog, {
       attachTo: document.body,
-      props: { modelValue: true, header: 'Sized', width: '28rem' },
+      props: { modelValue: true, title: 'Sized', width: '28rem' },
     })
     await nextTick()
     const panel = document.body.querySelector('.m-dialog') as HTMLElement
@@ -227,7 +204,7 @@ describe('muDialog', () => {
               'onUpdate:modelValue': (value: boolean) => {
                 open.value = value
               },
-              header: 'Sized',
+              title: 'Sized',
               style: { width: '28rem' },
             },
           )
@@ -247,7 +224,7 @@ describe('muDialog', () => {
       attachTo: document.body,
       props: {
         modelValue: true,
-        header: 'Customizable',
+        title: 'Customizable',
         pt: {
           root: { class: 'custom-backdrop' },
           zoom: { class: 'custom-zoom' },
@@ -278,6 +255,259 @@ describe('muDialog', () => {
     const vm = wrapper.vm as unknown as { transitionName: string | undefined; transitionCss: boolean }
     expect(vm.transitionName).toBe('m-zoom')
     expect(vm.transitionCss).toBe(true)
+    wrapper.unmount()
+  })
+
+  // —— fullscreen ————————————————————————————————————————
+
+  it('supports fullscreen via prop and syncs with the maximize toggle', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Full', fullscreen: true, maximizable: true },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog--fullscreen')).toBeTruthy()
+    expect(document.body.querySelector('.m-dialog--maximized')).toBeTruthy()
+    expect(document.body.querySelector('.m-dialog-backdrop--maximized')).toBeTruthy()
+
+    // Toggle button should reflect fullscreen state and emit `update:fullscreen`.
+    const toggle = document.body.querySelector('.m-dialog__action') as HTMLButtonElement
+    expect(toggle.getAttribute('aria-label')).toBe('还原')
+    toggle.click()
+    await nextTick()
+    expect(wrapper.emitted('update:fullscreen')).toEqual([[false]])
+    expect(wrapper.emitted('unmaximize')).toHaveLength(1)
+    wrapper.unmount()
+  })
+
+  it('emits update:fullscreen when user toggles maximized', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Sync', maximizable: true },
+    })
+    await nextTick()
+    const toggle = document.body.querySelector('.m-dialog__action') as HTMLButtonElement
+    toggle.click()
+    await nextTick()
+    expect(wrapper.emitted('update:fullscreen')).toEqual([[true]])
+    expect(wrapper.emitted('maximize')).toHaveLength(1)
+    wrapper.unmount()
+  })
+
+  it('reacts to fullscreen prop changes from the parent', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'External', maximizable: true, fullscreen: false },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog--maximized')).toBeFalsy()
+    await wrapper.setProps({ fullscreen: true })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog--maximized')).toBeTruthy()
+    expect(wrapper.emitted('maximize')).toHaveLength(1)
+    wrapper.unmount()
+  })
+
+  // —— width number / top / zIndex ————————————————————————————
+
+  it('accepts width as a number (treated as px)', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Sized', width: 480 },
+    })
+    await nextTick()
+    const panel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(panel.style.getPropertyValue('--m-dialog-width')).toBe('480px')
+    wrapper.unmount()
+  })
+
+  it('applies top margin only for top-* positions', async () => {
+    const top = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Top', position: 'top', top: '15vh' },
+    })
+    await nextTick()
+    const topPanel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(topPanel.style.getPropertyValue('--m-dialog-top')).toBe('15vh')
+    top.unmount()
+
+    const centered = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Centered', top: '15vh' },
+    })
+    await nextTick()
+    const centeredPanel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(centeredPanel.style.getPropertyValue('--m-dialog-top')).toBe('')
+    centered.unmount()
+  })
+
+  it('applies zIndex to the backdrop', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Stacked', zIndex: 3000 },
+    })
+    await nextTick()
+    const backdrop = document.body.querySelector('.m-dialog-backdrop') as HTMLElement
+    expect(backdrop.style.zIndex).toBe('3000')
+    wrapper.unmount()
+  })
+
+  // —— closeIcon / headerAriaLevel ————————————————————————————
+
+  it('renders a custom close icon', async () => {
+    const custom = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Custom', closeIcon: 'warning' },
+    })
+    await nextTick()
+    const customButton = document.body.querySelector(
+      '.m-dialog__actions .m-dialog__action:last-child',
+    ) as HTMLButtonElement
+    const customHtml = customButton.innerHTML
+    custom.unmount()
+    document.body.innerHTML = ''
+
+    const fallback = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Default' },
+    })
+    await nextTick()
+    const defaultButton = document.body.querySelector(
+      '.m-dialog__actions .m-dialog__action:last-child',
+    ) as HTMLButtonElement
+    // The custom close icon should render different svg markup than the default.
+    expect(customHtml).not.toBe(defaultButton.innerHTML)
+    fallback.unmount()
+  })
+
+  it('applies headerAriaLevel to the title heading', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'A11y', headerAriaLevel: 3 },
+    })
+    await nextTick()
+    const title = document.body.querySelector('.m-dialog__title') as HTMLElement
+    expect(title.getAttribute('role')).toBe('heading')
+    expect(title.getAttribute('aria-level')).toBe('3')
+    wrapper.unmount()
+  })
+
+  // —— destroyOnClose ————————————————————————————————————
+
+  it('destroys default slot content on close when destroyOnClose is true', async () => {
+    const open = ref(true)
+    let mountCount = 0
+    let unmountCount = 0
+    const Child = {
+      template: '<div class="sentinel">hello</div>',
+      mounted() {
+        mountCount++
+      },
+      unmounted() {
+        unmountCount++
+      },
+    }
+    const Host = {
+      components: { MDialog, Child },
+      setup: () => () =>
+        h(
+          MDialog,
+          {
+            modelValue: open.value,
+            'onUpdate:modelValue': (v: boolean) => {
+              open.value = v
+            },
+            title: 'Destroyable',
+            destroyOnClose: true,
+            transition: false,
+          },
+          { default: () => h(Child) },
+        ),
+    }
+    const wrapper = mount(Host, { attachTo: document.body })
+    await nextTick()
+    expect(mountCount).toBe(1)
+    open.value = false
+    await nextTick()
+    await nextTick() // let transition after-leave run
+    expect(unmountCount).toBe(1)
+    open.value = true
+    await nextTick()
+    expect(mountCount).toBe(2)
+    wrapper.unmount()
+  })
+
+  // —— openDelay / closeDelay ————————————————————————————
+
+  it('honours openDelay and closeDelay', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: false, title: 'Delayed', openDelay: 30, closeDelay: 30 },
+    })
+    await nextTick()
+    await wrapper.setProps({ modelValue: true })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop')).toBeFalsy()
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop')).toBeTruthy()
+
+    await wrapper.setProps({ modelValue: false })
+    await nextTick()
+    // Backdrop should still exist until closeDelay expires.
+    expect(document.body.querySelector('.m-dialog-backdrop')).toBeTruthy()
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop')).toBeFalsy()
+    wrapper.unmount()
+  })
+
+  // —— draggable ————————————————————————————————————
+
+  it('drags the panel by its header and exposes resetPosition', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Drag', draggable: true, transition: false },
+    })
+    await nextTick()
+    const header = document.body.querySelector('.m-dialog__header') as HTMLElement
+    const panel = document.body.querySelector('.m-dialog') as HTMLElement
+    expect(document.body.querySelector('.m-dialog-backdrop--draggable')).toBeTruthy()
+
+    header.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, clientX: 100, clientY: 100 }))
+    document.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, clientX: 160, clientY: 140 }))
+    // Wait a frame for rAF to apply the transform.
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    document.dispatchEvent(new PointerEvent('pointerup', { bubbles: true }))
+    expect(panel.style.transform).toContain('translate3d(')
+    await nextTick()
+    // After pointerup the panel should no longer be in the dragging state.
+    expect(panel.classList.contains('m-dialog--dragging')).toBe(false)
+
+    // Clicking the close button inside the header must not start a drag.
+    const closeBtn = document.body.querySelector(
+      '.m-dialog__actions .m-dialog__action:last-child',
+    ) as HTMLButtonElement
+    closeBtn.dispatchEvent(
+      new PointerEvent('pointerdown', { bubbles: true, button: 0, clientX: 200, clientY: 200 }),
+    )
+    await nextTick()
+    expect(panel.classList.contains('m-dialog--dragging')).toBe(false)
+
+    await (wrapper.vm as { resetPosition: () => void }).resetPosition()
+    await nextTick()
+    expect(panel.style.transform).toBe('')
+    wrapper.unmount()
+  })
+
+  it('does not drag when fullscreen', async () => {
+    const wrapper = mount(MDialog, {
+      attachTo: document.body,
+      props: { modelValue: true, title: 'Full', draggable: true, fullscreen: true, transition: false },
+    })
+    await nextTick()
+    expect(document.body.querySelector('.m-dialog-backdrop--draggable')).toBeFalsy()
+    expect(document.body.querySelector('.m-dialog--draggable')).toBeFalsy()
     wrapper.unmount()
   })
 })

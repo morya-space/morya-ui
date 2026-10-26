@@ -8,7 +8,7 @@ const open = ref(false)
 <template>
   <div>
     <MButton label="With Footer" @click="open = true" />
-    <MDialog v-model="open" header="Save changes" width="28rem">
+    <MDialog v-model="open" title="Save changes" width="28rem">
       <p style="margin:0">
         Footer slot is for primary and secondary actions.
       </p>

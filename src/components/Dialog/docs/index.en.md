@@ -33,7 +33,7 @@ Supports `center` / `top` / `bottom` / `left` / `right` and the four corner posi
 
 ## Mask click
 
-Clicking the mask does not close the dialog by default; set `dismissableMask` (or `closeOnOutsideClick` / `maskClosable`) to enable it.
+Clicking the mask does not close the dialog by default; set `closeOnOutsideClick` to enable it.
 
 ```vue preview src="./demos/NoDismissMask.vue"
 ```
@@ -43,6 +43,27 @@ Clicking the mask does not close the dialog by default; set `dismissableMask` (o
 `maximizable` adds a maximize / restore toggle in the title bar.
 
 ```vue preview src="./demos/Maximizable.vue"
+```
+
+## Fullscreen
+
+Use `v-model:fullscreen` to make the dialog start in fullscreen; combined with `maximizable`, the two stay in sync.
+
+```vue preview src="./demos/Fullscreen.vue"
+```
+
+## Draggable
+
+`draggable` lets users drag the panel by its title bar. By default the panel cannot leave the viewport — add `overflow` to relax that. Call `resetPosition()` on the instance to reset.
+
+```vue preview src="./demos/Draggable.vue"
+```
+
+## Destroy on close
+
+`destroy-on-close` unmounts the default slot content after the leave transition; it is re-mounted on next open.
+
+```vue preview src="./demos/DestroyOnClose.vue"
 ```
 
 ## Preset footer and async close
@@ -58,18 +79,23 @@ Clicking the mask does not close the dialog by default; set `dismissableMask` (o
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | Visibility. Use with `v-model`. |
 | `title` | `string` | — | Title text. |
-| `header` | `string` | — | Alias of `title`. |
 | `closeOnEsc` | `boolean` | `true` | Close on Esc. |
 | `blockScroll` | `boolean` | `true` | Lock page scroll while open (when `modal` is true). |
 | `closeOnOutsideClick` | `boolean` | `false` | Close when clicking the mask. |
-| `dismissableMask` | `boolean` | — | Alias of `closeOnOutsideClick`. |
-| `maskClosable` | `boolean` | — | Alias of `closeOnOutsideClick` . |
 | `closable` | `boolean` | `true` | Show the close button. |
+| `closeIcon` | `IconName \| null` | `'close'` | Custom close icon; `null` falls back to the default. |
 | `maximizable` | `boolean` | `false` | Show the maximize / restore button. |
+| `fullscreen` | `boolean` | — | Fullscreen mode. Use `v-model:fullscreen`; synced with the maximize toggle. |
+| `draggable` | `boolean` | `false` | Allow dragging the panel by its header. |
+| `overflow` | `boolean` | `false` | When `draggable`, allow the panel to leave the viewport. |
+| `destroyOnClose` | `boolean` | `false` | Unmount default slot content after the close transition. |
+| `openDelay` | `number` | — | Delay (ms) before showing after `modelValue` flips to `true`. |
+| `closeDelay` | `number` | — | Delay (ms) before hiding after `modelValue` flips to `false`. |
 | `modal` | `boolean` | `true` | Overlay mask. |
 | `position` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'topleft' \| 'topright' \| 'bottomleft' \| 'bottomright'` | `'center'` | Dialog position. |
-| `centered` | `boolean` | — | Vertical centering: `true` → `center`, `false` → `top`; omit to use `position`. |
-| `width` | `string` | — | Dialog width (ignored when maximized). |
+| `width` | `string \| number` | — | Dialog width; numbers are treated as px (ignored when maximized / fullscreen). |
+| `top` | `string` | — | Margin-top (e.g. `'15vh'`); only for `top` / `topleft` / `topright` positions. |
+| `zIndex` | `number \| string` | — | Force the backdrop `z-index`; for stacking multiple overlays. |
 | `teleport` | `boolean` | `true` | Overlay Teleport; mounts to `body` by default. |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | Mount target; `'self'` renders in place. |
 | `type` | `'info' \| 'success' \| 'warning' \| 'danger'` | — | Status icon in the header |
@@ -78,6 +104,7 @@ Clicking the mask does not close the dialog by default; set `dismissableMask` (o
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | Return `false` to keep the dialog open |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | Runs before X / Esc / mask dismiss; return `false` to keep open |
 | `ariaLabel` | `string` | — | Accessible dialog name. |
+| `headerAriaLevel` | `number \| string` | `2` | `aria-level` for the title heading (`role="heading"`). |
 | `transition` | `string \| false` | `'zoom'` | Enter/exit motion preset; `false` / `'none'` disables. See [Motion](/docs/motion). |
 | `pt` | [DialogPassThrough](/docs/types#DialogPassThrough) | — | Attributes for named Dialog DOM parts. |
 
@@ -112,11 +139,14 @@ After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `t
 | Event | Prop | Description |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | Visibility change. |
-| `close` | — | Emitted when closing. |
-| `show` | — | Emitted when opening. |
-| `hide` | — | Emitted after closing. |
-| `maximize` | — | Enter maximize. |
-| `unmaximize` | — | Exit maximize. |
+| `update:fullscreen` | `boolean` | Fullscreen state change. |
+| `close` | — | Emitted when the close action is triggered. |
+| `show` | — | Emitted when opening (before focus / scroll lock). |
+| `opened` | — | Emitted after the enter transition finishes. |
+| `hide` | — | Emitted after closing (after focus / scroll restore). |
+| `closed` | — | Emitted after the leave transition finishes. |
+| `maximize` | — | Enter maximize / fullscreen. |
+| `unmaximize` | — | Exit maximize / fullscreen. |
 
 ## Methods
 
@@ -125,6 +155,7 @@ After Teleport, fallthrough attrs on `<MDialog>` (`class`, `style`, `data-*`, `t
 | `close()` | Close the dialog (same as the cancel/close action). |
 | `maximize()` | Maximize; no-op when already maximized. |
 | `unmaximize()` | Leave the maximized state. |
+| `resetPosition()` | Reset the panel position after dragging. |
 
 ## Slots
 
@@ -174,8 +205,8 @@ Passing a string as `options` is shorthand for `{ content: '...' }`.
 | `okText` / `cancelText` | `string` | locale | Button labels |
 | `showCancel` | `boolean` | `false` for status helpers, `true` for `confirm` | Show the cancel button |
 | `okColor` | `ButtonColor` | `'primary'` | Confirm button color |
-| `width` / `position` / `centered` | as Dialog | — | Layout |
-| `maskClosable` | `boolean` | `false` | Dismiss by clicking the mask |
+| `width` / `position` | as Dialog | — | Layout |
+| `closeOnOutsideClick` | `boolean` | `false` | Dismiss by clicking the mask |
 | `onOk` | `() => void \| Promise<void>` | — | Confirm handler; a returned Promise puts the button in a loading state |
 | `onCancel` | `() => void` | — | Cancel / dismiss handler |
 | `afterClose` | `() => void` | — | Called after the close transition |

@@ -33,7 +33,7 @@ import { MButton, MDialog } from 'morya-ui'
 
 ## 遮罩点击
 
-默认点击遮罩不关闭弹窗；设置 `dismissableMask`（或 `closeOnOutsideClick` / `maskClosable`）后点击遮罩关闭。
+默认点击遮罩不关闭弹窗；设置 `closeOnOutsideClick` 后点击遮罩关闭。
 
 ```vue preview src="./demos/NoDismissMask.vue"
 ```
@@ -43,6 +43,27 @@ import { MButton, MDialog } from 'morya-ui'
 `maximizable` 在标题栏提供最大化 / 还原切换。
 
 ```vue preview src="./demos/Maximizable.vue"
+```
+
+## Fullscreen
+
+通过 `v-model:fullscreen` 让对话框默认进入全屏；配合 `maximizable` 时两者保持同步。
+
+```vue preview src="./demos/Fullscreen.vue"
+```
+
+## Draggable
+
+`draggable` 允许按住标题栏拖动面板。默认不会拖出可视区，加 `overflow` 放宽限制；通过实例方法 `resetPosition()` 复位。
+
+```vue preview src="./demos/Draggable.vue"
+```
+
+## Destroy on close
+
+`destroy-on-close` 让默认插槽内容在关闭动画结束后被卸载，下次打开重新渲染。
+
+```vue preview src="./demos/DestroyOnClose.vue"
 ```
 
 ## 预设页脚与异步关闭
@@ -58,18 +79,23 @@ import { MButton, MDialog } from 'morya-ui'
 | --- | --- | --- | --- |
 | `modelValue` | `boolean` | `false` | 可见性。配合 `v-model` 使用。 |
 | `title` | `string` | — | 标题文案。 |
-| `header` | `string` | — | `title` 的别名。 |
 | `closeOnEsc` | `boolean` | `true` | 按 Esc 关闭。 |
 | `blockScroll` | `boolean` | `true` | 打开时锁定页面滚动（`modal` 时生效）。 |
 | `closeOnOutsideClick` | `boolean` | `false` | 点击遮罩关闭。 |
-| `dismissableMask` | `boolean` | — | `closeOnOutsideClick` 的别名。 |
-| `maskClosable` | `boolean` | — | `closeOnOutsideClick` 的别名。 |
 | `closable` | `boolean` | `true` | 显示关闭按钮。 |
+| `closeIcon` | `IconName \| null` | `'close'` | 自定义关闭图标；`null` 使用默认。 |
 | `maximizable` | `boolean` | `false` | 显示最大化 / 还原按钮。 |
+| `fullscreen` | `boolean` | — | 全屏模式，配合 `v-model:fullscreen` 双向绑定；与 `maximizable` 内部状态保持同步。 |
+| `draggable` | `boolean` | `false` | 允许按住标题栏拖动面板。 |
+| `overflow` | `boolean` | `false` | `draggable` 时是否允许拖出可视区。 |
+| `destroyOnClose` | `boolean` | `false` | 关闭动画结束后卸载默认插槽内容。 |
+| `openDelay` | `number` | — | `modelValue` 变 true 后延迟多少 ms 显示。 |
+| `closeDelay` | `number` | — | `modelValue` 变 false 后延迟多少 ms 关闭。 |
 | `modal` | `boolean` | `true` | 遮罩层。 |
 | `position` | `'center' \| 'top' \| 'bottom' \| 'left' \| 'right' \| 'topleft' \| 'topright' \| 'bottomleft' \| 'bottomright'` | `'center'` | 对话框位置。 |
-| `centered` | `boolean` | — | 垂直居中：`true` → `center`，`false` → `top`；省略时用 `position`。 |
-| `width` | `string` | — | 对话框宽度（最大化时忽略）。 |
+| `width` | `string \| number` | — | 对话框宽度；数字按 px 处理（最大化 / 全屏时忽略）。 |
+| `top` | `string` | — | 顶部外边距（如 `'15vh'`），仅 `position` 为 `top / topleft / topright` 时生效。 |
+| `zIndex` | `number \| string` | — | 强制设置 backdrop 的 `z-index`；多层堆叠时使用。 |
 | `teleport` | `boolean` | `true` | 浮层 Teleport；默认挂到 `body`。 |
 | `appendTo` | `string \| HTMLElement \| 'self'` | `'body'` | 挂载目标；`'self'` 就地渲染。 |
 | `type` | `'info' \| 'success' \| 'warning' \| 'danger'` | — | 标题状态图标 |
@@ -78,6 +104,7 @@ import { MButton, MDialog } from 'morya-ui'
 | `onPositiveClick` / `onNegativeClick` | `(e) => unknown \| Promise<unknown>` | — | 返回 `false` 则不关闭 |
 | `beforeClose` | `() => unknown \| Promise<unknown>` | — | X / Esc / 遮罩关闭前；返回 `false` 则保持打开 |
 | `ariaLabel` | `string` | — | 对话框可访问名称。 |
+| `headerAriaLevel` | `number \| string` | `2` | 标题的 `aria-level`（`role="heading"`）。 |
 | `transition` | `string \| false` | `'zoom'` | 进出场动效预设；`false` / `'none'` 关闭。见[动效](/docs/motion)。 |
 | `pt` | [DialogPassThrough](/docs/types#DialogPassThrough) | — | 指定 Dialog 内部部件的透传 attrs。 |
 
@@ -112,11 +139,14 @@ Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`clas
 | 事件名 | 参数 | 说明 |
 | --- | --- | --- |
 | `update:modelValue` | `boolean` | 可见性变化。 |
-| `close` | — | 关闭时触发。 |
-| `show` | — | 打开时触发。 |
-| `hide` | — | 关闭后触发。 |
-| `maximize` | — | 进入最大化。 |
-| `unmaximize` | — | 退出最大化。 |
+| `update:fullscreen` | `boolean` | 全屏状态变化。 |
+| `close` | — | 关闭时触发（关闭动作发起）。 |
+| `show` | — | 打开时触发（焦点 / 滚动锁定前）。 |
+| `opened` | — | 进入过渡完成后触发。 |
+| `hide` | — | 关闭后触发（焦点 / 滚动恢复后）。 |
+| `closed` | — | 离开过渡完成后触发。 |
+| `maximize` | — | 进入最大化 / 全屏。 |
+| `unmaximize` | — | 退出最大化 / 全屏。 |
 
 ## Methods
 
@@ -125,6 +155,7 @@ Dialog Teleport 到 `body` 后，你在组件上写的 fallthrough attrs（`clas
 | `close()` | 关闭对话框（等同取消/关闭动作）。 |
 | `maximize()` | 最大化；已最大化时无操作。 |
 | `unmaximize()` | 退出最大化。 |
+| `resetPosition()` | 拖拽后复位到初始位置。 |
 
 ## Slots
 
@@ -174,8 +205,8 @@ dialog.success({ title: '已保存' })
 | `okText` / `cancelText` | `string` | locale | 按钮文案 |
 | `showCancel` | `boolean` | 状态弹窗 `false`，`confirm` `true` | 是否显示取消按钮 |
 | `okColor` | `ButtonColor` | `'primary'` | 确认按钮颜色 |
-| `width` / `position` / `centered` | 同 Dialog | — | 布局 |
-| `maskClosable` | `boolean` | `false` | 点击遮罩关闭 |
+| `width` / `position` | 同 Dialog | — | 布局 |
+| `closeOnOutsideClick` | `boolean` | `false` | 点击遮罩关闭 |
 | `onOk` | `() => void \| Promise<void>` | — | 确认回调；返回 Promise 时按钮进入 loading |
 | `onCancel` | `() => void` | — | 取消 / 关闭回调 |
 | `afterClose` | `() => void` | — | 关闭动画结束后回调 |
