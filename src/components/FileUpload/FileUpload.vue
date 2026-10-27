@@ -3,8 +3,11 @@
 import type { FileUploadFile, FileUploadProps, FileUploadRequestOptions } from './types'
 import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
 import { useMLocale } from '../../locale'
+import { useDisabled } from '../../shared/config'
 import { useFieldParts } from '../../shared/useComponentAttrs'
+import MButton from '../Button/Button.vue'
 import MIcon from '../Icon/Icon.vue'
+import MProgressBar from '../ProgressBar/ProgressBar.vue'
 import { ajaxUpload } from './ajax'
 import { formatSize, isImageFile, matchesAccept } from './fileUtils'
 defineOptions({ inheritAttrs: false })
@@ -37,6 +40,7 @@ const emit = defineEmits<{
 }>()
 const attrs = useAttrs()
 const { rootAttrs, controlAttrs } = useFieldParts(attrs, () => props.pt, { controlKey: 'input' })
+const mergedDisabled = useDisabled(() => props.disabled)
 
 
 let uidSeed = 0
@@ -52,7 +56,7 @@ const canUpload = computed(() => Boolean(props.action || props.httpRequest))
 const shouldAutoUpload = computed(() => props.autoUpload && canUpload.value)
 const showList = computed(() => props.showFileList && items.value.length > 0 && !isPictureCard.value)
 const showTrigger = computed(() => !isPictureCard.value)
-const canAdd = computed(() => !props.disabled && (props.limit == null || items.value.length < props.limit))
+const canAdd = computed(() => !mergedDisabled.value && (props.limit == null || items.value.length < props.limit))
 const showSubmit = computed(
   () =>
     canUpload.value &&
@@ -66,7 +70,7 @@ const rootClass = computed(() => [
   `m-file-upload--${props.mode}`,
   `m-file-upload--${props.listType}`,
   {
-    'm-file-upload--disabled': props.disabled,
+    'm-file-upload--disabled': mergedDisabled.value,
     'm-file-upload--drag': props.drag,
   },
 ])
@@ -117,7 +121,7 @@ function revokeUrl(file: FileUploadFile) {
 }
 
 async function applyFiles(incoming: File[]) {
-  if (props.disabled) return
+  if (mergedDisabled.value) return
   const accepted: File[] = []
   for (const file of incoming) {
     if (!matchesAccept(file, props.accept)) continue
@@ -173,7 +177,7 @@ function onChange(event: Event) {
 }
 
 function onDragOver(event: DragEvent) {
-  if (props.disabled) return
+  if (mergedDisabled.value) return
   event.preventDefault()
   if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy'
   dragOver.value = true
@@ -187,7 +191,7 @@ function onDragLeave(event: DragEvent) {
 }
 
 function onDrop(event: DragEvent) {
-  if (props.disabled) return
+  if (mergedDisabled.value) return
   event.preventDefault()
   dragOver.value = false
   void applyFiles(Array.from(event.dataTransfer?.files ?? []))
@@ -246,7 +250,7 @@ function requestOptions(item: FileUploadFile, file: File): FileUploadRequestOpti
 
 async function uploadOne(item: FileUploadFile) {
   const file = item.raw
-  if (!file || props.disabled || !canUpload.value) return
+  if (!file || mergedDisabled.value || !canUpload.value) return
   patchItem(item.uid, { status: 'uploading', percentage: item.percentage ?? 0, error: undefined })
   const options = requestOptions(item, file)
 
@@ -283,7 +287,7 @@ function abort(file?: FileUploadFile) {
 }
 
 async function removeFile(file: FileUploadFile) {
-  if (props.disabled) return
+  if (mergedDisabled.value) return
   if (props.beforeRemove) {
     const allowed = await props.beforeRemove(file, items.value)
     if (allowed === false) return
@@ -327,7 +331,7 @@ defineExpose({
       type="file"
       :multiple="multiple || directory"
       :accept="accept"
-      :disabled="disabled"
+      :disabled="mergedDisabled"
       :webkitdirectory="directory || undefined"
       v-bind="controlAttrs"
       @change="onChange"
@@ -339,7 +343,7 @@ defineExpose({
       :class="{ 'm-file-upload__dragger--over': dragOver }"
       role="button"
       tabindex="0"
-      :aria-disabled="disabled || undefined"
+      :aria-disabled="mergedDisabled || undefined"
       :aria-label="chooseText"
       @click="openPicker"
       @keydown="onDropzoneKeydown"
@@ -357,24 +361,25 @@ defineExpose({
       </slot>
     </div>
 
-    <button
+    <MButton
       v-else-if="showTrigger && $slots.trigger"
-      type="button"
+      type="primary"
       class="m-file-upload__choose m-file-upload__choose--slot"
-      :disabled="disabled || !canAdd"
+      :auto-insert-space="false"
+      :disabled="mergedDisabled || !canAdd"
       @click="openPicker"
     >
       <slot name="trigger" />
-    </button>
-    <button
+    </MButton>
+    <MButton
       v-else-if="showTrigger"
-      type="button"
+      type="primary"
       class="m-file-upload__choose"
-      :disabled="disabled || !canAdd"
+      :label="chooseText"
+      :auto-insert-space="false"
+      :disabled="mergedDisabled || !canAdd"
       @click="openPicker"
-    >
-      {{ chooseText }}
-    </button>
+    />
 
     <div v-if="$slots.tip" class="m-file-upload__tip">
       <slot name="tip" />
@@ -400,43 +405,43 @@ defineExpose({
             <span v-if="file.size != null" class="m-file-upload__size">{{ formatSize(file.size) }}</span>
             <span v-if="file.status === 'fail'" class="m-file-upload__status">{{ file.error || locale.uploadFailed }}</span>
             <span class="m-file-upload__actions">
-              <button
+              <MButton
                 v-if="file.url && isImageFile(file)"
-                type="button"
+                variant="text"
+                icon="eye"
+                icon-only
+                size="small"
                 class="m-file-upload__action"
                 :aria-label="locale.previewFile"
                 @click="previewFile(file)"
-              >
-                <MIcon name="eye" size="sm" />
-              </button>
-              <button
+              />
+              <MButton
                 v-if="file.status === 'fail'"
-                type="button"
+                variant="text"
+                icon="refresh"
+                icon-only
+                size="small"
                 class="m-file-upload__action"
                 :aria-label="locale.retryUpload"
                 @click="uploadOne(file)"
-              >
-                <MIcon name="refresh" size="sm" />
-              </button>
-              <button
-                type="button"
+              />
+              <MButton
+                variant="text"
+                icon="trash"
+                icon-only
+                size="small"
                 class="m-file-upload__action"
                 :aria-label="locale.removeFile"
-                :disabled="disabled"
+                :disabled="mergedDisabled"
                 @click="removeFile(file)"
-              >
-                <MIcon name="trash" size="sm" />
-              </button>
+              />
             </span>
           </div>
-          <div
+          <MProgressBar
             v-if="file.status === 'uploading'"
             class="m-file-upload__progress"
-            role="progressbar"
-            :aria-valuemin="0"
-            :aria-valuemax="100"
-            :aria-valuenow="Math.round(file.percentage ?? 0)"
-            :style="{ width: `${file.percentage ?? 0}%` }"
+            :value="file.percentage ?? 0"
+            :show-value="false"
           />
         </slot>
       </li>
@@ -470,33 +475,36 @@ defineExpose({
             {{ Math.round(file.percentage ?? 0) }}%
           </div>
           <div v-else class="m-file-upload__card-mask">
-            <button
+            <MButton
               v-if="file.url && isImageFile(file)"
-              type="button"
+              variant="text"
+              icon="eye"
+              icon-only
+              size="small"
               class="m-file-upload__action"
               :aria-label="locale.previewFile"
               @click="previewFile(file)"
-            >
-              <MIcon name="eye" size="sm" />
-            </button>
-            <button
+            />
+            <MButton
               v-if="file.status === 'fail'"
-              type="button"
+              variant="text"
+              icon="refresh"
+              icon-only
+              size="small"
               class="m-file-upload__action"
               :aria-label="locale.retryUpload"
               @click="uploadOne(file)"
-            >
-              <MIcon name="refresh" size="sm" />
-            </button>
-            <button
-              type="button"
+            />
+            <MButton
+              variant="text"
+              icon="trash"
+              icon-only
+              size="small"
               class="m-file-upload__action"
               :aria-label="locale.removeFile"
-              :disabled="disabled"
+              :disabled="mergedDisabled"
               @click="removeFile(file)"
-            >
-              <MIcon name="trash" size="sm" />
-            </button>
+            />
           </div>
         </slot>
       </div>
@@ -512,12 +520,22 @@ defineExpose({
     </div>
 
     <div v-if="showToolbar" class="m-file-upload__toolbar">
-      <button v-if="showSubmit" type="button" class="m-file-upload__choose" @click="submit">
-        {{ locale.uploadFile }}
-      </button>
-      <button type="button" class="m-file-upload__clear" @click="clearFiles">
-        {{ locale.clear }}
-      </button>
+      <MButton
+        v-if="showSubmit"
+        type="primary"
+        class="m-file-upload__choose"
+        :label="locale.uploadFile"
+        :auto-insert-space="false"
+        :disabled="mergedDisabled"
+        @click="submit"
+      />
+      <MButton
+        class="m-file-upload__clear"
+        :label="locale.clear"
+        :auto-insert-space="false"
+        :disabled="mergedDisabled"
+        @click="clearFiles"
+      />
     </div>
   </div>
 </template>

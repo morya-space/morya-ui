@@ -15,56 +15,12 @@
     display: none;
 }
 
+/* Choose / clear / submit buttons render through MButton; keep layout-only hooks. */
 .m-file-upload__choose,
 .m-file-upload__clear {
     align-self: flex-start;
-    background: var(--m-color-primary);
-    border: 0;
-    border-radius: var(--m-radius-control);
-    color: var(--m-color-on-emphasis);
-    cursor: pointer;
-    font-family: var(--m-font-sans);
-    font-weight: 500;
-    padding: var(--m-space-2) var(--m-space-3);
-    transition:
-        background-color var(--m-motion-fast) var(--m-motion-ease),
-        border-color var(--m-motion-fast) var(--m-motion-ease),
-        color var(--m-motion-fast) var(--m-motion-ease),
-        box-shadow var(--m-motion-fast) var(--m-motion-ease),
-        opacity var(--m-motion-fast) var(--m-motion-ease);
 }
 
-.m-file-upload__clear {
-    background: transparent;
-    border: var(--m-border-width) solid var(--m-color-border);
-    color: var(--m-color-text);
-}
-
-.m-file-upload__choose:hover:not(:disabled) {
-    background: var(--m-color-primary-hover);
-}
-
-.m-file-upload__choose:disabled,
-.m-file-upload__clear:disabled {
-    cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
-}
-
-.m-file-upload__choose:focus-visible,
-.m-file-upload__clear:focus-visible {
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
-}
-
-.m-file-upload__clear:hover:not(:disabled) {
-    background: color-mix(
-        in srgb,
-        var(--m-color-primary) 10%,
-        var(--m-color-surface)
-    );
-}
-
-.m-file-upload--disabled .m-file-upload__choose,
 .m-file-upload--disabled .m-file-upload__dragger {
     cursor: not-allowed;
     opacity: var(--m-opacity-disabled);
@@ -208,40 +164,16 @@
     margin-left: auto;
 }
 
-.m-file-upload__action {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    border-radius: var(--m-radius-sm);
-    color: var(--m-color-text-muted);
-    cursor: pointer;
-    display: inline-flex;
-    height: var(--m-control-affix-size);
-    justify-content: center;
-    padding: 0;
-    transition: color var(--m-motion-fast) var(--m-motion-ease);
-    width: var(--m-control-affix-size);
-}
-
-.m-file-upload__action:hover {
-    color: var(--m-color-primary);
-}
-
-.m-file-upload__action:focus-visible {
-    box-shadow: var(--m-focus-shadow);
-    outline: none;
-}
-
-.m-file-upload__action:disabled {
-    cursor: not-allowed;
-    opacity: var(--m-opacity-disabled);
+/* Row actions render through MButton (text, icon-only); tune via button tokens. */
+.m-file-upload__actions .m-file-upload__action {
+    --m-button-fg: var(--m-color-text-muted);
+    --m-button-hover-bg: transparent;
+    --m-button-hover-fg: var(--m-color-primary);
+    --m-button-active-bg: transparent;
 }
 
 .m-file-upload__progress {
-    background: var(--m-color-primary);
-    border-radius: var(--m-radius-full, 999px);
-    height: var(--m-file-upload-progress-height);
-    max-width: 100%;
+    --m-progress-bar-height: var(--m-file-upload-progress-height);
 }
 
 .m-file-upload__toolbar {
@@ -310,11 +242,10 @@
 }
 
 .m-file-upload__card-mask .m-file-upload__action {
-    color: var(--m-color-on-emphasis);
-}
-
-.m-file-upload__card-mask .m-file-upload__action:hover {
-    color: var(--m-color-primary);
+    --m-button-fg: var(--m-color-on-emphasis);
+    --m-button-hover-bg: transparent;
+    --m-button-hover-fg: var(--m-color-primary);
+    --m-button-active-bg: transparent;
 }
 
 .m-file-upload__card-progress {

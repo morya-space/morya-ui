@@ -1,4 +1,6 @@
 import '../../theme/styles.css'
 import '../../styles/base.css'
+import '../Button/styles.css'
 import '../Icon/styles.css'
+import '../ProgressBar/styles.css'
 import './styles.css'
