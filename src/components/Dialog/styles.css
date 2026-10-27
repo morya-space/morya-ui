@@ -146,11 +146,11 @@
 .m-dialog__footer {
     align-items: center;
     display: flex;
-    justify-content: space-between;
     padding: var(--m-space-4);
 }
 
 .m-dialog__header {
+    justify-content: space-between;
     border-bottom: var(--m-border-width) solid var(--m-dialog-header-border-color);
     flex: 0 0 auto;
     gap: var(--m-space-3);
@@ -256,6 +256,7 @@
 }
 
 .m-dialog__footer {
+    justify-content: flex-end;
     border-top: var(--m-border-width) solid var(--m-dialog-footer-border-color);
     flex: 0 0 auto;
 }
