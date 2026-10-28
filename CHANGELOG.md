@@ -1,5 +1,37 @@
 # morya-ui
 
+## 0.5.6
+
+### 破坏性变更
+
+- rename dismissable to closeOnOutsideClick
+- drop the StepperOrientation type re-export
+- drop labelPlacement and requiredMark aliases
+- drop the dataSource and data aliases for items
+- drop pageSize and showSizeChanger aliases
+- drop the deprecated size prop
+- drop the deprecated cancel prop
+- drop the deprecated modelValue prop
+- drop the dismissable alias for closeOnOutsideClick
+- drop the inputId alias for the id prop
+- drop the tip alias for description
+- drop the tip alias for the text prop
+- drop the direction alias for the layout prop
+- drop the bound alias for the bounds prop
+- drop orientation and titlePlacement aliases
+- drop the href alias on items and home
+- drop modelValue alias for open
+- drop the orientation alias for the vertical prop
+- drop the gap alias for the size prop
+- extend Dialog API and remove deprecated alias props
+
+### 变更
+
+- update button components and styles for improved consistency
+- update footer and header alignment styles
+- regenerate mcp catalog + recipes after alias cleanup
+- shift status color from tinted surface to icon only
+
 ## 0.5.5
 
 ### 新功能

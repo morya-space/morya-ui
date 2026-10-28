@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-26T03:12:15.737Z",
+  "generatedAt": "2026-10-28T07:53:52.718Z",
   "library": {
     "name": "morya-ui",
-    "version": "0.5.5"
+    "version": "0.5.6"
   },
   "mcp": {
     "name": "@morya-ui/mcp",
-    "version": "0.5.5"
+    "version": "0.5.6"
   },
   "components": [
     {
@@ -10627,9 +10627,7 @@
           "--m-file-upload-card-size": "7.5rem",
           "--m-file-upload-progress-height": "0.25rem"
         },
-        "overridable": {
-          "--m-radius-full": "999px"
-        }
+        "overridable": {}
       },
       "examples": [
         {
